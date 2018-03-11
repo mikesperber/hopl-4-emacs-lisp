@@ -1,0 +1,21 @@
+* Language Overview
+** ... usual stuff ...
+** Buffer-local variables
+
+* Original Inception
+
+* Language Evolution
+** Static scope
+
+* Compiler architecture
+** C FFI
+** Byte-code architecture
+** Image dumping
+** Rewrite by Jamie Zawinski / Lucid Emacs
+
+* Replacement attempts
+** Common Lisp
+** Scheme/Guile
+
+* Misc
+** OCaml extensions?
