@@ -1,21 +1,39 @@
-* Language Overview
-** ... usual stuff ...
-** Buffer-local variables
+* General structure
+Not sure exactly about ordering: most other HOPL papers follow a mostly
+chronological organization, so I guess we could do the same?
 
-* Original Inception
+* Original Inception, early history
+** Language Overview
+*** ... usual stuff ...
+*** Buffer-local variables
+
+** Comparison to other Lisps of the time
+
+* Language implementation
+** Interpreter
+** Image dumping
+** Byte-code architecture
+** Bootstrap?
+** Rewrite by Jamie Zawinski / Lucid Emacs
+** C FFI
+** JIT compiler attempts
 
 * Language Evolution
+** CL
+** EIEIO/CLOS
 ** Static scope
+** How 'bout evolution of typical programming style?
+** frame-local variables?
+** Evolution of the "core Elisp" language?
+I'm thinking here of how when/unless/dolist/push/setf slowly migrated from
+CL to subr.el in Emacs.
+** Of course, I'd mention `pcase` in there as well
+** lack of tail-call elimination?
+** lack of modules?
 
-* Compiler architecture
-** C FFI
-** Byte-code architecture
-** Image dumping
-** Rewrite by Jamie Zawinski / Lucid Emacs
-
-* Replacement attempts
-** Common Lisp
-** Scheme/Guile
+* Other implementations
+** Elisp in Guile
+** Elisp in Common-Lisp (Sam Steingold?)
 
 * Misc
 ** OCaml extensions?
