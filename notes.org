@@ -3,6 +3,13 @@ Not sure exactly about ordering: most other HOPL papers follow a mostly
 chronological organization, so I guess we could do the same?
 
 * Original Inception, early history
+** Sources
+https://www.emacswiki.org/emacs/EmacsHistory
+https://www.jwz.org/doc/emacs-timeline.html
+https://www.jwz.org/doc/lemacs.html
+http://www.multicians.org/mepap.html
+https://en.wikipedia.org/wiki/Mocklisp
+
 ** Language Overview
 *** ... usual stuff ...
 *** Buffer-local variables
@@ -15,6 +22,7 @@ chronological organization, so I guess we could do the same?
 ** Byte-code architecture
 ** Bootstrap?
 ** Rewrite by Jamie Zawinski / Lucid Emacs
+- type opacity - keymaps, events?
 ** C FFI
 ** JIT compiler attempts
 
@@ -22,6 +30,7 @@ chronological organization, so I guess we could do the same?
 ** CL
 ** EIEIO/CLOS
 ** Static scope
+Mention Neubauer/Sperber ICFP 2011 paper
 ** How 'bout evolution of typical programming style?
 ** frame-local variables?
 ** Evolution of the "core Elisp" language?
@@ -32,8 +41,13 @@ CL to subr.el in Emacs.
 ** lack of modules?
 
 * Other implementations
+** Elisp in MIT Scheme
+Edwin, there's also a paper on this:
+https://archive.org/stream/bitsavers_mitaiaimAI_794650/AITR-1451_djvu.txt
 ** Elisp in Guile
 ** Elisp in Common-Lisp (Sam Steingold?)
 
 * Misc
 ** OCaml extensions?
+* Future evolution
+** Multi-threading?
