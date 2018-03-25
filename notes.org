@@ -9,7 +9,11 @@ https://www.jwz.org/doc/emacs-timeline.html
 https://www.jwz.org/doc/lemacs.html
 http://www.multicians.org/mepap.html
 https://en.wikipedia.org/wiki/Mocklisp
+https://www.gnu.org/gnu/rms-lisp.en.html
 
+** MockLisp
+https://news.ycombinator.com/item?id=8727085
+http://bitsavers.informatik.uni-stuttgart.de/pdf/cmu/Gosling_Unix_EMACS_Dec81.pdf
 ** Language Overview
 *** ... usual stuff ...
 *** Buffer-local variables
