@@ -2,31 +2,47 @@
 Not sure exactly about ordering: most other HOPL papers follow a mostly
 chronological organization, so I guess we could do the same?
 
-* Original Inception, early history
-** Sources
+However, HOPL 2 / Lisp has:
+
+https://www.cs.umbc.edu/courses/331/resources/papers/Evolution-of-Lisp.pdf
+
+- History in terms of projects and people
+
+- Evolution of the language in technical terms
+
+* Sources
 https://www.emacswiki.org/emacs/EmacsHistory
 https://www.jwz.org/doc/emacs-timeline.html
 https://www.jwz.org/doc/lemacs.html
 http://www.multicians.org/mepap.html
 https://en.wikipedia.org/wiki/Mocklisp
 https://www.gnu.org/gnu/rms-lisp.en.html
-
-** MockLisp
+* Projects and people
+** Gosling Emacs/MockLisp
 https://news.ycombinator.com/item?id=8727085
 http://bitsavers.informatik.uni-stuttgart.de/pdf/cmu/Gosling_Unix_EMACS_Dec81.pdf
-** Language Overview
-*** ... usual stuff ...
-*** Buffer-local variables
+
+** Compiler rewrite by Jamie Zawinski / Lucid Emacs
+- type opacity - keymaps, events?
+
+** Other implementations
+*** Elisp in MIT Scheme
+ Edwin, there's also a paper on this:
+ https://archive.org/stream/bitsavers_mitaiaimAI_794650/AITR-1451_djvu.txt
+*** Elisp in Guile
+*** Elisp in Common-Lisp (Sam Steingold?)
+
+* Language & Implementation Overview
+** ... usual stuff ...
+** Buffer-local variables
 
 ** Comparison to other Lisps of the time
 
-* Language implementation
+** Language implementation
 ** Interpreter
 ** Image dumping
 ** Byte-code architecture
 ** Bootstrap?
-** Rewrite by Jamie Zawinski / Lucid Emacs
-- type opacity - keymaps, events?
 ** C FFI
 ** JIT compiler attempts
 
@@ -44,14 +60,8 @@ CL to subr.el in Emacs.
 ** lack of tail-call elimination?
 ** lack of modules?
 
-* Other implementations
-** Elisp in MIT Scheme
-Edwin, there's also a paper on this:
-https://archive.org/stream/bitsavers_mitaiaimAI_794650/AITR-1451_djvu.txt
-** Elisp in Guile
-** Elisp in Common-Lisp (Sam Steingold?)
-
-* Misc
-** OCaml extensions?
 * Future evolution
 ** Multi-threading?
+** OCaml extensions?
+** Replacement by Scheme/Guile
+** Replacement by Common Lisp
