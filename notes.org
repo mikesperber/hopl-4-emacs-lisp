@@ -10,6 +10,14 @@ https://www.cs.umbc.edu/courses/331/resources/papers/Evolution-of-Lisp.pdf
 
 - Evolution of the language in technical terms
 
+How 'bout:
+1- prehistory (Mocklisp and Maclisp)
+2- early history (Emacs until the big schism)
+3- XEmacs
+4- Emacs
+Given that XEmacs's development was most active when Emacs's was most
+dormant and vice-versa, this ends up being almost chronological.
+
 * Sources
 https://www.emacswiki.org/emacs/EmacsHistory
 https://www.jwz.org/doc/emacs-timeline.html
@@ -29,6 +37,7 @@ http://bitsavers.informatik.uni-stuttgart.de/pdf/cmu/Gosling_Unix_EMACS_Dec81.pd
 *** Elisp in MIT Scheme
  Edwin, there's also a paper on this:
  https://archive.org/stream/bitsavers_mitaiaimAI_794650/AITR-1451_djvu.txt
+In "down with emacs lisp" you also mention JEmacs.
 *** Elisp in Guile
 *** Elisp in Common-Lisp (Sam Steingold?)
 
@@ -59,6 +68,12 @@ CL to subr.el in Emacs.
 ** Of course, I'd mention `pcase` in there as well
 ** lack of tail-call elimination?
 ** lack of modules?
+** what about tooling?
+*** docstrings (and checkdoc)
+*** Edebug
+*** Advice?
+*** the various `declare` thingies
+indent, debug, doc-string, advertized-calling-convention, ...
 
 * Future evolution
 ** Multi-threading?
