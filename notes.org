@@ -6,7 +6,8 @@ However, HOPL 2 / Lisp has:
 
 https://www.cs.umbc.edu/courses/331/resources/papers/Evolution-of-Lisp.pdf
 
-- History in terms of projects and people
+- History in terms of projects and people: XEmacs was going strong
+  when Emacs wasn't
 
 - Evolution of the language in technical terms
 
