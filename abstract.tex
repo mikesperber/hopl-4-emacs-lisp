@@ -46,26 +46,29 @@
 
 
 \begin{abstract}
-  Emacs is the world's greatest editor---at least its proponents think
-  so.  One of its chief appeals is that it is \emph{programmable} via
+  While Emacs proponents largely agree that it is the world's greatest text
+  editor, it is almost as much a Lisp machine disguised as an editor.
+  Indeed, one of its chief appeals is that it is \emph{programmable} via
   its own programming language, Emacs Lisp, a Lisp in the classic
   tradition.  Its core has remained remarkably stable since its
-  inception in 1981.  Still, Emacs Lisp has evolved and continues to
-  do so.
+  inception in 1981, in large part to preserve compatibility with the many
+  third-party packages providing a multitude of extensions.
+  Still, Emacs Lisp has evolved and continues to do so.
 
   Despite the fact that it is closely tied to a concrete editor, Emacs
   Lisp has spawned multiple implementations---in Emacs itself but also
   in variants of Emacs, such as XEmacs and Edwin.  Through competing
   implementations as well as changes in maintainership, it has picked
   up outside influences over the years, most notably from Common Lisp.
-  Important aspects of Emacs Lisp's  have been shaped by
-  concrete \emph{requirements} of the editor it supports, most
-  visibly in \textit{buffer-local variables} that tie binding to
-  editor buffers.
+
+  We discuss how important aspects of Emacs Lisp's have been shaped by
+  concrete \emph{requirements} of the editor it supports, such as
+  the \textit{buffer-local variables} that tie binding to
+  editor buffers, as well as implementation constraints.
   These requirements led to the choice of a Lisp dialect as Emacs's
-  language in the first place, specifically its dynamic nature.
+  language in the first place, specifically its simplicity and dynamic nature.
   Loading additional Emacs packages or changing the ones in place
-  occurs frequently, and having to to restart the editor in order to
+  occurs frequently, and having to restart the editor in order to
   re-compile or re-link the code would be unacceptable.  Fulfilling
   this requirement in a more static language would have been difficult
   at best.
@@ -75,21 +78,24 @@
   through the involvement of programming-language researchers with
   Emacs maintainership.
   One of Lisp's chief characteristics is its malleability through its
-  uniform syntax and the use of macros.  This has allowed the core to
-  change only slowly while enabling Emacs packages to provide new
+  uniform syntax and the use of macros.  This has allowed the language to
+  evolve much more rapidly and substantively than the evolution of its core
+  would suggest, by letting Emacs packages provide new
   surface syntax.  In particular, Emacs Lisp can be customized to look
-  much like Common Lisp, and additional packages provide object
-  systems, legible regular expressions, and FIXME Stefan.
+  much like Common Lisp, and additional packages provide multiple-dispatch
+  object systems, legible regular expressions, programmable pattern matching
+  constructs, generalized variables, and more.
   One area where, maybe surprisingly, Emacs Lisp has not picked up
-  "`principled design concepts"' is modularity, despite the fact that
-  Emacs constitutes a fairly large ecosystem of packages with several
-  million lines of code.  Instead, Emacs Lisp relies on social
-  mechanisms to achieve composability of packages. This, combined
-  Emacs Lisp's dynamic nature, have produced a remarkably robust
+  ``principled design concepts'' is modularity, despite the fact that
+  Emacs constitutes a fairly large ecosystem of independent packages which
+  total several million lines of code.  Instead, Emacs Lisp relies on social
+  mechanisms to achieve composability of packages.  This, combined
+  with Emacs Lisp's dynamic nature, have produced a remarkably robust
   system that continues to function even in the face of unexpected
   exceptions.
 
-  While we highlight these technical aspects of Emacs Lisp, we trace
+  While we highlight these technical aspects of Emacs Lisp as well as the
+  underlying motivations for the various design decisions, we trace
   its development chronologically. The timeline of Emacs Lisp
   development is closely tied to the projects and people who have
   shaped it over the years: We document Emacs Lisp history through its
