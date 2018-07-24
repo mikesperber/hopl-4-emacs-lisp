@@ -1,0 +1,118 @@
+\documentclass[format=acmsmall, review=false, screen=true]{acmart}
+
+\usepackage{booktabs} % For formal tables
+
+\usepackage[utf8]{inputenc}
+
+% Metadata Information
+\copyrightyear{2018}
+%\acmArticleSeq{9}
+
+% Copyright
+%\setcopyright{acmcopyright}
+\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+% Paper history
+\received{August 2018}
+
+
+% Document starts
+\begin{document}
+% Title portion. Note the short title for running heads
+\title{Evolution of Emacs Lisp}
+
+\author{Stefan Monnier}
+\affiliation{%
+  \institution{Université de Montréal}
+  \streetaddress{C.P.\ 6128, succ.\ centre-ville}
+  \city{Montréal}
+  \state{QC}
+  \postcode{H3C 3J7}
+  \country{Canada}}
+\email{monnier@iro.umontreal.ca}
+\author{Michael Sperber}
+\affiliation{%
+  \institution{Active Group GmbH}
+  \streetaddress{Hechinger Str.\ 12/1}
+  \city{Tübingen}
+  \country{Germany}
+}
+\email{sperber@deinprogramm.de}
+
+
+\begin{abstract}
+  Emacs is the world's greatest editor---at least its proponents think
+  so.  One of its chief appeals is that it is \emph{programmable} via
+  its own programming language, Emacs Lisp, a Lisp in the classic
+  tradition.  Its core has remained remarkably stable since its
+  inception in 1981.  Still, Emacs Lisp has evolved and continues to
+  do so.
+
+  Despite the fact that it is closely tied to a concrete editor, Emacs
+  Lisp has spawned multiple implementations---in Emacs itself but also
+  in variants of Emacs, such as XEmacs and Edwin.  Through competing
+  implementations as well as changes in maintainership, it has picked
+  up outside influences over the years, most notably from Common Lisp.
+  Important aspects of Emacs Lisp's  have been shaped by
+  concrete \emph{requirements} of the editor it supports, most
+  visibly in \textit{buffer-local variables} that tie binding to
+  editor buffers.
+  These requirements led to the choice of a Lisp dialect as Emacs's
+  language in the first place, specifically its dynamic nature.
+  Loading additional Emacs packages or changing the ones in place
+  occurs frequently, and having to to restart the editor in order to
+  re-compile or re-link the code would be unacceptable.  Fulfilling
+  this requirement in a more static language would have been difficult
+  at best.
+
+  Emacs Lisp has also picked up some ideas from principled
+  programming-language design as well, notably lexical scoping,
+  through the involvement of programming-language researchers with
+  Emacs maintainership.
+  One of Lisp's chief characteristics is its malleability through its
+  uniform syntax and the use of macros.  This has allowed the core to
+  change only slowly while enabling Emacs packages to provide new
+  surface syntax.  In particular, Emacs Lisp can be customized to look
+  much like Common Lisp, and additional packages provide object
+  systems, legible regular expressions, and FIXME Stefan.
+  One area where, maybe surprisingly, Emacs Lisp has not picked up
+  "`principled design concepts"' is modularity, despite the fact that
+  Emacs constitutes a fairly large ecosystem of packages with several
+  million lines of code.  Instead, Emacs Lisp relies on social
+  mechanisms to achieve composability of packages. This, combined
+  Emacs Lisp's dynamic nature, have produced a remarkably robust
+  system that continues to function even in the face of unexpected
+  exceptions.
+
+  While we highlight these technical aspects of Emacs Lisp, we trace
+  its development chronologically. The timeline of Emacs Lisp
+  development is closely tied to the projects and people who have
+  shaped it over the years: We document Emacs Lisp history through its
+  predecessors, Mocklisp and MacLisp, its early development up the
+  "`Emacs schism"' and the fork of Lucid Emacs, the development of
+  XEmacs, and the subsequent rennaissance of Emacs development.  When
+  it makes sense, we tie in with the evolution of Lisp in general.
+\end{abstract}
+
+\ccsdesc{Social and professional topics}
+\ccsdesc{Professional topics}
+\ccsdesc{History of computing}
+\ccsdesc{History of programming languages}
+
+%
+% End generated code
+%
+
+
+\keywords{history of programming languages, Lisp, Emacs Lisp}
+
+
+\maketitle
+
+
+\end{document}
