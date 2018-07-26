@@ -1,0 +1,170 @@
+\documentclass[format=acmsmall, review=false, screen=true]{acmart}
+
+\usepackage{booktabs} % For formal tables
+
+\usepackage[utf8]{inputenc}
+
+% Metadata Information
+\copyrightyear{2018}
+%\acmArticleSeq{9}
+
+% Copyright
+%\setcopyright{acmcopyright}
+\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+% Paper history
+\received{August 2018}
+
+\newcommand \Elisp {Elisp}
+
+% Document starts
+\begin{document}
+% Title portion. Note the short title for running heads
+\title{Evolution of Emacs Lisp}
+
+\author{Stefan Monnier}
+\affiliation{%
+  \institution{Université de Montréal}
+  \streetaddress{C.P.\ 6128, succ.\ centre-ville}
+  \city{Montréal}
+  \state{QC}
+  \postcode{H3C 3J7}
+  \country{Canada}}
+\email{monnier@iro.umontreal.ca}
+\author{Michael Sperber}
+\affiliation{%
+  \institution{Active Group GmbH}
+  \streetaddress{Hechinger Str.\ 12/1}
+  \city{Tübingen}
+  \country{Germany}
+}
+\email{sperber@deinprogramm.de}
+
+
+\input abstract
+
+\ccsdesc{Social and professional topics}
+\ccsdesc{Professional topics}
+\ccsdesc{History of computing}
+\ccsdesc{History of programming languages}
+
+%
+% End generated code
+%
+
+
+\keywords{history of programming languages, Lisp, Emacs Lisp}
+
+
+\maketitle
+
+\section{Introduction}
+
+\section{Prehistory}
+
+%% Mocklisp, Maclisp, Scheme, TECO's language?
+
+\section{Early history}         % -1992 ?
+
+%% * Language & Implementation Overview
+%% ** ... usual stuff ...
+%% ** Buffer-local variables
+
+%% ** Comparison to other Lisps of the time
+
+%% ** Language implementation
+%% ** Interpreter
+%% ** Image dumping
+%% ** Byte-code architecture (or should that go XEmacs-period?)
+
+\section{XEmacs period}         % 1992-2007 ?
+
+%% How did XEmacs bootstrap?
+%% Strings with text-properties?
+
+\section{post-XEmacs}           % 2007-now ?
+
+%% FIXME: I'm putting chunks of text here without knowing where they
+%% should really go.
+
+Emacs being the brain child of Richard Stallman, its design strives to
+embody and showcase the ideals of Free Software.  For example, not only
+should it be legal to get and modify the source code, but every effort
+should be made to encourage the end-user to do so.  This has a profound
+influence on the \Elisp{} language:
+\begin{itemize}
+\item The language should be accessible to a wide audience, so that as many
+  people as possible can adapt Emacs to their own needs, without being
+  dependent on the availability of someone with a technical expertise.
+  This can be seen concretely in the inclusion in Emacs of the
+  \emph{Introduction to Programming in Emacs Lisp}
+  tutorial~\citep{ElispIntro} targeting users with no programming
+  experience.  This has been a strong motivation to keep \Elisp{} on the
+  minimalist side and to resist incorporation of many Common-Lisp features.
+\item It should be easy for the end-user to find the relevant code in order
+  to modify Emacs's behavior.   This has driven the development of element
+  such as the \emph{docstrings} and more generally the self-documenting
+  aspect of the language.  It also imposes constraints on the evolution of
+  the language: the use of some facilities, such as \emph{advice}, is
+  discouraged because it makes the code more opaque.
+\item Emacs should be easily portable to as many platforms as possible.
+  This largely explains why \Elisp{} is still using a fairly naive
+  mark\&sweep garbage collector, and why its main execution engine is
+  a simple bytecode interpreter.
+\end{itemize}
+
+%% How to structure that?
+
+%% ** Other implementations
+%% *** Elisp in MIT Scheme
+%%  Edwin, there's also a paper on this:
+%%  https://archive.org/stream/bitsavers_mitaiaimAI_794650/AITR-1451_djvu.txt
+%% In "down with emacs lisp" you also mention JEmacs.
+%% *** Elisp in Guile
+%% *** Elisp in Common-Lisp (Sam Steingold?)
+
+%% * Language Evolution
+%% ** CL
+%% ** EIEIO/CLOS
+%% ** Static scope
+%% Mention Neubauer/Sperber ICFP 2011 paper
+%% ** How 'bout evolution of typical programming style?
+%% ** frame-local variables?
+%% ** Evolution of the "core Elisp" language?
+%% I'm thinking here of how when/unless/dolist/push/setf slowly migrated from
+%% CL to subr.el in Emacs.
+%% ** Of course, I'd mention `pcase` in there as well
+%% ** lack of tail-call elimination?
+%% ** lack of modules?
+%% ** what about tooling?
+%% *** docstrings (and checkdoc)
+%% *** Edebug
+%% *** Advice?
+%% *** the various `declare` thingies
+%% indent, debug, doc-string, advertized-calling-convention, ...
+
+
+\subsection{Implementation}
+
+
+
+%% ** Bootstrap?
+%% ** C FFI
+%% ** JIT compiler attempts
+%% ** Byte code changes
+%% ** GC changes
+
+\section{Conclusion}
+
+%% * Future evolution
+%% ** Multi-threading?
+%% ** OCaml extensions?
+%% ** Replacement by Scheme/Guile
+%% ** Replacement by Common Lisp
+
+\end{document}
