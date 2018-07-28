@@ -92,6 +92,10 @@
 %% FIXME: I'm putting chunks of text here without knowing where they
 %% should really go.
 
+%% FIXME: This is somewhat revisionist in the sense that some of those
+%% developments occurred before GNU and the FSF, so it's not clear exactly
+%% if those designs were driven by a desire for Freedom, or by just more
+%% mundane software-development good practices.
 Emacs being the brain child of Richard Stallman, its design strives to
 embody and showcase the ideals of Free Software.  For example, not only
 should it be legal to get and modify the source code, but every effort
@@ -107,7 +111,7 @@ influence on the \Elisp{} language:
   experience.  This has been a strong motivation to keep \Elisp{} on the
   minimalist side and to resist incorporation of many Common-Lisp features.
 \item It should be easy for the end-user to find the relevant code in order
-  to modify Emacs's behavior.   This has driven the development of element
+  to modify Emacs's behavior.   This has driven the development of elements
   such as the \emph{docstrings} and more generally the self-documenting
   aspect of the language.  It also imposes constraints on the evolution of
   the language: the use of some facilities, such as \emph{advice}, is
@@ -148,6 +152,66 @@ influence on the \Elisp{} language:
 %% *** the various `declare` thingies
 %% indent, debug, doc-string, advertized-calling-convention, ...
 
+\subsubsection{CL-lib}          %Released in Emacs-24.3
+
+While the core of \Elisp{} has evolved very slowly over the years, the
+evolution of other Lisps (mostly Scheme and Common-Lisp) has put pressure to
+try and add various extensions to the language.  As it turns out, \Elisp{},
+to a first approximation, can be seen as a subset of Common-Lisp, so already
+in 1986 Cesar Quiroz wrote a \texttt{cl.el} package which provided various
+Common-Lisp facilities implemented as macros.
+
+Richard never wanted \Elisp{} to morph into Common-Lisp, but he saw the
+value of offering such facilities, so this \texttt{cl.el} package was
+included fairly early on into Emacs, and has been one of the most popular
+packages, used by a large proportion of \Elisp{} packages.  Yet, Richard did
+not want to impose \texttt{cl.el} onto any Emacs user, so he imposed
+a policy where the use of \texttt{cl.el} was limited \emph{within} Emacs
+itself.  More specifically, \Elisp{} packages bundled with Emacs were
+restricted to limit their use of \texttt{cl.el} in such a way that
+\texttt{cl.el} never needed to be loaded during a normal editing session.
+Concretely, this meant that the only features of \texttt{cl.el} that could
+be used were: macros and inlined functions.
+
+The reasons why Richard did not want to turn \Elisp{} into Common-Lisp are
+not completely clear, but the following elements seem to have been part of
+the motivation:
+\begin{itemize}
+\item Common-Lisp was considered a very large language back then, so in all
+  likelihood it would have taken a significant effort to really make
+  \Elisp{} into a reasonably complete implementation of Common-Lisp.
+\item Some aspects of Common-Lisp's design can incur an important efficiency
+  cost, and Emacs already carried the stigma of \emph{eight megabytes and
+    constantly swapping}, so there were good reasons to try and not make
+  \Elisp{}'s efficiency any worse.
+\item Keeping \Elisp{} small meant that users could participate in its
+  development without having to learn all of Common-Lisp.  When inclusion of
+  Common-Lisp features was discussed, Richard would often point the cost
+  in terms of the need for more and more complex documentation.
+\item Finally, turning \Elisp{} into Common-Lisp would be a loss of control,
+  in that Emacs would be somewhat bound to Common-Lisp's evolution and would
+  have to follow the decisions of the designers of Common-Lisp on most aspects.
+\end{itemize}
+Over the years, the importance of the first two points has waned to some
+extent.  Also the popularity of the \texttt{cl.el} package, as well as the
+relentless pressure from Emacs contributors asking for more Common-Lisp
+features has also reduced the relevance of the third point.
+
+%% FIXME: Describe how things have been integrated little by little over
+%% the years.
+
+During the development of Emacs-24.3 the issue of better integration of the
+\texttt{cl.el} package came up again.  The main point of pressure was the
+desire to use \texttt{cl.el} \emph{functions} within packages bundled with
+Emacs.  The main resistance from Richard was coming from the fourth point
+above, but this time, the then maintainer, Stefan Monnier, was decided to
+resolve this issue once and for all.  He came up with a compromise: replace
+the \texttt{cl.el} package with a new package (called \texttt{cl-lib.el})
+which provides the same facilities but with names which all use the
+\texttt{cl-} prefix.  This way, the \texttt{cl-lib.el} package doesn't turn
+\Elisp{} into the Common-Lisp language, but instead provides the Common-Lisp
+facilities under its own namespace, leaving \Elisp{} free to evolve in its
+own way.
 
 \subsection{Implementation}
 
