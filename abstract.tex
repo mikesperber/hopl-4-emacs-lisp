@@ -28,20 +28,14 @@
   this requirement in a more static language would have been difficult
   at best.
 
-  %% FIXME: This makes it sound like ELisp started as a "quick hack"
-  %% to which "principled programming-language design" was applied only later,
-  %% while the choice of Maclisp as the main inspiration was already
-  %% a choice of "principled programming-language design" (and Richard
-  %% was quite familiar with Scheme as well).
-  %%Especially when compared to Mocklisp and TECO!
-  %%\Elisp{} has also picked up some ideas from principled
-  %%programming-language design as well, notably lexical scoping,
-  %%through the involvement of programming-language researchers with
-  %%Emacs maintainership.
-  In contrast to too many extension or configuration languages, \Elisp{}
-  started as a real programming language with powerful abstraction facilities,
-  and many Emacs maintainers have been closely related to
-  programming-language research.
+  Many extension and configuration languages start out ``small,'' with
+  no ambition to grow into a full-fledged programming language.  In
+  particular, Emacs's predecessors, Gosling Emacs and TECO featured
+  small languages that were too weak to support the vision Richard
+  Stallman had for Emacs.  Consequently, Stallman took inspiration
+  from Maclisp, and \Elisp{} started as a real programming language
+  with powerful abstraction facilities, thus foregoing Greenspun's
+  tenth rule.
 
   One of Lisp's chief characteristics is its malleability through its
   uniform syntax and the use of macros.  This has allowed the language to
@@ -51,6 +45,10 @@
   much like Common Lisp, and additional packages provide multiple-dispatch
   object systems, legible regular expressions, programmable pattern matching
   constructs, generalized variables, and more.
+  Still, the core has also evolved, albeit slowly.  Most notably, it
+  acquired lexical scoping through the involvement of
+  programming-language researchers with Emacs maintainership.
+  
   One area where, maybe surprisingly, \Elisp{} has not picked up
   ``principled design concepts'' is support for some kind of module system,
   despite the fact that
