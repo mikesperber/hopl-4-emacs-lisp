@@ -85,6 +85,163 @@
 
 \section{XEmacs period}         % 1992-2007 ?
 
+In 1991, Lucid Inc., a software development company based in Menlo
+Park, Carlifornia, started a project called \textit{Energize}.
+Energize was to be a C/C++ integrated development environment based on
+Emacs~\cite{GabrielLetter}.  Lucid decided to use Emacs as the central
+component of Energize.  At the time, the current version of Emacs was
+18, which was still essentially a textual application.  The then
+upcoming version of Emacs, Emacs 19, was to have a graphical user
+interface and many other features that the developers at Lucid
+considered essential for the development of Energize.  However, at the
+time that Lucid needed Emacs 19, a release was not in
+sight.\footnote{The first official release of Emacs 19, Emacs
+  19.28, came out in on November 1, 1994.}
+
+While Lucid at first tried to support and thus speed up the
+development of Emacs 19, the required cooperation between Lucid and
+the Free Software Foundation soon broke down.  As a result, Lucid
+forked Emacs development, creating its own Emacs variant \textit{Lucid
+Emacs}.\footnote{The first release of Lucid Emacs came out in April,
+1992.}  Jamie Zawinski was the primary developer of Lucid Emacs.
+In 1994, Lucid went bankrupt.  Sun subsequently wanted to ship
+Lucid Emacs with their operating system, and ended up financing some
+of the continued development of Lucid Emacs, and effected a name
+change to the current \textit{XEmacs}.
+
+The focus of Lucid Emacs was on providing a proper graphical user
+interface.  As a result, most of the changes to Emacs Lisp in Lucid
+Emacs / XEmacs were to support the move from a TTY-based purely
+textual model to a graphical model.\foonote{Jamie Zawinski did write a new
+  byte-compiler, but its focus was on speed and optimization, not on
+  language features.}
+
+\subsection{Event and keymap representations}
+
+
+%  with richer character sets and
+% richer input events
+
+% keymap type
+
+
+\subsection{Character representation}
+
+% character type with XEmacs 20
+
+%    Difference from Emacs 18:
+
+% We have reimplemented keymaps so that sequences of events can be stored into
+% them instead of just ASCII codes; it is possible to, for example, bind
+% different commands to each of the chords Control-h, Control-H, Backspace,
+% Control-Backspace, and Super-Shift-Backspace.  Key bindings, function key
+% bindings, and mouse bindings live in the same keymaps.
+
+
+% ** Major Differences Between 19.13 and 19.14
+% ============================================
+
+% -- Common-Lisp support (the CL package) is now dumped standard
+%    into XEmacs.  No more need for (require 'cl) or anything
+%    like that.
+
+% ** Major Differences Between 19.6 and 19.8
+% ==========================================
+
+% There is a new internal representation for lisp objects, giving emacs-lisp 28
+% bit integers and a 28 bit address space, up from the previous maximum of 26.
+% We expect eventually to increase this to 30 bit integers and a 32 bit address
+% space, eliminating the need for DATA_SEG_BITS on some architectures.  (On 64
+% bit machines, add 32 to all of these numbers.)
+
+\section{Emacs/XEmacs co-evolution}
+
+\subsection{Bignums}
+
+% bignums
+
+% ** Major Differences Between 19.11 and 19.12
+% ============================================
+
+
+% *** Basic Lisp Stuff
+% --------------------
+
+% Common-Lisp backquote syntax is recognized.  For example, the old
+% expression
+
+% (` (a b (, c)))
+
+% can now be written
+
+% `(a b ,c)
+
+% The old backquote syntax is still accepted.
+
+% The new function `type-of' returns a symbol describing the type of a
+% Lisp object (`integer', `string', `symbol', etc.)
+
+% Symbols beginning with a colon (called "keywords") are treated
+% specially in that they are automatically made self-evaluating when
+% they are interned into `obarray'.  The new function `keywordp' returns
+% whether a symbol begins with a colon.
+
+% `get', `put', and `remprop' have been generalized to allow you to set
+% and retrieve properties on many different kinds of objects: symbols,
+% strings, faces, glyphs, and extents (for extents, however, this is not
+% yet implemented).  They are joined by a new function `object-plist'
+% that returns all of the properties that have been set on an object.
+
+% New functions `plists-eq' and `plists-equal' are provided for
+% comparing property lists (a property list is an alternating list
+% of keys and values).
+
+% The Common-Lisp functions `caar', `cadr', `cdar', `cddr', `caaar', etc.
+% (up to four a's and/or d's), `first', `second', `third', etc. (up to
+% `tenth'), `last', `rest', and `endp' have been added, for more
+% convenient manipulation of lists.
+
+% New function `mapvector' maps over a sequence and returns a vector
+% of the results, analogous to `mapcar'.
+
+% New functions `rassoc', `remassoc', `remassq', `remrassoc', and
+% `remrassq' are provided for working with alists.
+
+% New functions `defvaralias', `variable-alias' and `indirect-variable'
+% are provided for creating variable aliases.
+
+% Strings have a modified-tick that is bumped every time a string
+% is modified in-place with `aset' or `fillarray'.  This is retrieved
+% with the new function `string-modified-tick'.
+
+% New macro `push' destructively adds an element to the beginning of a
+% list.  New macro `pop' destructively removes and returns the first
+% element of a list.
+
+
+
+% * Lisp and internal changes in XEmacs 21.0
+% ==========================================
+
+% ** It is now possible to build XEmacs with support for 31-bit Lisp
+% integers (normally, Lisp integers are only 28 bits wide on 32-bit
+% machines.)  Configure with --use-minimal-tagbits to test.  With this
+% change, the maximum buffer size on 32-bit machines is increased from
+% 128M to 1G.  This setting will be made default in a future XEmacs
+% version.
+
+
+% * Lisp and internal changes in XEmacs 21.4
+% ==========================================
+
+% *** Instead of being lists of 256-character strings, case tables are
+% now opaque objects.  The interface to access them is almost the same,
+% except it now works for international characters, and you can set the
+% case pairs using `put-case-table-pair'.  `set-case-table' and friends
+% still support the old list/string based interface for backward
+% compatibility.
+
+
 %% How did XEmacs bootstrap?
 %% Strings with text-properties?
 

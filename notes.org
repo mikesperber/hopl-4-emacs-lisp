@@ -23,9 +23,11 @@ dormant and vice-versa, this ends up being almost chronological.
 https://www.emacswiki.org/emacs/EmacsHistory
 https://www.jwz.org/doc/emacs-timeline.html
 https://www.jwz.org/doc/lemacs.html
+https://www.xemacs.org/Documentation/21.5/html/internals_3.html
 http://www.multicians.org/mepap.html
 https://en.wikipedia.org/wiki/Mocklisp
 https://www.gnu.org/gnu/rms-lisp.en.html
+http://www.softwarepreservation.org/projects/LISP/embedded/#Emacs_Lisp_
 * Projects and people
 ** Gosling Emacs/MockLisp
 https://news.ycombinator.com/item?id=8727085
@@ -59,6 +61,9 @@ In "down with emacs lisp" you also mention JEmacs.
 * Language Evolution
 ** CL
 ** EIEIO/CLOS
+** Opaque data types u XEmacs
+** Text/character representation
+** Keymps
 ** Static scope
 Mention Neubauer/Sperber ICFP 2011 paper
 ** How 'bout evolution of typical programming style?
