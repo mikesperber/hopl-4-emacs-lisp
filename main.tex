@@ -112,20 +112,75 @@ change to the current \textit{XEmacs}.
 The focus of Lucid Emacs was on providing a proper graphical user
 interface.  As a result, most of the changes to Emacs Lisp in Lucid
 Emacs / XEmacs were to support the move from a TTY-based purely
-textual model to a graphical model.\foonote{Jamie Zawinski did write a new
+textual model to a graphical model.\footnote{Jamie Zawinski did write a new
   byte-compiler, but its focus was on speed and optimization, not on
   language features.}
 
 \subsection{Event and keymap representations}
 
+One significant departure from Emacs in Lucid Emacs was the
+representation of keymaps: Emacs, to this day, uses a transparent
+S-expression representation for keymaps.  In Emacs 19, a keymap was
+simply a two-element list whose car is the symbol \texttt{keymap} and
+whose second element is a vector, indexed by character code.  This
+representation did not gracefully extend to GUI-based input models,
+which distinguish between, say, backspace and Control-H.\footnote{One
+  problem with early Emacsen especially for early users was that
+  Control-H would trigger help instead of deleting the character in
+  front of the cursor.}
 
-%  with richer character sets and
-% richer input events
+The current representation for keymaps is much richer---here is an
+example~\cite{ELispManual2018}:
+%
+\begin{verbatim}
+(keymap
+ (3 keymap
+    ;; C-c C-z
+    (26 . run-lisp))
+ (27 keymap
+     ;; ‘C-M-x’, treated as ‘<ESC> C-x’
+     (24 . lisp-send-defun))
+ ;; This part is inherited from ‘lisp-mode-shared-map’.
+ keymap
+ ;; <DEL>
+ (127 . backward-delete-char-untabify)
+ (27 keymap
+     ;; ‘C-M-q’, treated as ‘<ESC> C-q’
+     (17 . indent-sexp)))
+\end{verbatim}
+%
+This creates problems with software evolution: While Emacs offered
+constructors and mutators for keymaps, Emacs code could, in principle,
+just use the tools for manipulating S-expressions for creating
+them---\texttt{cons}, \texttt{rplaca}, \texttt{rplacd} etc.  This code
+would break in the face of the representation change, but would not
+immediately trigger an error.
 
-% keymap type
+The developers Lucid Emacs of Lucid Emacs foresaw this problem, and
+made keymaps into on opaque datatype, forbidding manipulation via the
+S-expression primitives.  This allowed Lucid Emacs to evolve the
+representations of keymaps to cater to a richer set of input events
+(including mouse events, for instance), leaving existing Lisp programs
+unaffected.
 
+This step reflected a general difference in philosophy.  Lucid Emacs
+also used opaque data types for case tables and input events, both of
+which retain transparent representations in Emacs to this day.
 
 \subsection{Character representation}
+
+Another instance of a change in representation happened with the
+release of XEmacs 20, the first release of XEmacs with support for
+MULE (Multi-Lingual Emacs).  In previous versions of XEmacs,
+characters were represented by integers, and certain bits represented
+modifiers such as alt, hyper, or meta.  The shift to MULE also brought
+about changes in the mapping between (conceptual) characters and their
+numeric codes.  As a consequence, XEmacs made the character data type
+opaque and distinct in XEmacs 20.
+
+Emacs has retained the representation of characters through numbers,
+but shifted to a fixed Unicode-based encoding scheme in FIXME Stefan.
+
 
 % character type with XEmacs 20
 
@@ -136,6 +191,20 @@ textual model to a graphical model.\foonote{Jamie Zawinski did write a new
 % different commands to each of the chords Control-h, Control-H, Backspace,
 % Control-Backspace, and Super-Shift-Backspace.  Key bindings, function key
 % bindings, and mouse bindings live in the same keymaps.
+
+
+% ** Differences between XEmacs and GNU Emacs 19
+% ==================================================
+
+% In XEmacs, events are first-class objects.  FSF 19 represents them as
+% integers, which obscures the differences between a key gesture and the
+% ancient ASCII code used to represent a particular overlapping subset of them.
+
+% In XEmacs, keymaps are first-class opaque objects.  FSF 19 represents them as
+% complicated combinations of association lists and vectors.  If you use the
+% advertised functional interface to manipulation of keymaps, the same code
+% will work in XEmacs, Emacs 18, and GNU Emacs 19; if your code depends
+% on the underlying implementation of keymaps, it will not.
 
 
 % ** Major Differences Between 19.13 and 19.14
