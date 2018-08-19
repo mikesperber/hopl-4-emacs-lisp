@@ -171,16 +171,28 @@ which retain transparent representations in Emacs to this day.
 
 Another instance of a change in representation happened with the
 release of XEmacs 20, the first release of XEmacs with support for
-MULE (Multi-Lingual Emacs).  In previous versions of XEmacs,
-characters were represented by integers, and certain bits represented
-modifiers such as alt, hyper, or meta.  The shift to MULE also brought
-about changes in the mapping between (conceptual) characters and their
-numeric codes.  As a consequence, XEmacs made the character data type
-opaque and distinct in XEmacs 20.
+MULE (Multi-Lingual Emacs).
 
-Emacs has retained the representation of characters through numbers,
-but shifted to a fixed Unicode-based encoding scheme in FIXME Stefan.
+Previous versions of Emacs and XEmacs were inherently tied to an 8-bit
+representation of characters.  Moreover, they had used strings not
+only for representing text but also for representing key sequences.
+In strings, the high bit represented ``meta,'' basically restricting
+Emacs to ASCII.  Characters outside of strings could have more
+modifiers in higher bits.
 
+This situation was no longer tenable when multi-language support came to
+XEmacs.  The work on MULE~\cite{MULEFIXME} predates widespread
+adoption of Unicode, and at the time XEmacs adopted MULE (around
+1994), a number of other text encodings were still in use.  The MULE
+character representation encoded a character as a pair of a national
+character set and an associated codepoint.
+
+To enforce the separation between characters and their associated
+encodings, XEmacs 20 made characters a separate data type.  XEmacs had
+functions to convert between a character and its numerical
+representation (\texttt{make-char} and \texttt{char-int}).  However,
+it allowed Lisp programs to mostly eschew handling these
+representations and thus discouraged the practice.
 
 % character type with XEmacs 20
 
@@ -224,6 +236,12 @@ but shifted to a fixed Unicode-based encoding scheme in FIXME Stefan.
 % bit machines, add 32 to all of these numbers.)
 
 \section{Emacs/XEmacs co-evolution}
+
+\subsection{Unicode}
+
+Emacs still uses numbers to represent characters, and has seen several changes
+
+The separation has simplified the inevitable 
 
 \subsection{Bignums}
 
