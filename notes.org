@@ -29,6 +29,7 @@ https://en.wikipedia.org/wiki/Mocklisp
 https://www.gnu.org/gnu/rms-lisp.en.html
 http://www.softwarepreservation.org/projects/LISP/embedded/#Emacs_Lisp_
 https://www.math.utah.edu/docs/info/elisp_toc.html
+ftp://ftp.gnu.org/old-gnu/Manuals/
 * Projects and people
 ** Gosling Emacs/MockLisp
 https://news.ycombinator.com/item?id=8727085
