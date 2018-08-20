@@ -70,6 +70,11 @@
 
 %% Mocklisp, Maclisp, Scheme, TECO's language?
 
+While Emacs's original inception was as a set of macros for the TECO
+editor, it had no high-level extensionsion language.  Arguably, the
+strongest influences for Emacs Lisp were Gosling Emacs's Mock Lisp and
+MacLisp.
+
 \subsection{Gosling Emacs}
 
 \textit{Unix Emacs}, written by James Gosling in
@@ -89,6 +94,19 @@ function: For example, \texttt{(arg 1)} would access the first
 argument.  Moreover, argument expressions were essentially evaluated
 in a call-by-name fashion by \texttt{arg}, and evaluation happened in
 the dynamic environment of the callee.
+
+\subsection{MacLisp}
+
+Several other early incarnations of Emacs were written in Lisp,
+notably on the Lisp Machine by Dan Weinreb and in
+MacLisp~\cite{Moon1974} by Bernie Greenberg~\cite{Stallman2002}.  The
+ensuing possibilities for extending the editor was attractive to
+Richard Stallman, who wanted to write a new widel available version.
+As Greenberg's Emacs required a high-performance Lisp compiler to run
+efficiently, Stallman decided to reimplement the basis for the new
+Emacs in C, with an integrated Lisp interpreter.  Buffer manipulation
+and redisplay were written in efficient C, higher-level functionality
+in Lisp.
 
 \section{Early history}         % -1992 ?
 
