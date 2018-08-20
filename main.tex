@@ -250,12 +250,10 @@ codepoint.
 To enforce the separation between characters and their associated
 encodings, XEmacs 20 made characters a separate data type.  XEmacs had
 functions to convert between a character and its numerical
-representation (\texttt{make-char} and \texttt{char-int}).  However,
-%% FIXME: I don't quite understand what you're saying here, I think you mean
-%% that XEmacs discouraged the practice of treating a char like a number,
-%% but I'm not 100% sure.
-it allowed Lisp programs to mostly eschew handling these
-representations and thus discouraged the practice.
+representation (\texttt{make-char} and \texttt{char-int}).  Generally,
+Emacs Lisp allows programs to mostly handle text as strings,
+and avoid manipulating the numerical representation.  Making
+characters an opaque type additionally discouraged the practice.
 
 % character type with XEmacs 20
 
