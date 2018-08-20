@@ -120,12 +120,32 @@ textual model to a graphical model.\footnote{Jamie Zawinski did write a new
 
 One significant departure from Emacs in Lucid Emacs was the
 representation of keymaps: Emacs, to this day, uses a transparent
-S-expression representation for keymaps.  In Emacs 19, a keymap was
+S-expression representation for keymaps.
+%% FIXME: According to Git, Emacs supported sparse keymaps
+%% (i.e. using an alist representation rather than a vector)
+%% at least since May 6 1991 (there's no earlier record).
+%% In terms of possible representation, this is not very different from
+%% current Emacs, although the code is now a lot more featureful and
+%% robust, especially w.r.t inheritance.
+In Emacs 19, a keymap was
 simply a two-element list whose car is the symbol \texttt{keymap} and
-whose second element is a vector, indexed by character code.  This
+whose second element is a vector, indexed by character code.
+%% FIXME: The May 6 1991 version of the code already used reorder_modifiers
+%% to canonicalize events represented as symbols before looking them up, so
+%% it worked pretty much the same as current Emacs.
+%% So either XEmacs's keymaps date back to some earlier time than May 6 1991,
+%% or they were motivated by something else (e.g. a general dislike
+%% for the approach used in Emacs's src/keymap.c, or a feeling or knowledge that
+%% making it handle extensions like (multiple) inheritance would be messy
+%% (as the author of the multiple-inheritance support for Emacs, I can vouch
+%% for it being quite messy/tricky).
+This
 representation did not gracefully extend to GUI-based input models,
 which distinguish between, say, backspace and Control-H.\footnote{One
   problem with early Emacsen especially for early users was that
+  %% FIXME: Quite so, but this only occurred under ttys, not under GUIs,
+  %% because the issue was that the terminal did send C-h when the user
+  %% hit Backspace, so it was not actually related to keymaps!
   Control-H would trigger help instead of deleting the character in
   front of the cursor.}
 
@@ -187,10 +207,16 @@ adoption of Unicode, and at the time XEmacs adopted MULE (around
 character representation encoded a character as a pair of a national
 character set and an associated codepoint.
 
+%% FIXME: I think we should mention the actual underlying representation
+%% of characters in the C code (the text above suggests it was an actual pair of
+%% character set and codepoint, which would suggest it was heap allocated).
 To enforce the separation between characters and their associated
 encodings, XEmacs 20 made characters a separate data type.  XEmacs had
 functions to convert between a character and its numerical
 representation (\texttt{make-char} and \texttt{char-int}).  However,
+%% FIXME: I don't quite understand what you're saying here, I think you mean
+%% that XEmacs discouraged the practice of treating a char like a number,
+%% but I'm not 100% sure.
 it allowed Lisp programs to mostly eschew handling these
 representations and thus discouraged the practice.
 
@@ -208,6 +234,12 @@ representations and thus discouraged the practice.
 % ** Differences between XEmacs and GNU Emacs 19
 % ==================================================
 
+%% FIXME: In Emacs-19, events were not only represented by integers but also
+%% by symbols like `C-left` or `C-backspace`.  Not sure when they
+%% were extended to also allows pairs of the form (NAME . DATA),
+%% where NAME can be something like `C-mouse-1` and DATA gives extra
+%% information such as the position of the click.
+%%
 % In XEmacs, events are first-class objects.  FSF 19 represents them as
 % integers, which obscures the differences between a key gesture and the
 % ancient ASCII code used to represent a particular overlapping subset of them.
@@ -297,6 +329,8 @@ The separation has simplified the inevitable
 % New functions `defvaralias', `variable-alias' and `indirect-variable'
 % are provided for creating variable aliases.
 
+%% FIXME: Ha, didn't know about this one.  I'm eager to learn about the
+%% motivation for this feature.
 % Strings have a modified-tick that is bumped every time a string
 % is modified in-place with `aset' or `fillarray'.  This is retrieved
 % with the new function `string-modified-tick'.
@@ -379,9 +413,6 @@ influence on the \Elisp{} language:
 
 %% * Language Evolution
 %% ** Influence of Lisp Machine's editors like Zmacs?
-%% ** CL
-%% ** EIEIO/CLOS
-%% ** lexical/static-scoping (and eager macroexpansion)
 %% Mention Neubauer/Sperber ICFP 2011 paper
 %% ** How 'bout evolution of typical programming style?
 %% ** frame-local variables?
@@ -532,10 +563,50 @@ closure conversion.  The main focus at that point was to:
   necessarily with the best performance.
 \end{itemize}
 
-\subsubsection{Eager macro-expansion}
+Performance of the new lexical scoping mode proved to be competitive
+with the performance of the dynamic scoping mode except for its interaction
+with the \texttt{condition-case} and \texttt{unwind-protect} primitives
+whose underlying byte-codes were a poor fit.  So in Emacs-24.4, new byte
+codes were introduced and the byte-compiler was modified to be able to make
+use of them.
 
+\subsubsection{Eager macro-expansion} %Emacs-24.3?
 
-\subsubsection{Pcase}
+The exact time at which a macro is expanded has never been clearly specified
+in \Elisp{}.  Until Emacs-24, macro-expansion usually took place as late as
+possible for interpreted code, whereas for byte-compiled code,
+macro-expansion always took place during byte-compilation, with some notable
+exceptions where the code was ``hidden'' from the byte-compiler.  In the
+byte-compiler, the macro-expansion was also done ``lazily'' in that it was
+done on the fly during the single pass of compilation.
+
+In order to implement the separate closure conversion phase for Emacs-24,
+this had to be changed so that the code is macro-expanded in a separate
+phase before closure conversion and the actual byte-compilation, using a new
+\texttt{macroexpand-all} function.
+This caused some visible differences in corner cases where some macros ended
+up expanded in code which earlier was eliminated by optimizations before
+getting to the point of macro-expansion, but in practice this did not cause
+any serious regression.
+
+This use of the new \texttt{macroexpand-all} function was made yet a bit
+more prevalent in Emacs-24.3 where we started applying it when loading
+a non-compiled file, so that macro-expansion now happens ``eagerly'' when
+loading a file rather than lazily when we actually run the code.  This eager
+macro-expansion occasionally bumped into problematic dependencies (typically
+in files which were never compiled), so we made it fail gracefully: if an
+error is signaled during the macro-expansion that takes place while loading
+a file, we just abort the macro-expansion and continue with the non-expanded
+code like we did in the past, tho not without duly notifying the user about
+the problem.
+
+In Emacs-25.1, we additionally fine-tuned these macro-expansion phases (both
+while loading a file and while compiling them) according to the section
+3.2.3.1 of the Common-Lisp HyperSpec~\cite{HyperSpec}, so as to improve the
+handling of macros that expand to both definitions and uses of
+those definitions.
+
+\subsubsection{Pcase}           %Released in Emacs-24.1
 
 While working on the lexical-binding feature, Stefan Monnier grew
 increasingly frustrated at the shape of the code used to traverse the
@@ -572,6 +643,38 @@ improved to follow some of the design of Racket's \texttt{match}.
 The new version appeared in Emacs-25.1 and the main novelty there was the
 introduction of \texttt{pcase-defmacro} which can define new patterns
 in a modular way, often using the new low-level pattern \texttt{app}.
+
+\subsubsection{Incorporating functionality from \texttt{cl.el}}
+
+Over the years, various macros and functions from \texttt{cl.el} were found
+to be sufficiently popular to move them into \Elisp{} proper:
+
+\begin{itemize}
+\item [Emacs-20.1]: The release of Emacs-20.1 saw the move of the macros
+  \texttt{when} and \texttt{unless} as well as the functions \texttt{caar},
+  \texttt{cadr}, \texttt{cdar}, and \texttt{cddr}.
+\item [Emacs-21.1]: The hash-table functions, reimplemented in C, as well as
+  the Common-Lisp concept of \emph{keywords} (tho only as objects, not as
+  arguments).  Additionally the macros \texttt{dolist}, \texttt{dotimes},
+  \texttt{push}, and \texttt{pop} were also added to \Elisp{}, which
+  introduced some difficulties: in \texttt{cl.el} those macros included
+  extra functionality which relied on parts of \texttt{cl.el} which we did
+  not want to move to \Elisp{} proper, specifically
+  \texttt{block}/\texttt{return} and generalized references.  For that
+  reason those macros added to \Elisp{} do not actually replace those of
+  \texttt{cl.el}; instead when \texttt{cl.el} is loaded, it overrides the
+  original macros with its own version.
+\item [Emacs-22.1]: \texttt{delete-dups}, which provides a subset of
+  \texttt{cl.el}'s \texttt{delete-duplicates}.
+\item [Emacs-24.1]: \textt{macroexpand-all} and lexical-scoping, which
+  replaces \texttt{cl.el}'s \texttt{lexical-let}.
+\item [Emacs-24.3]: Compiler macros, \texttt{setf} and
+  generalized references.
+\item [Emacs-26.1]: Additionally to the cXXr functions incorporated in
+  Emacs-20.1, the cXXXr functions are now also part of \Elisp{}.
+  The resistance against those was mostly one of style, since they tend to
+  lead to poorly readable code.
+\end{itemize}
 
 \subsubsection{CL-lib}          %Released in Emacs-24.3
 
@@ -770,16 +873,19 @@ programming in the form of method dispatch has been historically limited
 in Emacs.
 
 The first real step in that direction was the development of EIEIO by Eric
-Ludlam around the end of 1995, beginning of 1996.  The name ``Enhanced
+Ludlam around the end of 1995, beginning of 1996.  The official name ``Enhanced
 Implementation of Emacs Interpreted Objects'' hints at the earlier existence
-%% FIXME: I asked Eric about it, waiting for his answer.
-of some ``Emacs Interpreted Objects'' package but we were not able to find
-any information about it.
+of some ``Emacs Interpreted Objects'' package but in reality the acronym
+came before its expansion.  EIEIO started as an experiment to try use
+an object system in Emacs, first following a model like that of C++, but
+very soon switching to a CLOS-inspired model.
 
 EIEIO is an implementation of a subset of CLOS.  Its development was mostly
-driven by actual needs of CEDET more than as an end in itself.  It included
-support for most of CLOS's \texttt{defclass}, as well as support for
-a subset of \texttt{defmethod}, more specifically it was limited to
+driven by actual needs more than as an end in itself: the original
+motivation was to try and play with an object request broker, then a widget
+toolkit, and later switched to providing support for the CEDET package.
+It included support for most of CLOS's \texttt{defclass}, as well as support
+for a subset of \texttt{defmethod}, more specifically it was limited to
 single-dispatch methods, dispatching on the first argument, and it could
 only dispatch based on types of \texttt{defclass} objects.  It also had
 incomplete support for method combinations, only allowing \texttt{:before}
@@ -801,7 +907,7 @@ popular), but there was also a desire to improve the \texttt{defmethod} with
 support for \texttt{:around} methods and dispatch on other types than those
 defined with \texttt{defclass}.
 
-But it became quickly evident that the implementation of method dispatch
+It became quickly evident that the implementation of method dispatch
 needed a complete overhaul: rather than constructing combined methods
 up-front and memoizing the result, as in typical CLOS implementations,
 EIEIO's dispatch and \texttt{call-next-method} did all their work
@@ -836,10 +942,11 @@ a much simpler mechanism.
 
 As for the second difference, it was made necessary by the need to dispatch
 on EIEIO objects even though \texttt{cl-generic.el} could not depend on
-EIEIO since it was not clean enough.  There were other motivations for it,
-tho: not only it was clearly desirable to be able to define new
+EIEIO since it was not clean enough.  There were additional motivations for
+it, tho: not only it was clearly desirable to be able to define new
 specializers, but it also made the implementation of the main specializers
-cleaner.
+cleaner, and most importantly it seemed like an interesting problem
+to solve.
 
 Just like in the CLOS MOP, there is a fair bit of delicate bootstrapping
 involved: new specializers are defined by adding methods to the
@@ -861,8 +968,8 @@ frames using a particular kind of GUI.
 
 The implementation of \texttt{cl-generic.el} was accompanied by an extension
 of the on-line help system so as to be able to give information not just
-above \Elisp{} variables, functions, and faces but also other kinds of named
-elements, starting with types.  And to go along with that the implementation
+about \Elisp{} variables, functions, and faces but also other kinds of named
+elements, starting with types.  And to go along with that, the implementation
 of \texttt{cl-defstruct} was improved to better preserve information about
 the type hierarchy so that the on-line help system can be used to traverse
 it.  This started as an attempt to adapt to \texttt{cl-generic.el} the EIEIO
