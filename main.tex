@@ -238,16 +238,15 @@ In strings, the high bit represented ``meta,'' basically restricting
 Emacs to ASCII.  Characters outside of strings could have more
 modifiers in higher bits.
 
-This situation was no longer tenable when multi-language support came to
-XEmacs.  The work on MULE~\cite{Ohmaki2002} predates widespread
+This situation was no longer tenable when multi-language support came
+to XEmacs.  The work on MULE~\cite{Ohmaki2002} predates widespread
 adoption of Unicode, and at the time XEmacs adopted MULE (around
 1994), a number of other text encodings were still in use.  The MULE
-character representation encoded a character as a pair of a national
-character set and an associated codepoint.
+character representation encoded a character as an integer that
+represented two numbers, in the high and low bits respectively: One
+represented the national character set, the other the associated
+codepoint.
 
-%% FIXME: I think we should mention the actual underlying representation
-%% of characters in the C code (the text above suggests it was an actual pair of
-%% character set and codepoint, which would suggest it was heap allocated).
 To enforce the separation between characters and their associated
 encodings, XEmacs 20 made characters a separate data type.  XEmacs had
 functions to convert between a character and its numerical
