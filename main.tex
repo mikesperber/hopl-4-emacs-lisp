@@ -471,21 +471,24 @@ Scheme, being developed in a nearby office, \Elisp{} was mostly derived from
 Maclisp and used exclusively dynamic scoping.  The motivation for this
 decision is not completely clear but seems to include:
 \begin{itemize}
-\item Familiarity: Richard was more familiar with Maclisp than Scheme, and
+\item Familiarity: Richard Stallman was more familiar with Maclisp than Scheme, and
   lexical scoping was new whereas dynamic scoping was the
   tried-and-tested alternative.
 \item Hackability: Scheme's lexical scoping makes it impossible to access
   variables in other scopes, so it provides a strong form of abstraction,
   which is great in many cases, but can be annoying to the end user who just
-  wants to do a quick and dirty hack.  Similarly, Richard has often
+  wants to do a quick and dirty hack.
+  % FIXME: evidence?
+  Similarly, Richard Stallman has often
   preferred to avoid the use of opaque datatypes, most famously for the
   representation of keymaps and characters.
+  % FIXME: Needs to tie in with XEmacs above
 \item Efficiency: It was perceived that closures would incur a cost that was
   not justified.  This was especially true in the context of the early Emacs
   which relied exclusively on interpretation to evaluate its \Elisp{} code.
 \end{itemize}
-Yet, very quickly, lexical scoping became the established standard in pretty
-much all serious programming languages, including those of the Lisp family.
+Yet, very quickly, lexical scoping became the established standard in
+the Lisp family in both Common Lisp and Scheme.
 So of course, the question of adding lexical scoping to \Elisp{} has been
 brought up many times.
 
@@ -507,7 +510,8 @@ Dynamic scoping had two main drawbacks in practice:
 \begin{itemize}
 \item The lack of closures.  Some packages circumvented the lack of closures
   by building lambda expressions on the fly with constructs like
-  \texttt{`(lambda (x) (+ x ',y))}, which was quite tolerable, although it
+  \texttt{`(lambda (x) (+ x ',y))}, which was quite tolerable, % FIXME: what does "tolerable" mean?
+  although it
   suffered from various problems such as the fact that macros within that
   closure were expanded late, and its code was not seen by the
   byte-compiler.  Emacs-23.1 introduced the curry operator
@@ -516,6 +520,7 @@ Dynamic scoping had two main drawbacks in practice:
 \item The global visibility of variable names, requiring more care with the
   choice of local variable names.  The convention followed by Emacs to name
   all global variables with a package-specific prefix works well enough in
+  % FIXME: sufficient to do what?  Maybe code examples?
   most cases, but it was not sufficient for higher-order functions, like
   \texttt{reduce}, and it was also problematic in a few other cases such as
   the byte-compiler: in order to emit warnings about the use of undeclared
@@ -669,7 +674,7 @@ that the pattern does match and hence can skip all the tests, leaving only the
 operations that extract data.
 
 After the release of Emacs-24.1, Stefan was made aware of Racket's
-\texttt{match} construct, which somehow eluded his earlier search for
+\texttt{match} construct~\cite{RacketReference2018}, which somehow eluded his earlier search for
 existing pattern matching macros and whose design makes it easy to define
 new patterns.  The implementation of Racket's \texttt{match} could not be
 easily be reused in \Elisp{} because it relies too much on the compiler's
@@ -725,7 +730,7 @@ value of offering such facilities, so this \texttt{cl.el} package was
 included fairly early on into Emacs, and has been one of the most popular
 packages, used by a large proportion of \Elisp{} packages.  Yet, Richard did
 not want to impose \texttt{cl.el} onto any Emacs user, so he imposed
-a policy where the use of \texttt{cl.el} was limited \emph{within} Emacs
+a policy where the use of \texttt{cl.el} was restricted \emph{within} Emacs
 itself.  More specifically, \Elisp{} packages bundled with Emacs were
 restricted to limit their use of \texttt{cl.el} in such a way that
 \texttt{cl.el} never needed to be loaded during a normal editing session.
@@ -800,6 +805,8 @@ concept was used.  The reasons for this new implementation were:
 \end{itemize}
 In Common-Lisp, a \emph{place} is defined by providing a function which
 turns it into a 5-tuple
+% FIXME: I can't follow here. How is that function provided?
+% Who calls it on what?
 \begin{displaymath}
   (\textsl{VARS}~\textsl{VALS}~\textsl{STORE-VAR}~\textsl{STORE-FORM}
   ~\textsl{ACCESS-FORM})
@@ -842,7 +849,7 @@ For example, the \texttt{push} macro could be naively implemented as:
                    (lambda (ACCESS-FORM STORE-FUNCTION)
                      (funcall STORE-FUNCTION `(cons x ,ACCESS-FORM))))))
 \end{verbatim}
-tho instead, \Elisp{} provides a macro \texttt{gv-letplace} which lets us
+instead, \Elisp{} provides a macro \texttt{gv-letplace} which lets us
 write the above as:
 \begin{verbatim}
     (defmacro push (EXP PLACE)
@@ -857,7 +864,9 @@ a corresponding higher-order function.  The reverse is not true, however, so
 this design precludes compatibility with \texttt{get-setf-method} (nowadays
 called \texttt{get-setf-expansion}).
 
-Breaking compatibility with \texttt{get-setf-expansion} was of course
+Breaking compatibility with \texttt{get-setf-expansion}
+% FIXME: What's get-setf-expansion?
+was of course
 a downside, but in practice this function was almost never used outside of
 \texttt{cl.el} itself so very few packages were impacted by
 this incompatibility.
