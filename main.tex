@@ -95,7 +95,8 @@ many built-in functions (such as \texttt{eolp},
 \texttt{forward-character}, \texttt{save-excursion}) whose names
 survive in Emacs Lisp.
 
-MLisp had dynamic binding and local variables, but a peculiar
+MLisp was a quite limited language: It lacked cons cells and lists.
+MLisp did have dynamic binding and local variables, but a peculiar
 mechanism for passing arguments:  There were no named
 parameters.  Instead, a program would invoke the \texttt{arg}
 function: For example, \texttt{(arg 1)} would access the first
@@ -109,25 +110,28 @@ Several other early incarnations of Emacs were written in Lisp,
 notably on the Lisp Machine by Dan Weinreb and in
 MacLisp~\cite{Moon1974} by Bernie Greenberg~\cite{Stallman2002}.  The
 ensuing possibilities for extending the editor was attractive to
-Richard Stallman, who wanted to write a new widel available version.
+Richard Stallman, who wanted to write a new widely available version.
+As a result, Emacs Lisp is a direct descendant of MacLisp.
+
+\section{Early history}         % -1992 ?
+
+Following Greenberg's Multics Emacs, Stallman decided to write a (for
+him) second version of Emacs, which included \Elisp{} from the start.
 As Greenberg's Emacs required a high-performance Lisp compiler to run
 efficiently, Stallman decided to reimplement the basis for the new
 Emacs in C, with an integrated Lisp interpreter.  Buffer manipulation
 and redisplay were written in efficient C, higher-level functionality
-in Lisp.  As a result, Emacs Lisp is a direct descendant of MacLisp.
-
-\section{Early history}         % -1992 ?
+in Lisp.
 
 % Moved from abstract:
 
 Many extension and configuration languages start out ``small,'' with
-no ambition to grow into a full-fledged programming language.  In
-particular, Emacs's predecessors, Gosling Emacs and TECO featured
-small languages that were too weak to support the vision Richard
-Stallman had for Emacs.  Consequently, Stallman took inspiration
-from Maclisp, and \Elisp{} started as a real programming language
-with powerful abstraction facilities, thus foregoing Greenspun's
-tenth rule.
+no ambition to grow into a full-fledged programming language.  TECO
+and Gosling Emacs featured small languages that were too weak to
+support the vision Richard Stallman had for Emacs.  Consequently,
+Stallman took inspiration from MacLisp, and \Elisp{} started as a real
+programming language with powerful abstraction facilities, thus
+foregoing Greenspun's tenth rule.
 
 %% * Language & Implementation Overview
 %% ** ... usual stuff ...
