@@ -133,12 +133,11 @@ Stallman took inspiration from MacLisp, and \Elisp{} started as a real
 programming language with powerful abstraction facilities, thus
 foregoing Greenspun's tenth rule.
 
+%% FIXME: TODO
 %% * Language & Implementation Overview
 %% ** ... usual stuff ...
 %% ** Buffer-local variables
-
 %% ** Comparison to other Lisps of the time
-
 %% ** Language implementation
 %% ** Interpreter
 %% ** Image dumping
@@ -435,8 +434,8 @@ The separation has simplified the inevitable
 %% mundane software-development good practices.
 Emacs being the brain child of Richard Stallman, its design strives to
 embody and showcase the ideals of Free Software.  For example, not only
-should it be legal to get and modify the source code, but every effort
-should be made to encourage the end-user to do so.  This has a profound
+is it legal to get and modify the source code, but every effort
+is made to encourage the end-user to do so.  This has a profound
 influence on the \Elisp{} language:
 \begin{itemize}
 \item The language should be accessible to a wide audience, so that as many
@@ -448,7 +447,7 @@ influence on the \Elisp{} language:
   experience.  This has been a strong motivation to keep \Elisp{} on the
   minimalist side and to resist incorporation of many Common-Lisp features.
 \item It should be easy for the end-user to find the relevant code in order
-  to modify Emacs's behavior.   This has driven the development of elements
+  to modify Emacs's behavior.  This has driven the development of elements
   such as the \emph{docstrings} and more generally the self-documenting
   aspect of the language.  It also imposes constraints on the evolution of
   the language: the use of some facilities, such as \emph{advice}, is
@@ -461,6 +460,7 @@ influence on the \Elisp{} language:
 
 %% How to structure that?
 
+%% FIXME:
 %% ** Other implementations
 %% *** Elisp in MIT Scheme
 %%  Edwin, there's also a paper on this:
@@ -469,9 +469,9 @@ influence on the \Elisp{} language:
 %% *** Elisp in Guile
 %% *** Elisp in Common-Lisp (Sam Steingold?)
 
+%% FIXME:
 %% * Language Evolution
 %% ** Influence of Lisp Machine's editors like Zmacs?
-%% Mention Neubauer/Sperber ICFP 2011 paper
 %% ** How 'bout evolution of typical programming style?
 %% ** frame-local variables?
 %% ** Evolution of the "core Elisp" language?
@@ -486,7 +486,7 @@ influence on the \Elisp{} language:
 %% *** the various `declare` thingies
 %% indent, debug, doc-string, advertized-calling-convention, ...
 
-\subsubsection{Lexical scoping}
+\subsection{Lexical scoping}
 
 While Scheme was already about to get its second revision when Richard
 Stallman started to work on GNU Emacs, and Richard obviously knew about
@@ -533,15 +533,13 @@ Dynamic scoping had two main drawbacks in practice:
 \begin{itemize}
 \item The lack of closures.  Some packages circumvented the lack of closures
   by building lambda expressions on the fly with constructs like
-  \texttt{`(lambda (x) (+ x ',y))}, which was quite tolerable, % FIXME: what does "tolerable" mean?
-  although it
-  suffered from various problems such as the fact that macros within that
-  closure were expanded late, and its code was not seen by the
-  byte-compiler.  Emacs-23.1 introduced the curry operator
-  \texttt{apply-partially} to cover similar use cases without
+  \texttt{`(lambda (x) (+ x ',y))}, which suffered from various problems
+  such as the fact that macros within that closure were expanded late, and
+  its code was not seen by the byte-compiler.  Emacs-23.1 introduced the
+  curry operator \texttt{apply-partially} to cover similar use cases without
   those drawbacks.
 \item The global visibility of variable names, requiring more care with the
-  choice of local variable names.  The convention followed by Emacs to name
+  choice of local names.  The convention followed in Emacs to name
   all global variables with a package-specific prefix works well enough in
   % FIXME: sufficient to do what?  Maybe code examples?
   most cases, but it was not sufficient for higher-order functions, like
@@ -574,7 +572,7 @@ not clear how to find the few places where dynamic scoping is needed so as
 to avoid breaking too many existing packages.
 
 In~\cite{Neubauer01}, the authors try to solve this problem by a code
-analysis which instead of try to find the places where dynamic scoping is
+analysis which, instead of trying to find the places where dynamic scoping is
 needed, tries to find those bindings for which lexical scoping would not
 change the resulting semantics.  This tool could have been used to
 mechanically convert \Elisp{} packages to a lexically scoped version of
@@ -633,7 +631,7 @@ whose underlying byte-codes were a poor fit.  So in Emacs-24.4, new byte
 codes were introduced and the byte-compiler was modified to be able to make
 use of them.
 
-\subsubsection{Eager macro-expansion} %Emacs-24.3?
+\subsection{Eager macro-expansion} %Emacs-24.3?
 
 The exact time at which a macro is expanded has never been clearly specified
 in \Elisp{}.  Until Emacs-24, macro-expansion usually took place as late as
@@ -669,7 +667,7 @@ while loading a file and while compiling them) according to the section
 handling of macros that expand to both definitions and uses of
 those definitions.
 
-\subsubsection{Pcase}           %Released in Emacs-24.1
+\subsection{Pcase}           %Released in Emacs-24.1
 
 While working on the lexical-binding feature, Stefan Monnier grew
 increasingly frustrated at the shape of the code used to traverse the
@@ -697,17 +695,18 @@ that the pattern does match and hence can skip all the tests, leaving only the
 operations that extract data.
 
 After the release of Emacs-24.1, Stefan was made aware of Racket's
-\texttt{match} construct~\cite{RacketReference2018}, which somehow eluded his earlier search for
+\texttt{match} construct~\cite{RacketReference2018}, which somehow eluded
+his earlier search for
 existing pattern matching macros and whose design makes it easy to define
 new patterns.  The implementation of Racket's \texttt{match} could not be
-easily be reused in \Elisp{} because it relies too much on the compiler's
+easily reused in \Elisp{} because it relies too much on the compiler's
 efficient handling of locally defined functions, but \texttt{pcase.el} was
 improved to follow some of the design of Racket's \texttt{match}.
-The new version appeared in Emacs-25.1 and the main novelty there was the
+The new version appeared in Emacs-25.1 and the main resulting novelty was the
 introduction of \texttt{pcase-defmacro} which can define new patterns
 in a modular way, often using the new low-level pattern \texttt{app}.
 
-\subsubsection{Incorporating functionality from \texttt{cl.el}}
+\subsection{Incorporating functionality from \texttt{cl.el}}
 
 Over the years, various macros and functions from \texttt{cl.el} were found
 to be sufficiently popular to move them into \Elisp{} proper:
@@ -739,7 +738,7 @@ to be sufficiently popular to move them into \Elisp{} proper:
   lead to poorly readable code.
 \end{itemize}
 
-\subsubsection{CL-lib}          %Released in Emacs-24.3
+\subsection{CL-lib}          %Released in Emacs-24.3
 
 While the core of \Elisp{} has evolved very slowly over the years, the
 evolution of other Lisps (mostly Scheme and Common-Lisp) has put pressure to
@@ -797,7 +796,7 @@ above, but this time, a compromise was found: replace
 the \texttt{cl.el} package with a new package (called \texttt{cl-lib.el})
 which provides the same facilities but with names which all use the
 \texttt{cl-} prefix.  This way, the \texttt{cl-lib.el} package doesn't turn
-\Elisp{} into the Common-Lisp language, but instead provides the Common-Lisp
+\Elisp{} into the Common-Lisp language, but instead provides Common-Lisp
 facilities under its own namespace, leaving \Elisp{} free to evolve in its
 own way.
 
@@ -806,9 +805,9 @@ own way.
 %% as part of the lexical-scoping work), and reimplementing others so
 %% as to rely on less-invasive advice instead of blunt redefinition
 %% (e.g. use a simple (tho hackish) `function` macro to implement `cl-labels`,
-%% and advice `macroexpand` (rather than redefine it) for cl-symbol-macrolet).
+%% and advise `macroexpand` (rather than redefine it) for cl-symbol-macrolet).
 
-\subsubsection{Generalized variables} %Released in Emacs-24.3
+\subsection{Generalized variables} %Released in Emacs-24.3
 
 To facilitate the move to \texttt{cl-lib.el}, some frequently used
 functionality from \texttt{cl.el} was moved directly to \Elisp{}.  The most
@@ -926,7 +925,7 @@ this incompatibility.
 %% much easier to see that \texttt{n} and \texttt{place} are evaluated in the
 %% proper order.
 
-\subsubsection{Object-oriented programming} %Emacs-25.1
+\subsection{Object-oriented programming} %Emacs-25.1
 
 While \texttt{cl.el} early on (already in the version by Cesar Quiroz
 %% FIXME: the new cl.el says "This package was written by Dave Gillespie;
@@ -1043,7 +1042,7 @@ it.  This started as an attempt to adapt to \texttt{cl-generic.el} the EIEIO
 facilities to explore interactively EIEIO objects and methods, but is more
 modular and better integrated with the rest of Emacs's on-line help system.
 
-\subsubsection{Actual objects}  %Emacs-26.1
+\subsection{Actual objects}  %Emacs-26.1
 
 While Emacs-25's \texttt{cl-generic.el} introduced object-oriented
 programming facilities into \Elisp{}, objects (whether defined via
@@ -1066,15 +1065,103 @@ and those using the new encoding.
 \subsection{Implementation}
 
 
-
+%% FIXME: TODO
+%% ** Byte-code interpreter optimisation
+%% *** IIRC there was a round of micro-optimisation in the XEmacs interpreter
+%% *** threaded implementation (using gcc's computed gotos)
 %% ** Bootstrap?
 %% ** C FFI
 %% ** JIT compiler attempts
 %% ** Byte code changes
 %% ** GC changes
 
+\subsection{Data representation}
+
+%% FIXME: We should probably talk about memory management here as well,
+%% since the two are closely linked.
+
+Emacs started with a data representation of its boxed data based on 32bit
+words.  Those used a 7bit tag located in the most significant bits, 1 extra
+``mark'' bit (see below), and 24bit of immediate data: either an integer or
+a pointer.  Not all the possible 128 tags were actually used, but the 24
+remaining bits where amply sufficient to represent the needed pointers and
+integers for the typical available memory of the machines of that time.
+
+The memory management code allocated objects by blocs of 4KB dedicated to
+a particular kind of objects: one bloc each for cons cells, floats, symbols,
+markers, and strings, all other objects were allocated directly with
+\texttt{malloc}.  The ``mark'' bit in each 32bit box was not used for the
+object contained in the 32bit box.  Instead it was used so that cons cells
+could occupy only 2 words: the extra bit needed to store the mark&sweep's
+\emph{markbit} of each cons cell was stored in the ``mark'' bit of the first
+word (i.e. of the \texttt{car}).
+
+Over time, this tagging scheme became problematic, since it limited to 16 MB
+the size of the Lisp heap and to 8MB the size of files that could be edited.
+The limit on file size is fundamentally linked to the maximum representable
+integer since that is how buffer positions are represented.
+
+So in Emacs-19.29 the scheme was tweaked so that the tag was reduced to
+3 bits, pushing the maximum file size to a more comfortable 128MB and the
+maximum heap size to 256MB.  To reduce the tag to 3 bits, the less important
+object types were placed into two groups: one group using the
+\texttt{Lisp\_Misc} tag and another using the \texttt{Lisp\_Vector} tag.
+The \texttt{Lisp\_Misc} tag was used for objects that could share the same
+heap size as Lisp markers (6 words), and hence be allocated from the same
+4KB bloc.  For some of those objects, it imposed a slight waste of space,
+which was justified by the fact that objects using the \texttt{Lisp\_Vector}
+tag had other extra costs: 2 words of header, plus the overhead of having
+each object by allocated directly by \texttt{malloc}.
+
+Of course, these limits were still not actually comfortable.  So during the
+development of Emacs-22, the tagging scheme was significantly reworked.
+First, the ``mark'' bit was removed, which doubled the previous limits.
+Second the tag bits were moved to the least significant bits, allowing
+the Lisp heap to grow as large as the full address space allowed.
+To this end, the \emph{markbit} of cons cells was moved to a separate bitmap
+stored alongside each bloc of cons cells, which required allocating those
+blocs on 4KB alignment boundaries.  This avoided the use of one extra word
+per cons cell, as was done previously for floats.  This same bitmap scheme
+was of course also used for floats, thus reducing the typical heap size of
+floats from 96 bits to 64 bits.  Reducing the heap size of floats to 64bits
+and avoiding the use of 3 words for cons cells was not just motivated by
+thriftiness but rather by the need to enforce that all objects be aligned on
+a multiple of 8, so as to free the least significant 3 bits for use as
+tag bits.
+
+At that point, there was no illusion that a maximum file size of 256MB was
+sufficient, but at the same time, the design of Emacs made it basically
+impossible to view files larger than 4GB or edit files larger than 2GB (on
+a 32bit system) anyway, no matter which tagging scheme we used, so there was
+not a lot of room for improvement.
+
+In Emacs-23.2 the tagging scheme was tweaked to use 2 tags for integers,
+hence pushing the maximum file size to 512MB.
+
+And to cover the remaining space, a new compilation option
+\texttt{--with-wide-int} was introduced in Emacs-24.1 to make the boxed data
+use 64bit on 32bit systems.  This imposes a significant extra cost in terms
+of space and time but makes it possible to edit files up to about 2GB.
+When this compilation option is used, tag bits are placed in the most
+significant bits again, so that the 32bit of pointers can be extracted at no
+cost at all.
+
+In Emacs-24.4, the representation of \texttt{Lisp\_Vector} objects (which is
+used for many more object types than just vectors) was improved so as to
+reduce their header from 2 words down to a single word.
+
+In Emacs-27.1, the object representation was changed again: the distinction
+between \texttt{Lisp\_Misc} and \texttt{Lisp\_Vector} was dropped by making
+all objects use the \texttt{Lisp\_Vector} representation since it had been
+improved sufficiently to be competitive with the special
+\texttt{Lisp\_Misc} representation.
+
+%% FIXME: With the addition of bignums in the upcoming Emacs-27, there's
+%% a chance that this compilation option won't be needed any more!
+
 \section{Conclusion}
 
+%% FIXME: TODO
 %% * Future evolution
 %% ** Multi-threading?
 %% ** OCaml extensions?
