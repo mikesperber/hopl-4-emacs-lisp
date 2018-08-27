@@ -825,23 +825,18 @@ own way.
 \subsection{Generalized variables} %Released in Emacs-24.3
 
 To facilitate the move to \texttt{cl-lib.el}, some frequently used
-functionality from \texttt{cl.el} was moved directly to \Elisp{}.  The most
-visible one is the support for \emph{generalized variables}, also variously
-known as \emph{places}, \emph{generalized references}, or \emph{lvalues}.
+functionality from \texttt{cl.el} was moved directly to \Elisp{}.  The
+most visible one is the support for \emph{generalized variables}, also
+variously known as \emph{places}, \emph{generalized references}, or
+\emph{lvalues}.  A generalized variable is a form that can be used as
+an expression and an updateable reference.  The concept comes from
+Common Lisp, and the Emacs implementation originally a part of
+\texttt{cl.el}.  In both Common Lisp and Emacs, a number of special
+forms take generalized variables as operands---in particular,
+\texttt{setf}, which treats a generalized variable as a reference and
+sets its value.
 
-But rather than take the existing \texttt{cl.el} code implementing the
-support for \emph{setf} and friends, a fresh new implementation of the
-concept was used.  The reasons for this new implementation were:
-\begin{itemize}
-\item NIH syndrome: the existing code was hard to follow.
-\item The code made use of internal helper functions from \texttt{cl.el}
-  which we wanted to keep in \texttt{cl.el}, so some significant massaging
-  was needed anyway.
-\item \texttt{cl.el} followed Common-Lisp's design, which the implementor of
-  \emph{cl-lib} considered ugly.
-\end{itemize}
-In Common-Lisp, a \emph{place} is defined by providing a function which
-turns it into a 5-tuple
+In Common Lisp, special forms accepting a place can obtain five values 
 % FIXME: I can't follow here. How is that function provided?
 % Who calls it on what?
 \begin{displaymath}
@@ -862,6 +857,19 @@ This imposes a fairly rigid structure which, while general enough to adapt
 to most needs, can be burdensome and leads to verbose code with a lot
 of plumbing, both in the implementation of places and in the implementation
 of macros which take places as arguments.
+
+The original \texttt{cl.el} code followed the Common Lisp design. When
+implementing the
+support for \emph{setf} and friends, a fresh new implementation of the
+concept was used.  The reasons for this new implementation were:
+\begin{itemize}
+\item NIH syndrome: the existing code was hard to follow.
+\item The code made use of internal helper functions from \texttt{cl.el}
+  which we wanted to keep in \texttt{cl.el}, so some significant massaging
+  was needed anyway.
+\item \texttt{cl.el} followed Common-Lisp's design, which the implementor of
+  \emph{cl-lib} considered ugly.
+\end{itemize}
 %% For example, if we want to define a place
 %% of the form $\texttt{(if~\textsl{TEST}~\textsl{PLACE1}~\textsl{PLACE2})}$
 %% the above \texttt{push} will inevitably end up with one of two
@@ -874,10 +882,11 @@ of macros which take places as arguments.
 %%   \texttt{funcall} within \textsl{ACCESS-FORM} and \textsl{STORE-FORM}.
 %% \end{itemize}
 
-So the reimplementation uses a different design: a \emph{place} is defined
-by turning it into a single higher-order function (instead of a 5-tuple).
+So the reimplementation uses a different design: a \emph{place} 
+maps to a single higher-order function (instead of a the
+five values of the Common Lisp design).
 This higher-order function takes as its sole argument a \textsl{DO} function
-of 2 arguments, the \textsl{ACCESS-FORM} and the \textsl{STORE-FUNCTION}.
+of two arguments, the \textsl{ACCESS-FORM} and the \textsl{STORE-FUNCTION}.
 For example, the \texttt{push} macro could be naively implemented as:
 \begin{verbatim}
     (defmacro push (EXP PLACE)
@@ -896,11 +905,13 @@ write the above as:
 \end{verbatim}
 This design generally leads to cleaner and simpler code, and we can easily
 provide backward compatibility wrappers for most of Common-Lisp's
-primitives: any 5-tuple representation of a place can easily be turned into
-a corresponding higher-order function.  The reverse is not true, however, so
-this design precludes compatibility with \texttt{get-setf-method} (nowadays
-called \texttt{get-setf-expansion}).
+primitives.
 
+Any 5-tuple representation of a place can easily be turned into
+a corresponding higher-order function.  The reverse is not true, however, so
+this design precludes compatibility with Common Lisp and
+\texttt{cl.el}'s \texttt{get-setf-expansion}, which must produce the
+five values described above.
 Breaking compatibility with \texttt{get-setf-expansion}
 % FIXME: What's get-setf-expansion?
 was of course
