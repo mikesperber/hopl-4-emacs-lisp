@@ -328,11 +328,21 @@ characters an opaque type additionally discouraged the practice.
 
 \subsection{Unicode}
 
-Emacs still uses numbers to represent characters, and has seen several changes
+As Unicode~\cite{Unicode6} became universally adopted, Emacs
+and XEmacs both supported the standard by converting between Unicode
+and the internal MULE encoding.  This type of Unicode support appeared
+in Emacs 22 and XEmacs 21.4 (both in 2001).
 
-The separation has simplified the inevitable 
+As Unicode evolved a universal text representation and supplanted many
+of the earlier encodings,, Emacs and XEmacs both started efforts to
+replace the internal MULE representation by Unicode altogether.  This
+appeared in Emacs 23 (2007) and XEmacs 21.5 (starting about 2010 in a
+separate branch).  As a result, the integer representation of a
+character in both Emacs and XEmacs is its Unicode scalar value.
 
 \subsection{Bignums}
+
+
 
 % bignums
 
