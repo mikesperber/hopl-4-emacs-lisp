@@ -329,6 +329,16 @@ characters an opaque type additionally discouraged the practice.
 
 \subsection{Unicode}
 
+%% FIXME: Emacs-21.1 already supported the `utf-8` coding-system, but it
+%% was not unified with other charsets (just like the various iso-8859 charsets
+%% weren't unified between themselves).  Emacs-22.1 introduced a form of
+%% unification between the unicode charset and several other charsets.
+%% This said, maybe we don't care about those details, who don't directly
+%% affect the Elisp language (we should resist the temptation to talk about
+%% Emacs rather than about Elisp).
+%% IIUC XEmacs went through pretty much the same steps at around the same
+%% time, although the implementation of the unification was quite
+%% different, IIRC.
 As Unicode~\cite{Unicode6} became universally adopted, Emacs
 and XEmacs both supported the standard by converting between Unicode
 and the internal MULE encoding.  This type of Unicode support appeared
@@ -343,11 +353,17 @@ character in both Emacs and XEmacs is its Unicode scalar value.
 
 \subsection{Bignums}
 
+%% FIXME: Mention the motivations for adding bignums (additionally to Calc),
+%% i.e. those places where workarounds were used (e.g. using floats or lists
+%% of integers for time and file sizes).
 Somewhat surprisingly for Lisp, Emacs Lisp had no support for
 arbitrarily large integers or \textit{bignums} for many years, despite
 the fact that Emacs Lisp was used for more and more applications
 beyond text editing.  As a result, Calc, an advanced calculator and
 computer algebra tool, which has shipped with the Emacs distribution
+%% FIXME: Maybe we should add details about how bignum support was added:
+%% interaction with print&read, with `eql`, and with other primitives,
+%% whether or not it was optional, ...
 since 2001, had to implement bignum arithmetic in Lisp.  Jerry James
 added bignums to XEmacs 21.5.18 in 2004.  Efforts to add bignums to
 Emacs are underway at the time of writing of this article, in 2018.
@@ -487,6 +503,7 @@ influence on the \Elisp{} language:
 
 %% FIXME:
 %% * Language Evolution
+%% ** old and new style backquotes
 %% ** Influence of Lisp Machine's editors like Zmacs?
 %% ** How 'bout evolution of typical programming style?
 %% ** frame-local variables?
@@ -837,7 +854,9 @@ forms take generalized variables as operands---in particular,
 \texttt{setf}, which treats a generalized variable as a reference and
 sets its value.
 
-In Common Lisp, special forms accepting a place can obtain five values 
+%% FIXME: reword a bit
+In Common Lisp, macros accepting a place can ask \texttt{get-setf-expansion}
+to turn it into a list of five elements:
 % FIXME: I can't follow here. How is that function provided?
 % Who calls it on what?
 \begin{displaymath}
@@ -859,17 +878,17 @@ to most needs, can be burdensome and leads to verbose code with a lot
 of plumbing, both in the implementation of places and in the implementation
 of macros which take places as arguments.
 
-The original \texttt{cl.el} code followed the Common Lisp design. When
-implementing the
-support for \emph{setf} and friends, a fresh new implementation of the
-concept was used.  The reasons for this new implementation were:
+The original \texttt{cl.el} code followed this Common Lisp design.  But when
+implementing the support for \emph{setf} and friends in \Elisp{}, a fresh
+new implementation of the concept was used.  The reasons for this new
+implementation were:
 \begin{itemize}
 \item NIH syndrome: the existing code was hard to follow.
-\item The code made use of internal helper functions from \texttt{cl.el}
-  which we wanted to keep in \texttt{cl.el}, so some significant massaging
-  was needed anyway.
-\item \texttt{cl.el} followed Common-Lisp's design, which the implementor of
-  \emph{cl-lib} considered ugly.
+\item The previous code made use of internal helper functions from
+  \texttt{cl.el} which we wanted to keep in \texttt{cl.el}, so some
+  significant massaging was needed anyway.
+\item the implementor of \emph{cl-lib} considered this part of Common-Lisp's
+  design ugly.
 \end{itemize}
 %% For example, if we want to define a place
 %% of the form $\texttt{(if~\textsl{TEST}~\textsl{PLACE1}~\textsl{PLACE2})}$
@@ -883,9 +902,8 @@ concept was used.  The reasons for this new implementation were:
 %%   \texttt{funcall} within \textsl{ACCESS-FORM} and \textsl{STORE-FORM}.
 %% \end{itemize}
 
-So the reimplementation uses a different design: a \emph{place} 
-maps to a single higher-order function (instead of a the
-five values of the Common Lisp design).
+So the reimplementation uses a different design: instead of a five element
+list, a \emph{place} maps to a single higher-order function.
 This higher-order function takes as its sole argument a \textsl{DO} function
 of two arguments, the \textsl{ACCESS-FORM} and the \textsl{STORE-FUNCTION}.
 For example, the \texttt{push} macro could be naively implemented as:
@@ -1091,7 +1109,6 @@ and those using the new encoding.
 
 \subsection{Implementation}
 
-
 %% FIXME: TODO
 %% ** Byte-code interpreter optimisation
 %% *** IIRC there was a round of micro-optimisation in the XEmacs interpreter
@@ -1102,10 +1119,7 @@ and those using the new encoding.
 %% ** Byte code changes
 %% ** GC changes
 
-\subsection{Data representation}
-
-%% FIXME: We should probably talk about memory management here as well,
-%% since the two are closely linked.
+\subsection{Data representation and memory management}
 
 Emacs started with a data representation of its boxed data based on 32bit
 words.  Those used a 7bit tag located in the most significant bits, 1 extra
@@ -1114,14 +1128,18 @@ a pointer.  Not all the possible 128 tags were actually used, but the 24
 remaining bits where amply sufficient to represent the needed pointers and
 integers for the typical available memory of the machines of that time.
 
-The memory management code allocated objects by blocs of 4KB dedicated to
-a particular kind of objects: one bloc each for cons cells, floats, symbols,
-markers, and strings, all other objects were allocated directly with
-\texttt{malloc}.  The ``mark'' bit in each 32bit box was not used for the
-object contained in the 32bit box.  Instead it was used so that cons cells
-could occupy only 2 words: the extra bit needed to store the mark&sweep's
+The memory management used a simple mark\&sweep garbage collection
+algorithm, and allocated objects by blocs of 4KB dedicated to a particular
+kind of objects: one bloc each for cons cells, floats, symbols, markers, and
+strings, all other objects were allocated directly with \texttt{malloc}.
+To avoid fragmentation in the blocs of strings, those were compacted during
+each GC.  The ``mark'' bit in each 32bit box was not used for the object
+contained in the 32bit box.  Instead it was used so that cons cells could
+occupy only 2 words: the extra bit needed to store the mark\&sweep's
 \emph{markbit} of each cons cell was stored in the ``mark'' bit of the first
 word (i.e. of the \texttt{car}).
+
+%% FIXME: Strings got text-properties some time between 19.1 and 19.7.
 
 Over time, this tagging scheme became problematic, since it limited to 16 MB
 the size of the Lisp heap and to 8MB the size of files that could be edited.
@@ -1140,8 +1158,47 @@ which was justified by the fact that objects using the \texttt{Lisp\_Vector}
 tag had other extra costs: 2 words of header, plus the overhead of having
 each object by allocated directly by \texttt{malloc}.
 
-Of course, these limits were still not actually comfortable.  So during the
-development of Emacs-22, the tagging scheme was significantly reworked.
+\subsubsection{Scanning the stack}
+Until Emacs-21, the mark phase of the GC was precise: the global roots were
+explicitly registered, the GC knew all the types of Lisp objects and where
+were the fields that could contain references, and the roots from the stack
+were also explicitly registered into a singly linked list itself directly
+allocated on the stack.
+
+The cost of properly registering/unregistering stack references was
+perceived to be high: it slowed down execution, both directly by adding
+administrative code and indirectly by preventing some variables from being
+kept in registers, and it was a source of bugs, especially since some code
+tried to be clever and avoid registering local references under the
+assumption that the GC could not be triggered at that particular point.
+Similarly, the relocation of strings was a frequent source of hard-to-track
+bugs because only the references known to the GC were properly updated, so
+the programmer had to be careful not to keep unboxed or unregistered
+references to a string at any point where a GC was possible.
+
+To try and address those concerns, for Emacs-21.1, Gerd
+Moellman changed the string compaction code and implemented a conservative
+stack scan.  Strings are split into the string object itself, of fixed size
+and non-relocatable, and the relocatable string data to which the code
+(almost) never keeps a direct reference.  In order to find out if a given
+word found on the stack might be a potentially valid reference to a Lisp
+object, it keeps a memory map that records which regions of the memory
+contains which kinds of Lisp objects.  It could be used either in addition
+to the singly linked list of registered references, as a kind of debugging
+aide, or replace it altogether.
+
+Thanks to the interactive nature of Emacs and its opportunistic GC strategy
+which ensures that the GC is often run when the stack is almost empty, the
+slower conservative stack scanning and the potential false positives it
+introduces have not been a problem.  The maintenance of the memory map,
+implemented as a red-black tree, was hence the main cost of this new stack
+scanning, which proved competitive with the previous scheme.  The previous
+scheme was kept in use on some rare systems until Emacs-25.1, where all the
+register/unregister code of stack references could finally be removed.
+
+\subsubsection{Squeezing the tag bits}
+Of course, a limit of 256MB was not actually comfortable.  So during the
+development of Emacs-22, the tagging scheme was reworked again.
 First, the ``mark'' bit was removed, which doubled the previous limits.
 Second the tag bits were moved to the least significant bits, allowing
 the Lisp heap to grow as large as the full address space allowed.
@@ -1173,9 +1230,20 @@ When this compilation option is used, tag bits are placed in the most
 significant bits again, so that the 32bit of pointers can be extracted at no
 cost at all.
 
-In Emacs-24.4, the representation of \texttt{Lisp\_Vector} objects (which is
-used for many more object types than just vectors) was improved so as to
-reduce their header from 2 words down to a single word.
+In Emacs-24.3, the allocation of objects using the \texttt{Lisp\_Vector} tag
+(which is used for many more object types than just vectors) was modified:
+instead of calling \texttt{malloc} for each such objects, they are now
+allocated from ``vector blocs''.  The motivation was not that
+\texttt{malloc} was too slow, but that the implementation of our
+conservative stack scanning keeps track of every part of the Lisp heap
+allocated with \texttt{malloc} in a balanced tree, so every such
+\texttt{malloc} costs us an $O(N \textsf{log} N)$ operation plus a heap
+allocation of an extra tree node, which was very costly for small objects
+both in time and space.
+
+In Emacs-24.4, the representation of objects using the \texttt{Lisp\_Vector}
+tag (which is used for many more object types than just vectors) was
+improved so as to reduce their header from 2 words down to a single word.
 
 In Emacs-27.1, the object representation was changed again: the distinction
 between \texttt{Lisp\_Misc} and \texttt{Lisp\_Vector} was dropped by making
