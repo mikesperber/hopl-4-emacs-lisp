@@ -357,7 +357,11 @@ character in both Emacs and XEmacs is its Unicode scalar value.
 \subsection{Bignums}
 
 Somewhat surprisingly for Lisp, Emacs Lisp had no support for
-arbitrarily large integers (\textit{bignums}) for many years.  As a
+arbitrarily large integers (\textit{bignums}) for many years.
+Integer range was restricted by word size on the underlying machine,
+and representation changes over time have affected the exact range
+available in \Elisp.
+As a
 result, various functions dealing with numbers beyond the fixnum range
 had to implement workarounds.  Notable are \texttt{file-attributes}
 (which may use a pair of two fixnums for inode numbers and device
