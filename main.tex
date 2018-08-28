@@ -335,22 +335,17 @@ characters an opaque type additionally discouraged the practice.
 
 \section{Emacs/XEmacs co-evolution}
 
+Some aspects of Emacs Lisp evolved in both Emacs and XEmacs, with both
+versions borrowing design from the other.
+
 \subsection{Unicode}
 
-%% FIXME: Emacs-21.1 already supported the `utf-8` coding-system, but it
-%% was not unified with other charsets (just like the various iso-8859 charsets
-%% weren't unified between themselves).  Emacs-22.1 introduced a form of
-%% unification between the unicode charset and several other charsets.
-%% This said, maybe we don't care about those details, who don't directly
-%% affect the Elisp language (we should resist the temptation to talk about
-%% Emacs rather than about Elisp).
-%% IIUC XEmacs went through pretty much the same steps at around the same
-%% time, although the implementation of the unification was quite
-%% different, IIRC.
-As Unicode~\cite{Unicode6} became universally adopted, Emacs
-and XEmacs both supported the standard by converting between Unicode
-and the internal MULE encoding.  This type of Unicode support appeared
-in Emacs 22 and XEmacs 21.4 (both in 2001).
+As Unicode~\cite{Unicode6} became universally adopted, Emacs and
+XEmacs both supported the standard.  Emacs 21.1 supported the
+\texttt{utf-8} coding-system, but it was not unified with other
+charsets.  In 2001, Emacs 22.1 introduced a form of unification
+between the unicode charset and several other charsets.  XEmacs did
+the same in 2001 with release 21.4.
 
 As Unicode evolved a universal text representation and supplanted many
 of the earlier encodings,, Emacs and XEmacs both started efforts to
