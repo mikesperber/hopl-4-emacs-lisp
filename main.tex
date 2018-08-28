@@ -144,6 +144,14 @@ foregoing Greenspun's tenth rule.
 %% ** Image dumping
 %% ** Byte-code architecture (or should that go XEmacs-period?)
 
+\subsection{Buffer-local variables}
+
+FIXME
+
+\subsection{Hooks}
+
+FIXME
+
 \section{XEmacs period}         % 1992-2007 ?
 
 In 1991, Lucid Inc., a software development company based in Menlo
@@ -1256,15 +1264,42 @@ improved sufficiently to be competitive with the special
 
 \section{Alternative Implementations}
 
+Implementation of Emacs Lisp have not been confined to Emacs and its
+derivatives.  Two implementations---Edwin and JEmacs---are notable for
+running Emacs Lisp code on editors implemented independently from
+Emacs.  Moreover, Guile Scheme also comes with support for the Emacs
+language.  These implementation all aim at running existing Emacs Lisp
+code in alternative environments, and consequently feature no
+significant language changes.
+
 \subsection{Edwin}
 
-FIXME \cite{Birkholz1993}
+Edwin is the editor that ships with MIT Scheme~\cite{MITScheme2014}.
+Its user interface is based on that of Emacs.  Edwin is implemented
+completely in Scheme, and Scheme is its native extension language.
+Additionally, Matthew Birkholz implemented an \Elisp{} interpreter
+in Scheme that was able to run substantial \Elisp{}
+packages~\cite{Birkholz1993} at the time, among them the Gnus news reader.
 
 \subsection{JEmacs}
 
-FIXME \cite{Bothner2001}
+JEmacs~\cite{Bothner2001} is an editor that ships with Kawa
+Scheme~\cite{KawaScheme}.  JEmacs comes with support for running some
+\Elisp{} code.  Its implementation (written partly in Java and
+partly in Scheme) works by translating \Elisp{} code to Scheme, and
+running the result.
+
+\subsection{Guile}
+
+Guile Scheme~\cite{Guile2018} was conceived as the universal extension
+language of the GNU project, with the specific intention of replacing
+Emacs Lisp at one point.  This has not happened (yet), but Guile does
+ship with a partial implementation of \Elisp{} that translates
+\Elisp{} programs to Guile's intermediate language.
 
 \section{Conclusion}
+
+
 
 %% FIXME: TODO
 %% * Future evolution
