@@ -374,9 +374,23 @@ Jerry James added bignums to XEmacs 21.5.18 in 2004.  Efforts to add
 bignums to Emacs are underway at the time of writing of this article,
 in 2018.
 
-%% FIXME: Maybe we should add details about how bignum support was added:
-%% interaction with print&read, with `eql`, and with other primitives,
-%% whether or not it was optional, ...
+The support for bignums in XEmacs is optional at build time, and hence
+XEmacs \Elisp{} programs still cannot rely on bignum support.
+Consequently, \texttt{file-attributes}, \texttt{current-time} and Calc
+are still as they were in the pre-bignum days.
+
+The introduction of bignums raises some design issues in \Elisp, as
+previously integers were always unboxed.  As a result, \Elisp{} could
+assume that, if two integers represented the same number, \texttt{eq}
+would return true on them.  Bignums are heap-allocated, so the same is
+not necessarily true for two bignums.  In XEmacs, \texttt{eq} can
+return \texttt{nil} in this case, and this seems to have caused no
+serious problems.  This issue is still being discussed with Emacs.  % FIXME Stefan: or is it?
+
+% FIXME Stefan: I think this is the detail to which this is
+% interesting.  The same level of detail for Emacs would be nice, but
+% I haven't been able to figure out the current state of the discussion.
+
 
 % ** Major Differences Between 19.11 and 19.12
 % ============================================
