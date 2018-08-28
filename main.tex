@@ -68,13 +68,42 @@
 
 \subsection{Organization of This Paper}
 
-FIXME
+\Elisp{} has evolved in multiple strands and implementations over the
+years, and thus its evolution did happen along a single timeline.
+Moreover, some aspects evolved over long periods of time.  To avoid
+excessive interleaving of those aspects, we have organized the
+top-level structure of the paper into chronological eras.  Within an
+era, as a new topic are introduced, we generally follow that topic
+chronologically to its conclusion, even if that means going beyond the
+era where it started.
 
 \subsection{Emacs Lisp as a Succession of Software Projects}
 
-FIXME
+We trace the overall evolution \Elisp{} in the software projects that
+implemented it. Its predecessors EINE (1976) and Multics Emacs (1978)
+were themselves written in Lisp.  Unix Emacs (also known as Gosling
+Emacs) (which appeared in 1981) included its own Lisp.  We briefly
+describe those predecessors in Section~\ref{sec:prehistory}.
+
+Emacs as we know it today itself started in the early 1980s.  Its
+development continued at a high pace until about 1991---described in
+Section~\ref{early-history}.  Around that time, it slowed down and
+room for Lucid Emacs, later renamed XEmacs, whose development of
+\Elisp{} we trace in Section~\ref{sec:xemacs}.  Eventually,
+development of Emacs picked up again, and both co-evolved until about
+2007.  We describe the relevant aspects of that evolution in
+Section~\ref{sec:coevolution}.  After 2007, XEmacs development slowed
+down, and we describe this post-XEmacs period in
+Section~\ref{sec:post-xemacs}.
+
+\Elisp{} was re-implemented in several other projects outside this
+successions.  Be briefly touch upon those projects in
+Section~\ref{sec:alternative-implementations}.  Our conclusions are in
+Section~\ref{sec:conclusion}.
+
 
 \section{Prehistory}
+\label{sec:prehistory}
 
 %% Mocklisp, Maclisp, Scheme, TECO's language?
 
@@ -82,6 +111,17 @@ While Emacs's original inception was as a set of macros for the TECO
 editor, it had no high-level extensionsion language.  Arguably, the
 strongest influences for Emacs Lisp were Gosling Emacs's Mock Lisp and
 MacLisp.
+
+\subsection{MacLisp}
+
+Several early incarnations of Emacs were written in Lisp, notably on
+the Lisp Machine (called \textit{EINE} for ``EINE Is Not EMACS'') by
+Dan Weinreb and in MacLisp~\cite{Moon1974} by Bernie Greenberg in
+1978~\cite{Stallman2002}.  The ensuing possibilities for extending the
+editor was attractive to Richard Stallman, who wanted to write a new
+widely available version.  As a result, Emacs Lisp is a direct
+descendant of MacLisp.
+
 
 \subsection{Gosling Emacs}
 
@@ -105,16 +145,8 @@ argument.  Moreover, argument expressions were essentially evaluated
 in a call-by-name fashion by \texttt{arg}, and evaluation happened in
 the dynamic environment of the callee.
 
-\subsection{MacLisp}
-
-Several other early incarnations of Emacs were written in Lisp,
-notably on the Lisp Machine by Dan Weinreb and in
-MacLisp~\cite{Moon1974} by Bernie Greenberg~\cite{Stallman2002}.  The
-ensuing possibilities for extending the editor was attractive to
-Richard Stallman, who wanted to write a new widely available version.
-As a result, Emacs Lisp is a direct descendant of MacLisp.
-
 \section{Early history}         % -1992 ?
+\label{sec:early-history}
 
 Following Greenberg's Multics Emacs, Stallman decided to write a (for
 him) second version of Emacs, which included \Elisp{} from the start.
@@ -153,7 +185,8 @@ FIXME
 FIXME
 
 \section{XEmacs period}         % 1992-2007 ?
-
+\label{sec:xemacs}
+  
 In 1991, Lucid Inc., a software development company based in Menlo
 Park, Carlifornia, started a project called \textit{Energize}.
 Energize was to be a C/C++ integrated development environment based on
@@ -333,7 +366,8 @@ characters an opaque type additionally discouraged the practice.
 % space, eliminating the need for DATA_SEG_BITS on some architectures.  (On 64
 % bit machines, add 32 to all of these numbers.)
 
-\section{Emacs/XEmacs co-evolution}
+\section{Emacs/XEmacs Co-Evolution}
+\label{sec:coevolution}
 
 Some aspects of Emacs Lisp evolved in both Emacs and XEmacs, with both
 versions borrowing design from the other.
@@ -486,7 +520,8 @@ serious problems.  This issue is still being discussed with Emacs.  % FIXME Stef
 %% How did XEmacs bootstrap?
 %% Strings with text-properties?
 
-\section{post-XEmacs}           % 2007-now ?
+\section{Post-XEmacs}           % 2007-now ?
+\label{sec:post-xemacs}
 
 %% FIXME: I'm putting chunks of text here without knowing where they
 %% should really go.
@@ -1286,6 +1321,7 @@ improved sufficiently to be competitive with the special
 %% a chance that this compilation option won't be needed any more!
 
 \section{Alternative Implementations}
+\label{sec:alternative-implementations}
 
 Implementation of Emacs Lisp have not been confined to Emacs and its
 derivatives.  Two implementations---Edwin and JEmacs---are notable for
@@ -1321,7 +1357,7 @@ ship with a partial implementation of \Elisp{} that translates
 \Elisp{} programs to Guile's intermediate language.
 
 \section{Conclusion}
-
+\label{sec:conclusion}
 
 
 %% FIXME: TODO
