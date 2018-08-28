@@ -446,8 +446,11 @@ serious problems.  This issue is still being discussed with Emacs.  % FIXME Stef
 % New functions `defvaralias', `variable-alias' and `indirect-variable'
 % are provided for creating variable aliases.
 
-%% FIXME: Ha, didn't know about this one.  I'm eager to learn about the
+%% FIXME Mike: Ha, didn't know about this one.  I'm eager to learn about the
 %% motivation for this feature.
+%% FIXME Stefan: There's not a single use of this function, I think it
+%% was mainly there as a parallel to `buffer-modified-tick`.
+
 % Strings have a modified-tick that is bumped every time a string
 % is modified in-place with `aset' or `fillarray'.  This is retrieved
 % with the new function `string-modified-tick'.
