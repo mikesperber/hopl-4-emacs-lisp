@@ -191,6 +191,155 @@ support this.  Consequently, Stallman took inspiration from MacLisp,
 and \Elisp{} started as a real programming language with powerful
 abstraction facilities, thus foregoing Greenspun's tenth rule.
 
+\subsection{Implementation}
+
+FIXME
+
+%% FIXME: TODO
+%% ** Byte-code interpreter optimisation
+%% *** IIRC there was a round of micro-optimisation in the XEmacs interpreter
+%% *** threaded implementation (using gcc's computed gotos)
+%% ** Bootstrap?
+%% ** C FFI
+%% ** JIT compiler attempts
+%% ** Byte code changes
+%% ** GC changes
+
+\subsection{Data representation and memory management}
+
+Emacs started with a data representation of its boxed data based on 32bit
+words.  Those used a 7bit tag located in the most significant bits, 1 extra
+``mark'' bit (see below), and 24bit of immediate data: either an integer or
+a pointer.  Not all the possible 128 tags were actually used, but the 24
+remaining bits where amply sufficient to represent the needed pointers and
+integers for the typical available memory of the machines of that time.
+
+The memory management used a simple mark\&sweep garbage collection
+algorithm, and allocated objects by blocs of 4KB dedicated to a particular
+kind of objects: one bloc each for cons cells, floats, symbols, markers, and
+strings, all other objects were allocated directly with \texttt{malloc}.
+To avoid fragmentation in the blocs of strings, those were compacted during
+each GC.  The ``mark'' bit in each 32bit box was not used for the object
+contained in the 32bit box.  Instead it was used so that cons cells could
+occupy only 2 words: the extra bit needed to store the mark\&sweep's
+\emph{markbit} of each cons cell was stored in the ``mark'' bit of the first
+word (i.e. of the \texttt{car}).
+
+%% FIXME: Strings got text-properties some time between 19.1 and 19.7.
+
+Over time, this tagging scheme became problematic, since it limited to 16 MB
+the size of the Lisp heap and to 8MB the size of files that could be edited.
+The limit on file size is fundamentally linked to the maximum representable
+integer since that is how buffer positions are represented.
+
+So in Emacs-19.29 the scheme was tweaked so that the tag was reduced to
+3 bits, pushing the maximum file size to a more comfortable 128MB and the
+maximum heap size to 256MB.  To reduce the tag to 3 bits, the less important
+object types were placed into two groups: one group using the
+\texttt{Lisp\_Misc} tag and another using the \texttt{Lisp\_Vector} tag.
+The \texttt{Lisp\_Misc} tag was used for objects that could share the same
+heap size as Lisp markers (6 words), and hence be allocated from the same
+4KB bloc.  For some of those objects, it imposed a slight waste of space,
+which was justified by the fact that objects using the \texttt{Lisp\_Vector}
+tag had other extra costs: 2 words of header, plus the overhead of having
+each object by allocated directly by \texttt{malloc}.
+
+\subsubsection{Scanning the stack}
+Until Emacs-21, the mark phase of the GC was precise: the global roots were
+explicitly registered, the GC knew all the types of Lisp objects and where
+were the fields that could contain references, and the roots from the stack
+were also explicitly registered into a singly linked list itself directly
+allocated on the stack.
+
+The cost of properly registering/unregistering stack references was
+perceived to be high: it slowed down execution, both directly by adding
+administrative code and indirectly by preventing some variables from being
+kept in registers, and it was a source of bugs, especially since some code
+tried to be clever and avoid registering local references under the
+assumption that the GC could not be triggered at that particular point.
+Similarly, the relocation of strings was a frequent source of hard-to-track
+bugs because only the references known to the GC were properly updated, so
+the programmer had to be careful not to keep unboxed or unregistered
+references to a string at any point where a GC was possible.
+
+To try and address those concerns, for Emacs-21.1, Gerd
+Moellman changed the string compaction code and implemented a conservative
+stack scan.  Strings are split into the string object itself, of fixed size
+and non-relocatable, and the relocatable string data to which the code
+(almost) never keeps a direct reference.  In order to find out if a given
+word found on the stack might be a potentially valid reference to a Lisp
+object, it keeps a memory map that records which regions of the memory
+contains which kinds of Lisp objects.  It could be used either in addition
+to the singly linked list of registered references, as a kind of debugging
+aide, or replace it altogether.
+
+Thanks to the interactive nature of Emacs and its opportunistic GC strategy
+which ensures that the GC is often run when the stack is almost empty, the
+slower conservative stack scanning and the potential false positives it
+introduces have not been a problem.  The maintenance of the memory map,
+implemented as a red-black tree, was hence the main cost of this new stack
+scanning, which proved competitive with the previous scheme.  The previous
+scheme was kept in use on some rare systems until Emacs-25.1, where all the
+register/unregister code of stack references could finally be removed.
+
+\subsubsection{Squeezing the tag bits}
+Of course, a limit of 256MB was not actually comfortable.  So during the
+development of Emacs-22, the tagging scheme was reworked again.
+First, the ``mark'' bit was removed, which doubled the previous limits.
+Second the tag bits were moved to the least significant bits, allowing
+the Lisp heap to grow as large as the full address space allowed.
+To this end, the \emph{markbit} of cons cells was moved to a separate bitmap
+stored alongside each bloc of cons cells, which required allocating those
+blocs on 4KB alignment boundaries.  This avoided the use of one extra word
+per cons cell, as was done previously for floats.  This same bitmap scheme
+was of course also used for floats, thus reducing the typical heap size of
+floats from 96 bits to 64 bits.  Reducing the heap size of floats to 64bits
+and avoiding the use of 3 words for cons cells was not just motivated by
+thriftiness but rather by the need to enforce that all objects be aligned on
+a multiple of 8, so as to free the least significant 3 bits for use as
+tag bits.
+
+At that point, there was no illusion that a maximum file size of 256MB was
+sufficient, but at the same time, the design of Emacs made it basically
+impossible to view files larger than 4GB or edit files larger than 2GB (on
+a 32bit system) anyway, no matter which tagging scheme we used, so there was
+not a lot of room for improvement.
+
+In Emacs-23.2 the tagging scheme was tweaked to use 2 tags for integers,
+hence pushing the maximum file size to 512MB.
+
+And to cover the remaining space, a new compilation option
+\texttt{--with-wide-int} was introduced in Emacs-24.1 to make the boxed data
+use 64bit on 32bit systems.  This imposes a significant extra cost in terms
+of space and time but makes it possible to edit files up to about 2GB.
+When this compilation option is used, tag bits are placed in the most
+significant bits again, so that the 32bit of pointers can be extracted at no
+cost at all.
+
+In Emacs-24.3, the allocation of objects using the \texttt{Lisp\_Vector} tag
+(which is used for many more object types than just vectors) was modified:
+instead of calling \texttt{malloc} for each such objects, they are now
+allocated from ``vector blocs''.  The motivation was not that
+\texttt{malloc} was too slow, but that the implementation of our
+conservative stack scanning keeps track of every part of the Lisp heap
+allocated with \texttt{malloc} in a balanced tree, so every such
+\texttt{malloc} costs us an $O(N \textsf{log} N)$ operation plus a heap
+allocation of an extra tree node, which was very costly for small objects
+both in time and space.
+
+In Emacs-24.4, the representation of objects using the \texttt{Lisp\_Vector}
+tag (which is used for many more object types than just vectors) was
+improved so as to reduce their header from 2 words down to a single word.
+
+In Emacs-27.1, the object representation was changed again: the distinction
+between \texttt{Lisp\_Misc} and \texttt{Lisp\_Vector} was dropped by making
+all objects use the \texttt{Lisp\_Vector} representation since it had been
+improved sufficiently to be competitive with the special
+\texttt{Lisp\_Misc} representation.
+
+%% FIXME: With the addition of bignums in the upcoming Emacs-27, there's
+%% a chance that this compilation option won't be needed any more!
+
 %% FIXME: TODO
 %% * Language & Implementation Overview
 %% ** ... usual stuff ...
@@ -1165,152 +1314,6 @@ to print and read those new objects, as well as the incompatibility between
 the printed representation of objects using the old vector-based encoding
 and those using the new encoding.
 
-\subsection{Implementation}
-
-%% FIXME: TODO
-%% ** Byte-code interpreter optimisation
-%% *** IIRC there was a round of micro-optimisation in the XEmacs interpreter
-%% *** threaded implementation (using gcc's computed gotos)
-%% ** Bootstrap?
-%% ** C FFI
-%% ** JIT compiler attempts
-%% ** Byte code changes
-%% ** GC changes
-
-\subsection{Data representation and memory management}
-
-Emacs started with a data representation of its boxed data based on 32bit
-words.  Those used a 7bit tag located in the most significant bits, 1 extra
-``mark'' bit (see below), and 24bit of immediate data: either an integer or
-a pointer.  Not all the possible 128 tags were actually used, but the 24
-remaining bits where amply sufficient to represent the needed pointers and
-integers for the typical available memory of the machines of that time.
-
-The memory management used a simple mark\&sweep garbage collection
-algorithm, and allocated objects by blocs of 4KB dedicated to a particular
-kind of objects: one bloc each for cons cells, floats, symbols, markers, and
-strings, all other objects were allocated directly with \texttt{malloc}.
-To avoid fragmentation in the blocs of strings, those were compacted during
-each GC.  The ``mark'' bit in each 32bit box was not used for the object
-contained in the 32bit box.  Instead it was used so that cons cells could
-occupy only 2 words: the extra bit needed to store the mark\&sweep's
-\emph{markbit} of each cons cell was stored in the ``mark'' bit of the first
-word (i.e. of the \texttt{car}).
-
-%% FIXME: Strings got text-properties some time between 19.1 and 19.7.
-
-Over time, this tagging scheme became problematic, since it limited to 16 MB
-the size of the Lisp heap and to 8MB the size of files that could be edited.
-The limit on file size is fundamentally linked to the maximum representable
-integer since that is how buffer positions are represented.
-
-So in Emacs-19.29 the scheme was tweaked so that the tag was reduced to
-3 bits, pushing the maximum file size to a more comfortable 128MB and the
-maximum heap size to 256MB.  To reduce the tag to 3 bits, the less important
-object types were placed into two groups: one group using the
-\texttt{Lisp\_Misc} tag and another using the \texttt{Lisp\_Vector} tag.
-The \texttt{Lisp\_Misc} tag was used for objects that could share the same
-heap size as Lisp markers (6 words), and hence be allocated from the same
-4KB bloc.  For some of those objects, it imposed a slight waste of space,
-which was justified by the fact that objects using the \texttt{Lisp\_Vector}
-tag had other extra costs: 2 words of header, plus the overhead of having
-each object by allocated directly by \texttt{malloc}.
-
-\subsubsection{Scanning the stack}
-Until Emacs-21, the mark phase of the GC was precise: the global roots were
-explicitly registered, the GC knew all the types of Lisp objects and where
-were the fields that could contain references, and the roots from the stack
-were also explicitly registered into a singly linked list itself directly
-allocated on the stack.
-
-The cost of properly registering/unregistering stack references was
-perceived to be high: it slowed down execution, both directly by adding
-administrative code and indirectly by preventing some variables from being
-kept in registers, and it was a source of bugs, especially since some code
-tried to be clever and avoid registering local references under the
-assumption that the GC could not be triggered at that particular point.
-Similarly, the relocation of strings was a frequent source of hard-to-track
-bugs because only the references known to the GC were properly updated, so
-the programmer had to be careful not to keep unboxed or unregistered
-references to a string at any point where a GC was possible.
-
-To try and address those concerns, for Emacs-21.1, Gerd
-Moellman changed the string compaction code and implemented a conservative
-stack scan.  Strings are split into the string object itself, of fixed size
-and non-relocatable, and the relocatable string data to which the code
-(almost) never keeps a direct reference.  In order to find out if a given
-word found on the stack might be a potentially valid reference to a Lisp
-object, it keeps a memory map that records which regions of the memory
-contains which kinds of Lisp objects.  It could be used either in addition
-to the singly linked list of registered references, as a kind of debugging
-aide, or replace it altogether.
-
-Thanks to the interactive nature of Emacs and its opportunistic GC strategy
-which ensures that the GC is often run when the stack is almost empty, the
-slower conservative stack scanning and the potential false positives it
-introduces have not been a problem.  The maintenance of the memory map,
-implemented as a red-black tree, was hence the main cost of this new stack
-scanning, which proved competitive with the previous scheme.  The previous
-scheme was kept in use on some rare systems until Emacs-25.1, where all the
-register/unregister code of stack references could finally be removed.
-
-\subsubsection{Squeezing the tag bits}
-Of course, a limit of 256MB was not actually comfortable.  So during the
-development of Emacs-22, the tagging scheme was reworked again.
-First, the ``mark'' bit was removed, which doubled the previous limits.
-Second the tag bits were moved to the least significant bits, allowing
-the Lisp heap to grow as large as the full address space allowed.
-To this end, the \emph{markbit} of cons cells was moved to a separate bitmap
-stored alongside each bloc of cons cells, which required allocating those
-blocs on 4KB alignment boundaries.  This avoided the use of one extra word
-per cons cell, as was done previously for floats.  This same bitmap scheme
-was of course also used for floats, thus reducing the typical heap size of
-floats from 96 bits to 64 bits.  Reducing the heap size of floats to 64bits
-and avoiding the use of 3 words for cons cells was not just motivated by
-thriftiness but rather by the need to enforce that all objects be aligned on
-a multiple of 8, so as to free the least significant 3 bits for use as
-tag bits.
-
-At that point, there was no illusion that a maximum file size of 256MB was
-sufficient, but at the same time, the design of Emacs made it basically
-impossible to view files larger than 4GB or edit files larger than 2GB (on
-a 32bit system) anyway, no matter which tagging scheme we used, so there was
-not a lot of room for improvement.
-
-In Emacs-23.2 the tagging scheme was tweaked to use 2 tags for integers,
-hence pushing the maximum file size to 512MB.
-
-And to cover the remaining space, a new compilation option
-\texttt{--with-wide-int} was introduced in Emacs-24.1 to make the boxed data
-use 64bit on 32bit systems.  This imposes a significant extra cost in terms
-of space and time but makes it possible to edit files up to about 2GB.
-When this compilation option is used, tag bits are placed in the most
-significant bits again, so that the 32bit of pointers can be extracted at no
-cost at all.
-
-In Emacs-24.3, the allocation of objects using the \texttt{Lisp\_Vector} tag
-(which is used for many more object types than just vectors) was modified:
-instead of calling \texttt{malloc} for each such objects, they are now
-allocated from ``vector blocs''.  The motivation was not that
-\texttt{malloc} was too slow, but that the implementation of our
-conservative stack scanning keeps track of every part of the Lisp heap
-allocated with \texttt{malloc} in a balanced tree, so every such
-\texttt{malloc} costs us an $O(N \textsf{log} N)$ operation plus a heap
-allocation of an extra tree node, which was very costly for small objects
-both in time and space.
-
-In Emacs-24.4, the representation of objects using the \texttt{Lisp\_Vector}
-tag (which is used for many more object types than just vectors) was
-improved so as to reduce their header from 2 words down to a single word.
-
-In Emacs-27.1, the object representation was changed again: the distinction
-between \texttt{Lisp\_Misc} and \texttt{Lisp\_Vector} was dropped by making
-all objects use the \texttt{Lisp\_Vector} representation since it had been
-improved sufficiently to be competitive with the special
-\texttt{Lisp\_Misc} representation.
-
-%% FIXME: With the addition of bignums in the upcoming Emacs-27, there's
-%% a chance that this compilation option won't be needed any more!
 
 \section{Alternative Implementations}
 \label{sec:alternative-implementations}
