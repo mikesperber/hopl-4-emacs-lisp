@@ -159,19 +159,20 @@ Emacs in C, with an integrated Lisp interpreter.  Buffer manipulation
 and redisplay were written in efficient C, higher-level functionality
 in Lisp.
 
-Many extension and configuration languages start out ``small,'' with
-no ambition to grow into a full-fledged programming language.  TECO
-and Gosling Emacs featured small languages that were too weak to
-support the vision Richard Stallman had for Emacs.  Consequently,
-Stallman took inspiration from MacLisp, and \Elisp{} started as a real
-programming language with powerful abstraction facilities, thus
-foregoing Greenspun's tenth rule.
+The initial design of \Elisp{} was motivated by the pervasive
+requirement of \textit{extensibility}; users ``must be able to
+redefine each character''~\cite{Stallman1981}.  TECO and Gosling Emacs
+featured small languages that were either too obscure or too weak to
+support this vision.  Consequently, Stallman took inspiration from
+MacLisp, and \Elisp{} started as a real programming language with
+powerful abstraction facilities, thus foregoing Greenspun's tenth
+rule.
 
 %% FIXME: This is somewhat revisionist in the sense that some of those
 %% developments occurred before GNU and the FSF, so it's not clear exactly
 %% if those designs were driven by a desire for Freedom, or by just more
 %% mundane software-development good practices.
-Emacs being the brain child of Richard Stallman, its design strives to
+Moreover, Stallman, made the design of \Elisp{}
 embody and showcase the ideals of Free Software.  For example, not only
 is it legal to get and modify the source code, but every effort
 is made to encourage the end-user to do so.  This has a profound
@@ -197,15 +198,17 @@ influence on the \Elisp{} language:
   a simple bytecode interpreter.
 \end{itemize}
 
-%% FIXME Mike: I don't think the above characteristics were part of the
-%% motivation to use a "real" language.  Instead, I think Richard had simply
-%% plenty of experience with real Lisp implementations to hate MockLisp's
-%% quirks and want to replace it with a real language.  So I re-introduced
-%% your previous paragraph instead, which I liked better.
-%%TECO and Gosling Emacs featured small languages that were too weak to
-%%support this.  Consequently, Stallman took inspiration from MacLisp,
-%%and \Elisp{} started as a real programming language with powerful
-%%abstraction facilities, thus foregoing Greenspun's tenth rule.
+\subsection{Base language}
+
+% Compared to MacLisp:
+% No DO
+% No LOOP, RETURN, GO
+% CATCH, THROW
+% UNWIND-PROTECT
+
+\subsection{Error handling}
+
+FIXME
 
 \subsection{Buffer-local variables}
 
@@ -843,28 +846,35 @@ This issue is still being discussed with Emacs.
 \subsection{Lexical scoping}
 
 While Scheme was already about to get its second revision when Richard
-Stallman started to work on GNU Emacs, and Richard obviously knew about
+Stallman started to work on GNU Emacs, and Stallman obviously knew about
 Scheme, being developed in a nearby office, \Elisp{} was mostly derived from
-MacLisp and used exclusively dynamic scoping.  The motivation for this
-decision is not completely clear but seems to include:
-\begin{itemize}
-\item Familiarity: Richard Stallman was more familiar with MacLisp than Scheme, and
-  lexical scoping was new whereas dynamic scoping was the
-  tried-and-tested alternative.
-\item Hackability: Scheme's lexical scoping makes it impossible to access
-  variables in other scopes, so it provides a strong form of abstraction,
-  which is great in many cases, but can be annoying to the end user who just
-  wants to do a quick and dirty hack.
-  % FIXME: evidence?
-  Similarly, Richard Stallman has often
-  preferred to avoid the use of opaque datatypes, most famously for the
-  representation of keymaps and characters.
-  % FIXME: Needs to tie in with XEmacs above
-\item Efficiency: It was perceived that closures would incur a cost that was
-  not justified.  This was especially true in the context of the early Emacs
-  which relied exclusively on interpretation to evaluate its \Elisp{} code.
-\end{itemize}
-Yet, very quickly, lexical scoping became the established standard in
+MacLisp and used exclusively dynamic scoping.  Dynamic scoping is used
+extensively to add ``hidden'' configuration options to existing
+functions without passing explicit arguments~\cite{Stallman1981}.
+
+% FIXME Stefan: I elided this because Stallman1981 lays out the
+% motivation quite clearly
+% The motivation for this
+% decision is not completely clear but seems to include:
+% \begin{itemize}
+% \item Familiarity: Richard Stallman was more familiar with MacLisp than Scheme, and
+%   lexical scoping was new whereas dynamic scoping was the
+%   tried-and-tested alternative.
+% \item Hackability: Scheme's lexical scoping makes it impossible to access
+%   variables in other scopes, so it provides a strong form of abstraction,
+%   which is great in many cases, but can be annoying to the end user who just
+%   wants to do a quick and dirty hack.
+%   % FIXME: evidence?
+%   Similarly, Richard Stallman has often
+%   preferred to avoid the use of opaque datatypes, most famously for the
+%   representation of keymaps and characters.
+%   % FIXME: Needs to tie in with XEmacs above
+% \item Efficiency: It was perceived that closures would incur a cost that was
+%   not justified.  This was especially true in the context of the early Emacs
+%   which relied exclusively on interpretation to evaluate its \Elisp{} code.
+% \end{itemize}
+
+Eventually, lexical scoping became the established standard in
 the Lisp family in both Common Lisp and Scheme.
 So of course, the question of adding lexical scoping to \Elisp{} has been
 brought up many times.
