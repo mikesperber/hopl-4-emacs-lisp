@@ -68,13 +68,42 @@
 
 \subsection{Organization of This Paper}
 
-FIXME
+\Elisp{} has evolved in multiple strands and implementations over the
+years, and thus its evolution did happen along a single timeline.
+Moreover, some aspects evolved over long periods of time.  To avoid
+excessive interleaving of those aspects, we have organized the
+top-level structure of the paper into chronological eras.  Within an
+era, as a new topic are introduced, we generally follow that topic
+chronologically to its conclusion, even if that means going beyond the
+era where it started.
 
 \subsection{Emacs Lisp as a Succession of Software Projects}
 
-FIXME
+We trace the overall evolution \Elisp{} in the software projects that
+implemented it. Its predecessors EINE (1976) and Multics Emacs (1978)
+were themselves written in Lisp.  Unix Emacs (also known as Gosling
+Emacs) (which appeared in 1981) included its own Lisp.  We briefly
+describe those predecessors in Section~\ref{sec:prehistory}.
+
+Emacs as we know it today itself started in the early 1980s.  Its
+development continued at a high pace until about 1991---described in
+Section~\ref{early-history}.  Around that time, it slowed down and
+room for Lucid Emacs, later renamed XEmacs, whose development of
+\Elisp{} we trace in Section~\ref{sec:xemacs}.  Eventually,
+development of Emacs picked up again, and both co-evolved until about
+2007.  We describe the relevant aspects of that evolution in
+Section~\ref{sec:coevolution}.  After 2007, XEmacs development slowed
+down, and we describe this post-XEmacs period in
+Section~\ref{sec:post-xemacs}.
+
+\Elisp{} was re-implemented in several other projects outside this
+successions.  Be briefly touch upon those projects in
+Section~\ref{sec:alternative-implementations}.  Our conclusions are in
+Section~\ref{sec:conclusion}.
+
 
 \section{Prehistory}
+\label{sec:prehistory}
 
 %% Mocklisp, Maclisp, Scheme, TECO's language?
 
@@ -82,6 +111,17 @@ While Emacs's original inception was as a set of macros for the TECO
 editor, it had no high-level extensionsion language.  Arguably, the
 strongest influences for Emacs Lisp were Gosling Emacs's Mock Lisp and
 MacLisp.
+
+\subsection{MacLisp}
+
+Several early incarnations of Emacs were written in Lisp, notably on
+the Lisp Machine (called \textit{EINE} for ``EINE Is Not EMACS'') by
+Dan Weinreb and in MacLisp~\cite{Moon1974} by Bernie Greenberg in
+1978~\cite{Stallman2002}.  The ensuing possibilities for extending the
+editor was attractive to Richard Stallman, who wanted to write a new
+widely available version.  As a result, Emacs Lisp is a direct
+descendant of MacLisp.
+
 
 \subsection{Gosling Emacs}
 
@@ -105,16 +145,8 @@ argument.  Moreover, argument expressions were essentially evaluated
 in a call-by-name fashion by \texttt{arg}, and evaluation happened in
 the dynamic environment of the callee.
 
-\subsection{MacLisp}
-
-Several other early incarnations of Emacs were written in Lisp,
-notably on the Lisp Machine by Dan Weinreb and in
-MacLisp~\cite{Moon1974} by Bernie Greenberg~\cite{Stallman2002}.  The
-ensuing possibilities for extending the editor was attractive to
-Richard Stallman, who wanted to write a new widely available version.
-As a result, Emacs Lisp is a direct descendant of MacLisp.
-
 \section{Early history}         % -1992 ?
+\label{sec:early-history}
 
 Following Greenberg's Multics Emacs, Stallman decided to write a (for
 him) second version of Emacs, which included \Elisp{} from the start.
@@ -124,15 +156,224 @@ Emacs in C, with an integrated Lisp interpreter.  Buffer manipulation
 and redisplay were written in efficient C, higher-level functionality
 in Lisp.
 
-% Moved from abstract:
+%% FIXME: This is somewhat revisionist in the sense that some of those
+%% developments occurred before GNU and the FSF, so it's not clear exactly
+%% if those designs were driven by a desire for Freedom, or by just more
+%% mundane software-development good practices.
+Emacs being the brain child of Richard Stallman, its design strives to
+embody and showcase the ideals of Free Software.  For example, not only
+is it legal to get and modify the source code, but every effort
+is made to encourage the end-user to do so.  This has a profound
+influence on the \Elisp{} language:
+\begin{itemize}
+\item The language should be accessible to a wide audience, so that as many
+  people as possible can adapt Emacs to their own needs, without being
+  dependent on the availability of someone with a technical expertise.
+  This can be seen concretely in the inclusion in Emacs of the
+  \emph{Introduction to Programming in Emacs Lisp}
+  tutorial~\citep{ElispIntro} targeting users with no programming
+  experience.  This has been a strong motivation to keep \Elisp{} on the
+  minimalist side and to resist incorporation of many Common-Lisp features.
+\item It should be easy for the end-user to find the relevant code in order
+  to modify Emacs's behavior.  This has driven the development of elements
+  such as the \emph{docstrings} and more generally the self-documenting
+  aspect of the language.  It also imposes constraints on the evolution of
+  the language: the use of some facilities, such as \emph{advice}, is
+  discouraged because it makes the code more opaque.
+\item Emacs should be easily portable to as many platforms as possible.
+  This largely explains why \Elisp{} is still using a fairly naive
+  mark\&sweep garbage collector, and why its main execution engine is
+  a simple bytecode interpreter.
+\end{itemize}
+%
+TECO and Gosling Emacs featured small languages that were too weak to
+support this.  Consequently, Stallman took inspiration from MacLisp,
+and \Elisp{} started as a real programming language with powerful
+abstraction facilities, thus foregoing Greenspun's tenth rule.
 
-Many extension and configuration languages start out ``small,'' with
-no ambition to grow into a full-fledged programming language.  TECO
-and Gosling Emacs featured small languages that were too weak to
-support the vision Richard Stallman had for Emacs.  Consequently,
-Stallman took inspiration from MacLisp, and \Elisp{} started as a real
-programming language with powerful abstraction facilities, thus
-foregoing Greenspun's tenth rule.
+\subsection{Implementation}
+
+FIXME
+
+%% FIXME: TODO
+%% ** Byte-code interpreter optimisation
+%% *** IIRC there was a round of micro-optimisation in the XEmacs interpreter
+%% *** threaded implementation (using gcc's computed gotos)
+%% ** Bootstrap?
+%% ** (portable)dumper
+%% ** C FFI
+%% ** JIT compiler attempts
+%% ** Byte code changes
+
+\subsection{Data representation and memory management}
+
+Emacs started with a data representation of its boxed data based on 32bit
+words.  Those used a 7bit tag located in the most significant bits, 1 extra
+``mark'' bit (see below), and 24bit of immediate data: either an integer or
+a pointer.  Not all the possible 128 tags were actually used, but the 24
+remaining bits where amply sufficient to represent the needed pointers and
+integers for the typical available memory of the machines of that time.
+
+The memory management used a simple mark\&sweep garbage collection
+algorithm, and allocated objects by blocs of 4KB dedicated to a particular
+kind of objects: one bloc each for cons cells, floats, symbols, markers, and
+strings, all other objects were allocated directly with \texttt{malloc}.
+To avoid fragmentation in the blocs of strings, those were compacted during
+each GC.  The ``mark'' bit in each 32bit box was not used for the object
+contained in the 32bit box.  Instead it was used so that cons cells could
+occupy only 2 words: the extra bit needed to store the mark\&sweep's
+\emph{markbit} of each cons cell was stored in the ``mark'' bit of the first
+word (i.e. of the \texttt{car}).
+
+%% FIXME: Strings got text-properties some time between 19.1 and 19.7.
+
+Over time, this tagging scheme became problematic, since it limited to 16 MB
+the size of the Lisp heap and to 8MB the size of files that could be edited.
+The limit on file size is fundamentally linked to the maximum representable
+integer since that is how buffer positions are represented.
+
+So in Emacs-19.29 the scheme was tweaked so that the tag was reduced to
+3 bits, pushing the maximum file size to a more comfortable 128MB and the
+maximum heap size to 256MB.  To reduce the tag to 3 bits, the less important
+object types were placed into two groups: one group using the
+\texttt{Lisp\_Misc} tag and another using the \texttt{Lisp\_Vector} tag.
+The \texttt{Lisp\_Misc} tag was used for objects that could share the same
+heap size as Lisp markers (6 words), and hence be allocated from the same
+4KB bloc.  For some of those objects, it imposed a slight waste of space,
+which was justified by the fact that objects using the \texttt{Lisp\_Vector}
+tag had other extra costs: 2 words of header, plus the overhead of having
+each object by allocated directly by \texttt{malloc}.
+
+\subsubsection{Scanning the stack}
+Until Emacs-21, the mark phase of the GC was precise: the global roots were
+explicitly registered, the GC knew all the types of Lisp objects and where
+were the fields that could contain references, and the roots from the stack
+were also explicitly registered into a singly linked list itself directly
+allocated on the stack.
+
+The cost of properly registering/unregistering stack references was
+perceived to be high: it slowed down execution, both directly by adding
+administrative code and indirectly by preventing some variables from being
+kept in registers, and it was a source of bugs, especially since some code
+tried to be clever and avoid registering local references under the
+assumption that the GC could not be triggered at that particular point.
+Similarly, the relocation of strings was a frequent source of hard-to-track
+bugs because only the references known to the GC were properly updated, so
+the programmer had to be careful not to keep unboxed or unregistered
+references to a string at any point where a GC was possible.
+
+To try and address those concerns, for Emacs-21.1, Gerd
+Moellman changed the string compaction code and implemented a conservative
+stack scan.  Strings are split into the string object itself, of fixed size
+and non-relocatable, and the relocatable string data to which the code
+(almost) never keeps a direct reference.  In order to find out if a given
+word found on the stack might be a potentially valid reference to a Lisp
+object, it keeps a memory map that records which regions of the memory
+contains which kinds of Lisp objects.  It could be used either in addition
+to the singly linked list of registered references, as a kind of debugging
+aide, or replace it altogether.
+
+Thanks to the interactive nature of Emacs and its opportunistic GC strategy
+which ensures that the GC is often run when the stack is almost empty, the
+slower conservative stack scanning and the potential false positives it
+introduces have not been a problem.  The maintenance of the memory map,
+implemented as a red-black tree, was hence the main cost of this new stack
+scanning, which proved competitive with the previous scheme.  The previous
+scheme was kept in use on some rare systems until Emacs-25.1, where all the
+register/unregister code of stack references could finally be removed.
+
+\subsubsection{Squeezing the tag bits}
+Of course, a limit of 256MB was not actually comfortable.  So during the
+development of Emacs-22, the tagging scheme was reworked again.
+First, the ``mark'' bit was removed, which doubled the previous limits.
+Second the tag bits were moved to the least significant bits, allowing
+the Lisp heap to grow as large as the full address space allowed.
+To this end, the \emph{markbit} of cons cells was moved to a separate bitmap
+stored alongside each bloc of cons cells, which required allocating those
+blocs on 4KB alignment boundaries.  This avoided the use of one extra word
+per cons cell, as was done previously for floats.  This same bitmap scheme
+was of course also used for floats, thus reducing the typical heap size of
+floats from 96 bits to 64 bits.  Reducing the heap size of floats to 64bits
+and avoiding the use of 3 words for cons cells was not just motivated by
+thriftiness but rather by the need to enforce that all objects be aligned on
+a multiple of 8, so as to free the least significant 3 bits for use as
+tag bits.
+
+At that point, there was no illusion that a maximum file size of 256MB was
+sufficient, but at the same time, the design of Emacs made it basically
+impossible to view files larger than 4GB or edit files larger than 2GB (on
+a 32bit system) anyway, no matter which tagging scheme we used, so there was
+not a lot of room for improvement.
+
+In Emacs-23.2 the tagging scheme was tweaked to use 2 tags for integers,
+hence pushing the maximum file size to 512MB.
+
+And to cover the remaining space, a new compilation option
+\texttt{--with-wide-int} was introduced in Emacs-24.1 to make the boxed data
+use 64bit on 32bit systems.  This imposes a significant extra cost in terms
+of space and time but makes it possible to edit files up to about 2GB.
+When this compilation option is used, tag bits are placed in the most
+significant bits again, so that the 32bit of pointers can be extracted at no
+cost at all.
+
+In Emacs-24.3, the allocation of objects using the \texttt{Lisp\_Vector} tag
+(which is used for many more object types than just vectors) was modified:
+instead of calling \texttt{malloc} for each such objects, they are now
+allocated from ``vector blocs''.  The motivation was not that
+\texttt{malloc} was too slow, but that the implementation of our
+conservative stack scanning keeps track of every part of the Lisp heap
+allocated with \texttt{malloc} in a balanced tree, so every such
+\texttt{malloc} costs us an $O(N \textsf{log} N)$ operation plus a heap
+allocation of an extra tree node, which was very costly for small objects
+both in time and space.
+
+In Emacs-24.4, the representation of objects using the \texttt{Lisp\_Vector}
+tag (which is used for many more object types than just vectors) was
+improved so as to reduce their header from 2 words down to a single word.
+
+In Emacs-27.1, the object representation was changed again: the distinction
+between \texttt{Lisp\_Misc} and \texttt{Lisp\_Vector} was dropped by making
+all objects use the \texttt{Lisp\_Vector} representation since it had been
+improved sufficiently to be competitive with the special
+\texttt{Lisp\_Misc} representation.
+
+%% FIXME: With the addition of bignums in the upcoming Emacs-27, there's
+%% a chance that this compilation option won't be needed any more!
+
+\subsubsection{New GC algorithm}
+During the learly years of Emacs, the main complaints from users w.r.t the
+simple mark\&sweep algorithm were the GC pauses.  These were solved very
+simply in Emacs-19.31 by removing the messages that indicated when GC was in
+progress.  Since then complaints about the performance of the GC have been
+fairly rare.  Most of them have to do with the amount of time wasted in the
+GC during initialization phases, where a lot of data is allocated without
+generating much garbage.
+
+Over time, there have been several attempts to replace the GC.
+
+During the development of Emacs-21, Gerd Moellman worked on an incremental
+GC based on a write barrier implemented using the operating system's VM
+primitives.  It was never actually integrated into any release, tho.
+He himself did not push for it even while he was maintainer, and there was
+generally not a strong interest for it.  Its main interest was to reduce the
+duration of GC pauses, but these are rarely problematic.  Its main problems
+were that it increased the proportion of time spent in the GC, and that it
+introduced various portability issues because it relied on operating system
+primitives which are not well standardized.
+
+During 2003, Dave Love worked on replacing Emacs's GC with Boehm's
+conservative GC.  The effort went far enough to get a usable Emacs but it
+was never completed, mostly because the early performance results were
+disappointing.  It also showed that such a replacement is non-trivial.
+The first issue is that various parts of Emacs's code assume that
+a collection can only occur during \Elisp{} code execution and not during
+heap allocation, and of course those assumptions are not explicitly recorded
+in the code.  The second issue is that Emacs currently implements various
+forms of ad-hoc weak references which need to be adapted to the more
+%% FIXME: Is it worth going though the details of hash-tables's weakness
+%% and markers's weakness (and their removal from undo lists)?
+standard forms of weak references.
+
 
 %% FIXME: TODO
 %% * Language & Implementation Overview
@@ -144,8 +385,17 @@ foregoing Greenspun's tenth rule.
 %% ** Image dumping
 %% ** Byte-code architecture (or should that go XEmacs-period?)
 
-\section{XEmacs period}         % 1992-2007 ?
+\subsection{Buffer-local variables}
 
+FIXME
+
+\subsection{Hooks}
+
+FIXME
+
+\section{XEmacs period}         % 1992-2007 ?
+\label{sec:xemacs}
+  
 In 1991, Lucid Inc., a software development company based in Menlo
 Park, Carlifornia, started a project called \textit{Energize}.
 Energize was to be a C/C++ integrated development environment based on
@@ -325,24 +575,20 @@ characters an opaque type additionally discouraged the practice.
 % space, eliminating the need for DATA_SEG_BITS on some architectures.  (On 64
 % bit machines, add 32 to all of these numbers.)
 
-\section{Emacs/XEmacs co-evolution}
+\section{Emacs/XEmacs Co-Evolution}
+\label{sec:coevolution}
+
+Some aspects of Emacs Lisp evolved in both Emacs and XEmacs, with both
+versions borrowing design from the other.
 
 \subsection{Unicode}
 
-%% FIXME: Emacs-21.1 already supported the `utf-8` coding-system, but it
-%% was not unified with other charsets (just like the various iso-8859 charsets
-%% weren't unified between themselves).  Emacs-22.1 introduced a form of
-%% unification between the unicode charset and several other charsets.
-%% This said, maybe we don't care about those details, who don't directly
-%% affect the Elisp language (we should resist the temptation to talk about
-%% Emacs rather than about Elisp).
-%% IIUC XEmacs went through pretty much the same steps at around the same
-%% time, although the implementation of the unification was quite
-%% different, IIRC.
-As Unicode~\cite{Unicode6} became universally adopted, Emacs
-and XEmacs both supported the standard by converting between Unicode
-and the internal MULE encoding.  This type of Unicode support appeared
-in Emacs 22 and XEmacs 21.4 (both in 2001).
+As Unicode~\cite{Unicode6} became universally adopted, Emacs and
+XEmacs both supported the standard.  Emacs 21.1 supported the
+\texttt{utf-8} coding-system, but it was not unified with other
+charsets.  In 2001, Emacs 22.1 introduced a form of unification
+between the unicode charset and several other charsets.  XEmacs did
+the same in 2001 with release 21.4.
 
 As Unicode evolved a universal text representation and supplanted many
 of the earlier encodings,, Emacs and XEmacs both started efforts to
@@ -353,25 +599,60 @@ character in both Emacs and XEmacs is its Unicode scalar value.
 
 \subsection{Bignums}
 
-%% FIXME: Mention the motivations for adding bignums (additionally to Calc),
-%% i.e. those places where workarounds were used (e.g. using floats or lists
-%% of integers for:
-%% - inode and device numbers
-%% - file size
-%% - uid, gid, ...
-%% - timestamps
 Somewhat surprisingly for Lisp, Emacs Lisp had no support for
-arbitrarily large integers or \textit{bignums} for many years, despite
-the fact that Emacs Lisp was used for more and more applications
-beyond text editing.  As a result, Calc, an advanced calculator and
-computer algebra tool, which has shipped with the Emacs distribution
-%% FIXME: Maybe we should add details about how bignum support was added:
-%% type of numbers (e.g. Emacs only has mpz whereas IIUC XEmacs has also
-%% mpq and mpf), interaction with print&read, with `eql`, and with other
-%% primitives, whether or not it was optional, ...
-since 2001, had to implement bignum arithmetic in Lisp.  Jerry James
-added bignums to XEmacs 21.5.18 in 2004.  Efforts to add bignums to
-Emacs are underway at the time of writing of this article, in 2018.
+arbitrarily large integers (\textit{bignums}) for many years.
+Integer range was restricted by word size on the underlying machine,
+and representation changes over time have affected the exact range
+available in \Elisp.
+As a result, various functions dealing with numbers beyond the fixnum range
+had to implement workarounds.  Notable are \texttt{file-attributes} (which
+may use a pair of two fixnums for inode numbers, device numbers, user id,
+and group id, and may use a float for the file size) and
+\texttt{current-time}, which returns a list of numbers to encode the time.
+Another place where the limited range of integers has caused friction has
+been in the fact that it also limits the maximum size of file that can
+be edited.
+
+Moreover, Emacs Lisp was used for more and more applications beyond
+text editing, and also had to implement workarounds.  As a result,
+Calc, an advanced calculator and computer algebra tool, which has
+shipped with the Emacs distribution since 2001, had to implement
+bignum arithmetic in Lisp.
+
+Jerry James added bignums to XEmacs 21.5.18 in 2004, using the GMP
+library~\cite{GMP}.  In Emacs, Gerd Moellman started work on adding support
+for bignums via GMP around October 2001, but never finished it.  It's only
+in August 2018 that Tom Tromey, with the help of Paul Eggert and several
+other developers, finally added support for bignums to Emacs (again, using
+GMP).
+
+The support for bignums in XEmacs includes arbitrary-precision integers,
+rationals, and floating point numbers and is optional at build time, so
+while it is fairly complete, XEmacs's \Elisp{} programs still cannot rely on
+bignum support.  Consequently, \texttt{file-attributes},
+\texttt{current-time}, and Calc still do not take advantage of bignums.
+
+In contrast, Emacs's bignum support is currently restricted to
+arbitrary-precision integers but the feature is provided unconditionally by
+bundling the \texttt{mini-gmp} library with Emacs for those systems where
+GMP is not installed.  The lack of support for rationals and
+arbitrary-precision floats is only a reflection of the lack of interest for
+these features.  The support was made unconditional so that the code does
+not need to keep alternate code paths for when bignums are not available.
+As a result, \texttt{file-attributes} and Calc have been modified to use
+native bignums (but not \texttt{current-time} which would need
+arbitrary-precision rationals or floating points).
+
+The introduction of bignums raises some design issues in \Elisp, as
+previously integers were always unboxed.  This meant that the fast
+\texttt{eq} only behaved differently from \texttt{eql} on floating point
+numbers.  As a result, \Elisp{} could assume that, if two integers
+represented the same number, \texttt{eq} would return true on them.
+Bignums are heap-allocated, so the same is not necessarily true for two
+bignums.  In XEmacs, \texttt{eq} can return \texttt{nil} in this case, and
+this seems to have caused no serious problems.
+%% FIXME: Update this when the discussion is over!
+This issue is still being discussed with Emacs.
 
 % ** Major Differences Between 19.11 and 19.12
 % ============================================
@@ -423,8 +704,11 @@ Emacs are underway at the time of writing of this article, in 2018.
 % New functions `defvaralias', `variable-alias' and `indirect-variable'
 % are provided for creating variable aliases.
 
-%% FIXME: Ha, didn't know about this one.  I'm eager to learn about the
+%% FIXME Mike: Ha, didn't know about this one.  I'm eager to learn about the
 %% motivation for this feature.
+%% FIXME Stefan: There's not a single use of this function, I think it
+%% was mainly there as a parallel to `buffer-modified-tick`.
+
 % Strings have a modified-tick that is bumped every time a string
 % is modified in-place with `aset' or `fillarray'.  This is retrieved
 % with the new function `string-modified-tick'.
@@ -460,40 +744,8 @@ Emacs are underway at the time of writing of this article, in 2018.
 %% How did XEmacs bootstrap?
 %% Strings with text-properties?
 
-\section{post-XEmacs}           % 2007-now ?
-
-%% FIXME: I'm putting chunks of text here without knowing where they
-%% should really go.
-
-%% FIXME: This is somewhat revisionist in the sense that some of those
-%% developments occurred before GNU and the FSF, so it's not clear exactly
-%% if those designs were driven by a desire for Freedom, or by just more
-%% mundane software-development good practices.
-Emacs being the brain child of Richard Stallman, its design strives to
-embody and showcase the ideals of Free Software.  For example, not only
-is it legal to get and modify the source code, but every effort
-is made to encourage the end-user to do so.  This has a profound
-influence on the \Elisp{} language:
-\begin{itemize}
-\item The language should be accessible to a wide audience, so that as many
-  people as possible can adapt Emacs to their own needs, without being
-  dependent on the availability of someone with a technical expertise.
-  This can be seen concretely in the inclusion in Emacs of the
-  \emph{Introduction to Programming in Emacs Lisp}
-  tutorial~\citep{ElispIntro} targeting users with no programming
-  experience.  This has been a strong motivation to keep \Elisp{} on the
-  minimalist side and to resist incorporation of many Common-Lisp features.
-\item It should be easy for the end-user to find the relevant code in order
-  to modify Emacs's behavior.  This has driven the development of elements
-  such as the \emph{docstrings} and more generally the self-documenting
-  aspect of the language.  It also imposes constraints on the evolution of
-  the language: the use of some facilities, such as \emph{advice}, is
-  discouraged because it makes the code more opaque.
-\item Emacs should be easily portable to as many platforms as possible.
-  This largely explains why \Elisp{} is still using a fairly naive
-  mark\&sweep garbage collector, and why its main execution engine is
-  a simple bytecode interpreter.
-\end{itemize}
+\section{Post-XEmacs}           % 2007-now ?
+\label{sec:post-xemacs}
 
 %% How to structure that?
 
@@ -529,10 +781,10 @@ influence on the \Elisp{} language:
 While Scheme was already about to get its second revision when Richard
 Stallman started to work on GNU Emacs, and Richard obviously knew about
 Scheme, being developed in a nearby office, \Elisp{} was mostly derived from
-Maclisp and used exclusively dynamic scoping.  The motivation for this
+MacLisp and used exclusively dynamic scoping.  The motivation for this
 decision is not completely clear but seems to include:
 \begin{itemize}
-\item Familiarity: Richard Stallman was more familiar with Maclisp than Scheme, and
+\item Familiarity: Richard Stallman was more familiar with MacLisp than Scheme, and
   lexical scoping was new whereas dynamic scoping was the
   tried-and-tested alternative.
 \item Hackability: Scheme's lexical scoping makes it impossible to access
@@ -1112,199 +1364,46 @@ to print and read those new objects, as well as the incompatibility between
 the printed representation of objects using the old vector-based encoding
 and those using the new encoding.
 
-\subsection{Implementation}
-
-%% FIXME: TODO
-%% ** Byte-code interpreter optimisation
-%% *** IIRC there was a round of micro-optimisation in the XEmacs interpreter
-%% *** threaded implementation (using gcc's computed gotos)
-%% ** Bootstrap?
-%% ** (portable)dumper
-%% ** C FFI
-%% ** JIT compiler attempts
-%% ** Byte code changes
-
-\subsection{Data representation and memory management}
-
-Emacs started with a data representation of its boxed data based on 32bit
-words.  Those used a 7bit tag located in the most significant bits, 1 extra
-``mark'' bit (see below), and 24bit of immediate data: either an integer or
-a pointer.  Not all the possible 128 tags were actually used, but the 24
-remaining bits where amply sufficient to represent the needed pointers and
-integers for the typical available memory of the machines of that time.
-
-The memory management used a simple mark\&sweep garbage collection
-algorithm, and allocated objects by blocs of 4KB dedicated to a particular
-kind of objects: one bloc each for cons cells, floats, symbols, markers, and
-strings, all other objects were allocated directly with \texttt{malloc}.
-To avoid fragmentation in the blocs of strings, those were compacted during
-each GC.  The ``mark'' bit in each 32bit box was not used for the object
-contained in the 32bit box.  Instead it was used so that cons cells could
-occupy only 2 words: the extra bit needed to store the mark\&sweep's
-\emph{markbit} of each cons cell was stored in the ``mark'' bit of the first
-word (i.e. of the \texttt{car}).
-
-%% FIXME: Strings got text-properties some time between 19.1 and 19.7.
-
-Over time, this tagging scheme became problematic, since it limited to 16 MB
-the size of the Lisp heap and to 8MB the size of files that could be edited.
-The limit on file size is fundamentally linked to the maximum representable
-integer since that is how buffer positions are represented.
-
-So in Emacs-19.29 the scheme was tweaked so that the tag was reduced to
-3 bits, pushing the maximum file size to a more comfortable 128MB and the
-maximum heap size to 256MB.  To reduce the tag to 3 bits, the less important
-object types were placed into two groups: one group using the
-\texttt{Lisp\_Misc} tag and another using the \texttt{Lisp\_Vector} tag.
-The \texttt{Lisp\_Misc} tag was used for objects that could share the same
-heap size as Lisp markers (6 words), and hence be allocated from the same
-4KB bloc.  For some of those objects, it imposed a slight waste of space,
-which was justified by the fact that objects using the \texttt{Lisp\_Vector}
-tag had other extra costs: 2 words of header, plus the overhead of having
-each object by allocated directly by \texttt{malloc}.
-
-\subsubsection{Scanning the stack}
-Until Emacs-21, the mark phase of the GC was precise: the global roots were
-explicitly registered, the GC knew all the types of Lisp objects and where
-were the fields that could contain references, and the roots from the stack
-were also explicitly registered into a singly linked list itself directly
-allocated on the stack.
-
-The cost of properly registering/unregistering stack references was
-perceived to be high: it slowed down execution, both directly by adding
-administrative code and indirectly by preventing some variables from being
-kept in registers, and it was a source of bugs, especially since some code
-tried to be clever and avoid registering local references under the
-assumption that the GC could not be triggered at that particular point.
-Similarly, the relocation of strings was a frequent source of hard-to-track
-bugs because only the references known to the GC were properly updated, so
-the programmer had to be careful not to keep unboxed or unregistered
-references to a string at any point where a GC was possible.
-
-To try and address those concerns, for Emacs-21.1, Gerd
-Moellman changed the string compaction code and implemented a conservative
-stack scan.  Strings are split into the string object itself, of fixed size
-and non-relocatable, and the relocatable string data to which the code
-(almost) never keeps a direct reference.  In order to find out if a given
-word found on the stack might be a potentially valid reference to a Lisp
-object, it keeps a memory map that records which regions of the memory
-contains which kinds of Lisp objects.  It could be used either in addition
-to the singly linked list of registered references, as a kind of debugging
-aide, or replace it altogether.
-
-Thanks to the interactive nature of Emacs and its opportunistic GC strategy
-which ensures that the GC is often run when the stack is almost empty, the
-slower conservative stack scanning and the potential false positives it
-introduces have not been a problem.  The maintenance of the memory map,
-implemented as a red-black tree, was hence the main cost of this new stack
-scanning, which proved competitive with the previous scheme.  The previous
-scheme was kept in use on some rare systems until Emacs-25.1, where all the
-register/unregister code of stack references could finally be removed.
-
-\subsubsection{Squeezing the tag bits}
-Of course, a limit of 256MB was not actually comfortable.  So during the
-development of Emacs-22, the tagging scheme was reworked again.
-First, the ``mark'' bit was removed, which doubled the previous limits.
-Second the tag bits were moved to the least significant bits, allowing
-the Lisp heap to grow as large as the full address space allowed.
-To this end, the \emph{markbit} of cons cells was moved to a separate bitmap
-stored alongside each bloc of cons cells, which required allocating those
-blocs on 4KB alignment boundaries.  This avoided the use of one extra word
-per cons cell, as was done previously for floats.  This same bitmap scheme
-was of course also used for floats, thus reducing the typical heap size of
-floats from 96 bits to 64 bits.  Reducing the heap size of floats to 64bits
-and avoiding the use of 3 words for cons cells was not just motivated by
-thriftiness but rather by the need to enforce that all objects be aligned on
-a multiple of 8, so as to free the least significant 3 bits for use as
-tag bits.
-
-At that point, there was no illusion that a maximum file size of 256MB was
-sufficient, but at the same time, the design of Emacs made it basically
-impossible to view files larger than 4GB or edit files larger than 2GB (on
-a 32bit system) anyway, no matter which tagging scheme we used, so there was
-not a lot of room for improvement.
-
-In Emacs-23.2 the tagging scheme was tweaked to use 2 tags for integers,
-hence pushing the maximum file size to 512MB.
-
-And to cover the remaining space, a new compilation option
-\texttt{--with-wide-int} was introduced in Emacs-24.1 to make the boxed data
-use 64bit on 32bit systems.  This imposes a significant extra cost in terms
-of space and time but makes it possible to edit files up to about 2GB.
-When this compilation option is used, tag bits are placed in the most
-significant bits again, so that the 32bit of pointers can be extracted at no
-cost at all.
-
-In Emacs-24.3, the allocation of objects using the \texttt{Lisp\_Vector} tag
-(which is used for many more object types than just vectors) was modified:
-instead of calling \texttt{malloc} for each such objects, they are now
-allocated from ``vector blocs''.  The motivation was not that
-\texttt{malloc} was too slow, but that the implementation of our
-conservative stack scanning keeps track of every part of the Lisp heap
-allocated with \texttt{malloc} in a balanced tree, so every such
-\texttt{malloc} costs us an $O(N \textsf{log} N)$ operation plus a heap
-allocation of an extra tree node, which was very costly for small objects
-both in time and space.
-
-In Emacs-24.4, the representation of objects using the \texttt{Lisp\_Vector}
-tag (which is used for many more object types than just vectors) was
-improved so as to reduce their header from 2 words down to a single word.
-
-In Emacs-27.1, the object representation was changed again: the distinction
-between \texttt{Lisp\_Misc} and \texttt{Lisp\_Vector} was dropped by making
-all objects use the \texttt{Lisp\_Vector} representation since it had been
-improved sufficiently to be competitive with the special
-\texttt{Lisp\_Misc} representation.
-
-%% FIXME: With the addition of bignums in the upcoming Emacs-27, there's
-%% a chance that this compilation option won't be needed any more!
-
-\subsubsection{New GC algorithm}
-During the learly years of Emacs, the main complaints from users w.r.t the
-simple mark\&sweep algorithm were the GC pauses.  These were solved very
-simply in Emacs-19.31 by removing the messages that indicated when GC was in
-progress.  Since then complaints about the performance of the GC have been
-fairly rare.  Most of them have to do with the amount of time wasted in the
-GC during initialization phases, where a lot of data is allocated without
-generating much garbage.
-
-Over time, there have been several attempts to replace the GC.
-
-During the development of Emacs-21, Gerd Moellman worked on an incremental
-GC based on a write barrier implemented using the operating system's VM
-primitives.  It was never actually integrated into any release, tho.
-He himself did not push for it even while he was maintainer, and there was
-generally not a strong interest for it.  Its main interest was to reduce the
-duration of GC pauses, but these are rarely problematic.  Its main problems
-were that it increased the proportion of time spent in the GC, and that it
-introduced various portability issues because it relied on operating system
-primitives which are not well standardized.
-
-During 2003, Dave Love worked on replacing Emacs's GC with Boehm's
-conservative GC.  The effort went far enough to get a usable Emacs but it
-was never completed, mostly because the early performance results were
-disappointing.  It also showed that such a replacement is non-trivial.
-The first issue is that various parts of Emacs's code assume that
-a collection can only occur during \Elisp{} code execution and not during
-heap allocation, and of course those assumptions are not explicitly recorded
-in the code.  The second issue is that Emacs currently implements various
-forms of ad-hoc weak references which need to be adapted to the more
-%% FIXME: Is it worth going though the details of hash-tables's weakness
-%% and markers's weakness (and their removal from undo lists)?
-standard forms of weak references.
-
 
 \section{Alternative Implementations}
+\label{sec:alternative-implementations}
+
+Implementation of Emacs Lisp have not been confined to Emacs and its
+derivatives.  Two implementations---Edwin and JEmacs---are notable for
+running Emacs Lisp code on editors implemented independently from
+Emacs.  Moreover, Guile Scheme also comes with support for the Emacs
+language.  These implementation all aim at running existing Emacs Lisp
+code in alternative environments, and consequently feature no
+significant language changes.
 
 \subsection{Edwin}
 
-FIXME \cite{Birkholz1993}
+Edwin is the editor that ships with MIT Scheme~\cite{MITScheme2014}.
+Its user interface is based on that of Emacs.  Edwin is implemented
+completely in Scheme, and Scheme is its native extension language.
+Additionally, Matthew Birkholz implemented an \Elisp{} interpreter
+in Scheme that was able to run substantial \Elisp{}
+packages~\cite{Birkholz1993} at the time, among them the Gnus news reader.
 
 \subsection{JEmacs}
 
-FIXME \cite{Bothner2001}
+JEmacs~\cite{Bothner2001} is an editor that ships with Kawa
+Scheme~\cite{KawaScheme}.  JEmacs comes with support for running some
+\Elisp{} code.  Its implementation (written partly in Java and
+partly in Scheme) works by translating \Elisp{} code to Scheme, and
+running the result.
+
+\subsection{Guile}
+
+Guile Scheme~\cite{Guile2018} was conceived as the universal extension
+language of the GNU project, with the specific intention of replacing
+Emacs Lisp at one point.  This has not happened (yet), but Guile does
+ship with a partial implementation of \Elisp{} that translates
+\Elisp{} programs to Guile's intermediate language.
 
 \section{Conclusion}
+\label{sec:conclusion}
+
 
 %% FIXME: TODO
 %% * Future evolution
