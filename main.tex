@@ -206,7 +206,7 @@ Many basic special forms are identical: (\texttt{defun},
 \texttt{nil}, cons cells, arrays, and many familiar Lisp
 functions.
 
-A symbol had an associated \texitt{property list}, essentially a
+A symbol had an associated \textit{property list}, essentially a
 dictionary mapping property names (also symbols) to values.
 
 Like MacLisp, \Elisp{} was (and still is) a
@@ -232,7 +232,7 @@ One departure in \Elisp{} from MacLisp is error handling.  MacLisp's
 error-handling system was quite primitive, and had poor separation of
 signalling and handling~\cite{Pitman2001}.  \Elisp{} took inspiration
 from developments elsewhere in the Lisp community and featured a
-\texitt{condition system}.  The \Elisp{} condition system establishes
+\textit{condition system}.  The \Elisp{} condition system establishes
 a protocol between code signalling an exceptional situation and code
 handling it.
 
@@ -251,7 +251,22 @@ signalling and handling code.
 \subsubsection{Buffer-local variables}
 \label{sec:buffer-local-variables}
 
-FIXME
+Buffer-local variables are the prominent feature marking \Elisp{} as
+the extension language of a text editor: Calling
+\texttt{make-variable-buffer-local} on the name of a global variable
+makes it \textit{buffer-local}.  This associates the value of the
+variable with the \textit{current buffer}, a global reference managed
+by Emacs that determines the implicit target of editing operations.
+An assignment to a buffer-local variable only affects dereferences
+with the same current buffer in effect.  In the absence of such an
+assignment, a buffer-local variable dereferences its special
+\textit{default value}.
+
+It is also possible to call \texttt{make-local-variable} on a variable
+name, which makes the variable have a local variable on the buffer
+current at the time of the \texttt{make-local-variable} invocation.
+Moreover, Emacs features a small number of \textit{terminal-local}
+variables.
 
 \subsubsection{Hooks}
 \label{sec:hooks}
