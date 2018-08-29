@@ -206,8 +206,11 @@ Many basic special forms are identical: (\texttt{defun},
 \texttt{nil}, cons cells, arrays, and many familiar Lisp
 functions.
 
-A symbol had an associated \textit{property list}, essentially a
-dictionary mapping property names (also symbols) to values.
+Symbols could be used to refer to variables.  In particular, the
+\texttt{set} function, which performed assignment, accepted the
+\emph{name} of a variable as its argument.  A symbol had an associated
+\textit{property list}, essentially a dictionary mapping property
+names (also symbols) to values.
 
 Like MacLisp, \Elisp{} was (and still is) a
 Lisp-2~\cite{SteeleGabriel1993}.  The namespaces for functions and
@@ -271,9 +274,28 @@ variables.
 \subsubsection{Hooks}
 \label{sec:hooks}
 
+One important aspect of the extensibility Stallman originally
+conceived for Emacs was the ability to make existing functions run
+additional code without having to change them, as as to extend their
+behavior.  Emacs supports this at well-defined points called
+\textit{hooks}.
 
+A hook is simply a variable bound to a list of functions.  The
+\texttt{add-hook} function adds a function to such a list by
+reassigning the variable.  (This makes use of the ability to refer to
+a variable by its name symbol.)
 
-% FIXME: Do we need to talk about advice?
+Hooks are not a core language feature, but their use has been is a
+pervasive convention in Emacs from the start.  In particular, many
+libraries run a hook when they are loaded to allow customization.
+Also, modes generally run hooks to allow modifying their behavior.
+
+Initial versions of Emacs also seemed to allow attaching hooks to
+variable changes~\cite{Stallman1981}, but this feature has not
+survived.\footnote{In 1992, the \texttt{advice.el} package was added
+  to Emacs, duplicating a design available in other Lisps, that
+  allowed attaching code to functions even if they do not run hooks.
+  FIXME Stefan: nadvice?}
 
 \subsubsection{Strings}
 
