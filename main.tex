@@ -162,10 +162,6 @@ MacLisp, and \Elisp{} started as a real programming language with
 powerful abstraction facilities, thus foregoing Greenspun's tenth
 rule.
 
-%% FIXME: This is somewhat revisionist in the sense that some of those
-%% developments occurred before GNU and the FSF, so it's not clear exactly
-%% if those designs were driven by a desire for Freedom, or by just more
-%% mundane software-development good practices.
 Moreover, Stallman, made the design of \Elisp{}
 embody and showcase the ideals of Free Software.  For example, not only
 is it legal to get and modify the source code, but every effort
@@ -192,7 +188,7 @@ influence on the \Elisp{} language:
   a simple bytecode interpreter.
 \end{itemize}
 %
-% FIXME: Section organizaetion
+% FIXME: Section organization
 
 \subsection{Language design}
 
@@ -478,8 +474,8 @@ cost at all.
 %% FIXME Stefan: I find this of limited interest, as it doesn't really
 %% impact the language.
 %% Mike: Hmm... not sure why you think so (pretty much all this memory
-%% management section had no impact on the language itself, it's just an
-%% implementation detail).  Maybe I should talk a bit more about the
+%% management section had no impact on the language itself, it's just
+%% implementation details).  Maybe I should talk a bit more about the
 %% motivation for this change: in earlier Elisp (pseudo)vectors were not
 %% used very much, but over time this has changed, mostly with the
 %% increasing use of defstruct as well as closures.
@@ -576,8 +572,16 @@ highly platform-specific C files that implemented a function called
 \texttt{unexec}.  The \texttt{unexec} function turns the running
 process back into an executable file.  However, the implementations of
 \texttt{unexec} have been hard to write and difficult to maintain.
+%% FIXME: "recently" should be made more precise.  Also IIRC
+%% this change only breaks the particular way Emacs used to dump
+%% (more specifically it makes it "impossible" to unexec&restore a heap
+%% that contains data allocated with glibc's malloc, but Emacs
+%% already implemented a workaround by using its own malloc library
+%% before the dump and glibc's malloc library afterwards (that solution
+%% had been developed earlier for the Cygwin port, IIRC, tho
+%% I can't remember exactly what were the reason for that hack in Cygwin)).
 Moreover, the Glibc maintainers have recently published plans to
-remove support for this functionality.
+make changes which would break this functionality.
 
 For XEmacs, in 1999, Olivier Galibert (based on initial work by Kyle
 Jones) started writing a \emph{portable dumper} that would serialize
@@ -586,11 +590,21 @@ just the heap of the running XEmacs into a file, which could later be
 for all Lisp types to the system, which would later also benefit the
 new incremental garbage collector.  (See
 Section~\ref{sec:incremental-gc}.)  This required pervasive changes to
-the C code, and so it took until 2001 until the first version of the
-portable dumper was released.
+the C code, and so it took until 2001 for the first version of the
+portable dumper to be released.
 
-% FIXME Stefan: Not sure what the current state of unexec replacement
-% is.
+The Glibc announcement re-ignited interest in implementing a more portable
+way to dump\&restore Emacs's heap.  Some experiments were first made to dump
+the heap in the form of a ``normal'' byte-compiled \Elisp{} file.
+While this solution proved easy to implement, the time to load such a dumped
+heap remained too high to be acceptable.  So the experiment only resulted in
+the implementation of some improvements to the performance of the code to
+read byte-compiled code.  In parallel, Daniel Colascione worked on
+a different approach more like that of XEmacs's portable dumper.  The code
+was basically finished, but Emacs maintainers so far have not accepted it
+into the official release.  The main reason for that reluctance is that it
+trades off the brittle platform-dependence of the old unexec code with more
+code which partly duplicates some of the GC's code.
 
 \section{XEmacs period}         % 1992-2007 ?
 \label{sec:xemacs}
@@ -973,27 +987,32 @@ MacLisp and used exclusively dynamic scoping.  Dynamic scoping is used
 extensively to add ``hidden'' configuration options to existing
 functions without passing explicit arguments~\cite{Stallman1981}.
 
-% FIXME Stefan: I elided this because Stallman1981 lays out the
-% motivation quite clearly
-% The motivation for this
-% decision is not completely clear but seems to include:
-% \begin{itemize}
-% \item Familiarity: Richard Stallman was more familiar with MacLisp than Scheme, and
-%   lexical scoping was new whereas dynamic scoping was the
-%   tried-and-tested alternative.
-% \item Hackability: Scheme's lexical scoping makes it impossible to access
-%   variables in other scopes, so it provides a strong form of abstraction,
-%   which is great in many cases, but can be annoying to the end user who just
-%   wants to do a quick and dirty hack.
-%   % FIXME: evidence?
-%   Similarly, Richard Stallman has often
-%   preferred to avoid the use of opaque datatypes, most famously for the
-%   representation of keymaps and characters.
-%   % FIXME: Needs to tie in with XEmacs above
-% \item Efficiency: It was perceived that closures would incur a cost that was
-%   not justified.  This was especially true in the context of the early Emacs
-%   which relied exclusively on interpretation to evaluate its \Elisp{} code.
-% \end{itemize}
+%% FIXME Stefan: I elided this because Stallman1981 lays out the
+%% motivation quite clearly
+%% FIXME Mike: Indeed, it explains well why dynamic scoping is provided,
+%% but I think it's worth summarizing it here and it's worth adding
+%% explanations for why it was the *only* binding provided (Stallman1981
+%% only argues for the importance of having dynamic scoping).
+%%
+%% The motivation for this
+%% decision is not completely clear but seems to include:
+%% \begin{itemize}
+%% \item Familiarity: Richard Stallman was more familiar with MacLisp than Scheme, and
+%%   lexical scoping was new whereas dynamic scoping was the
+%%   tried-and-tested alternative.
+%% \item Hackability: Scheme's lexical scoping makes it impossible to access
+%%   variables in other scopes, so it provides a strong form of abstraction,
+%%   which is great in many cases, but can be annoying to the end user who just
+%%   wants to do a quick and dirty hack.
+%%   % FIXME: evidence?
+%%   Similarly, Richard Stallman has often
+%%   preferred to avoid the use of opaque datatypes, most famously for the
+%%   representation of keymaps and characters.
+%%   % FIXME: Needs to tie in with XEmacs above
+%% \item Efficiency: It was perceived that closures would incur a cost that was
+%%   not justified.  This was especially true in the context of the early Emacs
+%%   which relied exclusively on interpretation to evaluate its \Elisp{} code.
+%% \end{itemize}
 
 Eventually, lexical scoping became the established standard in
 the Lisp family in both Common Lisp and Scheme.
@@ -1024,18 +1043,17 @@ Dynamic scoping had two main drawbacks in practice:
   curry operator \texttt{apply-partially} to cover similar use cases without
   those drawbacks.
 \item The global visibility of variable names, requiring more care with the
-  choice of local names.  The convention followed in Emacs to name
-  all global variables with a package-specific prefix works well enough in
-  % FIXME: sufficient to do what?  Maybe code examples?
-  most cases, but it was not sufficient for higher-order functions, like
+  choice of local names.  The convention followed in Emacs to name all
+  global variables with a package-specific prefix works well to avoid name
+  conflicts, except in the presence of higher-order functions, like
   \texttt{reduce}, and it was also problematic in a few other cases such as
-  the byte-compiler: in order to emit warnings about the use of undeclared
-  variables, the byte-compiler just tested whether that variable was already
-  known to Emacs, which always returned true for those variables locally
-  bound by one of the functions on the call stack, such as the functions in
-  the byte-compiler itself.  So some code was made uglier with long local
-  variable names in order not to interfere with other local bindings, and
-  these ``solutions'' were never complete.
+  in the byte-compiler: in order to emit warnings about the use of
+  undeclared variables, the byte-compiler just tested whether that variable
+  was already known to Emacs, which always returned true for those variables
+  locally bound by one of the functions on the call stack, such as the
+  functions in the byte-compiler itself.  So some code was made uglier with
+  long local variable names in order not to interfere with other local
+  bindings.  Worse: these ``solutions'' were never really complete.
 \end{itemize}
 
 The only fully satisfactory solution to the desire for lexical scoping in
@@ -1306,11 +1324,8 @@ forms take generalized variables as operands---in particular,
 \texttt{setf}, which treats a generalized variable as a reference and
 sets its value.
 
-%% FIXME: reword a bit
 In Common Lisp, macros accepting a place can ask \texttt{get-setf-expansion}
 to turn it into a list of five elements:
-% FIXME: I can't follow here. How is that function provided?
-% Who calls it on what?
 \begin{displaymath}
   (\textsl{VARS}~\textsl{VALS}~\textsl{STORE-VAR}~\textsl{STORE-FORM}
   ~\textsl{ACCESS-FORM})
@@ -1384,7 +1399,6 @@ this design precludes compatibility with Common Lisp and
 \texttt{cl.el}'s \texttt{get-setf-expansion}, which must produce the
 five values described above.
 Breaking compatibility with \texttt{get-setf-expansion}
-% FIXME: What's get-setf-expansion?
 was of course
 a downside, but in practice this function was almost never used outside of
 \texttt{cl.el} itself so very few packages were impacted by
