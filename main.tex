@@ -68,7 +68,7 @@
 
 % FIXME!  I hate it when there's no text between \verb|\section| and
 % \verb|\subsection|
-% FIXME: Mike hates it, too.  Also initial sections called "Introduduction"
+% FIXME: Mike hates it, too.  Also initial sections called "Introduction"
 
 \Elisp{} has evolved in multiple strands and implementations over the
 years, and thus its evolution did not happen along a single timeline.
@@ -112,7 +112,7 @@ MacLisp.
 \subsection{MacLisp}
 
 Several early incarnations of Emacs were written in Lisp, notably on
-the Lisp Machine (called \textit{EINE} for ``EINE Is Not EMACS'') by
+the Lisp Machine (called \emph{EINE} for ``EINE Is Not EMACS'') by
 Dan Weinreb and in MacLisp~\cite{Moon1974,Pitman1983} by Bernie Greenberg in
 1978~\cite{Stallman2002}.  The ensuing possibilities for extending the
 editor was attractive to Richard Stallman, who wanted to write a new
@@ -122,11 +122,11 @@ descendant of MacLisp.
 
 \subsection{Gosling Emacs}
 
-\textit{Unix Emacs}, written by James Gosling in
+\emph{Unix Emacs}, written by James Gosling in
 1980/1981~\cite{Gosling1981}, preserved in the history books
-as \textit{Gosling Emacs}, was one of the immediate predecessors of
-Emacs.  It featured an extension language called \textit{MLisp} or
-\textit{Mock Lisp}, which bears visual resemblance to Emacs Lisp.
+as \emph{Gosling Emacs}, was one of the immediate predecessors of
+Emacs.  It featured an extension language called \emph{MLisp} or
+\emph{Mock Lisp}, which bears visual resemblance to Emacs Lisp.
 MLisp featured function definitions via \texttt{defun}, as well as
 many built-in functions (such as \texttt{eolp},
 \texttt{forward-character}, \texttt{save-excursion}) whose names
@@ -154,7 +154,7 @@ and redisplay were written in efficient C, higher-level functionality
 in Lisp.
 
 The initial design of \Elisp{} was motivated by the pervasive
-requirement of \textit{extensibility}; users ``must be able to
+requirement of \emph{extensibility}; users ``must be able to
 redefine each character''~\cite{Stallman1981}.  TECO and Gosling Emacs
 featured small languages that were either too obscure or too weak to
 support this vision.  Consequently, Stallman took inspiration from
@@ -196,8 +196,8 @@ influence on the \Elisp{} language:
 
 \subsection{Language design}
 
-The base language of Emacs Lisp started out as a straightforward of
-MacLisp~\ref{Moon1974,Pitman1983}.
+The base language of Emacs Lisp started out as a straightforward
+implementation of MacLisp~\ref{Moon1974,Pitman1983}.
 
 Many basic special forms are identical: (\texttt{defun},
 \texttt{defvar}, \texttt{defmacro} \texttt{let}, \texttt{let*},
@@ -209,7 +209,7 @@ functions.
 Symbols could be used to refer to variables.  In particular, the
 \texttt{set} function, which performed assignment, accepted the
 \emph{name} of a variable as its argument.  A symbol had an associated
-\textit{property list}, essentially a dictionary mapping property
+\emph{property list}, essentially a dictionary mapping property
 names (also symbols) to values.
 
 Like MacLisp, \Elisp{} was (and still is) a
@@ -234,8 +234,10 @@ control transfer.
 One departure in \Elisp{} from MacLisp is error handling.  MacLisp's
 error-handling system was quite primitive, and had poor separation of
 signalling and handling~\cite{Pitman2001}.  \Elisp{} took inspiration
+%% FIXME: It would be great to say *where* it came from.  Clearly it
+%% is a bit like Common-Lisp, but it's not quite like it either.
 from developments elsewhere in the Lisp community and featured a
-\textit{condition system}.  The \Elisp{} condition system establishes
+\emph{condition system}.  The \Elisp{} condition system establishes
 a protocol between code signalling an exceptional situation and code
 handling it.
 
@@ -254,21 +256,23 @@ signalling and handling code.
 \subsubsection{Buffer-local variables}
 \label{sec:buffer-local-variables}
 
+%% FIXME: Expand on this, including frame-local vars
+
 Buffer-local variables are the prominent feature marking \Elisp{} as
 the extension language of a text editor: Calling
 \texttt{make-variable-buffer-local} on the name of a global variable
-makes it \textit{buffer-local}.  This associates the value of the
-variable with the \textit{current buffer}, a global reference managed
+makes it \emph{buffer-local}.  This associates the value of the
+variable with the \emph{current buffer}, a global reference managed
 by Emacs that determines the implicit target of editing operations.
 An assignment to a buffer-local variable only affects dereferences
 with the same current buffer in effect.  In the absence of such an
 assignment, a buffer-local variable dereferences its special
-\textit{default value}.
+\emph{default value}.
 
 It is also possible to call \texttt{make-local-variable} on a variable
 name, which makes the variable have a local variable on the buffer
 current at the time of the \texttt{make-local-variable} invocation.
-Moreover, Emacs features a small number of \textit{terminal-local}
+Moreover, Emacs features a small number of \emph{terminal-local}
 variables.
 
 \subsubsection{Hooks}
@@ -276,16 +280,16 @@ variables.
 
 One important aspect of the extensibility Stallman originally
 conceived for Emacs was the ability to make existing functions run
-additional code without having to change them, as as to extend their
+additional code without having to change them, so as to extend their
 behavior.  Emacs supports this at well-defined points called
-\textit{hooks}.
+\emph{hooks}.
 
 A hook is simply a variable bound to a list of functions.  The
 \texttt{add-hook} function adds a function to such a list by
 reassigning the variable.  (This makes use of the ability to refer to
 a variable by its name symbol.)
 
-Hooks are not a core language feature, but their use has been is a
+Hooks are not a core language feature, but their use has been a
 pervasive convention in Emacs from the start.  In particular, many
 libraries run a hook when they are loaded to allow customization.
 Also, modes generally run hooks to allow modifying their behavior.
@@ -317,6 +321,12 @@ FIXME
 %% ** C FFI
 %% ** JIT compiler attempts
 %% ** Byte code changes
+
+%% Early history:
+%% the `byte-code` function was already present in Emacs-16.56 (earliest
+%% revision we could find).
+%% byte-compiled objects added some time between Emacs-18.59 and Emacs-19.7
+%% dynamically-loaded bytecode added in Emacs-19.29.
 
 \subsection{Data representation and memory management}
 
@@ -360,6 +370,8 @@ each object by allocated directly by \texttt{malloc}.
 
 XEmacs implemented a similar change in 1993 with Lucid Emacs 19.8,
 giving Emacs Lisp 28-bit integers and a 28-bit address space, and
+%% FIXME: I don't know what you mean by "caught up with Emacs 19.30".  28bit
+%% integers and heap size is what Emacs got in 19.29.
 caught up with Emacs 19.30 with the release of XEmacs 19.13, also in
 1995.
 
@@ -414,7 +426,7 @@ allocated via \texttt{malloc}, and would make the decision
 individually based on size.
 
 In the process of these GC improvements, Crestani and Michael Sperber
-also added \textit{ephemerons} to \Elisp{}~\cite{Hayes1997}.
+also added \emph{ephemerons} to \Elisp{}~\cite{Hayes1997}.
 
 \subsubsection{Squeezing the tag bits}
 
@@ -422,19 +434,23 @@ Of course, a limit of 256MB was not actually comfortable.
 
 XEmacs added a ``minimal-tagbits'' configure option with the release
 of XEmacs 21.0 in 1998, yielding 31-bit integers and a 1GB maximum
-file size.  The mark bit was removed from the boxes, and the number of
+file size.
+%% FIXME: Mention to where the mark bit was moved (I assume it just
+%% made cons cells into 3-word objects?).
+The mark bit was removed from the boxes, and the number of
 type tags was reduced to four: records (heap-allocated objects,
-characters, even und odd fixnums.)  This became default with XEmacs
+characters, even and odd fixnums.)  This became default with XEmacs
 21.2 in 2002.
 
 During the development of Emacs-22 in 2007, its tagging scheme was
 similarly reworked: The mark bit was removed, and the tag bits were
 moved to the least significant bits, allowing the Lisp heap to grow as
 large as the full address space allowed.
-Morepver end, the \emph{markbit} of cons cells was moved to a separate bitmap
+Moreover, the \emph{markbit} of cons cells was moved to a separate bitmap
 stored alongside each bloc of cons cells, which required allocating those
 blocs on 4KB alignment boundaries.  This avoided the use of one extra word
-per cons cell, as was done previously for floats.  This same bitmap scheme
+per cons cell just to store the markbit, as was done previously for floats.
+This same bitmap scheme
 was of course also used for floats, thus reducing the typical heap size of
 floats from 96 bits to 64 bits.  Reducing the heap size of floats to 64bits
 and avoiding the use of 3 words for cons cells was not just motivated by
@@ -459,8 +475,14 @@ When this compilation option is used, tag bits are placed in the most
 significant bits again, so that the 32bit of pointers can be extracted at no
 cost at all.
 
-% FIXME Stefan: I find this of limited interest, as it doesn't really
-% impact the language
+%% FIXME Stefan: I find this of limited interest, as it doesn't really
+%% impact the language.
+%% Mike: Hmm... not sure why you think so (pretty much all this memory
+%% management section had no impact on the language itself, it's just an
+%% implementation detail).  Maybe I should talk a bit more about the
+%% motivation for this change: in earlier Elisp (pseudo)vectors were not
+%% used very much, but over time this has changed, mostly with the
+%% increasing use of defstruct as well as closures.
 
 In Emacs-24.3, the allocation of objects using the \texttt{Lisp\_Vector} tag
 (which is used for many more object types than just vectors) was modified:
@@ -497,7 +519,7 @@ generating much garbage.
 
 Over time, there have been several attempts to replace the GC.
 
-During the development of Emacs-21 around 2000, Gerd Moellman worked on an incremental
+During the development of Emacs-21 around 2001, Gerd Moellman worked on an incremental
 GC based on a write barrier implemented using the operating system's VM
 primitives.  It was never actually integrated into any release, tho.
 He himself did not push for it even while he was maintainer, and there was
@@ -521,6 +543,11 @@ forms of ad-hoc weak references which need to be adapted to the more
 standard forms of weak references.
 
 \label{sec:incremental-gc}
+%% FIXME: Given Emacs's lack of interest for incremental collector, I think
+%% it would be interesting (at least for me, but likely for the other
+%% readers as well ;-) to expand a bit on this, e.g. what were the
+%% motivations and how did it work out in practice (is it used in all
+%% builds, is its performance competitive, known cases where it shines, ...).
 In 2005, Marcus Crestani developed an incremental collector for
 XEmacs, which was released with XEmacs 21.5.21 in
 2005~\cite{Crestani2005}.
@@ -553,7 +580,7 @@ Moreover, the Glibc maintainers have recently published plans to
 remove support for this functionality.
 
 For XEmacs, in 1999, Olivier Galibert (based on initial work by Kyle
-Jones) started writing a \textit{portable dumper} that would serialize
+Jones) started writing a \emph{portable dumper} that would serialize
 just the heap of the running XEmacs into a file, which could later be
 \texttt{mmap}ed.  Galibert added explicit memory-layout descriptors
 for all Lisp types to the system, which would later also benefit the
@@ -569,7 +596,7 @@ portable dumper was released.
 \label{sec:xemacs}
   
 In 1991, Lucid Inc., a software development company based in Menlo
-Park, Carlifornia, started a project called \textit{Energize}.
+Park, Carlifornia, started a project called \emph{Energize}.
 Energize was to be a C/C++ integrated development environment based on
 Emacs~\cite{GabrielLetter}.  Lucid decided to use Emacs as the central
 component of Energize.  At the time, the current version of Emacs was
@@ -584,13 +611,13 @@ sight.\footnote{The first official release of Emacs 19, Emacs
 While Lucid at first tried to support and thus speed up the
 development of Emacs 19, the required cooperation between Lucid and
 the Free Software Foundation soon broke down.  As a result, Lucid
-forked Emacs development, creating its own Emacs variant \textit{Lucid
+forked Emacs development, creating its own Emacs variant \emph{Lucid
 Emacs}.\footnote{The first release of Lucid Emacs came out in April,
 1992.}  Jamie Zawinski was the primary developer of Lucid Emacs.
 In 1994, Lucid went bankrupt.  Sun subsequently wanted to ship
 Lucid Emacs with their operating system, and ended up financing some
 of the continued development of Lucid Emacs, and effected a name
-change to the current \textit{XEmacs}.
+change to the current \emph{XEmacs}.
 
 The focus of Lucid Emacs was on providing a proper graphical user
 interface.  As a result, most of the changes to Emacs Lisp in Lucid
@@ -765,7 +792,7 @@ character in both Emacs and XEmacs is its Unicode scalar value.
 \subsection{Bignums}
 
 Somewhat surprisingly for Lisp, Emacs Lisp had no support for
-arbitrarily large integers (\textit{bignums}) for many years.
+arbitrarily large integers (\emph{bignums}) for many years.
 Integer range was restricted by word size on the underlying machine,
 and representation changes over time have affected the exact range
 available in \Elisp.
@@ -1572,6 +1599,10 @@ ship with a partial implementation of \Elisp{} that translates
 \section{Conclusion}
 \label{sec:conclusion}
 
+\subsection{Acknowledgments}
+
+Big thanks to Lars Brinkhoff for his archiving work at
+\url{https://github.com/larsbrinkhoff/emacs-history}.
 
 %% FIXME: TODO
 %% * Future evolution
