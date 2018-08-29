@@ -248,7 +248,8 @@ the size of the Lisp heap and to 8MB the size of files that could be edited.
 The limit on file size is fundamentally linked to the maximum representable
 integer since that is how buffer positions are represented.
 
-So in Emacs-19.29 the scheme was tweaked so that the tag was reduced to
+So in 1995, with the release of Emacs-19.29,
+the scheme was tweaked so that the tag was reduced to
 3 bits, pushing the maximum file size to a more comfortable 128MB and the
 maximum heap size to 256MB.  To reduce the tag to 3 bits, the less important
 object types were placed into two groups: one group using the
@@ -259,6 +260,11 @@ heap size as Lisp markers (6 words), and hence be allocated from the same
 which was justified by the fact that objects using the \texttt{Lisp\_Vector}
 tag had other extra costs: 2 words of header, plus the overhead of having
 each object by allocated directly by \texttt{malloc}.
+
+XEmacs implemented a similar change in 1993 with Lucid Emacs 19.8,
+giving Emacs Lisp 28-bit integers and a 28-bit address space, and
+caught up with Emacs 19.30 with the release of XEmacs 19.13, also in
+1995.
 
 \subsubsection{Scanning the stack}
 Until Emacs-21, the mark phase of the GC was precise: the global roots were
@@ -298,13 +304,34 @@ scanning, which proved competitive with the previous scheme.  The previous
 scheme was kept in use on some rare systems until Emacs-25.1, where all the
 register/unregister code of stack references could finally be removed.
 
+\subsubsection{Heap management in XEmacs}
+
+XEmacs has kept precise GC, and impleemented a number of improvements
+in its memory management.  In particular, Markus Kaltenbach and Marcus
+Crestani implemented a scanning algorithm that used the memory-layout
+descriptors that had been added to support the portable dumper.  (See
+Section~\ref{FIXMEDumping}.)  Marcus Crestani also replaced the
+allocator: The new, much simplified allocator eliminated the
+distinction between objects that were allocated in blocs and those
+allocated via \texttt{malloc}, and would make the decision
+individually based on size.
+
 \subsubsection{Squeezing the tag bits}
-Of course, a limit of 256MB was not actually comfortable.  So during the
-development of Emacs-22, the tagging scheme was reworked again.
-First, the ``mark'' bit was removed, which doubled the previous limits.
-Second the tag bits were moved to the least significant bits, allowing
-the Lisp heap to grow as large as the full address space allowed.
-To this end, the \emph{markbit} of cons cells was moved to a separate bitmap
+
+Of course, a limit of 256MB was not actually comfortable.
+
+XEmacs added a ``minimal-tagbits'' configure option with the release
+of XEmacs 21.0 in 1998, yielding 31-bit integers and a 1GB maximum
+file size.  The mark bit was removed from the boxes, and the number of
+type tags was reduced to four: records (heap-allocated objects,
+characters, even und odd fixnums.)  This became default with XEmacs
+21.2 in 2002.
+
+During the development of Emacs-22 in 2007, its tagging scheme was
+similarly reworked: The mark bit was removed, and the tag bits were
+moved to the least significant bits, allowing the Lisp heap to grow as
+large as the full address space allowed.
+Morepver end, the \emph{markbit} of cons cells was moved to a separate bitmap
 stored alongside each bloc of cons cells, which required allocating those
 blocs on 4KB alignment boundaries.  This avoided the use of one extra word
 per cons cell, as was done previously for floats.  This same bitmap scheme
@@ -332,6 +359,9 @@ When this compilation option is used, tag bits are placed in the most
 significant bits again, so that the 32bit of pointers can be extracted at no
 cost at all.
 
+% FIXME Stefan: I find this of limited interest, as it doesn't really
+% impact the language
+
 In Emacs-24.3, the allocation of objects using the \texttt{Lisp\_Vector} tag
 (which is used for many more object types than just vectors) was modified:
 instead of calling \texttt{malloc} for each such objects, they are now
@@ -356,7 +386,7 @@ improved sufficiently to be competitive with the special
 %% FIXME: With the addition of bignums in the upcoming Emacs-27, there's
 %% a chance that this compilation option won't be needed any more!
 
-\subsubsection{New GC algorithm}
+\subsubsection{New GC algorithms}
 During the learly years of Emacs, the main complaints from users w.r.t the
 simple mark\&sweep algorithm were the GC pauses.  These were solved very
 simply in Emacs-19.31 by removing the messages that indicated when GC was in
@@ -367,7 +397,7 @@ generating much garbage.
 
 Over time, there have been several attempts to replace the GC.
 
-During the development of Emacs-21, Gerd Moellman worked on an incremental
+During the development of Emacs-21 around 2000, Gerd Moellman worked on an incremental
 GC based on a write barrier implemented using the operating system's VM
 primitives.  It was never actually integrated into any release, tho.
 He himself did not push for it even while he was maintainer, and there was
@@ -390,6 +420,9 @@ forms of ad-hoc weak references which need to be adapted to the more
 %% and markers's weakness (and their removal from undo lists)?
 standard forms of weak references.
 
+In 2005, Marcus Crestani developed an incremental collector for
+XEmacs, which was released with XEmacs 21.5.21 in
+2005~\cite{Crestani2005}.
 
 %% FIXME: TODO
 %% * Language & Implementation Overview
@@ -582,14 +615,6 @@ characters an opaque type additionally discouraged the practice.
 %    into XEmacs.  No more need for (require 'cl) or anything
 %    like that.
 
-% ** Major Differences Between 19.6 and 19.8
-% ==========================================
-
-% There is a new internal representation for lisp objects, giving emacs-lisp 28
-% bit integers and a 28 bit address space, up from the previous maximum of 26.
-% We expect eventually to increase this to 30 bit integers and a 32 bit address
-% space, eliminating the need for DATA_SEG_BITS on some architectures.  (On 64
-% bit machines, add 32 to all of these numbers.)
 
 \section{Emacs/XEmacs Co-Evolution}
 \label{sec:coevolution}
@@ -736,15 +761,6 @@ This issue is still being discussed with Emacs.
 
 
 
-% * Lisp and internal changes in XEmacs 21.0
-% ==========================================
-
-% ** It is now possible to build XEmacs with support for 31-bit Lisp
-% integers (normally, Lisp integers are only 28 bits wide on 32-bit
-% machines.)  Configure with --use-minimal-tagbits to test.  With this
-% change, the maximum buffer size on 32-bit machines is increased from
-% 128M to 1G.  This setting will be made default in a future XEmacs
-% version.
 
 
 % * Lisp and internal changes in XEmacs 21.4
