@@ -318,7 +318,7 @@ XEmacs has kept precise GC, and impleemented a number of improvements
 in its memory management.  In particular, Markus Kaltenbach and Marcus
 Crestani implemented a scanning algorithm that used the memory-layout
 descriptors that had been added to support the portable dumper.  (See
-Section~\ref{FIXMEDumping}.)  Marcus Crestani also replaced the
+Section~\ref{sec:image-dumping}.)  Marcus Crestani also replaced the
 allocator: The new, much simplified allocator eliminated the
 distinction between objects that were allocated in blocs and those
 allocated via \texttt{malloc}, and would make the decision
@@ -428,6 +428,7 @@ forms of ad-hoc weak references which need to be adapted to the more
 %% and markers's weakness (and their removal from undo lists)?
 standard forms of weak references.
 
+\label{sec:incremental-gc}
 In 2005, Marcus Crestani developed an incremental collector for
 XEmacs, which was released with XEmacs 21.5.21 in
 2005~\cite{Crestani2005}.
@@ -441,6 +442,36 @@ XEmacs, which was released with XEmacs 21.5.21 in
 %% ** Interpreter
 %% ** Image dumping
 %% ** Byte-code architecture (or should that go XEmacs-period?)
+
+\subsubsection{Image dumping}
+\label{sec:image-dumping}
+
+An important feature of \Elisp{} has been the \texttt{dump-emacs}
+function, which can be used to store a heap image of the running Emacs
+into a file, which can later be restored.  This is crucial for Emacs's
+usability, as it allows the editor to start up quickly, without
+having to load and run all initialization code every time.
+
+The implementation of \texttt{dump-emacs} started out as a set of
+highly platform-specific C files that implemented a function called
+\texttt{unexec}.  The \texttt{unexec} function turns the running
+process back into an executable file.  However, the implementations of
+\texttt{unexec} have been hard to write and difficult to maintain.
+Moreover, the Glibc maintainers have recently published plans to
+remove support for this functionality.
+
+For XEmacs, in 1999, Olivier Galibert (based on initial work by Kyle
+Jones) started writing a \textit{portable dumper} that would serialize
+just the heap of the running XEmacs into a file, which could later be
+\texttt{mmap}ed.  Galibert added explicit memory-layout descriptors
+for all Lisp types to the system, which would later also benefit the
+new incremental garbage collector.  (See
+Section~\ref{sec:incremental-gc}.)  This required pervasive changes to
+the C code, and so it took until 2001 until the first version of the
+portable dumper was released.
+
+% FIXME Stefan: Not sure what the current state of unexec replacement
+% is.
 
 \section{XEmacs period}         % 1992-2007 ?
 \label{sec:xemacs}
