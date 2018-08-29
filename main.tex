@@ -389,6 +389,9 @@ distinction between objects that were allocated in blocs and those
 allocated via \texttt{malloc}, and would make the decision
 individually based on size.
 
+In the process of these GC improvements, Crestani and Michael Sperber
+also added \textit{ephemerons} to \Elisp{}~\cite{Hayes1997}.
+
 \subsubsection{Squeezing the tag bits}
 
 Of course, a limit of 256MB was not actually comfortable.
