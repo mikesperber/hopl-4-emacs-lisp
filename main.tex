@@ -355,15 +355,20 @@ character in both Emacs and XEmacs is its Unicode scalar value.
 
 %% FIXME: Mention the motivations for adding bignums (additionally to Calc),
 %% i.e. those places where workarounds were used (e.g. using floats or lists
-%% of integers for time and file sizes).
+%% of integers for:
+%% - inode and device numbers
+%% - file size
+%% - uid, gid, ...
+%% - timestamps
 Somewhat surprisingly for Lisp, Emacs Lisp had no support for
 arbitrarily large integers or \textit{bignums} for many years, despite
 the fact that Emacs Lisp was used for more and more applications
 beyond text editing.  As a result, Calc, an advanced calculator and
 computer algebra tool, which has shipped with the Emacs distribution
 %% FIXME: Maybe we should add details about how bignum support was added:
-%% interaction with print&read, with `eql`, and with other primitives,
-%% whether or not it was optional, ...
+%% type of numbers (e.g. Emacs only has mpz whereas IIUC XEmacs has also
+%% mpq and mpf), interaction with print&read, with `eql`, and with other
+%% primitives, whether or not it was optional, ...
 since 2001, had to implement bignum arithmetic in Lisp.  Jerry James
 added bignums to XEmacs 21.5.18 in 2004.  Efforts to add bignums to
 Emacs are underway at the time of writing of this article, in 2018.
@@ -1114,10 +1119,10 @@ and those using the new encoding.
 %% *** IIRC there was a round of micro-optimisation in the XEmacs interpreter
 %% *** threaded implementation (using gcc's computed gotos)
 %% ** Bootstrap?
+%% ** (portable)dumper
 %% ** C FFI
 %% ** JIT compiler attempts
 %% ** Byte code changes
-%% ** GC changes
 
 \subsection{Data representation and memory management}
 
@@ -1253,6 +1258,41 @@ improved sufficiently to be competitive with the special
 
 %% FIXME: With the addition of bignums in the upcoming Emacs-27, there's
 %% a chance that this compilation option won't be needed any more!
+
+\subsubsection{New GC algorithm}
+During the learly years of Emacs, the main complaints from users w.r.t the
+simple mark\&sweep algorithm were the GC pauses.  These were solved very
+simply in Emacs-19.31 by removing the messages that indicated when GC was in
+progress.  Since then complaints about the performance of the GC have been
+fairly rare.  Most of them have to do with the amount of time wasted in the
+GC during initialization phases, where a lot of data is allocated without
+generating much garbage.
+
+Over time, there have been several attempts to replace the GC.
+
+During the development of Emacs-21, Gerd Moellman worked on an incremental
+GC based on a write barrier implemented using the operating system's VM
+primitives.  It was never actually integrated into any release, tho.
+He himself did not push for it even while he was maintainer, and there was
+generally not a strong interest for it.  Its main interest was to reduce the
+duration of GC pauses, but these are rarely problematic.  Its main problems
+were that it increased the proportion of time spent in the GC, and that it
+introduced various portability issues because it relied on operating system
+primitives which are not well standardized.
+
+During 2003, Dave Love worked on replacing Emacs's GC with Boehm's
+conservative GC.  The effort went far enough to get a usable Emacs but it
+was never completed, mostly because the early performance results were
+disappointing.  It also showed that such a replacement is non-trivial.
+The first issue is that various parts of Emacs's code assume that
+a collection can only occur during \Elisp{} code execution and not during
+heap allocation, and of course those assumptions are not explicitly recorded
+in the code.  The second issue is that Emacs currently implements various
+forms of ad-hoc weak references which need to be adapted to the more
+%% FIXME: Is it worth going though the details of hash-tables's weakness
+%% and markers's weakness (and their removal from undo lists)?
+standard forms of weak references.
+
 
 \section{Alternative Implementations}
 
