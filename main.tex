@@ -104,8 +104,6 @@ Section~\ref{sec:conclusion}.
 \section{Prehistory}
 \label{sec:prehistory}
 
-%% Mocklisp, Maclisp, Scheme, TECO's language?
-
 While Emacs's original inception was as a set of macros for the TECO
 editor, it had no high-level extension language.  Arguably, the
 strongest influences for Emacs Lisp were Gosling Emacs's Mock Lisp and
@@ -115,7 +113,7 @@ MacLisp.
 
 Several early incarnations of Emacs were written in Lisp, notably on
 the Lisp Machine (called \textit{EINE} for ``EINE Is Not EMACS'') by
-Dan Weinreb and in MacLisp~\cite{Moon1974} by Bernie Greenberg in
+Dan Weinreb and in MacLisp~\cite{Moon1974,Pitman1983} by Bernie Greenberg in
 1978~\cite{Stallman2002}.  The ensuing possibilities for extending the
 editor was attractive to Richard Stallman, who wanted to write a new
 widely available version.  As a result, Emacs Lisp is a direct
@@ -193,37 +191,87 @@ influence on the \Elisp{} language:
   mark\&sweep garbage collector, and why its main execution engine is
   a simple bytecode interpreter.
 \end{itemize}
+%
+% FIXME: Section organizaetion
 
-\subsection{Base language}
+\subsection{Language design}
 
-% Compared to MacLisp:
-% No DO
-% No LOOP, RETURN, GO
-% CATCH, THROW
-% UNWIND-PROTECT
+The base language of Emacs Lisp started out as a straightforward of
+MacLisp~\ref{Moon1974,Pitman1983}.
 
-\subsection{Error handling}
+Many basic special forms are identical: (\texttt{defun},
+\texttt{defvar}, \texttt{defmacro} \texttt{let}, \texttt{let*},
+\texttt{cond}, \texttt{if}, \texttt{catch}, \texttt{throw},
+\texttt{unwind-protect}.  So are basic data structures: symbols,
+\texttt{nil}, cons cells, arrays, and many familiar Lisp
+functions.
+
+A symbol had an associated \texitt{property list}, essentially a
+dictionary mapping property names (also symbols) to values.
+
+Like MacLisp, \Elisp{} was (and still is) a
+Lisp-2~\cite{SteeleGabriel1993}.  The namespaces for functions and
+``ordinary values'' are separate, and to call a function bound to a
+variable, a program must use \texttt{funcall}.  Also, symbols can be
+used as function values.
+
+Some specialized control structures were missing in the original
+\Elisp{}, among them the \texttt{do} loop construct, and the
+accompanying \texttt{return} and \texttt{go} forms for non-local
+control transfer.
+
+% FIXME: Overview over coming subsubsections
+
+\subsubsection{Error handling}
+\label{sec:error-handling}
+
+One departure in \Elisp{} from MacLisp is error handling.  MacLisp's
+error-handling system was quite primitive, and had poor separation of
+signalling and handling~\cite{Pitman2001}.  \Elisp{} took inspiration
+from developments elsewhere in the Lisp community and featured a
+\texitt{condition system}.  The \Elisp{} condition system establishes
+a protocol between code signalling an exceptional situation and code
+handling it.
+
+The \texttt{signal} function takes an \texttt{ERROR-SYMBOL}
+classifying the exceptional situation and an additional \texttt{DATA}
+argument.  An error symbol is a symbol with an
+\texttt{error-conditions} property that is a list of condition names.
+An invocation of \texttt{signal} escapes to the most recent active use
+of \texttt{conditio-case}, which dispatches on the condition name.
+
+These condition names can be used to dispatch on the condition with
+the \texttt{condition-case} form which specifies a handler.  Emacs
+comes with a set of standard errors, establishing a protocol between
+signalling and handling code.
+
+\subsubsection{Buffer-local variables}
+\label{sec:buffer-local-variables}
 
 FIXME
 
-\subsection{Buffer-local variables}
+\subsubsection{Hooks}
+\label{sec:hooks}
 
 FIXME
 
-\subsection{Hooks}
+\subsubsection{Strings}
 
-FIXME
+FIXME Stefan
+
+For details on text encoding, see Section~\ref{sec:character-representation}
 
 \subsection{Implementation}
 
 FIXME
+
+\subsubsection{Byte-code interpreter}
 
 %% FIXME: TODO
 %% ** Byte-code interpreter optimisation
 %% *** IIRC there was a round of micro-optimisation in the XEmacs interpreter
 %% *** threaded implementation (using gcc's computed gotos)
 %% ** Bootstrap?
-%% ** (portable)dumper
 %% ** C FFI
 %% ** JIT compiler attempts
 %% ** Byte code changes
@@ -578,6 +626,7 @@ also used opaque data types for case tables and input events, both of
 which retain transparent representations in Emacs to this day.
 
 \subsection{Character representation}
+\label{sec:character-representation}
 
 Another instance of a change in representation happened with the
 release of XEmacs 20, the first release of XEmacs with support for
