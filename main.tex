@@ -66,10 +66,13 @@
 
 \section{Introduction}
 
+FIXME!  I hate it when there's no text between \verb|\section| and
+\verb|\subsection|
+
 \subsection{Organization of This Paper}
 
 \Elisp{} has evolved in multiple strands and implementations over the
-years, and thus its evolution did happen along a single timeline.
+years, and thus its evolution did not happen along a single timeline.
 Moreover, some aspects evolved over long periods of time.  To avoid
 excessive interleaving of those aspects, we have organized the
 top-level structure of the paper into chronological eras.  Within an
@@ -79,16 +82,16 @@ era where it started.
 
 \subsection{Emacs Lisp as a Succession of Software Projects}
 
-We trace the overall evolution \Elisp{} in the software projects that
-implemented it. Its predecessors EINE (1976) and Multics Emacs (1978)
-were themselves written in Lisp.  Unix Emacs (also known as Gosling
-Emacs) (which appeared in 1981) included its own Lisp.  We briefly
-describe those predecessors in Section~\ref{sec:prehistory}.
+We trace the overall evolution of \Elisp{} in the software projects that
+implemented it.  Its predecessors EINE (1976) and Multics Emacs (1978) were
+themselves written in Lisp.  Unix Emacs (also known as Gosling Emacs), which
+appeared in 1981, was written in C but included its own Lisp-like language.
+We briefly describe those predecessors in Section~\ref{sec:prehistory}.
 
-Emacs as we know it today itself started in the early 1980s.  Its
+Emacs as we know it today itself appears to have started in early 1985.  Its
 development continued at a high pace until about 1991---described in
-Section~\ref{early-history}.  Around that time, it slowed down and
-room for Lucid Emacs, later renamed XEmacs, whose development of
+Section~\ref{early-history}.  Around that time, its development slowed down and
+was overtaken by Lucid Emacs, later renamed XEmacs, whose development of
 \Elisp{} we trace in Section~\ref{sec:xemacs}.  Eventually,
 development of Emacs picked up again, and both co-evolved until about
 2007.  We describe the relevant aspects of that evolution in
@@ -108,7 +111,7 @@ Section~\ref{sec:conclusion}.
 %% Mocklisp, Maclisp, Scheme, TECO's language?
 
 While Emacs's original inception was as a set of macros for the TECO
-editor, it had no high-level extensionsion language.  Arguably, the
+editor, it had no high-level extension language.  Arguably, the
 strongest influences for Emacs Lisp were Gosling Emacs's Mock Lisp and
 MacLisp.
 
@@ -156,6 +159,14 @@ Emacs in C, with an integrated Lisp interpreter.  Buffer manipulation
 and redisplay were written in efficient C, higher-level functionality
 in Lisp.
 
+Many extension and configuration languages start out ``small,'' with
+no ambition to grow into a full-fledged programming language.  TECO
+and Gosling Emacs featured small languages that were too weak to
+support the vision Richard Stallman had for Emacs.  Consequently,
+Stallman took inspiration from MacLisp, and \Elisp{} started as a real
+programming language with powerful abstraction facilities, thus
+foregoing Greenspun's tenth rule.
+
 %% FIXME: This is somewhat revisionist in the sense that some of those
 %% developments occurred before GNU and the FSF, so it's not clear exactly
 %% if those designs were driven by a desire for Freedom, or by just more
@@ -185,11 +196,16 @@ influence on the \Elisp{} language:
   mark\&sweep garbage collector, and why its main execution engine is
   a simple bytecode interpreter.
 \end{itemize}
-%
-TECO and Gosling Emacs featured small languages that were too weak to
-support this.  Consequently, Stallman took inspiration from MacLisp,
-and \Elisp{} started as a real programming language with powerful
-abstraction facilities, thus foregoing Greenspun's tenth rule.
+
+%% FIXME Mike: I don't think the above characteristics were part of the
+%% motivation to use a "real" language.  Instead, I think Richard had simply
+%% plenty of experience with real Lisp implementations to hate MockLisp's
+%% quirks and want to replace it with a real language.  So I re-introduced
+%% your previous paragraph instead, which I liked better.
+%%TECO and Gosling Emacs featured small languages that were too weak to
+%%support this.  Consequently, Stallman took inspiration from MacLisp,
+%%and \Elisp{} started as a real programming language with powerful
+%%abstraction facilities, thus foregoing Greenspun's tenth rule.
 
 \subsection{Implementation}
 
@@ -708,6 +724,7 @@ This issue is still being discussed with Emacs.
 %% motivation for this feature.
 %% FIXME Stefan: There's not a single use of this function, I think it
 %% was mainly there as a parallel to `buffer-modified-tick`.
+%% Oh! :-(
 
 % Strings have a modified-tick that is bumped every time a string
 % is modified in-place with `aset' or `fillarray'.  This is retrieved
