@@ -228,7 +228,10 @@ in Section~\ref{sec:lambda}.  Section~\ref{sec:strings} discusses the
 string representation (absent in MacLisp).
 MacLisp-style backquote reader syntax was only added later to \Elisp{}---see Section~\ref{sec:backquote}.
 An feature supporting easy extensibility was self-documentation
-through \textit{docstrings}, described in Section~\ref{sec:docstrings}.
+through \textit{docstrings}, described in
+Section~\ref{sec:docstrings}.
+Section~\ref{sec:interactive-functions} describes how Emacs ties
+functions to interactive commands.
 Section~\ref{sec:error-handling} describes \Elisp{}'s improvements
 over MacLisp's error handling.
 Section~\ref{sec:buffer-local-variables} describes buffer-local
@@ -301,7 +304,6 @@ string after the signature:
 (defun ignore (&rest _ignore)
   "Do nothing and return nil.
 This function accepts any number of arguments, but ignores them."
-  (interactive)
   nil)
 \end{alltt}
 %
@@ -309,6 +311,44 @@ This \textit{docstring} can be retrieved in various ways, in
 particular through the user interface.  While MacLisp did not have
 docstrings, notably Common Lisp~\cite{HyperSpec} also adopted them.  The exact
 genealogy between the two is unclear.
+
+\subsection{Interactive functions}
+\label{sec:interactive-functions}
+
+The most direct method to make a function implemented in \Elisp{}
+accessible to a user is to provide a keybinding for it.  This is not
+realistic for all functions, however---there are too many of them.
+
+A user can also invoke an function by typing \texttt{M-x}
+\textit{function-name}.  This only makes sense for a certain subset of
+all defined functions, namely \textit{interactive} functions, which
+are specially marked with an \texttt{interactive} form at the
+beginning of the body, like this:
+%
+\begin{verbatim}
+(defun forward-symbol (arg)
+  "Move point to the next position that is the end of a symbol.
+A symbol is any sequence of characters that are in either the
+word constituent or symbol constituent syntax class.
+With prefix argument ARG, do it ARG times if positive, or move
+backwards ARG times if negative."
+  (interactive "^p")
+  (if (natnump arg)
+      (re-search-forward "\\(\\sw\\|\\s_\\)+" nil 'move arg)
+    (while (< arg 0)
+      (if (re-search-backward "\\(\\sw\\|\\s_\\)+" nil 'move)
+          (skip-syntax-backward "w_"))
+      (setq arg (1+ arg)))))
+\end{verbatim}
+%
+The \texttt{interactive} form also has an optional string operand that
+regulates how such a function receives its arguments.  In the above
+example, \verb|p| means that the function accepts a \textit{prefix
+  argument}: The user can type \texttt{ESC} \textit{number} or
+\texttt{C-u} (to specify powers of 4) prior to invoking the function,
+and the number will be passed to the function as an argument, in this
+case as \texttt{arg}.  The \verb|^| (a more recent addition) has to do with
+region selection with a pressed shift key.
 
 \subsection{Error handling}
 \label{sec:error-handling}
