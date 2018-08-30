@@ -538,9 +538,8 @@ Of course, a limit of 256MB was not actually comfortable.
 
 XEmacs added a ``minimal-tagbits'' configure option with the release
 of XEmacs 21.0 in 1998, yielding 31-bit integers and a 1GB maximum
-file size.
-%% FIXME: Mention to where the mark bit was moved (I assume it just
-%% made cons cells into 3-word objects?).
+file size.  The mark bits movd to the object headers, which were also
+added to cons cells, making them 3-word objects.
 The mark bit was removed from the boxes, and the number of
 type tags was reduced to four: records (heap-allocated objects,
 characters, even and odd fixnums.)  This became default with XEmacs
