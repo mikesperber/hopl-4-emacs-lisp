@@ -222,7 +222,21 @@ Some specialized control structures were missing in the original
 accompanying \texttt{return} and \texttt{go} forms for non-local
 control transfer.
 
-Interestingly, \texttt{lambda} was not technically part of the \Elisp{}
+This section discusses some notable differences from and additions to
+MacLisp.  Lambda expressions worked slightly differently, as discussed
+in Section~\ref{sec:lambda}.  Section~\ref{sec:strings} discusses the
+string representation (absent in MacLisp).
+Section~\ref{sec:error-handling} describes \Elisp{}'s improvements
+over MacLisp's error handling.
+Section~\ref{sec:buffer-local-variables} describes buffer-local
+variables, which tie the language to the editor.  One important
+pragmatic aspect of the use of the language was extensibility of
+existing code via hooks, discussed in Section~\ref{sec:hooks}.
+
+\subsection{Lambda}
+\label{sec:lambda}
+
+Interestingly (unlike MacLisp), \texttt{lambda} was not technically part of the \Elisp{}
 language until around 1991 when it was added as a macro, early during the
 development of Emacs-19.  In Emacs-18, anonymous functions were written
 as quoted values of the form:
@@ -233,7 +247,14 @@ While the \texttt{lambda} macro has made this quote unnecessary for almost
 30 years now, there is still a lot of \Elisp{} code out there following
 this practice.
 
-% FIXME: Overview over coming subsubsections
+\subsection{Strings}
+\label{sec:strings}
+
+% FIXME Stefan
+
+For details on text encoding, see Section~\ref{sec:character-representation}
+
+% Note: No text properties in strings in XEmacs
 
 \subsection{Error handling}
 \label{sec:error-handling}
@@ -345,11 +366,6 @@ survived.\footnote{In 1992, the \texttt{advice.el} package was added
   allowed attaching code to functions even if they do not run hooks.
   FIXME Stefan: nadvice?}
 
-\subsection{Strings}
-
-FIXME Stefan
-
-For details on text encoding, see Section~\ref{sec:character-representation}
 
 \section{Base language Implementation}
 \label{sec:base-language-implementation}
