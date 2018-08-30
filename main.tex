@@ -328,6 +328,8 @@ made local to any buffer.
 Over the years many bugs were fixed in the implementation of let-binding
 buffer-local variables.  The most famous one was fixed in Emacs-21.1.
 %% FIXME: When did it get fixed in XEmacs?
+%% Mike says: I don't see that it was ever "fixed".  What's the bug
+%% anyway - any behavior I can imagine seems surprising to some.
 This bug affected code like
 \begin{verbatim}
   (let ((buffer-file-name "/home/rms/.emacs"))
