@@ -652,10 +652,15 @@ standard forms of weak references.
 %% it would be interesting (at least for me, but likely for the other
 %% readers as well ;-) to expand a bit on this, e.g. what were the
 %% motivations and how did it work out in practice (is it used in all
-%% builds, is its performance competitive, known cases where it shines, ...).
+%% builds, is its performance competitive, known cases where it
+%% shines, ...).
+%% FIXME Stefan: better?
+In XEmacs, GC pauses continued to be a perceived problem.
 In 2005, Marcus Crestani developed an incremental collector for
 XEmacs, which was released with XEmacs 21.5.21 in
-2005~\cite{Crestani2005}.
+2005~\cite{Crestani2005}, which soon was turned on by default.  It
+eliminates GC pauses from the user experience, and its asymptotic
+performance is competitive with the old collector.
 
 %% FIXME: TODO
 %% * Language & Implementation Overview
