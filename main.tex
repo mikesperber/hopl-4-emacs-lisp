@@ -1300,11 +1300,9 @@ analysis which, instead of trying to find the places where dynamic scoping is
 needed, tries to find those bindings for which lexical scoping would not
 change the resulting semantics.  This tool could have been used to
 mechanically convert \Elisp{} packages to a lexically scoped version of
-\Elisp{}, while preserving the semantics.  But that did not happen.
-The reasons for that are unclear, but the lack of an existing lexically
-scoped version of \Elisp{} to target was probably a big part of it, and
-doubts over whether this approach was practical probably dissuaded other
-people from implementing such a lexically scoped version of \Elisp{}.
+\Elisp{}, while preserving the semantics.  The plan with this approach
+was to facilitate moving \Elisp{} code to Scheme eventually, but the
+overall project was too large to ever be realized.
 
 Around 2002, Miles Bader started working on a branch of Emacs with support
 for lexical scoping.  His approach to the problem was to bite the bullet and
