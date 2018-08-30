@@ -368,13 +368,26 @@ survived.\footnote{In 1992, the \texttt{advice.el} package was added
   allowed attaching code to functions even if they do not run hooks.
   FIXME Stefan: nadvice?}
 
-
 \section{Base language Implementation}
 \label{sec:base-language-implementation}
 
-FIXME
+At least initially, the \Elisp{} language was defined by its sole
+implementation.  Various design aspects had impact on the users of the
+language, and this section discusses some of them.
+Section~\ref{sec:byte-code-interpreter} describes the byte-code
+interpreter.  Section~\ref{sec:data-representation} describes the
+essential data representation of the implementation.  The following
+sections touch on other issues related to memory management:
+Section~\ref{sec:stack-scanning} describes the evolution of scanning
+GC roots. Section ~\ref{sec:heap-xemacs} describes changes in XEmacs
+to simplify heap management.  Section~\ref{sec:tag-bits} describes
+efforts in Emacs and XEmacs to reduce the tag bits.  Improvements to
+the GC algorithm are described in Section~\ref{sec:gc-algorithms}.
+Finally, Section~\ref{sec:image-dumping} describes the
+image-dumping mechanism in Emacs and XEmacs and how it changed over time.
 
 \subsection{Byte-code interpreter}
+\label{sec:byte-code-interpreter}
 
 %% FIXME: TODO
 %% ** Byte-code interpreter optimisation
@@ -416,7 +429,8 @@ before that, a byte-compiled function looked like:
 %% byte-compiled objects added some time between Emacs-18.59 and Emacs-19.7
 %% dynamically-loaded bytecode added in Emacs-19.29.
 
-\section{Data representation and memory management}
+\subsection{Data representation and memory management}
+\label{sec:data-representation}
 
 Emacs started with a data representation of its boxed data based on 32bit
 words.  Those used a 7bit tag located in the most significant bits, 1 extra
@@ -464,6 +478,8 @@ caught up with Emacs 19.30 with the release of XEmacs 19.13, also in
 1995.
 
 \subsection{Scanning the stack}
+\label{sec:stack-scanning}
+
 Until Emacs-21, the mark phase of the GC was precise: the global roots were
 explicitly registered, the GC knew all the types of Lisp objects and where
 were the fields that could contain references, and the roots from the stack
@@ -502,6 +518,7 @@ scheme was kept in use on some rare systems until Emacs-25.1, where all the
 register/unregister code of stack references could finally be removed.
 
 \subsection{Heap management in XEmacs}
+\label{sec:heap-xemacs}
 
 XEmacs has kept precise GC, and impleemented a number of improvements
 in its memory management.  In particular, Markus Kaltenbach and Marcus
@@ -517,6 +534,7 @@ In the process of these GC improvements, Crestani and Michael Sperber
 also added \emph{ephemerons} to \Elisp{}~\cite{Hayes1997}.
 
 \subsection{Squeezing the tag bits}
+\label{sec:tag-bits}
 
 Of course, a limit of 256MB was not actually comfortable.
 
@@ -597,6 +615,8 @@ improved sufficiently to be competitive with the special
 %% a chance that this compilation option won't be needed any more!
 
 \subsection{New GC algorithms}
+\label{sec:gc-algorithms}
+
 During the learly years of Emacs, the main complaints from users w.r.t the
 simple mark\&sweep algorithm were the GC pauses.  These were solved very
 simply in Emacs-19.31 by removing the messages that indicated when GC was in
@@ -643,11 +663,8 @@ XEmacs, which was released with XEmacs 21.5.21 in
 %% FIXME: TODO
 %% * Language & Implementation Overview
 %% ** ... usual stuff ...
-%% ** Buffer-local variables
-%% ** Comparison to other Lisps of the time
 %% ** Language implementation
 %% ** Interpreter
-%% ** Image dumping
 %% ** Byte-code architecture (or should that go XEmacs-period?)
 
 \subsection{Image dumping}
