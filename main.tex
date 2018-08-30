@@ -788,7 +788,8 @@ S-expression representation for keymaps.
 %% In terms of possible representation, this is not very different from
 %% current Emacs, although the code is now a lot more featureful and
 %% robust, especially w.r.t inheritance.
-In Emacs 19, a keymap was
+%% FIXME Stefan: Tried to clean up the wording.
+In Emacs prior to version 19, a keymap was
 simply a two-element list whose car is the symbol \texttt{keymap} and
 whose second element is a vector, indexed by character code.
 %% FIXME: The May 6 1991 version of the code already used reorder_modifiers
@@ -802,14 +803,9 @@ whose second element is a vector, indexed by character code.
 %% for it being quite messy/tricky).
 This
 representation did not gracefully extend to GUI-based input models,
-which distinguish between, say, backspace and Control-H.\footnote{One
-  problem with early Emacsen especially for early users was that
-  %% FIXME: Quite so, but this only occurred under ttys, not under GUIs,
-  %% because the issue was that the terminal did send C-h when the user
-  %% hit Backspace, so it was not actually related to keymaps!
-  Control-H would trigger help instead of deleting the character in
-  front of the cursor.}
-
+which distinguish between, say, backspace and Control-H.
+In Emacs-19, a keymap list could contain more elements beyond that
+initial vector.
 The current representation for keymaps is much richer---here is an
 example~\cite{ELispManual2018}:
 %
@@ -833,9 +829,11 @@ example~\cite{ELispManual2018}:
 This creates problems with software evolution: While Emacs offered
 constructors and mutators for keymaps, Emacs code could, in principle,
 just use the tools for manipulating S-expressions for creating
-them---\texttt{cons}, \texttt{rplaca}, \texttt{rplacd} etc.  This code
-would break in the face of the representation change, but would not
-immediately trigger an error.
+them---\texttt{cons}, \texttt{rplaca}, \texttt{rplacd} etc.
+Emacs-19 tried to keep such code working to some extent by merely
+extending the previous list representation.
+Eventually howeevr such code would break in the face of representation
+changes, but would not immediately trigger an error.  
 
 The developers Lucid Emacs of Lucid Emacs foresaw this problem, and
 made keymaps into on opaque datatype, forbidding manipulation via the
