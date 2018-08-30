@@ -1,7 +1,7 @@
 \documentclass[format=acmsmall, review=false, screen=true]{acmart}
 
 \usepackage{booktabs} % For formal tables
-
+\usepackage{alltt}
 \usepackage[utf8]{inputenc}
 
 % Metadata Information
@@ -319,51 +319,6 @@ where the current buffer was different when the let-binding is entered from
 when it is left\footnote{\texttt{set-buffer} is like
   \texttt{with-current-buffer} except that it is not scoped, so it takes
   effect until the next \texttt{set-buffer}.}
-
-\subsubsubsection{Terminal-local and frame-local variables}
-
-%% FIXME Mike: Add XEmacs's view to this.  Specifiers?
-
-Emacs calls GUI windows \emph{frames} and as with buffers, Emacs
-maintains a reference to the \emph{current frame} which determines the
-implicit target of GUI operations.
-
-In 1995, Emacs-19.29 added the ability to have \emph{frames} on several
-different X11 servers at the same time.  On that occasion, it also added the
-notion of \emph{terminal-local} variables, which are variables which take
-different values depending on the X11 server (the \emph{terminal}) to which
-the current frame belongs.  The set of terminal-local variables is small and
-predefined in the C code; they are mostly used internally to keep track of
-things like keyboard state; there is no way for \Elisp{} programs to
-create others.
-
-Then in 1998 Emacs-20 added the ability to set a frame-local value to
-a variable.  Contrary to terminal-local variables, any variable can be made
-frame-local, and additionally, a variable can be both frame-local and
-buffer-local at the same time.
-
-%% FIXME: Emacs-22.1 added variable aliases (introduced earlier in XEmacs).
-
-In 2008, during the development of Emacs-23.1 several bugs were found and
-fixed in corner case interactions between let-bindings and buffer-local and
-frame-local variables (for example, when a variable is made buffer-local
-between the moment a let-binding is entered and when it is left), and at
-that occasion it was decided that variables should not be allowed to be both
-buffer-local and frame-local.
-
-The work on those bugs made it clear that the implementation of buffer-local
-and frame-local bindings was too hard to follow, so in 2010 the
-implementation was reworked to make the different possible states more
-explicit in the code, and at the same time it was decided that frame-local
-variables should be deprecated: while buffer-local variables are used
-extensively in \Elisp{} and replacing them with explicit accesses to fields
-or properties of buffer objects would make \Elisp{} code heavier,
-frame-local variables were not in widespread use and could easily be
-replaced by more traditional use of accessors to frame properties, making it
-hard to justify the extra complexity in the implementation.  So in 2012 with
-the release of Emacs-24.1, it became impossible to let-bind frame-local
-variables any more, and in 2018 with the release of Emacs-26.1 frame-local
-variables have been removed altogether.
 
 \subsubsection{Hooks}
 \label{sec:hooks}
@@ -1063,7 +1018,91 @@ This issue is still being discussed with Emacs.
 
 
 %% How did XEmacs bootstrap?
-%% Strings with text-properties?
+%% Strings with text-properties? No.
+
+\subsection{Terminal-local and frame-local variables, specifiers}
+
+In 1995, Emacs-19.29 added the ability to have \emph{frames} on
+several different X11 servers at the same time.  XEmacs evolved
+similarly.  This led to a requirement that certain aspects of display
+should be local to a frame or an output device.  Emacs calls GUI
+windows \emph{frames} and as with buffers, Emacs maintains a reference
+to the \emph{current frame} which determines the implicit target of
+GUI operations.  XEmacs also maintained \textit{devices} as part of
+the display context, to distinguish, say, between different TTYs and
+different X11 servers.
+
+As buffer-local variables already allow settings that are sentitive to
+context, Emacs furthered the analog by adding the notion of
+\emph{terminal-local} variables, which are variables which take
+different values depending on the X11 server (the \emph{terminal}) to
+which the current frame belongs.  The set of terminal-local variables
+is small and predefined in the C code; they are mostly used internally
+to keep track of things like keyboard state; there is no way for
+\Elisp{} programs to create others.
+
+XEmacs chose a different route: Starting in 1995, Ben Wing (working
+from a prototype by Chuck Thompson) implemented
+\textit{specifiers}. which are objects that manage properties that
+depend on a generalized notion of \textit{display
+  context}~\cite{XEmacsLispRef1998}.  The first prototype
+implementation was released with XEmacs 19.12.
+
+A specifier's value (its \textit{instance}) depends on its
+\textit{locale}, which can be buffer, a window, a frame, a device, or a MULE
+character set, or certain properties of these.  For example,
+\texttt{default-toolbar} is a specifier that could be created with:
+%
+\begin{alltt}
+(defvar default-toolbar (make-specifier 'toolbar))
+\end{alltt}
+%
+(The \verb|'toolbar| is a type argument that the specifier system uses
+for validation.
+
+\Elisp{} code could retrieve a specifier's value (its
+\textit{instantiator}) like this:
+%
+\begin{alltt}
+(specifier-instance default-toolbar)
+\end{alltt}
+%
+Code can modify a specifier with a value that is buffer-local as
+follows:
+%
+\begin{alltt}
+(set-specifier default-toolbar
+               <value>
+               (current-buffer))
+\end{alltt}
+%
+Emacs-20 in 1998 added the ability to set variable to a frame-local
+value.  Contrary to terminal-local variables, any variable can be made
+frame-local, and additionally, a variable can be both frame-local and
+buffer-local at the same time.
+
+%% FIXME: Emacs-22.1 added variable aliases (introduced earlier in XEmacs).
+
+In 2008, during the development of Emacs-23.1 several bugs were found and
+fixed in corner case interactions between let-bindings and buffer-local and
+frame-local variables (for example, when a variable is made buffer-local
+between the moment a let-binding is entered and when it is left), and at
+that occasion it was decided that variables should not be allowed to be both
+buffer-local and frame-local.
+
+The work on those bugs made it clear that the implementation of buffer-local
+and frame-local bindings was too hard to follow, so in 2010 the
+implementation was reworked to make the different possible states more
+explicit in the code, and at the same time it was decided that frame-local
+variables should be deprecated: while buffer-local variables are used
+extensively in \Elisp{} and replacing them with explicit accesses to fields
+or properties of buffer objects would make \Elisp{} code heavier,
+frame-local variables were not in widespread use and could easily be
+replaced by more traditional use of accessors to frame properties, making it
+hard to justify the extra complexity in the implementation.  So in 2012 with
+the release of Emacs-24.1, it became impossible to let-bind frame-local
+variables any more, and in 2018 with the release of Emacs-26.1 frame-local
+variables have been removed altogether.
 
 \section{Post-XEmacs}           % 2007-now ?
 \label{sec:post-xemacs}
