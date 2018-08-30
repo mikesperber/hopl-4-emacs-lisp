@@ -227,6 +227,8 @@ MacLisp.  Lambda expressions worked slightly differently, as discussed
 in Section~\ref{sec:lambda}.  Section~\ref{sec:strings} discusses the
 string representation (absent in MacLisp).
 MacLisp-style backquote reader syntax was only added later to \Elisp{}---see Section~\ref{sec:backquote}.
+An feature supporting easy extensibility was self-documentation
+through \textit{docstrings}, described in Section~\ref{sec:docstrings}.
 Section~\ref{sec:error-handling} describes \Elisp{}'s improvements
 over MacLisp's error handling.
 Section~\ref{sec:buffer-local-variables} describes buffer-local
@@ -286,6 +288,27 @@ was written in early \Elisp{} as:
 %
 The releases of Emacs-19.28 and XEmacs 19.12 finally added the proper
 reader support to generate the latter version from the first.
+
+\subsection{Docstrings}
+\label{sec:docstrings}
+
+An important feature of Emacs from the start was the idea of
+\textit{self-documentation}~\cite{Stallman1981}.  To that end, every
+definition form in \Elisp{} can include documentation in the form of a
+string after the signature:
+%
+\begin{alltt}
+(defun ignore (&rest _ignore)
+  "Do nothing and return nil.
+This function accepts any number of arguments, but ignores them."
+  (interactive)
+  nil)
+\end{alltt}
+%
+This \textit{docstring} can be retrieved in various ways, in
+particular through the user interface.  While MacLisp did not have
+docstrings, notably Common Lisp also adopted them.  The exact
+genealogy between the two is unclear.
 
 \subsection{Error handling}
 \label{sec:error-handling}
