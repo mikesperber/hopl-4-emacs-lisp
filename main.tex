@@ -1003,20 +1003,6 @@ This issue is still being discussed with Emacs.
 % ============================================
 
 
-% *** Basic Lisp Stuff
-% --------------------
-
-% Common-Lisp backquote syntax is recognized.  For example, the old
-% expression
-
-% (` (a b (, c)))
-
-% can now be written
-
-% `(a b ,c)
-
-% The old backquote syntax is still accepted.
-
 % The new function `type-of' returns a symbol describing the type of a
 % Lisp object (`integer', `string', `symbol', etc.)
 
@@ -1052,21 +1038,6 @@ This issue is still being discussed with Emacs.
 % New macro `push' destructively adds an element to the beginning of a
 % list.  New macro `pop' destructively removes and returns the first
 % element of a list.
-
-
-
-
-
-% * Lisp and internal changes in XEmacs 21.4
-% ==========================================
-
-% *** Instead of being lists of 256-character strings, case tables are
-% now opaque objects.  The interface to access them is almost the same,
-% except it now works for international characters, and you can set the
-% case pairs using `put-case-table-pair'.  `set-case-table' and friends
-% still support the old list/string based interface for backward
-% compatibility.
-
 
 %% How did XEmacs bootstrap?
 %% Strings with text-properties? No.
