@@ -908,14 +908,6 @@ characters an opaque type additionally discouraged the practice.
 % on the underlying implementation of keymaps, it will not.
 
 
-% ** Major Differences Between 19.13 and 19.14
-% ============================================
-
-% -- Common-Lisp support (the CL package) is now dumped standard
-%    into XEmacs.  No more need for (require 'cl) or anything
-%    like that.
-
-
 \section{Emacs/XEmacs co-evolution}
 \label{sec:coevolution}
 
@@ -1457,6 +1449,9 @@ to be sufficiently popular to move them into \Elisp{} proper:
   The resistance against those was mostly one of style, since they tend to
   lead to poorly readable code.
 \end{itemize}
+%
+XEmacs took the easy route on this and loaded \texttt{cl.el} into the
+standard XEmacs image, starting with XEmacs 19.14 in 1996.
 
 \subsection{CL-lib}          %Released in Emacs-24.3
 
