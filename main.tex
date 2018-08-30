@@ -202,6 +202,9 @@ Many basic special forms are identical: (\texttt{defun},
 \texttt{nil}, cons cells, arrays, and many familiar Lisp
 functions.
 
+The language used dynamic scoping where the latest binding of a variable is
+simply stored in the \emph{value slot} of the corresponding symbol object,
+resulting in simple and efficient variable lookups and let-bindings.
 Symbols could be used to refer to variables.  In particular, the
 \texttt{set} function, which performed assignment, accepted the
 \emph{name} of a variable as its argument.  A symbol had an associated
@@ -218,6 +221,17 @@ Some specialized control structures were missing in the original
 \Elisp{}, among them the \texttt{do} loop construct, and the
 accompanying \texttt{return} and \texttt{go} forms for non-local
 control transfer.
+
+Interestingly, \texttt{lambda} was not technically part of the \Elisp{}
+language until around 1991 when it was added as a macro, early during the
+development of Emacs-19.  In Emacs-18, anonymous functions were written
+as quoted values of the form:
+\begin{verbatim}
+  '(lambda (..ARGS..) ..BODY..)
+\end{verbatim}
+While the \texttt{lambda} macro has made this quote unnecessary for almost
+30 years now, there is still a lot of \Elisp{} code out there following
+this practice.
 
 % FIXME: Overview over coming subsubsections
 
@@ -249,27 +263,107 @@ the \texttt{condition-case} form which specifies a handler.  Emacs
 comes with a set of standard errors, establishing a protocol between
 signalling and handling code.
 
+%% FIXME: I think we have a problem with the nesting: error-handling and
+%% buffer-local vars should be subsections, not subsubsections.
+
 \subsubsection{Buffer-local variables}
 \label{sec:buffer-local-variables}
 
-%% FIXME: Expand on this, including frame-local vars
+Buffer-local variables are the prominent feature marking \Elisp{} as the
+extension language of a text editor.  In Emacs, \emph{buffers} are objects
+that store the contents of a file while it's being edited; additionally to
+the file's content, those buffers store a lot of auxiliary information such
+as the name of the associated file, the rules to use to highlight its
+contents, the editing mode to use, the character encoding used, ...
+Additionally, there is a global reference managed by Emacs called the
+\emph{current buffer}, that determines the implicit target of
+editing operations.
 
-Buffer-local variables are the prominent feature marking \Elisp{} as
-the extension language of a text editor: Calling
-\texttt{make-variable-buffer-local} on the name of a global variable
-makes it \emph{buffer-local}.  This associates the value of the
-variable with the \emph{current buffer}, a global reference managed
-by Emacs that determines the implicit target of editing operations.
-An assignment to a buffer-local variable only affects dereferences
-with the same current buffer in effect.  In the absence of such an
-assignment, a buffer-local variable dereferences its special
-\emph{default value}.
+Making a variable \emph{buffer-local} associates the value of the variable
+with the \emph{current buffer}.  An assignment to a buffer-local variable
+only affects dereferences with the same current buffer in effect.
+Any variable can be made local to any buffer, so variables can take
+different values in different buffer.  For example, the variable
+\texttt{buffer-file-name} keeps the name of the file associated with the
+corresponding buffer.  This variable typically has a different value in
+every buffer.  In the absence of such a buffer-local assignment, a variable
+is said to have its \emph{default} or \emph{global} value.
 
-It is also possible to call \texttt{make-local-variable} on a variable
-name, which makes the variable have a local variable on the buffer
-current at the time of the \texttt{make-local-variable} invocation.
-Moreover, Emacs features a small number of \emph{terminal-local}
-variables.
+Variables can be both buffer-local and dynamically bound at the same time:
+\begin{verbatim}
+  (let ((buffer-file-name "/home/rms/.emacs"))
+    (with-current-buffer "some-other-buffer"
+      buffer-file-name))
+\end{verbatim}
+This example will not return \texttt{"/home/rms/.emacs"} but the
+buffer-local value of \texttt{buffer-file-name} in the buffer
+\texttt{"some-other-buffer"} instead because \texttt{with-current-buffer}
+temporarily changes which buffer is current.
+
+The presence of buffer-local values significantly complicates the
+implementation of looking up, setting, and let-binding a variable, so the
+code is optimized for the ``normal'' case of variables that have not been
+made local to any buffer.
+
+Over the years many bugs were fixed in the implementation of let-binding
+buffer-local variables.  The most famous one was fixed in Emacs-21.1.
+%% FIXME: When did it get fixed in XEmacs?
+This bug affected code like
+\begin{verbatim}
+  (let ((buffer-file-name "/home/rms/.emacs"))
+    ...
+    (set-buffer other-buffer)
+    ...)
+\end{verbatim}
+where the current buffer was different when the let-binding is entered from
+when it is left\footnote{\texttt{set-buffer} is like
+  \texttt{with-current-buffer} except that it is not scoped, so it takes
+  effect until the next \texttt{set-buffer}.}
+
+\subsubsubsection{Terminal-local and frame-local variables}
+
+%% FIXME Mike: Add XEmacs's view to this.  Specifiers?
+
+Emacs calls GUI windows \emph{frames} and as with buffers, Emacs
+maintains a reference to the \emph{current frame} which determines the
+implicit target of GUI operations.
+
+In 1995, Emacs-19.29 added the ability to have \emph{frames} on several
+different X11 servers at the same time.  On that occasion, it also added the
+notion of \emph{terminal-local} variables, which are variables which take
+different values depending on the X11 server (the \emph{terminal}) to which
+the current frame belongs.  The set of terminal-local variables is small and
+predefined in the C code; they are mostly used internally to keep track of
+things like keyboard state; there is no way for \Elisp{} programs to
+create others.
+
+Then in 1998 Emacs-20 added the ability to set a frame-local value to
+a variable.  Contrary to terminal-local variables, any variable can be made
+frame-local, and additionally, a variable can be both frame-local and
+buffer-local at the same time.
+
+%% FIXME: Emacs-22.1 added variable aliases (introduced earlier in XEmacs).
+
+In 2008, during the development of Emacs-23.1 several bugs were found and
+fixed in corner case interactions between let-bindings and buffer-local and
+frame-local variables (for example, when a variable is made buffer-local
+between the moment a let-binding is entered and when it is left), and at
+that occasion it was decided that variables should not be allowed to be both
+buffer-local and frame-local.
+
+The work on those bugs made it clear that the implementation of buffer-local
+and frame-local bindings was too hard to follow, so in 2010 the
+implementation was reworked to make the different possible states more
+explicit in the code, and at the same time it was decided that frame-local
+variables should be deprecated: while buffer-local variables are used
+extensively in \Elisp{} and replacing them with explicit accesses to fields
+or properties of buffer objects would make \Elisp{} code heavier,
+frame-local variables were not in widespread use and could easily be
+replaced by more traditional use of accessors to frame properties, making it
+hard to justify the extra complexity in the implementation.  So in 2012 with
+the release of Emacs-24.1, it became impossible to let-bind frame-local
+variables any more, and in 2018 with the release of Emacs-26.1 frame-local
+variables have been removed altogether.
 
 \subsubsection{Hooks}
 \label{sec:hooks}
@@ -317,6 +411,31 @@ FIXME
 %% ** C FFI
 %% ** JIT compiler attempts
 %% ** Byte code changes
+
+Emacs has two execution engines for \Elisp: first it has a very simple
+interpreter written in C operating directly on the S-expression
+representation of the code.  But already in July 1985 Emacs-16.56 came with
+a \texttt{byte-code} function, which interpreted its string argument as
+a sequence of byte codes to execute, as well as a compiler, written in
+\Elisp{}, which translated \Elisp{} code to that byte-code language.
+
+While \Elisp{} is basically a ``run of the mill'' programming language, just
+with some specific functions tailored to the particular use of a text
+editor, this byte-code language is much less standard since it includes many
+byte codes corresponding to \Elisp{} primitives such as
+\texttt{forward-char}, \texttt{insert}, or \texttt{current-column}.
+
+While a systematic study would likely reveal that the operations that should
+deserve their own byte-code in modern \Elisp{} code are quite different, the
+byte-code language of Emacs has changed very little over the years.
+
+Around 1992, during the early development of Emacs-19, the implementation of
+the bytecode interpreter was rewritten, as was the compiler.  At the same
+time, a new object type for byte-compiled \Elisp{} functions was introduced;
+before that, a byte-compiled function looked like:
+\begin{verbatim}
+  (lambda (..ARGS..) (byte-code "..." ...))
+\end{verbatim}
 
 %% Early history:
 %% the `byte-code` function was already present in Emacs-16.56 (earliest
@@ -603,7 +722,7 @@ read byte-compiled code.  In parallel, Daniel Colascione worked on
 a different approach more like that of XEmacs's portable dumper.  The code
 was basically finished, but Emacs maintainers so far have not accepted it
 into the official release.  The main reason for that reluctance is that it
-trades off the brittle platform-dependence of the old unexec code with more
+trades off the brittle platform-dependence of the old unexec code for more
 code which partly duplicates some of the GC's code.
 
 \section{XEmacs period}         % 1992-2007 ?
