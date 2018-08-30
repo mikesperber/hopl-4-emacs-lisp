@@ -226,7 +226,7 @@ This section discusses some notable differences from and additions to
 MacLisp.  Lambda expressions worked slightly differently, as discussed
 in Section~\ref{sec:lambda}.  Section~\ref{sec:strings} discusses the
 string representation (absent in MacLisp).
-Backquote was only added later to \Elisp{}---see Section~\ref{sec:backquote}.
+MacLisp-style backquote reader syntax was only added later to \Elisp{}---see Section~\ref{sec:backquote}.
 Section~\ref{sec:error-handling} describes \Elisp{}'s improvements
 over MacLisp's error handling.
 Section~\ref{sec:buffer-local-variables} describes buffer-local
@@ -260,7 +260,24 @@ For details on text encoding, see Section~\ref{sec:character-representation}
 \subsection{Backquote}
 \label{sec:backquote}
 
-% FIXME
+Curiously, \Elisp{} did not until 1994 include the reader syntax for
+quasiquotation common to many other Lisps, including MacLisp~\cite{Bawden1999}.
+Instead, the special forms that came with quasiquotation---backquote
+(\verb|`|), unquote (\verb|,|) and unquote-splicing (\verb|,@|) were
+the names of special forms.   Thus, what is usually written as:
+%
+\begin{alltt}
+`(a b ,c)
+\end{alltt}
+%
+was written in early \Elisp{} as:
+%
+\begin{alltt}
+(` (a b (, c)))
+\end{alltt}
+%
+The releases of Emacs-19.28 and XEmacs 19.12 finally added the proper
+reader support to generate the latter version from the first.
 
 \subsection{Error handling}
 \label{sec:error-handling}
