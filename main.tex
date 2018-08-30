@@ -644,15 +644,18 @@ highly platform-specific C files that implemented a function called
 \texttt{unexec}.  The \texttt{unexec} function turns the running
 process back into an executable file.  However, the implementations of
 \texttt{unexec} have been hard to write and difficult to maintain.
-%% FIXME: "recently" should be made more precise.  Also IIRC
+%% FIXME: Also IIRC
 %% this change only breaks the particular way Emacs used to dump
 %% (more specifically it makes it "impossible" to unexec&restore a heap
 %% that contains data allocated with glibc's malloc, but Emacs
 %% already implemented a workaround by using its own malloc library
 %% before the dump and glibc's malloc library afterwards (that solution
 %% had been developed earlier for the Cygwin port, IIRC, tho
-%% I can't remember exactly what were the reason for that hack in Cygwin)).
-Moreover, the Glibc maintainers have recently published plans to
+%% I can't remember exactly what were the reason for that hack in
+%% Cygwin)).
+%% Mike says: Not sure if that changes anything.  We could could just
+%% elide the following sentence though:
+Moreover, the Glibc maintainers in 2016 published plans to
 make changes which would break this functionality.
 
 For XEmacs, in 1999, Olivier Galibert (based on initial work by Kyle
