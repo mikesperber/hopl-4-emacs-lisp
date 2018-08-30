@@ -81,9 +81,14 @@ themselves written in Lisp.  Unix Emacs (also known as Gosling Emacs), which
 appeared in 1981, was written in C but included its own Lisp-like language.
 We briefly describe those predecessors in Section~\ref{sec:prehistory}.
 
-Emacs as we know it today itself appears to have started in early 1985.  Its
-development continued at a high pace until about 1991---described in
-Section~\ref{sec:early-history}.  Around that time, its development slowed down and
+Emacs as we know it today itself appears to have started in early 1985.  
+Section~\ref{sec:early-history} describes the driving motivation for
+the early design and implementation of \Elisp.  The following Section
+\ref{sec:base-language-design} traces the evolution of the base
+language design, and Section \ref{sec:base-language-implementation}
+its implementation.
+Development continued at a high pace until about 1991.
+Around that time, its development slowed down and
 was overtaken by Lucid Emacs, later renamed XEmacs, whose development of
 \Elisp{} we trace in Section~\ref{sec:xemacs}.  Eventually,
 development of Emacs picked up again, and both co-evolved until about
@@ -183,10 +188,9 @@ influence on the \Elisp{} language:
   mark\&sweep garbage collector, and why its main execution engine is
   a simple bytecode interpreter.
 \end{itemize}
-%
-% FIXME: Section organization
 
-\subsection{Language design}
+\section{Base language design}
+\label{sec:base-language-design}
 
 The base language of Emacs Lisp started out as a straightforward
 variant of MacLisp~\cite{Moon1974,Pitman1983}.
@@ -231,7 +235,7 @@ this practice.
 
 % FIXME: Overview over coming subsubsections
 
-\subsubsection{Error handling}
+\subsection{Error handling}
 \label{sec:error-handling}
 
 % FIXME Stefan: I'm pretty sure this was not in the first version of
@@ -261,10 +265,7 @@ the \texttt{condition-case} form which specifies a handler.  Emacs
 comes with a set of standard errors, establishing a protocol between
 signalling and handling code.
 
-%% FIXME: I think we have a problem with the nesting: error-handling and
-%% buffer-local vars should be subsections, not subsubsections.
-
-\subsubsection{Buffer-local variables}
+\subsection{Buffer-local variables}
 \label{sec:buffer-local-variables}
 
 Buffer-local variables are the prominent feature marking \Elisp{} as the
@@ -318,7 +319,7 @@ when it is left\footnote{\texttt{set-buffer} is like
   \texttt{with-current-buffer} except that it is not scoped, so it takes
   effect until the next \texttt{set-buffer}.}
 
-\subsubsection{Hooks}
+\subsection{Hooks}
 \label{sec:hooks}
 
 One important aspect of the extensibility Stallman originally
@@ -344,17 +345,18 @@ survived.\footnote{In 1992, the \texttt{advice.el} package was added
   allowed attaching code to functions even if they do not run hooks.
   FIXME Stefan: nadvice?}
 
-\subsubsection{Strings}
+\subsection{Strings}
 
 FIXME Stefan
 
 For details on text encoding, see Section~\ref{sec:character-representation}
 
-\subsection{Implementation}
+\section{Base language Implementation}
+\label{sec:base-language-implementation}
 
 FIXME
 
-\subsubsection{Byte-code interpreter}
+\subsection{Byte-code interpreter}
 
 %% FIXME: TODO
 %% ** Byte-code interpreter optimisation
@@ -396,7 +398,7 @@ before that, a byte-compiled function looked like:
 %% byte-compiled objects added some time between Emacs-18.59 and Emacs-19.7
 %% dynamically-loaded bytecode added in Emacs-19.29.
 
-\subsection{Data representation and memory management}
+\section{Data representation and memory management}
 
 Emacs started with a data representation of its boxed data based on 32bit
 words.  Those used a 7bit tag located in the most significant bits, 1 extra
@@ -443,7 +445,7 @@ giving Emacs Lisp 28-bit integers and a 28-bit address space, and
 caught up with Emacs 19.30 with the release of XEmacs 19.13, also in
 1995.
 
-\subsubsection{Scanning the stack}
+\subsection{Scanning the stack}
 Until Emacs-21, the mark phase of the GC was precise: the global roots were
 explicitly registered, the GC knew all the types of Lisp objects and where
 were the fields that could contain references, and the roots from the stack
@@ -481,7 +483,7 @@ scanning, which proved competitive with the previous scheme.  The previous
 scheme was kept in use on some rare systems until Emacs-25.1, where all the
 register/unregister code of stack references could finally be removed.
 
-\subsubsection{Heap management in XEmacs}
+\subsection{Heap management in XEmacs}
 
 XEmacs has kept precise GC, and impleemented a number of improvements
 in its memory management.  In particular, Markus Kaltenbach and Marcus
@@ -496,7 +498,7 @@ individually based on size.
 In the process of these GC improvements, Crestani and Michael Sperber
 also added \emph{ephemerons} to \Elisp{}~\cite{Hayes1997}.
 
-\subsubsection{Squeezing the tag bits}
+\subsection{Squeezing the tag bits}
 
 Of course, a limit of 256MB was not actually comfortable.
 
@@ -576,7 +578,7 @@ improved sufficiently to be competitive with the special
 %% FIXME: With the addition of bignums in the upcoming Emacs-27, there's
 %% a chance that this compilation option won't be needed any more!
 
-\subsubsection{New GC algorithms}
+\subsection{New GC algorithms}
 During the learly years of Emacs, the main complaints from users w.r.t the
 simple mark\&sweep algorithm were the GC pauses.  These were solved very
 simply in Emacs-19.31 by removing the messages that indicated when GC was in
@@ -630,7 +632,7 @@ XEmacs, which was released with XEmacs 21.5.21 in
 %% ** Image dumping
 %% ** Byte-code architecture (or should that go XEmacs-period?)
 
-\subsubsection{Image dumping}
+\subsection{Image dumping}
 \label{sec:image-dumping}
 
 An important feature of \Elisp{} has been the \texttt{dump-emacs}
