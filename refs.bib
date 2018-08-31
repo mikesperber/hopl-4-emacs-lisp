@@ -1,5 +1,7 @@
 @string{Sperber = { Michael Sperber }}
-
+@string{Appel	= { Andrew W. Appel }}
+@string{Tolmach = { Andrew Tolmach }}
+@string{Pitman =  { Kent M. Pitman }}
 
 @InProceedings{Neubauer01,
   author =       {Matthias Neubauer and}# Sperber,
@@ -32,24 +34,6 @@
                   be tolerably efficient.}
 }
 
-@string{ELS	= {European Lisp Symposium}}
-@string{ICFP	= {International Conference on Functional Programming}}
-
-@proceedings{ELS14,
-  title =        ELS,
-  booktitle =    ELS,
-  year =         2014
-}
-
-@Proceedings{ICFP01,
-  title = 	 ICFP,
-  booktitle =	 ICFP,
-  year = 	 2001,
-  key =		 {ICFP'01},
-  month =	 sep,
-  address =  	 {Florence, Italy}
-}
-
 @Misc{GabrielLetter,
   author = 	 {Richard P. Gabriel},
   title = 	 {Letter to {Chris DiBona} and {Tim O'Reilly}},
@@ -58,6 +42,34 @@
   lastchecked = {2018-08-18}
 }
 
+
+@Misc{GMP,
+  title =        {The {GNU} {M}ultiple {P}recision Arithmetic Library},
+  key =          {GMP},
+  url =          {https://gmplib.org/}
+}
+
+@Article{Tichy85,
+  author =       {Walter F. Tichy},
+  note =         {Purdue University},
+  title =        {{RCS} - A System for Version Control},
+  journal =      {Software Practice\&Experience},
+  volume =       15,
+  number =       7,
+  page =         {637-654},
+  year =         1985,
+  url =          {https://www.gnu.org/software/rcs/tichy-paper.pdf}
+}
+
+
+@InProceedings{Berliner90,
+  author =       {Berliner, Brian},
+  title =        {CVS II: Parallelizing software development},
+  booktitle =    {USENIX Winter 1990 Technical Conference},
+  year =         1990,
+  volume =       341,
+  pages =        352
+}
 
 @Manual{ELispManual2018,
   title = 	 {GNU Emacs Lisp Reference Manual},
@@ -101,7 +113,7 @@
 
 
 @TechReport{Pitman1983,
-  author = 	 {Kent M. Pitman},
+  author = 	 Pitman,
   title = 	 {The Revised {Maclisp} Manual},
   institution =  {Laboratory for Computer Science, MIT},
   year = 	 1983,
@@ -111,16 +123,25 @@
   url = {http://www.maclisp.info/pitmanual/}}
 
 @INPROCEEDINGS{Ohmaki2002,
-author={K. Ohmaki},
-booktitle={7th IEEE International Symposium on High Assurance Systems Engineering, 2002. Proceedings.},
-title={Open source software research activities in AIST towards secure open systems},
-year={2002},
-volume={},
-number={},
-pages={37-41},
-keywords={operating systems (computers);Unix;information technology;security of data;software engineering;open source software research activities;AIST;secure open systems;open source software;secure software;cross site scripting;Web servers;application software;Linux operating system;Open source software;Open systems;Application software;Linux;Web server;Government;Information technology;Software quality;Information security;Operating systems},
-ISSN={1530-2059},
-month={Oct}}
+  author =       {K. Ohmaki},
+  booktitle =    {7th IEEE International Symposium on High Assurance Systems
+                  Engineering},
+  title =        {Open source software research activities in {AIST} towards
+                  secure open systems},
+  year =         2002,
+  pages =        {37-41},
+  keywords =     {operating systems (computers);Unix;information
+                  technology;security of data;software engineering;open
+                  source software research activities;AIST;secure open
+                  systems;open source software;secure software;cross site
+                  scripting;Web servers;application software;Linux operating
+                  system;Open source software;Open systems;Application
+                  software;Linux;Web server;Government;Information
+                  technology;Software quality;Information security;Operating
+                  systems},
+  ISSN =         {1530-2059},
+  month =        {Oct}
+}
 
 
 
@@ -181,10 +202,53 @@ month={Oct}}
 
 
 
+@Article{Kellomaki93,
+  author =       {Pertti Kellomäki},
+  title =        {{PSD} - a Portable Scheme Debugger},
+  journal =      {{SIGPLAN} Lisp Pointers},
+  year =         1993,
+  volume =       {VI},
+  number =       1,
+  pages =        {15-23},
+  month =        {jan},
+  url =          {https://dl.acm.org/citation.cfm?doid=173770.173772},
+  abstract =     {Psd is a portable debugger for the Scheme language.
+                  Debugging with Psd is accomplished by instrumenting the
+                  original source program.  When the instrumented program is
+                  run, it presents the user with an interactive interface
+                  that lets him or her examine and change values of
+                  variables, set breakpoints, and single step evaluation.
+                  Psd is designed to be run within GNU Emacs, which is used
+                  for displaying the current source code position.}
+}
+
+@InProceedings{Tolmach90,
+  author =       Tolmach #{and}# Appel,
+  title =        {Debugging {S}tandard {ML} without reverse engineering},
+  crossref =     {LFP90},
+  pages =        {1-12},
+  url =          {https://dl.acm.org/citation.cfm?id=91564},
+  abstract =     {We have built a novel and efficient replay debugger for
+                  our Standard ML compiler.  Debugging facilities are
+                  provided by instrumenting the user's source code; this
+                  approach, made feasible by ML's safety property, is
+                  machine-independent and back-end independent.  Replay is
+                  practical because ML is normally used functionally, and
+                  our compiler uses continuation-passing style; thus most of
+                  the program's state can be checkpointed quickly and
+                  compactly using call-with-current-continuation.  Together,
+                  instrumentation and replay support a simple and elegant
+                  debugger featuring full variable display, polymorphic type
+                  resolution, stack trace-back, breakpointing, and reverse
+                  execution, even though our compiler is very highly
+                  optimizing and has no run-time stack.}
+}
+
 @Misc{KawaScheme,
-  author = 	 {Per Bother},
-  title = 	 {The {Kawa} {Scheme} language},
-  url = {https://www.gnu.org/software/kawa/index.html}
+  author =       {Per Bothner},
+  year =         1999,
+  title =        {The {Kawa} {Scheme} language},
+  url =          {https://www.gnu.org/software/kawa/index.html}
 }
 
 @Article{Bothner2001,
@@ -239,7 +303,7 @@ month={Oct}}
 }
 
 @InCollection{Pitman2001,
-  author = 	 {Kent M. Pitman},
+  author = 	 Pitman,
   editor = 	 {A. Romanovsky and C. Dony and J.L. Knudsen and A. Tripathi},
   booktitle = 	 {Advances in Exception Handling Techniques},
   title = 	 {Condition Handling in the {Lisp} Language Family},
@@ -248,6 +312,13 @@ month={Oct}}
   volume = 	 2022,
   series = 	 {Lecture Notes in Computer Science},
   url = {http://www.nhplace.com/kent/Papers/Condition-Handling-2001.html}}
+
+@Misc{Steingold99,
+  author =       {Sam Steingold},
+  title =        {Load {E}macs-{L}isp files into {C}ommon {L}isp},
+  year =         1999,
+  url =          {https://sourceforge.net/p/clocc/hg/ci/default/tree/src/cllib/elisp.lisp}
+}
 
 @inproceedings{Hayes1997,
  author = {Hayes, Barry},
@@ -283,8 +354,34 @@ month={Oct}}
 }
 
 @Misc{HyperSpec,
-  author = 	 {Kent Pitman},
+  author = 	 Pitman,
   title = 	 {{Common Lisp} {HyperSpec}},
   url = {http://www.lispworks.com/documentation/HyperSpec/Front/index.htm},
   year = 2005}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@string{ELS	= {European Lisp Symposium}}
+@string{ICFP	= {International Conference on Functional Programming}}
+@string{LFP	= {Conference on Lisp and Functional Programming}}
+
+@Proceedings{LFP90,
+  title =	 LFP,
+  year =	 1990,
+  booktitle =	 LFP
+}
+@proceedings{ELS14,
+  title =        ELS,
+  booktitle =    ELS,
+  year =         2014
+}
+
+@Proceedings{ICFP01,
+  title = 	 ICFP,
+  booktitle =	 ICFP,
+  year = 	 2001,
+  key =		 {ICFP'01},
+  month =	 sep,
+  address =  	 {Florence, Italy}
+}
 
