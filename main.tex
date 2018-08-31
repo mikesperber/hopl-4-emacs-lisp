@@ -227,12 +227,12 @@ MacLisp.  Lambda expressions worked slightly differently, as discussed
 in Section~\ref{sec:lambda}.  Section~\ref{sec:strings} discusses the
 string representation (absent in MacLisp).
 MacLisp-style backquote reader syntax was only added later to \Elisp{}---see Section~\ref{sec:backquote}.
-An feature supporting easy extensibility was self-documentation
-through \textit{docstrings}, described in
+A feature supporting easy extensibility was self-documentation
+through \emph{docstrings}, described in
 Section~\ref{sec:docstrings}.
 Section~\ref{sec:interactive-functions} describes how Emacs ties
 functions to interactive commands.
-Section~\ref{sec:error-handling} describes \Elisp{}'s improvements
+Section~\ref{sec:non-local-exits} describes \Elisp{}'s improvements
 over MacLisp's error handling.
 Section~\ref{sec:buffer-local-variables} describes buffer-local
 variables, which tie the language to the editor.  One important
@@ -256,9 +256,21 @@ this practice.
 \subsection{Strings}
 \label{sec:strings}
 
-% FIXME Stefan
+\Elisp{} included support for string objects from the beginning of course.
+They were just byte arrays.
 
-For details on text encoding, see Section~\ref{sec:character-representation}
+During the early development of Emacs-19, this type was extended with
+support for \emph{text-properties}: each char of a string can be annotated
+with a set of properties, which maps property names to values, where property
+names can be any symbol.  This is used to carry information such as color
+and font to use when displaying the various parts of the string.
+% Note: No text properties in strings in XEmacs
+
+Around 1994, support for arbitrary character sets was added to Emacs and
+XEmacs, which required distinguishing between bytes and characters, and
+hence changing its string objects.  Characters are represented with
+a variable number of bytes, favoring a compact representation at the
+detriment of random access.
 
 In XEmacs, strings have a ``modified-tick'' that is bumped every time
 a string is modified in-place.  This count can be retrieved with the
@@ -268,7 +280,6 @@ unclear.  It is a straightforward parallel to the
 \texttt{buffer-modified-tick} function that tracks modifications to
 buffers, and which has many uses.
 
-% Note: No text properties in strings in XEmacs
 
 \subsection{Backquote}
 \label{sec:backquote}
@@ -289,16 +300,35 @@ was written in early \Elisp{} as:
 (` (a b (, c)))
 \end{alltt}
 %
-The releases of Emacs-19.28 and XEmacs 19.12 finally added the proper
-reader support to generate the latter version from the first.
+The releases of Emacs-19.28 and XEmacs 19.12 in 1994 finally added the
+proper reader support to generate the latter version from the first.
 
-%% FIXME Stef: update on recent changes in this regard
+It had to rely on a heuristic for that, tho, because \texttt{(` a)} is valid
+in both syntaxes but means different things.  So the old format was declared
+obsolete, tho still supported, and the new format only recognized in some
+cases; more specifically the new unquote was only recognized within a new
+backquote, and the new backquote was only recognized if it occurs within
+a new backquote or if it does not immediately follow an open parenthesis.
+
+Seeing how uses of old-style backquotes were not going away, in 2007
+Emacs-22.2 introduced explicit tests and warnings to bring attention to uses
+of old-style backquotes, while still keeping the actual behavior unchanged.
+
+Then in 2012 with the release of Emacs-24.1, the behavior was changed so
+that the old format is only recognized if it follows a parenthesis and is
+followed by a space.  The main motivation for this change was the
+introduction of the \texttt{pcase} macro where patterns can also use the
+backquote syntax and are commonly placed right after a parenthesis so they
+were otherwise mistaken for an old-style backquote syntax.
+
+Finally in 2018 during the development of Emacs-27 the
+old-style backquote syntax was removed.
 
 \subsection{Docstrings}
 \label{sec:docstrings}
 
 An important feature of Emacs from the start was the idea of
-\textit{self-documentation}~\cite{Stallman1981}.  To that end, every
+\emph{self-documentation}~\cite{Stallman1981}.  To that end, every
 definition form in \Elisp{} can include documentation in the form of a
 string after the signature:
 %
@@ -309,7 +339,7 @@ This function accepts any number of arguments, but ignores them."
   nil)
 \end{alltt}
 %
-This \textit{docstring} can be retrieved in various ways, in particular
+This \emph{docstring} can be retrieved in various ways, in particular
 through the user interface.  This idea was apparently first introduced in
 the original Emacs implementation in TECO, then adapted to \Elisp{}.
 Many languages have since adopted them, notably Common
@@ -323,8 +353,8 @@ accessible to a user is to provide a keybinding for it.  This is not
 realistic for all functions, however---there are too many of them.
 
 A user can also invoke an function by typing \texttt{M-x}
-\textit{function-name}.  This only makes sense for a certain subset of
-all defined functions, namely \textit{interactive} functions, which
+\emph{function-name}.  This only makes sense for a certain subset of
+all defined functions, namely \emph{interactive} functions, which
 are specially marked with an \texttt{interactive} form at the
 beginning of the body, like this:
 %
@@ -346,42 +376,38 @@ backwards ARG times if negative."
 %
 The \texttt{interactive} form also has an optional string operand that
 regulates how such a function receives its arguments.  In the above
-example, \verb|p| means that the function accepts a \textit{prefix
-  argument}: The user can type \texttt{ESC} \textit{number} or
+example, \verb|p| means that the function accepts a \emph{prefix
+  argument}: The user can type \texttt{ESC} \emph{number} or
 \texttt{C-u} (to specify powers of 4) prior to invoking the function,
 and the number will be passed to the function as an argument, in this
 case as \texttt{arg}.  The \verb|^| (a more recent addition) has to do with
 region selection with a pressed shift key.
 
-\subsection{Error handling}
-\label{sec:error-handling}
+\subsection{Non-local exits}
+\label{sec:non-local-exits}
 
-%% FIXME Stefan: I'm pretty sure this was not in the first version of
-%% Emacs Lisp, but don't know when it was added.  Emacs git has it from
-%% the very beginning.
-One departure in \Elisp{} from MacLisp is error handling.  MacLisp's
-error-handling system was quite primitive, and had poor separation of
-signalling and handling~\cite{Pitman2001}.  \Elisp{} took inspiration
-%% FIXME: It would be great to say *where* it came from.  Clearly it
-%% is a bit like Common-Lisp, but it's not quite like it either.
-%% Mike would say it's quite unlike Common Lisp, whose condition
-%% system depends on CLOS.
-from developments elsewhere in the Lisp community and featured a
-\emph{condition system}.  The \Elisp{} condition system establishes
-a protocol between code signalling an exceptional situation and code
-handling it.
+\Elisp{} came very early on with a good set of primitives to handle
+non-local exits.  Additionally to the \texttt{catch} and \texttt{throw}
+primitives inherited from MacLisp, it came with \texttt{unwind-protect},
+which was inherited from TECO, as well as an error handling system.
+
+MacLisp's error-handling system was quite primitive, and had poor separation
+of signalling and handling~\cite{Pitman2001}.  \Elisp{} instead featured
+a \emph{condition system} inspired from the Lisp Machine although it did
+not cover all the features of the Lisp Machine system, such as the ability
+to recover from an error.
 
 The \texttt{signal} function takes an \texttt{ERROR-SYMBOL}
 classifying the exceptional situation and an additional \texttt{DATA}
 argument.  An error symbol is a symbol with an
 \texttt{error-conditions} property that is a list of condition names.
 An invocation of \texttt{signal} escapes to the most recent active use
-of \texttt{conditio-case}, which dispatches on the condition name.
+of \texttt{condition-case}, which dispatches on the condition name.
 
 These condition names can be used to dispatch on the condition with
 the \texttt{condition-case} form which specifies a handler.  Emacs
 comes with a set of standard errors, establishing a protocol between
-signalling and handling code.
+signaling and handling code.
 
 \subsection{Buffer-local variables}
 \label{sec:buffer-local-variables}
@@ -424,10 +450,10 @@ made local to any buffer.
 
 Over the years many bugs were fixed in the implementation of let-binding
 buffer-local variables.  The most famous one was fixed in Emacs-21.1.
-%% FIXME: When did it get fixed in XEmacs?
+%% FIXME Mike: When did it get fixed in XEmacs?
 %% Mike says: I don't see that it was ever "fixed".  What's the bug
 %% anyway - any behavior I can imagine seems surprising to some.
-%% FIXME Stefan: explain the bug
+%% FIXME Mike: I explained the bug.
 This bug affected code like
 \begin{verbatim}
   (let ((buffer-file-name "/home/rms/.emacs"))
@@ -438,7 +464,9 @@ This bug affected code like
 where the current buffer was different when the let-binding is entered from
 when it is left\footnote{\texttt{set-buffer} is like
   \texttt{with-current-buffer} except that it is not scoped, so it takes
-  effect until the next \texttt{set-buffer}.}
+  effect until the next \texttt{set-buffer}.}; the bug was that this code
+ended up ``restoring'' the value of \texttt{buffer-file-name} into the
+wrong buffer when exiting the \texttt{let}.
 
 \subsection{Hooks}
 \label{sec:hooks}
@@ -459,12 +487,26 @@ pervasive convention in Emacs from the start.  In particular, many
 libraries run a hook when they are loaded to allow customization.
 Also, modes generally run hooks to allow modifying their behavior.
 
-Initial versions of Emacs also seemed to allow attaching hooks to
-variable changes~\cite{Stallman1981}, but this feature has not
-survived.\footnote{In 1992, the \texttt{advice.el} package was added
-  to Emacs, duplicating a design available in other Lisps, that
-  allowed attaching code to functions even if they do not run hooks.
-  FIXME Stefan: nadvice?}
+The old TECO version of Emacs also allowed attaching hooks to variable
+changes~\cite{Stallman1981}, but this feature was not provided in \Elisp{}
+because Richard Stallman considered it a misfeature which could make it
+difficult to debug the code.  Yet this very feature was finally added to
+\Elisp{} in 2018 in the form of \emph{variable watchers}, tho they are
+ironically mostly meant to be used as debugging aides.
+
+Of course, authors do not always have the foresight to place hooks where
+users need them, so in 1992, the \texttt{advice.el} package was added to
+Emacs-19, providing a \texttt{defadvice} macro duplicating a design
+available in MacLisp and Lisp Machines, that allowed attaching code to
+functions even if they do not run hooks.
+
+The way the \texttt{defadvice} macro gave access to function arguments did
+not work with lexical scoping; furthermore time had shown that most of the
+non-core features of \texttt{defadvice} were very seldom used, and even more
+seldom used properly.  So in late 2012 a new package \texttt{nadvice.el} was
+developed which provides the same core features but with a much simpler
+design that tries to make better use of existing language features.  It was
+released as part of Emacs-24.4.
 
 \section{Base language Implementation}
 \label{sec:base-language-implementation}
@@ -488,21 +530,21 @@ image-dumping mechanism in Emacs and XEmacs and how it changed over time.
 \label{sec:byte-code-interpreter}
 
 %% FIXME: TODO
-%% ** Byte-code interpreter optimisation
-%% *** FIXME Mike: IIRC there was a round of micro-optimisation in the
-%%     XEmacs byte-code interpreter
-%% *** threaded implementation (using gcc's computed gotos)
-%% ** Bootstrap?
 %% ** C FFI
 %% ** JIT compiler attempts
-%% ** Byte code changes
+
+%% FIXME Mike:
+%%    We say nothing about XEmacs here :-(
+%%    IIRC there was a round of micro-optimisation in the
+%%    XEmacs byte-code interpreter
 
 Emacs has two execution engines for \Elisp: first it has a very simple
 interpreter written in C operating directly on the S-expression
 representation of the code.  But already in July 1985 Emacs-16.56 came with
 a \texttt{byte-code} function, which interpreted its string argument as
-a sequence of byte codes to execute, as well as a compiler, written in
-\Elisp{}, which translated \Elisp{} code to that byte-code language.
+a sequence of stack-based byte codes to execute, as well as a compiler,
+written in \Elisp{}, which translated \Elisp{} code to that
+byte-code language.
 
 While \Elisp{} is basically a ``run of the mill'' programming language, just
 with some specific functions tailored to the particular use of a text
@@ -512,7 +554,8 @@ byte codes corresponding to \Elisp{} primitives such as
 
 While a systematic study would likely reveal that the operations that should
 deserve their own byte-code in modern \Elisp{} code are quite different, the
-byte-code language of Emacs has changed very little over the years.
+byte-code language of Emacs has changed very little over the years and is
+still essentially the same as that of 1985.
 
 Around 1992, during the early development of Emacs-19, the implementation of
 the bytecode interpreter was rewritten, as was the compiler.  At the same
@@ -522,11 +565,54 @@ before that, a byte-compiled function looked like:
   (lambda (..ARGS..) (byte-code "..." ...))
 \end{verbatim}
 
-%% Early history:
-%% the `byte-code` function was already present in Emacs-16.56 (earliest
-%% revision we could find).
-%% byte-compiled objects added some time between Emacs-18.59 and Emacs-19.7
-%% dynamically-loaded bytecode added in Emacs-19.29.
+Then in Emacs-19.29 in an attempt to speed up loading of \Elisp{} packages
+as well as reduce the memory use of Emacs processes, a mechanism was added
+so that documentation strings as well as byte-code could be lazily fetched
+from compiled \Elisp{} files.  This can introduce problems if the file is
+modified while Emacs was running, so while this feature is always used
+for documentation strings it's very rarely used for byte-code.
+
+Changes to the byte-code were introduced as part of the lexical scoping
+feature that appeared in 2012 in Emacs-24.1, but were actually developed
+much earlier, probably around 2003.  Until the introduction of
+lexical-scoping, the stack-based byte-code only used its stack in the most
+simple way, and did not include any operation beyond
+\texttt{pop}/\texttt{dup}/\texttt{exch}, so to better support lexical
+scoping where the lexical variables are stored on the stack, several
+byte-codes were added to index directly into the stack, to modify stack
+slots, and to discard several stack elements at once.
+
+In 2012 during the development of Emacs-24.3, the byte-code interpreter was
+modified by Tom Tromey to implement token threading using GCC's
+\emph{computed goto} feature when available.  Patches for this feature had
+been submitted several times in the past already, but the speed improvement
+was rather disappointing so they had not raised much enthusiasm.
+Tom's implementation was no better, but he pushed stronger for its
+inclusion.  The reason why the speed improvement is disappointing was not
+really investigated, but the general consensus is that the byte-code
+interpreter is simply not very optimized, so the relative cost of the
+\texttt{switch} is not as high as it could (or, arguably, should) be.
+
+\subsubsection{Bootstrap}
+
+Since the \Elisp{} compiler is itself written in \Elisp{}, it requires
+a form of bootstrap.  Until 2002 during the development of Emacs-21, Emacs's
+development was done using the revision control system RCS~\cite{RCS}, and
+changes were installed by logging remotely into an FSF-owned machine and
+performing the commits there.  This machine also kept the (last) compiled
+form of the \Elisp{} files and so naturally provided the needed compiled
+files for bootstrap.  When development moved to CVS~\cite{CVS} to ease
+collaboration between contributors, another solution was needed.
+
+Of course, since Emacs also comes with a simple direct \Elisp{} interpreter,
+bootstrapping is not very difficult, but several changes were needed
+nevertheless because the previous use of pre-compiled files had hidden some
+circular dependencies.  Of those, the only one that was not removed in
+Emacs-21.1 is that a lot of \Elisp{} code relies on the fact that some
+functions are \emph{autoloaded}, and some of that code is used to build the
+file that contains all those \texttt{autoload} declarations.  So instead,
+the solution found was to keep a pre-built copy of that file in the
+CVS repository.
 
 \subsection{Data representation and memory management}
 \label{sec:data-representation}
@@ -548,8 +634,6 @@ contained in the 32bit box.  Instead it was used so that cons cells could
 occupy only 2 words: the extra bit needed to store the mark\&sweep's
 \emph{markbit} of each cons cell was stored in the ``mark'' bit of the first
 word (i.e. of the \texttt{car}).
-
-%% FIXME: Strings got text-properties some time between 19.1 and 19.7.
 
 Over time, this tagging scheme became problematic, since it limited to 16 MB
 the size of the Lisp heap and to 8MB the size of files that could be edited.
@@ -679,12 +763,8 @@ cost at all.
 
 %% FIXME Stefan: I find this of limited interest, as it doesn't really
 %% impact the language.
-%% Mike: Hmm... not sure why you think so (pretty much all this memory
-%% management section had no impact on the language itself, it's just
-%% implementation details).  Maybe I should talk a bit more about the
-%% motivation for this change: in earlier Elisp (pseudo)vectors were not
-%% used very much, but over time this has changed, mostly with the
-%% increasing use of defstruct as well as closures.
+%% Mike: Hmm... OK, I changed it to talk a bit more about the
+%% motivation for this change.
 
 In Emacs-24.3, the allocation of objects using the \texttt{Lisp\_Vector} tag
 (which is used for many more object types than just vectors) was modified:
@@ -695,7 +775,14 @@ conservative stack scanning keeps track of every part of the Lisp heap
 allocated with \texttt{malloc} in a balanced tree, so every such
 \texttt{malloc} costs us an $O(N \textsf{log} N)$ operation plus a heap
 allocation of an extra tree node, which was very costly for small objects
-both in time and space.
+both in time and space.  The reason why it took until Emacs-24.3 to fix this
+performance issue is that objects using the \texttt{Lisp\_Vector} tag were
+historically not used in large numbers in early \Elisp{} code.  There were
+two factors that changed this situation: first, over time the style of
+\Elisp{} coding evolved and the use of \texttt{cl.el}'s \texttt{defstruct}
+(which internally represents those objects as vectors) became much more
+common, and second the closures used in the lexical-scoping feature of
+Emacs-24.1 also use the \texttt{Lisp\_Vector} tag.
 
 In Emacs-24.4, the representation of objects using the \texttt{Lisp\_Vector}
 tag (which is used for many more object types than just vectors) was
@@ -704,7 +791,7 @@ improved so as to reduce their header from 2 words down to a single word.
 In Emacs-27.1, the object representation was changed again: the distinction
 between \texttt{Lisp\_Misc} and \texttt{Lisp\_Vector} was dropped by making
 all objects use the \texttt{Lisp\_Vector} representation since it had been
-improved sufficiently to be competitive with the special
+improved sufficiently to be competitive with the special-cased
 \texttt{Lisp\_Misc} representation.
 
 %% FIXME: With the addition of bignums in the upcoming Emacs-27, there's
@@ -747,27 +834,13 @@ forms of ad-hoc weak references which need to be adapted to the more
 standard forms of weak references.
 
 \label{sec:incremental-gc}
-%% FIXME: Given Emacs's lack of interest for incremental collector, I think
-%% it would be interesting (at least for me, but likely for the other
-%% readers as well ;-) to expand a bit on this, e.g. what were the
-%% motivations and how did it work out in practice (is it used in all
-%% builds, is its performance competitive, known cases where it
-%% shines, ...).
-%% FIXME Stefan: better?
-%% Yes, much better, thanks, tho now I want even more that code in Emacs!
-In XEmacs, GC pauses continued to be a perceived problem.
-In 2005, Marcus Crestani developed an incremental collector for
-XEmacs, which was released with XEmacs 21.5.21 in
-2005~\cite{Crestani2005}, which soon was turned on by default.  It
+In XEmacs, GC pauses continued to be a perceived problem.  In 2005, Marcus
+Crestani developed an incremental collector for XEmacs, again using
+a VM-based write barrier.  It was released with XEmacs 21.5.21 in
+2005~\cite{Crestani2005} and soon was turned on by default.  It
+%% Damn!  Now I want even more that code in Emacs!  -- Stef
 eliminates GC pauses from the user experience, and its asymptotic
 performance is competitive with the old collector.
-
-%% FIXME: TODO
-%% * Language & Implementation Overview
-%% ** ... usual stuff ...
-%% ** Language implementation
-%% ** Interpreter
-%% ** Byte-code architecture (or should that go XEmacs-period?)
 
 \subsection{Image dumping}
 \label{sec:image-dumping}
@@ -783,19 +856,8 @@ highly platform-specific C files that implemented a function called
 \texttt{unexec}.  The \texttt{unexec} function turns the running
 process back into an executable file.  However, the implementations of
 \texttt{unexec} have been hard to write and difficult to maintain.
-%% FIXME: Also IIRC
-%% this change only breaks the particular way Emacs used to dump
-%% (more specifically it makes it "impossible" to unexec&restore a heap
-%% that contains data allocated with glibc's malloc, but Emacs
-%% already implemented a workaround by using its own malloc library
-%% before the dump and glibc's malloc library afterwards (that solution
-%% had been developed earlier for the Cygwin port, IIRC, tho
-%% I can't remember exactly what were the reason for that hack in
-%% Cygwin)).
-%% Mike says: Not sure if that changes anything.  We could could just
-%% elide the following sentence though:
-Moreover, the Glibc maintainers in 2016 published plans to
-make changes which would break this functionality.
+For example, the Glibc maintainers in 2016 decided to make changes to their
+\texttt{malloc} implementation which broke this functionality.
 
 For XEmacs, in 1999, Olivier Galibert (based on initial work by Kyle
 Jones) started writing a \emph{portable dumper} that would serialize
@@ -859,16 +921,11 @@ textual model to a graphical model.\footnote{Jamie Zawinski did write a new
 One significant departure from Emacs in Lucid Emacs was the
 representation of keymaps: Emacs, to this day, uses a transparent
 S-expression representation for keymaps.
-%% FIXME: According to Git, Emacs supported sparse keymaps
-%% (i.e. using an alist representation rather than a vector)
-%% at least since May 6 1991 (there's no earlier record).
-%% In terms of possible representation, this is not very different from
-%% current Emacs, although the code is now a lot more featureful and
-%% robust, especially w.r.t inheritance.
-%% FIXME Stefan: Tried to clean up the wording.
-In Emacs prior to version 19, a keymap was
+In early Emacs in a keymap was
 simply a two-element list whose car is the symbol \texttt{keymap} and
-whose second element is a vector, indexed by character code.
+whose second element is either a vector indexed by character code or an
+%% This option was already present in Emacs-16.56!
+\emph{association list}.
 %% FIXME: The May 6 1991 version of the code already used reorder_modifiers
 %% to canonicalize events represented as symbols before looking them up, so
 %% it worked pretty much the same as current Emacs.
@@ -878,13 +935,8 @@ whose second element is a vector, indexed by character code.
 %% making it handle extensions like (multiple) inheritance would be messy
 %% (as the author of the multiple-inheritance support for Emacs, I can vouch
 %% for it being quite messy/tricky).
-This
-representation did not gracefully extend to GUI-based input models,
-which distinguish between, say, backspace and Control-H.
-In Emacs-19, a keymap list could contain more elements beyond that
-initial vector.
-The current representation for keymaps is much richer---here is an
-example~\cite{ELispManual2018}:
+The current representation for keymaps in Emacs is richer but follows
+largely the same design---here is an example~\cite{ELispManual2018}:
 %
 \begin{verbatim}
 (keymap
@@ -911,14 +963,17 @@ them---\texttt{cons}, \texttt{rplaca}, \texttt{rplacd} etc.
 Emacs-19 tried to keep such code working to some extent by merely
 extending the previous list representation.
 Eventually however such code would break in the face of representation
-changes, but would not immediately trigger an error.  
+changes, but would not immediately trigger an error.  Furthermore, the
+support for inheritance was fundamentally flawed until Emacs-24.1 were it
+was extended to multiple-inheritance but at the cost of a fairly significant
+and delicate rewrite of the code.
 
-The developers Lucid Emacs of Lucid Emacs foresaw this problem, and
-made keymaps into on opaque datatype, forbidding manipulation via the
-S-expression primitives.  This allowed Lucid Emacs to evolve the
+The developers Lucid Emacs of Lucid Emacs foresaw these problems, and
+instead made keymaps into an opaque datatype, forbidding manipulation via the
+S-expression primitives and giving themselves a lot more implementation
+freedom.  This allowed Lucid Emacs to evolve more rapidly the
 representations of keymaps to cater to a richer set of input events
-(including mouse events, for instance), leaving existing Lisp programs
-unaffected.
+(including mouse events, for instance).
 
 This step reflected a general difference in philosophy.  Lucid Emacs
 also used opaque data types for case tables and input events, both of
@@ -964,26 +1019,6 @@ characters an opaque type additionally discouraged the practice.
 % different commands to each of the chords Control-h, Control-H, Backspace,
 % Control-Backspace, and Super-Shift-Backspace.  Key bindings, function key
 % bindings, and mouse bindings live in the same keymaps.
-
-
-% ** Differences between XEmacs and GNU Emacs 19
-% ==================================================
-
-%% FIXME: In Emacs-19, events were not only represented by integers but also
-%% by symbols like `C-left` or `C-backspace`.  Not sure when they
-%% were extended to also allows pairs of the form (NAME . DATA),
-%% where NAME can be something like `C-mouse-1` and DATA gives extra
-%% information such as the position of the click.
-%%
-% In XEmacs, events are first-class objects.  FSF 19 represents them as
-% integers, which obscures the differences between a key gesture and the
-% ancient ASCII code used to represent a particular overlapping subset of them.
-
-% In XEmacs, keymaps are first-class opaque objects.  FSF 19 represents them as
-% complicated combinations of association lists and vectors.  If you use the
-% advertised functional interface to manipulation of keymaps, the same code
-% will work in XEmacs, Emacs 18, and GNU Emacs 19; if your code depends
-% on the underlying implementation of keymaps, it will not.
 
 
 \section{Emacs/XEmacs co-evolution}
@@ -1120,7 +1155,7 @@ similarly.  This led to a requirement that certain aspects of display
 should be local to a frame or an output device.  Emacs calls GUI
 windows \emph{frames} and as with buffers, Emacs maintains a reference
 to the \emph{current frame} which determines the implicit target of
-GUI operations.  XEmacs also maintained \textit{devices} as part of
+GUI operations.  XEmacs also maintained \emph{devices} as part of
 the display context, to distinguish, say, between different TTYs and
 different X11 servers.
 
@@ -1135,13 +1170,13 @@ to keep track of things like keyboard state; there is no way for
 
 XEmacs chose a different route: Starting in 1995, Ben Wing (working
 from a prototype by Chuck Thompson) implemented
-\textit{specifiers}. which are objects that manage properties that
-depend on a generalized notion of \textit{display
+\emph{specifiers}. which are objects that manage properties that
+depend on a generalized notion of \emph{display
   context}~\cite{XEmacsLispRef1998}.  The first prototype
 implementation was released with XEmacs 19.12.
 
-A specifier's value (its \textit{instance}) depends on its
-\textit{locale}, which can be buffer, a window, a frame, a device, or a MULE
+A specifier's value (its \emph{instance}) depends on its
+\emph{locale}, which can be buffer, a window, a frame, a device, or a MULE
 character set, or certain properties of these.  For example,
 \texttt{default-toolbar} is a specifier that could be created with:
 %
@@ -1153,7 +1188,7 @@ character set, or certain properties of these.  For example,
 for validation.
 
 \Elisp{} code could retrieve a specifier's value (its
-\textit{instantiator}) like this:
+\emph{instantiator}) like this:
 %
 \begin{alltt}
 (specifier-instance default-toolbar)
@@ -1381,12 +1416,16 @@ closure conversion.  The main focus at that point was to:
   necessarily with the best performance.
 \end{itemize}
 
-Performance of the new lexical scoping mode proved to be competitive
-with the performance of the dynamic scoping mode except for its interaction
-with the \texttt{condition-case} and \texttt{unwind-protect} primitives
-whose underlying byte-codes were a poor fit.  So in Emacs-24.4, new byte
-codes were introduced and the byte-compiler was modified to be able to make
-use of them.
+%% FIXME: Should this go to the bytecode section?
+Performance of the new lexical scoping mode proved to be competitive with
+the performance of the dynamic scoping mode except for its interaction with
+the \texttt{catch}, \texttt{condition-case}, and \texttt{unwind-protect}
+primitives whose underlying byte-codes were a poor fit, requiring run-time
+construction of \Elisp{} code to propagate the lexical context into the body
+of those constructs.  So in Emacs-24.4, new byte codes were introduced and
+the byte-compiler was modified to be able to make use of them.  Nowadays,
+code compiled using lexical scoping is generally expected to be marginally
+faster than if compiled with dynamic scoping.
 
 \subsection{Eager macro-expansion} %Emacs-24.3?
 
