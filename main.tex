@@ -580,31 +580,50 @@ scoping where the lexical variables are stored on the stack, several
 byte-codes were added to index directly into the stack, to modify stack
 slots, and to discard several stack elements at once.
 
-In 2012 during the development of Emacs-24.3, the byte-code interpreter was
-modified by Tom Tromey to implement token threading using GCC's
-\emph{computed goto} feature when available.  Patches for this feature had
-been submitted several times in the past already, but the speed improvement
-was rather disappointing so they had not raised much enthusiasm.
-Tom's implementation was no better, but he pushed stronger for its
-inclusion.  The reason why the speed improvement is disappointing was not
-really investigated, but the general consensus is that the byte-code
-interpreter is simply not very optimized, so the relative cost of the
-\texttt{switch} is not as high as it could (or, arguably, should) be.
+In late 2009, the byte-code interpreter was modified by Tom Tromey to
+implement token threading using GCC's \emph{computed goto} feature, when
+available.  A patch for this feature had been submitted in May 2004 by
+Jaeyoun Chung, but the speed improvement was not even measured at that time
+so it had not raised much enthusiasm.  Tom's implementation was no better,
+and the speed up was a meager 5\% but he pushed stronger for its inclusion,
+which only happened with Emacs-24.3, in 2012.  The reason why the speed
+improvement is disappointing was not really investigated, but the general
+consensus is that the byte-code interpreter is simply not very optimized, so
+the relative cost of the \texttt{switch} is not as high as it could (or,
+arguably, should) be.
 
 \paragraph{Tail-call optimisation}
 
 \Elisp{} does not optimize away tail calls.  With Scheme being familiar to
 many \Elisp{} developers, this is a disappointment for many.  There have
-%% FIXME: detail at least some concrete examples!
-been patches submitted to Emacs to optimize away at least some tail calls in
-byte-compiled code, but so far none of them have made it into an official
-release.  The main reason for that is partly a chicken-and-eggs problem:
-First tail-call optimization (TCO) is largely incompatible with dynamic
-scoping, so it was basically inapplicable until the introduction of lexical
-scoping in 2012, then \Elisp{} function calls are relatively expensive and
-finally the lack of TCO created a coding style which favored the use of
-iteration over recursive definitions, which in turn makes TCO rarely
-beneficial on existing code.
+been two patches developped independently and submitted to Emacs maintainers
+in late 2012 (by Troels Nielsen first and Chris Gay two months later) to
+optimize away tail calls in byte-compiled code, but so far none of them have
+made it into an official release.
+
+The main reason for that is partly a chicken-and-eggs problem.  Tail-call
+optimization (TCO) is largely incompatible with dynamic scoping, so it was
+basically inapplicable until the introduction of lexical scoping in 2012;
+furthermore, function calls are relatively expensive in the current
+implementation of \Elisp{}.  Together, these two factors created a coding
+style which favored the use of iteration over recursive definitions, which
+in turn makes TCO rarely beneficial on existing code.
+
+This said, there were other objections to those patches:
+\begin{itemize}
+\item They only affected byte-compiled code, and while it is expected that
+  most code is byte-compiled before being executed, it's very common to run
+  non-compiled \Elisp{} code, especially during development or debugging.
+  So if \Elisp{} code starts to rely on TCO, it would tend to cause problems
+  when interpreted.  One alternative is to always byte-compile the code and
+  get rid of the \Elisp{} interpreter, but that's a change that would have
+  much further consequences.
+\item TCO affects the behavior not only in terms of reducing the stack
+  allocation and increasing performance, but it would also eliminate some
+  activation frames from stack backtraces, which would be detrimental to
+  debugging.  This is particularly true for tail-calls which are made to
+  other functions, such as non-recursive tail-calls.
+\end{itemize}
 
 \subsubsection{Bootstrap}
 
@@ -842,7 +861,7 @@ a collection can only occur during \Elisp{} code execution and not during
 heap allocation, and of course those assumptions are not explicitly recorded
 in the code.  The second issue is that Emacs currently implements various
 forms of ad-hoc weak references which need to be adapted to the more
-%% FIXME: Is it worth going though the details of hash-tables's weakness
+%% FIXME: Is it worth going through the details of hash-tables's weakness
 %% and markers's weakness (and their removal from undo lists)?
 standard forms of weak references.
 
@@ -1895,6 +1914,8 @@ FIXME
 
 FIXME
 
+%% FIXME: Compilation of Elisp to C by Tom Tromey!
+
 \section{Alternative Implementations}
 \label{sec:alternative-implementations}
 
@@ -1929,7 +1950,10 @@ Guile Scheme~\cite{Guile2018} was conceived as the universal extension
 language of the GNU project, with the specific intention of replacing
 \Elisp in Emacs at one point.  This has not happened (yet), but Guile does
 ship with a fairly complete implementation of \Elisp{} that translates
-\Elisp{} programs to Guile's intermediate language.
+\Elisp{} programs to Guile's intermediate language.  It is used in the
+Guile-Emacs system, which is a work-in-progress modification of Emacs where
+the \Elisp{} engine is provided by Guile.
+%% FIXME: Motivations?
 
 \subsection{Elisp in Common-Lisp}
 
@@ -1949,13 +1973,6 @@ FIXME
 
 We'd like to thank Lars Brinkhoff for his archiving work at
 \url{https://github.com/larsbrinkhoff/emacs-history}.
-
-%% FIXME: TODO
-%% * Future evolution
-%% ** Multi-threading?
-%% ** OCaml extensions?
-%% ** Replacement by Scheme/Guile
-%% ** Replacement by Common Lisp
 
 \bibliographystyle{abbrvnat}
 \bibliography{refs}
