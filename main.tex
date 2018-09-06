@@ -562,14 +562,16 @@ those made to support lexical scoping; see Section~\ref{sec:lexical-scoping}.
 many \Elisp{} developers, this is a disappointment for many.
 In 1991, Jamie Zawinski added an \texttt{unbind\_all} instruction to
 the XEmacs byte-code engine (which appears in both Emacs and
-XEmacs to this day) that was meant to support tail-call optimization,
+XEmacs to this day) that was intended to support tail-call optimization,
 but never implemented the optimization itself.
+%% FIXME Mike: BTW, I remember seeing this unbind_all bytecode and wanting to
+%% implement the optimization, but I must admit that I could never figure out
+%% how it's meant to be used.  I think Jamie added it without knowing either ;-)
 
-There have
-been two patches developed independently and submitted to Emacs maintainers
-in late 2012 (by Troels Nielsen first and Chris Gay two months later) to
-optimize away tail calls in byte-compiled code, but so far none of them have
-made it into an official release.  
+There have been two patches developed independently and submitted to Emacs
+maintainers in late 2012 (by Troels Nielsen first and Chris Gay two months
+later) to optimize away tail calls in lexically-scoped byte-compiled code,
+but so far none of them have made it into an official release.
 
 The main reason for that is partly a chicken-and-eggs problem.  Tail-call
 optimization (TCO) is largely incompatible with dynamic scoping, so it was
@@ -584,7 +586,7 @@ This said, there were other objections to those patches:
 \item They only affected byte-compiled code, and while it is expected that
   most code is byte-compiled before being executed, it's very common to run
   non-compiled \Elisp{} code, especially during development or debugging.
-  So if \Elisp{} code starts to rely on TCO, it would tend to cause problems
+  So if \Elisp{} code started to rely on TCO, it would tend to cause problems
   when interpreted.  One alternative is to always byte-compile the code and
   get rid of the \Elisp{} interpreter, but that's a change that would have
   much further consequences.
@@ -680,16 +682,16 @@ bugs because only the references known to the GC were properly updated, so
 the programmer had to be careful not to keep unboxed or unregistered
 references to a string at any point where a GC was possible.
 
-To try and address those concerns, for Emacs-21.1, Gerd
-Moellman changed the string compaction code and implemented a conservative
-stack scan.  Strings are split into the string object itself, of fixed size
-and non-relocatable, and the relocatable string data to which the code
-(almost) never keeps a direct reference.  In order to find out if a given
-word found on the stack might be a potentially valid reference to a Lisp
-object, it keeps a memory map that records which regions of the memory
-contains which kinds of Lisp objects.  It could be used either in addition
-to the singly linked list of registered references, as a kind of debugging
-aide, or replace it altogether.
+To try and address those concerns, for Emacs-21.1, Gerd Moellman changed the
+string compaction code and implemented a conservative stack scan.
+Strings are split into the string object itself, of fixed size and
+non-relocatable, and the relocatable string data to which the code (almost)
+never keeps a direct reference.  In order to find out if a given word found
+on the stack might be a potentially valid reference to a Lisp object, it
+keeps a memory map that records which regions of the memory contains which
+kinds of Lisp objects.  This conservative stack scanning could be used
+either in addition to the singly linked list of registered references, as
+a kind of debugging aide, or replace it altogether.
 
 Thanks to the interactive nature of Emacs and its opportunistic GC strategy
 which ensures that the GC is often run when the stack is almost empty, the
@@ -812,17 +814,20 @@ generating much garbage.
 
 Over time, there have been several attempts to replace the GC.
 
-During the development of Emacs-21 around 2001, Gerd Moellman worked on an incremental
-GC based on a write barrier implemented using the operating system's VM
-primitives.  It was never actually integrated into any release, tho.
-He himself did not push for it even while he was maintainer, and there was
-generally not a strong interest for it.  Its main interest was to reduce the
-duration of GC pauses, but these are rarely problematic.  Its main problems
-were that it increased the proportion of time spent in the GC, and that it
-introduced various portability issues because it relied on operating system
-primitives which are not well standardized.
+During the development of Emacs-21 around 2001, Gerd Moellman worked on
+a generational incremental mostly-copying GC based on a read barrier
+implemented using the operating system's VM primitives, but it was never
+completed nor even actually integrated into Emacs's code.
+Its implementation did not get far enough to know its
+performance characteristics and when Gerd stepped down as Emacs maintainer
+in 2002 he stopped working on it and noone picked it up either.
+%% Its main interest was to reduce the
+%% duration of GC pauses, but these are rarely problematic.  Its main problems
+%% were that it increased the proportion of time spent in the GC, and that it
+%% introduced various portability issues because it relied on operating system
+%% primitives which are not well standardized.
 
-During 2003, Dave Love worked on replacing Emacs's GC with Boehm's
+during 2003, Dave Love worked on replacing Emacs's GC with Boehm's
 conservative GC.  The effort went far enough to get a usable Emacs but it
 was never completed, mostly because the early performance results were
 disappointing.  It also showed that such a replacement is non-trivial.
@@ -1055,12 +1060,19 @@ Both Emacs and XEmacs made various performance improvements, most of
 which were merged back and forth between the two versions.
 
 Jamie Zawinski and Hallvard Furuseth wrote a new optimizing
+%% FIXME Mike: I assume the resistance was from Richard.
+%% Could we give some idea about the reason for the resistance or
+%% was it just the fact that he didn't have the time to follow the
+%% progress of the implementation and was hence "losing control" in the
+%% sense that he wasn't familiar with the code and/or didn't like some
+%% of the implementation choices yet didn't have the time/energy to
+%% change it?
 byte-compiler for XEmacs, which, after some initial resistance, was
 merged into the Emacs codebase by 1992.
 
 Also around 1992, during the early development of Emacs-19, the
 implementation of the bytecode interpreter was rewritten, and the
-result ended up in both in Emacs and XEmacs.  
+result ended up in both in Emacs and XEmacs.
 As part of this rewrite, new object type for byte-compiled \Elisp{}
 functions was introduced; before that, a byte-compiled function looked
 like:
@@ -1073,20 +1085,25 @@ Then in Emacs-19.29 in an attempt to speed up loading of \Elisp{} packages
 as well as reduce the memory use of Emacs processes, a mechanism was added
 so that documentation strings as well as byte-code could be lazily fetched
 from compiled \Elisp{} files.  This can introduce problems if the file is
-modified while Emacs was running, so while this feature is always used
+modified while Emacs is running, so while this feature is always used
 for documentation strings it's very rarely used for byte-code.
 
+%% FIXME Mike: any idea what kind of speedup this brought?
 XEmacs added a just-in-time optimization pass to the byte code.  This
 would perform some validity checks ahead (eliding them from the actual
 execution), pre-compute stack use, make byte-code jumps relative
 (saving a register), and optimize relative jumps with short offsets.
 This effectively created an alternative byte-code dialect, which
 XEmacs would convert back to the ``standard'' representation on
-demand.  For many years, the XEmacs developers avoided changing the
+demand.
+%% FIXME Mike: This makes it sound like after those "many years" XEmacs
+%% developers finally did change the bytecode format, yet we don't talk
+%% about that change.
+For many years, the XEmacs developers avoided changing the
 byte-code format to make byte-code files interchangeable between Emacs
 and XEmacs..
 
-In late 2009, the byte-code interpreter was modified by Tom Tromey to
+In late 2009, the Emacs byte-code interpreter was modified by Tom Tromey to
 implement token threading using GCC's \emph{computed goto} feature, when
 available.  A patch for this feature had been submitted in May 2004 by
 Jaeyoun Chung, but the speed improvement was not even measured at that time
@@ -1302,10 +1319,17 @@ variables have been removed altogether.
 \section{Post-XEmacs}           % 2007-now ?
 \label{sec:post-xemacs}
 
-% FIXME: Section header
+Between 1991 and 2001, Emacs improved rather slowly compared to XEmacs.
+But starting around 2001, Emacs's pace picked up again, whereas XEmacs
+started to lose momentum.  Since around 2008, XEmacs development has been
+dormant.  2008 was also the year when Richard Stallman stepped down (again)
+from the maintainership of Emacs, and the new maintainers have proved more
+eager to make \Elisp{} evolve.
+%% Sadly, many improvements in XEmacs have never been
+%% incorporated back into Emacs.
 
 \subsection{Lexical scoping}
-\label{sec:lexical scoping}
+\label{sec:lexical-scoping}
 
 While Scheme was already about to get its second revision when Richard
 Stallman started to work on GNU Emacs, and Stallman obviously knew about
@@ -1354,10 +1378,10 @@ brought up many times.
 
 The first implementation appeared quite early, in the form of the
 \texttt{lexical-let} macro, which was part of the new \texttt{cl.el} by Dave
-Gillespie \email{<daveg@synaptics.com>} introduced in 1993 and performed
-a local form of closure-conversion.
+Gillespie \email{<daveg@synaptics.com>} introduced in 1993 and which
+performed a local form of closure-conversion.
 While this macro was used in many packages, it was never considered as
-a really good solution to the problem of providing lexical scoping.
+a good solution to the problem of providing lexical scoping.
 The somewhat long name was likely a factor, but the reason was more probably
 due to the fact that the code generated by the macro was less efficient than
 equivalent dynamically-scoped code and was more difficult to debug because
@@ -1462,7 +1486,7 @@ Changes to the byte-code were introduced as part of the lexical scoping
 feature that appeared in 2012 in Emacs-24.1, but were actually developed
 much earlier, probably around 2003.  Until the introduction of
 lexical-scoping, the stack-based byte-code only used its stack in the most
-simple way, and did not include any operation beyond
+simple way, and did not include any stack operation beyond
 \texttt{pop}/\texttt{dup}/\texttt{exch}, so to better support lexical
 scoping where the lexical variables are stored on the stack, several
 byte-codes were added to index directly into the stack, to modify stack
@@ -1922,21 +1946,97 @@ and those using the new encoding.
 
 \subsection{Profiler}
 
-FIXME
+In 1992, during early development of Emacs-19, Boaz Ben-Zvi implemented the
+\texttt{profile.el} package which implemented a fairly simple \Elisp{}
+profiler all in \Elisp{}.  This implementation was based on instrumenting
+a set of user-specified \Elisp{} functions by modifying their bodies in-place
+to keep track of time spent in those functions.
 
-\subsection{JIT compiler}
+In 1994, Barry A.~Warsaw implemented the \texttt{elp.el} package which took
+a similar approach but without modifying functions's bodies, which was
+brittle and inconvenient and only worked for functions defined in \Elisp.
+Instead it replaced the instrumented functions with wrappers which counted
+the number of calls, along with the execution time, and internally called
+the original function's definition.  This package was included in
+Emacs-19.29 and made \texttt{profile.el} obsolete.  Its implementation was
+significantly reworked for Emacs-24.4 to make use of the new
+\texttt{nadvice.el} package in order to add/remove instrumentation instead
+of doing it in its own ad-hoc way.
 
-FIXME
+In early 2011, Tomohiro Matsuyama started implementing in Emacs's C code
+a sampling-based profiler for \Elisp{}.  He finished the implementation as
+part of Google's Summer of Code of 2012, and it was included in Emacs-24.3.
+The main advantage of this profiler compared to \texttt{elp.el} is that it
+does not require instrumentation, and it collects (partial) stack traces.
+This means that not only the user does not need to know beforehand which
+functions might be involved but it can show a an actual call tree.
 
 \subsection{Generators}
 
-FIXME
+With the success of Python's and Javascript's iterators and generators, some
+Emacs users felt like \Elisp{} was lacking in abstraction, so in 2015,
+Daniel Colascione developed the \texttt{generator.el}, which was included
+into Emacs-25.1.  It makes it easy and convenient to write generators using
+macros \texttt{iter-lambda} and \texttt{iter-yield}.  Its implementation is
+based on a kind of local conversion to continuation-passing style (CPS) and
+hence relies extensively on the use of lexical scoping, to work around the
+fact that \Elisp{} does not directly provide something like \texttt{call/cc}
+to access underlying continuations.
 
 \subsection{Concurrency}
 
-FIXME
+\Elisp{} is a fundamentally sequential language, and it relies very heavily
+on side-effects to a global state.  Yet, its use in an interactive program
+has inevitably lead to a desire for concurrency to try and improve
+responsiveness.  So concurrency appeared very early on: already in
+Emacs-16.56 Emacs included support for asynchronous processes, i.e.~the
+execution of separate programs whose output was processed by so-called
+\emph{process filters} whenever the \Elisp{} execution engine is idly
+waiting for the next user command.
+
+While this very limited form of cooperative concurrency was slightly
+improved in 1996's Emacs-19.31 by adding native support for timers (they
+were earlier implemented as an asynchronous process sending Emacs output at
+the requested time), it has been the only form of concurrency available for
+most of Emacs's life.
+
+Adding true shared-memory concurrency to \Elisp{} is very problematic
+because of the pervasive reliance on a shared state in all of existing
+\Elisp{} code, but the limited existing support was limiting even in those
+cases where it was technically sufficient: many \Elisp{} packages which
+interact with external programs block many more times than really necessary,
+simply because in order to avoid it the coder needs to write their code in
+a \emph{continuation-passing style}, which interacts poorly with dynamic
+scoping and requires significant surgery to retro-fit to existing code.
+
+So in 2010, Tom Tromey started to work on adding shared-memory cooperative
+concurrency primitives like \texttt{make-thread} to Emacs.  Interaction with
+the implementation dynamic scoping, which is based on a global state for
+speed, required experimentation with various approaches.
+
+This result of this was finally released in 2018, as part of Emacs-26.1.
+Context switches still only take place at a few known points where \Elisp{}
+is idle (or via explicit calls to \texttt{thread-yield}).  The current
+implementation of this feature makes context switches take time proportional
+to the current stack depth, because the dynamic bindings of the old thread
+need to be saved and removed, after which the dynamic bindings of the new
+thread need to be restored.  Earlier implementation approaches tried to
+avoid this expensive form of context switching, by making global variable
+lookups a bit more expensive instead, but these required much more extensive
+and delicate changes to existing code, so while they may still be good
+options for the future, this first implementation favored a simpler and
+safer approach.
+
+Over the years, other approaches to concurrency and parallelism have been
+developed as \Elisp{} packages, most notably the \texttt{async.el} package
+developed in 2012 which runs \Elisp{} code in parallel in a separate
+Emacs subprocess.
 
 \subsection{Inline functions}
+
+FIXME
+
+\subsection{JIT compiler}
 
 FIXME
 
@@ -1989,10 +2089,14 @@ the \Elisp{} engine is provided by Guile.
 
 %% FIXME: Ask Sam what were his motivations for this work and how complete
 %% it is.
-In 1999, Sam Steingold also implemented the \Elisp{} language as
-a Common Lisp package~\cite{Steingold99}.  It does not attempt to
-reimplement the library of functions provided in Emacs to manipulate buffers
-and other related objects, so it focuses on the ``pure'' \Elisp{} language.
+In 1999, Sam Steingold also implemented the \Elisp{} language as a Common
+Lisp package~\cite{Steingold99}.  He was motivated by the hope of moving
+Emacs to work with a Common-Lisp language instead of \Elisp{}.
+His \texttt{elisp.lisp} package does not attempt to reimplement the library
+of functions provided in Emacs to manipulate buffers and other related
+objects, so it focuses on the ``pure'' \Elisp{} language; but it was able to
+run the non-UI parts of the Emacs Calendar, which provides sophisticated
+functions to manipulate and convert dates between many historical calendars.
 
 \section{Conclusion}
 \label{sec:conclusion}
