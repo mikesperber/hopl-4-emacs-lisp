@@ -556,14 +556,20 @@ byte-code language of Emacs has changed very little over the years and is
 still essentially the same as that of 1985.  The main changes were
 those made to support lexical scoping; see Section~\ref{sec:lexical-scoping}.
 
-\paragraph{Tail-call optimisation}
+\paragraph{Tail-call optimization}
 
 \Elisp{} does not optimize away tail calls.  With Scheme being familiar to
-many \Elisp{} developers, this is a disappointment for many.  There have
-been two patches developped independently and submitted to Emacs maintainers
+many \Elisp{} developers, this is a disappointment for many.
+In 1991, Jamie Zawinski added an \texttt{unbind\_all} instruction to
+the XEmacs byte-code engine (which appears in both Emacs and
+XEmacs to this day) that was meant to support tail-call optimization,
+but never implemented the optimization itself.
+
+There have
+been two patches developed independently and submitted to Emacs maintainers
 in late 2012 (by Troels Nielsen first and Chris Gay two months later) to
 optimize away tail calls in byte-compiled code, but so far none of them have
-made it into an official release.
+made it into an official release.  
 
 The main reason for that is partly a chicken-and-eggs problem.  Tail-call
 optimization (TCO) is largely incompatible with dynamic scoping, so it was
