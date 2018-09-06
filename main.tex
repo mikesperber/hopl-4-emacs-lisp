@@ -553,44 +553,8 @@ byte codes corresponding to \Elisp{} primitives such as
 While a systematic study would likely reveal that the operations that should
 deserve their own byte-code in modern \Elisp{} code are quite different, the
 byte-code language of Emacs has changed very little over the years and is
-still essentially the same as that of 1985.
-
-Around 1992, during the early development of Emacs-19, the implementation of
-the bytecode interpreter was rewritten, as was the compiler.  At the same
-time, a new object type for byte-compiled \Elisp{} functions was introduced;
-before that, a byte-compiled function looked like:
-\begin{verbatim}
-  (lambda (..ARGS..) (byte-code "..." ...))
-\end{verbatim}
-
-Then in Emacs-19.29 in an attempt to speed up loading of \Elisp{} packages
-as well as reduce the memory use of Emacs processes, a mechanism was added
-so that documentation strings as well as byte-code could be lazily fetched
-from compiled \Elisp{} files.  This can introduce problems if the file is
-modified while Emacs was running, so while this feature is always used
-for documentation strings it's very rarely used for byte-code.
-
-Changes to the byte-code were introduced as part of the lexical scoping
-feature that appeared in 2012 in Emacs-24.1, but were actually developed
-much earlier, probably around 2003.  Until the introduction of
-lexical-scoping, the stack-based byte-code only used its stack in the most
-simple way, and did not include any operation beyond
-\texttt{pop}/\texttt{dup}/\texttt{exch}, so to better support lexical
-scoping where the lexical variables are stored on the stack, several
-byte-codes were added to index directly into the stack, to modify stack
-slots, and to discard several stack elements at once.
-
-In late 2009, the byte-code interpreter was modified by Tom Tromey to
-implement token threading using GCC's \emph{computed goto} feature, when
-available.  A patch for this feature had been submitted in May 2004 by
-Jaeyoun Chung, but the speed improvement was not even measured at that time
-so it had not raised much enthusiasm.  Tom's implementation was no better,
-and the speed up was a meager 5\% but he pushed stronger for its inclusion,
-which only happened with Emacs-24.3, in 2012.  The reason why the speed
-improvement is disappointing was not really investigated, but the general
-consensus is that the byte-code interpreter is simply not very optimized, so
-the relative cost of the \texttt{switch} is not as high as it could (or,
-arguably, should) be.
+still essentially the same as that of 1985.  The main changes were
+those made to support lexical scoping; see Section~\ref{sec:lexical-scoping}.
 
 \paragraph{Tail-call optimisation}
 
@@ -983,9 +947,7 @@ change to the current \emph{XEmacs}.
 The focus of Lucid Emacs was on providing a proper graphical user
 interface.  As a result, most of the changes to Emacs Lisp in Lucid
 Emacs / XEmacs were to support the move from a TTY-based purely
-textual model to a graphical model.\footnote{Jamie Zawinski did write a new
-  byte-compiler, but its focus was on speed and optimization, not on
-  language features.}
+textual model to a graphical model.
 
 \subsection{Event and keymap representations}
 
@@ -1079,7 +1041,56 @@ characters an opaque type additionally discouraged the practice.
 \label{sec:coevolution}
 
 Some aspects of Emacs Lisp evolved in both Emacs and XEmacs, with both
-versions borrowing design from the other.
+versions borrowing design and code from the other.
+
+\subsection{Performance improvements}
+
+Both Emacs and XEmacs made various performance improvements, most of
+which were merged back and forth between the two versions.
+
+Jamie Zawinski and Hallvard Furuseth wrote a new optimizing
+byte-compiler for XEmacs, which, after some initial resistance, was
+merged into the Emacs codebase by 1992.
+
+Also around 1992, during the early development of Emacs-19, the
+implementation of the bytecode interpreter was rewritten, and the
+result ended up in both in Emacs and XEmacs.  
+As part of this rewrite, new object type for byte-compiled \Elisp{}
+functions was introduced; before that, a byte-compiled function looked
+like:
+%
+\begin{verbatim}
+  (lambda (..ARGS..) (byte-code "..." ...))
+\end{verbatim}
+%
+Then in Emacs-19.29 in an attempt to speed up loading of \Elisp{} packages
+as well as reduce the memory use of Emacs processes, a mechanism was added
+so that documentation strings as well as byte-code could be lazily fetched
+from compiled \Elisp{} files.  This can introduce problems if the file is
+modified while Emacs was running, so while this feature is always used
+for documentation strings it's very rarely used for byte-code.
+
+XEmacs added a just-in-time optimization pass to the byte code.  This
+would perform some validity checks ahead (eliding them from the actual
+execution), pre-compute stack use, make byte-code jumps relative
+(saving a register), and optimize relative jumps with short offsets.
+This effectively created an alternative byte-code dialect, which
+XEmacs would convert back to the ``standard'' representation on
+demand.  For many years, the XEmacs developers avoided changing the
+byte-code format to make byte-code files interchangeable between Emacs
+and XEmacs..
+
+In late 2009, the byte-code interpreter was modified by Tom Tromey to
+implement token threading using GCC's \emph{computed goto} feature, when
+available.  A patch for this feature had been submitted in May 2004 by
+Jaeyoun Chung, but the speed improvement was not even measured at that time
+so it had not raised much enthusiasm.  Tom's implementation was no better,
+and the speed up was a meager 5\% but he pushed stronger for its inclusion,
+which only happened with Emacs-24.3, in 2012.  The reason why the speed
+improvement is disappointing was not really investigated, but the general
+consensus is that the byte-code interpreter is simply not very optimized, so
+the relative cost of the \texttt{switch} is not as high as it could (or,
+arguably, should) be.
 
 \subsection{Unicode}
 
@@ -1285,7 +1296,10 @@ variables have been removed altogether.
 \section{Post-XEmacs}           % 2007-now ?
 \label{sec:post-xemacs}
 
+% FIXME: Section header
+
 \subsection{Lexical scoping}
+\label{sec:lexical scoping}
 
 While Scheme was already about to get its second revision when Richard
 Stallman started to work on GNU Emacs, and Stallman obviously knew about
@@ -1437,14 +1451,24 @@ closure conversion.  The main focus at that point was to:
 \item provide reliable support for the new lexical scoping mode, tho not
   necessarily with the best performance.
 \end{itemize}
+%
+Changes to the byte-code were introduced as part of the lexical scoping
+feature that appeared in 2012 in Emacs-24.1, but were actually developed
+much earlier, probably around 2003.  Until the introduction of
+lexical-scoping, the stack-based byte-code only used its stack in the most
+simple way, and did not include any operation beyond
+\texttt{pop}/\texttt{dup}/\texttt{exch}, so to better support lexical
+scoping where the lexical variables are stored on the stack, several
+byte-codes were added to index directly into the stack, to modify stack
+slots, and to discard several stack elements at once.
 
-%% FIXME: Should this go to the bytecode section?
 Performance of the new lexical scoping mode proved to be competitive with
 the performance of the dynamic scoping mode except for its interaction with
 the \texttt{catch}, \texttt{condition-case}, and \texttt{unwind-protect}
 primitives whose underlying byte-codes were a poor fit, requiring run-time
 construction of \Elisp{} code to propagate the lexical context into the body
-of those constructs.  So in Emacs-24.4, new byte codes were introduced and
+of those constructs.
+So in Emacs-24.4, new byte codes were introduced and
 the byte-compiler was modified to be able to make use of them.  Nowadays,
 code compiled using lexical scoping is generally expected to be marginally
 faster than if compiled with dynamic scoping.
