@@ -1108,6 +1108,9 @@ modified while Emacs is running, so while this feature is always used
 for documentation strings it's very rarely used for byte-code.
 
 %% FIXME Mike: any idea what kind of speedup this brought?
+%% No, Ben Wing tended to submit massive patches where the details got
+%% lost in the shuffle.
+
 XEmacs added a just-in-time optimization pass to the byte code.  This
 would perform some validity checks ahead (eliding them from the actual
 execution), pre-compute stack use, make byte-code jumps relative
@@ -1120,6 +1123,11 @@ avoided changing the byte-code format to make byte-code files
 interchangeable between Emacs and XEmacs.  While no significant
 changes were made to the byte-code format in XEmacs, the two
 instruction sets eventually drifted and became incompatible.
+
+While not directly a performance improvement to the \Elisp{}
+implementation, Ben Wing added an \Elisp{} profiler to XEmacs 19.14 in
+1996, which can provide timing information about function calls and
+allocation.
 
 In late 2009, the Emacs byte-code interpreter was modified by Tom Tromey to
 implement token threading using GCC's \emph{computed goto} feature, when
