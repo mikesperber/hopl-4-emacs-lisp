@@ -1041,7 +1041,31 @@ characters an opaque type additionally discouraged the practice.
 
 %% FIXME: \subsection{C FFI}
 
-%% FIXME: Variable aliases (Gerd added them to Emacs-22.1, introduced earlier in XEmacs)
+\subsection{Aliases}
+
+During the development of XEmacs 19.12, which was 1995, the first
+official release of Emacs 19 appeared, Emacs-19.28.  Emacs had
+implemented some XEmacs functionality, notably the support for
+multiple open GUI windows.  XEmacs had called these windows
+``screens,'' while Emacs called them ``frames.''  Compatibility with
+Emacs was an important goal for the XEmacs developers at the time.
+Consequently, they renamed the associated functionality.
+
+To preserve compatibility for \Elisp[} code written for previous
+versions of XEmacs, XEmacs introduced forms
+\texttt{define-obsolete-functional-alias} and
+\texttt{define-obsolete-variable-alias}.  The byte-code compiler would
+emit warnings if these aliases were used, but still compile the code.
+
+Emacs had long had a \texttt{defalias} form to declare function
+aliases, on which the \texttt{define-obsolete-functional-alias}
+functionality could be based.\footnote{Curiously, \texttt{defalias}
+  was elided from the Emacs code base in 1986 and reintroduced in
+  1993.}  XEmacs 19.12 added a corresponding primitive form for variable
+aliases, \texttt{defvaralias}, and functions \texttt{variable-alias}
+and \texttt{indirect-variable} to examine the alias chains.
+
+These additions were only merged into Emacs-22.1 in 2007.
 
 \section{Emacs/XEmacs co-evolution}
 \label{sec:coevolution}
