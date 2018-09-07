@@ -2108,7 +2108,49 @@ a corresponding compiler-macro.
 
 \subsection{JIT compiler}
 
-FIXME
+The existing implementations of \Elisp{} are relatively inefficient, all
+being based on fairly naive interpretation techniques.
+
+\subsubsection{First attempt}
+In 2004, Matthew Mundell developed the first JIT compiler for \Elisp.
+This took byte-compiled \Elisp{} code and used the GNU Lightning library to
+turn it into native machine code on the fly.
+The speed up obtained reached a factor of about 2 in the best case, which
+was rather disappointing, so it was not included into Emacs since the extra
+maintenance burden was not considered justified.
+An important reason for the disappointing performance is that it only
+removed the immediate interpretation overhead, but did not affect function
+calls nor was it able to remove redundant type checks.
+
+\subsubsection{Second attempt}
+Around 2012, Burton Samograd developed a second JIT compiler for \Elisp.
+This took a similar path, but using GNU Libjit instead.  It was very
+simplistic, turning each byte-code into a call to a C function.
+The resulting performance was not more impressive, the author measuring
+a 25\% speedup on a \texttt{raytracer.el} test.
+
+\subsubsection{Third attempt}
+In 2016, Nickolas Lloyd developed the third JIT compiler for \Elisp, again
+based on GNU Libjit and based on a similar approach.  It improved on
+Burton's implementation by open-coding most common byte-codes instead, which
+avoided many C function calls, but it obtained comparable results most
+likely because Libjit is not very good at optimizing its code and C function
+calls aren't that costly.  but did get to the point of being stable enough
+to be used globally.
+
+\subsubsection{Fourth attempt}
+In 2018, Tom Tromey took another stab at it, again using GNU Libjit.
+Compared to Nickolas, it focuses exclusively on code using lexical binding,
+which is likely to benefit more, and it implements additional optimizations
+by getting rid at compile-time of all the manipulation of the stack.
+In the best case it reaches a speed up factor of 3.5, which is not ideal,
+but is a bit more respectable.  It can be used globally but is still
+a very naive JIT compiler which requires further work to try and avoid
+pathological behavior in some situations where the JIT compilation is
+performed too eagerly, leading to significant slowdowns.
+
+The discussion whether this last JIT compiler will be integrated as an
+experimental feature into Emacs-27.1 is still on-going.
 
 \subsection{Module system}
 
@@ -2184,6 +2226,19 @@ Additionally, Matthew Birkholz implemented an \Elisp{} interpreter
 in Scheme that was able to run substantial \Elisp{}
 packages~\cite{Birkholz1993} at the time, among them the Gnus news reader.
 
+\subsection{Elisp in Common-Lisp}
+
+%% FIXME: Ask Sam what were his motivations for this work and how complete
+%% it is.
+In 1999, Sam Steingold also implemented the \Elisp{} language as a Common
+Lisp package~\cite{Steingold99}.  He was motivated by the hope of moving
+Emacs to work with a Common-Lisp language instead of \Elisp{}.
+His \texttt{elisp.lisp} package does not attempt to reimplement the library
+of functions provided in Emacs to manipulate buffers and other related
+objects, so it focuses on the ``pure'' \Elisp{} language; but it was able to
+run the non-UI parts of the Emacs Calendar, which provides sophisticated
+functions to manipulate and convert dates between many historical calendars.
+
 \subsection{JEmacs}
 
 JEmacs~\cite{Bothner2001} is an editor that ships with Kawa
@@ -2202,19 +2257,6 @@ ship with a fairly complete implementation of \Elisp{} that translates
 Guile-Emacs system, which is a work-in-progress modification of Emacs where
 the \Elisp{} engine is provided by Guile.
 %% FIXME: Motivations?
-
-\subsection{Elisp in Common-Lisp}
-
-%% FIXME: Ask Sam what were his motivations for this work and how complete
-%% it is.
-In 1999, Sam Steingold also implemented the \Elisp{} language as a Common
-Lisp package~\cite{Steingold99}.  He was motivated by the hope of moving
-Emacs to work with a Common-Lisp language instead of \Elisp{}.
-His \texttt{elisp.lisp} package does not attempt to reimplement the library
-of functions provided in Emacs to manipulate buffers and other related
-objects, so it focuses on the ``pure'' \Elisp{} language; but it was able to
-run the non-UI parts of the Emacs Calendar, which provides sophisticated
-functions to manipulate and convert dates between many historical calendars.
 
 \section{Conclusion}
 \label{sec:conclusion}
