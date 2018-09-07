@@ -1051,7 +1051,7 @@ multiple open GUI windows.  XEmacs had called these windows
 Emacs was an important goal for the XEmacs developers at the time.
 Consequently, they renamed the associated functionality.
 
-To preserve compatibility for \Elisp[} code written for previous
+To preserve compatibility for \Elisp{} code written for previous
 versions of XEmacs, XEmacs introduced forms
 \texttt{define-obsolete-functional-alias} and
 \texttt{define-obsolete-variable-alias}.  The byte-code compiler would
@@ -2112,7 +2112,55 @@ FIXME
 
 \subsection{Module system}
 
-FIXME
+While \Elisp{} was designed from the beginning as a real programming
+language rather than a tiny ad-hoc extension language, it was not designed
+for ``programming in the large'' as witnessed by the lack of module or
+namespace system.
+
+Yet, the \Elisp{} side of Emacs is now a rather large system, so in order to
+avoid name conflicts, \Elisp{} relies on a poor man's namespace system, as
+mentioned in Sec.~\ref{sec:lexical-scoping}, where code loosely follows
+a convention where global functions and variables belonging to package
+\textsl{<pkg>} will define identifiers starting with a \texttt{<pkg>-}
+prefix (and use a prefix of \texttt{<pkg>--} in order to indicate that this
+identifier should be considered an internal definition).
+
+There have been many attempts to remedy this situation by providing support
+for some form of namespacing:
+\begin{itemize}
+\item In May 2011, Christopher Wellons developed the Fakespace package which
+  lets one define private variables and functions and then prevents them
+  from escaping into the global namespace.  Non-private definitions still
+  rely on the usual package-prefix naming convention to avoid conflicts.
+\item In October 2012, Chris Barrett developed the Namespaces package which
+  provides an extensive set of new macros to define namespaces, define
+  functions and variables in those namespaces, and use them from
+  other namespaces.
+\item In March 2013, Wilfred Hughes developed the proof-of-concept
+  \texttt{with-namespace} macro which basically adds the specified namespace
+  prefix to all the elements defined in its body.
+\item At the same time, Yann Hodique developed the proof-of-concept Codex
+  package which instead tries to provide a functionality similar to
+  Common-Lisp's packages, where each package has its own \emph{obarray}.
+\item In early 2014, Artur Malabarba developed the Names package, which
+  takes the approach of \texttt{with-namespace}, but doing a much more
+  thorough job.
+\item In 2015, the same Artur Malabarba developed the Nameless package which
+  takes a completely different approach: it does not provide any new
+  \Elisp{} construct and instead focuses on making Emacs \emph{hide} the
+  package prefixes from the user while working on the code.
+\end{itemize}
+
+To date, no namespacing facility has been incorporated into Emacs, nor seen
+much use in other packages.  The last time this subject was (hotly) debated
+among Emacs maintainers and contributors, around 2013, no consensus
+appeared, but other than inertia one of the main arguments in favor of the
+status quo was that the poor man's namespacing used makes cross-referencing
+easier: simple textual search can be used to find definitions and uses of
+any global function or variable, whereas all the alternatives introduce
+names that need to be interpreted relative to their context forcing the
+reliance on an IDE that understand the particular namespacing
+used when browsing the code.
 
 %% FIXME: Compilation of Elisp to C by Tom Tromey!
 
