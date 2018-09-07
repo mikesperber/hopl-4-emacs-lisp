@@ -1141,7 +1141,8 @@ instruction sets eventually drifted and became incompatible.
 While not directly a performance improvement to the \Elisp{}
 implementation, Ben Wing added an \Elisp{} profiler to XEmacs 19.14 in
 1996, which can provide timing information about function calls and
-allocation.
+allocation.  (See Section~\ref{sec:profiler} about the profiling
+efforts in Emacs.)
 
 In late 2009, the Emacs byte-code interpreter was modified by Tom Tromey to
 implement token threading using GCC's \emph{computed goto} feature, when
@@ -1985,6 +1986,7 @@ the printed representation of objects using the old vector-based encoding
 and those using the new encoding.
 
 \subsection{Profiler}
+\label{sec:profiler}
 
 In 1992, during early development of Emacs-19, Boaz Ben-Zvi implemented the
 \texttt{profile.el} package which implemented a fairly simple \Elisp{}
