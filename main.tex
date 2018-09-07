@@ -1115,12 +1115,11 @@ execution), pre-compute stack use, make byte-code jumps relative
 This effectively created an alternative byte-code dialect, which
 XEmacs would convert back to the ``standard'' representation on
 demand.
-%% FIXME Mike: This makes it sound like after those "many years" XEmacs
-%% developers finally did change the bytecode format, yet we don't talk
-%% about that change.
-For many years, the XEmacs developers avoided changing the
-byte-code format to make byte-code files interchangeable between Emacs
-and XEmacs..
+During the XEmacs 19 and much of the XEmacs 20 cycle, developers
+avoided changing the byte-code format to make byte-code files
+interchangeable between Emacs and XEmacs.  While no significant
+changes were made to the byte-code format in XEmacs, the two
+instruction sets eventually drifted and became incompatible.
 
 In late 2009, the Emacs byte-code interpreter was modified by Tom Tromey to
 implement token threading using GCC's \emph{computed goto} feature, when
