@@ -1058,6 +1058,9 @@ versions of XEmacs, XEmacs introduced forms
 emit warnings if these aliases were used, but still compile the code.
 
 Emacs had long had a \texttt{defalias} form to declare function
+%% FIXME Mike: in current XEmacs I can only find define-obsolete-function-alias
+%% Has it changed name since its introduction (without leaving its
+%% own obsolete-function-alias ;-), or is that just a typo?
 aliases, on which the \texttt{define-obsolete-functional-alias}
 functionality could be based.\footnote{Curiously, \texttt{defalias}
   was elided from the Emacs code base in 1986 and reintroduced in
@@ -1079,27 +1082,12 @@ Both Emacs and XEmacs made various performance improvements, most of
 which were merged back and forth between the two versions.
 
 Jamie Zawinski and Hallvard Furuseth wrote a new optimizing
-%% FIXME Mike: I assume the resistance was from Richard.
-%% Could we give some idea about the reason for the resistance or
-%% was it just the fact that he didn't have the time to follow the
-%% progress of the implementation and was hence "losing control" in the
-%% sense that he wasn't familiar with the code and/or didn't like some
-%% of the implementation choices yet didn't have the time/energy to
-%% change it?
-%% FIXME Stefan: I think it was mostly incompatible personalities.
-%% Jamie's take was:
-%%
-%% "In addition to not listening to any design ideas we had, RMS's
-%% policy was to require us to provide source diffs and to explain
-%% every changed line. Because our efforts towards release were
-%% mounting, and we were re-writing massive amounts of the system,
-%% source diffs didn't make sense, but RMS and Blandy were unwilling or
-%% unable to work at a higher level. I traveled to Cambridge to work
-%% things out, and my team had numerous phone conversations with RMS. "
-%%
-%% This description certainly fits with the behavior I've seen from
-%% Richard, so I assume it's true.  Don't know how to do better
-%% wrt. the paper though.
+%% FIXME Mike: we tend to use XEmacs a bit everywhere, but I wonder if we
+%% should be careful to use "Lucid Emacs" when the timeframe corresponds
+%% to before the name was changed to XEmacs (such as here).
+%% Or maybe add a note in the intro about the fact that we often use XEmacs
+%% to refer to what was then called Lucid Emacs.
+%% WDYT?
 byte-compiler for XEmacs, which, after some initial resistance, was
 merged into the Emacs codebase by 1992.
 
@@ -1138,7 +1126,11 @@ interchangeable between Emacs and XEmacs.  While no significant
 changes were made to the byte-code format in XEmacs, the two
 instruction sets eventually drifted and became incompatible.
 
+%% FIXME: Maybe this should be moved to the sec:profiler section (which
+%% itself should maybe move to an earlier part of the paper)?
 While not directly a performance improvement to the \Elisp{}
+%% FIXME Mike: Could you give a bit more info (e.g. is it sampling-based, or
+%% instrumentation-based, or something else?)
 implementation, Ben Wing added an \Elisp{} profiler to XEmacs 19.14 in
 1996, which can provide timing information about function calls and
 allocation.  (See Section~\ref{sec:profiler} about the profiling
