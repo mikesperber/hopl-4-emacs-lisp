@@ -2067,10 +2067,10 @@ but the compiler-macro is important to optimize for example
 \texttt{(cl-typep x 'integer)} into \texttt{(integerp x)}.  While this
 optimization could arguably be performed automatically by a sufficiently
 sophisticated compiler, the \Elisp{} compiler is much too naive for that.
-So Stefan Monnier developed instead the new macro \texttt{define-inline}
-macro, which was included in Emacs-25.1.  It lets one define a function in
-such a way that from its definition the macro can extract both a normal
-function body and a corresponding compiler-macro.
+So he developed the new macro \texttt{define-inline}, which was included in
+Emacs-25.1.  It lets one define a function in such a way that from its
+definition the macro can extract both a normal function body and
+a corresponding compiler-macro.
 
 \subsection{JIT compiler}
 
