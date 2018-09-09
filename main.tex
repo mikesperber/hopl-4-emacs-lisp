@@ -1127,12 +1127,11 @@ instruction sets eventually drifted and became incompatible.
 %% FIXME: Maybe this should be moved to the sec:profiler section (which
 %% itself should maybe move to an earlier part of the paper)?
 While not directly a performance improvement to the \Elisp{}
-%% FIXME Mike: Could you give a bit more info (e.g. is it sampling-based, or
-%% instrumentation-based, or something else?)
 implementation, Ben Wing added an \Elisp{} profiler to XEmacs 19.14 in
-1996, which can provide timing information about function calls and
-allocation.  (See Section~\ref{sec:profiler} about the profiling
-efforts in Emacs.)
+1996 by instrumenting entry points in the byte-code interpreter.
+In profiling mode, the byte-code interpreter provides timing
+information about function calls and allocation.  (See
+Section~\ref{sec:profiler} about the profiling efforts in Emacs.)
 
 In late 2009, the Emacs byte-code interpreter was modified by Tom Tromey to
 implement token threading using GCC's \emph{computed goto} feature, when
