@@ -1,7 +1,7 @@
 \documentclass[format=acmsmall, review=false, screen=true]{acmart}
 
 \usepackage{booktabs} % For formal tables
-\usepackage{alltt}
+%% \usepackage{alltt}
 \usepackage[utf8]{inputenc}
 
 % Metadata Information
@@ -118,7 +118,7 @@ Several early incarnations of Emacs were written in Lisp, notably on
 the Lisp Machine (called \emph{EINE} for ``EINE Is Not EMACS'') by
 Dan Weinreb and in MacLisp~\cite{Moon1974,Pitman1983} by Bernie Greenberg in
 1978~\cite{Stallman2002}.  The ensuing possibilities for extending the
-editor wereattractive to Richard Stallman, who wanted to write a new
+editor were attractive to Richard Stallman, who wanted to write a new
 widely available version.  As a result, \Elisp{} is a direct
 descendant of MacLisp.
 
@@ -148,10 +148,10 @@ the dynamic environment of the callee.
 \section{Early history}         % -1992 ?
 \label{sec:early-history}
 
-Following Greenberg's Multics Emacs, Stallman decided to write a (for
+Following Greenberg's Multics Emacs, Richard Stallman decided to write a (for
 him) second version of Emacs, which included \Elisp{} from the start.
 As Greenberg's Emacs required a high-performance Lisp compiler to run
-efficiently, Stallman decided to reimplement the basis for the new
+efficiently, Richard Stallman decided to reimplement the basis for the new
 Emacs in C, with an integrated Lisp interpreter.  Buffer manipulation
 and redisplay were written in efficient C, higher-level functionality
 in Lisp.
@@ -160,12 +160,12 @@ The initial design of \Elisp{} was motivated by the pervasive
 requirement of \emph{extensibility}; users ``must be able to
 redefine each character''~\cite{Stallman1981}.  TECO and Gosling Emacs
 featured small languages that were either too obscure or too weak to
-support this vision.  Consequently, Stallman took inspiration from
+support this vision.  Consequently, Richard Stallman took inspiration from
 MacLisp, and \Elisp{} started as a real programming language with
 powerful abstraction facilities, thus foregoing Greenspun's tenth
 rule.
 
-Moreover, Stallman, made the design of \Elisp{}
+Moreover, Richard Stallman, made the design of \Elisp{}
 embody and showcase the ideals of Free Software.  For example, not only
 is it legal to get and modify the source code, but every effort
 is made to encourage the end-user to do so.  The resulting requirements had a profound
@@ -249,10 +249,11 @@ language until around 1991 when it was added as a macro, early during the
 development of Emacs-19.  In Emacs-18, anonymous functions were written
 as quoted values of the form:
 \begin{verbatim}
-  '(lambda (..ARGS..) ..BODY..)
+    '(lambda (..ARGS..) ..BODY..)
 \end{verbatim}
 While the \texttt{lambda} macro has made this quote unnecessary for almost
-30 years now, many instances of this practice still occur in \Elisp{} code.
+30 years now, many instances of this practice still occur in \Elisp{} code,
+even though it prevents byte-compilation of the body.
 
 % FIXME: #'(lambda ...)
 
@@ -273,11 +274,14 @@ and font to use when displaying the various parts of the string.
 Around 1994, support for arbitrary character sets was added to Emacs and
 XEmacs, which required distinguishing between bytes and characters, and
 hence changing its string objects.  Characters are represented with
-a variable number of bytes, favoring a compact representation at the
-detriment of random access.
-
-% FIXME Stefan: But what was the representation, and what exactly was
-% the "detriment"?
+a variable number of bytes, similar to \texttt{utf-8}, favoring a compact
+representation at the cost of a slower random access.  In practice, random
+access to strings is fairly rare, so it works rather well, but it does
+impose a significant constraint: the \texttt{aset} primitive which replaces
+one of the string's character with another by side-effect will sometimes
+change the string's length in bytes, which needs to relocate the
+string's bytes elsewhere and requires an indirection between the string
+object and the bytes it holds.
 
 In XEmacs, strings have a ``modified-tick'' that is bumped every time
 a string is modified in-place.  This count can be retrieved with the
@@ -297,32 +301,31 @@ Instead, the special forms that came with quasiquotation---backquote
 (\verb|`|), unquote (\verb|,|) and unquote-splicing (\verb|,@|) were
 the names of special forms.   Thus, what is usually written as:
 %
-\begin{alltt}
-`(a b ,c)
-\end{alltt}
+\begin{verbatim}
+    `(a b ,c)
+\end{verbatim}
 %
 was written in early \Elisp{} as:
 %
-\begin{alltt}
-(` (a b (, c)))
-\end{alltt}
+\begin{verbatim}
+    (` (a b (, c)))
+\end{verbatim}
 %
 The releases of Emacs-19.28 and XEmacs 19.12 in 1994 finally added the
 proper reader support to generate the latter version from the first.
 % FIXME Stefan: Do a global replace "tho" -> "though"?
-The reader had to rely on a heuristic for that, tho, because \texttt{(` a)} is
-valid in both syntaxes but means different things: It could either
-denote a backquote expression (denoting the symbol \verb|a|) or an
-application of a function named \verb|`| to the value of variable
-\verb|a|.
+The reader had to rely on a heuristic for that, tho, because \texttt{(`a)} is
+valid in both syntaxes but means different things: It could either denote an
+old-style backquote expression (denoting the backquoted symbol \texttt{a}) or
+a single-element list containing the new-style backquoted symbol \texttt{a}.
 
-So the old format was declared obsolete,
-% FIXME Stefan: when?
-tho still supported, and the
-new format is only recognized in some cases; more specifically the new
+%% Stefan: I can't see when/where it was actually declared obsolete,
+%% but it clearly was made obsolete by the introduction of the new syntax.
+So the old format, tho obsolete, was still supported, and the
+new format was only recognized in some cases; more specifically the new
 unquote was only recognized within a new backquote, and the new
-backquote was only recognized if it occurs within a new backquote or
-if it does not immediately follow an open parenthesis.
+backquote was only recognized if it occurred within a new backquote or
+if it did not immediately follow an open parenthesis.
 
 Seeing how uses of old-style backquotes were not going away, in 2007
 Emacs-22.2 introduced explicit tests and warnings to bring attention to uses
@@ -346,12 +349,12 @@ An important feature of Emacs from the start was the idea of
 definition form in \Elisp{} can include documentation in the form of a
 string after the signature:
 %
-\begin{alltt}
-(defun ignore (&rest _ignore)
-  "Do nothing and return nil.
-This function accepts any number of arguments, but ignores them."
-  nil)
-\end{alltt}
+\begin{verbatim}
+    (defun ignore (&rest _ignore)
+      "Do nothing and return nil.
+    This function accepts any number of arguments, but ignores them."
+      nil)
+\end{verbatim}
 %
 This \emph{docstring} can be retrieved in various ways, in particular
 through the user interface.  This idea was apparently first introduced in
@@ -373,21 +376,21 @@ are specially marked with an \texttt{interactive} form at the
 beginning of the body, like this:
 %
 \begin{verbatim}
-(defun forward-symbol (arg)
-  "Move point to the next position that is the end of a symbol.
-A symbol is any sequence of characters that are in either the
-word constituent or symbol constituent syntax class.
-With prefix argument ARG, do it ARG times if positive, or move
-backwards ARG times if negative."
-  (interactive "^p")
-  (if (natnump arg)
-      (re-search-forward "\\(\\sw\\|\\s_\\)+" nil 'move arg)
-    (while (< arg 0)
-      (if (re-search-backward "\\(\\sw\\|\\s_\\)+" nil 'move)
-          (skip-syntax-backward "w_"))
-      (setq arg (1+ arg)))))
+    (defun forward-symbol (arg)
+      "Move point to the next position that is the end of a symbol.
+    A symbol is any sequence of characters that are in either the
+    word constituent or symbol constituent syntax class.
+    With prefix argument ARG, do it ARG times if positive, or move
+    backwards ARG times if negative."
+      (interactive "^p")
+      (if (natnump arg)
+          (re-search-forward "\\(\\sw\\|\\s_\\)+" nil 'move arg)
+        (while (< arg 0)
+          (if (re-search-backward "\\(\\sw\\|\\s_\\)+" nil 'move)
+              (skip-syntax-backward "w_"))
+          (setq arg (1+ arg)))))
 \end{verbatim}
-%
+%% FIXME: The operand doesn't have to be a string!
 The \texttt{interactive} form also has an optional string operand that
 regulates how such a function receives its arguments.  In the above
 example, \verb|p| means that the function accepts a \emph{prefix
@@ -411,12 +414,12 @@ a \emph{condition system} inspired from the Lisp Machine although it did
 not cover all the features of the Lisp Machine system, such as the ability
 to recover from an error.
 
-The \texttt{signal} function takes an \texttt{ERROR-SYMBOL}
-classifying the exceptional situation and an additional \texttt{DATA}
-argument.  An error symbol is a symbol with an
-\texttt{error-conditions} property that is a list of condition names.
-An invocation of \texttt{signal} escapes to the most recent active use
-of \texttt{condition-case}, which dispatches on the condition name.
+The \texttt{signal} function takes an \texttt{ERROR-SYMBOL} classifying the
+exceptional situation and an additional \texttt{DATA} argument.  An error
+symbol is a symbol with an \texttt{error-conditions} property that is a list
+of condition names.  An invocation of \texttt{signal} escapes to the nearest
+use of \texttt{condition-case} in the call stack, which dispatches on the
+condition name.
 
 % FIXME: Examples?
 
@@ -450,9 +453,9 @@ is said to have its \emph{default} or \emph{global} value.
 
 Variables can be both buffer-local and dynamically bound at the same time:
 \begin{verbatim}
-  (let ((buffer-file-name "/home/rms/.emacs"))
-    (with-current-buffer "some-other-buffer"
-      buffer-file-name))
+    (let ((buffer-file-name "/home/rms/.emacs"))
+      (with-current-buffer "some-other-buffer"
+        buffer-file-name))
 \end{verbatim}
 This example will not return \texttt{"/home/rms/.emacs"} but the
 buffer-local value of \texttt{buffer-file-name} in the buffer
@@ -474,11 +477,11 @@ buffer-local variables.  The most famous one was fixed in Emacs-21.1.
 %% that was.
 This bug affected code like
 \begin{verbatim}
-  (let ((buffer-file-name "/home/rms/.emacs"))
-    ...
-    (set-buffer other-buffer)
-    ...)
-"/afs/deinprogramm.de/home/sperber/data/papers/hopl-4-emacs-lisp/main.tex"\end{verbatim}
+    (let ((buffer-file-name "/home/rms/.emacs"))
+      ...
+      (set-buffer other-buffer)
+      ...)
+\end{verbatim}
 where the current buffer was different when the let-binding is entered from
 when it is left\footnote{\texttt{set-buffer} is like
   \texttt{with-current-buffer} except that it is not scoped, so it takes
@@ -489,7 +492,7 @@ wrong buffer when exiting the \texttt{let}.
 \subsection{Hooks}
 \label{sec:hooks}
 
-One important aspect of the extensibility Stallman originally
+One important aspect of the extensibility Richard Stallman originally
 conceived for Emacs was the ability to make existing functions run
 additional code without having to change them, so as to extend their
 behavior.  Emacs supports this at well-defined points called
@@ -556,10 +559,14 @@ to \Elisp{}.
 
 Emacs has two execution engines for \Elisp: The first is a very simple
 interpreter written in C operating directly on the S-expression
-representation of the code.  In July 1985, Emacs-16.56 also came with
-a \texttt{byte-code} function, which interpreted its string argument as
-a sequence of stack-based byte codes to execute, as well as a compiler,
-written in \Elisp{}, which translated \Elisp{} code to that
+representation of the code.
+%% FIXME: This makes it sound like it was introduced in Emacs-16.56,
+%% whereas I don't know when it was introduced: 16.56 is simply the first
+%% revision I could get my hands on!
+Some time before the release of Emacs-16.56 in July 1985,
+a \texttt{byte-code} function was added, which interpreted its string
+argument as a sequence of stack-based byte codes to execute, along with
+a compiler, written in \Elisp{}, which translated \Elisp{} code to that
 byte-code language.
 
 While \Elisp{} is basically a ``run of the mill'' programming language, just
@@ -609,9 +616,17 @@ This said, there were other objections to those patches:
   when interpreted.  One alternative is to always byte-compile the code and
   get rid of the \Elisp{} interpreter, but that's a change that would have
   much further consequences.
-  % Note: TCO in general does not need to have this effect, notably
-  % MIT Scheme doesn't, so Mike softened the wording here.
-\item The available implementations of TCO affect the behavior not only in terms of reducing the stack
+  %% Note: TCO in general does not need to have this effect, notably
+  %% MIT Scheme doesn't, so Mike softened the wording here.
+  %% FIXME Mike: not sure I understand.  Do you mean to say that TCO does not
+  %% necessarily reduce the stack usage?  That doesn't correspond to my
+  %% understanding of TCO (unless you're thinking of stack in a literal
+  %% way, where it may be unaffected for implementation that allocate
+  %% their activation frames in the heap, but for those, I'd consider
+  %% the linked list of activation frames to be the (heap-allocated) stack,
+  %% and TCP still reduces that stack usage).
+\item The available implementations of TCO affect the behavior not only in
+  terms of reducing the stack
   allocation and increasing performance, but it would also eliminate some
   activation frames from stack backtraces, which would be detrimental to
   debugging.  This is particularly true for tail-calls which are made to
@@ -839,15 +854,12 @@ Over time, there have been several attempts to replace the GC.
 During the development of Emacs-21 around 2001, Gerd Möllman worked on
 a generational incremental mostly-copying GC based on a read barrier
 implemented using the operating system's VM primitives, but it was never
-completed nor even actually integrated into Emacs's code.
-Its implementation did not get far enough to know its
-performance characteristics and when Gerd stepped down as Emacs maintainer
-in 2002 he stopped working on it and noone picked it up either.
-%% Its main interest was to reduce the
-%% duration of GC pauses, but these are rarely problematic.  Its main problems
-%% were that it increased the proportion of time spent in the GC, and that it
-%% introduced various portability issues because it relied on operating system
-%% primitives which are not well standardized.
+completed nor even actually integrated into Emacs's code.  Gerd gave up on
+this work when he realized that it was infringing on a patent and hence
+wouldn't be distributable with Emacs anyway.
+%% Its implementation did not get far enough to know its
+%% performance characteristics and when Gerd stepped down as Emacs maintainer
+%% in 2002 he stopped working on it and noone picked it up either.
 
 During 2003, Dave Love worked on replacing Emacs's GC with Boehm's
 conservative GC.  The effort went far enough to get a usable Emacs but it
@@ -986,6 +998,9 @@ functions might be involved but it can show a an actual call tree.
 
 \subsection{JIT compilation}
 \label{sec:jit}
+%% FIXME Mike: Why is this in this early section, even though it's a pretty
+%% late effort that only affects Emacs, so it can be considered "post-XEmacs"?
+%% Is that in preparation for the addition of some XEmacs-JIT efforts?
 
 The existing implementations of \Elisp{} are relatively inefficient, all
 being based on fairly naive interpretation techniques.
@@ -1077,20 +1092,20 @@ The current representation for keymaps in Emacs is richer but follows
 largely the same design---here is an example~\cite{ELispManual2018}:
 %
 \begin{verbatim}
-(keymap
- (3 keymap
-    ;; C-c C-z
-    (26 . run-lisp))
- (27 keymap
-     ;; ‘C-M-x’, treated as ‘<ESC> C-x’
-     (24 . lisp-send-defun))
- ;; This part is inherited from ‘lisp-mode-shared-map’.
- keymap
- ;; <DEL>
- (127 . backward-delete-char-untabify)
- (27 keymap
-     ;; ‘C-M-q’, treated as ‘<ESC> C-q’
-     (17 . indent-sexp)))
+    (keymap
+     (3 keymap
+        ;; C-c C-z
+        (26 . run-lisp))
+     (27 keymap
+         ;; ‘C-M-x’, treated as ‘<ESC> C-x’
+         (24 . lisp-send-defun))
+     ;; This part is inherited from ‘lisp-mode-shared-map’.
+     keymap
+     ;; <DEL>
+     (127 . backward-delete-char-untabify)
+     (27 keymap
+         ;; ‘C-M-q’, treated as ‘<ESC> C-q’
+         (17 . indent-sexp)))
 \end{verbatim}
 %
 This creates problems with software evolution: While Emacs offered
@@ -1149,7 +1164,7 @@ characters an opaque type additionally discouraged the practice.
 
 \subsection{C FFI}
 
-As the \Elisp{} runtime was written in C, it was always possibly to
+As the \Elisp{} runtime was written in C, it was always possible to
 add new \Elisp{} functions written in C to the system.  Those C
 functions could also call \Elisp{} functions.
 
@@ -1159,7 +1174,7 @@ Starting in 1998, J.\ Kean Johnston added facilities to XEmacs
 (released with version 21.2 in 1999), which allowed \Elisp{} code to
 build and dynamically load shared libraries (called \textit{modules})
 written in C into running editor and call the functions defined
-there.  Starting in 2002 with XEmacs 21.5.5, a number of such modules
+therein.  Starting in 2002 with XEmacs 21.5.5, a number of such modules
 were distributed with XEmacs, among them bindings for existing C
 libraries such as Zlib, Ldap, PostgreSQL.
 
@@ -1169,18 +1184,20 @@ Evgeny wrote an FFI for SXEmacs~\cite{SXEmacs}, a fork of XEmacs.
 This FFI allows loading and calling existing C libraries directly,
 without intervening wrappers, by declaring the type signatures of C
 functions in \Elisp{}.  For example, the FFI allows using Curl like
-so:
+this:
 %
 \begin{verbatim}
-(ffi-load "libcurl.so")
-(setq curl:curl_escape
-      (ffi-defun '(function c-string c-string int) "curl_escape"))
-(let* ((url "http://foo.org/please escape this<$!=3>")
-       (str (ffi-create-fo 'c-string url))
-       (len (ffi-create-fo 'int (length url)))
-       (result (ffi-call-function curl:curl_escape str len))
-  (ffi-get result))
+    (ffi-load "libcurl.so")
+    (setq curl:curl_escape
+          (ffi-defun '(function c-string c-string int) "curl_escape"))
+    (let* ((url "http://foo.org/please escape this<$!=3>")
+           (str (ffi-create-fo 'c-string url))
+           (len (ffi-create-fo 'int (length url)))
+           (result (ffi-call-function curl:curl_escape str len))
+      (ffi-get result))
 \end{verbatim}
+
+%% FIXME Stefan: Add discussion of Emacs's FFI
 
 \subsection{Aliases}
 
@@ -1227,7 +1244,7 @@ Jamie Zawinski and Hallvard Furuseth wrote a new optimizing
 %% to refer to what was then called Lucid Emacs.
 %% WDYT?
 %% Mike: You're right.
-byte-compiler for Lucid Emacs Emacs, which, after some initial resistance, was
+byte-compiler for Lucid Emacs, which, after some initial resistance, was
 merged into the Emacs codebase by 1992.
 
 Also around 1992, during the early development of Emacs-19, the
@@ -1238,7 +1255,7 @@ functions was introduced; before that, a byte-compiled function looked
 like:
 %
 \begin{verbatim}
-  (lambda (..ARGS..) (byte-code "..." ...))
+    (lambda (..ARGS..) (byte-code "..." ...))
 \end{verbatim}
 %
 Then in Emacs-19.29 in an attempt to speed up loading of \Elisp{} packages
@@ -1429,9 +1446,9 @@ A specifier's value (its \emph{instance}) depends on its
 character set, or certain properties of these.  For example,
 \texttt{default-toolbar} is a specifier that could be created with:
 %
-\begin{alltt}
-(defvar default-toolbar (make-specifier 'toolbar))
-\end{alltt}
+\begin{verbatim}
+    (defvar default-toolbar (make-specifier 'toolbar))
+\end{verbatim}
 %
 (The \verb|'toolbar| is a type argument that the specifier system uses
 for validation.)
@@ -1439,16 +1456,16 @@ for validation.)
 \Elisp{} code could retrieve a specifier's value (its
 \emph{instantiator}) like this:
 %
-\begin{alltt}
-(specifier-instance default-toolbar)
-\end{alltt}
+\begin{verbatim}
+    (specifier-instance default-toolbar)
+\end{verbatim}
 %
 Code can modify a specifier with a value that is buffer-local as
 follows:
 %
-\begin{alltt}
-(set-specifier default-toolbar <value> (current-buffer))
-\end{alltt}
+\begin{verbatim}
+    (set-specifier default-toolbar <value> (current-buffer))
+\end{verbatim}
 %
 Emacs-20 in 1998 added the ability to set variable to a frame-local
 value.  Contrary to terminal-local variables, any variable can be made
@@ -1480,11 +1497,10 @@ variables have been removed altogether.
 \label{sec:post-xemacs}
 
 Between 1991 and 2001, Emacs improved rather slowly compared to XEmacs.
-But starting around 2001, Emacs's pace picked up again, whereas XEmacs
-started to lose momentum startomg about 2010.
-2008 was also the year when Richard Stallman stepped down (again)
-from the maintainership of Emacs, and the new maintainers have proved more
-eager to make \Elisp{} evolve.
+But starting around 2001, Emacs's pace picked up again.  In 2008 Richard
+Stallman stepped down (again) from the maintainership of Emacs, and the new
+maintainers have proved more eager to make \Elisp{} evolve, whereas XEmacs
+started to lose momentum starting about 2010.
 %% Sadly, many improvements in XEmacs have never been
 %% incorporated back into Emacs.
 
@@ -1494,7 +1510,7 @@ eager to make \Elisp{} evolve.
 \label{sec:lexical-scoping}
 
 While Scheme was already about to get its second revision when Richard
-Stallman started to work on GNU Emacs, and Stallman obviously knew about
+Stallman started to work on GNU Emacs, and he obviously knew about
 Scheme, being developed in a nearby office, \Elisp{} was mostly derived from
 MacLisp and used exclusively dynamic scoping.  Dynamic scoping is used
 extensively to add ``hidden'' configuration options to existing
@@ -1574,7 +1590,7 @@ Dynamic scoping had two main drawbacks in practice:
   long local variable names in order not to interfere with other local
   bindings.  Worse: these ``solutions'' were never really complete.
 \end{itemize}
-%
+%%
 The only fully satisfactory solution to the desire for lexical scoping in
 \Elisp{} was that it should be the scoping used by default by all binding
 constructs, as is the case in Common Lisp.  But at the same time, there was
@@ -1604,7 +1620,7 @@ was to facilitate moving \Elisp{} code to Scheme eventually, but the
 overall project was too large to ever be realized.
 
 Around 2002, Miles Bader started working on a branch of Emacs with support
-for lexical scoping.  His approach to the problem was to 
+for lexical scoping.  His approach to the problem was to
 have two languages: an \Elisp{} with dynamic scope and another with lexical
 scope.  Each file was tagged to indicate which language was to be used, and
 in turn, each function was tagged with which language it was using, so
@@ -1688,7 +1704,7 @@ This use of the new \texttt{macroexpand-all} function was made yet a bit
 more prevalent in Emacs-24.3 which applies it when loading
 a non-compiled file, so that macro-expansion now happens ``eagerly'' when
 loading a file rather than lazily when Emacs actually runs the code.  This eager
-macro-expansion occasionally bumped into problematic dependencies (typically
+macro-expansion occasionally bumps into problematic dependencies (typically
 in files which were never compiled), so it fails gracefully: if an
 error is signaled during the macro-expansion that takes place while loading
 a file, Emacs just aborts the macro-expansion and continues with the non-expanded
@@ -1823,7 +1839,7 @@ took a longer road, where over the years, various macros and functions from
 During the development of Emacs-24.3 the issue of better integration of the
 \texttt{cl.el} package came up again.  The main point of pressure was the
 desire to use \texttt{cl.el} \emph{functions} within packages bundled with
-Emacs.  The main resistance from Stallman was coming from the last point
+Emacs.  The main resistance from Richard Stallman was coming from the last point
 above, but this time, a compromise was found: replace
 the \texttt{cl.el} package with a new package (called \texttt{cl-lib.el})
 which provides the same facilities but with names which all use the
@@ -2196,7 +2212,7 @@ implement an ``inlinable function'', namely by defining it as a macro.
 In late 2014, while working to adapt the \texttt{cl-lib} library to the
 changes in EIEIO and \texttt{cl-defstruct} objects, Stefan Monnier became
 frustrated by the redundancy between \texttt{cl-typep}'s definition and its
-compiler macro.  The \texttt{cl-typep }function takes two arguments and tests if the first is
+compiler macro.  The \texttt{cl-typep} function takes two arguments and tests if the first is
 a value of the type specified by the second.  The function definition takes
 care of the general case where the type argument is only known at run-time,
 but the compiler-macro is important to optimize for example
