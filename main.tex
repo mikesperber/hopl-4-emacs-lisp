@@ -1039,7 +1039,40 @@ Emacs Lisp allows programs to mostly handle text as strings,
 and avoid manipulating the numerical representation.  Making
 characters an opaque type additionally discouraged the practice.
 
-%% FIXME: \subsection{C FFI}
+\subsection{C FFI}
+
+As the \Elisp{} runtime was written in C, it was always possibly to
+add new \Elisp{} functions written in C to the system.  Those C
+functions could also call \Elisp{} functions.
+
+However, functions written in C originally lacked the dynamic nature
+of \Elisp{}, as they had to be linked into the Emacs executable.
+Starting in 1998, J.\ Kean Johnston added facilities to XEmacs
+(released with version 21.2 in 1999), which allowed \Elisp{} code to
+build and dynamically load shared libraries (called \textit{modules})
+written in C into running editor and call the functions defined
+there.  Starting in 2002 with XEmacs 21.5.5, a number of such modules
+were distributed with XEmacs, among them bindings for existing C
+libraries such as Zlib, Ldap, PostgreSQL.
+
+Even with modules in place, developers still had to create wrappers to
+make existing C libraries accessible in \Elisp{}.  In 2005, Zajcev
+Evgeny wrote an FFI for SXEmacs~\cite{SXEmacs}, a fork of XEmacs.
+This FFI allows loading and calling existing C libraries directly,
+without intervening wrappers, by declaring the type signatures of C
+functions in \Elisp{}.  For example, the FFI allows using Curl like
+so:
+%
+\begin{verbatim}
+(ffi-load "libcurl.so")
+(setq curl:curl_escape
+      (ffi-defun '(function c-string c-string int) "curl_escape"))
+(let* ((url "http://foo.org/please escape this<$!=3>")
+       (str (ffi-create-fo 'c-string url))
+       (len (ffi-create-fo 'int (length url)))
+       (result (ffi-call-function curl:curl_escape str len))
+  (ffi-get result))
+\end{verbatim}
 
 \subsection{Aliases}
 
