@@ -73,7 +73,7 @@ years, and thus its evolution did not happen along a single timeline.
 Moreover, some aspects evolved over long periods of time.  To avoid
 excessive interleaving of those aspects, we have organized the
 top-level structure of the paper into chronological eras.  Within an
-era, as a new topic are introduced, we generally follow that topic
+era, as a new topic is introduced, we usually follow that topic
 chronologically to its conclusion, even if that means going beyond the
 era where it started.
 
@@ -83,7 +83,7 @@ themselves written in Lisp.  Unix Emacs (also known as Gosling Emacs), which
 appeared in 1981, was written in C but included its own Lisp-like language.
 We briefly describe those predecessors in Section~\ref{sec:prehistory}.
 
-Emacs as we know it today itself appears to have started in early 1985.  
+Emacs as we know it today itself started in early 1985.  
 Section~\ref{sec:early-history} describes the driving motivation for
 the early design and implementation of \Elisp.  The following Section
 \ref{sec:base-language-design} traces the evolution of the base
@@ -92,7 +92,7 @@ its implementation.
 Development continued at a high pace until about 1991.
 Around that time, its development slowed down and
 was overtaken by Lucid Emacs, later renamed XEmacs, whose development of
-\Elisp{} we trace in Section~\ref{sec:xemacs}.  Eventually,
+\Elisp{} we describe in Section~\ref{sec:xemacs}.  Eventually,
 development of Emacs picked up again, and both co-evolved until about
 2007.  We describe the relevant aspects of that evolution in
 Section~\ref{sec:coevolution}.  After 2007, XEmacs development slowed
@@ -109,7 +109,7 @@ Section~\ref{sec:conclusion}.
 
 While Emacs's original inception was as a set of macros for the TECO
 editor, it had no high-level extension language.  Arguably, the
-strongest influences for Emacs Lisp were Gosling Emacs's Mock Lisp and
+strongest influences for \Elisp{} were Gosling Emacs's Mock Lisp and
 MacLisp.
 
 \subsection{MacLisp}
@@ -118,8 +118,8 @@ Several early incarnations of Emacs were written in Lisp, notably on
 the Lisp Machine (called \emph{EINE} for ``EINE Is Not EMACS'') by
 Dan Weinreb and in MacLisp~\cite{Moon1974,Pitman1983} by Bernie Greenberg in
 1978~\cite{Stallman2002}.  The ensuing possibilities for extending the
-editor was attractive to Richard Stallman, who wanted to write a new
-widely available version.  As a result, Emacs Lisp is a direct
+editor wereattractive to Richard Stallman, who wanted to write a new
+widely available version.  As a result, \Elisp{} is a direct
 descendant of MacLisp.
 
 
@@ -129,11 +129,11 @@ descendant of MacLisp.
 1980/1981~\cite{Gosling1981}, preserved in the history books
 as \emph{Gosling Emacs}, was one of the immediate predecessors of
 Emacs.  It featured an extension language called \emph{MLisp} or
-\emph{Mock Lisp}, which bears visual resemblance to Emacs Lisp.
+\emph{Mock Lisp}, which bears visual resemblance to \Elisp{}.
 MLisp featured function definitions via \texttt{defun}, as well as
 many built-in functions (such as \texttt{eolp},
 \texttt{forward-character}, \texttt{save-excursion}) whose names
-survive in Emacs Lisp.  Emacs contained some backwards-compatibility
+survive in \Elisp{}.  Emacs contained some backwards-compatibility
 support for MLisp until Emacs 21.2 in 2001.
 
 MLisp was a quite limited language: It lacked cons cells and lists.
@@ -168,7 +168,7 @@ rule.
 Moreover, Stallman, made the design of \Elisp{}
 embody and showcase the ideals of Free Software.  For example, not only
 is it legal to get and modify the source code, but every effort
-is made to encourage the end-user to do so.  This has a profound
+is made to encourage the end-user to do so.  The resulting requirements had a profound
 influence on the \Elisp{} language:
 \begin{itemize}
 \item The language should be accessible to a wide audience, so that as many
@@ -181,7 +181,7 @@ influence on the \Elisp{} language:
   minimalist side and to resist incorporation of many Common-Lisp features.
 \item It should be easy for the end-user to find the relevant code in order
   to modify Emacs's behavior.  This has driven the development of elements
-  such as the \emph{docstrings} and more generally the self-documenting
+  such as the \emph{docstrings} (see Section~\ref{sec:docstrings}) and more generally the self-documenting
   aspect of the language.  It also imposes constraints on the evolution of
   the language: the use of some facilities, such as \emph{advice}, is
   discouraged because it makes the code more opaque.
@@ -194,7 +194,7 @@ influence on the \Elisp{} language:
 \section{Base language design}
 \label{sec:base-language-design}
 
-The base language of Emacs Lisp started out as a straightforward
+The base language of \Elisp{} started out as a straightforward
 variant of MacLisp~\cite{Moon1974,Pitman1983}.
 
 Many basic special forms are identical: \texttt{defun},
@@ -653,7 +653,7 @@ tag had other extra costs: 2 words of header, plus the overhead of having
 each object by allocated directly by \texttt{malloc}.
 
 XEmacs implemented a similar change in 1993 with Lucid Emacs 19.8,
-giving Emacs Lisp 28-bit integers and a 28-bit address space, and
+giving \Elisp{} 28-bit integers and a 28-bit address space, and
 merged that data representation of Emacs 19.30 with the release of XEmacs 19.13, also in
 1995.
 
@@ -951,7 +951,7 @@ of the continued development of Lucid Emacs, and effected a name
 change to the current \emph{XEmacs}.
 
 The focus of Lucid Emacs was on providing a proper graphical user
-interface.  As a result, most of the changes to Emacs Lisp in Lucid
+interface.  As a result, most of the changes to \Elisp{} in Lucid
 Emacs / XEmacs were to support the move from a TTY-based purely
 textual model to a graphical model.
 
@@ -1035,7 +1035,7 @@ To enforce the separation between characters and their associated
 encodings, XEmacs 20 made characters a separate data type.  XEmacs had
 functions to convert between a character and its numerical
 representation (\texttt{make-char} and \texttt{char-int}).  Generally,
-Emacs Lisp allows programs to mostly handle text as strings,
+\Elisp{} allows programs to mostly handle text as strings,
 and avoid manipulating the numerical representation.  Making
 characters an opaque type additionally discouraged the practice.
 
@@ -1103,7 +1103,7 @@ These additions were only merged into Emacs-22.1 in 2007.
 \section{Emacs/XEmacs co-evolution}
 \label{sec:coevolution}
 
-Some aspects of Emacs Lisp evolved in both Emacs and XEmacs, with both
+Some aspects of \Elisp{} evolved in both Emacs and XEmacs, with both
 versions borrowing design and code from the other.
 
 \subsection{Performance improvements}
@@ -1196,7 +1196,7 @@ character in both Emacs and XEmacs is its Unicode scalar value.
 
 \subsection{Bignums}
 
-Somewhat surprisingly for Lisp, Emacs Lisp had no support for
+Somewhat surprisingly for Lisp, \Elisp{} had no support for
 arbitrarily large integers (\emph{bignums}) for many years.
 Integer range was restricted by word size on the underlying machine,
 and representation changes over time have affected the exact range
@@ -1210,7 +1210,7 @@ Another place where the limited range of integers has caused friction has
 been in the fact that it also limits the maximum size of file that can
 be edited.
 
-Moreover, Emacs Lisp was used for more and more applications beyond
+Moreover, \Elisp{} was used for more and more applications beyond
 text editing, and also had to implement workarounds.  As a result,
 Calc, an advanced calculator and computer algebra tool, which has
 shipped with the Emacs distribution since 2001, had to implement
