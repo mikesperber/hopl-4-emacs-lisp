@@ -544,8 +544,10 @@ GC roots. Section ~\ref{sec:heap-xemacs} describes changes in XEmacs
 to simplify heap management.  Section~\ref{sec:tag-bits} describes
 efforts in Emacs and XEmacs to reduce the tag bits.  Improvements to
 the GC algorithm are described in Section~\ref{sec:gc-algorithms}.
-Finally, Section~\ref{sec:image-dumping} describes the
+Section~\ref{sec:image-dumping} describes the
 image-dumping mechanism in Emacs and XEmacs and how it changed over time.
+Finally, Sections~\ref{sec:debugger} and \ref{sec:profiler} document
+debugging and profiling efforts, respectively.
 
 \subsection{Byte-code interpreter}
 \label{sec:byte-code-interpreter}
@@ -907,7 +909,8 @@ into the official release.  The main reason for that reluctance is that it
 trades off the brittle platform-dependence of the old unexec code for more
 code which partly duplicates some of the GC's code.
 
-\subsection{Debugger}
+\subsection{Debugging}
+\label{sec:debugger}
 
 Debugging support was added very early to \Elisp: Emacs-16.56 already
 included the \emph{backtrace debugger}, which suspends execution at the time
@@ -945,6 +948,39 @@ non-instrumented, which is safe but suboptimal.  To improve on this default
 behavior, the macro author can annotate its macro with a \emph{debug
   specification} which describes the role of each argument using a kind of
 grammar formalism, so Edebug can know which parts should be instrumented.
+
+\subsection{Profiler}
+\label{sec:profiler}
+
+In 1992, during early development of Emacs-19, Boaz Ben-Zvi implemented the
+\texttt{profile.el} package which implemented a fairly simple \Elisp{}
+profiler all in \Elisp{}.  This implementation was based on instrumenting
+a set of user-specified \Elisp{} functions by modifying their bodies in-place
+to keep track of time spent in those functions.
+
+In 1994, Barry A.~Warsaw implemented the \texttt{elp.el} package which took
+a similar approach but without modifying functions's bodies, which was
+brittle and inconvenient and only worked for functions defined in \Elisp.
+Instead it replaced the instrumented functions with wrappers which counted
+the number of calls, along with the execution time, and internally called
+the original function's definition.  This package was included in
+Emacs-19.29 and made \texttt{profile.el} obsolete.  Its implementation was
+significantly reworked for Emacs-24.4 to make use of the new
+\texttt{nadvice.el} package in order to add/remove instrumentation instead
+of doing it in its own ad-hoc way.
+
+Ben Wing added an \Elisp{} profiler to XEmacs 19.14 in
+1996 by instrumenting entry points in the byte-code interpreter.
+In profiling mode, the byte-code interpreter provides timing
+information about function calls and allocation.
+
+In early 2011, Tomohiro Matsuyama started implementing in Emacs's C code
+a sampling-based profiler for \Elisp{}.  He finished the implementation as
+part of Google's Summer of Code of 2012, and it was included in Emacs-24.3.
+The main advantage of this profiler compared to \texttt{elp.el} is that it
+does not require instrumentation, and it collects (partial) stack traces.
+This means that not only the user does not need to know beforehand which
+functions might be involved but it can show a an actual call tree.
 
 \section{XEmacs period}         % 1992-2007 ?
 \label{sec:xemacs}
@@ -1179,15 +1215,6 @@ avoided changing the byte-code format to make byte-code files
 interchangeable between Emacs and XEmacs.  While no significant
 changes were made to the byte-code format in XEmacs, the two
 instruction sets eventually drifted and became incompatible.
-
-%% FIXME Mike: Maybe this should be moved to the sec:profiler section (which
-%% itself should maybe move to an earlier part of the paper)?
-While not directly a performance improvement to the \Elisp{}
-implementation, Ben Wing added an \Elisp{} profiler to XEmacs 19.14 in
-1996 by instrumenting entry points in the byte-code interpreter.
-In profiling mode, the byte-code interpreter provides timing
-information about function calls and allocation.  (See
-Section~\ref{sec:profiler} about the profiling efforts in Emacs.)
 
 In late 2009, the Emacs byte-code interpreter was modified by Tom Tromey to
 implement token threading using GCC's \emph{computed goto} feature, when
@@ -2030,34 +2057,6 @@ The main complexity introduced by this change was the need for a new syntax
 to print and read those new objects, as well as the incompatibility between
 the printed representation of objects using the old vector-based encoding
 and those using the new encoding.
-
-\subsection{Profiler}
-\label{sec:profiler}
-
-In 1992, during early development of Emacs-19, Boaz Ben-Zvi implemented the
-\texttt{profile.el} package which implemented a fairly simple \Elisp{}
-profiler all in \Elisp{}.  This implementation was based on instrumenting
-a set of user-specified \Elisp{} functions by modifying their bodies in-place
-to keep track of time spent in those functions.
-
-In 1994, Barry A.~Warsaw implemented the \texttt{elp.el} package which took
-a similar approach but without modifying functions's bodies, which was
-brittle and inconvenient and only worked for functions defined in \Elisp.
-Instead it replaced the instrumented functions with wrappers which counted
-the number of calls, along with the execution time, and internally called
-the original function's definition.  This package was included in
-Emacs-19.29 and made \texttt{profile.el} obsolete.  Its implementation was
-significantly reworked for Emacs-24.4 to make use of the new
-\texttt{nadvice.el} package in order to add/remove instrumentation instead
-of doing it in its own ad-hoc way.
-
-In early 2011, Tomohiro Matsuyama started implementing in Emacs's C code
-a sampling-based profiler for \Elisp{}.  He finished the implementation as
-part of Google's Summer of Code of 2012, and it was included in Emacs-24.3.
-The main advantage of this profiler compared to \texttt{elp.el} is that it
-does not require instrumentation, and it collects (partial) stack traces.
-This means that not only the user does not need to know beforehand which
-functions might be involved but it can show a an actual call tree.
 
 \subsection{Generators}
 
