@@ -426,16 +426,36 @@ to recover from an error.
 The \texttt{signal} function takes an \texttt{ERROR-SYMBOL} classifying the
 exceptional situation and an additional \texttt{DATA} argument.  An error
 symbol is a symbol with an \texttt{error-conditions} property that is a list
-of condition names.  An invocation of \texttt{signal} escapes to the nearest
+of condition names.  For example, the following invocation states that
+a \texttt{pixmap} parameter is bound to an invalid argument, and
+should have fulfilled the predicate \texttt{stipple-pixmap-p}:
+%
+\begin{verbatim}
+(signal 'wrong-type-argument (list #'stipple-pixmap-p pixmap))
+\end{verbatim}
+%
+An invocation of \texttt{signal} escapes to the nearest
 use of \texttt{condition-case} in the call stack, which dispatches on the
 condition name.
-
-% FIXME: Examples?
-
 These condition names can be used to dispatch on the condition with
-the \texttt{condition-case} form which specifies a handler.  Emacs
-comes with a set of standard errors, establishing a protocol between
-signaling and handling code.
+the \texttt{condition-case} form which specifies a handler.  
+Here is an example:
+%
+\begin{verbatim}
+(condition-case err
+    (key-binding (this-command-keys))
+  (wrong-type-argument
+    <handle>))
+\end{verbatim}
+%
+This evaluates \texttt{(key-binding ...)}.  If a
+\texttt{wrong-type-argument} is signalled during evaluation,
+\verb|<handle>| is evaluated, with \texttt{err} bound to a pair
+consisting of the error symbol and the data argument passed to
+\texttt{signal}.
+
+Emacs comes with a set of standard errors, establishing a protocol
+between signaling and handling code.
 
 \subsection{Buffer-local variables}
 \label{sec:buffer-local-variables}
