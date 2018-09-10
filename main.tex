@@ -619,7 +619,7 @@ In 1991, Jamie Zawinski added an \texttt{unbind\_all} instruction to
 the Lucid Emacs byte-code engine (which appears in both Emacs and
 XEmacs to this day) that was intended to support tail-call optimization,
 but never implemented the optimization itself.
-%% FIXME Mike: BTW, I remember seeing this unbind_all byte code and wanting to
+%% Stefan: BTW, I remember seeing this unbind_all byte code and wanting to
 %% implement the optimization, but I must admit that I could never figure out
 %% how it's meant to be used.  I think Jamie added it without knowing either ;-)
 
@@ -654,6 +654,10 @@ This said, there were other objections to those patches:
   %% their activation frames in the heap, but for those, I'd consider
   %% the linked list of activation frames to be the (heap-allocated) stack,
   %% and TCP still reduces that stack usage).
+  %% FIXME Stefan: No, I just meant to say that it's not necessarily
+  %% detrimental to debugging.  MIT Scheme uses you a ring buffer for
+  %% the activation frames, giving *improved* debugging.  Maybe the
+  %% two issues need to be detangled in the sentence.
 \item The available implementations of TCO affect the behavior not only in
   terms of reducing the stack
   allocation and increasing performance, but it would also eliminate some
@@ -831,10 +835,12 @@ When this compilation option is used, tag bits are placed in the most
 significant bits again, so that the 32bit of pointers can be extracted at no
 cost at all.
 
-%% FIXME Stefan: I find this of limited interest, as it doesn't really
+%% Mike: I find this of limited interest, as it doesn't really
 %% impact the language.
-%% FIXME Mike: Hmm... OK, I changed it to talk a bit more about the
-%% motivation for this change.  Do you still think we should remove it?
+%% Stefan: Hmm... OK, I changed it to talk a bit more about the
+%% motivation for this change.  Do you still think we should remove
+%% it?
+%% Mike: I think it's fine now.
 
 In Emacs-24.3, the allocation of objects using the \texttt{Lisp\_Vector} tag
 (which is used for many more object types than just vectors) was modified:
@@ -901,6 +907,8 @@ in the code.  The second issue is that Emacs currently implements various
 forms of ad-hoc weak references which need to be adapted to the more
 %% FIXME: Is it worth going through the details of hash-tables's weakness
 %% and markers's weakness (and their removal from undo lists)?
+%% Mike: I think it might be, as it affects design.  I suggest leaving
+%% it for the final version, however.
 standard forms of weak references.
 
 \label{sec:incremental-gc}
@@ -1030,6 +1038,9 @@ functions might be involved but it can show a an actual call tree.
 %% FIXME Mike: Why is this in this early section, even though it's a pretty
 %% late effort that only affects Emacs, so it can be considered "post-XEmacs"?
 %% Is that in preparation for the addition of some XEmacs-JIT efforts?
+%% FIXME Stefan: No, I think the section is too lonely in the back,
+%% which really is all about design now.  The supersection here is
+%% about Base-language implementation.
 
 The existing implementations of \Elisp{} are relatively inefficient, all
 being based on fairly naive interpretation techniques.
