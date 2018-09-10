@@ -399,9 +399,9 @@ beginning of the body, like this:
               (skip-syntax-backward "w_"))
           (setq arg (1+ arg)))))
 \end{verbatim}
-%% FIXME: The operand doesn't have to be a string!
 The \texttt{interactive} form also has an optional string operand that
-regulates how such a function receives its arguments.  In the above
+regulates how such a function receives its arguments.  (It can also be
+an expression that is evaluated to produce a list of arguments.)  In the above
 example, \verb|p| means that the function accepts a \emph{prefix
   argument}: The user can type \texttt{ESC} \emph{number} or
 \texttt{C-u} (to specify powers of 4) prior to invoking the function,
