@@ -207,8 +207,8 @@ The base language of \Elisp{} started out as a straightforward
 variant of MacLisp~\cite{Moon1974,Pitman1983}.
 
 Many basic special forms are identical: \texttt{defun},
-\texttt{defvar}, \texttt{defmacro} \texttt{let}, \texttt{let*},
-\texttt{cond}, \texttt{if}, \texttt{catch}, \texttt{throw},
+\texttt{defvar}, \texttt{defmacro}, \texttt{let}, \texttt{let*},
+\texttt{cond}, \texttt{if}, \texttt{function}, \texttt{catch}, \texttt{throw},
 \texttt{unwind-protect}.  So are basic data structures: symbols,
 \texttt{nil}, cons cells, arrays, and many familiar Lisp
 functions.
@@ -263,6 +263,10 @@ as quoted values of the form:
 While the \texttt{lambda} macro has made this quote unnecessary for almost
 30 years now, many instances of this practice still occur in \Elisp{} code,
 even though it prevents byte-compilation of the body.
+
+Somewhat relatedly, only in 1993 did Lucid Emacs 19.8 import the
+\verb|#'...| reader shorthand for \texttt{(function ...)} from MacLisp.  Emacs
+followed suit the year after.
 
 \subsection{Strings}
 \label{sec:strings}
