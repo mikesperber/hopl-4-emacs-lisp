@@ -1560,6 +1560,18 @@ started to lose momentum starting about 2010.
 %% Sadly, many improvements in XEmacs have never been
 %% incorporated back into Emacs.
 
+This section discusses some notable evolution of the design of
+\Elisp{} during that time: lexical scoping
+(Section~\ref{sec:lexical-scoping}), Common Lisp compatibility
+(Section~\ref{sec:cl-clib}), generalized variables
+(Section~\ref{sec:generalized-variables}), object-oriented programming
+(Section~\ref{sec:oop}), native support for objects
+(Section~\ref{sec:actual-objects}), generators
+(Section~\ref{sec:generators}), concurrency
+(Section~\ref{sec:concurrency}), inline functions
+(Section~\ref{sec:inline-functions}) and various attempts at module
+systems (Section~\ref{sec:module-system}).
+
 %% FIXME: Section overview
 
 \subsection{Lexical scoping}
@@ -1813,6 +1825,7 @@ introduction of \texttt{pcase-defmacro} which can define new patterns
 in a modular way, often using the new low-level pattern \texttt{app}.
 
 \subsection{CL-lib}          %Released in Emacs-24.3
+\label{sec:cl-clib}
 
 While the core of \Elisp{} has evolved very slowly over the years, the
 evolution of other Lisps (mostly Scheme and Common Lisp) has put pressure to
@@ -1919,6 +1932,7 @@ the change has been surprisingly successful if we look at the proportion of
 new packages which use \texttt{cl-lib.el} instead of \texttt{cl.el}.
 
 \subsection{Generalized variables} %Released in Emacs-24.3
+\label{sec:generalized-variables}
 
 To facilitate the move to \texttt{cl-lib.el}, some frequently used
 functionality from \texttt{cl.el} was moved directly to \Elisp{}.  The
@@ -2045,6 +2059,7 @@ this incompatibility.
 %% proper order.
 
 \subsection{Object-oriented programming} %Emacs-25.1
+\label{sec:oop}
 
 While \texttt{cl.el} early on (originally developed in 1986 by Cesar Quiroz
 \email{<quiroz@cs.rochester.edu>}, and included in Emacs-18.51 in 1988)
@@ -2160,6 +2175,7 @@ facilities to explore interactively EIEIO objects and methods, but is more
 modular and better integrated with the rest of Emacs's on-line help system.
 
 \subsection{Actual objects}  %Emacs-26.1
+\label{sec:actual-objects}
 
 While Emacs-25's \texttt{cl-generic.el} introduced object-oriented
 programming facilities into \Elisp{}, objects (whether defined via
@@ -2180,6 +2196,7 @@ the printed representation of objects using the old vector-based encoding
 and those using the new encoding.
 
 \subsection{Generators}
+\label{sec:generators}
 
 With the success of Python's and Javascript's iterators and generators, some
 Emacs users felt like \Elisp{} was lacking in abstraction, so in 2015,
@@ -2192,6 +2209,7 @@ fact that \Elisp{} does not directly provide something like \texttt{call/cc}
 to access underlying continuations.
 
 \subsection{Concurrency}
+\label{sec:concurrency}
 
 \Elisp{} is a fundamentally sequential language, and it relies very heavily
 on side-effects to a global state.  Yet, its use in an interactive program
@@ -2241,6 +2259,7 @@ developed in 2012 which runs \Elisp{} code in parallel in a separate
 Emacs subprocess.
 
 \subsection{Inline functions}
+\label{sec:inline-functions}
 
 Function calls are fairly expensive in \Elisp{}, and their semantics
 involves looking up the current definition in the global name space, so
@@ -2281,6 +2300,7 @@ definition the macro can extract both a normal function body and
 a corresponding compiler-macro.
 
 \subsection{Module system}
+\label{sec:module-system}
 
 While \Elisp{} was designed from the beginning as a real programming
 .language rather than a tiny ad-hoc extension language, it was not designed
