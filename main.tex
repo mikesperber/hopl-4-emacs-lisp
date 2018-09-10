@@ -68,6 +68,15 @@
 
 \section{Organization}
 
+\Elisp{} is the extension language of the Emacs text editor.  In this sense,
+it is just a side-project of Emacs and might be overlooked as a programming
+language.  But Emacs itself comes with more than a million lines of \Elisp{}
+code, and yet more \Elisp{} is distributed separately from Emacs in various
+Emacs Lisp Package Archives (ELPA).  If you additionally consider that the
+majority of Emacs users have likely written a few lines of \Elisp{} in their
+configuration file, it is clearly one of the most widely used dialects
+of Lisp.
+
 \Elisp{} has evolved in multiple strands and implementations over the
 years, and thus its evolution did not happen along a single timeline.
 Moreover, some aspects evolved over long periods of time.  To avoid
@@ -1197,7 +1206,21 @@ this:
       (ffi-get result))
 \end{verbatim}
 
-%% FIXME Stefan: Add discussion of Emacs's FFI
+Richard Stallman refused to incorporate XEmacs's FFI into Emacs for fear
+that it would open up a backdoor with which developers would be able to
+legally circumvent the GNU General Public License (GPL) and thus link
+Emacs's own code with code that does not abide by these licensing terms.
+After many years of pressure on this issue (not just within the Emacs
+project, since this affected several other GNU projects, most notably GCC),
+a solution was agreed to, which was to implement an FFI that would only
+accept to load libraries that came with a special symbol attesting that this
+library is compatible with the GPL.  As a result, after a very long wait,
+2016 finally saw the release of Emacs-25.1 with an FFI comparable in
+functionality to that of XEmacs.  So far, we do not know of any publicly
+available package which makes use of this new functionality, sadly.
+But rumors indicate that it has been used in a few private projects, either
+to link Emacs with another language or to extend Emacs with ad-hoc
+functionality implemented in C for performance reasons.
 
 \subsection{Aliases}
 
@@ -2341,6 +2364,12 @@ mechanisms to achieve composability of packages.  This, combined
 with \Elisp's dynamic nature, have produced a remarkably robust
 system that continues to function even in the face of unexpected
 exceptions.
+
+\Elisp{} is a language mostly driven by a rather conservative design, that
+has mostly grown by slowly incorporating popular features from other
+languages, both in the language itself and in its implementation.  But it
+has also come up with its own features, such as docstrings, buffer-local
+variables, and the addition of text-properties to strings.
 
 %% FIXME: This is quite lame, but I really don't know what to put here.
 We retraced the evolution of the \Elisp{} language through its more than 30
