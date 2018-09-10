@@ -3,12 +3,13 @@
 \begin{abstract}
   While Emacs proponents largely agree that it is the world's greatest text
   editor, it is almost as much a Lisp machine disguised as an editor.
-  Indeed, one of its chief appeals is that it is \emph{programmable} via
-  its own programming language, \Elisp{} (or Emacs Lisp), a Lisp in the classic
-  tradition.  Its core has remained remarkably stable since its
-  inception in 1985, in large part to preserve compatibility with the many
-  third-party packages providing a multitude of extensions.
-  Still, \Elisp{} has evolved and continues to do so.
+  Indeed, one of its chief appeals is that it is \emph{programmable} via its
+  own programming language, \Elisp{} (or Emacs Lisp), a Lisp in the classic
+  tradition.  In this article, we present the history of this language over
+  its more than 30 years of evolution.  Its core has remained remarkably
+  stable since its inception in 1985, in large part to preserve
+  compatibility with the many third-party packages providing a multitude of
+  extensions.  Still, \Elisp{} has evolved and continues to do so.
 
   Despite the fact that it is closely tied to a concrete editor,
   \Elisp{} has spawned multiple implementations---in Emacs itself but
@@ -20,7 +21,8 @@
   Important aspects of \Elisp{} have been shaped by
   concrete \emph{requirements} of the editor it supports, such as
   the \textit{buffer-local variables} that tie bindings to
-  editor buffers, as well as implementation constraints.
+  editing contexts, %FIXME: We used to say "buffers" but that's not defined!
+  as well as implementation constraints.
   These requirements led to the choice of a Lisp dialect as Emacs's
   language in the first place, specifically its simplicity and dynamic nature:
   Loading additional Emacs packages or changing the ones in place
