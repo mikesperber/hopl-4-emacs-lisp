@@ -777,13 +777,13 @@ register/unregister code of stack references could finally be removed.
 \subsection{Heap management in XEmacs}
 \label{sec:heap-xemacs}
 
-XEmacs has kept precise GC, and impleemented a number of improvements
+XEmacs has kept precise GC, and implemented a number of improvements
 in its memory management.  In particular, Markus Kaltenbach and Marcus
 Crestani implemented a scanning algorithm that used the memory-layout
 descriptors that had been added to support the portable dumper.  (See
 Section~\ref{sec:image-dumping}.)  Marcus Crestani also replaced the
 allocator: The new, much simplified allocator eliminated the
-distinction between objects that were allocated in blocs and those
+distinction between objects that were allocated in blocks and those
 allocated via \texttt{malloc}, and would make the decision
 individually based on size.
 
@@ -2299,6 +2299,9 @@ Emacs-25.1.  It lets one define a function in such a way that from its
 definition the macro can extract both a normal function body and
 a corresponding compiler-macro.
 
+%% Daniel Colascione: Do you want to mention how Emacs Lisp is _defined_ to
+%% expand compiler macros, which, AIUI, distinguishes it from other lisps?
+
 \subsection{Module system}
 \label{sec:module-system}
 
@@ -2408,6 +2411,8 @@ ship with a fairly complete implementation of \Elisp{} that translates
 Guile-Emacs system, which is a work-in-progress modification of Emacs where
 the \Elisp{} engine is provided by Guile.
 %% FIXME: Motivations?
+
+%% FIXME: Mention librep? Or is that too different from elisp proper?
 
 \section{Conclusion}
 \label{sec:conclusion}
