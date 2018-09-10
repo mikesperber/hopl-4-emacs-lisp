@@ -2283,7 +2283,7 @@ a corresponding compiler-macro.
 \subsection{Module system}
 
 While \Elisp{} was designed from the beginning as a real programming
-language rather than a tiny ad-hoc extension language, it was not designed
+.language rather than a tiny ad-hoc extension language, it was not designed
 for ``programming in the large'' as witnessed by the lack of module or
 namespace system.
 
@@ -2391,26 +2391,18 @@ the \Elisp{} engine is provided by Guile.
 \section{Conclusion}
 \label{sec:conclusion}
 
-% FIXME: Moved from the abstract
-\Elisp{} relies on social
-mechanisms to achieve composability of packages.  This, combined
-with \Elisp's dynamic nature, have produced a remarkably robust
-system that continues to function even in the face of unexpected
-exceptions.
+%% FIXME Stefan: Mike's suggestion, feel free to revise or replace
 
-\Elisp{} is a language mostly driven by a rather conservative design, that
-has mostly grown by slowly incorporating popular features from other
-languages, both in the language itself and in its implementation.  But it
-has also come up with its own features, such as docstrings, buffer-local
-variables, and the addition of text-properties to strings.
-
-%% FIXME: This is quite lame, but I really don't know what to put here.
-We retraced the evolution of the \Elisp{} language through its more than 30
-years of life so far.  It has been guided mostly by the limited manpower
-dedicated to its low-level implementation and the organic growth of the
-high-level packages developed for Emacs.  Given the amount of changes it
-went through over the last decade, we are looking forward to the \Elisp{} of
-the next 30 years.
+Like Lisp in general the development of Emacs has seen plenty of
+discord, with unbridgeable personal differences, heated debates, and
+forks along the way.  However, througout these differences, \Elisp{}
+has steered a remarkably stable course of conservative development and
+gradual extension.  Possibly, the shared ecosystem of Emacs Lisp
+packages, whose composability relies on social mechanisms, has
+provided enough cohesive force to keep balkanization at bay for more
+than 30 years.  Given the amount of changes it went through over the
+last decade, we are looking forward to the \Elisp{} of the next 30
+years.
 
 \subsection{Acknowledgments}
 
