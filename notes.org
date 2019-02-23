@@ -780,7 +780,7 @@ SPECIFIC COMMENTS and ADVICE
   along the way". This is the place to record the controversies, right or
   wrong, as they are part of the history.
 
-
+  
 ** Review #16C
 ===========================================================================
 
@@ -794,12 +794,29 @@ Reviewer expertise
 
 Paper summary
 -------------
-The paper traces the evolution of ELISP as the Lisp based macro facility of Emacs.  It discusses the language evolution, but more than that how the system that it was a part of evolved over time...and how the system often changed the language more than the language designers did.
+The paper traces the evolution of ELISP as the Lisp based macro
+facility of Emacs.  It discusses the language evolution, but more than
+that how the system that it was a part of evolved over time...and how
+the system often changed the language more than the language designers
+did.
 
 Comments for author
 -------------------
-TBD
+I enjoyed this paper a great deal.  It told the story of ELISP and how
+it changed and evolved over time...driven by the needs of Emacs, of
+the open source community, of different views of development
+environments and tools (like debuggers and operating systems).  It
+treats the language design, performance optimizations, surround
+features/environemnts as parts of the "whole" and I really like that
+approach.  The personalities involved, especially the influence of
+Stallman, comes through - which is nice for an open source project
+that doesnt have the usual corporate funding/management issues that
+Jean Sammet used to ask about in earlier HOPLs.
 
+At this point my main complaint is that the paper attempts to bring
+the history up the present day and even hints at future plans...a
+natural thing to do, but probably not right for a history paper.
+There are a few obvious typos to that will have to be fixed.
 
 ** Review #16D
 ===========================================================================
