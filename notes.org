@@ -901,3 +901,42 @@ I think there are quite a few lessons for language developers here.   It may be 
 - p35 "general the" -> "general, the"
 - p35 "contributions of course" -> "contributions, of course"
 
+* Conf calls
+
+** 2019-02-28 w/ Brent Hailpern
+
+Story that tells a story that teaches something
+
+move to appendix stuff without human or organizational motivation
+
+good: constrained to make editor better
+
+highlight: how it evolved to make the macro experience better
+
+why is RMS important?
+
+why were we important?
+
+What was Emacs like?
+
+Evolution from TECO to Emacs Lisp
+
+Step 1: Fill in context, get the story
+
+LGPL came out of Lucid negotiations
+
+more background on Emacs
+
+Lua paper in HOPL III
+
+free software ... "boxes on the side"
+
+appendix
+
+tell several sub-stories
+
+TECO : find serious macro writers
+
+more interviews
+
+interview with Dick Gabriel, LGPL
