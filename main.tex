@@ -20,7 +20,7 @@
 %% Paper history
 \received{August 2018}
 
-\newcommand \Elisp {Elisp}
+\newcommand \Elisp {Emacs Lisp}
 \newcommand \MAlign [1] {\begin{array}{@{}l@{}}#1\end{array}}
 
 %% Document starts
@@ -120,7 +120,7 @@ themselves written in Lisp.  Unix Emacs (also known as Gosling Emacs), which
 appeared in 1981, was written in C but included its own Lisp-like language.
 We briefly describe those predecessors in Section~\ref{sec:prehistory}.
 
-Emacs as we know it today itself started in early 1985.  
+Emacs as we know it today itself started in 1984.
 Section~\ref{sec:early-history} describes the driving motivation for
 the early design and implementation of \Elisp.  The following Section
 \ref{sec:base-language-design} traces the evolution of the base
@@ -144,21 +144,24 @@ Section~\ref{sec:conclusion}.
 \section{Prehistory}
 \label{sec:prehistory}
 
-While Emacs's original inception was as a set of macros for the TECO
-editor, it had no high-level extension language.  Arguably, the
-strongest influences for \Elisp{} were Gosling Emacs's Mock Lisp and
-MacLisp.
+Emacs's original inception was as a set of macros for the TECO editor,
+written by Richard Stallman with help from Guy Steele in 1976~\cite{Stallman2018-personal}.  This
+version of Emacs had no high-level extension language.  Arguably, the strongest
+influence for \Elisp{} was MacLisp.  The design of the editing
+primitives was influenced by Gosling Emacs's Mock Lisp.
 
 \subsection{MacLisp}
 
 Several early incarnations of Emacs were written in Lisp, notably on
-the Lisp Machine (called \emph{EINE} for ``EINE Is Not EMACS'') by
-Dan Weinreb and in MacLisp~\cite{Moon1974,Pitman1983} by Bernie Greenberg in
+the Lisp Machine (\emph{EINE} for ``EINE Is Not EMACS'') by
+Dan Weinreb and in MacLisp~\cite{Moon1974,Pitman1983}, \emph{ZWEI} for
+"`ZWEI was EINE initially"' by Dan Weinreb and Mike McMahon~\cite{Weinreb1979}),
+by Bernie Greenberg in
 1978~\cite{Stallman2002}.  The ensuing possibilities for extending the
-editor were attractive to Richard Stallman, who wanted to write a new
+editor were attractive to Richard Stallman, who had worked on
+ZWEI~\cite{Stallman2018-personal}, and who wanted to write a new
 widely available version.  As a result, \Elisp{} is a direct
 descendant of MacLisp.
-
 
 \subsection{Gosling Emacs}
 
@@ -181,6 +184,14 @@ function: For example, \texttt{(arg 1)} would access the first
 argument.  Moreover, argument expressions were essentially evaluated
 in a call-by-name fashion by \texttt{arg}, and evaluation happened in
 the dynamic environment of the callee.
+
+The Mock Lisp primitives differed from ZWEI in that ZWEI primitives
+would always take arguments to specify what text to operate on,
+whereas in Mock Lisp primitives all operated at the current
+point---the current ``cursor position.''  Stallman, who had worked on
+ZWEI, found ZWEI's approach ``clumsy,'' and adopted Mock Lisp's basic
+approach~\cite{Stallman2018-personal}.
+
 %% FIXME Mike: Can we provide a code snippet doing the same thing but that
 %% highlights the differences and similarity mentionned above?
 
@@ -207,7 +218,7 @@ rule.
 
 Moreover, Richard Stallman, made the design of \Elisp{}
 embody and showcase the ideals of Free Software.  For example, not only
-is it legal to get and modify the source code, but every effort
+is it permitted to get and modify the source code, but every effort
 is made to encourage the end-user to do so.  The resulting requirements had a profound
 influence on the \Elisp{} language:
 \begin{itemize}
@@ -262,7 +273,8 @@ used as function values.
 Some specialized control structures were missing in the original
 \Elisp{}, among them the \texttt{do} loop construct, and the
 accompanying \texttt{return} and \texttt{go} forms for non-local
-control transfer.
+control transfer.  This was to reduce Emacs's memory footprint, in
+order to make it work on Unix systems with one megabyte of memory~\cite{Stallman2018-personal}.
 
 This section discusses some notable differences from and additions to
 MacLisp.  Lambda expressions worked slightly differently, as discussed
@@ -284,7 +296,7 @@ existing code via hooks, discussed in Section~\ref{sec:hooks}.
 \subsection{Lambda}
 \label{sec:lambda}
 
-Interestingly (unlike MacLisp), \texttt{lambda} was not technically part of the \Elisp{}
+Interestingly (unlike MacLisp), \texttt{lambda} was not a keyword of the \Elisp{}
 language until around 1991 when it was added as a macro, early during the
 development of Emacs-19.  In Emacs-18, anonymous functions were written
 as quoted values of the form:
@@ -407,7 +419,8 @@ old-style backquote syntax was removed.
 \label{sec:docstrings}
 
 An important feature of Emacs from the start was the idea of
-\emph{self-documentation}~\cite{Stallman1981}.  To that end, every
+\emph{self-documentation}~\cite{Stallman1981}, which originated with
+the first, TECO-based Emacs~\cite{Stallman2018-personal}.  To that end, every
 definition form in \Elisp{} can include documentation in the form of a
 string after the signature:
 %%
@@ -594,14 +607,18 @@ The old TECO version of Emacs also allowed attaching hooks to variable
 changes~\cite{Stallman1981}, but this feature was not provided in \Elisp{}
 because Richard Stallman considered it a misfeature, which could make it
 difficult to debug the code.  Yet this very feature was finally added to
-\Elisp{} in 2018 in the form of \emph{variable watchers}, though they are
-ironically mostly meant to be used as debugging aides.
+\Elisp{} in 2018 in the form of \emph{variable watchers}, 
+meant to be used as debugging aides.
 
 Of course, authors do not always have the foresight to place hooks where
 users need them, so in 1992, the \texttt{advice.el} package was added to
 Emacs-19, providing a \texttt{defadvice} macro duplicating a design
 available in MacLisp and Lisp Machines, that allowed attaching code to
-functions even if they do not run hooks.
+functions even if they do not run hooks.\footnote{``It is bad practice
+  to make a Lisp program put advice on another Lisp
+  program's function, because that is confusing.  When you see that the
+  program calls \texttt{mumble}, it might take you hours before you think of
+  checking whether it has advice.'' \cite{Stallman2018-personal}}
 
 The way the \texttt{defadvice} macro gave access to function arguments did
 not work with lexical scoping; furthermore time had shown that most of the
@@ -950,7 +967,7 @@ improved sufficiently to be competitive with the special-cased
 \subsection{New GC algorithms}
 \label{sec:gc-algorithms}
 
-During the learly years of Emacs, the main complaints from users about the
+During the early years of Emacs, the main complaints from users about the
 simple mark\&sweep algorithm were the GC pauses.  These were solved very
 simply in Emacs-19.31 by removing the messages that indicated when GC was in
 progress.  Since then complaints about the performance of the GC have been
@@ -1744,7 +1761,7 @@ although some limited breakage for rare situations could be tolerated.
 
 The vast majority of existing \Elisp{} code was (and still is) agnostic to
 the kind of scoping used in the sense that either dynamic or lexical scoping
-gives the same result in almost all circumstances.  This was true of early
+of local variables gives the same result in almost all circumstances.  This was true of early
 \Elisp{} code and has become even more true over time as the byte-compiler
 started to warn about references to undeclared variables.  Warning about
 unused variables would have probably pushed even more \Elisp{} code to be
