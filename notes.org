@@ -93,7 +93,8 @@ indent, debug, doc-string, advertized-calling-convention, ...
   > implemented it. Its predecessors EINE (1976) and Multics Emacs (1978)
   > were themselves written in Lisp.
 
-I did some work on ZWEI, the second iteration of EINE.  In ZWEI (Zwei
+** DONE I did some work on ZWEI, the second iteration of EINE.  In ZWEI (Zwei
+   CLOSED: [2019-03-20 Wed 16:38]
 Was Eine Initially), buffer-modifying primitives took arguments to
 specify what text to operate on.  I found that clumsy, so in Emacs
 Lisp I made them operate at point.
@@ -103,28 +104,39 @@ positions.  It was always and only operating at point.  I found that
 too clumsy.  So Emacs Lisp has some primitives that operate where an
 arg says, and some that operate at point.
 
-  > Emacs as we know it today itself started in early 1985.
+** DONE > Emacs as we know it today itself started in early 1985.
+   CLOSED: [2019-03-19 Tue 15:19]
 
-The original Emacs was dsveloped in 1976, by me with some help from
+ The original Emacs was dsveloped in 1976, by me with some help from
 Guy Steele.
 
 I started GNU Emacs around Sep 1984.
 
-  > Development continued at a high pace until about 1991. Around that time,
+** DONE > Development continued at a high pace until about 1991. Around that time,
+   CLOSED: [2019-03-20 Wed 16:43]
   > its development slowed down and was overtaken by Lucid Emacs, later
   > renamed XEmacs,
 
 This is because Lucid hired the Emacs developer away from the FSF.
 
-  > Arguably, the strongest
+NOTE: I don't see supporting documentation for this - when Lucid Emacs
+overtook Emacs, Joe Arceneaux was no longer working on the project.
+
+** DONE > Arguably, the strongest
+   CLOSED: [2019-03-20 Wed 16:38]
   > influences for Elisp were Gosling Emacs's Mock Lisp and MacLisp.
 
-Nocklisp (that's how it was written) had very little influence, since I
+Nocklisp (that's how it was written) 
+
+NOTE (Mike): Gosling's manual for Unix Emacs says "Mock Lisp"
+
+had very little influence, since I
 decided very early to replace it with real Lisp.  In Mocklisp,
 primitives all operated at point.  I made the corresponding features of
 Emacs Lisp less clunky.
 
-  > Moreover, Richard Stallman, made the design of Elisp embody and showcase
+** DONE > Moreover, Richard Stallman, made the design of Elisp embody and showcase
+   CLOSED: [2019-03-20 Wed 16:44]
   > the ideals of Free Software. For example, not only is it legal to get
   > and modify the source code, but every effort is made to encourage the
   > end-user to do so.
@@ -133,21 +145,24 @@ Indeed, there is no law saying that the user can't do this (because it is free
 software, released under a free software license).  But is that what you mean?
 Is "legal" the right word to use here?
 
-  > Some specialized control structures were missing in the original Elisp,
+** DONE > Some specialized control structures were missing in the original Elisp,
+   CLOSED: [2019-03-20 Wed 16:45]
   > among them the `do` loop construct, and the accompanying `return` and
   > `go` forms for non-local control transfer.
 
 The reason I left them out was to make Emacs work on Unix systems which had
 just 1 meg of memory and no virtual memory.
 
-  > A feature supporting easy extensibility was
+** DONE > A feature supporting easy extensibility was
+   CLOSED: [2019-03-20 Wed 16:46]
   > self-documentation through *docstrings*, described in
   > Section [4.4](#sec:docstrings){reference-type="ref"
   > reference="sec:docstrings"}.
 
 These came from the original TECO-based Emacs.
 
-  > Interestingly (unlike MacLisp), `lambda` was not technically part of the
+** DONE > Interestingly (unlike MacLisp), `lambda` was not technically part of the
+   CLOSED: [2019-03-20 Wed 16:47]
   > Elisp language until around 1991 when it was added as a macro, early
   > during the development of Emacs-19.
 
@@ -157,7 +172,8 @@ since the very beginning of GNU Emacs.
 However, those lists did not self-evaluate until `lambda' was made
 a macro.
 
-  > changes [@Stallman1981], but this feature was not provided in Elisp
+** DONE > changes [@Stallman1981], but this feature was not provided in Elisp
+   CLOSED: [2019-03-20 Wed 16:49]
   > because Richard Stallman considered it a misfeature, which could make it
   > difficult to debug the code. Yet this very feature was finally added to
   > Elisp in 2018 in the form of *variable watchers*, though they are
@@ -167,7 +183,8 @@ This is not ironic.  We avoid using them as an extension mechanism
 because that makes the code hard to debug.  Using them as a debugging method
 does not have such a problem.
 
-  > Emacs-19, providing a `defadvice` macro duplicating a design available
+** DONE > Emacs-19, providing a `defadvice` macro duplicating a design available
+   CLOSED: [2019-03-20 Wed 16:50]
   > in MacLisp and Lisp Machines, that allowed attaching code to functions
   > even if they do not run hooks.
 
@@ -176,11 +193,13 @@ program's function, because that is confusing.  When you see that the
 program calls `mumble', it might take you hours before you think of
 checking whether it has advice.
 
-  > During the learly years of Emacs,
+** DONE > During the learly years of Emacs,
+   CLOSED: [2019-03-20 Wed 16:50]
 
 typo,
 
-  > While Lucid at first tried to support and thus speed up the development
+** DONE > While Lucid at first tried to support and thus speed up the development
+   CLOSED: [2019-03-20 Wed 17:04]
   > of Emacs 19, the required cooperation between Lucid and the Free
   > Software Foundation soon broke down.
 
@@ -198,14 +217,23 @@ instead the text properties that Joe Arceneaux had been working on
 (but he had left the code unfinished when he went to Lucid on short
 notice).
 
-I think that Lisp "module" systems based on distinguishing mu;tiple
+NOTE (Mike): Dick Gabriel's account of that period in
+https://www.jwz.org/doc/lemacs.html differs from this, so I think it's
+likely best to elaborate on why that cooperation broke down at this
+point.
+
+** DONE I think that Lisp "module" systems based on distinguishing mu;tiple
+   CLOSED: [2019-03-20 Wed 17:08]
 symbols with the same abbreviated name inevitably work badly.
 That was my experience with Common Lisp in the Lisp Machine.
 
 Scheme's module system can work reasonably because it operates when determining
 the binding of a symbol, not when reading the symbol.
 
-  > The vast majority of existing Elisp code was (and still is) agnostic to
+NOTE (Mike): No historical note here.
+
+** DONE > The vast majority of existing Elisp code was (and still is) agnostic to
+   CLOSED: [2019-03-20 Wed 17:09]
   > the kind of scoping used in the sense that either dynamic or lexical
   > scoping gives the same result in almost all circumstances.
 
