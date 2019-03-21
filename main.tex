@@ -70,7 +70,7 @@
 %%
 %% - History is first and foremost about humans. The history in this article
 %% is quite technical. I think it would be very interesting to know more
-%% about the people behind ELisp and Emacs. Ex : Why did XEmacs forked?
+%% about the people behind ELisp and Emacs. Ex : Why did XEmacs fork?
 %% Who decided in 199X how the language evolved? How does that compare to
 %% the current sitution in 2018? How many programmers are involved? Does
 %% functionnality XYZ required the joint efforts of 300 programmers or just
@@ -94,14 +94,74 @@
 
 \section{Introduction}
 
-\Elisp{} is the extension language of the Emacs text editor.  In this sense,
-it is just a side-project of Emacs and might be overlooked as a programming
-language.  But Emacs itself comes with more than a million lines of \Elisp{}
-code, and yet more \Elisp{} is distributed separately from Emacs in various
-Emacs Lisp Package Archives (ELPA).  If you additionally consider that the
-majority of Emacs users have likely written a few lines of \Elisp{} in their
-configuration file, it is clearly one of the most widely used dialects
-of Lisp.
+Emacs Lisp (\Elisp{}) is the extension language of the Emacs text editor.
+In this sense, it is just a side-project of Emacs and might be overlooked as
+a programming language.  But Emacs itself comes with more than a million
+lines of \Elisp{} code, and yet more \Elisp{} is distributed separately from
+Emacs in various Emacs Lisp Package Archives (ELPA).  If you additionally
+consider that the majority of Emacs users have likely written a few lines of
+\Elisp{} in their configuration file, it is clearly one of the most widely
+used dialects of Lisp.
+
+While in theory \Elisp{} exists independently from Emacs, its design,
+implementation, and history is inextricably linked to that of Emacs.
+
+\subsection{Emacs early history}
+\label{sec:emacs-early-history}
+
+Emacs's original inception was around 1976 as a set of macros maintained by
+Richard Stallman, then working at MIT's AI Lab, for the TECO editor, which
+offered a primitive extension language.  Note that TECO and Emacs were not
+completely separate entities in the sense that TECO's extension language was
+also Emacs's extension language and that they evolved together, where
+TECO's extension language was regularly extended to provide facilities then
+used by Emacs~\cite{https://www.gnu.org/gnu/rms-lisp.html}.
+
+This original Emacs grew popular in the lab and soon started to be
+reimplemented in various other systems.  Several of those incarnations of
+Emacs were written in Lisp, notably on the Lisp Machine (called \emph{EINE}
+for ``EINE Is Not EMACS'') by Dan Weinreb and in
+MacLisp~\cite{Moon1974,Pitman1983} and by Bernie Greenberg in
+1978~\cite{Stallman2002}.  The ensuing possibilities offered by Lisp for
+extending the editor were attractive to Richard Stallman, who decided to
+write a (for him) second version of Emacs which would use Lisp as its
+extension language like Greenberg's Multics Emacs, but would we written in
+C so as to be more widely available.
+
+\emph{Unix Emacs}, written in C by James Gosling in
+1980/1981~\cite{Gosling1981}, preserved in the history books as
+\emph{Gosling Emacs}, was the immediate predecessors of Emacs.
+It featured an extension language called \emph{MLisp} or \emph{Mock Lisp},
+which bears visual resemblance to \Elisp{}, but was a lesser member of the
+Lisp family in the sense that it lacked \emph{cons} cells.
+
+Richard Stallman started Emacs by replacing the \emph{Mock Lisp} interpreter
+and data structures of \emph{Gosling Emacs} with an \Elisp{} interpreter,
+adapting internal data structures to those of this \Elisp{} interpreter.
+When James Gosling later sold \emph{Gosling Emacs} to UniPress which in turn
+threatened Richard Stallman to stop distributing his version of Emacs,
+forcing him to replace or rewrite the rest of Emacs's code as well, such as
+the code responsible for the redisplay, and to invent the GNU General Public
+License \cite{http://www.free-soft.org/gpl_history/}, to try and ensure that
+users of his code would never have to go through such an experience.
+
+Emacs is a Free Software project, developed by a large and loosely connected
+set of volunteers doing it mostly in their spare time, and several of them
+do not consider themselves as computer professionals.  Development is not
+really organized, in the sense that volunteers work on what they find
+appealing rather than follow some agreed upon plan, and the overall
+direction of evolution being in effect controlled by the head maintainer(s)
+accepting or rejecting contributions, and via discussions in mailing-lists.
+
+\subsection{The authors}
+
+Neither of us was around when Emacs and \Elisp{} were designed, but we are
+two researchers in programming languages with a keen interest and a lot of
+experience in (X)Emacs and \Elisp{}, which made us well positioned to write
+this article.  Stefan has been a core contributor to Emacs since
+1999 and head maintainer from 2008 to 2015, while Mike has been a core
+contributor to XEmacs since 199? and ??.
+
 
 \subsection{Organization}
 
@@ -1058,7 +1118,7 @@ debugger enabled all the time, without impeding normal use, and in 2012
 context of any activation frame, which was necessary to allow access to
 lexically scoped variables.
 
-In 1998, Daniel Laliberte developed another \Elisp{} debugger, called
+In 1988, Daniel Laliberte developed another \Elisp{} debugger, called
 Edebug.  It was included into Emacs a few years later during the early
 development of Emacs-19.  This one works without any special support in the
 interpreter; instead it instruments the \Elisp{} source code you want to
@@ -2555,6 +2615,11 @@ social mechanisms, has provided enough cohesive force to keep balkanization
 at bay for more than 30 years.  Given the amount of changes it went through
 over the last decade, we are looking forward to the \Elisp{} of the next
 30 years.
+
+%% FIXME: Discuss whether \Elisp{} is more of a sponge
+%% that incorporated other languages's features, or one that comes up
+%% with its own solutions which are sometimes then picked up by
+%% other languages?
 
 \subsection{Acknowledgments}
 
