@@ -306,37 +306,45 @@ something about his overall role in the history.
 *** TODO Occasionally you refer to the Emacs community in the first person.
 I recommend you use third person throughout.
 
-*** TODO p4, Section 3
+*** DONE p4, Section 3
+    CLOSED: [2019-03-24 Sun 11:16]
 "Following Greenberg's Multics Emacs" Citation please!
 
-*** TODO "Greenspun's tenth rule" Citation please! Not all your readers will
+*** DONE "Greenspun's tenth rule" Citation please! Not all your readers will
+    CLOSED: [2019-03-24 Sun 11:23]
 know it.
 
-*** TODO p5, Section 4
+*** DONE p5, Section 4
+    CLOSED: [2019-03-24 Sun 11:57]
 This section says nothing about lexical vs dynamic scope. As dynamic
 scope seems a pretty backward design choice for 1985, it would be
 helpful to say something about why it was chosen.  (This is finally
 discussed in 8.1. Moving some of that discussion ahead, or at least
 giving a forward pointer, would help.)
 
-*** TODO p5, Section 4.1
+*** DONE p5, Section 4.1
+    CLOSED: [2019-03-24 Sun 12:27]
 A word on *why* lambda was omitted would be helpful. Can you interview
 Stallman?  It's a little weird that you show in detail the syntax for
 the Emacs-18 workaround, but you don't describe the Emacs-19 macro.
 
-*** TODO p6
+*** DONE p6
+    CLOSED: [2019-03-24 Sun 12:27]
 "With buffer-local variables" --> "Along with buffer-local variables"
 
-*** TODO p7
+*** DONE p7
+    CLOSED: [2019-03-24 Sun 12:37]
 "It could either denote ..." Please rephrase. I guess one of these
 means (` a) and one means (`a), in the old-style notation,
 but I can't tell which is which.
 
-*** TODO p8
+*** DONE p8
+    CLOSED: [2019-03-24 Sun 12:40]
 "has to do with region selection" This is mysterious---how does the
 region affect this function?
 
-*** TODO p9
+*** DONE p9
+    CLOSED: [2019-03-24 Sun 12:43]
 "run a hook" Please explain what this means. I'm guessing it means to
 execute each function in the list. Are the functions required to take
 no arguments, or, if they have arguments, which are passed?
@@ -928,6 +936,11 @@ I think there are quite a few lessons for language developers here.   It may be 
 *** TODO - p33 latex problem with one use of <pkg> (forgot to protect < and >)
 *** TODO - p35 "general the" -> "general, the"
 *** TODO - p35 "contributions of course" -> "contributions, of course"
+
+* Questions
+** RMS
+*** Why was lambda-as-a-macro only added so late?
+
 
 * Conf calls
 

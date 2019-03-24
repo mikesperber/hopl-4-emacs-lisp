@@ -291,7 +291,8 @@ approach~\cite{Stallman2018-personal}.
 \section{Early history}         % -1992?
 \label{sec:early-history}
 
-Following Greenberg's Multics Emacs, Richard Stallman decided to write a (for
+Following Greenberg's Multics Emacs~\cite{MulticsEmacs1996},
+Richard Stallman decided to write a (for
 him) second version of Emacs, which included \Elisp{} from the start.
 As Greenberg's Emacs required a high-performance Lisp compiler to run
 efficiently, Richard Stallman decided to reimplement the basis for the new
@@ -307,7 +308,7 @@ support this vision.  Consequently, Richard Stallman took inspiration from
 MacLisp, and \Elisp{} started as a real programming language with
 %% FIXME: Add a summary or reference to that 10th rule?
 powerful abstraction facilities, thus foregoing Greenspun's tenth
-rule.
+rule~\cite{GreenspunsRule}.
 
 Moreover, Richard Stallman, made the design of \Elisp{}
 embody and showcase the ideals of Free Software.  For example, not only
@@ -369,7 +370,8 @@ accompanying \texttt{return} and \texttt{go} forms for non-local
 control transfer.  This was to reduce Emacs's memory footprint, in
 order to make it work on Unix systems with one megabyte of memory~\cite{Stallman2018-personal}.
 
-This section discusses some notable differences from and additions to
+This section discusses the choice of dynamic scoping, as well as
+some notable differences from and additions to
 MacLisp.  Lambda expressions worked slightly differently, as discussed
 in Section~\ref{sec:lambda}.  Section~\ref{sec:strings} discusses the
 string representation (absent in MacLisp).
@@ -386,16 +388,97 @@ variables, which tie the language to the editor.  One important
 pragmatic aspect of the use of the language was extensibility of
 existing code via hooks, discussed in Section~\ref{sec:hooks}.
 
+\subsection{Dynamic scoping}
+
+\Elisp{} took from MacLisp the choice of dynamic scoping.  Richard
+Stallman made this choice despite the fact that the two major emerging
+Lisps at the time---Common Lisp and Scheme---were moving to lexical
+scoping~\cite{CLtL1,R2RS}.
+
+Richard Stallman chose dynamic scoping to meet extensibility
+requirements in Emacs~\cite{Stallman1981}.  The Emacs code base uses
+variables for holding configuration options.  These configuration
+options often need to be modified temporatily, restoring the original
+value after a piece of code has run.  It would in principle be
+possible to structure the code base to pass configuration options
+explicitly, but this would make the code verbose, and require changing
+many function signatures once a new configuration option gets added to
+the system.
+
+Richard Stallman considered the possibility of having an alternate
+scope rule early, but deemed the availability of dynamic scoping
+necessary~\cite{Stallman1981}.  More recently, lexical scoping has
+been added as on option to Emacs---see
+Section~\cite{sec:lexical-scoping}.
+
+%% FIXME Stefan: I elided this because Stallman1981 lays out the
+%% motivation quite clearly
+%% FIXME Mike: Indeed, it explains well why dynamic scoping is provided,
+%% but I think it's worth summarizing it here and it's worth adding
+%% explanations for why it was the *only* binding provided (Stallman1981
+%% only argues for the importance of having dynamic scoping).
+%%
+%% FIXME Stefan: Sure - but do we know that the text that was there
+%% before is correct?  To me, Stallman1981 seems to say "we needed at
+%% least dynamic scoping, and implementing lexical scoping in addition
+%% would have been more work".  I may be wrong though, so feel free to
+%% put the text back in.
+%%
+%% The motivation for this
+%% decision is not completely clear but seems to include:
+%% \begin{itemize}
+%% \item Familiarity: Richard Stallman was more familiar with MacLisp than Scheme, and
+%%   lexical scoping was new whereas dynamic scoping was the
+%%   tried-and-tested alternative.
+%% \item Hackability: Scheme's lexical scoping makes it impossible to access
+%%   variables in other scopes, so it provides a strong form of abstraction,
+%%   which is great in many cases, but can be annoying to the end user who just
+%%   wants to do a quick and dirty hack.
+%%   % FIXME: evidence?
+%%   Similarly, Richard Stallman has often
+%%   preferred to avoid the use of opaque datatypes, most famously for the
+%%   representation of keymaps and characters.
+%%   % FIXME: Needs to tie in with XEmacs above
+%% \item Efficiency: It was perceived that closures would incur a cost that was
+%%   not justified.  This was especially true in the context of the early Emacs
+%%   which relied exclusively on interpretation to evaluate its \Elisp{} code.
+%% \end{itemize}
+
 \subsection{Lambda}
 \label{sec:lambda}
 
-Interestingly, \texttt{lambda} was not a keyword of the \Elisp{} language
-(unlike in MacLisp) until around 1991 when it was added as a macro, early
-during the development of Emacs-19.  In Emacs-18, anonymous functions were
-written as quoted values of the form:
+Interestingly, \texttt{lambda} was not originally a keyword of the
+\Elisp{} language (unlike in MacLisp).  Up to Emacs-18, anonymous
+functions could be lists of the following form:
+%
+\begin{verbatim}
+    (lambda (..ARGS..) ..BODY..)
+\end{verbatim}
+%
+In code, anonymous functions were typically written as quoted Lisp
+literals:
+%
 \begin{verbatim}
     '(lambda (..ARGS..) ..BODY..)
 \end{verbatim}
+%
+The use of dynamic scope made it unnecessary to create closures, and
+thus enabled this implementation strategy.
+
+% FIXME: We don't know why it was done this way.
+
+To create byte-compiled anonymous functions, \Elisp{} has the
+\texttt{function} special form (also imported from MacLisp) for the
+alternative notation:
+%
+\begin{verbatim}
+    (function (lambda (..ARGS..) ..BODY..))
+\end{verbatim}
+%
+Around 1991, \texttt{lambda} was added as a macro, early during the
+development of Emacs-19.  The macro simply returns the list
+representation.
+
 While the \texttt{lambda} macro has made this quote unnecessary for almost
 30 years now, many instances of this practice still occur in \Elisp{} code,
 even though it prevents byte-compilation of the body.
@@ -430,7 +513,7 @@ undesired complexities, and decided that Emacs's text properties should not
 have identity and should apply to the characters of the string so there is
 never a question of splitting or merging text properties.
 
-With buffer-local variables~\ref{sec:buffer-local-variables}, this is one of
+Along with buffer-local variables~\ref{sec:buffer-local-variables}, this is one of
 the very rare cases where the core \Elisp{} language has been extended with
 a feature that specifically caters to the needs of the Emacs text editor, to
 keep track of rendering information.  It is more generally useful, of
@@ -481,10 +564,13 @@ was written in early \Elisp{} as:
 %%
 The releases of Emacs-19.28 and XEmacs 19.12 in 1994 finally added the
 proper reader support to generate the latter version from the first.
-The reader had to rely on a heuristic for that, though, because \texttt{(`a)} is
-valid in both syntaxes but means different things: It could either denote an
-old-style backquote expression (denoting the backquoted symbol \texttt{a}) or
-a single-element list containing the new-style backquoted symbol \texttt{a}.
+
+The reader had to rely on a heuristic for the translation, though,
+because \texttt{(`a)} is valid in both syntaxes but means different
+things: It could either denote an old-style backquote expression
+(\verb|(` a)| in the old notation) or a single-element list containing
+the new-style backquoted symbol \texttt{a} (\verb|((` a))| in the old
+notation).
 
 %% Stefan: I can't see when/where it was actually declared obsolete,
 %% but it clearly was made obsolete by the introduction of the new syntax.
@@ -566,7 +652,8 @@ example, \verb|p| means that the function accepts a \emph{prefix
 \texttt{C-u} (to specify powers of 4) prior to invoking the function,
 and the number will be passed to the function as an argument, in this
 case as \texttt{arg}.  (The \verb|^| (a more recent addition) has to do with
-region selection with a pressed shift key.)
+region selection with a pressed shift key---it may lead to the region
+being activated.)
 
 \subsection{Non-local exits}
 \label{sec:non-local-exits}
@@ -686,10 +773,11 @@ additional code without having to change them, so as to extend their
 behavior.  Emacs supports this at well-defined points called
 \emph{hooks}.
 
-A hook is simply a variable bound to a list of functions.  The
-\texttt{add-hook} function adds a function to such a list by
-reassigning the variable.  (This makes use of the ability to refer to
-a variable by its name symbol.)
+A hook is simply a variable bound to a list of zero-argument
+functions.  The \texttt{add-hook} function adds a function to such a
+list by reassigning the variable.  (This makes use of the ability to
+refer to a variable by its name symbol.)  The \texttt{run-hooks}
+function calls all functions in that list.
 
 Hooks are not a core language feature, but their use has been a
 pervasive convention in Emacs from the start.  In particular, many
@@ -1767,50 +1855,10 @@ systems (Section~\ref{sec:module-system}).
 \subsection{Lexical scoping}
 \label{sec:lexical-scoping}
 
-While Scheme was already about to get its second revision when Richard
-Stallman started to work on GNU Emacs, and he obviously knew about
-Scheme, being developed in a nearby office, \Elisp{} was mostly derived from
-MacLisp and used exclusively dynamic scoping.  Dynamic scoping is used
-extensively to add ``hidden'' configuration options to existing
-functions without passing explicit arguments~\cite{Stallman1981}.
-
-%% FIXME Stefan: I elided this because Stallman1981 lays out the
-%% motivation quite clearly
-%% FIXME Mike: Indeed, it explains well why dynamic scoping is provided,
-%% but I think it's worth summarizing it here and it's worth adding
-%% explanations for why it was the *only* binding provided (Stallman1981
-%% only argues for the importance of having dynamic scoping).
-%%
-%% FIXME Stefan: Sure - but do we know that the text that was there
-%% before is correct?  To me, Stallman1981 seems to say "we needed at
-%% least dynamic scoping, and implementing lexical scoping in addition
-%% would have been more work".  I may be wrong though, so feel free to
-%% put the text back in.
-%%
-%% The motivation for this
-%% decision is not completely clear but seems to include:
-%% \begin{itemize}
-%% \item Familiarity: Richard Stallman was more familiar with MacLisp than Scheme, and
-%%   lexical scoping was new whereas dynamic scoping was the
-%%   tried-and-tested alternative.
-%% \item Hackability: Scheme's lexical scoping makes it impossible to access
-%%   variables in other scopes, so it provides a strong form of abstraction,
-%%   which is great in many cases, but can be annoying to the end user who just
-%%   wants to do a quick and dirty hack.
-%%   % FIXME: evidence?
-%%   Similarly, Richard Stallman has often
-%%   preferred to avoid the use of opaque datatypes, most famously for the
-%%   representation of keymaps and characters.
-%%   % FIXME: Needs to tie in with XEmacs above
-%% \item Efficiency: It was perceived that closures would incur a cost that was
-%%   not justified.  This was especially true in the context of the early Emacs
-%%   which relied exclusively on interpretation to evaluate its \Elisp{} code.
-%% \end{itemize}
-
-Eventually, lexical scoping became the established standard in
-the Lisp family in both Common Lisp and Scheme.
-So of course, the question of adding lexical scoping to \Elisp{} has been
-brought up many times.
+When the Richard Stallman started working on \Elisp, lexical scoping
+was becoming the established standard in the Lisp family in both
+Common Lisp and Scheme.  So of course, the question of adding lexical
+scoping to \Elisp{} has been brought up many times.
 
 The first implementation appeared quite early, in the form of the
 \texttt{lexical-let} macro, which was part of the new \texttt{cl.el} by Dave
