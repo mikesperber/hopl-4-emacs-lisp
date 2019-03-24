@@ -119,7 +119,7 @@ implementation, and history are inextricably linked to that of Emacs.
 
 %% FIXME: What should we put here?
 
-\subsection{Emacs early history}
+\subsection{Emacs's early history}
 \label{sec:emacs-early-history}
 
 Emacs's original inception was as a set of macros for the TECO editor,
@@ -175,20 +175,71 @@ accepting or rejecting contributions, and via discussions in mailing-lists.
 
 Richard Stallman was the original maintainer and even though several other
 people have been official maintainers at various points in time, he always
-stayed as a ``default maintainer'' when noone wanted to step up and has
-always stayed very actively involved in Emacs's development.
+acted as a ``default maintainer'' when noone wanted to step up and has
+followed Emacs's development very closely even when he was not officially
+the maintainer.  Also, Richard Stallman being the founder of the Free
+Software Foundation (FSF), Emacs is part of the FSF's GNU project and is
+hence linked to the FSF by its use of FSF's resources to host the code and
+own the copyright.  The link with the FSF is of course particularly strong
+because of Richard's role in Emacs.
 %% %% FIXME: Do we really care about those details?
-%% several hands:
-%% %% FIXME: when?  I think it was around the time of collaboration with Lucid
-%% Joseph Arceneaux was the first to take over maintenance,
-%% %% FIXME: When?  Was it right after or Joe, or did Richard fill in-between?
-%% then followed by Jim Blandy
-%% %% FIXME Since when?  Did Richard fill in-between?
+%% Joseph Arceneaux was the first to take over maintenance, not sure when it
+%% started, but he was maintainer in October 1990 when he started being
+%% paid as consultant by Lucid.  By summer 1991, maintainership had shifted to
+%% Jim Blandy who was paid by the FSF.
 %% then followed by Gerd Möllman until the release of Emacs-22.1, after which
 %% Richard came back as maintainer until 2008 when the maintenance was shared
-%% between Chong Yidong and Stefan Monnier
+%% between Chong Yidong and Stefan Monnier, then Richard again, then
+%% John Wiegley, later joined by and then replace by Eli Zaretskii.
+
+The organization of Emacs's development is not really codified, but in
+practice the role of the maintainer is a balancing act between the desire to
+maintain a sane code base, to promote Free Software, to be attractive to its
+users, and to encourage contributions.  There is also more structure to the
+organization: the maintenance is really shared among a handful of people who
+earned each other's respect by the weight of their past contributions and
+who can then make more or less any change to the code they like, and accept
+or reject external contributions, as long as nobody complains.  In case of
+disagreement between those core contributors the maintainer has the final
+word.  This structure exists since 1991 and until 2000 was embodied in the
+fact that the core contributors were members of a private \emph{emacs-core}
+mailing-list and were the only ones with direct access to the code.
+Since late 2000, when the CVS server became public, this has become much
+more blurry: technically, more than a hundred contributors have direct write
+access to the code now and nowhere is it ever written or said which of those
+is or isn't considered a core contributor at any given point it time.
+Instead the system functions by self-regulation: every time someone installs
+a change without prior permission, someone else may or may not complain
+about the change's quality, which can lead to requiring further changes or
+even a complete revert, so over time contributors learn to judge on their
+own what makes a change acceptable.
 
 \subsubsection{The great schism}
+
+In 1988, Lucid Inc., a software development company based in Menlo
+Park, Carlifornia, started a project called \emph{Energize}.
+Energize was to be a C/C++ integrated development environment based on
+Emacs~\cite{GabrielLetter}.  Lucid decided to use Emacs as the central
+component of Energize.  At the time, the current version of Emacs was
+18, which was still essentially a textual application.  The then
+upcoming version of Emacs, Emacs 19, was to have a graphical user
+interface and many other features that the developers at Lucid
+considered essential for the development of Energize.  However, at the
+time that Lucid needed Emacs 19, a release was not in
+sight.\footnote{The first official release of Emacs 19, Emacs
+  19.28, came out on November 1, 1994.}
+
+While Lucid at first tried to support and thus speed up the
+development of Emacs 19, the required cooperation between Lucid and
+the Free Software Foundation soon broke down.  As a result, Lucid
+forked Emacs development, creating its own Emacs variant \emph{Lucid
+Emacs}.\footnote{The first release of Lucid Emacs came out in April,
+1992.}  Jamie Zawinski was the primary developer of Lucid Emacs.
+In 1994, Lucid went bankrupt.  Sun subsequently wanted to ship
+Lucid Emacs with their operating system, and ended up financing some
+of the continued development of Lucid Emacs, and effected a name
+change to the current \emph{XEmacs}.
+
 
 \subsection{The authors}
 
@@ -1479,30 +1530,6 @@ experimental feature into Emacs-27.1 is still on-going.
 \section{XEmacs period}         % 1992-2007 ?
 \label{sec:xemacs}
   
-In 1991, Lucid Inc., a software development company based in Menlo
-Park, Carlifornia, started a project called \emph{Energize}.
-Energize was to be a C/C++ integrated development environment based on
-Emacs~\cite{GabrielLetter}.  Lucid decided to use Emacs as the central
-component of Energize.  At the time, the current version of Emacs was
-18, which was still essentially a textual application.  The then
-upcoming version of Emacs, Emacs 19, was to have a graphical user
-interface and many other features that the developers at Lucid
-considered essential for the development of Energize.  However, at the
-time that Lucid needed Emacs 19, a release was not in
-sight.\footnote{The first official release of Emacs 19, Emacs
-  19.28, came out in on November 1, 1994.}
-
-While Lucid at first tried to support and thus speed up the
-development of Emacs 19, the required cooperation between Lucid and
-the Free Software Foundation soon broke down.  As a result, Lucid
-forked Emacs development, creating its own Emacs variant \emph{Lucid
-Emacs}.\footnote{The first release of Lucid Emacs came out in April,
-1992.}  Jamie Zawinski was the primary developer of Lucid Emacs.
-In 1994, Lucid went bankrupt.  Sun subsequently wanted to ship
-Lucid Emacs with their operating system, and ended up financing some
-of the continued development of Lucid Emacs, and effected a name
-change to the current \emph{XEmacs}.
-
 The focus of Lucid Emacs was on providing a proper graphical user
 interface.  As a result, most of the changes to \Elisp{} in Lucid
 Emacs / XEmacs were to support the move from a TTY-based purely
