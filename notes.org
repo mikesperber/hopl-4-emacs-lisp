@@ -949,6 +949,7 @@ I think there are quite a few lessons for language developers here.   It may be 
 *** How do we "cite" revision-control records?
 *** How do we deal with disputed history?
 *** How relevant is history with impact on Emacs but not on Emacs Lisp?
+*** Should we explain more of core Emacs Lisp instead of deferring to the MacLisp manual?
 
 * Conf calls
 

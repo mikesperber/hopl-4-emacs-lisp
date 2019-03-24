@@ -3,6 +3,8 @@
 
 \usepackage{booktabs} % For formal tables
 %% \usepackage{alltt}
+\usepackage{longtable}
+\usepackage{tabu}
 \usepackage[utf8]{inputenc}
 
 %% Metadata Information
@@ -335,6 +337,93 @@ influence on the \Elisp{} language:
   mark\&sweep garbage collector, and why its main execution engine is
   a simple byte-code interpreter.
 \end{itemize}
+
+% FIXME: remove the *, which is only there to not mess w/ section numbers
+\section*{Timeline}
+
+This section contains a timeline of significant milestones in the
+development of Emacs and Lucid Emacs/XEmacs.  It also includes a few
+milestones from \textit{Epoch}, a predecessor to Lucid Emacs that
+had support for multiple windows.
+
+For the time until 2007, the timeline in this section borrows much
+from Jamie Zawinski's timeline~\cite{JWZTimeline}.  Maintainers are
+listed in parentheses.
+
+\begin{center}
+  \begin{longtabu} to \textwidth {l|X|X}
+    1985-03-20 & GNU Emacs 13.0 \\
+    & (Richard Stallman)\\
+    & earliest recorded release\\[1ex]
+    1985-07-15 & GNU Emacs 16.56 \\
+    & (Richard Stallman)\\
+    & oldest version for which code survives, code from Gosling Emacs expunged\\[1ex]
+    1987-09-18 & GNU Emacs 18.49\\
+    & (Richard Stallman)\\[1ex]
+    1987 & & Epoch forks from GNU Emacs 18.49\\
+    && (Alan M.\ Carroll)\\[1ex]
+    1988-12-14 & & Epoch 1.0\\
+    & & (Alan M.\ Caroll, Simon Kaplan)\\[1ex]
+    1989-08-23 & GNU Emacs 18.55\\
+    & (Richard Stallman)\\[1ex]
+    1990 & work on GNU Emacs 19 forks from GNU Emacs 18.55\\[1ex]
+    & (Joe Arcenaux)\\
+    1990-08-27 & & Epoch 4.0\\
+    && (Marc Andreesen)\\[1ex]
+    1990-04 && Lucid Emacs 19.0 \\
+    && (Jamie Zawinski)\\[1ex]
+    1992-10-31 & GNU Emacs 18.59 \\
+    & (Richard Stallman)\\
+    & last release of Emacs 18\\[1ex]
+    1993-05-22 & GNU Emacs 19.7 beta\\
+    & (Jim Blandy)\\
+    & first public beta of GNU Emacs 19\\[1ex]
+    1993-05-27 & GNU Emacs 19.8 beta\\
+    & (Jim Blandy)\\
+    1993-09-06 & & Lucid Emacs 19.8\\
+    & & (Jamie Zawinski)\\
+    & & (merged Epoch, GNU Emacs 19.8)\\[1ex]
+    1994-05-17 & GNU Emacs 19.23 beta\\
+    & (Richard Stallman)\\[1ex]
+    1994-05-27 & & Lucid Emacs 19.10\\
+    & & (Jamie Zawinski)\\[1ex]
+    1994-09-13 & & XEmacs 19.11\\
+    & & (Chuck Thompson, Ben Wing)\\[1ex]
+    1994-11-01 & GNU Emacs 19.28\\
+    & (Richard Stallman)\\
+    & first official release of GNU Emacs 19\\[1ex]
+    1995 && work on XEmacs 20 with MULE support begins\\[1ex]
+    1995-09-01 && XEmacs 19.13\\
+    && (Check Thompson, Ben Wing)\\
+    && merged Emacs 19.30\\[1ex]
+    1995-11-24 & GNU Emacs 19.30\\
+    & (Richard Stallman)\\[1ex]
+    1996-05-25 & GNU Emacs 19.31\\
+    & (Karl Heuer)\\[1ex]
+    1996-08-21 & GNU Emacs 19.34\\
+    & (Richard Stallman))\\[1ex]
+    1997-02-09 && XEmacs 20.0\\
+    && (Steve Baur)\\[1ex]
+    1997-03-26 && XEmacs 19.15\\
+    && (Steve Baur)\\[1ex]
+    1997-09-17 & Emacs 20.1\\
+    & (Richard Stallman)\\[1ex]
+    1997-10-31 && XEmacs 19.16\\
+    && (Steve Baur)\\[1ex]
+    1998-02-28 && XEmacs 20.4\\
+    && (Steve Baur)\\
+    && first stable release with MULE support\\
+    && packages shipped separately\\[1ex]
+    2001-04-16 && XEmacs 21.4\\
+    && (Stephen Turnbull)\\[1ex]
+    2001-10-20 & GNU Emacs 21.1\\
+    & (Gerd Moellmann)\\[1ex]
+    2007-06-01 & GNU Emacs 22.1\\
+    & (Chong Yidong)
+  \end{longtabu}
+\end{center}
+
+% FIXME: timeline Emacs Lisp evolution?
 
 \section{Base language design}
 \label{sec:base-language-design}
