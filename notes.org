@@ -349,12 +349,13 @@ region affect this function?
 execute each function in the list. Are the functions required to take
 no arguments, or, if they have arguments, which are passed?
 
-*** TODO "attaching code to functions even if they do not run hooks" Does this
+*** DONE "attaching code to functions even if they do not run hooks" Does this
+    CLOSED: [2019-03-24 Sun 15:20]
 attach a single function to another function? Or a list of functions,
 as in a hook? Does the attached function run before the other function,
 or at some other time?
 
-*** TODO "makes better use of existing language features" Obscure. Explain or
+*** TODO Stefan "makes better use of existing language features" Obscure. Explain or
 give a citation.
 
 *** TODO I could not discern an order to the subsections of Section 4. Possibly
@@ -366,11 +367,13 @@ best to reorder them, with the ones directly related to Emacs first
 *** TODO p10 Section 5.1
 Who developed the byte-code compiler? Citations, please.
 
-*** TODO p11
+*** DONE p11
+    CLOSED: [2019-03-24 Sun 15:24]
 "FSF-owned" I guess this is the Free Software Foundation?
 But you haven't mentioned it by name at this point.
 
-*** TODO p12
+*** DONE p12
+    CLOSED: [2019-03-24 Sun 15:25]
 "where amply sufficient" --> "were amply sufficient"
 
 *** TODO "the "mark" bit was not used" I'm confused. If it wasn't used for this
@@ -940,7 +943,12 @@ I think there are quite a few lessons for language developers here.   It may be 
 * Questions
 ** RMS
 *** Why was lambda-as-a-macro only added so late?
+*** When was the byte-code compiler added?
 
+** Brent
+*** How do we "cite" revision-control records?
+*** How do we deal with disputed history?
+*** How relevant is history with impact on Emacs but not on Emacs Lisp?
 
 * Conf calls
 

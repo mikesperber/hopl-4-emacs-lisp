@@ -795,22 +795,42 @@ Of course, authors do not always have the foresight to place hooks where
 users need them, so in 1992, the \texttt{advice.el} package was added to
 Emacs-19, providing a \texttt{defadvice} macro duplicating a design
 available in MacLisp and Lisp Machines, that allowed attaching code to
-functions even if they do not run hooks.\footnote{``It is bad practice
+a function even if it does not run hooks.\footnote{``It is bad practice
   %% FIXME: I've often found people don't like footnotes very much.
   %% Should we try and eliminating them (by working them into the mainline text)
   %% or do we say that it's perfectly OK to use them?
   to make a Lisp program put advice on another Lisp
   program's function, because that is confusing.  When you see that the
   program calls \texttt{mumble}, it might take you hours before you think of
-  checking whether it has advice.'' \cite{Stallman2018-personal}}
+  checking whether it has advice.'' \cite{Stallman2018-personal}}  
+
+Here is an example \texttt{defadvice} form:
+%
+\begin{verbatim}
+(defadvice eval-region (around cl-read activate)
+  "Use the reader::read instead of the original read if cl-read-active."
+  (with-elisp-eval-region (not cl-read-active)
+    (ad-do-it)))
+\end{verbatim}
+%
+This specifies a piece of code that is run on each invocation of the
+\texttt{eval-region} function.  The \texttt{around} means that the
+code in the \texttt{defadvice} form explicitly delegates to the
+advised function via \texttt{ad-do-it}.  (Also possible are
+\texttt{before} and \texttt{after} with implicit delegation.)  The
+\texttt{activate} flag means that the advice becomes active
+immediately.  The \texttt{cl-read} name can be used to disable the
+advice later.
 
 The way the \texttt{defadvice} macro gave access to function arguments did
 not work with lexical scoping; furthermore time had shown that most of the
 non-core features of \texttt{defadvice} were very seldom used, and even more
-seldom used properly.  So in late 2012 a new package \texttt{nadvice.el} was
-developed which provides the same core features but with a much simpler
-design that tries to make better use of existing language features.  It was
-released as part of Emacs-24.4.
+seldom used properly.  So in late 2012 Stefan Monnier developed a new
+package \texttt{nadvice.el} that provides the same core features with
+a much simpler
+design.  Moreover, Stefan Monnier tried to make better use of existing
+language features.  The \texttt{nadvice} package was released as part
+of Emacs-24.4.
 
 \subsection{I/O}
 
@@ -868,7 +888,7 @@ representation of the code.
 %% whereas I don't know when it was introduced: 16.56 is simply the first
 %% revision I could get my hands on!
 Some time before the release of Emacs-16.56 in July 1985,
-a \texttt{byte-code} function was added, which interpreted its string
+Richard Stallman added the \texttt{byte-code} function, which interpreted its string
 argument as a sequence of stack-based byte codes to execute, along with
 a compiler, written in \Elisp{}, which translated \Elisp{} code to that
 byte-code language.
@@ -947,7 +967,8 @@ This said, there were other objections to those patches:
 Since the \Elisp{} compiler is itself written in \Elisp{}, it requires
 a form of bootstrap.  Until 2002 during the development of Emacs-21, Emacs's
 development was done using the revision control system RCS~\cite{Tichy85}, and
-changes were installed by logging remotely into an FSF-owned machine and
+changes were installed by logging remotely into a machine owned by the
+Free Software Foundation and
 performing the commits there.  This machine also kept the (last) compiled
 form of the \Elisp{} files and so naturally provided the needed compiled
 files for bootstrap.  When development moved to CVS~\cite{Berliner90} to ease
@@ -970,7 +991,7 @@ Emacs started with a data representation of its boxed data based on 32bit
 words.  Those used a 7bit tag located in the most significant bits, 1 extra
 ``mark'' bit (see below), and 24bit of immediate data: either an integer or
 a pointer.  Not all the possible 128 tags were actually used, but the 24
-remaining bits where amply sufficient to represent the needed pointers and
+remaining bits were amply sufficient to represent the needed pointers and
 integers for the typical available memory of the machines of that time.
 
 The memory management used a simple mark\&sweep garbage collection
