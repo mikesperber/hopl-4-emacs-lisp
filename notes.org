@@ -272,7 +272,7 @@ development with no citations, not even to its documentation. The
 exposition often assumed knowledge I did not have, such as familiarity
 with CLOS.
 
-The development is quite detailed, and I wonder how much interest it
+*** TODO The development is quite detailed, and I wonder how much interest it
 will hold for the general community. There certainly are points of
 interest.  The conclusion refers to "willingness to break backward
 compatibility in specific cases" and "unbridgeable personal
@@ -283,186 +283,186 @@ detail.
 
 Comments for author
 -------------------
-Please use author-year citations throughout.
+*** TODO Please use author-year citations throughout.
 
-Many sections of the paper have no citations. In all these cases,
+*** TODO Many sections of the paper have no citations. In all these cases,
 are we to assume there is no documentation and it is down to personal
 knowledge of the authors? Please add citations wherever possible.
 
-Throughout, I had a lot of trouble mapping release numbers to
+*** TODO Throughout, I had a lot of trouble mapping release numbers to
 years, and relating release numbers for Emacs to those for XEmacs.
 Could you give a table with a chronology of releases?
 
-Why are you two the right ones to write this paper? Please say in
+*** TODO Why are you two the right ones to write this paper? Please say in
 the introduction a little about your involvement with Emacs and
 to what extent (if any) you consulted with the community in writing
 this paper.
 
-Also, bring out some details about the people involved. For instance,
+*** TODO Also, bring out some details about the people involved. For instance,
 you should say something regarding Stallman's biography. He is
 mentioned with regard to specific details, but you should also say
 something about his overall role in the history.
 
-Occasionally you refer to the Emacs community in the first person.
+*** TODO Occasionally you refer to the Emacs community in the first person.
 I recommend you use third person throughout.
 
-p4, Section 3
+*** TODO p4, Section 3
 "Following Greenberg's Multics Emacs" Citation please!
 
-"Greenspun's tenth rule" Citation please! Not all your readers will
+*** TODO "Greenspun's tenth rule" Citation please! Not all your readers will
 know it.
 
-p5, Section 4
+*** TODO p5, Section 4
 This section says nothing about lexical vs dynamic scope. As dynamic
 scope seems a pretty backward design choice for 1985, it would be
 helpful to say something about why it was chosen.  (This is finally
 discussed in 8.1. Moving some of that discussion ahead, or at least
 giving a forward pointer, would help.)
 
-p5, Section 4.1
+*** TODO p5, Section 4.1
 A word on *why* lambda was omitted would be helpful. Can you interview
 Stallman?  It's a little weird that you show in detail the syntax for
 the Emacs-18 workaround, but you don't describe the Emacs-19 macro.
 
-p6
+*** TODO p6
 "With buffer-local variables" --> "Along with buffer-local variables"
 
-p7
+*** TODO p7
 "It could either denote ..." Please rephrase. I guess one of these
 means (` a) and one means (`a), in the old-style notation,
 but I can't tell which is which.
 
-p8
+*** TODO p8
 "has to do with region selection" This is mysterious---how does the
 region affect this function?
 
-p9
+*** TODO p9
 "run a hook" Please explain what this means. I'm guessing it means to
 execute each function in the list. Are the functions required to take
 no arguments, or, if they have arguments, which are passed?
 
-"attaching code to functions even if they do not run hooks" Does this
+*** TODO "attaching code to functions even if they do not run hooks" Does this
 attach a single function to another function? Or a list of functions,
 as in a hook? Does the attached function run before the other function,
 or at some other time?
 
-"makes better use of existing language features" Obscure. Explain or
+*** TODO "makes better use of existing language features" Obscure. Explain or
 give a citation.
 
-I could not discern an order to the subsections of Section 4. Possibly
+*** TODO I could not discern an order to the subsections of Section 4. Possibly
 best to reorder them, with the ones directly related to Emacs first
 (e.g., 4.2, 4.5, 4.7, 4.9), then ones tied to Emacs goals (e.g., 4.4,
 4.8), and the ones that are only incidental later (e.g., 4.1, 4.3,
 4.6).
 
-p10 Section 5.1
+*** TODO p10 Section 5.1
 Who developed the byte-code compiler? Citations, please.
 
-p11
+*** TODO p11
 "FSF-owned" I guess this is the Free Software Foundation?
 But you haven't mentioned it by name at this point.
 
-p12
+*** TODO p12
 "where amply sufficient" --> "were amply sufficient"
 
-"the "mark" bit was not used" I'm confused. If it wasn't used for this
+*** TODO "the "mark" bit was not used" I'm confused. If it wasn't used for this
 purpose, how were objects marked?
 
-"each object by allocated" --> "each object be allocated"
+*** TODO "each object by allocated" --> "each object be allocated"
 
-If there are just eight object types, perhaps it would be
+*** TODO If there are just eight object types, perhaps it would be
 worthwhile to list them all?
 
-"merged that data representation of Emacs 19.30" I can't work out what
+*** TODO "merged that data representation of Emacs 19.30" I can't work out what
 this phrase refers to, please rewrite.
 
-p13
+*** TODO p13
 "ephemerons" Are these so uninteresting that they deserve no
 description in the paper?
 
-p14
+*** TODO p14
 "no matter which tagging scheme we used" Change from first to third
 person.
 
-"tweaked to use two tags for integers" Link this to the odd and
+*** TODO "tweaked to use two tags for integers" Link this to the odd and
 even fixnum tags mentioned earlier.
 
-"cl.el's defstruct" What is cl.el? I guess it is a library inspired
+*** TODO "cl.el's defstruct" What is cl.el? I guess it is a library inspired
 by Common Lisp, but you ought to be clear about this.
 
-p15
+*** TODO p15
 "the more standard forms of weak references" I don't know what this
 means.
 
-"very early" Is Emacs-16.56 really very early?
+*** TODO "very early" Is Emacs-16.56 really very early?
 
-p16
+*** TODO p16
 
-Section 5.10.  End first paragraph with the sentence "Modifying
+*** TODO Section 5.10.  End first paragraph with the sentence "Modifying
 function bodies was brittle and inconvenient and only worked for
 functions defined in Elisp." Delete the similar phrase from the next
 paragraph.
 
-p17
+*** TODO p17
 "but did get" --> "But it did get"
 
-"stable enough to be used globally" What does this mean? (I gather it
+*** TODO "stable enough to be used globally" What does this mean? (I gather it
 does not mean the feature was released, since it is still an
 attmempt.)
 
-"compared to Nickolas" --> "compared to Lloyd"
+*** TODO "compared to Nickolas" --> "compared to Lloyd"
 
-Section 6. Since Xemacs has been referred to throughout the paper,
+*** TODO Section 6. Since Xemacs has been referred to throughout the paper,
 it would be best to move the information in the first three paragraphs
 of Section 6 to before Section 4.
 
-Footnote 3. What was the release number of the first release of
+*** TODO Footnote 3. What was the release number of the first release of
 Lucid Emacs?
 
-p18
+*** TODO p18
 Section 6.1. I gather the purpose of a keymap is to map a 
 sequence of keystrokes to a function to invoke. Please say this
 explicitly. Please also explain nesting of keymaps.
 
-"inheritance" I don't know what inheritance means in the context of a
+*** TODO "inheritance" I don't know what inheritance means in the context of a
 keymap.
 
-"SFEmacs" Perhaps say a word or two about why this fork came
+*** TODO "SFEmacs" Perhaps say a word or two about why this fork came
 into existence?
 
-p20
+*** TODO p20
 "While no significant changes were made to the byte-code format in
 XEmacs, the two instruction sets eventually drifted and became
 incompatible." Surely the first incompatible change was significant,
 just because it was incompatible? Make clear whether the drift was a
 deliberate choice or an accident.
 
-p21
+*** TODO p21
 "it was not unified with other charsets" I don't know what this means.
 
-p22
+*** TODO p22
 "This issue is still being discussed with Emacs." --> "This issue is
 still being discussed in the Emacs community."
 
-Section 7.4. Why are the three displayed examples given? This seems
+*** TODO Section 7.4. Why are the three displayed examples given? This seems
 more detailed than other discussion, and it seems more detail than
 necessary.
 
-p23
+*** TODO p23
 "during that time" Unclear. Replace by "post-2010" or whatever is
 correct.
 
-The summary of Section 8 at the beginning omits 8.2 and 8.3.
+*** TODO The summary of Section 8 at the beginning omits 8.2 and 8.3.
 
-""hidden" configuration options" I'm not sure what "hidden" adds
+*** TODO ""hidden" configuration options" I'm not sure what "hidden" adds
 here, perhaps delete?
 
-p24
+*** TODO p24
 "except in the presence of higher-order functions, like reduce" I
 don't understand why higher-order function would lead to name
 conflicts under the described convention.
 
-p25
+*** TODO p25
 I take it that in the current version lexical scope is the default,
 but that dynamic scope is still possible. You should say something
 about how this is achieved. You should also say how backward
@@ -472,120 +472,120 @@ How smoothly did the introduction of lexical scope go?
 
 Has lexical scoping made its way into XEmacs?
 
-p26
+*** TODO p26
 "often using the new low-level pattern app". I have no idea
 what this means. Explain or omit.
 
-p27
+*** TODO p27
 "we" Perhaps change to third person?
 
-p28
+*** TODO p28
 I take it that both cl.el and cl-lib.el are currently in use.
 Does this introduce any performance or maintenance issues?
 Are there plans to deprecate cl.el?
 
-Section 8.5. Previously, the text used "generalised reference"
+*** TODO Section 8.5. Previously, the text used "generalised reference"
 but now it uses "generalised variable". Perhaps change the earlier
 occurrences of "generalised reference" to "generalised variable".
 
-"can be used as an ... and an ..." --> "can be used both as an ... and
+*** TODO "can be used as an ... and an ..." --> "can be used both as an ... and
 as an ..."
 
-"(VARS VALS STORE-VAR STORE-FORM ACCESS-FORM)" I don't follow this
+*** TODO "(VARS VALS STORE-VAR STORE-FORM ACCESS-FORM)" I don't follow this
 explanation. How does STORE-VAR relate to VARS? The expansion of
 (push EXP PLACE) helps little unless the reader knows how push
 is defined. This paragraph should be rewritten with more explanation.
 
-"NIH syndrome" That seems a different reason that "the existing
+*** TODO "NIH syndrome" That seems a different reason that "the existing
 code was hard to follow"!
 
-"wanted to keep in cl.el" --> "did not want to move to Emacs"
+*** TODO "wanted to keep in cl.el" --> "did not want to move to Emacs"
 
-"cl-lib" in italic --> "cl-lib.el" in tt foont
+*** TODO "cl-lib" in italic --> "cl-lib.el" in tt foont
 
-"a DO function of two arguments" Is this what is called
+*** TODO "a DO function of two arguments" Is this what is called
 gv-get-place-function in the following example? Please rewrite
 to clarify.
 
-p29
+*** TODO p29
 Nothing is gained by giving two forms of the push example.
 Just give one or the other.
 
-p29
+*** TODO p29
 "the reverse is not true" Why can't you set
   (VARS VALS STORE-VAR STORE-FORM ACCESS-FORM)  
 to
   (nil nil x (STORE-FUNCTION x) ACCESS-FORM)
 ?
 
-"(originally developed in 1986 by Cesar Quiroz, and included in
+*** TODO "(originally developed in 1986 by Cesar Quiroz, and included in
 Emacs-18.51 in 1988)" Doesn't belong here. Add the last phrase
 to the earlier mention of cl.el on p26.
 
-"CLOS" Give a citation for CLOS, and explain it is the
+*** TODO "CLOS" Give a citation for CLOS, and explain it is the
 Common Lisp Object System.
 
-"(a package providing IDE-like features)" move this to the
+*** TODO "(a package providing IDE-like features)" move this to the
 mention of CEDET in the previous paragraph.
 
-p30
+*** TODO p30
 
 "supported specializers" I'm not familiar with CLOS, and I don't know
 what a specializer is. Please explain. Indeed, please rewrite the
 whole section assuming your reader is not familiar with CLOS.
 
-“&context (EXP SPECIALIZER)” I'm completely lost here. Help!
+*** TODO “&context (EXP SPECIALIZER)” I'm completely lost here. Help!
 
-Are the object facilities of both EIEIO and cl-generic.el currently in
+*** TODO Are the object facilities of both EIEIO and cl-generic.el currently in
 use?  Does this introduce any performance or maintenance issues?  Are
 there plans to deprecate EIEIO?
 
-p31
+*** TODO p31
 "the generator.el" --> "generator.el"
 
-"in order to avoid it the coder needs to write their code in a
+*** TODO "in order to avoid it the coder needs to write their code in a
 continuation-passing style" I don't see why this should be the case,
 please explain.
 
-p32
+*** TODO p32
 "async.el" Cite its documentation.
 
-A word or two on uses of the concurrency package would be welcome.
+*** TODO A word or two on uses of the concurrency package would be welcome.
 Have the uses led to concurrency bugs? If there aren't many uses
 of the package yet that would also be valuable information.
 
-"is important to optimize for example" --> "performs important
+*** TODO "is important to optimize for example" --> "performs important
 optimizations, for example"
 
-"the macro can extract" Which macro??
+*** TODO "the macro can extract" Which macro??
 
-The story seems to stop early. Did define-inline solve the cl-typep
+*** TODO The story seems to stop early. Did define-inline solve the cl-typep
 problem? How? How widely used is define-inline? How does it co-exist
 with the older systems for inlining?
 
-p33
+*** TODO p33
 
 "¡pkg¿" font issue?
 
-p34
+*** TODO p34
 
 "Emacs-Ejit" I presume this is the compiler from Emacs to Javascript?
 Please make this explicit.
 
-p35
+*** TODO p35
 
 "willingness to break backward compatibility in specific cases" It would
 be good to make this a theme of the paper, stressing where it happened,
 how the evolution was handled, and how successful it was.
 
-"unbridgeable personal differences, heated debates, and forks along
+*** TODO "unbridgeable personal differences, heated debates, and forks along
 the way" These are all great topics for a history! But the paper largely
 ignores or downplays these.
 
-"But it has also come up with its own features" Interestingly, all three
+*** TODO "But it has also come up with its own features" Interestingly, all three
 that you list are already covered in Section 4! Were there later ones?
 
-"whose composability" Rewrite the sentence so it is clear you are talking
+*** TODO "whose composability" Rewrite the sentence so it is clear you are talking
 about the composability of packages, not of the community.
 
 
@@ -629,11 +629,11 @@ language for an editor, and of the constraints that come from being part of
 the free software movement. I wish this part of the story were told more
 consistently and more prominently.
 
-In contrast, many evolutionary changes are presented without discussion or
+*** TODO In contrast, many evolutionary changes are presented without discussion or
 analysis. I can only assume that the there were other reasons for these
 changes, besides the two listed above, but I would rather not have to guess.
 
-Indeed, many parts of the paper read like a changelog. Throughout these
+*** TODO Indeed, many parts of the paper read like a changelog. Throughout these
 sections, I found myself wondering, what should I take away from this section?
 What can I learn from it? How does it fit into the overall story? In
 particular, although it is notable that some features that require primitive
@@ -643,14 +643,14 @@ true for other LISP variants. What is unique here? Perhaps it would be better
 to focus on the ones that have more close connection to Elisp----for example,
 the ones that are difficult to implement in the presence of dynamic binding.
 
-Dynamic binding is itself one of the most famous (mis-)features of Elisp, and
+*** TODO Dynamic binding is itself one of the most famous (mis-)features of Elisp, and
 I wish the paper described this feature & the introduction of static binding
 in a more self-contained way, rather than scattering it throughout the text. I
 also wish that it were more complete. What were the initial advantages of
 dynamic binding? What made static binding ultimately possible? How has the
 change affected the community?
 
-Another issue with the paper is that it is targeted to Elisp experts. As a
+*** TODO Another issue with the paper is that it is targeted to Elisp experts. As a
 casual Emacs user for over twenty years (I am using it now to type this
 review), I have encountered some of Elisp, and as a programming language
 researcher, I am curious about its history. However, some parts of this paper
@@ -659,7 +659,7 @@ make the paper more accessible?
 
 SPECIFIC COMMENTS and ADVICE
 
-- In scientific papers we often keep ourselves out of the story, as the
+*** TODO - In scientific papers we often keep ourselves out of the story, as the
   scientist should be a independent observer. But that isn't the case for
   history. Please introduce yourselves at the beginning of the paper and lay
   out your connection to the material. This lets the reader better put this
@@ -667,12 +667,12 @@ SPECIFIC COMMENTS and ADVICE
   knowledge of because you were there, or is this something that you heard
   from someone else?
 
-- Overall, I kept confusing the description of Elisp the language with the
+*** TODO - Overall, I kept confusing the description of Elisp the language with the
   description of Emacs the software artifact. I believe this is a deliberate
   choice by the authors to blend these descriptions, and is probably
   justified, but at the same time it left me off kilter.
 
-- I would appreciate a timeline or figure near the beginning of the paper that
+*** TODO - I would appreciate a timeline or figure near the beginning of the paper that
   outlines the major milestones in the development of Emacs. In particular,
   the discussion lists various version releases (e.g. Emacs-24.3) without
   providing dates for these releases. Also, sometimes the discussion includes
@@ -683,7 +683,7 @@ SPECIFIC COMMENTS and ADVICE
   This timeline, and a capsule summary of the major software artifacts discussed
   in the paper, will help later discussion immensely. 
   
-- The paper needs a short introduction to who Richard Stallman is, what the
+*** TODO - The paper needs a short introduction to who Richard Stallman is, what the
   free software movement is, and what the GPL requires. Although many readers
   may already know this story, establishing the details that are important to
   later design decisions is a good introduction. Instead, the first time
@@ -691,7 +691,7 @@ SPECIFIC COMMENTS and ADVICE
   reimplement the basis for the new Emacs in C..." which I found really
   confusing. What was his first implementation?
 
-- In fact, I found the entirety of Section 2 (PREHISTORY) confusing. It is too
+*** TODO - In fact, I found the entirety of Section 2 (PREHISTORY) confusing. It is too
   short and jumps around too much. The introductory sentence "While Emacs's
   original inception was a set of macros for the TECO editor" puts me off
   right from the start. Should I know what the TECO editor is? Was this the
@@ -708,24 +708,24 @@ SPECIFIC COMMENTS and ADVICE
   you are referring to with the name "Emacs" at this point. Who wrote it?
   When?
 
-- Section 3. When was Stallman's Emacs (and Elisp) developed and released?
+*** TODO - Section 3. When was Stallman's Emacs (and Elisp) developed and released?
 
-- Please be careful with the use of "in jokes" such as "Greenspun's tenth
+*** TODO - Please be careful with the use of "in jokes" such as "Greenspun's tenth
   rule" and "Eight Megs And Constantly Swapping". These are both presented as
   if the reader is already familiar with them, which is a way to turn off
   readers. Mentioning them without explanation gives the impression that you
   only expect people already familiar with them to read this article. How
   limiting!
 
-- I generally find "table of contents" sections, such as the one right before 
+*** TODO - I generally find "table of contents" sections, such as the one right before 
   4.1, to be boring, repetitive and unhelpful. I never read them.
 
-- 4.1: What is the time period/Emacs versions covered in Section 4? What are the 
+*** TODO - 4.1: What is the time period/Emacs versions covered in Section 4? What are the 
   consequences of lambda being a macro. Why wasn't the original Elisp code
   ever updated to use this new lambda form over 30 years?
   What is the #' ... reader shorthand referred to at the end of page 6?
 
-- 4.2: I was confused by this section, especially since the discussion seems
+*** TODO - 4.2: I was confused by this section, especially since the discussion seems
    to be split between it and 4.7. What are buffer local variables? How does
    that make strings a fancier datatype than in most other languages?  What is
    the impact of storing strings with variable numbers of bytes? Why is moving
@@ -733,33 +733,33 @@ SPECIFIC COMMENTS and ADVICE
    "modified-tick" feature worth mentioning when it has apparently never been
    used?
 
-- 4.3: This section is an example of the Emacs communities' approach to
+*** TODO - 4.3: This section is an example of the Emacs communities' approach to
   backwards-incompatible changes, which is both tedious in detail but leaves
   me wanting to know more. What is the context of the design changes discussed
   in this section (i.e. introducing explicit warnings in Emacs-22.2)? How did
   users react to them? What changed so that the old-style syntax could be
   removed in 2018? Why could it not be changed earlier?
 
-- 4.4: Is there more to say about the docstring feature? Has it been studied
+*** TODO - 4.4: Is there more to say about the docstring feature? Has it been studied
   by language designers? Are there trade-offs in including this feature in
   Elisp? What percentage of Elisp code uses docstrings? How searchable is it?
   What other languages, besides Common Lisp, have adopted it?
 
-- 4.5: "C-u (to specify powers of 4)" ? What is this design? Why powers of 4?
+*** TODO - 4.5: "C-u (to specify powers of 4)" ? What is this design? Why powers of 4?
 
-- 4.6: How does Elisp's support for non-local exits compare to other language 
+*** TODO - 4.6: How does Elisp's support for non-local exits compare to other language 
   features, like exceptions? What influenced the design? (It appears to be
   constraints of general purpose software engineering, right? Nothing specific
   to the context of Emacs...)
 
-- 4.8: Is the defadvice feature used in practice? How? How was nadvice
+*** TODO - 4.8: Is the defadvice feature used in practice? How? How was nadvice
   different? What sort of advance was it?
   
-- Section 5: "The main changes were those made to support lexical scoping..."
+*** TODO - Section 5: "The main changes were those made to support lexical scoping..."
   I wonder if focusing on the dynamic to lexical scoping evolution would make
   for a tighter, more compelling read. 
 
-- Section 5: I found this section, which mainly focuses on changes to the
+*** TODO - Section 5: I found this section, which mainly focuses on changes to the
   implementation of Elisp, underwhelming. Partly it is my biases --- most of
   these changes are invisible to users, except when they remove limitations on
   heap size and file size. However, partly this is because this section does
@@ -767,40 +767,40 @@ SPECIFIC COMMENTS and ADVICE
   did changes, to say, data representation, affect users? libraries? runtime?
   FFI?
   
-- 5.7: "These were solved very simply in Emacs-19.31 by removing messages that
+*** TODO - 5.7: "These were solved very simply in Emacs-19.31 by removing messages that
   indicated when GC was in progress." This sentence, presented with minimal
   discussion, makes me sad. Sure, user complaints about GC decreased as a
   result, but is that because users were deceived? Or were the messages
   incorrect? Or were the user perceptions wrong to begin with? Was this the
   right thing to do? 
 
-- 6.1: Am I supposed to understand the keymap representation from this
+*** TODO - 6.1: Am I supposed to understand the keymap representation from this
   example? What is important about the current representation? Overall, the
   discussion in this section is one of software engineering experience: should
   a particular data structure in the implementation of Emacs be represented
   concretely or abstractly. How does this relate to the design of Elisp?
 
-- In the middle part of the paper, we start to see the introduction of new
+*** TODO - In the middle part of the paper, we start to see the introduction of new
   characters, as the development team grows. However, there is no high-level
   discussion about how the development teams for Emacs and XEmacs were
   composed, lead and organized. Were they both open-source projects? How big
   were the teams? Did Stallman always control everything to do with GNU Emacs?
   How did the teams communicate with each other (if they did so)?
 
-- 8.4: The timeline of integration of common lisp functions into Elisp seems
+*** TODO - 8.4: The timeline of integration of common lisp functions into Elisp seems
   uninteresting and really reads like a changelog. I have no idea what these
   functions are or why their integration is important.
 
-- 8.11: The fact that still Elisp rejects a module system because the
+*** TODO - 8.11: The fact that still Elisp rejects a module system because the
   developers don't want to rely on an IDE makes me despair as a language
   researcher. If any language can make assumptions about its development
   environment...
   
-- Section 9: This section reads like a laundry list, or a "we didn't want to
+*** TODO - Section 9: This section reads like a laundry list, or a "we didn't want to
   offend anyone by leaving them out". As a reader, I didn't get much out of
   it.
 
-- Section 10: The conclusion should never introduce new material. Yet, I don't
+*** TODO - Section 10: The conclusion should never introduce new material. Yet, I don't
   see where "a maintainership which was more interested in improving the text
   editor than the language" was discussed earlier in the paper. What actions
   is this comment in reference to? The paper also is rather oblique about
@@ -869,65 +869,65 @@ I have only two suggestions
 
 ### Summary
 
-I think it might be helpful to provide a summary (before the conclusion), summarizing some of the key elements of the story and highlights of the journey, in the form of a high-level re-cap.
+*** TODO I think it might be helpful to provide a summary (before the conclusion), summarizing some of the key elements of the story and highlights of the journey, in the form of a high-level re-cap.
 
 ### Lessons
 
 I think there are quite a few lessons for language developers here.   It may be worth drawing them out as such.   This could be done in-place, or it could be done by including a list of lessons in the summary section.   I am thinking here about lessons at all levels: open source software culture and how it affects the development and evolution of the language; the extent to which engineering pragmatics ultimately impact language design; the roles or personalities; the overall impact of the XEmacs split.   Etc.
 
-- I liked your point (p11) about the chicken-and-eggs nature of the TOC problem.   I think this is a very common pattern in systems implementation.
+*** TODO - I liked your point (p11) about the chicken-and-eggs nature of the TOC problem.   I think this is a very common pattern in systems implementation.
 
-- Your comment (p21) about the limited impact of optimizations where the underlying byte-code interpreter is slow, is interesting and probably common to many language implementations.
+*** TODO - Your comment (p21) about the limited impact of optimizations where the underlying byte-code interpreter is slow, is interesting and probably common to many language implementations.
 
 ### Minor
 
-- It would help your reviewers if you could include line numbers on the page (a feature which comes with the latest style files).   This makes it very easy for us to precisely communicate references to the text.
-- p5 "with a technical" -> "with technical"
-- p5 "in the inclusion in Emacs of" this is awkward
-- p5 "a Lisp-2" -> "a Lisp-2 language"
-- p6 "Richard Stallman felt" it would be great if you could provide references to such comments (I understand that this may not be possible).
-- p6 "With buffer-local" -> "Along with buffer-local"
-- p6 "requires to relocate" -> "requires relocating"
-- p7 "Emacs-27 the" -> "Emacs-27, the"
-- p9 "used etc." -> "used, etc."
-- p9 "instead because" -> "instead, because"
-- p11 the comment connecting bootstrap with RCS -> CVS transition is interesting, but needs a little bit more information.   The reader may not understand that RCS required local operation, while CVS did not.   Its not clear why the necessary files could not be kept around in CVS, nor how the original bootstrap began (answer on next page---the interpreter).
-- p12 "32bit" -> "32 bit" (systemic)
-- p12 "mark&sweep" -> "mark and sweep" (systemic)
-- p12 "heap size" this term is used widely to mean the size of the heap (how much memory is available to or consumed by the whole heap).   However, here you mean something like the heap footprint of a given object.   Sometimes in the GC literature, the word 'cell' is used to describe the space taken up by an object (inclusive of metadata etc).  systemic).
-- p12 "where were the fields" -> "where the fields were"
-- p13 "256MB" -> "256 MB" (use a thin space, eg \;) (systemic)
-- p13 "3-word" -> "three-word"
-- p13 "four: records" -> "four records:"
-- p14 "hence pushing" -> "pushing"
-- p14 "learly" -> "early"
-- p14 I like the anecdote about GC pauses!
-- p16 "show a an" -> "show an"
-- p17 "affect function calls" what does this mean?  Are you referring to inlining?
-- p17 "costly. but" -> "costly. But"
-- p17 "used globally" what does this mean? (again later in the page)
-- p17 "it focuses" what focuses?
-- p18 "Lucid Emacs of Lucid Emacs" -> "Lucid Emacs"
-- p19 "Characters outside of strings" can you elaborate?
-- p19 "into running" -> "into a running"
-- p19 "Richard Stallman refused to..." can you provide a reference?
-- p20 "rewrite, " -> "rewrite"
-- p21 "evolved" -> "evolved,"
-- p21 ",," -> ","
-- p22 "set variable" -> "set a variable"
-- p23 "Emacs-26.1" -> "Emacs-26.1,"
-- p27 "efficiency cost" -> "overhead"
-- p28 "NIH" -> "Not invented here"
-- p30 "only it was" -> "only was it"
-- p30 "machinery, required" -> "machinery required"
-- p30 "to explore interactively" -> "to interactively explore"
-- p31 "already in Emacs-16.56 Emacs" -> "by Emacs-16.56, Emacs"
-- p31 "all of existing" -> "all existing"
-- p31 "it the" -> "it, the"
-- p32 "This result" -> "The result"
-- p33 latex problem with one use of <pkg> (forgot to protect < and >)
-- p35 "general the" -> "general, the"
-- p35 "contributions of course" -> "contributions, of course"
+*** TODO - It would help your reviewers if you could include line numbers on the page (a feature which comes with the latest style files).   This makes it very easy for us to precisely communicate references to the text.
+*** TODO - p5 "with a technical" -> "with technical"
+*** TODO - p5 "in the inclusion in Emacs of" this is awkward
+*** TODO - p5 "a Lisp-2" -> "a Lisp-2 language"
+*** TODO - p6 "Richard Stallman felt" it would be great if you could provide references to such comments (I understand that this may not be possible).
+*** TODO - p6 "With buffer-local" -> "Along with buffer-local"
+*** TODO - p6 "requires to relocate" -> "requires relocating"
+*** TODO - p7 "Emacs-27 the" -> "Emacs-27, the"
+*** TODO - p9 "used etc." -> "used, etc."
+*** TODO - p9 "instead because" -> "instead, because"
+*** TODO - p11 the comment connecting bootstrap with RCS -> CVS transition is interesting, but needs a little bit more information.   The reader may not understand that RCS required local operation, while CVS did not.   Its not clear why the necessary files could not be kept around in CVS, nor how the original bootstrap began (answer on next page---the interpreter).
+*** TODO - p12 "32bit" -> "32 bit" (systemic)
+*** TODO - p12 "mark&sweep" -> "mark and sweep" (systemic)
+*** TODO - p12 "heap size" this term is used widely to mean the size of the heap (how much memory is available to or consumed by the whole heap).   However, here you mean something like the heap footprint of a given object.   Sometimes in the GC literature, the word 'cell' is used to describe the space taken up by an object (inclusive of metadata etc).  systemic).
+*** TODO - p12 "where were the fields" -> "where the fields were"
+*** TODO - p13 "256MB" -> "256 MB" (use a thin space, eg \;) (systemic)
+*** TODO - p13 "3-word" -> "three-word"
+*** TODO - p13 "four: records" -> "four records:"
+*** TODO - p14 "hence pushing" -> "pushing"
+*** TODO - p14 "learly" -> "early"
+*** TODO - p14 I like the anecdote about GC pauses!
+*** TODO - p16 "show a an" -> "show an"
+*** TODO - p17 "affect function calls" what does this mean?  Are you referring to inlining?
+*** TODO - p17 "costly. but" -> "costly. But"
+*** TODO - p17 "used globally" what does this mean? (again later in the page)
+*** TODO - p17 "it focuses" what focuses?
+*** TODO - p18 "Lucid Emacs of Lucid Emacs" -> "Lucid Emacs"
+*** TODO - p19 "Characters outside of strings" can you elaborate?
+*** TODO - p19 "into running" -> "into a running"
+*** TODO - p19 "Richard Stallman refused to..." can you provide a reference?
+*** TODO - p20 "rewrite, " -> "rewrite"
+*** TODO - p21 "evolved" -> "evolved,"
+*** TODO - p21 ",," -> ","
+*** TODO - p22 "set variable" -> "set a variable"
+*** TODO - p23 "Emacs-26.1" -> "Emacs-26.1,"
+*** TODO - p27 "efficiency cost" -> "overhead"
+*** TODO - p28 "NIH" -> "Not invented here"
+*** TODO - p30 "only it was" -> "only was it"
+*** TODO - p30 "machinery, required" -> "machinery required"
+*** TODO - p30 "to explore interactively" -> "to interactively explore"
+*** TODO - p31 "already in Emacs-16.56 Emacs" -> "by Emacs-16.56, Emacs"
+*** TODO - p31 "all of existing" -> "all existing"
+*** TODO - p31 "it the" -> "it, the"
+*** TODO - p32 "This result" -> "The result"
+*** TODO - p33 latex problem with one use of <pkg> (forgot to protect < and >)
+*** TODO - p35 "general the" -> "general, the"
+*** TODO - p35 "contributions of course" -> "contributions, of course"
 
 * Conf calls
 
