@@ -110,136 +110,10 @@ consider that the majority of Emacs users have likely written a few lines of
 used dialects of Lisp.
 
 While in theory \Elisp{} exists independently from Emacs, its design,
-implementation, and history are inextricably linked to that of Emacs.
+implementation, and history are inextricably linked to that of Emacs, so we
+include a short overview of the important events in Emacs's life.
 
 %% FIXME: I feel like we should add something here, but not sure what.
-
-\subsection{Emacs history}
-\label{sec:emacs-history}
-
-%% FIXME: What should we put here?
-
-\subsection{Emacs's early history}
-\label{sec:emacs-early-history}
-
-Emacs's original inception was as a set of macros for the TECO editor,
-written by Richard Stallman with help from Guy Steele in
-1976~\cite{Stallman2018-personal}.  This version of Emacs had no high-level
-extension language.  Note that TECO and Emacs were not completely separate
-entities in the sense that TECO's extension language was also Emacs's
-extension language and that they evolved together, where TECO's extension
-language was regularly extended to provide facilities then used by
-Emacs~\cite{https://www.gnu.org/gnu/rms-lisp.html}.
-
-This original Emacs grew popular in the lab and soon started to be
-reimplemented in various other systems.  Several of those incarnations of
-Emacs were written in Lisp, notably on the Lisp Machine (\emph{EINE} for
-``EINE Is Not EMACS'') by Dan Weinreb and in
-MacLisp~\cite{Moon1974,Pitman1983}, \emph{ZWEI} for ``ZWEI was EINE
-initially'' by Dan Weinreb and Mike McMahon~\cite{Weinreb1979}), and by
-Bernie Greenberg in 1978~\cite{Stallman2002}.  The ensuing possibilities
-offered by Lisp for extending the editor were attractive to Richard
-Stallman, who had worked on ZWEI~\cite{Stallman2018-personal} and decided to
-write a (for him) second version of Emacs which would use Lisp as its
-extension language like Greenberg's Multics Emacs, but would we written in
-C so as to be more widely available.
-
-\emph{Unix Emacs}, written in C by James Gosling in
-1980/1981~\cite{Gosling1981}, preserved in the history books as
-\emph{Gosling Emacs}, was the immediate predecessors of Emacs.
-It featured an extension language called \emph{MLisp} or \emph{Mock Lisp},
-which bears visual resemblance to \Elisp{}, but was a lesser member of the
-Lisp family in the sense that it lacked \emph{cons} cells.
-
-Richard Stallman started Emacs as we know it today in 1984 by replacing the
-\emph{Mock Lisp} interpreter and data structures of \emph{Gosling Emacs}
-with an \Elisp{} interpreter, adapting internal data structures to those of
-this \Elisp{} interpreter.  When James Gosling later sold \emph{Gosling
-  Emacs} to UniPress which in turn threatened Richard Stallman to stop
-distributing his version of Emacs, forcing him to replace or rewrite the
-rest of Emacs's code as well, such as the code responsible for the
-redisplay, and to invent the GNU General Public License
-\cite{http://www.free-soft.org/gpl_history/}, to try and ensure that users
-of his code would never have to go through such an experience.
-
-\subsubsection{Model of development}
-
-Emacs is a Free Software project, developed by a loosely connected
-%% FIXME: Not true at least for Gerd Möllman, maybe Joe?  Jim?
-set of volunteers doing it mostly in their spare time, and several of them
-do not consider themselves as computer professionals.  Development is not
-really organized, in the sense that volunteers work on what they find
-appealing rather than follow some agreed upon plan, and the overall
-direction of evolution is in effect controlled by the head maintainer(s)
-accepting or rejecting contributions, and via discussions in mailing-lists.
-
-Richard Stallman was the original maintainer and even though several other
-people have been official maintainers at various points in time, he always
-acted as a ``default maintainer'' when noone wanted to step up and has
-followed Emacs's development very closely even when he was not officially
-the maintainer.  Also, Richard Stallman being the founder of the Free
-Software Foundation (FSF), Emacs is part of the FSF's GNU project and is
-hence linked to the FSF by its use of FSF's resources to host the code and
-own the copyright.  The link with the FSF is of course particularly strong
-because of Richard's role in Emacs.
-%% %% FIXME: Do we really care about those details?
-%% Joseph Arceneaux was the first to take over maintenance, not sure when it
-%% started, but he was maintainer in October 1990 when he started being
-%% paid as consultant by Lucid.  By summer 1991, maintainership had shifted to
-%% Jim Blandy who was paid by the FSF.
-%% then followed by Gerd Möllman until the release of Emacs-22.1, after which
-%% Richard came back as maintainer until 2008 when the maintenance was shared
-%% between Chong Yidong and Stefan Monnier, then Richard again, then
-%% John Wiegley, later joined by and then replace by Eli Zaretskii.
-
-The organization of Emacs's development is not really codified, but in
-practice the role of the maintainer is a balancing act between the desire to
-maintain a sane code base, to promote Free Software, to be attractive to its
-users, and to encourage contributions.  There is also more structure to the
-organization: the maintenance is really shared among a handful of people who
-earned each other's respect by the weight of their past contributions and
-who can then make more or less any change to the code they like, and accept
-or reject external contributions, as long as nobody complains.  In case of
-disagreement between those core contributors the maintainer has the final
-word.  This structure exists since 1991 and until 2000 was embodied in the
-fact that the core contributors were members of a private \emph{emacs-core}
-mailing-list and were the only ones with direct access to the code.
-Since late 2000, when the CVS server became public, this has become much
-more blurry: technically, more than a hundred contributors have direct write
-access to the code now and nowhere is it ever written or said which of those
-is or isn't considered a core contributor at any given point it time.
-Instead the system functions by self-regulation: every time someone installs
-a change without prior permission, someone else may or may not complain
-about the change's quality, which can lead to requiring further changes or
-even a complete revert, so over time contributors learn to judge on their
-own what makes a change acceptable.
-
-\subsubsection{The great schism}
-
-In 1988, Lucid Inc., a software development company based in Menlo
-Park, Carlifornia, started a project called \emph{Energize}.
-Energize was to be a C/C++ integrated development environment based on
-Emacs~\cite{GabrielLetter}.  Lucid decided to use Emacs as the central
-component of Energize.  At the time, the current version of Emacs was
-18, which was still essentially a textual application.  The then
-upcoming version of Emacs, Emacs 19, was to have a graphical user
-interface and many other features that the developers at Lucid
-considered essential for the development of Energize.  However, at the
-time that Lucid needed Emacs 19, a release was not in
-sight.\footnote{The first official release of Emacs 19, Emacs
-  19.28, came out on November 1, 1994.}
-
-While Lucid at first tried to support and thus speed up the
-development of Emacs 19, the required cooperation between Lucid and
-the Free Software Foundation soon broke down.  As a result, Lucid
-forked Emacs development, creating its own Emacs variant \emph{Lucid
-Emacs}.\footnote{The first release of Lucid Emacs came out in April,
-1992.}  Jamie Zawinski was the primary developer of Lucid Emacs.
-In 1994, Lucid went bankrupt.  Sun subsequently wanted to ship
-Lucid Emacs with their operating system, and ended up financing some
-of the continued development of Lucid Emacs, and effected a name
-change to the current \emph{XEmacs}.
-
 
 \subsection{The authors}
 
@@ -249,11 +123,12 @@ experience in (X)Emacs and \Elisp{}, which made us well positioned to write
 this article.
 
 \paragraph{Stefan} has been a core contributor to Emacs since
-1999 and head maintainer from 2008 to 2015
+1999 and head maintainer from 2008 to 2015, and he supervised student
+projects on the \Elisp{} implementation in Emacs.
 
 \paragraph{Mike} has been a core contributor to XEmacs since 1994.
 Most of his work was done from 1995 to 2003, when he was a research
-assistent at the University Tübingen.  Apart from his own work on
+assistant at the University of Tübingen.  Apart from his own work on
 the XEmacs codebase, he supervised several student projects on the
 \Elisp{} implementation in XEmacs, and co-authored a paper on the
 analysis of dynamic scope~\cite{Neubauer01}.
@@ -296,101 +171,145 @@ successions.  We briefly touch upon those projects in
 Section~\ref{sec:alternative-implementations}.  Our conclusions are in
 Section~\ref{sec:conclusion}.
 
-\section{Prehistory}
-\label{sec:prehistory}
+\section{Emacs history}
+\label{sec:emacs-history}
+
+%% FIXME: What should we put here?
+
+\subsection{Emacs's early history}
+\label{sec:emacs-early-history}
 
 Emacs's original inception was as a set of macros for the TECO editor,
-written by Richard Stallman with help from Guy Steele in 1976~\cite{Stallman2018-personal}.  This
-version of Emacs had no high-level extension language.  Arguably, the strongest
-influence for \Elisp{} was MacLisp.  The design of the editing
-primitives was influenced by Gosling Emacs's Mock Lisp.
+written by Richard Stallman, then at the MIT AI lab, with help from Guy
+Steele in 1976~\cite{Stallman2018-personal}.
+%% FIXME: I'm not satisfied with this subtle distinction of "high-level".
+This version of Emacs had no high-level extension language.
+Note that TECO and Emacs were not completely separate
+entities in the sense that TECO's extension language was also Emacs's
+extension language and that they evolved together, where TECO's extension
+language was regularly extended to provide facilities then used by
+Emacs~\cite{https://www.gnu.org/gnu/rms-lisp.html}.
 
-\subsection{Gosling Emacs}
+This original Emacs grew popular in the lab and soon started to be
+reimplemented in various other systems.  Several of those incarnations of
+Emacs were written in Lisp, notably on the Lisp Machine (\emph{EINE} for
+``EINE Is Not EMACS'') by Dan Weinreb and in
+MacLisp~\cite{Moon1974,Pitman1983}, \emph{ZWEI} for ``ZWEI was EINE
+initially'' by Dan Weinreb and Mike McMahon~\cite{Weinreb1979}), and by
+Bernie Greenberg in 1978~\cite{Stallman2002}.  The ensuing possibilities
+offered by Lisp for extending the editor were attractive to Richard
+Stallman, who had worked on ZWEI~\cite{Stallman2018-personal} and decided to
+write a (for him) second version of Emacs which would use Lisp as its
+extension language like Greenberg's Multics Emacs, but would we written in
+C so as to be more widely available.
 
-\emph{Unix Emacs}, written by James Gosling in
-1980/1981~\cite{Gosling1981}, preserved in the history books
-as \emph{Gosling Emacs}, was one of the immediate predecessors of
-Emacs.  It featured an extension language called \emph{MLisp} or
-\emph{Mock Lisp}, which bears visual resemblance to \Elisp{}.
-MLisp featured function definitions via \texttt{defun}, as well as
-many built-in functions (such as \texttt{eolp},
-\texttt{forward-character}, \texttt{save-excursion}) whose names
-survive in \Elisp{}.  Emacs contained some backwards-compatibility
-support for MLisp until Emacs 21.2 in 2001.
+\emph{Unix Emacs}, written in C by James Gosling in
+1980/1981~\cite{Gosling1981} and preserved in the history books as
+\emph{Gosling Emacs}, was the immediate predecessor of Emacs.
+It featured an extension language called \emph{MLisp} or \emph{Mock Lisp},
+which bears visual resemblance to \Elisp{}, but was a lesser member of the
+Lisp family in the sense that it lacked \emph{cons} cells.
 
-MLisp was a quite limited language: It lacked cons cells and lists.
-MLisp did have dynamic binding and local variables, but a peculiar
-mechanism for passing arguments:  There were no named
-parameters.  Instead, a program would invoke the \texttt{arg}
-function: For example, \texttt{(arg 1)} would access the first
-argument.  Moreover, argument expressions were essentially evaluated
-in a call-by-name fashion by \texttt{arg}, and evaluation happened in
-the dynamic environment of the callee.
+Richard Stallman started Emacs as we know it today in 1984 by replacing the
+\emph{Mock Lisp} interpreter and data structures of \emph{Gosling Emacs}
+with an \Elisp{} interpreter, adapting internal data structures to those of
+this \Elisp{} interpreter.  When James Gosling later sold \emph{Gosling
+  Emacs} to UniPress which in turn threatened Richard Stallman to stop
+distributing his version of Emacs, it forced him to replace or rewrite the
+rest of Emacs's code as well, such as the code responsible for the
+redisplay.  It also motivated him to invent the GNU General Public License
+\cite{http://www.free-soft.org/gpl_history/}, to try and ensure that users
+of his code would never have to go through such an experience.
 
-The Mock Lisp primitives differed from ZWEI in that ZWEI primitives
-would always take arguments to specify what text to operate on,
-whereas in Mock Lisp primitives all operated at the current
-%% FIXME: It's funny that Richard presents it this way, because the TECO
-%% docs indicate that TECO already worked on the same principle, so
-%% it could be argued that Gosmacs just followed the design of the original
-%% Emacs.
-point---the current ``cursor position.''  Stallman, who had worked on
-ZWEI, found ZWEI's approach ``clumsy,'' and adopted Mock Lisp's basic
-approach~\cite{Stallman2018-personal}.
+\subsection{The great schism}
 
-%% FIXME Mike: Can we provide a code snippet doing the same thing but that
-%% highlights the differences and similarity mentionned above?
+%% Note: I put "1988" here based on Richard Gabriel's email (quoted in
+%% https://www.jwz.org/doc/lemacs.html) from 22 Jun 1992 where he says "4
+%% years ago".
+In 1988, Lucid Inc., a software development company founded by Richard
+Gabriel and based in Menlo
+Park, Carlifornia, started a project called \emph{Energize}.
+Energize was to be a C/C++ integrated development environment based on
+Emacs~\cite{GabrielLetter}.  Lucid decided to use Emacs as the central
+component of Energize.  At the time, the current version of Emacs was
+18, which was still essentially a textual application.  The then
+upcoming version of Emacs, Emacs 19, was to have a graphical user
+interface and many other features that the developers at Lucid
+considered essential for the development of Energize.However, at the
+time that Lucid needed Emacs 19, a release was not in
+sight.\footnote{The first official release of Emacs 19, Emacs
+  19.28, came out on November 1, 1994.}  Joseph Arsenaux was
+the principal Emacs developer at that time.
 
-\section{Early history}         % -1992?
-\label{sec:early-history}
+While Lucid at first tried to support and thus speed up the
+development of Emacs 19, among other things by hiring Joseph Arsenaux as
+a consultant, the required cooperation between Lucid and
+the Free Software Foundation soon broke down.  As a result, Lucid
+forked Emacs development, creating its own Emacs variant \emph{Lucid
+Emacs}.\footnote{The first release of Lucid Emacs came out in April,
+1992.}  Jamie Zawinski was the primary developer of Lucid Emacs.
+In 1994, Lucid went bankrupt.  Sun subsequently wanted to ship
+Lucid Emacs with their operating system, and ended up financing some
+of the continued development of Lucid Emacs, and effected a name
+change to the current \emph{XEmacs}.
 
-Following Greenberg's Multics Emacs~\cite{MulticsEmacs1996},
-Richard Stallman decided to write a (for
-him) second version of Emacs, which included \Elisp{} from the start.
-As Greenberg's Emacs required a high-performance Lisp compiler to run
-efficiently, Richard Stallman decided to reimplement the basis for the new
-Emacs in C, with an integrated Lisp interpreter.  Buffer manipulation
-and redisplay were written in efficient C, higher-level functionality
-in Lisp.
+\subsection{Model of development}
 
-The initial design of \Elisp{} was motivated by the pervasive
-requirement of \emph{extensibility}; users ``must be able to
-redefine each character''~\cite{Stallman1981}.  TECO and Gosling Emacs
-featured small languages that were either too obscure or too weak to
-support this vision.  Consequently, Richard Stallman took inspiration from
-MacLisp, and \Elisp{} started as a real programming language with
-%% FIXME: Add a summary or reference to that 10th rule?
-powerful abstraction facilities, thus foregoing Greenspun's tenth
-rule~\cite{GreenspunsRule}.
+Emacs is a Free Software project, developed by a loosely connected
+%% FIXME: Not true at least for Gerd Möllman, maybe Joe?  Jim?
+set of volunteers doing it mostly in their spare time, and several of them
+do not consider themselves as computer professionals.  Development is not
+really organized, in the sense that volunteers work on what they find
+appealing rather than follow some agreed upon plan, and the overall
+direction of evolution is in effect controlled by the head maintainer(s)
+accepting or rejecting contributions, and via discussions in mailing-lists.
 
-Moreover, Richard Stallman, made the design of \Elisp{}
-embody and showcase the ideals of Free Software.  For example, not only
-is it permitted to get and modify the source code, but every effort
-is made to encourage the end-user to do so.  The resulting requirements had a profound
-influence on the \Elisp{} language:
-\begin{itemize}
-\item The language should be accessible to a wide audience, so that as many
-  people as possible can adapt Emacs to their own needs, without being
-  dependent on the availability of someone with a technical expertise.
-  This can be seen concretely in the inclusion in Emacs of the
-  \emph{Introduction to Programming in Emacs Lisp}
-  tutorial~\citep{ElispIntro} targeting users with no programming
-  experience.  This has been a strong motivation to keep \Elisp{} on the
-  minimalist side and to resist incorporation of many Common Lisp features.
-\item It should be easy for the end-user to find the relevant code in order
-  to modify Emacs's behavior.  This has driven the development of elements
-  such as the \emph{docstrings} (see Section~\ref{sec:docstrings}) and more generally the self-documenting
-  aspect of the language.  It also imposes constraints on the evolution of
-  the language: the use of some facilities, such as \emph{advice}, is
-  discouraged because it makes the code more opaque.
-\item Emacs should be easily portable to as many platforms as possible.
-  This largely explains why \Elisp{} is still using a fairly naive
-  mark\&sweep garbage collector, and why its main execution engine is
-  a simple byte-code interpreter.
-\end{itemize}
+Richard Stallman was the original maintainer and even though several other
+people have been official maintainers at various points in time, he always
+acted as a ``default maintainer'' when noone wanted to step up and has
+followed Emacs's development very closely even when he was not officially
+the maintainer.  Also, Richard Stallman being the founder of the Free
+Software Foundation (FSF), Emacs is part of the FSF's GNU project and is
+hence linked to the FSF by its use of FSF's resources to host the code and
+own the copyright.  The link with the FSF is of course particularly strong
+because of Richard's role in Emacs.
+%% %% FIXME: Do we really care about those details?
+%% Joseph Arceneaux was the first to take over maintenance, not sure when it
+%% started, but he was maintainer in October 1990 when he started being
+%% paid as consultant by Lucid.  By summer 1991, maintainership had shifted to
+%% Jim Blandy who was paid by the FSF.
+%% then followed by Gerd Möllman until the release of Emacs-22.1, after which
+%% Richard came back as maintainer until 2008 when the maintenance was shared
+%% between Chong Yidong and Stefan Monnier, then Richard again, then
+%% John Wiegley, later joined by and then replace by Eli Zaretskii.
 
-% FIXME: remove the *, which is only there to not mess w/ section numbers
-\section*{Timeline}
+The organization of Emacs's development is not really codified, but in
+practice the role of the maintainer is a balancing act between the desire to
+maintain a sane code base, to promote Free Software, to be attractive to its
+users, and to encourage contributions.  There is also more structure to the
+organization: the maintenance is really shared among a handful of people who
+earned each other's respect by the weight of their past contributions and
+who can then make more or less any change to the code they like, and accept
+or reject external contributions, as long as nobody complains.  In case of
+disagreement between those core contributors the maintainer has the final
+word.  This structure probably appeared around 1991 and until 2000 was
+embodied in the fact that the core contributors were members of a private
+\emph{emacs-core} mailing-list and were the only ones with direct access to
+the code.  Since late 2000, when the CVS server became public and the
+\emph{emacs-core} private mailing-list was replaced by the public
+\emph{emacs-devel} mailing-list, this has become much more blurry:
+technically, more than a hundred contributors have direct write access to
+the code now and nowhere is it ever written or said which of those is or
+isn't considered a core contributor at any given point it time.  Instead the
+system functions by self-regulation: every time someone installs a change
+without prior permission, someone else may or may not complain about the
+change's quality, which can lead to requiring further changes or even
+a complete revert, so over time contributors learn to judge on their own
+what makes a change acceptable.
+
+%% FIXME: Discuss the XEmacs organization?
+
+\subsection{Timeline}
 
 This section contains a timeline of significant milestones in the
 development of Emacs and Lucid Emacs/XEmacs.  It also includes a few
@@ -470,7 +389,7 @@ listed in parentheses.
     2001-10-20 & GNU Emacs 21.1\\
     & (Gerd Möllmann)\\[1ex]
     2007-06-01 & GNU Emacs 22.1\\
-    & (Chong Yidong)\\[1ex]
+    & (Chong Yidong)\\[1ex]     %FIXME: That's definitely not right.
     2009-07-28 & GNU Emacs 23.1\\
     & (Chong Yidong, Stefan Monnier)\\[1ex]
     2012-06-10 & GNU Emacs 24.1\\
@@ -483,6 +402,97 @@ listed in parentheses.
 \end{center}
 
 % FIXME: timeline Emacs Lisp evolution?
+
+
+
+\section{Prehistory}
+\label{sec:prehistory}
+
+%% FIXME: Explain&cite what was Maclisp.
+Arguably, the strongest influence for \Elisp{} was MacLisp.  The design of
+the editing primitives was influenced by Gosling Emacs's Mock Lisp.
+
+\subsection{Gosling Emacs}
+
+\emph{Gosling Emacs}, the immediate predecessor of
+Emacs, featured an extension language called \emph{MLisp} or
+\emph{Mock Lisp}, which bears visual resemblance to \Elisp{}.
+MLisp featured function definitions via \texttt{defun}, as well as
+many built-in functions (such as \texttt{eolp},
+\texttt{forward-character}, \texttt{save-excursion}) whose names
+survive in \Elisp{}.  Emacs contained some backwards-compatibility
+support for MLisp until Emacs 21.2 in 2001.
+
+MLisp was a quite limited language: It lacked cons cells and lists.
+MLisp did have dynamic binding and local variables, but a peculiar
+mechanism for passing arguments:  There were no named
+parameters.  Instead, a program would invoke the \texttt{arg}
+function: For example, \texttt{(arg 1)} would access the first
+argument.  Moreover, argument expressions were essentially evaluated
+in a call-by-name fashion by \texttt{arg}, and evaluation happened in
+the dynamic environment of the callee.
+
+The Mock Lisp primitives differed from ZWEI in that ZWEI primitives
+would always take arguments to specify what text to operate on,
+whereas in Mock Lisp primitives all operated at the current
+%% FIXME: It's funny that Richard presents it this way, because the TECO
+%% docs indicate that TECO already worked on the same principle, so
+%% it could be argued that Gosmacs just followed the design of the original
+%% Emacs.
+point---the current ``cursor position.''  Stallman, who had worked on
+ZWEI, found ZWEI's approach ``clumsy,'' and adopted Mock Lisp's basic
+approach~\cite{Stallman2018-personal}.
+
+%% FIXME Mike: Can we provide a code snippet doing the same thing but that
+%% highlights the differences and similarity mentionned above?
+
+\section{Early history}         % -1992?
+\label{sec:early-history}
+
+Following Greenberg's Multics Emacs~\cite{MulticsEmacs1996},
+Richard Stallman decided to write a (for
+him) second version of Emacs, which included \Elisp{} from the start.
+As Greenberg's Emacs required a high-performance Lisp compiler to run
+efficiently, Richard Stallman decided to reimplement the basis for the new
+Emacs in C, with an integrated Lisp interpreter.  Buffer manipulation
+and redisplay were written in efficient C, higher-level functionality
+in Lisp.
+
+The initial design of \Elisp{} was motivated by the pervasive
+requirement of \emph{extensibility}; users ``must be able to
+redefine each character''~\cite{Stallman1981}.  TECO and Gosling Emacs
+featured small languages that were either too obscure or too weak to
+support this vision.  Consequently, Richard Stallman took inspiration from
+MacLisp, and \Elisp{} started as a real programming language with
+%% FIXME: Add a summary or reference to that 10th rule?
+powerful abstraction facilities, thus foregoing Greenspun's tenth
+rule~\cite{GreenspunsRule}.
+
+Moreover, Richard Stallman, made the design of \Elisp{}
+embody and showcase the ideals of Free Software.  For example, not only
+is it permitted to get and modify the source code, but every effort
+is made to encourage the end-user to do so.  The resulting requirements had a profound
+influence on the \Elisp{} language:
+\begin{itemize}
+\item The language should be accessible to a wide audience, so that as many
+  people as possible can adapt Emacs to their own needs, without being
+  dependent on the availability of someone with a technical expertise.
+  This can be seen concretely in the inclusion in Emacs of the
+  \emph{Introduction to Programming in Emacs Lisp}
+  tutorial~\citep{ElispIntro} targeting users with no programming
+  experience.  This has been a strong motivation to keep \Elisp{} on the
+  minimalist side and to resist incorporation of many Common Lisp features.
+\item It should be easy for the end-user to find the relevant code in order
+  to modify Emacs's behavior.  This has driven the development of elements
+  such as the \emph{docstrings} (see Section~\ref{sec:docstrings}) and more generally the self-documenting
+  aspect of the language.  It also imposes constraints on the evolution of
+  the language: the use of some facilities, such as \emph{advice}, is
+  discouraged because it makes the code more opaque.
+\item Emacs should be easily portable to as many platforms as possible.
+  This largely explains why \Elisp{} is still using a fairly naive
+  mark\&sweep garbage collector, and why its main execution engine is
+  a simple byte-code interpreter.
+\end{itemize}
 
 \section{Base language design}
 \label{sec:base-language-design}
