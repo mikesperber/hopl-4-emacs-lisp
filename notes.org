@@ -126,7 +126,7 @@ overtook Emacs, Joe Arceneaux was no longer working on the project.
    CLOSED: [2019-03-20 Wed 16:38]
   > influences for Elisp were Gosling Emacs's Mock Lisp and MacLisp.
 
-Nocklisp (that's how it was written) 
+Nocklisp (that's how it was written)
 
 NOTE (Mike): Gosling's manual for Unix Emacs says "Mock Lisp"
 
@@ -440,7 +440,7 @@ of Section 6 to before Section 4.
 Lucid Emacs?
 
 *** TODO p18
-Section 6.1. I gather the purpose of a keymap is to map a 
+Section 6.1. I gather the purpose of a keymap is to map a
 sequence of keystrokes to a function to invoke. Please say this
 explicitly. Please also explain nesting of keymaps.
 
@@ -533,7 +533,7 @@ Just give one or the other.
 
 *** TODO p29
 "the reverse is not true" Why can't you set
-  (VARS VALS STORE-VAR STORE-FORM ACCESS-FORM)  
+  (VARS VALS STORE-VAR STORE-FORM ACCESS-FORM)
 to
   (nil nil x (STORE-FUNCTION x) ACCESS-FORM)
 ?
@@ -632,7 +632,7 @@ ASSESSMENT
 
 Overall, this paper is not yet ready for HOPL in its current state. Perhaps
 with shepherding it could be made acceptable, however, it will take a lot of
-work. 
+work.
 
 The biggest problem with this paper is that it does not tell a compelling
 story. It is a historical account, but much of its telling lacks any
@@ -701,8 +701,8 @@ SPECIFIC COMMENTS and ADVICE
   release?
 
   This timeline, and a capsule summary of the major software artifacts discussed
-  in the paper, will help later discussion immensely. 
-  
+  in the paper, will help later discussion immensely.
+
 *** TODO - The paper needs a short introduction to who Richard Stallman is, what the
   free software movement is, and what the GPL requires. Although many readers
   may already know this story, establishing the details that are important to
@@ -737,10 +737,10 @@ SPECIFIC COMMENTS and ADVICE
   only expect people already familiar with them to read this article. How
   limiting!
 
-*** TODO - I generally find "table of contents" sections, such as the one right before 
+*** TODO - I generally find "table of contents" sections, such as the one right before
   4.1, to be boring, repetitive and unhelpful. I never read them.
 
-*** TODO - 4.1: What is the time period/Emacs versions covered in Section 4? What are the 
+*** TODO - 4.1: What is the time period/Emacs versions covered in Section 4? What are the
   consequences of lambda being a macro. Why wasn't the original Elisp code
   ever updated to use this new lambda form over 30 years?
   What is the #' ... reader shorthand referred to at the end of page 6?
@@ -767,17 +767,17 @@ SPECIFIC COMMENTS and ADVICE
 
 *** TODO - 4.5: "C-u (to specify powers of 4)" ? What is this design? Why powers of 4?
 
-*** TODO - 4.6: How does Elisp's support for non-local exits compare to other language 
+*** TODO - 4.6: How does Elisp's support for non-local exits compare to other language
   features, like exceptions? What influenced the design? (It appears to be
   constraints of general purpose software engineering, right? Nothing specific
   to the context of Emacs...)
 
 *** TODO - 4.8: Is the defadvice feature used in practice? How? How was nadvice
   different? What sort of advance was it?
-  
+
 *** TODO - Section 5: "The main changes were those made to support lexical scoping..."
   I wonder if focusing on the dynamic to lexical scoping evolution would make
-  for a tighter, more compelling read. 
+  for a tighter, more compelling read.
 
 *** TODO - Section 5: I found this section, which mainly focuses on changes to the
   implementation of Elisp, underwhelming. Partly it is my biases --- most of
@@ -786,13 +786,13 @@ SPECIFIC COMMENTS and ADVICE
   not discuss the context of these changes. What pressures were in play? How
   did changes, to say, data representation, affect users? libraries? runtime?
   FFI?
-  
+
 *** TODO - 5.7: "These were solved very simply in Emacs-19.31 by removing messages that
   indicated when GC was in progress." This sentence, presented with minimal
   discussion, makes me sad. Sure, user complaints about GC decreased as a
   result, but is that because users were deceived? Or were the messages
   incorrect? Or were the user perceptions wrong to begin with? Was this the
-  right thing to do? 
+  right thing to do?
 
 *** TODO - 6.1: Am I supposed to understand the keymap representation from this
   example? What is important about the current representation? Overall, the
@@ -815,7 +815,7 @@ SPECIFIC COMMENTS and ADVICE
   developers don't want to rely on an IDE makes me despair as a language
   researcher. If any language can make assumptions about its development
   environment...
-  
+
 *** TODO - Section 9: This section reads like a laundry list, or a "we didn't want to
   offend anyone by leaving them out". As a reader, I didn't get much out of
   it.
@@ -828,7 +828,7 @@ SPECIFIC COMMENTS and ADVICE
   along the way". This is the place to record the controversies, right or
   wrong, as they are part of the history.
 
-  
+
 ** Review #16C
 ===========================================================================
 
@@ -964,41 +964,53 @@ I think there are quite a few lessons for language developers here.   It may be 
 
 ** 2019-02-28 w/ Brent Hailpern
 
-Story that tells a story that teaches something
+- Story that tells a story that teaches something
 
-move to appendix stuff without human or organizational motivation
+- move to appendix stuff without human or organizational motivation
 
-good: constrained to make editor better
+- good: constrained to make editor better
 
-highlight: how it evolved to make the macro experience better
+- highlight: how it evolved to make the macro experience better
 
-why is RMS important?
+- why is RMS important?
 
-why were we important?
+- why were we important?
 
-What was Emacs like?
+- What was Emacs like?
 
-Evolution from TECO to Emacs Lisp
+- Evolution from TECO to Emacs Lisp
 
-Step 1: Fill in context, get the story
+- Step 1: Fill in context, get the story
 
-LGPL came out of Lucid negotiations
+- LGPL came out of Lucid negotiations
 
-more background on Emacs
+- more background on Emacs
 
-Lua paper in HOPL III
+- Lua paper in HOPL III
 
-free software ... "boxes on the side"
+- free software ... "boxes on the side"
+[ Mike: I don't understand what this means.  ]
 
-appendix
+- tell several sub-stories
 
-tell several sub-stories
+- TECO : find serious macro writers
 
-TECO : find serious macro writers
+- more interviews
 
-more interviews
+- interview with Dick Gabriel, LGPL
 
-interview with Dick Gabriel, LGPL
+- insist on the general human organization
+  (e.g. the fact that it was controlled neither by a company nor
+  a standards committee)
+
+- talk more about the importance of having a real language
+
+- design decisions that didn't work
+
+- accumulation of hacks
+[ I don't know what I meant by that!
+  Mike, by any chance, does that ring a bell for you?  ]
+
 * Interview questions
 Here are things that maybe we'd like to know:
 - how was Emacs's development organized before Emacs-21
