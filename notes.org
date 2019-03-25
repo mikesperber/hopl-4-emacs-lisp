@@ -376,22 +376,26 @@ But you haven't mentioned it by name at this point.
     CLOSED: [2019-03-24 Sun 15:25]
 "where amply sufficient" --> "were amply sufficient"
 
-*** TODO "the "mark" bit was not used" I'm confused. If it wasn't used for this
+*** TODO Stefan "the "mark" bit was not used" I'm confused. If it wasn't used for this
 purpose, how were objects marked?
 
-*** TODO "each object by allocated" --> "each object be allocated"
+*** DONE "each object by allocated" --> "each object be allocated"
+    CLOSED: [2019-03-25 Mon 11:01]
 
-*** TODO If there are just eight object types, perhaps it would be
+*** DONE If there are just eight object types, perhaps it would be
+    CLOSED: [2019-03-25 Mon 11:13]
 worthwhile to list them all?
 
-*** TODO "merged that data representation of Emacs 19.30" I can't work out what
+*** DONE "merged that data representation of Emacs 19.30" I can't work out what
+    CLOSED: [2019-03-25 Mon 11:13]
 this phrase refers to, please rewrite.
 
 *** TODO p13
 "ephemerons" Are these so uninteresting that they deserve no
 description in the paper?
 
-*** TODO p14
+*** DONE p14
+    CLOSED: [2019-03-25 Mon 11:14]
 "no matter which tagging scheme we used" Change from first to third
 person.
 
@@ -405,23 +409,28 @@ by Common Lisp, but you ought to be clear about this.
 "the more standard forms of weak references" I don't know what this
 means.
 
-*** TODO "very early" Is Emacs-16.56 really very early?
+*** DONE "very early" Is Emacs-16.56 really very early?
+    CLOSED: [2019-03-25 Mon 11:15]
 
-*** TODO p16
+*** DONE p16
+    CLOSED: [2019-03-25 Mon 11:16]
 
-*** TODO Section 5.10.  End first paragraph with the sentence "Modifying
+*** DONE Section 5.10.  End first paragraph with the sentence "Modifying
+    CLOSED: [2019-03-25 Mon 11:16]
 function bodies was brittle and inconvenient and only worked for
 functions defined in Elisp." Delete the similar phrase from the next
 paragraph.
 
-*** TODO p17
+*** DONE p17
+    CLOSED: [2019-03-25 Mon 11:17]
 "but did get" --> "But it did get"
 
 *** TODO "stable enough to be used globally" What does this mean? (I gather it
 does not mean the feature was released, since it is still an
 attmempt.)
 
-*** TODO "compared to Nickolas" --> "compared to Lloyd"
+*** DONE "compared to Nickolas" --> "compared to Lloyd"
+    CLOSED: [2019-03-25 Mon 11:34]
 
 *** TODO Section 6. Since Xemacs has been referred to throughout the paper,
 it would be best to move the information in the first three paragraphs

@@ -468,7 +468,7 @@ listed in parentheses.
     2001-04-16 && XEmacs 21.4\\
     && (Stephen Turnbull)\\[1ex]
     2001-10-20 & GNU Emacs 21.1\\
-    & (Gerd Moellmann)\\[1ex]
+    & (Gerd Möllmann)\\[1ex]
     2007-06-01 & GNU Emacs 22.1\\
     & (Chong Yidong)\\[1ex]
     2009-07-28 & GNU Emacs 23.1\\
@@ -1146,7 +1146,7 @@ The memory management used a simple mark\&sweep garbage collection
 algorithm, and allocated objects by blocs of 4KB dedicated to a particular
 kind of objects: one bloc each for cons cells, floats, symbols, markers, and
 strings, all other objects were allocated directly with \texttt{malloc}.
-To avoid fragmentation in the blocs of strings, those were compacted during
+To avoid fragmentation in the bloc of strings, those were compacted during
 each GC.  The ``mark'' bit in each 32bit box was not used for the object
 contained in the 32bit box.  Instead it was used so that cons cells could
 occupy only 2 words: the extra bit needed to store the mark\&sweep's
@@ -1161,20 +1161,27 @@ integer since that is how buffer positions are represented.
 So in 1995, with the release of Emacs-19.29,
 the scheme was tweaked so that the tag was reduced to
 3 bits, pushing the maximum file size to a more comfortable 128MB and the
-maximum heap size to 256MB.  To reduce the tag to 3 bits, the less important
+maximum heap size to 256MB.  To reduce the tag to 3 bits,
+the types that received their own tag were ints, symbols, cons cells, and floats.
+The less important
 object types were placed into two groups: one group using the
-\texttt{Lisp\_Misc} tag and another using the \texttt{Lisp\_Vector} tag.
+\texttt{Lisp\_Misc} tag and another using the \texttt{Lisp\_Vector}
+tag.
+
 The \texttt{Lisp\_Misc} tag was used for objects that could share the same
 heap size as Lisp markers (6 words), and hence be allocated from the same
-4KB bloc.  For some of those objects, it imposed a slight waste of space,
+4KB bloc  (Apart from markers, these were mostly various types of
+forwarding pointers.)  For some of those objects, it imposed a slight waste of space,
 which was justified by the fact that objects using the \texttt{Lisp\_Vector}
 tag had other extra costs: 2 words of header, plus the overhead of having
-each object by allocated directly by \texttt{malloc}.
+each object be allocated directly by \texttt{malloc}.
 
 XEmacs implemented a similar change in 1993 with Lucid Emacs 19.8,
 giving \Elisp{} 28-bit integers and a 28-bit address space, and
-merged that data representation of Emacs 19.30 with the release of XEmacs 19.13, also in
+used the data representation of Emacs 19.30 with the release of XEmacs 19.13, also in
 1995.
+
+% FIXME Mike: I think this is not th end of the story for XEmacs
 
 \subsection{Scanning the stack}
 \label{sec:stack-scanning}
@@ -1221,13 +1228,14 @@ register/unregister code of stack references could finally be removed.
 
 XEmacs has kept precise GC, and implemented a number of improvements
 in its memory management.  In particular, Markus Kaltenbach and Marcus
-Crestani implemented a scanning algorithm that used the memory-layout
+Crestani (then Michael Sperber's students)
+implemented a scanning algorithm that used the memory-layout
 descriptors that had been added to support the portable dumper.  (See
 Section~\ref{sec:image-dumping}.)  Marcus Crestani also replaced the
 allocator: The new, much simplified allocator eliminated the
 distinction between objects that were allocated in blocks and those
 allocated via \texttt{malloc}, and would make the decision
-individually based on size.
+individually based on size~\cite{Crestani2005}.
 
 In the process of these GC improvements, Crestani and Michael Sperber
 also added \emph{ephemerons} to \Elisp{}~\cite{Hayes1997}.
@@ -1265,7 +1273,7 @@ tag bits.
 At that point, there was no illusion that a maximum file size of 256MB was
 sufficient, but at the same time, the design of Emacs made it basically
 impossible to view files larger than 4GB or edit files larger than 2GB (on
-a 32bit system) anyway, no matter which tagging scheme we used, so there was
+a 32bit system) anyway, no matter which tagging scheme was used, so there was
 not a lot of room for improvement.
 
 In Emacs-23.2 the tagging scheme was tweaked to use 2 tags for integers,
@@ -1412,7 +1420,8 @@ code which partly duplicates some of the GC's code.
 \subsection{Debugging}
 \label{sec:debugger}
 
-Debugging support was added very early to \Elisp: Emacs-16.56 already
+Debugging support was added very early to \Elisp: Emacs-16.56 (which
+appeared in 1985, a mere four months after the initial Emacs release) already
 included the \emph{backtrace debugger}, which suspends execution at the time
 a \emph{condition} is signaled, showing the current stack backtrace and
 letting you examine the state of the application and place breakpoints
@@ -1456,11 +1465,12 @@ In 1992, during early development of Emacs-19, Boaz Ben-Zvi implemented the
 \texttt{profile.el} package which implemented a fairly simple \Elisp{}
 profiler all in \Elisp{}.  This implementation was based on instrumenting
 a set of user-specified \Elisp{} functions by modifying their bodies in-place
-to keep track of time spent in those functions.
+to keep track of time spent in those functions. Modifying function
+bodies was brittle and inconvenient and only worked for functions
+defined in \Elisp.
 
 In 1994, Barry A.~Warsaw implemented the \texttt{elp.el} package which took
-a similar approach but without modifying functions's bodies, which was
-brittle and inconvenient and only worked for functions defined in \Elisp.
+a similar approach but without modifying functions's bodies.
 Instead it replaced the instrumented functions with wrappers which counted
 the number of calls, along with the execution time, and internally called
 the original function's definition.  This package was included in
@@ -1518,12 +1528,12 @@ based on GNU Libjit and based on a similar approach.  It improved on
 Burton's implementation by open-coding most common byte-codes instead, which
 avoided many C function calls, but it obtained comparable results most
 likely because Libjit is not very good at optimizing its code and C function
-calls aren't that costly.  but did get to the point of being stable enough
+calls aren't that costly.  But it did get to the point of being stable enough
 to be used globally.
 
 \subsubsection{Fourth attempt}
 In 2018, Tom Tromey took another stab at it, again using GNU Libjit.
-Compared to Nickolas, it focuses exclusively on code using lexical binding,
+Compared to Lloyd, it focuses exclusively on code using lexical binding,
 which is likely to benefit more, and it implements additional optimizations
 by getting rid at compile-time of all the manipulation of the Lisp stack.
 In the best case it reaches a speed up factor of 3.5, which is not ideal,
