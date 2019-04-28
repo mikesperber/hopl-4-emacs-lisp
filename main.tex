@@ -246,7 +246,7 @@ development of Emacs 19, among other things by hiring Joseph Arsenaux as
 a consultant, the required cooperation between Lucid and
 the Free Software Foundation soon broke down.  As a result, Lucid
 forked Emacs development, creating its own Emacs variant \emph{Lucid
-Emacs}.\footnote{The first release of Lucid Emacs came out in April,
+Emacs}.\footnote{The first release of Lucid Emacs, Lucid Emacs 19.0, came out in April,
 1992.}  Jamie Zawinski was the primary developer of Lucid Emacs.
 In 1994, Lucid went bankrupt.  Sun subsequently wanted to ship
 Lucid Emacs with their operating system, and ended up financing some
@@ -556,7 +556,7 @@ scoping~\cite{CLtL1,R2RS}.
 Richard Stallman chose dynamic scoping to meet extensibility
 requirements in Emacs~\cite{Stallman1981}.  The Emacs code base uses
 variables for holding configuration options.  These configuration
-options often need to be modified temporatily, restoring the original
+options often need to be modified temporarily, restoring the original
 value after a piece of code has run.  It would in principle be
 possible to structure the code base to pass configuration options
 explicitly, but this would make the code verbose, and require changing
@@ -1566,9 +1566,18 @@ textual model to a graphical model.
 \subsection{Event and keymap representations}
 
 One significant departure from Emacs in Lucid Emacs was the
-representation of keymaps: Emacs, to this day, uses a transparent
+representation of keymaps.  A keymap maps a sequence of keystrokes to
+a function to invoke.  Many Emacs key assignments consist of several
+keystrokes in sequence---for examples, Control-X Control-S saves the
+current buffer.  Keymaps represent this by \emph{nesting} the keymap.
+For example, the binding for Control-X is not a function, but a nested
+keymap, and Control-S in the nested keymap is bound to the
+\texttt{save-buffer} function.  Moreover, a keymap can inherit the
+bindings of another keymap.
+
+Emacs, to this day, uses a transparent
 S-expression representation for keymaps.
-In early Emacs in a keymap was
+In early Emacs, a keymap was
 simply a two-element list whose car is the symbol \texttt{keymap} and
 whose second element is either a vector indexed by character code or an
 %% This option was already present in Emacs-16.56!
@@ -1605,7 +1614,7 @@ support for inheritance was fundamentally flawed until Emacs-24.1 where it
 was extended to multiple-inheritance, but at the cost of a fairly significant
 and delicate rewrite of the code.
 
-The developers Lucid Emacs of Lucid Emacs foresaw these problems, and
+The developers of Lucid Emacs foresaw these problems, and
 instead made keymaps into an opaque datatype, forbidding manipulation via the
 S-expression primitives and giving themselves a lot more implementation
 freedom.  This allowed Lucid Emacs to evolve more rapidly the
@@ -1665,7 +1674,11 @@ libraries such as Zlib, Ldap, PostgreSQL.
 
 Even with modules in place, developers still had to create wrappers to
 make existing C libraries accessible in \Elisp{}.  In 2005, Zajcev
-Evgeny wrote an FFI for SXEmacs~\cite{SXEmacs}, a fork of XEmacs.
+Evgeny wrote an FFI for SXEmacs~\cite{SXEmacs}, a fork of
+XEmacs.\footnote{SXEmacs was forked XEmacs 21.4.16 by Steve Youngs at
+  the end of 2004, due to perceived problems with the code quality and
+stability of XEmacs, and to allow more significant changes than XEmacs
+could accomodate at the time.}
 This FFI allows loading and calling existing C libraries directly,
 without intervening wrappers, by declaring the type signatures of C
 functions in \Elisp{}.  For example, the FFI allows using Curl like
@@ -1777,8 +1790,9 @@ XEmacs would convert back to the ``standard'' representation on
 demand.
 During the XEmacs 19 and much of the XEmacs 20 cycle, developers
 avoided changing the byte-code format to make byte-code files
-interchangeable between Emacs and XEmacs.  While no significant
-changes were made to the byte-code format in XEmacs, the two
+interchangeable between Emacs and XEmacs.  While
+the XEmacs developers consciously avoided making changes to the
+byte-code format, this was not a goal with Emacs, and the two
 instruction sets eventually drifted and became incompatible.
 
 In late 2009, the Emacs byte-code interpreter was modified by Tom Tromey to
@@ -1864,7 +1878,7 @@ Bignums are heap-allocated, so the same is not necessarily true for two
 bignums.  In XEmacs, \texttt{eq} can return \texttt{nil} in this case, and
 this seems to have caused no serious problems.
 %% FIXME Stefan: Update this when the discussion is over!
-This issue is still being discussed with Emacs.
+This issue is still being discussed in the Emacs community.
 
 
 %% FIXME: \subsection{Customize}
@@ -1942,30 +1956,8 @@ implementation was released with XEmacs 19.12.
 
 A specifier's value (its \emph{instance}) depends on its
 \emph{locale}, which can be buffer, a window, a frame, a device, or a MULE
-character set, or certain properties of these.  For example,
-\texttt{default-toolbar} is a specifier that could be created with:
-%%
-\begin{verbatim}
-    (defvar default-toolbar (make-specifier 'toolbar))
-\end{verbatim}
-%%
-(The \verb|'toolbar| is a type argument that the specifier system uses
-for validation.)
+character set, or certain properties of these.
 
-\Elisp{} code could retrieve a specifier's value (its
-\emph{instantiator}) like this:
-%%
-\begin{verbatim}
-    (specifier-instance default-toolbar)
-\end{verbatim}
-%%
-Code can modify a specifier with a value that is buffer-local as
-follows:
-%%
-\begin{verbatim}
-    (set-specifier default-toolbar <value> (current-buffer))
-\end{verbatim}
-%%
 Emacs-20 in 1998 added the ability to set variable to a frame-local
 value.  Contrary to terminal-local variables, any variable can be made
 frame-local, and additionally, a variable can be both frame-local and
@@ -2004,8 +1996,11 @@ started to lose momentum starting about 2010.
 %% incorporated back into Emacs.
 
 This section discusses some notable evolution of the design of
-\Elisp{} during that time: lexical scoping
-(Section~\ref{sec:lexical-scoping}), Common Lisp compatibility
+\Elisp{} after 2010: lexical scoping
+(Section~\ref{sec:lexical-scoping}),
+eager macro expansion (Section~\ref{sec:eager-macro-expansion}),
+pattern matching (Section~\ref{sec:pcase}),
+Common Lisp compatibility
 (Section~\ref{sec:cl-clib}), generalized variables
 (Section~\ref{sec:generalized-variables}), object-oriented programming
 (Section~\ref{sec:oop}), native support for objects
@@ -2153,6 +2148,7 @@ code compiled using lexical scoping is generally expected to be marginally
 faster than if compiled with dynamic scoping.
 
 \subsection{Eager macro-expansion} %Emacs-24.3?
+\label{sec:eager-macro-expansion}
 
 The exact time at which a macro is expanded has never been clearly specified
 in \Elisp{}.  Until Emacs-24, macro-expansion usually took place as late as
@@ -2188,7 +2184,8 @@ while loading a file and while compiling them) according to the section
 handling of macros that expand to both definitions and uses of
 those definitions.
 
-\subsection{Pcase}           %Released in Emacs-24.1
+\subsection{Pattern matching}           %Released in Emacs-24.1
+\label{sec:pcase}
 
 While working on the lexical-binding feature, Stefan Monnier grew
 increasingly frustrated with the shape of the code used to traverse the
@@ -2296,7 +2293,7 @@ took a longer road, where over the years, various macros and functions from
   \texttt{dotimes}, \texttt{push}, and \texttt{pop} are also added to
   \Elisp{}, which introduced some difficulties: in \texttt{cl.el} those
   macros included extra functionality which relied on parts of
-  \texttt{cl.el} which we did not want to move to \Elisp{} proper,
+  \texttt{cl.el} which were not needed in core \Elisp,
   specifically \texttt{block}/\texttt{return} and generalized references.
   For that reason the macros added to \Elisp{} do not actually replace those
   of \texttt{cl.el}; instead when \texttt{cl.el} is loaded, it overrides the

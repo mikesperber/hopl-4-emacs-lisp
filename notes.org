@@ -432,57 +432,68 @@ attmempt.)
 *** DONE "compared to Nickolas" --> "compared to Lloyd"
     CLOSED: [2019-03-25 Mon 11:34]
 
-*** TODO Section 6. Since Xemacs has been referred to throughout the paper,
+*** DONE Section 6. Since Xemacs has been referred to throughout the paper,
+    CLOSED: [2019-04-28 Sun 16:32]
 it would be best to move the information in the first three paragraphs
 of Section 6 to before Section 4.
 
-*** TODO Footnote 3. What was the release number of the first release of
+*** DONE Footnote 3. What was the release number of the first release of
+    CLOSED: [2019-04-28 Sun 16:33]
 Lucid Emacs?
 
-*** TODO p18
+*** DONE p18
+    CLOSED: [2019-04-28 Sun 17:07]
 Section 6.1. I gather the purpose of a keymap is to map a
 sequence of keystrokes to a function to invoke. Please say this
 explicitly. Please also explain nesting of keymaps.
 
-*** TODO "inheritance" I don't know what inheritance means in the context of a
+*** DONE "inheritance" I don't know what inheritance means in the context of a
+    CLOSED: [2019-04-28 Sun 17:24]
 keymap.
 
-*** TODO "SFEmacs" Perhaps say a word or two about why this fork came
+*** DONE "SFEmacs" Perhaps say a word or two about why this fork came
+    CLOSED: [2019-04-28 Sun 17:29]
 into existence?
 
-*** TODO p20
+*** DONE p20
+    CLOSED: [2019-04-28 Sun 17:30]
 "While no significant changes were made to the byte-code format in
 XEmacs, the two instruction sets eventually drifted and became
 incompatible." Surely the first incompatible change was significant,
 just because it was incompatible? Make clear whether the drift was a
 deliberate choice or an accident.
 
-*** TODO p21
+*** TODO Stefan p21
 "it was not unified with other charsets" I don't know what this means.
 
-*** TODO p22
+*** DONE p22
+    CLOSED: [2019-04-28 Sun 17:30]
 "This issue is still being discussed with Emacs." --> "This issue is
 still being discussed in the Emacs community."
 
-*** TODO Section 7.4. Why are the three displayed examples given? This seems
+*** DONE Section 7.4. Why are the three displayed examples given? This seems
+    CLOSED: [2019-04-28 Sun 17:34]
 more detailed than other discussion, and it seems more detail than
 necessary.
 
-*** TODO p23
+*** DONE p23
+    CLOSED: [2019-04-28 Sun 17:34]
 "during that time" Unclear. Replace by "post-2010" or whatever is
 correct.
 
-*** TODO The summary of Section 8 at the beginning omits 8.2 and 8.3.
+*** DONE The summary of Section 8 at the beginning omits 8.2 and 8.3.
+    CLOSED: [2019-04-28 Sun 17:36]
 
-*** TODO ""hidden" configuration options" I'm not sure what "hidden" adds
+*** DONE ""hidden" configuration options" I'm not sure what "hidden" adds
+    CLOSED: [2019-04-28 Sun 17:40]
 here, perhaps delete?
 
-*** TODO p24
+*** TODO Stefan p24
 "except in the presence of higher-order functions, like reduce" I
 don't understand why higher-order function would lead to name
 conflicts under the described convention.
 
-*** TODO p25
+*** TODO Stefan p25
 I take it that in the current version lexical scope is the default,
 but that dynamic scope is still possible. You should say something
 about how this is achieved. You should also say how backward
@@ -492,14 +503,15 @@ How smoothly did the introduction of lexical scope go?
 
 Has lexical scoping made its way into XEmacs?
 
-*** TODO p26
+*** TODO Stefan p26
 "often using the new low-level pattern app". I have no idea
 what this means. Explain or omit.
 
-*** TODO p27
+*** DONE p27
+    CLOSED: [2019-04-28 Sun 17:44]
 "we" Perhaps change to third person?
 
-*** TODO p28
+*** TODO Stefan p28
 I take it that both cl.el and cl-lib.el are currently in use.
 Does this introduce any performance or maintenance issues?
 Are there plans to deprecate cl.el?
