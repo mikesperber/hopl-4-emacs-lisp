@@ -516,41 +516,46 @@ I take it that both cl.el and cl-lib.el are currently in use.
 Does this introduce any performance or maintenance issues?
 Are there plans to deprecate cl.el?
 
-*** TODO Section 8.5. Previously, the text used "generalised reference"
+*** DONE Section 8.5. Previously, the text used "generalised reference"
+    CLOSED: [2019-04-29 Mon 11:11]
 but now it uses "generalised variable". Perhaps change the earlier
 occurrences of "generalised reference" to "generalised variable".
 
-*** TODO "can be used as an ... and an ..." --> "can be used both as an ... and
+*** DONE "can be used as an ... and an ..." --> "can be used both as an ... and
+    CLOSED: [2019-04-29 Mon 11:12]
 as an ..."
 
-*** TODO "(VARS VALS STORE-VAR STORE-FORM ACCESS-FORM)" I don't follow this
+*** TODO Stefan  "(VARS VALS STORE-VAR STORE-FORM ACCESS-FORM)" I don't follow this
 explanation. How does STORE-VAR relate to VARS? The expansion of
 (push EXP PLACE) helps little unless the reader knows how push
 is defined. This paragraph should be rewritten with more explanation.
 
-*** TODO "NIH syndrome" That seems a different reason that "the existing
+*** TODO Stefan "NIH syndrome" That seems a different reason that "the existing
 code was hard to follow"!
 
-*** TODO "wanted to keep in cl.el" --> "did not want to move to Emacs"
+*** DONE "wanted to keep in cl.el" --> "did not want to move to Emacs"
+    CLOSED: [2019-04-29 Mon 11:20]
 
-*** TODO "cl-lib" in italic --> "cl-lib.el" in tt foont
+*** DONE "cl-lib" in italic --> "cl-lib.el" in tt foont
+    CLOSED: [2019-04-29 Mon 11:21]
 
-*** TODO "a DO function of two arguments" Is this what is called
+*** TODO Stefan "a DO function of two arguments" Is this what is called
 gv-get-place-function in the following example? Please rewrite
 to clarify.
 
-*** TODO p29
+*** TODO Stefan p29
 Nothing is gained by giving two forms of the push example.
 Just give one or the other.
 
-*** TODO p29
+*** TODO Stefan p29
 "the reverse is not true" Why can't you set
   (VARS VALS STORE-VAR STORE-FORM ACCESS-FORM)
 to
   (nil nil x (STORE-FUNCTION x) ACCESS-FORM)
 ?
 
-*** TODO "(originally developed in 1986 by Cesar Quiroz, and included in
+*** DONE "(originally developed in 1986 by Cesar Quiroz, and included in
+    CLOSED: [2019-04-29 Mon 11:24]
 Emacs-18.51 in 1988)" Doesn't belong here. Add the last phrase
 to the earlier mention of cl.el on p26.
 

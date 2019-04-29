@@ -5,6 +5,7 @@
 %% \usepackage{alltt}
 \usepackage{longtable}
 \usepackage{tabu}
+\usepackage{alltt}
 \usepackage[utf8]{inputenc}
 
 %% Metadata Information
@@ -2231,8 +2232,9 @@ While the core of \Elisp{} has evolved very slowly over the years, the
 evolution of other Lisps (mostly Scheme and Common Lisp) has put pressure to
 try and add various extensions to the language.  As it turns out, \Elisp{},
 to a first approximation, can be seen as a subset of Common Lisp, so already
-in 1986 Cesar Quiroz wrote a \texttt{cl.el} package which provided various
-Common Lisp facilities implemented as macros.
+in 1986 Cesar Quiroz \email{<quiroz@cs.rochester.edu>} wrote a \texttt{cl.el} package which provided various
+Common Lisp facilities implemented as macros.  Emacs 18.51 was the
+first Emacs release to ship with \texttt{cl.el}, in 1988.
 
 Richard Stallman never wanted \Elisp{} to morph into Common Lisp, but he saw
 the value of offering such facilities, so this \texttt{cl.el} package was
@@ -2294,7 +2296,7 @@ took a longer road, where over the years, various macros and functions from
   \Elisp{}, which introduced some difficulties: in \texttt{cl.el} those
   macros included extra functionality which relied on parts of
   \texttt{cl.el} which were not needed in core \Elisp,
-  specifically \texttt{block}/\texttt{return} and generalized references.
+  specifically \texttt{block}/\texttt{return} and generalized variables.
   For that reason the macros added to \Elisp{} do not actually replace those
   of \texttt{cl.el}; instead when \texttt{cl.el} is loaded, it overrides the
   original macros with its own version.
@@ -2303,7 +2305,7 @@ took a longer road, where over the years, various macros and functions from
 \item[2012] Emacs-24.1 adds \texttt{macroexpand-all} and lexical scoping,
   which obsoletes \texttt{cl.el}'s \texttt{lexical-let}.
 \item[2013] Emacs-24.3 adds compiler macros, \texttt{setf} and
-  generalized references.
+  generalized variables.
 \item[2018] To the \texttt{cXXr} functions incorporated in Emacs-20.1,
   Emacs-26.1 adds the remaining \texttt{cXXXr} functions.  The resistance
   against those was mostly one of style, since they tend to lead to poorly
@@ -2343,8 +2345,8 @@ To facilitate the move to \texttt{cl-lib.el}, some frequently used
 functionality from \texttt{cl.el} was moved directly to \Elisp{}.  The
 most visible one is the support for \emph{generalized variables}, also
 variously known as \emph{places}, \emph{generalized references}, or
-\emph{lvalues}.  A generalized variable is a form that can be used as
-an expression and an updateable reference.  The concept comes from
+\emph{lvalues}.  A generalized variable is a form that can be used both as
+an expression and as an updateable reference.  The concept comes from
 Common Lisp, and the Emacs implementation originally a part of
 \texttt{cl.el}.  In both Common Lisp and Emacs, a number of special
 forms take generalized variables as operands---in particular,
@@ -2357,15 +2359,22 @@ to turn it into a list of five elements:
   (\textsl{VARS}~\textsl{VALS}~\textsl{STORE-VAR}~\textsl{STORE-FORM}
   ~\textsl{ACCESS-FORM})
 \end{displaymath}
-such that for example \texttt{(push \textsl{EXP} \textsl{PLACE})} turns into:
+such that for example \texttt{(push \textrm{\textsl{EXP}} \textrm{\textsl{PLACE}})},
+which essentially expands into
+%
+\begin{center}
+\texttt{(setf \textrm{\textsl{PLACE}} (cons \textrm{\textsl{EXP}} \textrm{\textsl{PLACE}}))}
+\end{center}
+%
+turns into:
 \begin{displaymath}
   \MAlign{
-    \texttt{(let ((v \textsl{EXP}))} \\
+    \texttt{(let ((v \textrm{\textsl{EXP}}))} \\
     \;\;\;\MAlign{
-      \texttt{(let* (\textsl{VARS} = \textsl{VALS})} \\
+      \texttt{(let* (\textrm{\textsl{VARS}} = \textrm{\textsl{VALS}})} \\
       \;\;\;\MAlign{
-        \texttt{(let ((\textsl{STORE-VAR} (cons v \textsl{ACCESS-FORM})))} \\
-        \;\;\;\texttt{\textsl{STORE-FORM})))}}}}
+        \texttt{(let ((\textrm{\textsl{STORE-VAR}} (cons v \textrm{\textsl{ACCESS-FORM}})))} \\
+        \;\;\;\textrm{\textsl{STORE-FORM})))}}}}
 \end{displaymath}
 This imposes a fairly rigid structure which, while general enough to adapt
 to most needs, can be burdensome and leads to verbose code with a lot
@@ -2379,9 +2388,9 @@ implementation were:
 \begin{itemize}
 \item NIH syndrome: the existing code was hard to follow.
 \item The previous code made use of internal helper functions from
-  \texttt{cl.el} which we wanted to keep in \texttt{cl.el}, so some
+  \texttt{cl.el} which we did not want to move to core \Elisp, so some
   significant massaging was needed anyway.
-\item the implementor of \emph{cl-lib} considered this part of Common Lisp's
+\item the implementor of \texttt{cl-lib} considered this part of Common Lisp's
   design ugly.
 \end{itemize}
 %% For example, if we want to define a place
@@ -2466,9 +2475,8 @@ this incompatibility.
 \subsection{Object-oriented programming} %Emacs-25.1
 \label{sec:oop}
 
-While \texttt{cl.el} early on (originally developed in 1986 by Cesar Quiroz
-\email{<quiroz@cs.rochester.edu>}, and included in Emacs-18.51 in 1988)
-provided compatibility with Common Lisp's \texttt{defstruct}, including the
+While \texttt{cl.el} early on provided compatibility with Common
+Lisp's \texttt{defstruct}, including the
 ability to define new structs as extensions/subtypes of others, thus
 providing a limited form of inheritance, actual support for object-oriented
 programming in the form of method dispatch has been historically limited
@@ -2482,7 +2490,8 @@ came before its expansion.  EIEIO started as an experiment to try use
 an object system in Emacs, first following a model like that of C++, but
 very soon switching to a CLOS-inspired model.
 
-EIEIO is an implementation of a subset of CLOS.  Its development was mostly
+EIEIO is an implementation of a subset of CLOS, the Common Lisp Object
+System~\cite{DeMichielGabriel1987}.  Its development was mostly
 driven by actual needs more than as an end in itself: the original
 motivation was to try and play with an object request broker, then a widget
 toolkit, and later switched to providing support for the CEDET package.
