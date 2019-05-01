@@ -1069,3 +1069,131 @@ Clarify "there was no lambda initially"
 Here are things that maybe we'd like to know:
 - how was Emacs's development organized before Emacs-21
 
+** Guy Steele
+
+"Guy Steele designed the original symmetrical Emacs command set; then
+he and I began implementing Emacs (on top of TECO), but after one long
+joint development session, Steele began drifting away, so I finished
+Emacs."
+
+Actually, everything Mike was going to ask is answered here, and we
+can cite Seibel's book:
+
+http://www.classiccmp.org/pipermail/cctalk/2015-August/010369.html
+
+Peter Siebel's "Coders at Work" features a chapter/interview with Steele:
+
+\\
+Siebel: During your time at MIT you were somehow involved in the birth 
+of Emacs. But the early history of Emacs is a hit hazy. What is your 
+version of the story?
+
+Steele: My version of the story was that I was playing standards guy. 
+What had happened was there was this display mode that turned TECO into 
+something like a WYSIWYG editor. On our 24x80 screens, 21 lines of what 
+was in the buffer would be shown on the screen and the bottom 3 lines 
+were still a TECO command line. You'd be typing in these TECO commands 
+and only when you hit the double altmode would they then be executed. 
+Then there was the real-time edit mode, where it was suggested that a 
+TECO command throw you in this other mode whereby instead of waiting for 
+you to type the double altmode, TECO would react immediately to single 
+character commands. If you type one character, it would do the command. 
+You type another character, it would do the command. And most printing 
+characters were self-inserting. Then the control characters were used to 
+move forward, back, up, and down. It was a very, very primitive---it 
+looked like a very primitive version of Emacs.
+
+Then came the breakthrough. The suggestion was, we have this idea of 
+taking a character and looking it up in a table and executing TECO 
+commands. Why don't we apply that to real-time edit mode? So that every 
+character you can type is used as a lookup character in this table. And 
+the default table says, printing characters are self-inserting and 
+control characters do these things. But let's just make it programmable 
+and see what happens. And what immediately happened was four or five 
+different bright people around MIT had their own ideas about what to do 
+with that. Within just a few months there were five completely 
+incompatible GUI interfaces to TECO.
+
+Seibel: So they were just customizing, essentially, the key-bindings?
+
+Steele: That's right. And they each had their own ideas about what 
+should be concise because you do it most often and what you can afford 
+to be longer. So one guy, for example, was really concerned about typing 
+in Lisp code and began to experiment with finding balanced parenthesized 
+expressions. And another guy was more interested in text, so he was 
+interested in commands that would move over words and convert between 
+uppercase and lowercase and capitalize them. And that's where those 
+commands in Emacs came from.
+
+Different people had different ideas about how the key-bindings ought to 
+be organized. As a systems-support guy for Lisp, I was often called to 
+people's terminals and asked to help them. And I fairly quickly noticed 
+that I couldn't sit down at their TECOs and help them modify their 
+programs because I'd be faced with a set of key-bindings and I had no 
+idea what they were going to do.
+
+Seibel: Was one of those guys Richard Stallman?
+
+Steele: No, Stallman was the implementer and supporter of TECO. And he 
+provided the built-in real-time edit mode feature, although I think Carl 
+Mikkelsen had worked on the early version of it. He provided the 
+key-bindings feature that made all of this possible.
+
+Anyway, there were something like four different macro packages and they 
+were incompatible, and I decided to play standards guy, or community 
+reconciliation guy. I saw something that had been lost in our community, 
+which was the ability to easily help each other at our terminals. I 
+said, "OK, we've had some experimentation; we've seen a bunch of ideas. 
+What if we could agree on a common set of key-bindings and draw the best 
+ideas from each of these things?"
+
+I literally had a pad of paper and ran around the building, talking to 
+these guys, visiting each of them several times, and tried to get some 
+kind of consensus. I was trying to get consensus on what the content 
+ought to be and then I drew on their designs and tried to organize the 
+actual choice of key-bindings so as to make them a little more regular 
+and a little more mnemonic. And not being a human-factors guy at all, I 
+didn't think at all about convenience for touch typists. I was 
+principally concerned with mnemonic value. And so that's why Meta-C and 
+Meta-L and Meta-U stand for capitalize and lowercase and uppercase.
+
+...
+
+Seibel: So you made this standard set of key-bindings. How did that go 
+over? Were people happy with it?
+
+Steele: Well, people worked through it. Then I sat down and proceeded to 
+begin an implementation of it. And we had another idea that came into 
+the mix at the same time and it was the idea that you could make TECO 
+macros run a lot faster if you squeezed out the spaces and deleted all 
+the comments. The way the TECO interpreter worked, interpreting one 
+character at a time, when you encountered a comment it had to spend the 
+time skipping over that comment. So we had this idea of this very 
+primitive TECO compiler that was mostly just squeezing out the white 
+space and the comments and doing a few other minor things to put it in a 
+form that would run a little bit faster.
+
+So I began in an initial way to try to construct a version of this macro 
+compressor, which I think was actually based on an earlier idea that 
+Moon had had. I don't think I originated that idea. I began to think 
+about how to organize the initial dispatch and organize some of the 
+first few routines borrowing on the existing implementations of other 
+macro pckages---I was trying to synthesize them. And about that point 
+Stallman came along and said, "What are you doing? This looks 
+interesting." He immediately jumped in and he could implement ten times 
+as fast as I could, partly because he knew TECO inside out.
+
+So I worked seriously on the implementation of Emacs probably for only 
+about four or six weeks. At which point it became clear that Stallman 
+understood what the program was. I wanted to get back to doing 
+graduate-student things. So Stallman did the other 99.999 percent of the 
+work. But I played a role in catalyzing it and beginning the implementation.
+
+** Joe Arceneaux
+
+Reading the accounts by Richard Stallman, Jamie Zawinski, and Richard
+Gabriel, one gets the impression that multiple opposing forces were
+pulling at you, not just into different political directions, but also
+into different technical ones.  Can you describe what they were?
+
+https://www.linkedin.com/in/joseph-arceneaux-1b1b20/
