@@ -1197,3 +1197,26 @@ pulling at you, not just into different political directions, but also
 into different technical ones.  Can you describe what they were?
 
 https://www.linkedin.com/in/joseph-arceneaux-1b1b20/
+
+** Richard Gabriel
+
+How did licsense issues play into the technical design of Energize?
+
+Reading, "Patterns of Software", I got the impression that the
+"Cadillac" project Lucid was working on, wasn't originally planned
+with Emacs in mind as the editor component.  (The way I read it, Emacs
+was part of the conception of the Hitchhiker project, which didn't
+materialize.)  How did Emacs get into the picture?
+
+What were the technical requirements of Energize that Emacs did not
+fulfill that the time (apart from the lack of a windowed UI) - were
+any particular aspects of Emacs Lisp part of these requirements?
+
+Generally, did the people at Lucid have a position on the suitability
+or problems with Emacs Lisp?
+
+Presumably, Energize would need a significant amount of Emacs Lisp to
+support the front-end functionality.  Given the number of annotations
+you were planning, how did performance of Emacs Lisp play into your
+planning and execution of Energize?
+
