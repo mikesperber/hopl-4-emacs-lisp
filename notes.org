@@ -559,10 +559,12 @@ to
 Emacs-18.51 in 1988)" Doesn't belong here. Add the last phrase
 to the earlier mention of cl.el on p26.
 
-*** TODO "CLOS" Give a citation for CLOS, and explain it is the
+*** DONE "CLOS" Give a citation for CLOS, and explain it is the
+    CLOSED: [2019-05-05 Sun 13:46]
 Common Lisp Object System.
 
-*** TODO "(a package providing IDE-like features)" move this to the
+*** DONE "(a package providing IDE-like features)" move this to the
+    CLOSED: [2019-05-05 Sun 13:47]
 mention of CEDET in the previous paragraph.
 
 *** TODO p30
@@ -573,11 +575,12 @@ whole section assuming your reader is not familiar with CLOS.
 
 *** TODO “&context (EXP SPECIALIZER)” I'm completely lost here. Help!
 
-*** TODO Are the object facilities of both EIEIO and cl-generic.el currently in
+*** TODO Stefan Are the object facilities of both EIEIO and cl-generic.el currently in
 use?  Does this introduce any performance or maintenance issues?  Are
 there plans to deprecate EIEIO?
 
-*** TODO p31
+*** DONE p31
+    CLOSED: [2019-05-05 Sun 13:47]
 "the generator.el" --> "generator.el"
 
 *** TODO "in order to avoid it the coder needs to write their code in a

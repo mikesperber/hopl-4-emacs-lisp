@@ -2494,7 +2494,8 @@ EIEIO is an implementation of a subset of CLOS, the Common Lisp Object
 System~\cite{DeMichielGabriel1987}.  Its development was mostly
 driven by actual needs more than as an end in itself: the original
 motivation was to try and play with an object request broker, then a widget
-toolkit, and later switched to providing support for the CEDET package.
+toolkit, and later switched to providing support for the CEDET
+package, a package providing IDE-like features.
 It included support for most of CLOS's \texttt{defclass}, as well as support
 for a subset of \texttt{defmethod}, more specifically it was limited to
 single-dispatch methods, dispatching on the first argument, and it could
@@ -2503,8 +2504,8 @@ incomplete support for method combinations, only allowing \texttt{:before}
 and \texttt{:after} methods but not \texttt{:around} nor any user-defined
 additional qualifiers.
 
-EIEIO spent most of its life as part of the CEDET package (a package
-providing IDE-like features) before being integrated into Emacs-23.2 in
+EIEIO spent most of its life as part of the CEDET package
+before being integrated into Emacs-23.2 in
 2010, along with most of CEDET.  Use of EIEIO within Emacs stayed fairly
 limited, partly for reasons of inertia, but also because EIEIO suffered some
 of the same problems as \texttt{cl.el} in that it was not
@@ -2614,7 +2615,7 @@ and those using the new encoding.
 
 With the success of Python's and Javascript's iterators and generators, some
 Emacs users felt like \Elisp{} was lacking in abstraction, so in 2015,
-Daniel Colascione developed the \texttt{generator.el}, which was included
+Daniel Colascione developed \texttt{generator.el}, which was included
 into Emacs-25.1.  It makes it easy and convenient to write generators using
 macros \texttt{iter-lambda} and \texttt{iter-yield}.  Its implementation is
 based on a kind of local conversion to continuation-passing style (CPS) and
@@ -2622,9 +2623,7 @@ hence relies extensively on the use of lexical scoping, to work around the
 fact that \Elisp{} does not directly provide something like \texttt{call/cc}
 to access underlying continuations.  It only handles a (relatively large)
 subset of \Elisp{}, because CPS conversion of forms like
-%% FIXME: Add citation to dynamic-wind or other Scheme article about
-%% unwind-protect.
-\texttt{unwind-protect} cannot be defined in general in \Elisp.
+\texttt{unwind-protect}~\cite{HaynesFriedman1987} cannot be defined in general in \Elisp.
 
 \subsection{Concurrency}
 \label{sec:concurrency}
