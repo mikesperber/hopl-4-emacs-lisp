@@ -967,10 +967,6 @@ I think there are quite a few lessons for language developers here.   It may be 
 *** TODO - p35 "contributions of course" -> "contributions, of course"
 
 * Questions
-** RMS
-*** Why was lambda-as-a-macro only added so late?
-*** When was the byte-code compiler added?
-
 ** Brent
 *** How do we "cite" revision-control records?
 *** How do we deal with disputed history?
@@ -1200,7 +1196,7 @@ https://www.linkedin.com/in/joseph-arceneaux-1b1b20/
 
 ** Richard Gabriel
 
-How did licsense issues play into the technical design of Energize?
+How did license issues play into the technical design of Energize?
 
 Reading, "Patterns of Software", I got the impression that the
 "Cadillac" project Lucid was working on, wasn't originally planned
@@ -1219,4 +1215,10 @@ Presumably, Energize would need a significant amount of Emacs Lisp to
 support the front-end functionality.  Given the number of annotations
 you were planning, how did performance of Emacs Lisp play into your
 planning and execution of Energize?
+
+
+** Richard Stallman
+
+*** Why was lambda-as-a-macro only added so late?
+*** When was the byte-code compiler added?
 
