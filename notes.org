@@ -979,92 +979,26 @@ I think there are quite a few lessons for language developers here.   It may be 
 *** Should we explain more of core Emacs Lisp instead of deferring to the MacLisp manual?
 
 * Conf calls
-
-** 2019-02-28 w/ Brent Hailpern
-
-- Story that tells a story that teaches something
-
-- move to appendix stuff without human or organizational motivation
-
-- good: constrained to make editor better
-
-- highlight: how it evolved to make the macro experience better
-
-- why is RMS important?
-
-- why were we important?
-
-- What was Emacs like?
-
-- Evolution from TECO to Emacs Lisp
-
-- Step 1: Fill in context, get the story
-
-- LGPL came out of Lucid negotiations
-
-- more background on Emacs
-
-- Lua paper in HOPL III
-
-- free software ... "boxes on the side"
-[ Mike: I don't understand what this means.  ]
-
-- tell several sub-stories
-
-- TECO : find serious macro writers
-
-- more interviews
-
-- interview with Dick Gabriel, LGPL
-
-- insist on the general human organization
-  (e.g. the fact that it was controlled neither by a company nor
-  a standards committee)
-
-- talk more about the importance of having a real language
-
-- design decisions that didn't work
-
-- accumulation of hacks
-[ I don't know what I meant by that!
-  Mike, by any chance, does that ring a bell for you?  ]
-
-** 2019-03-29 w/ Brent Hailpern
-
-contrast "normal language design" and Elisp design
-- some part of it is usual, of course
-- usually there's a language philosophy, but here it's maybe more driven by
-  practical needs?
-- discuss how Elisp had to adapt to changes in Emacs (e.g unicode)
-
-Discuss how the language was designed initially from the point of view of
-"what do we need to for an editor like Emacs" (key-bindings, model of
-buffers, IO model, functions, commands, ...).
-[ I guess that points also to the design of the interactive spec.  ]
-
-Need a Maclisp or core Elisp appendix at least, and we may want to present
-near the beginning a bit more of what Elisp looks like.
-
-Talk more on how the switch to lexical took place.
-
-How a language evolves when it's not in control of its destiny (because it
-mostly just serves the needs of Emacs).
-
-Maybe expand on the IO model.
-
-[ Not discussed but crossed my mind: I think it would be nice if the
-  article could make the reader understand how Elisp is a language where
-  everything takes place within a large state context, how state is
-  so ever present (and hence why multithreading is nigh-on impossible).  ]
-
-Do not just refer the reader to to the Maclisp manual
-
-See about how Lucid had different needs and how that explains the
-corresponding changes in design
-
-Investigate how early development&design was organized
-
-Clarify "there was no lambda initially"
+* Interview procecure
+** Todos
+- copyright waiver
+http://history.acm.org/content.php?do=publicdocuments%20
+** Haigh
+- don't write questions, write topics
+- 3 sessions
+- birth to grad school, then speed towards anecdotes
+- slow down, contextualize, probe
+- biggest regret
+- let interviewee edit
+** Hoddeson
+- "mask"
+- bring documents
+- trust and collaboration
+- iteration
+** Norberg
+- different settings - # of interviewees
+- career interview vs. focused interview
+- first general questions, then follow-up more specific
 
 * Interview questions
 Here are things that maybe we'd like to know:
