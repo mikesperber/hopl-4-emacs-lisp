@@ -1000,6 +1000,17 @@ http://history.acm.org/content.php?do=publicdocuments%20
 - career interview vs. focused interview
 - first general questions, then follow-up more specific
 
+** Booch
+https://www.oralhistory.org/about/principles-and-practices-revised-2009/oral-history-evaluation-guidelines-revised-in-2000/
+
+although, to be honest, for the histories I've done for the Computer 
+History Museum, my experience is simply
+
+-- study the subject thoroughly before starting
+-- listen, but follow up
+-- listen again
+-- keep listening
+
 * Interview questions
 Here are things that maybe we'd like to know:
 - how was Emacs's development organized before Emacs-21
