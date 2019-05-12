@@ -2643,14 +2643,17 @@ were earlier implemented as an asynchronous process sending Emacs output at
 the requested time), it has been the only form of concurrency available for
 most of Emacs's life.
 
-Adding true shared-memory concurrency to \Elisp{} is very problematic
-because of the pervasive reliance on a shared state in all of existing
-\Elisp{} code, but the limited existing support was limiting even in those
-cases where it was technically sufficient: many \Elisp{} packages which
-interact with external programs block many more times than really necessary,
-simply because in order to avoid it the coder needs to write their code in
-a \emph{continuation-passing style}, which interacts poorly with dynamic
-scoping and requires significant surgery to retro-fit to existing code.
+Adding true shared-memory concurrency to \Elisp{} is problematic
+because of the pervasive reliance on shared state in existing \Elisp{}
+code.  Even some cases, shared state is not a problem, and concurrency
+can be mimicked via asynchronous programming: When a program waits for
+an operation (such as an external program), instead of blocking, it
+registers a continuation callback and returns control to the main
+event loop.  Even when this is possible, many \Elisp{} packages 
+instead block, as instrumenting the code with callback means
+effectively writing code in continuation-passing style.  This style
+interacts poorly with dynamic scoping and requires significant surgery
+to retro-fit to existing code.
 
 So, shared-memory concurrency was largely considered as inapplicable to
 \Elisp{}.  Nevertheless, in November 2008, Giuseppe Scrivano posted a first
@@ -2678,7 +2681,8 @@ options for the future, this first implementation favored a simpler and
 safer approach.
 
 Over the years, other approaches to concurrency and parallelism have been
-developed as \Elisp{} packages, most notably the \texttt{async.el} package
+developed as \Elisp{} packages, most notably the \texttt{async.el}
+package~\cite{WiegleyAsync2019}
 developed in 2012 which runs \Elisp{} code in parallel in a separate
 Emacs subprocess.
 

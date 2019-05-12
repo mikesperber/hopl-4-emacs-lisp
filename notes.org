@@ -583,11 +583,13 @@ there plans to deprecate EIEIO?
     CLOSED: [2019-05-05 Sun 13:47]
 "the generator.el" --> "generator.el"
 
-*** TODO "in order to avoid it the coder needs to write their code in a
+*** DONE "in order to avoid it the coder needs to write their code in a
+    CLOSED: [2019-05-12 Sun 17:59]
 continuation-passing style" I don't see why this should be the case,
 please explain.
 
-*** TODO p32
+*** DONE p32
+    CLOSED: [2019-05-12 Sun 18:02]
 "async.el" Cite its documentation.
 
 *** TODO A word or two on uses of the concurrency package would be welcome.
