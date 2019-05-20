@@ -2715,17 +2715,22 @@ implement an ``inlinable function'', namely by defining it as a macro.
 In late 2014, while working to adapt the \texttt{cl-lib} library to the
 changes in EIEIO and \texttt{cl-defstruct} objects, Stefan Monnier became
 frustrated by the redundancy between \texttt{cl-typep}'s definition and its
-compiler macro.  The \texttt{cl-typep} function takes two arguments and tests if the first is
+compiler macro.
+
+The \texttt{cl-typep} function takes two arguments and tests if the first is
 a value of the type specified by the second.  The function definition takes
-care of the general case where the type argument is only known at run-time,
-but the compiler-macro is important to optimize for example
+care of the general case where the type argument is only known at run-time.
+The compiler macro enables optimizations---for example, it turns
 \texttt{(cl-typep x 'integer)} into \texttt{(integerp x)}.  While this
 optimization could arguably be performed automatically by a sufficiently
-sophisticated compiler, the \Elisp{} compiler is much too naive for that.
-So he developed the new macro \texttt{define-inline}, which was included in
-Emacs-25.1.  It lets one define a function in such a way that from its
-definition the macro can extract both a normal function body and
-a corresponding compiler-macro.
+sophisticated compiler, the \Elisp{} compiler is too naive for that.
+
+Consequently, Monnier developed the new macro \texttt{define-inline},
+which was included in Emacs-25.1.  It lets the programmer define a
+normal function and a corresponding optimizing compiler macro with a
+single form.  The current version of \texttt{cl-typep} uses
+\texttt{define-inline}.  Since then, 50 or so similar functions in the
+Emacs distribution have been rewritten using \texttt{define-inline}.
 
 %% Daniel Colascione: Do you want to mention how Emacs Lisp is _defined_ to
 %% expand compiler macros, which, AIUI, distinguishes it from other lisps?
@@ -2745,8 +2750,8 @@ Yet, the \Elisp{} side of Emacs is now a rather large system, so in order to
 avoid name conflicts, \Elisp{} relies on a poor man's namespace system, as
 mentioned in Sec.~\ref{sec:lexical-scoping}, where code loosely follows
 a convention where global functions and variables belonging to package
-\textsl{<pkg>} will define identifiers starting with a \texttt{<pkg>-}
-prefix (and use a prefix of \texttt{<pkg>--} in order to indicate that this
+\verb|<pkg>| will define identifiers starting with a \verb|<pkg>-|
+prefix (and use a prefix of \verb|<pkg>--| in order to indicate that this
 identifier should be considered an internal definition).
 
 There have been many attempts to remedy this situation by providing support
@@ -2855,8 +2860,8 @@ the \Elisp{} engine is provided by Guile.
 
 \subsection{Emacs-Ejit}
 
-In 2013, Nic Ferrier implemented in \Elisp{} a compiler from \Elisp{} to
-Javascript.  This was designed so as to be able to write complete web sites
+In 2013, Nic Ferrier implemented Emacs-Ejit, a compiler from \Elisp{} to
+Javascript, written in \Elisp{}.  This was designed so as to be able to write complete web sites
 all in \Elisp{}, using the Elnode \Elisp{} package to do the server-side
 processing and using Emacs-Ejit to write the client-side code in \Elisp{}
 as well.  It does not really aim to run any \Elisp{} package in your
@@ -2884,12 +2889,12 @@ implementation.  But it has also come up with its own features, such as
 docstrings, buffer-local variables, and the addition of text-properties
 to strings.
 
-Possibly, the organic growth of all the \Elisp{} packages developed within
-the community of Emacs users and developers, whose composability relies on
-social mechanisms, has provided enough cohesive force to keep balkanization
-at bay for more than 30 years.  Given the amount of changes it went through
-over the last decade, we are looking forward to the \Elisp{} of the next
-30 years.
+The composability of the existing \Elisp{} packages relies on social
+mechanisms, and the organic growth of all the \Elisp{} packages has
+been able to maintain it for more than 30 years, keeping balkanization
+at bay to date.  Given the vast amount of changes Emacs users and
+developers have made to the system over the last decade alone, we are
+looking forward to the \Elisp{} of the next 30 years.
 
 %% FIXME: Discuss whether \Elisp{} is more of a sponge
 %% that incorporated other languages's features, or one that comes up

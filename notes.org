@@ -596,20 +596,25 @@ please explain.
 Have the uses led to concurrency bugs? If there aren't many uses
 of the package yet that would also be valuable information.
 
-*** TODO "is important to optimize for example" --> "performs important
+*** DONE "is important to optimize for example" --> "performs important
+    CLOSED: [2019-05-20 Mon 20:14]
 optimizations, for example"
 
-*** TODO "the macro can extract" Which macro??
+*** DONE "the macro can extract" Which macro??
+    CLOSED: [2019-05-20 Mon 20:15]
 
-*** TODO The story seems to stop early. Did define-inline solve the cl-typep
+*** DONE The story seems to stop early. Did define-inline solve the cl-typep
+    CLOSED: [2019-05-20 Mon 20:22]
 problem? How? How widely used is define-inline? How does it co-exist
 with the older systems for inlining?
 
-*** TODO p33
+*** DONE p33
+    CLOSED: [2019-05-20 Mon 20:23]
 
 "¡pkg¿" font issue?
 
-*** TODO p34
+*** DONE p34
+    CLOSED: [2019-05-20 Mon 20:24]
 
 "Emacs-Ejit" I presume this is the compiler from Emacs to Javascript?
 Please make this explicit.
@@ -627,7 +632,10 @@ ignores or downplays these.
 *** TODO "But it has also come up with its own features" Interestingly, all three
 that you list are already covered in Section 4! Were there later ones?
 
-*** TODO "whose composability" Rewrite the sentence so it is clear you are talking
+Mike: want to cover customize
+
+*** DONE "whose composability" Rewrite the sentence so it is clear you are talking
+    CLOSED: [2019-05-20 Mon 20:36]
 about the composability of packages, not of the community.
 
 
