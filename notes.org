@@ -355,7 +355,10 @@ attach a single function to another function? Or a list of functions,
 as in a hook? Does the attached function run before the other function,
 or at some other time?
 
-*** TODO Stefan "makes better use of existing language features" Obscure. Explain or
+*** DONE "makes better use of existing language features" Obscure. Explain or
+    CLOSED: [2019-05-22 mer 19:26]
+    - CLOSING NOTE [2019-05-22 mer 19:26] \\
+      I added two examples of the simplification
 give a citation.
 
 *** TODO I could not discern an order to the subsections of Section 4. Possibly
@@ -376,7 +379,10 @@ But you haven't mentioned it by name at this point.
     CLOSED: [2019-03-24 Sun 15:25]
 "where amply sufficient" --> "were amply sufficient"
 
-*** TODO Stefan "the "mark" bit was not used" I'm confused. If it wasn't used for this
+*** DONE "the "mark" bit was not used" I'm confused. If it wasn't used for this
+    CLOSED: [2019-05-22 mer 19:27]
+    - CLOSING NOTE [2019-05-22 mer 19:27] \\
+      It was explained in the following sentence, so I reworded to clarify
 purpose, how were objects marked?
 
 *** DONE "each object by allocated" --> "each object be allocated"
@@ -463,7 +469,10 @@ incompatible." Surely the first incompatible change was significant,
 just because it was incompatible? Make clear whether the drift was a
 deliberate choice or an accident.
 
-*** TODO Stefan p21
+*** DONE p21
+    CLOSED: [2019-05-22 mer 19:28]
+    - CLOSING NOTE [2019-05-22 mer 19:28] \\
+      I gave an example of a lack of unification
 "it was not unified with other charsets" I don't know what this means.
 
 *** DONE p22
@@ -488,7 +497,10 @@ correct.
     CLOSED: [2019-04-28 Sun 17:40]
 here, perhaps delete?
 
-*** TODO Stefan p24
+*** DONE p24
+    CLOSED: [2019-05-22 mer 19:30]
+    - CLOSING NOTE [2019-05-22 mer 19:30] \\
+      I added an example to clarify
 "except in the presence of higher-order functions, like reduce" I
 don't understand why higher-order function would lead to name
 conflicts under the described convention.

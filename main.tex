@@ -370,6 +370,8 @@ listed in parentheses.
     1995-11-24 & GNU Emacs 19.30\\
     & (Richard Stallman)\\[1ex]
     1996-05-25 & GNU Emacs 19.31\\
+    %% FIXME: I have the impression that Karl was not really considered as
+    %% the maintainer but rather the one who took care of making the release.
     & (Karl Heuer)\\[1ex]
     1996-08-21 & GNU Emacs 19.34\\
     & (Richard Stallman))\\[1ex]
@@ -390,15 +392,18 @@ listed in parentheses.
     2001-10-20 & GNU Emacs 21.1\\
     & (Gerd Möllmann)\\[1ex]
     2007-06-01 & GNU Emacs 22.1\\
-    & (Chong Yidong)\\[1ex]     %FIXME: That's definitely not right.
+    %% FIXME: That's definitely not right.  It was either still Gerd or else
+    %% it was Richard.
+    & (Chong Yidong)\\[1ex]
     2009-07-28 & GNU Emacs 23.1\\
-    & (Chong Yidong, Stefan Monnier)\\[1ex]
+    %% Chong and I started as maintainers in January 2008, AFAIK.
+    & (Richard Stallman)\\[1ex]
     2012-06-10 & GNU Emacs 24.1\\
     & (Chong Yidong, Stefan Monnier)\\[1ex]
     2016-09-17 & GNU Emacs 25.1\\
-    & (John Wiegley)\\[1ex]
+    & (John Wiegley, Eli Zaretskii)\\[1ex]
     2018-05-28 & GNU Emacs 26.1\\
-    & (John Wiegley)
+    & (John Wiegley, Eli Zaretskii)
   \end{longtabu}
 \end{center}
 
@@ -985,11 +990,17 @@ The way the \texttt{defadvice} macro gave access to function arguments did
 not work with lexical scoping; furthermore time had shown that most of the
 non-core features of \texttt{defadvice} were very seldom used, and even more
 seldom used properly.  So in late 2012 Stefan Monnier developed a new
-package \texttt{nadvice.el} that provides the same core features with
-a much simpler
-design.  Moreover, Stefan Monnier tried to make better use of existing
-language features.  The \texttt{nadvice} package was released as part
-of Emacs-24.4.
+package \texttt{nadvice.el} that provides the same core features with a much
+simpler design.  This simplification is mostly derived from better reuse of
+existing language features: for example the old advice system had special
+features to control whether a piece of advice should be compiled whereas in
+the new system there is no need for that because the body of pieces of
+advice is placed inside normal functions; similarly, the old advice system
+has special primitives to get access to the function's original argument,
+whereas in the new system, the function's original arguments are passed as
+normal arguments to the piece of advice and can hence be accessed without
+any special construct.  The \texttt{nadvice} package was released as part of
+Emacs-24.4.
 
 \subsection{I/O}
 
@@ -1158,8 +1169,9 @@ algorithm, and allocated objects by blocs of 4KB dedicated to a particular
 kind of objects: one bloc each for cons cells, floats, symbols, markers, and
 strings, all other objects were allocated directly with \texttt{malloc}.
 To avoid fragmentation in the bloc of strings, those were compacted during
-each GC.  The ``mark'' bit in each 32bit box was not used for the object
-contained in the 32bit box.  Instead it was used so that cons cells could
+each GC.  The ``mark'' bit in each 32bit box belonged to the object
+that contained this 32bit box rather than to the object referenced from
+this box.  More specifically it was used so that cons cells could
 occupy only 2 words: the extra bit needed to store the mark\&sweep's
 \emph{markbit} of each cons cell was stored in the ``mark'' bit of the first
 word (i.e. of the \texttt{car}).
@@ -1636,7 +1648,7 @@ MULE (Multi-Lingual Emacs).
 Previous versions of Emacs and XEmacs were inherently tied to an 8-bit
 representation of characters.  Moreover, they had used strings not
 only for representing text but also for representing key sequences.
-In strings, the high bit represented ``meta,'' basically restricting
+In strings, the 8$^{th}$ bit represented ``meta,'' basically restricting
 Emacs to ASCII.  Characters outside of strings could have more
 modifiers in higher bits.
 
@@ -1644,10 +1656,9 @@ This situation was no longer tenable when multi-language support came
 to XEmacs.  The work on MULE~\cite{Ohmaki2002} predates widespread
 adoption of Unicode, and at the time XEmacs adopted MULE (around
 1994), a number of other text encodings were still in use.  The MULE
-character representation encoded a character as an integer that
-represented two numbers, in the high and low bits respectively: One
-represented the national character set, the other the associated
-codepoint.
+character representation was based in ISO-2022 and encoded a character as an
+integer divided in two parts: One represented the national character set,
+the other the associated codepoint within that character set.
 
 To enforce the separation between characters and their associated
 encodings, XEmacs 20 made characters a separate data type.  XEmacs had
@@ -1810,19 +1821,29 @@ could (or, arguably, should) be.
 
 \subsection{Unicode}
 
-As Unicode~\cite{Unicode6} became universally adopted, Emacs and
-XEmacs both supported the standard.  Emacs 21.1 supported the
-\texttt{utf-8} coding-system, but it was not unified with other
-charsets.  In 2001, Emacs 22.1 introduced a form of unification
-between the Unicode charset and several other charsets.  XEmacs did
-the same in 2001 with release 21.4.
+As Unicode~\cite{Unicode6} became universally adopted, Emacs and XEmacs both
+supported the standard.  Emacs 21.1 added support for the \texttt{utf-8}
+coding-system, by adding it as another ``national'' character set.
+This meant that an ``é'' coming from a utf-8 file was considered a different
+character from an ``é'' coming from a latin-9 file.  This already
+existed before for example between latin-1 and latin-9 (and many other
+character sets), but during the transition to utf-8 many more users were
+using a mix of two coding-systems and were hence affected by this problem.
+For this reason, in 2001, Emacs 22.1 introduced a limited form of
+unification between character sets.  XEmacs did the same in 2001 with
+release 21.4.
 
 As Unicode evolved a universal text representation and supplanted many
-of the earlier encodings,, Emacs and XEmacs both started efforts to
+of the earlier encodings, Emacs and XEmacs both started efforts to
 replace the internal MULE representation by Unicode altogether.  This
 appeared in Emacs 23 (2007) and XEmacs 21.5 (starting about 2010 in a
 separate branch).  As a result, the integer representation of a
-character in both Emacs and XEmacs is its Unicode scalar value.
+character in both Emacs and XEmacs is now its Unicode scalar value.
+
+%% FIXME: We should talk about string representations and
+%% unibyte-vs-multibyte issues (e.g. whether "\351" should be a string
+%% containing the *character* #o351 (i.e. "é") or the string containing the
+%% *byte* #o351.
 
 \subsection{Bignums}
 
@@ -2016,7 +2037,7 @@ systems (Section~\ref{sec:module-system}).
 \subsection{Lexical scoping}
 \label{sec:lexical-scoping}
 
-When the Richard Stallman started working on \Elisp, lexical scoping
+When Richard Stallman started working on \Elisp, lexical scoping
 was becoming the established standard in the Lisp family in both
 Common Lisp and Scheme.  So of course, the question of adding lexical
 scoping to \Elisp{} has been brought up many times.
@@ -2037,24 +2058,37 @@ scoping was really beneficial.
 
 Dynamic scoping had two main drawbacks in practice:
 \begin{itemize}
-\item The lack of closures.  Some packages circumvented the lack of closures
+\item The lack of closures.
+  Some packages circumvented the lack of closures
   by building lambda expressions on the fly with constructs like
   \texttt{`(lambda (x) (+ x ',y))}, which suffered from various problems
   such as the fact that macros within that closure were expanded late, and
   its code was not seen by the byte-compiler.  Emacs-23.1 introduced the
   curry operator \texttt{apply-partially} to cover similar use cases without
-  those drawbacks.
+  those drawbacks.  In all cases, the programmer had to manually specify
+  which variables to capture from the environment, with very little help
+  from the tools to detect errors in this respect.
 \item The global visibility of variable names, requiring more care with the
   choice of local names.  The convention followed in Emacs to name all
   global variables with a package-specific prefix works well to avoid name
-  conflicts, except in the presence of higher-order functions, like
-  \texttt{reduce}, and it was also problematic in a few other cases such as
-  in the byte-compiler: in order to emit warnings about the use of
-  undeclared variables, the byte-compiler just tested whether that variable
-  was already known to Emacs, which always returned true for those variables
-  locally bound by one of the functions on the call stack, such as the
-  functions in the byte-compiler itself.  So some code was made uglier with
-  long local variable names in order not to interfere with other local
+  conflicts: it not only avoids conflicts between global variables, but also
+  between local variable and global variables since local variables do not
+  have such a prefix.  The only remaining possible conflicts occur between
+  local variables of different functions.  In Elisp these tend to happen only
+  in the presence of higher-order functions.  For example in code such as:
+\begin{verbatim}
+  (let ((lst (some-list)))
+    (cl-every (lambda (x) (memq x lst)) elements))
+\end{verbatim}
+  where a name conflict occurs if \texttt{cl-every} happens to bind a local
+  variable \texttt{lst} before calling its first argument.  Name conflicts
+  were also problematic in one other special case, the byte-compiler: in
+  order to emit warnings about the use of undeclared variables, the
+  byte-compiler just tested whether that variable was already known to
+  Emacs, which always returned true for those variables locally bound by one
+  of the functions on the call stack, such as the functions in the
+  byte-compiler itself.  So some code in the byte-compiler was made uglier
+  with long local variable names in order not to interfere with other local
   bindings.  Worse: these ``solutions'' were never really complete.
 \end{itemize}
 %%
@@ -2087,15 +2121,15 @@ was to facilitate moving \Elisp{} code to Scheme eventually, but the
 overall project was too large to ever be realized.
 
 Around 2002, Miles Bader started working on a branch of Emacs with support
-for lexical scoping.  His approach to the problem was to
-have two languages: an \Elisp{} with dynamic scope and another with lexical
-scope.  Each file was tagged to indicate which language was to be used, and
-in turn, each function was tagged with which language it was using, so
-functions using dynamic scope could seamlessly call functions with lexical
-scope and vice versa.  This way, old code would keep working exactly as
-before and any new code that wanted to benefit from lexical scoping would
-simply have to add the corresponding ``\texttt{-*- lexical-binding:t -*-}''
-at the beginning of the file.
+for lexical scoping.  His approach to the problem was to have two languages:
+an \Elisp{} with dynamic scope and another with lexical scope.  Each file
+was tagged to indicate which language was to be used, and in turn, each
+function value was tagged with the language it was using, so functions
+using dynamic scope could seamlessly call functions with lexical scope and
+vice versa.  This way, old code would keep working exactly as before and any
+new code that wanted to benefit from lexical scoping would simply have to
+add the corresponding ``\texttt{-*- lexical-binding:t -*-}'' at the
+beginning of the file.
 
 The two languages were sufficiently similar that the new lexically scoped
 variant only required minor changes to the existing interpreter.  But the
