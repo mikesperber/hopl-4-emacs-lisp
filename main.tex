@@ -2032,6 +2032,7 @@ Common Lisp compatibility
 (Section~\ref{sec:inline-functions}) and various attempts at module
 systems (Section~\ref{sec:module-system}).
 
+None of those have found their way into XEmacs so far.
 %% FIXME: Section overview
 
 \subsection{Lexical scoping}
@@ -2094,7 +2095,8 @@ Dynamic scoping had two main drawbacks in practice:
 %%
 The only fully satisfactory solution to the desire for lexical scoping in
 \Elisp{} was that it should be the scoping used by default by all binding
-constructs, as is the case in Common Lisp.  But at the same time, there was
+constructs, with an easy way to request dynamic binding for some
+variables, as is the case in Common Lisp.  But at the same time, there was
 a non-negotiable need to preserve compatibility with existing \Elisp{} code,
 although some limited breakage for rare situations could be tolerated.
 
@@ -2120,34 +2122,39 @@ mechanically convert \Elisp{} packages to a lexically scoped version of
 was to facilitate moving \Elisp{} code to Scheme eventually, but the
 overall project was too large to ever be realized.
 
-Around 2002, Miles Bader started working on a branch of Emacs with support
-for lexical scoping.  His approach to the problem was to have two languages:
-an \Elisp{} with dynamic scope and another with lexical scope.  Each file
-was tagged to indicate which language was to be used, and in turn, each
-function value was tagged with the language it was using, so functions
-using dynamic scope could seamlessly call functions with lexical scope and
-vice versa.  This way, old code would keep working exactly as before and any
-new code that wanted to benefit from lexical scoping would simply have to
-add the corresponding ``\texttt{-*- lexical-binding:t -*-}'' at the
-beginning of the file.
+Around 2002, Miles Bader started working on a branch of Emacs called
+\emph{lexbind} with support for lexical scoping, which was finally included
+in Emacs-24.1.  The solution he adopted was to have two languages: an
+\Elisp{} with dynamic scope for backward compatibility, and another with
+scoping rules like those of Common Lisp, i.e.~lexical scope by default
+except for those variables that have been declared as dynamically scoped (in
+practice, these are all the global variables).  Each file is tagged to
+indicate which language is to be used (defaulting to the backward compatible
+mode), and in turn, each function value is tagged with the language it is
+using, so functions using dynamic scope can seamlessly call functions with
+lexical scope and vice versa.  This way, old code keeps working exactly
+as before and any new code that wants to benefit from lexical scoping
+simply has to add the corresponding ``\texttt{-*- lexical-binding:t -*-}''
+annotation at the beginning of the file.
 
 The two languages were sufficiently similar that the new lexically scoped
 variant only required minor changes to the existing interpreter.  But the
 changes needed to support this new language in the byte-compiler were more
-problematic, causing progress on this branch to be slow.
-This branch was kept up-to-date with the main Emacs
-development but the work was never completed.
+problematic, causing progress on this branch to be slow.  This branch was
+kept up-to-date with the main Emacs development but the modifications to the
+byte-compiler were never completed.
 
-It was only in 2010 that Stefan Monnier's student Igor Kuzmin
-worked on a summer project in which he tried to solve the problem
-differently: instead of directly adding support for lexical scoping and
-closures to the single-pass byte-compiler code (which required significant
-changes to the code), the idea was to implement a separate pass to perform
-closure conversion as a pre-processing step.  This freed the closure
-conversion from the constraints imposed by the design of the single-pass
-byte-compiler, making it much easier to implement, and it also significantly
-reduced the amount of changes needed in the byte-compiler, thus reducing the
-risk of introducing regressions.
+Finally in 2010 Igor Kuzmin worked on a summer project under the direction
+of Stefan Monnier, in which he tried to solve the problem differently:
+instead of directly adding support for lexical scoping and closures to the
+single-pass byte-compiler code (which required significant changes to the
+code and was made more complex by the need to fit into a single pass), he
+implemented a separate pass (itself split into two passes) to perform
+a traditional closure conversion as a pre-processing step.  This freed the
+closure conversion from the constraints imposed by the design of the
+single-pass byte-compiler, making it much easier to implement, and it also
+significantly reduced the amount of changes needed in the byte-compiler,
+thus reducing the risk of introducing regressions.
 
 Two years later, Emacs-24.1 was released with support for lexical
 scoping based on Miles Bader's \emph{lexbind} branch combined with Igor's
@@ -2155,15 +2162,15 @@ closure conversion.  The main focus at that point was to:
 \begin{itemize}
 \item minimize the changes to the existing code to limit incompatibility
   with existing \Elisp{} packages;
-\item make sure performance of existing code was not affected by the
-  new feature;
+\item make sure performance of existing code was not measurably affected by
+  the new feature;
 \item provide reliable support for the new lexical scoping mode, though not
   necessarily with the best performance.
 \end{itemize}
 %%
 Changes to the byte code were introduced as part of the lexical scoping
 feature that appeared in 2012 in Emacs-24.1, but were actually developed
-much earlier, probably around 2003.  Until the introduction of
+much earlier, probably around 2003: until the introduction of
 lexical-scoping, the stack-based byte-code only used its stack in the most
 simple way, and did not include any stack operation beyond
 \texttt{pop}/\texttt{dup}/\texttt{exch}, so to better support lexical
@@ -2181,6 +2188,21 @@ So in Emacs-24.4, new byte codes were introduced and
 the byte-code compiler was modified to be able to make use of them.  Nowadays,
 code compiled using lexical scoping is generally expected to be marginally
 faster than if compiled with dynamic scoping.
+
+The introduction of lexical-binding in Emacs-24.1 went very smoothly,
+causing very few backward incompatible changes for users, in part because
+very few of Emacs's own files made use of it.  Converting existing code to
+use the new language is usually easy (consisting mainly in adding a few
+variable declarations, with the help of warnings from the byte-compiler) but
+is not automated and can sometimes require a non-trivial effort for packages
+which make heavy or creative use of dynamic scoping.  Nowadays, most new
+packages choose to use the new lexically scoped language, and about half the
+well-maintained packages have converted to it, but there is still a large
+amount of code using the old language, either because they still want to
+support Emacsen older than Emacs-24.1, or because of the effort needed to
+convert.  For example, as of Emacs-26, only a third of Emacs's own Lisp code
+has been converted to use lexical-binding.
+
 
 \subsection{Eager macro-expansion} %Emacs-24.3?
 \label{sec:eager-macro-expansion}
@@ -2257,7 +2279,7 @@ efficient handling of locally defined functions, but \texttt{pcase.el} was
 improved to follow some of the design of Racket's \texttt{match}.
 The new version appeared in Emacs-25.1 and the main resulting novelty was the
 introduction of \texttt{pcase-defmacro} which can define new patterns
-in a modular way, often using the new low-level pattern \texttt{app}.
+in a modular way. %% often using the new low-level pattern \texttt{app}.
 
 \subsection{CL-lib}          %Released in Emacs-24.3
 \label{sec:cl-clib}
@@ -2358,7 +2380,11 @@ which provides the same facilities but with names which all use the
 facilities under its own namespace, leaving \Elisp{} free to evolve in its
 own way.
 
-On that occasion, some details of \texttt{cl.el}'s implementation were
+The implementation of \texttt{cl-lib} mostly just took \texttt{cl.el} and
+added the \texttt{cl-} prefix to its definitions while at the same time a new
+\texttt{cl.el} was implemented which is just a very thin wrapper
+re-exporting the \texttt{cl-lib} definitions under their old names.
+Yet, some details of \texttt{cl.el}'s implementation were also
 reworked to be less invasive.  The main aspect was that \texttt{cl.el}
 redefined Emacs's macro-expansion wholesale with its own implementation,
 which incorporated support for \texttt{lexical-let}, \texttt{flet}, and
@@ -2371,6 +2397,11 @@ released at the same time as Emacs-24.3.  Despite the annoyance of having to
 use a \texttt{cl-} prefix, which caused some resistance to this new library,
 the change has been surprisingly successful if we look at the proportion of
 new packages which use \texttt{cl-lib.el} instead of \texttt{cl.el}.
+
+Nowadays, both \texttt{cl-lib.el} and \texttt{cl.el} are bundled with Emacs
+and supported, but \texttt{cl.el} is not used by Emacs's own Lisp code,
+except for a very few exceptions, and it is expected to be declared obsolete
+in some future version.
 
 \subsection{Generalized variables} %Released in Emacs-24.3
 \label{sec:generalized-variables}

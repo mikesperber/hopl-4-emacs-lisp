@@ -505,7 +505,12 @@ here, perhaps delete?
 don't understand why higher-order function would lead to name
 conflicts under the described convention.
 
-*** TODO Stefan p25
+*** DONE p25
+    CLOSED: [2019-05-22 mer 22:47]
+    - CLOSING NOTE [2019-05-22 mer 22:47] \\
+      It was explained, but I guess it was not clear that Miles Bader's approach
+      is the one we use, so I reworked the wording to make it more clear.  I also
+      added a paragraph discussing how the new feature was accepted.
 I take it that in the current version lexical scope is the default,
 but that dynamic scope is still possible. You should say something
 about how this is achieved. You should also say how backward
@@ -515,7 +520,10 @@ How smoothly did the introduction of lexical scope go?
 
 Has lexical scoping made its way into XEmacs?
 
-*** TODO Stefan p26
+*** DONE p26
+    CLOSED: [2019-05-22 mer 22:51]
+    - CLOSING NOTE [2019-05-22 mer 22:51] \\
+      I just removed it
 "often using the new low-level pattern app". I have no idea
 what this means. Explain or omit.
 
