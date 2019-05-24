@@ -974,30 +974,53 @@ I think there are quite a few lessons for language developers here.   It may be 
 *** TODO - p14 I like the anecdote about GC pauses!
 *** TODO - p16 "show a an" -> "show an"
 *** TODO - p17 "affect function calls" what does this mean?  Are you referring to inlining?
-*** TODO - p17 "costly. but" -> "costly. But"
-*** TODO - p17 "used globally" what does this mean? (again later in the page)
-*** TODO - p17 "it focuses" what focuses?
-*** TODO - p18 "Lucid Emacs of Lucid Emacs" -> "Lucid Emacs"
-*** TODO - p19 "Characters outside of strings" can you elaborate?
-*** TODO - p19 "into running" -> "into a running"
-*** TODO - p19 "Richard Stallman refused to..." can you provide a reference?
-*** TODO - p20 "rewrite, " -> "rewrite"
-*** TODO - p21 "evolved" -> "evolved,"
-*** TODO - p21 ",," -> ","
-*** TODO - p22 "set variable" -> "set a variable"
-*** TODO - p23 "Emacs-26.1" -> "Emacs-26.1,"
-*** TODO - p27 "efficiency cost" -> "overhead"
-*** TODO - p28 "NIH" -> "Not invented here"
-*** TODO - p30 "only it was" -> "only was it"
-*** TODO - p30 "machinery, required" -> "machinery required"
-*** TODO - p30 "to explore interactively" -> "to interactively explore"
-*** TODO - p31 "already in Emacs-16.56 Emacs" -> "by Emacs-16.56, Emacs"
-*** TODO - p31 "all of existing" -> "all existing"
-*** TODO - p31 "it the" -> "it, the"
-*** TODO - p32 "This result" -> "The result"
-*** TODO - p33 latex problem with one use of <pkg> (forgot to protect < and >)
-*** TODO - p35 "general the" -> "general, the"
-*** TODO - p35 "contributions of course" -> "contributions, of course"
+*** DONE - p17 "costly. but" -> "costly. But"
+    CLOSED: [2019-05-24 Fri 21:38]
+*** DONE - p17 "used globally" what does this mean? (again later in the page)
+    CLOSED: [2019-05-24 Fri 21:38]
+*** DONE - p17 "it focuses" what focuses?
+    CLOSED: [2019-05-24 Fri 21:37]
+*** DONE - p18 "Lucid Emacs of Lucid Emacs" -> "Lucid Emacs"
+    CLOSED: [2019-05-24 Fri 21:35]
+*** DONE - p19 "Characters outside of strings" can you elaborate?
+    CLOSED: [2019-05-24 Fri 21:36]
+*** DONE - p19 "into running" -> "into a running"
+    CLOSED: [2019-05-24 Fri 21:35]
+*** TODO Stefan - p19 "Richard Stallman refused to..." can you provide a reference?
+*** DONE - p20 "rewrite, " -> "rewrite"
+    CLOSED: [2019-05-24 Fri 21:34]
+*** DONE - p21 "evolved" -> "evolved,"
+    CLOSED: [2019-05-24 Fri 21:33]
+*** DONE - p21 ",," -> ","
+    CLOSED: [2019-05-24 Fri 21:34]
+*** DONE - p22 "set variable" -> "set a variable"
+    CLOSED: [2019-05-24 Fri 21:32]
+*** DONE - p23 "Emacs-26.1" -> "Emacs-26.1,"
+    CLOSED: [2019-05-24 Fri 21:31]
+*** DONE - p27 "efficiency cost" -> "overhead"
+    CLOSED: [2019-05-24 Fri 21:31]
+*** DONE - p28 "NIH" -> "Not invented here"
+    CLOSED: [2019-05-24 Fri 21:31]
+*** DONE - p30 "only it was" -> "only was it"
+    CLOSED: [2019-05-24 Fri 21:30]
+*** DONE - p30 "machinery, required" -> "machinery required"
+    CLOSED: [2019-05-24 Fri 21:30]
+*** DONE - p30 "to explore interactively" -> "to interactively explore"
+    CLOSED: [2019-05-24 Fri 21:30]
+*** DONE - p31 "already in Emacs-16.56 Emacs" -> "by Emacs-16.56, Emacs"
+    CLOSED: [2019-05-24 Fri 21:30]
+*** DONE - p31 "all of existing" -> "all existing"
+    CLOSED: [2019-05-24 Fri 21:29]
+*** DONE - p31 "it the" -> "it, the"
+    CLOSED: [2019-05-24 Fri 21:29]
+*** DONE - p32 "This result" -> "The result"
+    CLOSED: [2019-05-24 Fri 21:27]
+*** DONE - p33 latex problem with one use of <pkg> (forgot to protect < and >)
+    CLOSED: [2019-05-24 Fri 21:27]
+*** DONE - p35 "general the" -> "general, the"
+    CLOSED: [2019-05-24 Fri 21:27]
+*** DONE - p35 "contributions of course" -> "contributions, of course"
+    CLOSED: [2019-05-24 Fri 21:27]
 
 * Questions
 ** Brent

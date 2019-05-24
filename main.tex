@@ -247,7 +247,7 @@ development of Emacs 19, among other things by hiring Joseph Arsenaux as
 a consultant, the required cooperation between Lucid and
 the Free Software Foundation soon broke down.  As a result, Lucid
 forked Emacs development, creating its own Emacs variant \emph{Lucid
-Emacs}.\footnote{The first release of Lucid Emacs, Lucid Emacs 19.0, came out in April,
+Emacs}.\footnote{The first release of Lucid Emacs, 19.0, came out in April,
 1992.}  Jamie Zawinski was the primary developer of Lucid Emacs.
 In 1994, Lucid went bankrupt.  Sun subsequently wanted to ship
 Lucid Emacs with their operating system, and ended up financing some
@@ -1552,15 +1552,15 @@ Burton's implementation by open-coding most common byte-codes instead, which
 avoided many C function calls, but it obtained comparable results most
 likely because Libjit is not very good at optimizing its code and C function
 calls aren't that costly.  But it did get to the point of being stable enough
-to be used globally.
+to handle all Emacs code by default.
 
 \subsubsection{Fourth attempt}
 In 2018, Tom Tromey took another stab at it, again using GNU Libjit.
-Compared to Lloyd, it focuses exclusively on code using lexical binding,
+Compared to Lloyd's JIT compiler, Tromey's focuses exclusively on code using lexical binding,
 which is likely to benefit more, and it implements additional optimizations
 by getting rid at compile-time of all the manipulation of the Lisp stack.
 In the best case it reaches a speed up factor of 3.5, which is not ideal,
-but is a bit more respectable.  It can be used globally but is still
+but is a bit more respectable.  It can be used on all Emacs code but is still
 a very naive JIT compiler which requires further work to try and avoid
 pathological behavior in some situations where the JIT compilation is
 performed too eagerly, leading to significant slowdowns.
@@ -1649,8 +1649,8 @@ Previous versions of Emacs and XEmacs were inherently tied to an 8-bit
 representation of characters.  Moreover, they had used strings not
 only for representing text but also for representing key sequences.
 In strings, the 8$^{th}$ bit represented ``meta,'' basically restricting
-Emacs to ASCII.  Characters outside of strings could have more
-modifiers in higher bits.
+Emacs to ASCII.  Character values could have more
+modifiers in higher bits than the characters stored in a string.
 
 This situation was no longer tenable when multi-language support came
 to XEmacs.  The work on MULE~\cite{Ohmaki2002} predates widespread
@@ -1679,7 +1679,7 @@ of \Elisp{}, as they had to be linked into the Emacs executable.
 Starting in 1998, J.\ Kean Johnston added facilities to XEmacs
 (released with version 21.2 in 1999), which allowed \Elisp{} code to
 build and dynamically load shared libraries (called \textit{modules})
-written in C into running editor and call the functions defined
+written in C into the running editor and call the functions defined
 therein.  Starting in 2002 with XEmacs 21.5.5, a number of such modules
 were distributed with XEmacs, among them bindings for existing C
 libraries such as Zlib, Ldap, PostgreSQL.
@@ -1774,7 +1774,7 @@ merged into the Emacs codebase by 1992.
 Also around 1992, during the early development of Emacs-19, the
 implementation of the byte-code interpreter was rewritten, and the
 result ended up in both in Emacs and XEmacs.
-As part of this rewrite, new object type for byte-compiled \Elisp{}
+As part of this rewrite new object type for byte-compiled \Elisp{}
 functions was introduced; before that, a byte-compiled function looked
 like:
 %%
@@ -1833,7 +1833,7 @@ For this reason, in 2001, Emacs 22.1 introduced a limited form of
 unification between character sets.  XEmacs did the same in 2001 with
 release 21.4.
 
-As Unicode evolved a universal text representation and supplanted many
+As Unicode became a universal text representation and supplanted many
 of the earlier encodings, Emacs and XEmacs both started efforts to
 replace the internal MULE representation by Unicode altogether.  This
 appeared in Emacs 23 (2007) and XEmacs 21.5 (starting about 2010 in a
@@ -1980,7 +1980,7 @@ A specifier's value (its \emph{instance}) depends on its
 \emph{locale}, which can be buffer, a window, a frame, a device, or a MULE
 character set, or certain properties of these.
 
-Emacs-20 in 1998 added the ability to set variable to a frame-local
+Emacs-20 in 1998 added the ability to set a variable to a frame-local
 value.  Contrary to terminal-local variables, any variable can be made
 frame-local, and additionally, a variable can be both frame-local and
 buffer-local at the same time.
@@ -2003,7 +2003,7 @@ frame-local variables were not in widespread use and could easily be
 replaced by more traditional use of accessors to frame properties, making it
 hard to justify the extra complexity in the implementation.  So in 2012 with
 the release of Emacs-24.1, it became impossible to let-bind frame-local
-variables any more, and in 2018 with the release of Emacs-26.1 frame-local
+variables any more, and in 2018 with the release of Emacs-26.1, frame-local
 variables have been removed altogether.
 
 \section{Post-XEmacs}           % 2007-now ?
@@ -2316,8 +2316,8 @@ to have been part of the motivation:
   Richard disliked several aspects of Common Lisp's design, such as the use of
   keyword arguments, especially in low-level primitives like
   \texttt{mapcar}.
-\item Some aspects of Common Lisp's design can incur an important efficiency
-  cost, and Emacs already carried the stigma of \emph{eight megabytes and
+\item Some aspects of Common Lisp's design can incur 
+  significant overhead, and Emacs already carried the stigma of \emph{eight megabytes and
     constantly swapping}, so there were good reasons to try and not make
   \Elisp{}'s efficiency any worse.
 \item Keeping \Elisp{} small meant that users could participate in its
@@ -2451,7 +2451,7 @@ implementing the support for \texttt{setf} and friends in \Elisp{}, a fresh
 new implementation of the concept was used.  The reasons for this new
 implementation were:
 \begin{itemize}
-\item NIH syndrome: the existing code was hard to follow.
+\item ``not-invented-here syndrome'': the existing code was hard to follow.
 \item The previous code made use of internal helper functions from
   \texttt{cl.el} which we did not want to move to core \Elisp, so some
   significant massaging was needed anyway.
@@ -2620,7 +2620,7 @@ a much simpler mechanism.
 As for the second difference, it was made necessary by the need to dispatch
 on EIEIO objects even though \texttt{cl-generic.el} could not depend on
 EIEIO since it was not clean enough.  There were additional motivations for
-it, though: not only it was clearly desirable to be able to define new
+it, though: not only was it clearly desirable to be able to define new
 specializers, but it also made the implementation of the main specializers
 cleaner, and most importantly it seemed like an interesting problem
 to solve.
@@ -2635,7 +2635,7 @@ to solve.
 %% to \textsl{VAL}), after which we use this new specializer to implement the
 %% \texttt{eql} specializer.
 
-Existing code that could make use of this new machinery,
+Existing code that could make use of this new machinery
 required dispatching on contextual information
 (i.e.\ on the current state) rather than only on arguments.
 Consequently, \texttt{cl-generic.el} also adds support to its \texttt{cl-defmethod} for
@@ -2651,7 +2651,7 @@ elements, starting with types.  And to go along with that, the implementation
 of \texttt{cl-defstruct} was improved to better preserve information about
 the type hierarchy so that the on-line help system can be used to traverse
 it.  This started as an attempt to adapt to \texttt{cl-generic.el} the EIEIO
-facilities to explore interactively EIEIO objects and methods, but is more
+facilities to interactively explore EIEIO objects and methods, but is more
 modular and better integrated with the rest of Emacs's on-line help system.
 
 \subsection{Actual objects}  %Emacs-26.1
@@ -2696,8 +2696,8 @@ subset of \Elisp{}, because CPS conversion of forms like
 \Elisp{} is a fundamentally sequential language, and it relies very heavily
 on side-effects to a global state.  Yet, its use in an interactive program
 has inevitably lead to a desire for concurrency to try and improve
-responsiveness.  So concurrency appeared very early on: already in
-Emacs-16.56 Emacs included support for asynchronous processes, i.e.~the
+responsiveness.  Concurrency appeared very early on: since
+Emacs-16.56, Emacs has included support for asynchronous processes, i.e.~the
 execution of separate programs whose output was processed by so-called
 \emph{process filters} whenever the \Elisp{} execution engine is idly
 waiting for the next user command.
@@ -2944,7 +2944,7 @@ the language and kept an eye on the longer term, and on the other to the
 willingness to break backward compatibility in specific cases, in order to
 gradually address problems encountered over time.
 
-Like Lisp in general the development of Emacs has seen plenty of
+Like Lisp in general, the development of Emacs has seen plenty of
 discord, with unbridgeable personal differences, heated debates, and
 forks along the way.  However, througout these differences, \Elisp{}
 has steered a remarkably stable course of conservative development and
@@ -2969,7 +2969,7 @@ looking forward to the \Elisp{} of the next 30 years.
 \subsection{Acknowledgments}
 
 Emacs and \Elisp{} are the result of the contribution of an impressive
-number of individuals.  We thank them all for their contributions of course.
+number of individuals.  We thank them all for their contributions.
 With respect to this article, while the efforts put into maintaining the
 revision history of Emacs through the various revision systems it has used
 have been very helpful, we'd like to thank also Lars Brinkhoff for his
