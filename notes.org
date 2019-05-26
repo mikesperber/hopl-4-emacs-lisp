@@ -761,7 +761,8 @@ make the paper more accessible?
 
 SPECIFIC COMMENTS and ADVICE
 
-*** TODO - In scientific papers we often keep ourselves out of the story, as the
+*** DONE - In scientific papers we often keep ourselves out of the story, as the
+    CLOSED: [2019-05-26 Sun 17:43]
   scientist should be a independent observer. But that isn't the case for
   history. Please introduce yourselves at the beginning of the paper and lay
   out your connection to the material. This lets the reader better put this
