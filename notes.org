@@ -971,41 +971,70 @@ I have only two suggestions
 
 ### Summary
 
-*** TODO I think it might be helpful to provide a summary (before the conclusion), summarizing some of the key elements of the story and highlights of the journey, in the form of a high-level re-cap.
+*** TODO I think it might be helpful to provide a summary (before the conclusion), 
+
+summarizing some of the key elements of the story and highlights of
+the journey, in the form of a high-level re-cap.
 
 ### Lessons
 
 I think there are quite a few lessons for language developers here.   It may be worth drawing them out as such.   This could be done in-place, or it could be done by including a list of lessons in the summary section.   I am thinking here about lessons at all levels: open source software culture and how it affects the development and evolution of the language; the extent to which engineering pragmatics ultimately impact language design; the roles or personalities; the overall impact of the XEmacs split.   Etc.
 
-*** TODO - I liked your point (p11) about the chicken-and-eggs nature of the TOC problem.   I think this is a very common pattern in systems implementation.
+*** DONE - I liked your point (p11) about the chicken-and-eggs nature of the TOC problem.   I think this is a very common pattern in systems implementation.
+    CLOSED: [2019-05-26 Sun 17:40]
 
-*** TODO - Your comment (p21) about the limited impact of optimizations where the underlying byte-code interpreter is slow, is interesting and probably common to many language implementations.
+*** DONE - Your comment (p21) about the limited impact of optimizations where the underlying byte-code interpreter is slow, is interesting and probably common to many language implementations.
+    CLOSED: [2019-05-26 Sun 17:41]
 
 ### Minor
 
-*** TODO - It would help your reviewers if you could include line numbers on the page (a feature which comes with the latest style files).   This makes it very easy for us to precisely communicate references to the text.
-*** TODO - p5 "with a technical" -> "with technical"
-*** TODO - p5 "in the inclusion in Emacs of" this is awkward
-*** TODO - p5 "a Lisp-2" -> "a Lisp-2 language"
-*** TODO - p6 "Richard Stallman felt" it would be great if you could provide references to such comments (I understand that this may not be possible).
-*** TODO - p6 "With buffer-local" -> "Along with buffer-local"
-*** TODO - p6 "requires to relocate" -> "requires relocating"
-*** TODO - p7 "Emacs-27 the" -> "Emacs-27, the"
-*** TODO - p9 "used etc." -> "used, etc."
-*** TODO - p9 "instead because" -> "instead, because"
-*** TODO - p11 the comment connecting bootstrap with RCS -> CVS transition is interesting, but needs a little bit more information.   The reader may not understand that RCS required local operation, while CVS did not.   Its not clear why the necessary files could not be kept around in CVS, nor how the original bootstrap began (answer on next page---the interpreter).
-*** TODO - p12 "32bit" -> "32 bit" (systemic)
-*** TODO - p12 "mark&sweep" -> "mark and sweep" (systemic)
-*** TODO - p12 "heap size" this term is used widely to mean the size of the heap (how much memory is available to or consumed by the whole heap).   However, here you mean something like the heap footprint of a given object.   Sometimes in the GC literature, the word 'cell' is used to describe the space taken up by an object (inclusive of metadata etc).  systemic).
-*** TODO - p12 "where were the fields" -> "where the fields were"
-*** TODO - p13 "256MB" -> "256 MB" (use a thin space, eg \;) (systemic)
-*** TODO - p13 "3-word" -> "three-word"
-*** TODO - p13 "four: records" -> "four records:"
-*** TODO - p14 "hence pushing" -> "pushing"
-*** TODO - p14 "learly" -> "early"
-*** TODO - p14 I like the anecdote about GC pauses!
-*** TODO - p16 "show a an" -> "show an"
-*** TODO - p17 "affect function calls" what does this mean?  Are you referring to inlining?
+*** DONE - It would help your reviewers if you could include line numbers on the page (a feature which comes with the latest style files).   This makes it very easy for us to precisely communicate references to the text.
+    CLOSED: [2019-05-26 Sun 17:41]
+*** DONE - p5 "with a technical" -> "with technical"
+    CLOSED: [2019-05-26 Sun 17:39]
+*** DONE - p5 "in the inclusion in Emacs of" this is awkward
+    CLOSED: [2019-05-26 Sun 17:39]
+*** DONE - p5 "a Lisp-2" -> "a Lisp-2 language"
+    CLOSED: [2019-05-26 Sun 17:38]
+*** TODO Stefan - p6 "Richard Stallman felt" it would be great if you could provide references to such comments (I understand that this may not be possible).
+*** DONE - p6 "With buffer-local" -> "Along with buffer-local"
+    CLOSED: [2019-05-26 Sun 17:38]
+*** DONE - p6 "requires to relocate" -> "requires relocating"
+    CLOSED: [2019-05-26 Sun 17:38]
+*** DONE - p7 "Emacs-27 the" -> "Emacs-27, the"
+    CLOSED: [2019-05-26 Sun 17:38]
+*** DONE - p9 "used etc." -> "used, etc."
+    CLOSED: [2019-05-26 Sun 17:38]
+*** DONE - p9 "instead because" -> "instead, because"
+    CLOSED: [2019-05-26 Sun 17:37]
+*** TODO Stefan - p11 the comment connecting bootstrap with RCS -> CVS transition is interesting, but needs a little bit more information. 
+The reader may not understand that RCS required local operation, while
+CVS did not.  Its not clear why the necessary files could not be kept
+around in CVS, nor how the original bootstrap began (answer on next
+page---the interpreter).
+*** DONE - p12 "32bit" -> "32 bit" (systemic)
+    CLOSED: [2019-05-26 Sun 17:37]
+*** DONE - p12 "mark&sweep" -> "mark and sweep" (systemic)
+    CLOSED: [2019-05-26 Sun 17:13]
+*** DONE - p12 "heap size" this term is used widely to mean the size of the heap (how much memory is available to or consumed by the whole heap).   However, here you mean something like the heap footprint of a given object.   Sometimes in the GC literature, the word 'cell' is used to describe the space taken up by an object (inclusive of metadata etc).  systemic).
+    CLOSED: [2019-05-26 Sun 17:13]
+*** DONE - p12 "where were the fields" -> "where the fields were"
+    CLOSED: [2019-05-26 Sun 17:11]
+*** DONE - p13 "256MB" -> "256 MB" (use a thin space, eg \;) (systemic)
+    CLOSED: [2019-05-26 Sun 17:10]
+*** DONE - p13 "3-word" -> "three-word"
+    CLOSED: [2019-05-26 Sun 17:09]
+*** DONE - p13 "four: records" -> "four records:"
+    CLOSED: [2019-05-26 Sun 17:09]
+*** DONE - p14 "hence pushing" -> "pushing"
+    CLOSED: [2019-05-26 Sun 17:05]
+*** DONE - p14 "learly" -> "early"
+    CLOSED: [2019-05-26 Sun 17:05]
+*** DONE - p14 I like the anecdote about GC pauses!
+    CLOSED: [2019-05-26 Sun 17:05]
+*** DONE - p16 "show a an" -> "show an"
+    CLOSED: [2019-05-26 Sun 17:05]
+*** TODO Stefan - p17 "affect function calls" what does this mean?  Are you referring to inlining?
 *** DONE - p17 "costly. but" -> "costly. But"
     CLOSED: [2019-05-24 Fri 21:38]
 *** DONE - p17 "used globally" what does this mean? (again later in the page)

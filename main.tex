@@ -483,10 +483,10 @@ influence on the \Elisp{} language:
 \begin{itemize}
 \item The language should be accessible to a wide audience, so that as many
   people as possible can adapt Emacs to their own needs, without being
-  dependent on the availability of someone with a technical expertise.
-  This can be seen concretely in the inclusion in Emacs of the
+  dependent on the availability of someone with technical expertise.
+  An example for this is that the
   \emph{Introduction to Programming in Emacs Lisp}
-  tutorial~\citep{ElispIntro} targeting users with no programming
+  tutorial~\citep{ElispIntro} targets users with no programming
   experience.  This has been a strong motivation to keep \Elisp{} on the
   minimalist side and to resist incorporation of many Common Lisp features.
 \item It should be easy for the end-user to find the relevant code in order
@@ -497,7 +497,7 @@ influence on the \Elisp{} language:
   discouraged because it makes the code more opaque.
 \item Emacs should be easily portable to as many platforms as possible.
   This largely explains why \Elisp{} is still using a fairly naive
-  mark\&sweep garbage collector, and why its main execution engine is
+  mark-and-sweep garbage collector, and why its main execution engine is
   a simple byte-code interpreter.
 \end{itemize}
 
@@ -524,7 +524,7 @@ Symbols could be used to refer to variables.  In particular, the
 names (also symbols) to values.
 
 Like MacLisp, \Elisp{} was (and still is) a
-Lisp-2~\cite{SteeleGabriel1993}.  The namespaces for functions and
+Lisp-2 language~\cite{SteeleGabriel1993}.  The namespaces for functions and
 ``ordinary values'' are separate, and to call a function bound to a
 variable, a program must use \texttt{funcall}.  Also, symbols can be
 used as function values.
@@ -694,7 +694,7 @@ access to strings is fairly rare, so it works rather well, but it does
 impose a significant constraint: there is an indirection between the string
 object and the bytes it holds because the \texttt{aset} primitive which
 replaces one of the string's characters with another by side-effect will
-sometimes change the string's length in bytes, which requires to relocate
+sometimes change the string's length in bytes, which requires relocating
 the string's bytes elsewhere.
 
 %% FIXME Mike: While reading the whole document, this part seemed rather
@@ -756,7 +756,7 @@ introduction of the \texttt{pcase} macro where patterns can also use the
 backquote syntax and are commonly placed right after a parenthesis so they
 were otherwise mistaken for an old-style backquote syntax.
 
-Finally in 2018 during the development of Emacs-27 the
+Finally in 2018 during the development of Emacs-27, the
 old-style backquote syntax was removed.
 
 \subsection{Docstrings}
@@ -876,7 +876,7 @@ extension language of a text editor.  In Emacs, \emph{buffers} are objects
 that store the contents of a file while it's being edited.  In addition to
 the file's content, buffers store auxiliary information such
 as the name of the associated file, the rules to use to highlight its
-contents, the editing mode to use, the character encoding used etc.
+contents, the editing mode to use, the character encoding used, etc.
 Additionally, there is a global reference managed by Emacs called the
 \emph{current buffer}, that determines the implicit target of
 editing operations.
@@ -899,7 +899,7 @@ Variables can be both buffer-local and dynamically bound at the same time:
 \end{verbatim}
 This example will not return \texttt{"/home/rms/.emacs"} but the
 buffer-local value of \texttt{buffer-file-name} in the buffer
-\texttt{"some-other-buffer"} instead because \texttt{with-current-buffer}
+\texttt{"some-other-buffer"} instead, because \texttt{with-current-buffer}
 temporarily changes which buffer is current.
 
 The presence of buffer-local values significantly complicates the
@@ -1158,7 +1158,7 @@ CVS repository.
 \subsection{Data representation and memory management}
 \label{sec:data-representation}
 
-Emacs started with a data representation of its boxed data based on 32bit
+Emacs started with a data representation of its boxed data based on 32-bit
 words.  Those used a 7bit tag located in the most significant bits, 1 extra
 ``mark'' bit (see below), and 24bit of immediate data: either an integer or
 a pointer.  Not all the possible 128 tags were actually used, but the 24
@@ -1170,30 +1170,30 @@ algorithm, and allocated objects by blocs of 4KB dedicated to a particular
 kind of objects: one bloc each for cons cells, floats, symbols, markers, and
 strings, all other objects were allocated directly with \texttt{malloc}.
 To avoid fragmentation in the bloc of strings, those were compacted during
-each GC.  The ``mark'' bit in each 32bit box belonged to the object
-that contained this 32bit box rather than to the object referenced from
+each GC.  The ``mark'' bit in each 32-bit box belonged to the object
+that contained this 32-bit box rather than to the object referenced from
 this box.  More specifically it was used so that cons cells could
 occupy only 2 words: the extra bit needed to store the mark\&sweep's
 \emph{markbit} of each cons cell was stored in the ``mark'' bit of the first
 word (i.e. of the \texttt{car}).
 
-Over time, this tagging scheme became problematic, since it limited to 16 MB
-the size of the Lisp heap and to 8MB the size of files that could be edited.
+Over time, this tagging scheme became problematic, since it limited to 16\;MB
+the size of the Lisp heap and to 8\;MB the size of files that could be edited.
 The limit on file size is fundamentally linked to the maximum representable
 integer since that is how buffer positions are represented.
 
 So in 1995, with the release of Emacs-19.29,
 the scheme was tweaked so that the tag was reduced to
 3 bits, pushing the maximum file size to a more comfortable 128MB and the
-maximum heap size to 256MB.  To reduce the tag to 3 bits,
+maximum heap size to 256\;MB.  To reduce the tag to 3 bits,
 the types that received their own tag were ints, symbols, cons cells, and floats.
 The less important
 object types were placed into two groups: one group using the
 \texttt{Lisp\_Misc} tag and another using the \texttt{Lisp\_Vector}
 tag.
 
-The \texttt{Lisp\_Misc} tag was used for objects that could share the same
-heap size as Lisp markers (6 words), and hence be allocated from the same
+The \texttt{Lisp\_Misc} tag was used for objects that could occupy the same
+the same space as Lisp markers (6 words), and hence be allocated from the same
 4KB bloc  (Apart from markers, these were mostly various types of
 forwarding pointers.)  For some of those objects, it imposed a slight waste of space,
 which was justified by the fact that objects using the \texttt{Lisp\_Vector}
@@ -1212,7 +1212,7 @@ used the data representation of Emacs 19.30 with the release of XEmacs 19.13, al
 
 Until Emacs-21, the mark phase of the GC was precise: the global roots were
 explicitly registered, the GC knew all the types of Lisp objects and where
-were the fields that could contain references, and the roots from the stack
+the fields were that could contain references, and the roots from the stack
 were also explicitly registered into a singly linked list itself directly
 allocated on the stack.
 
@@ -1267,14 +1267,14 @@ also added \emph{ephemerons} to \Elisp{}~\cite{Hayes1997}.
 \subsection{Squeezing the tag bits}
 \label{sec:tag-bits}
 
-Of course, a limit of 256MB was not actually comfortable.
+Of course, a limit of 256\;MB was not actually comfortable.
 
 XEmacs added a ``minimal-tagbits'' configure option with the release
 of XEmacs 21.0 in 1998, yielding 31-bit integers and a 1GB maximum
 file size.  The mark bits moved to the object headers, which were also
-added to cons cells, making them 3-word objects.
+added to cons cells, making them three-word objects.
 The mark bit was removed from the boxes, and the number of
-type tags was reduced to four: records (heap-allocated objects,
+type tags was reduced to four records (heap-allocated objects,
 characters, even and odd fixnums.)  This became default with XEmacs
 21.2 in 2002.
 
@@ -1287,28 +1287,29 @@ stored alongside each bloc of cons cells, which required allocating those
 blocs on 4KB alignment boundaries.  This avoided the use of one extra word
 per cons cell just to store the markbit, as was done previously for floats.
 This same bitmap scheme
-was of course also used for floats, thus reducing the typical heap size of
-floats from 96 bits to 64 bits.  Reducing the heap size of floats to 64bits
+was of course also used for floats, thus reducing the typical memory footprint of
+floats from 96 bits to 64 bits.  Reducing the memory footprint of
+floats to 64 bits
 and avoiding the use of 3 words for cons cells was not just motivated by
 thriftiness but rather by the need to enforce that all objects be aligned on
 a multiple of 8, so as to free the least significant 3 bits for use as
 tag bits.
 
-At that point, there was no illusion that a maximum file size of 256MB was
+At that point, there was no illusion that a maximum file size of 256\;MB was
 sufficient, but at the same time, the design of Emacs made it basically
 impossible to view files larger than 4GB or edit files larger than 2GB (on
-a 32bit system) anyway, no matter which tagging scheme was used, so there was
+a 32-bit system) anyway, no matter which tagging scheme was used, so there was
 not a lot of room for improvement.
 
 In Emacs-23.2 the tagging scheme was tweaked to use 2 tags for integers,
-hence pushing the maximum file size to 512MB.
+pushing the maximum file size to 512\;MB.
 
 To cover the remaining space, a new compilation option
 \texttt{--with-wide-int} was introduced in Emacs-24.1 to make the boxed data
-use 64bit on 32bit systems.  This imposes a significant extra cost in terms
+use 64-bit on 32-bit systems.  This imposes a significant extra cost in terms
 of space and time but makes it possible to edit files up to about 2GB.
 When this compilation option is used, tag bits are placed in the most
-significant bits again, so that the 32bit of pointers can be extracted at no
+significant bits again, so that the 32-bit of pointers can be extracted at no
 cost at all.
 
 %% Mike: I find this of limited interest, as it doesn't really
@@ -1514,7 +1515,7 @@ part of Google's Summer of Code of 2012, and it was included in Emacs-24.3.
 The main advantage of this profiler compared to \texttt{elp.el} is that it
 does not require instrumentation, and it collects (partial) stack traces.
 This means that not only the user does not need to know beforehand which
-functions might be involved but it can show a an actual call tree.
+functions might be involved but it can show an actual call tree.
 
 \subsection{JIT compilation}
 \label{sec:jit}
