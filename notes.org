@@ -531,7 +531,11 @@ what this means. Explain or omit.
     CLOSED: [2019-04-28 Sun 17:44]
 "we" Perhaps change to third person?
 
-*** TODO Stefan p28
+*** DONE Stefan p28
+    CLOSED: [2019-05-25 sam 23:38]
+    - CLOSING NOTE [2019-05-25 sam 23:38] \\
+      Clarified the relationship between the two and added a sentence about future
+      plans and maintenance cost
 I take it that both cl.el and cl-lib.el are currently in use.
 Does this introduce any performance or maintenance issues?
 Are there plans to deprecate cl.el?
@@ -545,12 +549,18 @@ occurrences of "generalised reference" to "generalised variable".
     CLOSED: [2019-04-29 Mon 11:12]
 as an ..."
 
-*** TODO Stefan  "(VARS VALS STORE-VAR STORE-FORM ACCESS-FORM)" I don't follow this
+*** DONE Stefan  "(VARS VALS STORE-VAR STORE-FORM ACCESS-FORM)" I don't follow this
+    CLOSED: [2019-05-26 dim 00:04]
+    - CLOSING NOTE [2019-05-26 dim 00:04] \\
+      I added a paragraph which explains what each part of the tuple does
 explanation. How does STORE-VAR relate to VARS? The expansion of
 (push EXP PLACE) helps little unless the reader knows how push
 is defined. This paragraph should be rewritten with more explanation.
 
-*** TODO Stefan "NIH syndrome" That seems a different reason that "the existing
+*** DONE Stefan "NIH syndrome" That seems a different reason that "the existing
+    CLOSED: [2019-05-26 dim 00:06]
+    - CLOSING NOTE [2019-05-26 dim 00:06] \\
+      In my experience the two are closely linked, but I rewrote it to clarify
 code was hard to follow"!
 
 *** DONE "wanted to keep in cl.el" --> "did not want to move to Emacs"
@@ -559,15 +569,29 @@ code was hard to follow"!
 *** DONE "cl-lib" in italic --> "cl-lib.el" in tt foont
     CLOSED: [2019-04-29 Mon 11:21]
 
-*** TODO Stefan "a DO function of two arguments" Is this what is called
+*** DONE Stefan "a DO function of two arguments" Is this what is called
+    CLOSED: [2019-05-26 dim 00:13]
+    - CLOSING NOTE [2019-05-26 dim 00:13] \\
+      Indeed the "DO" was confusing.  I eliminated it and clarified the role of
+      gv-get-place-function along the way
 gv-get-place-function in the following example? Please rewrite
 to clarify.
 
-*** TODO Stefan p29
+*** DONE Stefan p29
+    CLOSED: [2019-05-26 dim 00:15]
+    - CLOSING NOTE [2019-05-26 dim 00:15] \\
+      OK, done
 Nothing is gained by giving two forms of the push example.
 Just give one or the other.
 
-*** TODO Stefan p29
+*** DONE Stefan p29
+    CLOSED: [2019-05-26 dim 00:17]
+    - CLOSING NOTE [2019-05-26 dim 00:17] \\
+      You don't directly get access to STORE-FUNCTION and ACCESS-FORM (it's only
+      provided to a callback which may be called any number of times and has to
+      return code which will be inserted within other code under the control of
+      the place), so yes, technically you can hack something up that will often
+      work, but it's definitely not "easy" nor robust.
 "the reverse is not true" Why can't you set
   (VARS VALS STORE-VAR STORE-FORM ACCESS-FORM)
 to
@@ -587,15 +611,23 @@ Common Lisp Object System.
     CLOSED: [2019-05-05 Sun 13:47]
 mention of CEDET in the previous paragraph.
 
-*** TODO p30
-
+*** DONE p30
+    CLOSED: [2019-05-26 dim 01:04]
+    - CLOSING NOTE [2019-05-26 dim 01:04] \\
+      I added a paragraph briefly explaining CLOS
 "supported specializers" I'm not familiar with CLOS, and I don't know
 what a specializer is. Please explain. Indeed, please rewrite the
 whole section assuming your reader is not familiar with CLOS.
 
-*** TODO “&context (EXP SPECIALIZER)” I'm completely lost here. Help!
-
-*** TODO Stefan Are the object facilities of both EIEIO and cl-generic.el currently in
+*** DONE “&context (EXP SPECIALIZER)” I'm completely lost here. Help!
+    CLOSED: [2019-05-26 dim 01:11]
+    - CLOSING NOTE [2019-05-26 dim 01:11] \\
+      I added a sentence explaining what this means
+*** DONE Stefan Are the object facilities of both EIEIO and cl-generic.el currently in
+    CLOSED: [2019-05-26 dim 01:26]
+    - CLOSING NOTE [2019-05-26 dim 01:26] \\
+      Added a paragraph explaining the relationship between the various parts and
+      their deprecation status
 use?  Does this introduce any performance or maintenance issues?  Are
 there plans to deprecate EIEIO?
 
@@ -986,7 +1018,10 @@ I think there are quite a few lessons for language developers here.   It may be 
     CLOSED: [2019-05-24 Fri 21:36]
 *** DONE - p19 "into running" -> "into a running"
     CLOSED: [2019-05-24 Fri 21:35]
-*** TODO Stefan - p19 "Richard Stallman refused to..." can you provide a reference?
+*** DONE Stefan - p19 "Richard Stallman refused to..." can you provide a reference?
+    CLOSED: [2019-05-26 dim 01:49]
+    - CLOSING NOTE [2019-05-26 dim 01:49] \\
+      I found a mailing-list post about it and added its URL
 *** DONE - p20 "rewrite, " -> "rewrite"
     CLOSED: [2019-05-24 Fri 21:34]
 *** DONE - p21 "evolved" -> "evolved,"

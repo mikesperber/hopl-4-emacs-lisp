@@ -29,6 +29,7 @@
 %% and much prefer "Elisp" which is also very widely used.
 \newcommand \Elisp {Emacs Lisp}
 \newcommand \MAlign [1] {\begin{array}{@{}l@{}}#1\end{array}}
+\newcommand \id[1] {\textrm{\textsl{#1}}}
 
 %% Document starts
 \begin{document}
@@ -1707,17 +1708,18 @@ this:
       (ffi-get result))
 \end{verbatim}
 
-Richard Stallman refused to incorporate XEmacs's FFI into Emacs for fear
+Richard Stallman refused to incorporate features like XEmacs's FFI into Emacs for fear
 that it would open up a backdoor with which developers would be able to
 legally circumvent the GNU General Public License (GPL) and thus link
-Emacs's own code with code that does not abide by these licensing terms.
+Emacs's own code with code that does not abide by these licensing terms~\cite{RMS03}.
+
 After many years of pressure on this issue (not just within the Emacs
 project, since this affected several other GNU projects, most notably GCC),
 a solution was agreed to, which was to implement an FFI that would only
-accept to load libraries that came with a special symbol attesting that this
+accept to load libraries that come with a special symbol attesting that this
 library is compatible with the GPL.  As a result, after a very long wait,
-2016 finally saw the release of Emacs-25.1 with an FFI comparable in
-functionality to that of XEmacs.  So far, we do not know of any publicly
+2016 finally saw the release of Emacs-25.1 with the ability to load external
+libraries, somewhat like XEmacs's FFI.  So far, we do not know of any publicly
 available package which makes use of this new functionality, sadly.
 But rumors indicate that it has been used in a few private projects, either
 to link Emacs with another language or to extend Emacs with ad-hoc
@@ -2399,9 +2401,12 @@ the change has been surprisingly successful if we look at the proportion of
 new packages which use \texttt{cl-lib.el} instead of \texttt{cl.el}.
 
 Nowadays, both \texttt{cl-lib.el} and \texttt{cl.el} are bundled with Emacs
-and supported, but \texttt{cl.el} is not used by Emacs's own Lisp code,
-except for a very few exceptions, and it is expected to be declared obsolete
-in some future version.
+and supported, but \texttt{cl.el} is not used by Emacs's own Lisp code any
+more, except for a very few exceptions, and it is expected to be declared
+obsolete in some future version.  But it's been very popular for many years,
+so it will take a long time before we can really retire it.  And this thin
+wrapper is sufficiently simple that it doesn't incur much cost either in
+terms of maintenance or performance.
 
 \subsection{Generalized variables} %Released in Emacs-24.3
 \label{sec:generalized-variables}
@@ -2418,28 +2423,39 @@ forms take generalized variables as operands---in particular,
 \texttt{setf}, which treats a generalized variable as a reference and
 sets its value.
 
-In Common Lisp, macros accepting a place can ask \texttt{get-setf-expansion}
+In Common Lisp, macros accepting a place can ask ``\texttt{get-setf-expansion}''
 to turn it into a list of five elements:
 \begin{displaymath}
-  (\textsl{VARS}~\textsl{VALS}~\textsl{STORE-VAR}~\textsl{STORE-FORM}
-  ~\textsl{ACCESS-FORM})
+  (\id{VARS}~\id{VALS}~\id{STORE-VAR}~\id{STORE-FORM}
+  ~\id{ACCESS-FORM})
 \end{displaymath}
-such that for example \texttt{(push \textrm{\textsl{EXP}} \textrm{\textsl{PLACE}})},
-which essentially expands into
+where \id{VARS} and \id{VALS} together form a list of bindings which perform
+the computation needed to reach the place and should be done only once
+(for reasons of performance or side-effects); \id{ACCESS-FORM} lets you then
+read the current value of the place; and \id{STORE-VAR} and \id{STORE-FORM}
+specify how to \emph{set} the place (by binding \id{STORE-VAR} to the
+desired value and then executing \id{STORE-FORM}).
+
+For example the macro \texttt{(push \id{EXP} \id{PLACE})}, which adds
+\id{EXP} to the head of the list stored in \id{PLACE}, could be defined to
+expand to:
 %
 \begin{center}
-\texttt{(setf \textrm{\textsl{PLACE}} (cons \textrm{\textsl{EXP}} \textrm{\textsl{PLACE}}))}
+\texttt{(setf \id{PLACE} (cons \id{EXP} \id{PLACE}))}
 \end{center}
 %
-turns into:
+But that would duplicate \id{PLACE} which could perform a costly operation
+and have side-effects.  So the macro instead uses
+``\texttt{get-setf-expansion}'' in order to expand to code of the following
+form:
 \begin{displaymath}
   \MAlign{
-    \texttt{(let ((v \textrm{\textsl{EXP}}))} \\
+    \texttt{(let ((v \id{EXP}))} \\
     \;\;\;\MAlign{
-      \texttt{(let* (\textrm{\textsl{VARS}} = \textrm{\textsl{VALS}})} \\
+      \texttt{(let* (\id{VARS} = \id{VALS})} \\
       \;\;\;\MAlign{
-        \texttt{(let ((\textrm{\textsl{STORE-VAR}} (cons v \textrm{\textsl{ACCESS-FORM}})))} \\
-        \;\;\;\textrm{\textsl{STORE-FORM})))}}}}
+        \texttt{(let ((\id{STORE-VAR} (cons v \id{ACCESS-FORM})))} \\
+        \;\;\;\id{STORE-FORM}))}}}
 \end{displaymath}
 This imposes a fairly rigid structure which, while general enough to adapt
 to most needs, can be burdensome and leads to verbose code with a lot
@@ -2451,7 +2467,8 @@ implementing the support for \texttt{setf} and friends in \Elisp{}, a fresh
 new implementation of the concept was used.  The reasons for this new
 implementation were:
 \begin{itemize}
-\item ``not-invented-here syndrome'': the existing code was hard to follow.
+\item The implementor of \texttt{cl-lib} found the existing code was hard
+  to follow, arguably a case of ``not-invented-here syndrome''.
 \item The previous code made use of internal helper functions from
   \texttt{cl.el} which we did not want to move to core \Elisp, so some
   significant massaging was needed anyway.
@@ -2471,10 +2488,12 @@ implementation were:
 %% \end{itemize}
 %%
 So the reimplementation uses a different design: instead of a five element
-list, a \emph{place} maps to a single higher-order function.
-This higher-order function takes as its sole argument a \textsl{DO} function
-of two arguments, the \textsl{ACCESS-FORM} and the \textsl{STORE-FUNCTION}.
-For example, the \texttt{push} macro could be naively implemented as:
+list, the new function ``\texttt{gv-get-place-function}'' turns
+a \emph{place}  into a single higher-order function.
+This higher-order function takes as its sole argument a function
+of two arguments (the \textsl{ACCESS-FORM} and the \textsl{STORE-FUNCTION})
+which should return the code that we want to perform on the place.
+For example, the \texttt{push} macro could be implemented as:
 \begin{verbatim}
     (defmacro push (EXP PLACE)
       `(let ((x ,EXP))
@@ -2482,20 +2501,20 @@ For example, the \texttt{push} macro could be naively implemented as:
                    (lambda (ACCESS-FORM STORE-FUNCTION)
                      (funcall STORE-FUNCTION `(cons x ,ACCESS-FORM))))))
 \end{verbatim}
-instead, \Elisp{} provides a macro \texttt{gv-letplace} which lets us
-write the above as:
-\begin{verbatim}
-    (defmacro push (EXP PLACE)
-      `(let ((x ,EXP))
-         ,(gv-letplace (ACCESS-FORM STORE-FUNCTION) PLACE
-            (funcall STORE-FUNCTION `(cons x ,ACCESS-FORM)))))
-\end{verbatim}
+%% and this can be streamlined a bit with the use of the macro
+%% \texttt{gv-letplace} which lets us write the above as:
+%% \begin{verbatim}
+%%     (defmacro push (EXP PLACE)
+%%       `(let ((x ,EXP))
+%%          ,(gv-letplace (ACCESS-FORM STORE-FUNCTION) PLACE
+%%             (funcall STORE-FUNCTION `(cons x ,ACCESS-FORM)))))
+%% \end{verbatim}
 This design generally leads to cleaner and simpler code, and we can easily
 provide backward compatibility wrappers for most of Common Lisp's
 primitives.
 
 Any 5-tuple representation of a place can easily be turned into
-a corresponding higher-order function.  The reverse is not true, however, so
+its corresponding higher-order function.  The reverse is not true, however, so
 this design precludes compatibility with Common Lisp and
 \texttt{cl.el}'s \texttt{get-setf-expansion}, which must produce the
 five values described above.
@@ -2556,11 +2575,26 @@ an object system in Emacs, first following a model like that of C++, but
 very soon switching to a CLOS-inspired model.
 
 EIEIO is an implementation of a subset of CLOS, the Common Lisp Object
-System~\cite{DeMichielGabriel1987}.  Its development was mostly
+System~\cite{DeMichielGabriel1987}.  CLOS is a somewhat unusual object
+system where methods are not attached to objects or classes; instead, it
+provides the notion of \emph{generic function} which are functions
+implemented by a set of methods where each method indicates when it is
+applicable by annotating its arguments with a \emph{specializer} which is
+usually a type indicating that this method is applicable only if this
+argument belongs to this type.  This type-based dispatch is not limited to
+the first argument but can be applied to any number of arguments, a feature
+called \emph{multiple-dispatch}.  Furthermore, when several methods can be
+applied, the programmer can control how the methods are \emph{combined}, for
+example by adding \emph{qualifiers} (like \texttt{:after}, or
+\texttt{:before}).  Beside generic functions, CLOS also provides the
+\texttt{defclass} macro to define new types by listing their parents,
+fields, and various other properties.
+
+The development of EIEIO was mostly
 driven by actual needs more than as an end in itself: the original
 motivation was to try and play with an object request broker, then a widget
 toolkit, and later switched to providing support for the CEDET
-package, a package providing IDE-like features.
+package, a package providing IDE-like features~\cite{Ludlam18}.
 It included support for most of CLOS's \texttt{defclass}, as well as support
 for a subset of \texttt{defmethod}, more specifically it was limited to
 single-dispatch methods, dispatching on the first argument, and it could
@@ -2603,10 +2637,17 @@ differences:
 \begin{enumerate}
 \item Method combinations cannot be specified per method like in CLOS, but
   instead new method combinations can be added globally by adding
-  appropriate methods to \texttt{cl-\linebreak[0]generic-\linebreak[0]combine-\linebreak[0]methods}.  This seemed
-  like a good idea, but there is no known user of this feature at this time,
-  not even internal.
-\item The set of supported specializers is not hard-coded.  Instead, they
+  appropriate methods to
+  \texttt{cl-\linebreak[0]generic-\linebreak[0]combine-\linebreak[0]methods}.
+  This seemed like a good idea, but there is no known user of this feature
+  at this time, not even internal.
+\item The set of supported specializers is not hard-coded.  In CLOS,
+  a method indicates for which kind of arguments it should be applicable by
+  annotating the argument with a \emph{specializer} which can be
+  either a type (indicating the this method applies when the argument is of
+  this type) or of the form \texttt{(eql \id{VAL})}, indicating that the
+  method only applies when the argument is equal to \id{VAL}.
+  \Elisp{} extends this so new specializers
   can be defined in a modular way via the notion of \emph{generalizer}
   inspired from~\cite{Rhodes14}.  This is used both internally (to define
   all the standard specializers) as well as in some external packages, most
@@ -2635,14 +2676,16 @@ to solve.
 %% to \textsl{VAL}), after which we use this new specializer to implement the
 %% \texttt{eql} specializer.
 
-Existing code that could make use of this new machinery
-required dispatching on contextual information
-(i.e.\ on the current state) rather than only on arguments.
-Consequently, \texttt{cl-generic.el} also adds support to its \texttt{cl-defmethod} for
-pseudo-arguments of the form ``\texttt{\&context (\textsl{EXP}
-  \textsl{SPECIALIZER})}''.  This is used for methods which are only
-applicable in specific contexts, such as in specific major modes or in
-frames using a particular kind of GUI.
+Some existing \Elisp{} functions appeared like good candidates to use that
+machinery to split them into independent methods but required dispatching
+on contextual information (i.e.\ on the current state) rather than only on
+arguments.  Consequently, \texttt{cl-generic.el} also adds support to its
+\texttt{cl-defmethod} for pseudo-arguments of the form ``\texttt{\&context
+  (\id{EXP} \id{SPECIALIZER})}'' which means that this method is
+applicable when \id{EXP} evaluates to a value that satisfies the
+\id{SPECIALIZER} constraint.  This is used for methods which
+are only applicable in specific contexts, such as in specific major modes or
+in frames using a particular kind of GUI.
 
 The implementation of \texttt{cl-generic.el} was accompanied by an extension
 of the on-line help system so as to be able to give information not just
@@ -2653,6 +2696,23 @@ the type hierarchy so that the on-line help system can be used to traverse
 it.  This started as an attempt to adapt to \texttt{cl-generic.el} the EIEIO
 facilities to interactively explore EIEIO objects and methods, but is more
 modular and better integrated with the rest of Emacs's on-line help system.
+
+As of Emacs-26, object support in \Elisp{} is hence split into 4 parts: the
+old \texttt{cl-defstruct} provided by \texttt{cl-lib.el} which allows
+defining new object types and supports single-inheritance; \texttt{defclass}
+provided by EIEIO which offers similar functionality plus multiple
+inheritance and a few other benefits but at the cost of slower object
+creation and field accesses; \texttt{cl-defmethod} provided by
+\texttt{cl-generic.el} which allows defining methods and supports equally
+\texttt{cl-defstruct} objects and \texttt{defclass} objects; and finally
+\texttt{defmethod} which is the deprecated method definition of EIEIO which
+has been reimplemented as a wrapper on top of the new \texttt{cl-defmethod}
+(this backward compatibility library is deprecated and a bit less efficient
+than using \texttt{cl-defmethod} directly but still more efficient than its
+earlier implementation, and it's fully implemented using documented features
+of \texttt{cl-defmethod}, so it doesn't impose any performance or
+maintenance issue).  We will likely live with both \texttt{cl-defstruct} and
+\texttt{defclass} for the foreseeable future.
 
 \subsection{Actual objects}  %Emacs-26.1
 \label{sec:actual-objects}

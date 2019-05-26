@@ -1,0 +1,5 @@
+- Mention &quote args (removed in Emacs-17)
+- `cond` introduced in version 1.5
+- `function` introduced in 1.4 (compiler already existed at that point,
+  and async processes also, by the way)
+- macros added to 1.2
