@@ -1126,7 +1126,7 @@ This said, there were other objections to those patches:
   %% two issues need to be detangled in the sentence.
 \item The available implementations of TCO affect the behavior not only in
   terms of reducing the stack
-  allocation and increasing performance, but it would also eliminate some
+  allocation and increasing performance, but they also eliminate some
   activation frames from stack backtraces, which would be detrimental to
   debugging.  This is particularly true for tail-calls which are made to
   other functions, such as non-recursive tail-calls.
@@ -1137,13 +1137,16 @@ This said, there were other objections to those patches:
 
 Since the \Elisp{} compiler is itself written in \Elisp{}, it requires
 a form of bootstrap.  Until 2002 during the development of Emacs-21, Emacs's
-development was done using the revision control system RCS~\cite{Tichy85}, and
+development was done using the revision control system RCS~\cite{Tichy85},
+which did not support any form of remote access, so
 changes were installed by logging remotely into a machine owned by the
-Free Software Foundation and
+Free Software Foundation where the RCS files were kept, and
 performing the commits there.  This machine also kept the (last) compiled
 form of the \Elisp{} files and so naturally provided the needed compiled
 files for bootstrap.  When development moved to CVS~\cite{Berliner90} to ease
-collaboration between contributors, another solution was needed.
+collaboration between contributors, another solution was needed since
+storing those generated files in the CVS repository
+would have lead to never ending merge conflicts.
 
 Of course, since Emacs also comes with a simple direct \Elisp{} interpreter,
 bootstrapping is not very difficult, but several changes were needed

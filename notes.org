@@ -1285,6 +1285,30 @@ planning and execution of Energize?
 
 ** Richard Stallman
 
+*** When was GNU Emacs started?
+
+In some message you suggested it was started in Sep 1984, IIRC,
+based on Gosling Emacs.
+
+According to some reports, some time later Gosling sold Emacs to
+Unipress, and then a bit later, Unipress threatened you to stop using
+that code.
+So AFAIK the timeline looks like:
+- Sep 1984: start work on GNU Emacs based on Gosling Emacs
+- later Gosling sells his code to Unipress
+- later Unipress threatens you
+- then you rewrite the remaining pieces
+
+Yet, according to
+https://www.reddit.com/r/emacs/comments/bek5b2/til_emacs_was_originally_written_by_james_gosling/ 
+Unipress was already selling Gosling Emacs by Aug 1984.
+
+Can you clarify the timeline?  Was it that Unipress already had the right to
+sell Gosling Emacs but did not yet own the code?  Or is that reddit post
+just confused about something?
+
+Or that you actually started before Sep 1984?
+
 *** Why was lambda-as-a-macro only added so late?
 *** When was the byte-code compiler added?
 
