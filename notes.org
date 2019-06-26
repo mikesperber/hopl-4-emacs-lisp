@@ -1131,7 +1131,8 @@ History Museum, my experience is simply
 Here are things that maybe we'd like to know:
 - how was Emacs's development organized before Emacs-21
 
-** Guy Steele
+** DONE Guy Steele
+   CLOSED: [2019-06-26 Wed 10:13]
 
 "Guy Steele designed the original symmetrical Emacs command set; then
 he and I began implementing Emacs (on top of TECO), but after one long
