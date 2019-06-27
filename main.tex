@@ -181,20 +181,20 @@ Section~\ref{sec:conclusion}.
 \subsection{Emacs's early history}
 \label{sec:emacs-early-history}
 
-Emacs's original inception was as a set of macros and keybindings for
-the TECO editor.  TECO was written by Richard Stallman, then at the
-MIT AI lab, and featured a primitive programming
-language~\cite{Stallman2018-personal}.  TECO had a ``real-time edit
-mode'' (then a novelty), which updated the text being edited as typing
-happened.  This mode allowed mapping characters to commands, and users
-would typically configure TECO to bind printing characters to
-self-insert, and control chracters would execute TECO macros.  Guy
-Steele coordinated among the users, creating a common set of
-keybindings, which Richard Stallman evolved into the first version of
-Emacs~\cite{Seibel2009}.  Note that TECO and Emacs were not completely
-separate entities in the sense that TECO's extension language was also
-Emacs's extension language and that they evolved together, where
-TECO's extension language was regularly extended to provide facilities
+Emacs's original inception was as a set of macros and keybindings for the
+TECO editor.  TECO was originally written by Dan Murphy starting in
+1962~\cite{Murphy09}, then at the MIT AI lab, and featured a primitive
+programming language~\cite{Stallman2018-personal}.  In the mid-1970s Richard
+Stallman, then also at MIT, added to TECO a ``real-time edit mode'' (then
+a novelty), which updated the text being edited as typing happened.
+This mode allowed mapping characters to commands, and users would typically
+configure TECO to bind printing characters to self-insert, and control
+chracters would execute TECO macros.  Guy Steele coordinated among the
+users, creating a common set of keybindings, which Richard Stallman evolved
+into the first version of Emacs~\cite{Seibel2009}.  Note that TECO and Emacs
+were not completely separate entities in the sense that TECO's extension
+language was also Emacs's extension language and that they evolved together,
+where TECO's extension language was regularly extended to provide facilities
 then used by Emacs~\cite{Stallman2002}.
 
 This original Emacs grew popular in the lab and soon started to be
@@ -217,15 +217,15 @@ It featured an extension language called \emph{MLisp} or \emph{Mock Lisp},
 which bears visual resemblance to \Elisp{}, but was a lesser member of the
 Lisp family in the sense that it lacked \emph{cons} cells.
 
-Richard Stallman started Emacs as we know it today in 1984 by replacing the
-\emph{Mock Lisp} interpreter and data structures of \emph{Gosling Emacs}
+Richard Stallman started Emacs as we know it today in late 1984 by replacing
+the \emph{Mock Lisp} interpreter and data structures of \emph{Gosling Emacs}
 with an \Elisp{} interpreter, adapting internal data structures to those of
-this \Elisp{} interpreter.  When James Gosling later sold \emph{Gosling
-  Emacs} to UniPress which in turn threatened Richard Stallman to stop
-distributing his version of Emacs, it forced him to replace or rewrite the
-rest of Emacs's code as well, such as the code responsible for the
-redisplay.  It also motivated him to invent the GNU General Public License
-\cite{GPLHistory}, to try and ensure that users
+this \Elisp{} interpreter.  \emph{Gosling Emacs} was then distributed
+commercially by Unipress under the name \emph{Unipress Emacs}, and Unipress
+ordered Richard Stallman to stop distributing his version of Emacs, which
+forced him to replace or rewrite the rest of Emacs's code as well, such as
+the code responsible for the redisplay.  It also motivated him to invent the
+GNU General Public License \cite{GPLHistory}, to try and ensure that users
 of his code would never have to go through such an experience.
 
 \subsection{The great schism}
@@ -528,10 +528,10 @@ Symbols could be used to refer to variables.  In particular, the
 \emph{property list}, essentially a dictionary mapping property
 names (also symbols) to values.
 
-Like MacLisp, \Elisp{} was (and still is) a
-Lisp-2 language~\cite{SteeleGabriel1993}.  The namespaces for functions and
-``ordinary values'' are separate, and to call a function bound to a
-variable, a program must use \texttt{funcall}.  Also, symbols can be
+Like MacLisp, \Elisp{} was (and still is) a Lisp-2
+language~\cite{SteeleGabriel1993}, which means that the namespaces for
+functions and ``ordinary values'' are separate, and to call a function bound
+to a variable, a program must use \texttt{funcall}.  Also, symbols can be
 used as function values.
 
 Some specialized control structures were missing in the original
