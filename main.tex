@@ -21,6 +21,8 @@
 %%\setcopyright{usgovmixed}
 %%\setcopyright{cagov}
 %%\setcopyright{cagovmixed}
+\usepackage{natbib}
+\citestyle{acmauthoryear}
 
 %% Paper history
 \received{August 2018}
@@ -102,6 +104,10 @@
 
 \section{Introduction}
 
+Emacs is a text editor originally developed by Richard Stallman, who is also
+the founder of the Free Software Foundation (FSF) and who launched the GNU
+Project.
+
 \Elisp{} is the extension language of the Emacs text editor.
 In this sense, it is just a side-project of Emacs and might be overlooked as
 a programming language.  But Emacs itself comes with more than a million
@@ -110,10 +116,6 @@ Emacs in various Emacs Lisp Package Archives (ELPA).  If you additionally
 consider that the majority of Emacs users have likely written a few lines of
 \Elisp{} in their configuration file, it is arguably one of the most widely
 used dialects of Lisp.
-
-While in theory \Elisp{} exists independently from Emacs, its design,
-implementation, and history are inextricably linked to that of Emacs, so we
-include a short overview of the important events in Emacs's life.
 
 %% FIXME: I feel like we should add something here, but not sure what.
 
@@ -132,12 +134,12 @@ projects on the \Elisp{} implementation in Emacs.
 Most of his work was done from 1995 to 2003, when he was a research
 assistant at the University of Tübingen.  Apart from his own work on
 the XEmacs codebase, he supervised several student projects on the
-\Elisp{} implementation in XEmacs, and co-authored a paper on the
+\Elisp{} implementation in XEmacs, including a co-authored paper on the
 analysis of dynamic scope~\cite{Neubauer01}.
 
 \subsection{Organization}
 
-\Elisp{} has evolved in multiple strands and implementations over the
+\Elisp{} has evolved in several strands and implementations over the
 years, and thus its evolution did not happen along a single timeline.
 Moreover, some aspects evolved over long periods of time.  To avoid
 excessive interleaving of those aspects, we have organized the
@@ -145,12 +147,6 @@ top-level structure of the paper into chronological eras.  Within an
 era, as a new topic is introduced, we usually follow that topic
 chronologically to its conclusion, even if that means going beyond the
 era where it started.
-
-We trace the overall evolution of \Elisp{} in the software projects that
-implemented it.  Its predecessors EINE (1976) and Multics Emacs (1978) were
-themselves written in Lisp.  Unix Emacs (also known as Gosling Emacs), which
-appeared in 1981, was written in C but included its own Lisp-like language.
-We briefly describe those predecessors in Section~\ref{sec:prehistory}.
 
 Emacs as we know it today itself started in 1984.
 Section~\ref{sec:early-history} describes the driving motivation for
@@ -169,58 +165,67 @@ down, and we describe this post-XEmacs period in
 Section~\ref{sec:post-xemacs}.
 
 \Elisp{} was re-implemented in several other projects outside this
-successions.  We briefly touch upon those projects in
+succession.  We briefly touch upon those projects in
 Section~\ref{sec:alternative-implementations}.  Our conclusions are in
 Section~\ref{sec:conclusion}.
 
 \section{Emacs history}
 \label{sec:emacs-history}
 
-%% FIXME: What should we put here?
+While in theory \Elisp{} exists independently from Emacs, its design,
+implementation, and history are inextricably linked to that of Emacs, so we
+present here a short overview of the important events in Emacs's life.
 
 \subsection{Emacs's early history}
 \label{sec:emacs-early-history}
 
 Emacs's original inception was as a set of macros and keybindings for the
-TECO editor.  TECO was originally written by Dan Murphy starting in
+TECO text editor.  TECO was written by Dan Murphy starting in
 1962~\cite{Murphy09}, then at the MIT AI lab, and featured a primitive
 programming language~\cite{Stallman2018-personal}.  In the mid-1970s Richard
 Stallman, then also at MIT, added to TECO a ``real-time edit mode'' (then
-a novelty), which updated the text being edited as typing happened.
-This mode allowed mapping characters to commands, and users would typically
-configure TECO to bind printing characters to self-insert, and control
-chracters would execute TECO macros.  Guy Steele coordinated among the
-users, creating a common set of keybindings, which Richard Stallman evolved
-into the first version of Emacs~\cite{Seibel2009}.  Note that TECO and Emacs
-were not completely separate entities in the sense that TECO's extension
-language was also Emacs's extension language and that they evolved together,
-where TECO's extension language was regularly extended to provide facilities
-then used by Emacs~\cite{Stallman2002}.
+a novelty), which updated the display of the text being edited as typing
+happened.  This mode allowed mapping characters to little TECO programs, and
+users would typically configure TECO to bind printing characters to
+self-insert, and control characters to perform other tasks such as
+navigation to other parts of the text.  Guy Steele
+coordinated among the users, creating a common set of keybindings, which
+Richard Stallman evolved into the first version of Emacs~\cite{Seibel2009}.
+Note that TECO and Emacs were not completely separate entities in the sense
+that TECO's extension language was also Emacs's extension language and that
+they evolved together, where TECO's extension language was regularly
+extended to provide facilities then used by Emacs~\cite{Stallman2002}.
 
 This original Emacs grew popular in the lab and soon started to be
 reimplemented in various other systems.  Several of those incarnations of
-Emacs were written in Lisp, notably on the Lisp Machine (\emph{EINE} for
-``EINE Is Not EMACS'') by Dan Weinreb and in
-MacLisp~\cite{Moon1974,Pitman1983}, \emph{ZWEI} for ``ZWEI was EINE
-initially'' by Dan Weinreb and Mike McMahon~\cite{Weinreb1979}), and by
-Bernie Greenberg in 1978~\cite{Stallman2002}.  The ensuing possibilities
-offered by Lisp for extending the editor were attractive to Richard
-Stallman, who had worked on ZWEI~\cite{Stallman2018-personal} and decided to
-write a (for him) second version of Emacs which would use Lisp as its
-extension language like Greenberg's Multics Emacs, but would we written in
-C so as to be more widely available.
+Emacs were written in Lisp, notably \emph{EINE} (recursive acronym for
+``EINE Is Not Emacs'') on the Lisp Machine by Dan Weinreb, followed by
+\emph{ZWEI} (for ``ZWEI was EINE Initially'') by Dan Weinreb and Mike
+McMahon~\cite{Weinreb1979}), and \emph{Multics Emacs} by Bernie Greenberg in
+1978~\cite{Stallman2002} written in MacLisp~\cite{Moon1974,Pitman1983}.
+Given Lisp's dynamic nature, is was only natural that those systems used
+Lisp as their extension language.  Richard Stallman, who had worked on
+ZWEI~\cite{Stallman2018-personal}, liked the possibilities offered for
+extending the editor by having Lisp be both the extension language and the
+implementation language as well.  But high-performance Lisp compilers were not
+widely available, so he decided to write a (for him) second version of Emacs
+which would use Lisp as its extension language, like Greenberg's Multics
+Emacs, but where the implementation would be partly written in Lisp and
+partly in C (including buffer manipulation primitives, the redisplay code,
+and a Lisp interpreter) so as to be more widely available.
 
-\emph{Unix Emacs}, written in C by James Gosling in
-1980/1981~\cite{Gosling1981} and preserved in the history books as
-\emph{Gosling Emacs}, was the immediate predecessor of Emacs.
-It featured an extension language called \emph{MLisp} or \emph{Mock Lisp},
-which bears visual resemblance to \Elisp{}, but was a lesser member of the
-Lisp family in the sense that it lacked \emph{cons} cells.
+\emph{Unix Emacs}, written by James Gosling in 1980/1981~\cite{Gosling1981}
+and preserved in the history books as \emph{Gosling Emacs}, satisfied some
+of those design goals: it was implemented in C and it featured an extension
+language called \emph{MLisp} or \emph{Mock Lisp}, which bears visual
+resemblance to Lisp, but was a lesser member of the Lisp family in the
+sense that it lacked data structures like \emph{cons} cells and was
+generally too limited to be usable as an implementation language.
 
 Richard Stallman started Emacs as we know it today in late 1984 by replacing
 the \emph{Mock Lisp} interpreter and data structures of \emph{Gosling Emacs}
 with an \Elisp{} interpreter, adapting internal data structures to those of
-this \Elisp{} interpreter.  \emph{Gosling Emacs} was then distributed
+this \Elisp{} interpreter.  At that time, \emph{Gosling Emacs} was distributed
 commercially by Unipress under the name \emph{Unipress Emacs}, and Unipress
 ordered Richard Stallman to stop distributing his version of Emacs, which
 forced him to replace or rewrite the rest of Emacs's code as well, such as
@@ -263,23 +268,26 @@ change to the current \emph{XEmacs}.
 \subsection{Model of development}
 
 Emacs is a Free Software project, developed by a loosely connected
-%% FIXME: Not true at least for Gerd Möllman, maybe Joe?  Jim?
+%% FIXME: *mostly* but not completely (e.g. not true at least for Gerd Möllmann
+%% and Joe, probably others)
 set of volunteers doing it mostly in their spare time, and several of them
 do not consider themselves as computer professionals.  Development is not
 really organized, in the sense that volunteers work on what they find
 appealing rather than follow some agreed upon plan, and the overall
-direction of evolution is in effect controlled by the head maintainer(s)
-accepting or rejecting contributions, and via discussions in mailing-lists.
+direction of evolution is in effect controlled by the \emph{head
+maintainer(s)} by accepting or rejecting contributions, and via discussions in
+mailing-lists.
 
-Richard Stallman was the original maintainer and even though several other
-people have been official maintainers at various points in time, he always
-acted as a ``default maintainer'' when noone wanted to step up and has
-followed Emacs's development very closely even when he was not officially
-the maintainer.  Also, Richard Stallman being the founder of the Free
-Software Foundation (FSF), Emacs is part of the FSF's GNU project and is
-hence linked to the FSF by its use of FSF's resources to host the code and
-own the copyright.  The link with the FSF is of course particularly strong
-because of Richard's role in Emacs.
+Richard Stallman was the original maintainer and still participates: even
+though several other people have been official maintainers at various points
+in time, he always acted as a ``default maintainer'' when noone wanted to
+step up and he has followed Emacs's development very closely even when he
+was not officially the maintainer, contrary to most of the other programs he
+developed, such as \emph{gcc} and \emph{gdb}.  Also, Richard Stallman being
+the founder of the Free Software Foundation, Emacs is part of the FSF's GNU
+project and is hence linked to the FSF by its use of FSF's resources to host
+the code and own the copyright.  The link with the FSF is of course
+particularly strong because of Richard's role in Emacs.
 %% %% FIXME: Do we really care about those details?
 %% Joseph Arceneaux was the first to take over maintenance, not sure when it
 %% started, but he was maintainer in October 1990 when he started being
@@ -299,7 +307,7 @@ earned each other's respect by the weight of their past contributions and
 who can then make more or less any change to the code they like, and accept
 or reject external contributions, as long as nobody complains.  In case of
 disagreement between those core contributors the maintainer has the final
-word.  This structure probably appeared around 1991 and until 2000 was
+say.  This structure probably appeared around 1991 and until 2000 was
 embodied in the fact that the core contributors were members of a private
 \emph{emacs-core} mailing-list and were the only ones with direct access to
 the code.  Since late 2000, when the CVS server became public and the
@@ -327,6 +335,7 @@ For the time until 2007, the timeline in this section borrows much
 from Jamie Zawinski's timeline~\cite{JWZTimeline}.  Maintainers are
 listed in parentheses.
 
+%% FIXME: I think we should strive to make this fit on a single page!
 \begin{center}
   \begin{longtabu} to \textwidth {l|X|X}
     1985-03-20 & GNU Emacs 13.0 \\
@@ -376,9 +385,7 @@ listed in parentheses.
     1995-11-24 & GNU Emacs 19.30\\
     & (Richard Stallman)\\[1ex]
     1996-05-25 & GNU Emacs 19.31\\
-    %% FIXME: I have the impression that Karl was not really considered as
-    %% the maintainer but rather the one who took care of making the release.
-    & (Karl Heuer)\\[1ex]
+    & (Richard Stallman)\\[1ex]
     1996-08-21 & GNU Emacs 19.34\\
     & (Richard Stallman))\\[1ex]
     1997-02-09 && XEmacs 20.0\\
@@ -398,12 +405,10 @@ listed in parentheses.
     2001-10-20 & GNU Emacs 21.1\\
     & (Gerd Möllmann)\\[1ex]
     2007-06-01 & GNU Emacs 22.1\\
-    %% FIXME: That's definitely not right.  It was either still Gerd or else
-    %% it was Richard.
-    & (Chong Yidong)\\[1ex]
-    2009-07-28 & GNU Emacs 23.1\\
-    %% Chong and I started as maintainers in January 2008, AFAIK.
     & (Richard Stallman)\\[1ex]
+    2009-07-28 & GNU Emacs 23.1\\
+    %% Chong and I started as maintainers in February 2008.
+    & (Chong Yidong, Stefan Monnier)\\[1ex]
     2012-06-10 & GNU Emacs 24.1\\
     & (Chong Yidong, Stefan Monnier)\\[1ex]
     2016-09-17 & GNU Emacs 25.1\\
@@ -417,26 +422,27 @@ listed in parentheses.
 
 
 
-\section{Prehistory}
-\label{sec:prehistory}
+\section{Early history}         % -1992?
+\label{sec:early-history}
 
-%% FIXME: Explain&cite what was Maclisp.
-Arguably, the strongest influence for \Elisp{} was MacLisp.  The design of
-the editing primitives was influenced by Gosling Emacs's Mock Lisp.
+The design of \Elisp{} was based on the past experience with the extension
+language of TECO, ZWEI, Gosling Emacs, and Multics Emacs.
+Arguably, the strongest influence for the language itself was MacLisp while
+the design of the editing primitives was influenced by Gosling Emacs's
+Mock Lisp.
 
-\subsection{Gosling Emacs}
+\subsection{Mock Lisp}
 
-\emph{Gosling Emacs}, the immediate predecessor of
-Emacs, featured an extension language called \emph{MLisp} or
-\emph{Mock Lisp}, which bears visual resemblance to \Elisp{}.
-MLisp featured function definitions via \texttt{defun}, as well as
-many built-in functions (such as \texttt{eolp},
-\texttt{forward-character}, \texttt{save-excursion}) whose names
-survive in \Elisp{}.  Emacs contained some backwards-compatibility
-support for MLisp until Emacs 21.2 in 2001.
+\emph{Gosling Emacs}, arguably the immediate predecessor of today's Emacs,
+featured an extension language called \emph{MLisp} or \emph{Mock Lisp},
+which bears visual resemblance to \Elisp{}.  MLisp featured function
+definitions via \texttt{defun}, as well as many built-in functions (such as
+\texttt{eolp}, \texttt{forward-character}, \texttt{save-excursion}) whose
+names survive in \Elisp{}.  Emacs even contained some limited
+back\-ward-compatibility support for MLisp until Emacs 21.2 in 2001.
 
 MLisp was a quite limited language: It lacked cons cells and lists.
-MLisp did have dynamic binding and local variables, but a peculiar
+MLisp did have dynamic scoping and local variables, but a peculiar
 mechanism for passing arguments:  There were no named
 parameters.  Instead, a program would invoke the \texttt{arg}
 function: For example, \texttt{(arg 1)} would access the first
@@ -444,47 +450,48 @@ argument.  Moreover, argument expressions were essentially evaluated
 in a call-by-name fashion by \texttt{arg}, and evaluation happened in
 the dynamic environment of the callee.
 
-The Mock Lisp primitives differed from ZWEI in that ZWEI primitives
-would always take arguments to specify what text to operate on,
-whereas in Mock Lisp primitives all operated at the current
-%% FIXME: It's funny that Richard presents it this way, because the TECO
-%% docs indicate that TECO already worked on the same principle, so
-%% it could be argued that Gosmacs just followed the design of the original
-%% Emacs.
-point---the current ``cursor position.''  Stallman, who had worked on
+The Mock Lisp primitives differed from those of ZWEI in that ZWEI primitives
+would always take arguments to specify what text to operate on, whereas in
+Mock Lisp primitives all operated at the current \emph{point} (the current
+``cursor position''), as was the case in TECO.  Stallman, who had worked on
 ZWEI, found ZWEI's approach ``clumsy,'' and adopted Mock Lisp's basic
 approach~\cite{Stallman2018-personal}.
 
 %% FIXME Mike: Can we provide a code snippet doing the same thing but that
-%% highlights the differences and similarity mentionned above?
+%% highlights the differences and similarity mentioned above?
 
-\section{Early history}         % -1992?
-\label{sec:early-history}
+\subsection{Maclisp}
 
-Following Greenberg's Multics Emacs~\cite{MulticsEmacs1996},
-Richard Stallman decided to write a (for
-him) second version of Emacs, which included \Elisp{} from the start.
-As Greenberg's Emacs required a high-performance Lisp compiler to run
-efficiently, Richard Stallman decided to reimplement the basis for the new
-Emacs in C, with an integrated Lisp interpreter.  Buffer manipulation
-and redisplay were written in efficient C, higher-level functionality
-in Lisp.
+%% FIXME: Explain&cite what was Maclisp.
 
-The initial design of \Elisp{} was motivated by the pervasive
-requirement of \emph{extensibility}; users ``must be able to
-redefine each character''~\cite{Stallman1981}.  TECO and Gosling Emacs
-featured small languages that were either too obscure or too weak to
-support this vision.  Consequently, Richard Stallman took inspiration from
-MacLisp, and \Elisp{} started as a real programming language with
-%% FIXME: Add a summary or reference to that 10th rule?
+\subsection{Design goals}
+
+%% Following Greenberg's Multics Emacs~\cite{MulticsEmacs1996},
+%% Richard Stallman decided to write a (for
+%% him) second version of Emacs, which included \Elisp{} from the start.
+%% As Greenberg's Emacs required a high-performance Lisp compiler to run
+%% efficiently, Richard Stallman decided to reimplement the basis for the new
+%% Emacs in C, with an integrated Lisp interpreter.  Buffer manipulation
+%% and redisplay were written in efficient C, higher-level functionality
+%% in Lisp.
+
+The initial design of \Elisp{} was motivated by the pervasive requirement of
+\emph{extensibility}: users ``must be able to redefine each
+character''~\cite{Stallman1981}.  TECO and Gosling Emacs featured small
+languages that were either too obscure or too weak to support this vision.
+Consequently, Richard Stallman took inspiration from MacLisp, and \Elisp{}
+started right from the beginning as a real programming language with
 powerful abstraction facilities, thus foregoing Greenspun's tenth
-rule~\cite{GreenspunsRule}.
+rule.\footnote{``Any sufficiently complicated C or Fortran program contains an
+ad-hoc, informally-specified, bug-ridden, slow implementation of half of
+Common Lisp''~\cite{GreenspunsRule}}
 
-Moreover, Richard Stallman, made the design of \Elisp{}
-embody and showcase the ideals of Free Software.  For example, not only
-is it permitted to get and modify the source code, but every effort
-is made to encourage the end-user to do so.  The resulting requirements had a profound
-influence on the \Elisp{} language:
+Moreover, Richard Stallman, made the design of Emacs embody and showcase
+the ideals of Free Software.  For example, not only is it permitted to get
+and modify the source code, but every effort is made to encourage the
+end-user to do so.  The resulting requirements had a profound influence on
+the \Elisp{} language.  Retrospectively, to the best of our knowledge, those
+can be summarized as:
 \begin{itemize}
 \item The language should be accessible to a wide audience, so that as many
   people as possible can adapt Emacs to their own needs, without being
@@ -585,7 +592,7 @@ Section~\ref{sec:lexical-scoping}.
 %% motivation quite clearly
 %% FIXME Mike: Indeed, it explains well why dynamic scoping is provided,
 %% but I think it's worth summarizing it here and it's worth adding
-%% explanations for why it was the *only* binding provided (Stallman1981
+%% explanations for why it was the *only* scoping provided (Stallman1981
 %% only argues for the importance of having dynamic scoping).
 %%
 %% FIXME Stefan: Sure - but do we know that the text that was there
@@ -619,43 +626,45 @@ Section~\ref{sec:lexical-scoping}.
 
 Interestingly, \texttt{lambda} was not originally a keyword of the
 \Elisp{} language (unlike in MacLisp).  Up to Emacs-18, anonymous
-functions could be lists of the following form:
+function \emph{values} could be lists of the following form:
 %
 \begin{verbatim}
     (lambda (..ARGS..) ..BODY..)
 \end{verbatim}
 %
-In code, anonymous functions were typically written as quoted Lisp
-literals:
+The use of dynamic scope made it unnecessary to create closures, so it was
+possible to write these anonymous functions in source code using the
+pre-existing quoted Lisp literal mechanism:
 %
 \begin{verbatim}
     '(lambda (..ARGS..) ..BODY..)
 \end{verbatim}
 %
-The use of dynamic scope made it unnecessary to create closures, and
-thus enabled this implementation strategy.
-
-% FIXME: We don't know why it was done this way.
-
-To create byte-compiled anonymous functions, \Elisp{} has the
-\texttt{function} special form (also imported from MacLisp) for the
-alternative notation:
+The extra quote character was a very small price to pay for a slightly
+simpler Lisp implementation.  In order for the byte-compiler to be able
+to distinguish such an anonymous function in the source code from a mere
+quoted list, \Elisp{} needed to use the \texttt{function} special form (also
+imported from MacLisp) for the alternative notation:
 %
 \begin{verbatim}
     (function (lambda (..ARGS..) ..BODY..))
 \end{verbatim}
 %
 Around 1991, \texttt{lambda} was added as a macro, early during the
-development of Emacs-19.  The macro simply returns the list
-representation.
+development of Emacs-19.  The macro simply returns the list representation
+wrapped inside the \texttt{function} special form.  It is not completely
+clear why it took so long to introduce this simple macro, but it was likely
+due to the fact that anonymous functions were not used very often and that
+they were mostly used in places that were not very sensitive to performance.
 
 While the \texttt{lambda} macro has made this quote unnecessary for almost
-30 years now, many instances of this practice still occur in \Elisp{} code,
-even though it prevents byte-compilation of the body.
+30 years now, instances of this practice can still be found in many code
+snippets in web pages, users's configuration files, and third party \Elisp{}
+packages, even though it prevents byte-compilation of the function's body.
 
 Somewhat relatedly, only in 1993 did Lucid Emacs 19.8 import the
-\verb|#'...| reader shorthand for \texttt{(function ...)} from MacLisp.  Emacs
-followed suit the year after.
+\verb|#'...| reader shorthand for \texttt{(function ...)} from MacLisp.
+Emacs followed suit the year after.
 
 \subsection{Strings}
 \label{sec:strings}
@@ -1566,7 +1575,7 @@ to handle all Emacs code by default.
 
 \subsubsection{Fourth attempt}
 In 2018, Tom Tromey took another stab at it, again using GNU Libjit.
-Compared to Lloyd's JIT compiler, Tromey's focuses exclusively on code using lexical binding,
+Compared to Lloyd's JIT compiler, Tromey's focuses exclusively on code using lexical scoping,
 which is likely to benefit more, and it implements additional optimizations
 by getting rid at compile-time of all the manipulation of the Lisp stack.
 In the best case it reaches a speed up factor of 3.5, which is not ideal,
@@ -2106,7 +2115,7 @@ Dynamic scoping had two main drawbacks in practice:
 %%
 The only fully satisfactory solution to the desire for lexical scoping in
 \Elisp{} was that it should be the scoping used by default by all binding
-constructs, with an easy way to request dynamic binding for some
+constructs, with an easy way to request dynamic scoping for some
 variables, as is the case in Common Lisp.  But at the same time, there was
 a non-negotiable need to preserve compatibility with existing \Elisp{} code,
 although some limited breakage for rare situations could be tolerated.
@@ -2200,7 +2209,7 @@ the byte-code compiler was modified to be able to make use of them.  Nowadays,
 code compiled using lexical scoping is generally expected to be marginally
 faster than if compiled with dynamic scoping.
 
-The introduction of lexical-binding in Emacs-24.1 went very smoothly,
+The introduction of \texttt{lexical-binding} in Emacs-24.1 went very smoothly,
 causing very few backward incompatible changes for users, in part because
 very few of Emacs's own files made use of it.  Converting existing code to
 use the new language is usually easy (consisting mainly in adding a few
@@ -2212,7 +2221,7 @@ well-maintained packages have converted to it, but there is still a large
 amount of code using the old language, either because they still want to
 support Emacsen older than Emacs-24.1, or because of the effort needed to
 convert.  For example, as of Emacs-26, only a third of Emacs's own Lisp code
-has been converted to use lexical-binding.
+has been converted to use lexical scoping.
 
 
 \subsection{Eager macro-expansion} %Emacs-24.3?
@@ -2255,7 +2264,7 @@ those definitions.
 \subsection{Pattern matching}           %Released in Emacs-24.1
 \label{sec:pcase}
 
-While working on the lexical-binding feature, Stefan Monnier grew
+While working on the \texttt{lexical-binding} feature, Stefan Monnier grew
 increasingly frustrated with the shape of the code used to traverse the
 abstract syntax tree, littered with \texttt{car}, \texttt{cdr} carrying too
 little information, compared to the kind of code he would write for that in
@@ -2271,7 +2280,7 @@ limited and not easily extensible.
 
 So the \texttt{pcase.el} package was born,
 being first released as part of Emacs-24.1, and used extensively in the part
-of the byte-code compiler providing support for lexical binding.
+of the byte-code compiler providing support for lexical scoping.
 
 Additionally to the \texttt{pcase} macro itself that provides a superset of
 Common Lisp's \texttt{case} macro, this package also provides the

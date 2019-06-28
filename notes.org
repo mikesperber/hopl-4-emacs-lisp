@@ -433,7 +433,7 @@ paragraph.
 
 *** TODO "stable enough to be used globally" What does this mean? (I gather it
 does not mean the feature was released, since it is still an
-attmempt.)
+attempt.)
 
 *** DONE "compared to Nickolas" --> "compared to Lloyd"
     CLOSED: [2019-03-25 Mon 11:34]
@@ -944,7 +944,7 @@ Stallman, comes through - which is nice for an open source project
 that doesnt have the usual corporate funding/management issues that
 Jean Sammet used to ask about in earlier HOPLs.
 
-At this point my main complaint is that the paper attempts to bring
+*** TODO - At this point my main complaint is that the paper attempts to bring
 the history up the present day and even hints at future plans...a
 natural thing to do, but probably not right for a history paper.
 There are a few obvious typos to that will have to be fixed.
@@ -962,11 +962,16 @@ Reviewer expertise
 
 Paper summary
 -------------
-This paper describes the evolution of emacs lisp, from its very beginnings to the present day.  The paper describes design and implementation changes, along with much of the background motivation and underlying politics.
+This paper describes the evolution of emacs lisp, from its very beginnings
+to the present day.  The paper describes design and implementation changes,
+along with much of the background motivation and underlying politics.
 
 Comments for author
 -------------------
-I found this very interesting and overall an informative and enjoyable read.   I enjoyed your writing style and the touches of humor.    I enjoyed hearing the background to various technical decisions and some of the politics that under pinned the decisions.
+I found this very interesting and overall an informative and enjoyable read.
+I enjoyed your writing style and the touches of humor.    I enjoyed hearing
+the background to various technical decisions and some of the politics that
+under pinned the decisions.
 
 I have only two suggestions
 
