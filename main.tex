@@ -247,7 +247,7 @@ component of Energize.  At the time, the current version of Emacs was
 18, which was still essentially a textual application.  The then
 upcoming version of Emacs, Emacs 19, was to have a graphical user
 interface and many other features that the developers at Lucid
-considered essential for the development of Energize.However, at the
+considered essential for the development of Energize.  However, at the
 time that Lucid needed Emacs 19, a release was not in
 sight.\footnote{The first official release of Emacs 19, Emacs
   19.28, came out on November 1, 1994.}  Joseph Arsenaux was
@@ -304,7 +304,7 @@ maintain a sane code base, to promote Free Software, to be attractive to its
 users, and to encourage contributions.  There is also more structure to the
 organization: the maintenance is really shared among a handful of people who
 earned each other's respect by the weight of their past contributions and
-who can then make more or less any change to the code they like, and accept
+who can then make more or less any change they like to the code, and accept
 or reject external contributions, as long as nobody complains.  In case of
 disagreement between those core contributors the maintainer has the final
 say.  This structure probably appeared around 1991 and until 2000 was
@@ -425,8 +425,8 @@ listed in parentheses.
 \section{Early history}         % -1992?
 \label{sec:early-history}
 
-The design of \Elisp{} was based on the past experience with the extension
-language of TECO, ZWEI, Gosling Emacs, and Multics Emacs.
+The design of \Elisp{} was based on the past experiences with the extension
+languages of TECO, ZWEI, Gosling Emacs, and Multics Emacs.
 Arguably, the strongest influence for the language itself was MacLisp while
 the design of the editing primitives was influenced by Gosling Emacs's
 Mock Lisp.
@@ -517,23 +517,29 @@ can be summarized as:
 \label{sec:base-language-design}
 
 The base language of \Elisp{} started out as a straightforward
-variant of MacLisp~\cite{Moon1974,Pitman1983}.
+variant of MacLisp~\cite{Moon1974,Pitman1983}, laced with a bit of Lisp
+Machine Lisp, and put on a diet to keep it lean enough for use on the
+limited resources of the machines of the time.
 
 Many basic special forms are identical: \texttt{defun},
 \texttt{defvar}, \texttt{defmacro}, \texttt{let}, \texttt{let*},
 \texttt{cond}, \texttt{if}, \texttt{function}, \texttt{catch}, \texttt{throw},
 \texttt{unwind-protect}.  So are basic data structures: symbols,
-\texttt{nil}, cons cells, arrays, and many familiar Lisp
-functions.
+\texttt{nil}, cons cells, and many familiar Lisp functions.
+\Elisp{} also supports arrays, but using subset (e.g. only uni-dimensional
+arrays) of the primitives offered in Lisp Machine Lisp, which happens to
+also be a subset of the Common Lisp primitives) rather than Maclisp's
+approach of manipulating arrays as if they were functions.
 
-The language used dynamic scoping where the latest binding of a variable is
+One of the most famous (mis)features of \Elisp{} is that it only offered
+dynamic scoping of variables, where the latest binding of a variable is
 simply stored in the \emph{value slot} of the corresponding symbol object,
 resulting in simple and efficient variable lookups and let-bindings.
 Symbols could be used to refer to variables.  In particular, the
-\texttt{set} function, which performed assignment, accepted the
-\emph{name} of a variable as its argument.  A symbol had an associated
-\emph{property list}, essentially a dictionary mapping property
-names (also symbols) to values.
+\texttt{set} function, which performed assignment, accepted the \emph{name}
+of a variable as its argument.  A symbol had an associated \emph{property
+list}, essentially a dictionary mapping property names (also symbols)
+to values.
 
 Like MacLisp, \Elisp{} was (and still is) a Lisp-2
 language~\cite{SteeleGabriel1993}, which means that the namespaces for
