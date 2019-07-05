@@ -1257,7 +1257,8 @@ understood what the program was. I wanted to get back to doing
 graduate-student things. So Stallman did the other 99.999 percent of the 
 work. But I played a role in catalyzing it and beginning the implementation.
 
-** Joe Arceneaux
+** DONE Joe Arceneaux
+   CLOSED: [2019-07-05 Fri 15:55]
 
 Reading the accounts by Richard Stallman, Jamie Zawinski, and Richard
 Gabriel, one gets the impression that multiple opposing forces were
@@ -1266,28 +1267,116 @@ into different technical ones.  Can you describe what they were?
 
 https://www.linkedin.com/in/joseph-arceneaux-1b1b20/
 
-** Richard Gabriel
+** DONE Richard Gabriel
 
-How did license issues play into the technical design of Energize?
+*** How did license issues play into the technical design of Energize?
 
-Reading, "Patterns of Software", I got the impression that the
+Hardly at all. From the answer to the next question you will see that
+we needed a server-based system with database, surrounded by tools
+that interacted with the server via protocols. Among the tools were
+text editors. Emacs was our favorite given that we were all
+MIT-centric Lisp people. I can’t recall whether it already existed or
+whether it was created for us, but LGPL was the way to do the
+connection. My strong recollection was that RMS created LGPL for us. I
+would need to see whether I can substantiate that with email. Remember
+that generally speaking RMS and I were friends.
+
+Our “concession” was that we would fund Joe Arceneaux to make an
+X-based Emacs (Emacs 19) and supply an open-source version of
+Energize. Joe Arceneaux proved not up to the task, and RMS was slow
+responding and didn’t agree with some of our requirements for
+annotations - he believed people would create a few dozen per buffer,
+and we need programs to create thousands and very fast.
+
+*** Reading, "Patterns of Software", I got the impression that the
 "Cadillac" project Lucid was working on, wasn't originally planned
 with Emacs in mind as the editor component.  (The way I read it, Emacs
 was part of the conception of the Hitchhiker project, which didn't
 materialize.)  How did Emacs get into the picture?
 
-What were the technical requirements of Energize that Emacs did not
+Patrick Dussud and I came up with the basic ideas in what became the
+Cadillac project over a period of a few months. However, unlike other
+software companies, our approach was to visit lots of organizations
+that did C++ programming to find out what they really did and really
+needed. Most companies in Lucid’s position would require NDAs from
+those companies interviewed; we didn’t. This set us apart. It was
+after about a year of these interviews that we came up with a
+server-based / kernel-based approach surround by tools. This because
+the interviewed really wanted to use their programmers’ favorite
+interactive tools and not ones we would write. That’s when Emacs came
+into the picture. These interviews changed a lot of our thinking.
+
+*** What were the technical requirements of Energize that Emacs did not
 fulfill that the time (apart from the lack of a windowed UI) - were
 any particular aspects of Emacs Lisp part of these requirements?
 
-Generally, did the people at Lucid have a position on the suitability
+Please see the attached pdf file, which is the only paper we wrote
+about Energize. We needed the following:
+
+1. compilers that would annotate the source code with semantic
+   information - we did not want to analyze the code ourselves and the
+   interviewed did not want to see projections of ASTs. We chose GCC
+   and we also bought a C++ compiler company and did our own. The
+   annotations were designed to be language neutral (we did a quick
+   prototype of a Fortran Energize, as I recall). This meant access to
+   source code to add the annotation capabilities.
+
+2. a C++ database to hold the collected information about the
+   software. This because we needed persistence, fast persistence, and
+   the kernel had to be written in C++ to show that we believed in
+   C++.
+
+3. graphic tools to show code structure. Debuggers (we used GDB,
+   modifying it also).
+
+4. text editors that could respond to the Energize annotation
+   protocols. Emacs had available source code, but not X-window
+   support. Later we learned vi was essential, but we couldn’t get the
+   source code, so we hacked on the vi mode of Emacs.
+
+5. all the protocols needed to work over TCP/IP. This meant that
+   someone could work from home over a connection to the server
+   running at their company. The tools (Emacs, graphics) would run at
+   home; kernel, GCC, Lucid C++, and GDB could run at the company. To
+   appreciate this, you should remember that Energize was designed and
+   written in the late 1980s when such things as “over the net” were
+   not a thing.
+
+The annotations were like Nelson’s hypertext. HTML and all those were
+way in the future.
+
+*** Generally, did the people at Lucid have a position on the suitability
 or problems with Emacs Lisp?
 
-Presumably, Energize would need a significant amount of Emacs Lisp to
+We wrote some stuff in Emacs Lisp, but mostly, as I recall, to
+establish the TCP/IP connections and the local connections to the
+kernel. Also to send reports to the kernel that the source code had
+been “damaged.” GDB’s display was through the kernel to Emacs.
+
+*** Presumably, Energize would need a significant amount of Emacs Lisp to
 support the front-end functionality.  Given the number of annotations
 you were planning, how did performance of Emacs Lisp play into your
 planning and execution of Energize?
 
+Wrong presumption.
+
+We designed things so that the kernel did all the “thinking,” and
+Emacs had only to receive and display source code and annotations fed
+to it at interprocess communication speeds, and it had to handle
+thousands per buffer. The annotations had associated “pull-down
+menus,” which needed to be displayed, and selecting items therein were
+sent to the kernel which did them and sent back new “projections” of
+the code. Some in Emacs Lisp, as I recall, but the heavy lifting was
+in the C code for Emacs.
+
+Emacs had to act like a hypertext system as well as a text editor. It
+was ok for Emacs’s modes to know about the language, but we didn’t
+care about that. The idea was that the tools (like Emacs) not know
+crap about the stuff they were presenting - all that was in the
+kernel.
+
+I didn’t spend much time worrying about the Emacs Lisp part of
+it. Harlan Sexton and Jamie Zawinski were more in that loop.
 
 ** Richard Stallman
 

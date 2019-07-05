@@ -240,23 +240,24 @@ of his code would never have to go through such an experience.
 %% years ago".
 In 1988, Lucid Inc., a software development company founded by Richard
 Gabriel and based in Menlo
-Park, Carlifornia, started a project called \emph{Energize}.
+Park, Carlifornia, started a project called \emph{Energize}~\cite{GabrielEtAl1990,Gabriel-personal}.
 Energize was to be a C/C++ integrated development environment based on
 Emacs~\cite{GabrielLetter}.  Lucid decided to use Emacs as the central
 component of Energize.  At the time, the current version of Emacs was
-18, which was still essentially a textual application.  The then
-upcoming version of Emacs, Emacs 19, was to have a graphical user
-interface and many other features that the developers at Lucid
-considered essential for the development of Energize.  However, at the
-time that Lucid needed Emacs 19, a release was not in
-sight.\footnote{The first official release of Emacs 19, Emacs
-  19.28, came out on November 1, 1994.}  Joseph Arsenaux was
-the principal Emacs developer at that time.
+18, which was still essentially a textual application.
+For Energize, Lucid needed a graphical user
+interface and the ability to add a large number of annotations to
+program source code.
 
-While Lucid at first tried to support and thus speed up the
-development of Emacs 19, among other things by hiring Joseph Arsenaux as
-a consultant, the required cooperation between Lucid and
-the Free Software Foundation soon broke down.  As a result, Lucid
+Lucid hired Joseph Arcenaux,
+the principal Emacs developer at that time, to add these features
+for Lucid while continuing to work on the upcoming release of Emacs
+19.  It soon became clear that the respective goals Lucid and the Free
+Software Foundation had for Emacs 19 were incompatible,
+and the required cooperation between Lucid and
+the Free Software Foundation broke down~\cite{Arcenaux-interview}.
+
+As a result, Lucid
 forked Emacs development, creating its own Emacs variant \emph{Lucid
 Emacs}.\footnote{The first release of Lucid Emacs, 19.0, came out in April,
 1992.}  Jamie Zawinski was the primary developer of Lucid Emacs.
@@ -265,7 +266,7 @@ Lucid Emacs with their operating system, and ended up financing some
 of the continued development of Lucid Emacs, and effected a name
 change to the current \emph{XEmacs}.
 
-\subsection{Model of development}
+l\subsection{Model of development}
 
 Emacs is a Free Software project, developed by a loosely connected
 %% FIXME: *mostly* but not completely (e.g. not true at least for Gerd Möllmann
