@@ -504,7 +504,67 @@ approach~\cite{Stallman2018-personal}.
 
 \subsection{Maclisp}
 
-%% FIXME: Explain&cite what was Maclisp.
+MacLisp was a Lisp dialect developed at MIT's Project MAC in the early
+1970s, which was named for its conceptual relationship with ``Multiple
+Access Computers'' and ``Machine-Aided Cognition''~\cite{Pitman1983}.
+It was developed for use in artificial intelligence research and
+related fields.  It descended from Lisp 1.5, albeit with many changes~\cite{Moon1974}.
+MacLisp ran on the DEC PDP-10 series machines under various operating
+systems, and on the Honeywell 6180/6880 under Multics.
+
+Maclisp had all basic properties associated with Lisp today~\cite{Moon1974}:
+%
+\begin{itemize}
+\item Structure is defined through parentheses.
+\item Code forms have an internal representation as
+  \textit{S-expressions}, which print the same as the code, making the
+  language homoiconic.
+\item There is an \texttt{eval} function that evaluates an expression
+  represented as an S-expression.
+\item The basic data structure is \textit{cons}, which pairs two
+  objects, with the first component named \textit{car}, the second
+  \textit{cdr}.  Conses are used to implement singly-linked
+  \textit{lists}, where a special \textit{nil} value indicates the end
+  of the list.  Conses are mutable.
+\item A special \textit{symbol} data type represents identifiers in
+  S-expressions, but is also often used to represent enumeration,
+  status values etc.
+\item The language has first-class functions via the \texttt{lambda}
+  form.
+\item MacLisp also has an \texttt{apply} function that will apply a
+  function to a list of arguments, converting between argument lists
+  and regular lists.
+\item Local variables are bound \textit{dynamically} rather than
+  lexically: A local variable occurence refers to the last active
+  binding at runtime, rather than the lexically enclosing binding.
+\item The language has \textit{macros} that introduce new syntactic
+  forms; macros are essentially defined as functions on the S-expressions
+  representing code.
+\end{itemize}
+%
+Here is a simple example of a MacLisp function definition from the
+original manual~\cite{Moon1974}:
+%
+\begin{verbatim}
+(defun assoc (x y)
+  (cond
+    ((null y) nil)
+    ((equal x (caar y)) (car y))
+    ((assoc x (cdr y)))))
+\end{verbatim}
+%
+This looks for an entry \texttt{x} in a list of conses \texttt{y}, an
+association list.  The \texttt{cond} is a branching construct with
+three branches.  The first one has condition \texttt{(null y)} which
+checks whether the \texttt{y} list is empty.  If it is, \texttt{assoc}
+returns \texttt{nil}.  The second branch has condition \texttt{(equal
+  x (caar y))} checks whether \texttt{x} is equal to the car of the
+first element of \texttt{y}.  (The \texttt{caar} function takes the
+``car of the car.'')  In that case, it returns the first cons, whose
+car is equal to x.  Finally, if none of the cases matched,
+\texttt{assoc} recurs on the cdr of \texttt{y}.
+
+This function definition works in Emacs Lisp unchanged to this day.
 
 \section{Base language design}
 \label{sec:base-language-design}
