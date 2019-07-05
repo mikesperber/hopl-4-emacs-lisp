@@ -233,6 +233,46 @@ the code responsible for the redisplay.  It also motivated him to invent the
 GNU General Public License \cite{GPLHistory}, to try and ensure that users
 of his code would never have to go through such an experience.
 
+\subsection{Design goals}
+
+The initial design of \Elisp{} was motivated by the pervasive requirement of
+\emph{extensibility}: users ``must be able to redefine each
+character''~\cite{Stallman1981}.  TECO and Gosling Emacs featured small
+languages that were either too obscure or too weak to support this vision.
+Consequently, Richard Stallman took inspiration from MacLisp, and \Elisp{}
+started right from the beginning as a real programming language with
+powerful abstraction facilities, thus foregoing Greenspun's tenth
+rule.\footnote{``Any sufficiently complicated C or Fortran program contains an
+ad-hoc, informally-specified, bug-ridden, slow implementation of half of
+Common Lisp''~\cite{GreenspunsRule}}
+
+Moreover, Richard Stallman, made the design of Emacs embody and showcase
+the ideals of Free Software.  For example, not only is it permitted to get
+and modify the source code, but every effort is made to encourage the
+end-user to do so.  The resulting requirements had a profound influence on
+the \Elisp{} language.  Retrospectively, to the best of our knowledge, those
+can be summarized as:
+\begin{itemize}
+\item The language should be accessible to a wide audience, so that as many
+  people as possible can adapt Emacs to their own needs, without being
+  dependent on the availability of someone with technical expertise.
+  An example for this is that the
+  \emph{Introduction to Programming in Emacs Lisp}
+  tutorial~\citep{ElispIntro} targets users with no programming
+  experience.  This has been a strong motivation to keep \Elisp{} on the
+  minimalist side and to resist incorporation of many Common Lisp features.
+\item It should be easy for the end-user to find the relevant code in order
+  to modify Emacs's behavior.  This has driven the development of elements
+  such as the \emph{docstrings} (see Section~\ref{sec:docstrings}) and more generally the self-documenting
+  aspect of the language.  It also imposes constraints on the evolution of
+  the language: the use of some facilities, such as \emph{advice}, is
+  discouraged because it makes the code more opaque.
+\item Emacs should be easily portable to as many platforms as possible.
+  This largely explains why \Elisp{} is still using a fairly naive
+  mark-and-sweep garbage collector, and why its main execution engine is
+  a simple byte-code interpreter.
+\end{itemize}
+
 \subsection{The great schism}
 
 %% Note: I put "1988" here based on Richard Gabriel's email (quoted in
@@ -265,56 +305,6 @@ In 1994, Lucid went bankrupt.  Sun subsequently wanted to ship
 Lucid Emacs with their operating system, and ended up financing some
 of the continued development of Lucid Emacs, and effected a name
 change to the current \emph{XEmacs}.
-
-\subsection{Model of development}
-
-Emacs is a Free Software project, developed by a loosely connected
-%% FIXME: *mostly* but not completely (e.g. not true at least for Gerd Möllmann
-%% and Joe, probably others)
-set of volunteers doing it mostly in their spare time, and several of them
-do not consider themselves as computer professionals.  Development is not
-really organized, in the sense that volunteers work on what they find
-appealing rather than follow some agreed upon plan, and the overall
-direction of evolution is in effect controlled by the \emph{head
-maintainer(s)} by accepting or rejecting contributions, and via discussions in
-mailing-lists.
-
-Richard Stallman was the original maintainer and still participates: even
-though several other people have been official maintainers at various points
-in time, he always acted as a ``default maintainer'' when noone wanted to
-step up and he has followed Emacs's development very closely even when he
-was not officially the maintainer, contrary to most of the other programs he
-developed, such as \emph{gcc} and \emph{gdb}.  Also, Richard Stallman being
-the founder of the Free Software Foundation, Emacs is part of the FSF's GNU
-project and is hence linked to the FSF by its use of FSF's resources to host
-the code and own the copyright.  The link with the FSF is of course
-particularly strong because of Richard's role in Emacs.
-
-The organization of Emacs's development is not really codified, but in
-practice the role of the maintainer is a balancing act between the desire to
-maintain a sane code base, to promote Free Software, to be attractive to its
-users, and to encourage contributions.  There is also more structure to the
-organization: the maintenance is really shared among a handful of people who
-earned each other's respect by the weight of their past contributions and
-who can then make more or less any change they like to the code, and accept
-or reject external contributions, as long as nobody complains.  In case of
-disagreement between those core contributors the maintainer has the final
-say.  This structure probably appeared around 1991 and until 2000 was
-embodied in the fact that the core contributors were members of a private
-\emph{emacs-core} mailing-list and were the only ones with direct access to
-the code.  Since late 2000, when the CVS server became public and the
-\emph{emacs-core} private mailing-list was replaced by the public
-\emph{emacs-devel} mailing-list, this has become much more blurry:
-technically, more than a hundred contributors have direct write access to
-the code now and nowhere is it ever written or said which of those is or
-isn't considered a core contributor at any given point it time.  Instead the
-system functions by self-regulation: every time someone installs a change
-without prior permission, someone else may or may not complain about the
-change's quality, which can lead to requiring further changes or even
-a complete revert, so over time contributors learn to judge on their own
-what makes a change acceptable.
-
-%% FIXME: Discuss the XEmacs organization?
 
 \subsection{Timeline}
 
@@ -422,6 +412,56 @@ listed in parentheses.
 
 % FIXME: timeline Emacs Lisp evolution?
 
+\subsection{Model of development}
+
+Emacs is a Free Software project, developed by a loosely connected
+%% FIXME: *mostly* but not completely (e.g. not true at least for Gerd Möllmann
+%% and Joe, probably others)
+set of volunteers doing it mostly in their spare time, and several of them
+do not consider themselves as computer professionals.  Development is not
+really organized, in the sense that volunteers work on what they find
+appealing rather than follow some agreed upon plan, and the overall
+direction of evolution is in effect controlled by the \emph{head
+maintainer(s)} by accepting or rejecting contributions, and via discussions in
+mailing-lists.
+
+Richard Stallman was the original maintainer and still participates: even
+though several other people have been official maintainers at various points
+in time, he always acted as a ``default maintainer'' when noone wanted to
+step up and he has followed Emacs's development very closely even when he
+was not officially the maintainer, contrary to most of the other programs he
+developed, such as \emph{gcc} and \emph{gdb}.  Also, Richard Stallman being
+the founder of the Free Software Foundation, Emacs is part of the FSF's GNU
+project and is hence linked to the FSF by its use of FSF's resources to host
+the code and own the copyright.  The link with the FSF is of course
+particularly strong because of Richard's role in Emacs.
+
+The organization of Emacs's development is not really codified, but in
+practice the role of the maintainer is a balancing act between the desire to
+maintain a sane code base, to promote Free Software, to be attractive to its
+users, and to encourage contributions.  There is also more structure to the
+organization: the maintenance is really shared among a handful of people who
+earned each other's respect by the weight of their past contributions and
+who can then make more or less any change they like to the code, and accept
+or reject external contributions, as long as nobody complains.  In case of
+disagreement between those core contributors the maintainer has the final
+say.  This structure probably appeared around 1991 and until 2000 was
+embodied in the fact that the core contributors were members of a private
+\emph{emacs-core} mailing-list and were the only ones with direct access to
+the code.  Since late 2000, when the CVS server became public and the
+\emph{emacs-core} private mailing-list was replaced by the public
+\emph{emacs-devel} mailing-list, this has become much more blurry:
+technically, more than a hundred contributors have direct write access to
+the code now and nowhere is it ever written or said which of those is or
+isn't considered a core contributor at any given point it time.  Instead the
+system functions by self-regulation: every time someone installs a change
+without prior permission, someone else may or may not complain about the
+change's quality, which can lead to requiring further changes or even
+a complete revert, so over time contributors learn to judge on their own
+what makes a change acceptable.
+
+%% FIXME: Discuss the XEmacs organization?
+
 
 
 \section{Early history}         % -1992?
@@ -465,46 +505,6 @@ approach~\cite{Stallman2018-personal}.
 \subsection{Maclisp}
 
 %% FIXME: Explain&cite what was Maclisp.
-
-\subsection{Design goals}
-
-The initial design of \Elisp{} was motivated by the pervasive requirement of
-\emph{extensibility}: users ``must be able to redefine each
-character''~\cite{Stallman1981}.  TECO and Gosling Emacs featured small
-languages that were either too obscure or too weak to support this vision.
-Consequently, Richard Stallman took inspiration from MacLisp, and \Elisp{}
-started right from the beginning as a real programming language with
-powerful abstraction facilities, thus foregoing Greenspun's tenth
-rule.\footnote{``Any sufficiently complicated C or Fortran program contains an
-ad-hoc, informally-specified, bug-ridden, slow implementation of half of
-Common Lisp''~\cite{GreenspunsRule}}
-
-Moreover, Richard Stallman, made the design of Emacs embody and showcase
-the ideals of Free Software.  For example, not only is it permitted to get
-and modify the source code, but every effort is made to encourage the
-end-user to do so.  The resulting requirements had a profound influence on
-the \Elisp{} language.  Retrospectively, to the best of our knowledge, those
-can be summarized as:
-\begin{itemize}
-\item The language should be accessible to a wide audience, so that as many
-  people as possible can adapt Emacs to their own needs, without being
-  dependent on the availability of someone with technical expertise.
-  An example for this is that the
-  \emph{Introduction to Programming in Emacs Lisp}
-  tutorial~\citep{ElispIntro} targets users with no programming
-  experience.  This has been a strong motivation to keep \Elisp{} on the
-  minimalist side and to resist incorporation of many Common Lisp features.
-\item It should be easy for the end-user to find the relevant code in order
-  to modify Emacs's behavior.  This has driven the development of elements
-  such as the \emph{docstrings} (see Section~\ref{sec:docstrings}) and more generally the self-documenting
-  aspect of the language.  It also imposes constraints on the evolution of
-  the language: the use of some facilities, such as \emph{advice}, is
-  discouraged because it makes the code more opaque.
-\item Emacs should be easily portable to as many platforms as possible.
-  This largely explains why \Elisp{} is still using a fairly naive
-  mark-and-sweep garbage collector, and why its main execution engine is
-  a simple byte-code interpreter.
-\end{itemize}
 
 \section{Base language design}
 \label{sec:base-language-design}
