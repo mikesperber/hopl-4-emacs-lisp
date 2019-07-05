@@ -283,7 +283,8 @@ detail.
 
 Comments for author
 -------------------
-*** TODO Please use author-year citations throughout.
+*** DONE Please use author-year citations throughout.
+    CLOSED: [2019-07-05 Fri 16:26]
 
 *** TODO Many sections of the paper have no citations. In all these cases,
 are we to assume there is no documentation and it is down to personal
@@ -293,7 +294,8 @@ knowledge of the authors? Please add citations wherever possible.
 years, and relating release numbers for Emacs to those for XEmacs.
 Could you give a table with a chronology of releases?
 
-*** TODO Why are you two the right ones to write this paper? Please say in
+*** DONE Why are you two the right ones to write this paper? Please say in
+    CLOSED: [2019-07-05 Fri 16:26]
 the introduction a little about your involvement with Emacs and
 to what extent (if any) you consulted with the community in writing
 this paper.
