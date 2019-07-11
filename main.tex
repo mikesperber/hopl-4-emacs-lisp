@@ -245,23 +245,23 @@ The initial design of \Elisp{} was motivated by the pervasive requirement of
 character''~\cite{Stallman1981}.  TECO and Gosling Emacs featured small
 languages that were either too obscure or too weak to support this vision.
 Consequently, Richard Stallman took inspiration from MacLisp, and \Elisp{}
-started right from the beginning as a real programming language with
+started right from the beginning as a full-featured programming language with
 powerful abstraction facilities, thus foregoing Greenspun's tenth
 rule.\footnote{``Any sufficiently complicated C or Fortran program contains an
 ad-hoc, informally-specified, bug-ridden, slow implementation of half of
-Common Lisp''~\cite{GreenspunsRule}}
+Common Lisp.''~\cite{GreenspunsRule}}
 
 Moreover, Richard Stallman, made the design of Emacs embody and showcase
 the ideals of Free Software.  For example, not only is it permitted to get
 and modify the source code, but every effort is made to encourage the
 end-user to do so.  The resulting requirements had a profound influence on
-the \Elisp{} language.  Retrospectively, to the best of our knowledge, those
+the \Elisp{} language.  Retrospectively, those
 can be summarized as:
 \begin{itemize}
 \item The language should be accessible to a wide audience, so that as many
   people as possible can adapt Emacs to their own needs, without being
   dependent on the availability of someone with technical expertise.
-  An example for this is that the
+  For example, the
   \emph{Introduction to Programming in Emacs Lisp}
   tutorial~\citep{ElispIntro} targets users with no programming
   experience.  This has been a strong motivation to keep \Elisp{} on the
@@ -273,9 +273,7 @@ can be summarized as:
   the language: the use of some facilities, such as \emph{advice}, is
   discouraged because it makes the code more opaque.
 \item Emacs should be easily portable to as many platforms as possible.
-  This largely explains why \Elisp{} is still using a fairly naive
-  mark-and-sweep garbage collector, and why its main execution engine is
-  a simple byte-code interpreter.
+  This largely explains why \Elisp{} still runs in a simple byte-code interpreter.
 \end{itemize}
 
 \subsection{The great schism}
@@ -310,6 +308,8 @@ In 1994, Lucid went bankrupt.  Sun subsequently wanted to ship
 Lucid Emacs with their operating system, and ended up financing some
 of the continued development of Lucid Emacs, and effected a name
 change to the current \emph{XEmacs}.
+
+% FIXME: End of XEmacs
 
 \subsection{Timeline}
 
@@ -469,7 +469,7 @@ what makes a change acceptable.
 
 
 
-\section{Early history}         % -1992?
+\section{Early language design}         % -1992?
 \label{sec:early-history}
 
 The design of \Elisp{} was based on the past experiences with the extension
@@ -497,15 +497,43 @@ argument.  Moreover, argument expressions were essentially evaluated
 in a call-by-name fashion by \texttt{arg}, and evaluation happened in
 the dynamic environment of the callee.
 
-The Mock Lisp primitives differed from those of ZWEI in that ZWEI primitives
-would always take arguments to specify what text to operate on, whereas in
-Mock Lisp primitives all operated at the current \emph{point} (the current
-``cursor position''), as was the case in TECO.  Stallman, who had worked on
-ZWEI, found ZWEI's approach ``clumsy,'' and adopted Mock Lisp's basic
-approach~\cite{Stallman2018-personal}.
+With the design of the primitives, Richard Stallman adopted MLisp's
+basic approach~\cite{Stallman2018-personal}, diverging from ZWEI.
+ZWEI primitives would always take explicit arguments to specify what
+text to operate on.  Here is what a ZWEI function might have looked
+like that inserted a string surrounded by parentheses:
+%
+\begin{verbatim}
+(DEFUN INSERT-PARENS (BP STRING)
+  (LET* ((BP1 (INSERT BP "("))
+         (BP2 (INSERT BP1 STRING))
+         (BP3 (INSERT BP2 ")")))
+    BP2))
+\end{verbatim}
+%
+The \texttt{BP} parameter is for the location, at which the insertion
+is to take place.  \texttt{INSERT-PARENS} calls the primitive
+\texttt{INSERT} function three times; \texttt{INSERT} returns a new
+location, after the insertion, which gets threaded through the
+subsequent \texttt{INSERT} calls and finally rfeturned.
 
-%% FIXME Mike: Can we provide a code snippet doing the same thing but that
-%% highlights the differences and similarity mentioned above?
+The Mock Lisp primitives differed from those of ZWEI in that , whereas in
+Mock Lisp primitives all operated at the current \emph{point} (the current
+``cursor position''), as was the case in TECO.  Here is the
+\texttt{in-parens} function from the Gosling Emacs manual~\cite{Gosling1981}:
+%
+\begin{verbatim}
+(defun 
+      (in-parens ; The name of the function.
+        (insert-string "(") 
+        (insert-string (arg 1 "String to insert? ")) 
+        (insert-string ")") 
+      ) 
+      )
+\end{verbatim}
+%
+Stallman, who had worked on ZWEI, found ZWEI's approach clumsy, and
+used MLisp's approach for Emacs.
 
 \subsection{Maclisp}
 
