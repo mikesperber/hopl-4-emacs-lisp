@@ -548,10 +548,11 @@ systems, and on the Honeywell 6180/6880 under Multics.
 Maclisp had all basic properties associated with Lisp today~\cite{Moon1974}:
 %
 \begin{itemize}
-\item Structure is defined through parentheses.
+\item Structure is defined through parentheses and prefix notation.
 \item Code forms have an internal representation as
   \textit{S-expressions}, which print the same as the code, making the
   language homoiconic.
+  % FIXME: explain quote somewhere
 \item There is an \texttt{eval} function that evaluates an expression
   represented as an S-expression.
 \item The basic data structure is \textit{cons}, which pairs two
@@ -623,17 +624,8 @@ approach of accessing arrays as if they were functions.
 
 % FIXME: elaborate on arrays?
 
-One of the most famous (mis)features of \Elisp{} is that it only offered
-dynamic scoping of variables, where the latest binding of a variable is
-simply stored in the \emph{value slot} of the corresponding symbol object,
-resulting in simple and efficient variable lookups and let-bindings.
-Symbols could be used to refer to variables.  In particular, the
-\texttt{set} function, which performed assignment, accepted the \emph{name}
-of a variable as its argument.  A symbol had an associated \emph{property
-list}, essentially a dictionary mapping property names (also symbols)
-to values.
-
-Like MacLisp, \Elisp{} was (and still is) a Lisp-2
+Like MacLisp, \Elisp{} only offered
+dynamic scoping of variables.  Also like MacLisp, \Elisp{} was (and still is) a Lisp-2
 language~\cite{SteeleGabriel1993}, which means that the namespaces for
 functions and ``ordinary values'' are separate, and to call a function bound
 to a variable, a program must use \texttt{funcall}.  Also, symbols can be
@@ -665,7 +657,16 @@ existing code via hooks, discussed in Section~\ref{sec:hooks}.
 
 \subsection{Dynamic scoping}
 
-\Elisp{} took from MacLisp the choice of dynamic scoping.  Richard
+\Elisp{} took from MacLisp the choice of dynamic scoping, where the
+latest binding of a variable is simply stored in the \emph{value slot}
+of the corresponding symbol object, resulting in simple and efficient
+variable lookups and let-bindings.  Symbols could be used to refer to
+variables.  In particular, the \texttt{set} function, which performed
+assignment, accepted the \emph{name} of a variable as its argument.  A
+symbol had an associated \emph{property list}, essentially a
+dictionary mapping property names (also symbols) to values.
+
+Richard
 Stallman made this choice despite the fact that the two major emerging
 Lisps at the time---Common Lisp and Scheme---were moving to lexical
 scoping~\cite{CLtL1,R2RS}.
@@ -722,6 +723,14 @@ Section~\ref{sec:lexical-scoping}.
 \subsection{Lambda}
 \label{sec:lambda}
 
+In Lisp dialects, anonymous functions are usually the result of
+\texttt{lambda} expressions.  Here is an anomymous function that adds
+1 to a number:
+%
+\begin{verbatim}
+(lambda (x) (+ x 1))
+\end{verbatim}
+%
 Interestingly, \texttt{lambda} was not originally a keyword of the
 \Elisp{} language (unlike in MacLisp).  Up to Emacs-18, anonymous
 function \emph{values} could be lists of the following form:
@@ -771,7 +780,7 @@ Emacs followed suit the year after.
 Originally, they were just byte arrays.
 
 In 1992, during the early development of Emacs-19, this basic type was
-extended by Joseph Arceneaux with support for \emph{text-properties}: each
+extended by Joseph Arceneaux with support for \emph{text properties}: each
 char of a string can be annotated with a set of properties, which maps
 property names to values, where property names can be any symbol.  This can
 be used to carry information such as color and font to use when displaying
@@ -790,8 +799,8 @@ undesired complexities, and decided that Emacs's text properties should not
 have identity and should apply to the characters of the string so there is
 never a question of splitting or merging text properties.
 
-Along with buffer-local variables~\ref{sec:buffer-local-variables}, this is one of
-the very rare cases where the core \Elisp{} language has been extended with
+Along with buffer-local variables (see Section~\ref{sec:buffer-local-variables}), this is one of
+the cases where the core \Elisp{} language has been extended with
 a feature that specifically caters to the needs of the Emacs text editor, to
 keep track of rendering information.  It is more generally useful, of
 course, but turns strings into a much fancier datatype than in most
@@ -802,29 +811,57 @@ XEmacs, which required distinguishing between bytes and characters, and
 hence changing its string objects.  Characters are represented with
 a variable number of bytes, similar to \texttt{utf-8}, favoring a compact
 representation at the cost of a slower random access.  In practice, random
-access to strings is fairly rare, so it works rather well, but it does
-impose a significant constraint: there is an indirection between the string
-object and the bytes it holds because the \texttt{aset} primitive which
-replaces one of the string's characters with another by side-effect will
+access to strings is fairly rare, but it does
+impose a significant constraint: There is an indirection between the string
+object and the chars it holds because of the \texttt{aset} primitive.
+\texttt{(aset string index char)}
+replaces one of \texttt{string's} characters at index \texttt{index}
+with \texttt{char} by side-effect.  This will
 sometimes change the string's length in bytes, which requires relocating
 the string's bytes elsewhere.
 
 %% FIXME Mike: While reading the whole document, this part seemed rather
 %% uninteresting.  I think we should either drop it, or spice it up
 %% with information, stating at least in which context it was added.
-In XEmacs, strings have a ``modified-tick'' that is bumped every time
-a string is modified in-place.  This count can be retrieved with the
-new function \texttt{string-modified-tick}.  The XEmacs codebase never
-contained a user for this function, so the motivation for this is
-unclear.  It is a straightforward parallel to the
-\texttt{buffer-modified-tick} function that tracks modifications to
-buffers, and which has many uses.
+% In XEmacs, strings have a ``modified-tick'' that is bumped every time
+% a string is modified in-place.  This count can be retrieved with the
+% new function \texttt{string-modified-tick}.  The XEmacs codebase never
+% contained a use for this function, so the motivation for this is
+% unclear.  It is a straightforward parallel to the
+% \texttt{buffer-modified-tick} function that tracks modifications to
+% buffers, and which has many uses.
 
 \subsection{Backquote}
 \label{sec:backquote}
 
+Quasiquotation is a classic feature of Lisp readers, including
+MacLisp's~\cite{Bawden1999}: It allows creating nested list
+structures---particularly those representing code---via templates.
+Quasiquotation is usually introduced via \verb|`|, where the reader
+translates \verb|`|\textit{exp} to \texttt{(quasiquote \textit{exp})}.
+Nevertheless, the mechanism is often referred to as
+\textit{backquote}.  Backquote operates like \verb|'|, but a backquote
+form may contain \texttt{,} and \texttt{,@} subforms, which insert or
+splice the value of expressions into the result.
+
+Here is a backquote example:
+%
+\begin{verbatim}
+`(do ((i 0 (+ 1 i)))
+     ((>= i ,array-size))
+  (aset ,array-name i ,init-val))
+\end{verbatim}
+%
+This expands into the following backquote-less code:
+%
+\begin{verbatim}
+(list 'do '((i 0 (+ 1 i)))
+      (list (list '>= 'i array-size))
+      (list 'aset array-name 'i init-val))
+\end{verbatim}
+%
 Curiously, \Elisp{} did not until 1994 include the reader syntax for
-quasiquotation common to many other Lisps, including MacLisp~\cite{Bawden1999}.
+quasiquotation.
 Instead, the special forms that came with quasiquotation---backquote
 (\verb|`|), unquote (\verb|,|) and unquote-splicing (\verb|,@|) were
 the names of special forms.   Thus, what is usually written as:
@@ -891,7 +928,7 @@ This \emph{docstring} can be retrieved in various ways, in particular
 through the user interface.  This idea was apparently first introduced in
 the original Emacs implementation in TECO, then adapted to \Elisp{}.
 Many languages have since adopted them, notably Common
-Lisp~\cite{HyperSpec} and Clojure.
+Lisp~\cite{HyperSpec} and Clojure~\cite{ClojureDotOrg}.
 
 \subsection{Interactive functions}
 \label{sec:interactive-functions}
@@ -936,9 +973,30 @@ being activated.)
 \label{sec:non-local-exits}
 
 Very early on, \Elisp{} featured a good set of primitives to handle
-non-local exits.  Additionally to the \texttt{catch} and \texttt{throw}
-primitives inherited from MacLisp, it came with \texttt{unwind-protect},
-which was inherited from TECO, as well as an error handling system.
+non-local exits.  It inherited the \texttt{catch}, \texttt{throw}, and
+\texttt{unwind-protect} primitives from MacLisp.  Here is an example:
+%
+\begin{verbatim}
+(defun outer ()
+  (catch 'marker
+    (inner)))
+
+(defun inner ()
+  ...
+  (if x
+      (throw 'marker 'catch-value))
+  ...)
+\end{verbatim}
+%
+When \texttt{outer} is called, it calls \texttt{inner}.  If that call
+to \texttt{inner} evaluates to the \texttt{throw} form, it immediately
+aborts the current computation and jumps to the \texttt{catch} form
+(the last active \texttt{catch} form with the same \texttt{marker}
+label), which returns the \texttt{catch-value} value passed to it.
+
+The \texttt{unwind-protect} form allows attaching a ``cleanup form''
+to an expression, that will run even if expression evaluates to a
+non-local exit through \texttt{catch}.
 
 MacLisp's error-handling system was quite primitive, and had poor separation
 of signalling and handling~\cite{Pitman2001}.  \Elisp{} instead featured
@@ -1052,9 +1110,17 @@ behavior.  Emacs supports this at well-defined points called
 
 A hook is simply a variable bound to a list of zero-argument
 functions.  The \texttt{add-hook} function adds a function to such a
-list by reassigning the variable.  (This makes use of the ability to
-refer to a variable by its name symbol.)  The \texttt{run-hooks}
-function calls all functions in that list.
+list by reassigning the variable.  For example, the following form
+causes auto-fill mode to be turned on whenever \TeX{} mode is entered:
+%
+\begin{verbatim}
+(add-hook 'TeX-mode-hook 'auto-fill-mode)
+\end{verbatim}
+
+(This makes use of the ability to refer to a variable by its name
+symbol.)  The \texttt{run-hooks} function calls all functions in that
+list---there is a \texttt{(run-hooks 'TeX-mode-hook)} in the code
+setting up \TeX{} mode.
 
 Hooks are not a core language feature, but their use has been a
 pervasive convention in Emacs from the start.  In particular, many
@@ -1101,8 +1167,8 @@ advice later.
 
 The way the \texttt{defadvice} macro gave access to function arguments did
 not work with lexical scoping; furthermore time had shown that most of the
-non-core features of \texttt{defadvice} were very seldom used, and even more
-seldom used properly.  So in late 2012 Stefan Monnier developed a new
+non-core features of \texttt{defadvice} were very rarely used, and even more
+rarely used properly.  So in late 2012 Stefan Monnier developed a new
 package \texttt{nadvice.el} that provides the same core features with a much
 simpler design.  This simplification is mostly derived from better reuse of
 existing language features: for example the old advice system had special
@@ -1118,11 +1184,11 @@ Emacs-24.4.
 \subsection{I/O}
 
 One of the ways \Elisp{} distinguishes itself from most other programming
-languages is in its treatment of input/output: rather than follow the usual
+languages is in its treatment of input/output. Rather than follow the usual
 design based on some kind of file or stream object and primitives like
 \texttt{open}/\texttt{read}/\texttt{write}/\texttt{close}, \Elisp{} only
 offers coarser access to files via two primitive functions
-\texttt{insert-file-contents} and \texttt{write-region} which transfer file
+\texttt{insert-file-contents} and \texttt{write-region} that transfer file
 contents between a file and a buffer.  So all file manipulation takes place
 by reading the file into a buffer, performing the desired manipulation in
 this buffer, and then writing the result back into the file.
