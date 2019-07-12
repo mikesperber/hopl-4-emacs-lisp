@@ -608,9 +608,9 @@ wanted to have a real Lisp system but was constrained by the need for the
 implementation to be simple and lightweight enough to fit the limited
 resources of the machines of the time.  So the base language of \Elisp{} is
 a straightforward subset of MacLisp~\cite{Moon1974,Pitman1983} and Lisp
-Machine Lisp~\cite{LML}.
+Machine Lisp~\cite{WeinrebMoon1981}.
 
-Most basic special forms are identical: \texttt{defun},
+Most basic special forms are identical to MacLisp: \texttt{defun},
 \texttt{defvar}, \texttt{defmacro}, \texttt{let}, \texttt{let*},
 \texttt{cond}, \texttt{if}, \texttt{function}, \texttt{catch}, \texttt{throw},
 \texttt{unwind-protect}.  So are basic data structures: symbols,
@@ -620,6 +620,8 @@ Most basic special forms are identical: \texttt{defun},
 arrays) of the primitives offered in Lisp Machine Lisp, which happens to
 also be a subset of the Common Lisp primitives, rather than Maclisp's
 approach of accessing arrays as if they were functions.
+
+% FIXME: elaborate on arrays?
 
 One of the most famous (mis)features of \Elisp{} is that it only offered
 dynamic scoping of variables, where the latest binding of a variable is
