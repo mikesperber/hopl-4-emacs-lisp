@@ -655,16 +655,18 @@ variables, which tie the language to the editor.  One important
 pragmatic aspect of the use of the language was extensibility of
 existing code via hooks, discussed in Section~\ref{sec:hooks}.
 
-\subsection{Dynamic scoping}
+\subsection{Symbols and Dynamic scoping}
+
+% FIXME Mike: details about symbols and how property lists work --- A symbol
+% had an associated \emph{property list}, essentially a dictionary
+% mapping property names (also symbols) to values.
 
 \Elisp{} took from MacLisp the choice of dynamic scoping, where the
 latest binding of a variable is simply stored in the \emph{value slot}
 of the corresponding symbol object, resulting in simple and efficient
 variable lookups and let-bindings.  Symbols could be used to refer to
 variables.  In particular, the \texttt{set} function, which performed
-assignment, accepted the \emph{name} of a variable as its argument.  A
-symbol had an associated \emph{property list}, essentially a
-dictionary mapping property names (also symbols) to values.
+assignment, accepted the \emph{name} of a variable as its argument. 
 
 Richard
 Stallman made this choice despite the fact that the two major emerging
@@ -793,8 +795,8 @@ when strings are manipulated: XEmacs's extents cover a contiguous span of
 characters and they are objects in their own right with their own identity,
 so they need to be duplicated when a substring is selected, with the new
 extents not necessarily covering the same characters, and concatenation may
-end up bringing two ``identical'' extents next to each other but cannot
-merge them into one.  Richard Stallman felt like this was introducing
+end up bringing two ``identical'' extents next to each other 
+without merging them.  Richard Stallman felt like this was introducing
 undesired complexities, and decided that Emacs's text properties should not
 have identity and should apply to the characters of the string so there is
 never a question of splitting or merging text properties.
@@ -901,7 +903,7 @@ of old-style backquotes, while still keeping the actual behavior unchanged.
 Then in 2012 with the release of Emacs-24.1, the behavior was changed so
 that the old format is only recognized if it follows a parenthesis and is
 followed by a space.  The main motivation for this change was the
-introduction of the \texttt{pcase} macro where patterns can also use the
+introduction of the \texttt{pcase} macro (see Section~\ref{sec:pcase} where patterns can also use the
 backquote syntax and are commonly placed right after a parenthesis so they
 were otherwise mistaken for an old-style backquote syntax.
 
@@ -965,14 +967,14 @@ example, \verb|p| means that the function accepts a \emph{prefix
   argument}: The user can type \texttt{ESC} \emph{number} or
 \texttt{C-u} (to specify powers of 4) prior to invoking the function,
 and the number will be passed to the function as an argument, in this
-case as \texttt{arg}.  (The \verb|^| (a more recent addition) has to do with
+case as \texttt{arg}.  The \verb|^| (a more recent addition) has to do with
 region selection with a pressed shift key---it may lead to the region
-being activated.)
+being activated.
 
 \subsection{Non-local exits}
 \label{sec:non-local-exits}
 
-Very early on, \Elisp{} featured a good set of primitives to handle
+Very early on, \Elisp{} featured primitives to handle
 non-local exits.  It inherited the \texttt{catch}, \texttt{throw}, and
 \texttt{unwind-protect} primitives from MacLisp.  Here is an example:
 %
@@ -999,12 +1001,13 @@ to an expression, that will run even if expression evaluates to a
 non-local exit through \texttt{catch}.
 
 MacLisp's error-handling system was quite primitive, and had poor separation
-of signalling and handling~\cite{Pitman2001}.  \Elisp{} instead featured
-a \emph{condition system} inspired from the Lisp Machine although it did
-not cover all the features of the Lisp Machine system, such as the ability
-to recover from an error.
+of signalling and handling~\cite{Pitman2001}.
 
-The \texttt{signal} function takes an \texttt{ERROR-SYMBOL} classifying the
+As a result, \Elisp{} features
+a \emph{condition system} inspired by the Lisp Machine.  (It does
+not cover all the features of the Lisp Machine exception system, such as the ability
+to recover from an error.)
+The \texttt{signal} function takes an error symbol classifying the
 exceptional situation and an additional \texttt{DATA} argument.  An error
 symbol is a symbol with an \texttt{error-conditions} property that is a list
 of condition names.  For example, the following invocation states that
@@ -1015,12 +1018,16 @@ should have fulfilled the predicate \texttt{stipple-pixmap-p}:
     (signal 'wrong-type-argument (list #'stipple-pixmap-p pixmap))
 \end{verbatim}
 %%
-An invocation of \texttt{signal} escapes to the nearest
-use of \texttt{condition-case} in the call stack, which dispatches on the
-condition name.
-These condition names can be used to dispatch on the condition with
-the \texttt{condition-case} form which specifies a handler.
-Here is an example:
+An invocation of \texttt{signal} escapes to the nearest use of
+\texttt{condition-case} in the call stack, which dispatches on the
+condition name.  Note that it does not dispatch on the error symbol.
+For the \texttt{'wrong-type-argument} error symbol, \texttt{(get
+  'wrong-type-argument 'error-conditions)} returns the condition names
+\texttt{wrong-type-argument} and \texttt{error}.  This allows
+\texttt{condition-case} dispatch on both \texttt{wrong-type-argument}
+and \texttt{error} to work.
+
+Here is an example for \texttt{condition-case}:
 %%
 \begin{verbatim}
     (condition-case err
@@ -1043,7 +1050,7 @@ between signaling and handling code.
 
 Buffer-local variables are the prominent feature marking \Elisp{} as the
 extension language of a text editor.  In Emacs, \emph{buffers} are objects
-that store the contents of a file while it's being edited.  In addition to
+that store the contents of a file while it is being edited.  In addition to
 the file's content, buffers store auxiliary information such
 as the name of the associated file, the rules to use to highlight its
 contents, the editing mode to use, the character encoding used, etc.
@@ -1168,13 +1175,13 @@ advice later.
 The way the \texttt{defadvice} macro gave access to function arguments did
 not work with lexical scoping; furthermore time had shown that most of the
 non-core features of \texttt{defadvice} were very rarely used, and even more
-rarely used properly.  So in late 2012 Stefan Monnier developed a new
+rarely used properly.  As a result, in late 2012 Stefan Monnier developed a new
 package \texttt{nadvice.el} that provides the same core features with a much
 simpler design.  This simplification is mostly derived from better reuse of
-existing language features: for example the old advice system had special
+existing language features.  For example, the old advice system had special
 features to control whether a piece of advice should be compiled whereas in
-the new system there is no need for that because the body of pieces of
-advice is placed inside normal functions; similarly, the old advice system
+the new system there is no need for that because the body of a piece of
+advice is translated into a function.  Similarly, the old advice system
 has special primitives to get access to the function's original argument,
 whereas in the new system, the function's original arguments are passed as
 normal arguments to the piece of advice and can hence be accessed without
@@ -1194,10 +1201,10 @@ by reading the file into a buffer, performing the desired manipulation in
 this buffer, and then writing the result back into the file.
 
 Since this approach does not extend naturally to interaction with external
-processes or remote hosts, these are handled in a completely different way:
-there are primitive functions that spawn a sub-process or open up
+processes or remote hosts, these are handled in a completely different way.
+Primitive functions spawn a sub-process or open up
 a connection to a remote host and return a so-called \emph{process} object.
-These objects behave a bit like streams, with \texttt{process-send-string}
+These objects behave  a bit like streams, with \texttt{process-send-string}
 corresponding to the traditional \texttt{write}, but where the traditional
 \texttt{read} is replaced by execution of a callback whenever data is
 received from the sub-process or the remote host.
@@ -1217,8 +1224,7 @@ essential data representation of the implementation.  The following
 sections touch on other issues related to memory management:
 Section~\ref{sec:stack-scanning} describes the evolution of scanning
 GC roots. Section ~\ref{sec:heap-xemacs} describes changes in XEmacs
-to simplify heap management.  Section~\ref{sec:tag-bits} describes
-efforts in Emacs and XEmacs to reduce the tag bits.  Improvements to
+to simplify heap management.  Improvements to
 the GC algorithm are described in Section~\ref{sec:gc-algorithms}.
 Section~\ref{sec:image-dumping} describes the
 image-dumping mechanism in Emacs and XEmacs and how it changed over time.
@@ -1257,7 +1263,10 @@ those made to support lexical scoping; see Section~\ref{sec:lexical-scoping}.
 \subsection{Tail-call optimization}
 \label{sec:tco}
 
-\Elisp{} does not optimize away tail calls.  With Scheme being familiar to
+\Elisp{} does not implement proper tail calls~\cite{Clinger1998}: Each
+function call consumes stack space.
+
+With Scheme being familiar to
 many \Elisp{} developers, this is a disappointment for many.
 In 1991, Jamie Zawinski added an \texttt{unbind\_all} instruction to
 the Lucid Emacs byte-code engine (which appears in both Emacs and
@@ -1285,7 +1294,7 @@ This said, there were other objections to those patches:
 \item They only affected byte-compiled code, and while it is expected that
   most code is byte-compiled before being executed, it's very common to run
   non-compiled \Elisp{} code, especially during development or debugging.
-  So if \Elisp{} code started to rely on TCO, it would tend to cause problems
+  So if \Elisp{} code started to rely on proper tail calls, it would tend to cause problems
   when interpreted.  One alternative is to always byte-compile the code and
   get rid of the \Elisp{} interpreter, but that's a change that would have
   much further consequences.
@@ -1306,11 +1315,11 @@ This said, there were other objections to those patches:
   terms of reducing the stack
   allocation and increasing performance, but they also eliminate some
   activation frames from stack backtraces, which would be detrimental to
-  debugging.  This is particularly true for tail-calls which are made to
+  debugging.  This is particularly true for tail-calls to
   other functions, such as non-recursive tail-calls.
 \end{itemize}
 
-\subsubsection{Bootstrap}
+\subsection{Bootstrap}
 \label{sec:bootstrap}
 
 Since the \Elisp{} compiler is itself written in \Elisp{}, it requires
@@ -1332,24 +1341,23 @@ nevertheless because the previous use of pre-compiled files had hidden some
 circular dependencies.  Of those, the only one that was not removed in
 Emacs-21.1 is that some \Elisp{} code relies on the fact that some
 functions are \emph{autoloaded}, and some of that code is used to build the
-file that contains all those \texttt{autoload} declarations.  So instead,
-the solution found was to keep a pre-built copy of that file in the
-CVS repository.
+file that contains all those \texttt{autoload} declarations.  Consequently,
+a pre-built copy of that file is checked into revision control.
 
 \subsection{Data representation and memory management}
 \label{sec:data-representation}
 
 Emacs started with a data representation of its boxed data based on 32-bit
-words.  Those used a 7bit tag located in the most significant bits, 1 extra
-``mark'' bit (see below), and 24bit of immediate data: either an integer or
+words.  Those used a 7-bit tag located in the most significant bits, an extra
+``mark'' bit (see below), and 24-bit of immediate data: either an integer or
 a pointer.  Not all the possible 128 tags were actually used, but the 24
-remaining bits were amply sufficient to represent the needed pointers and
+remaining bits were more than sufficient to represent the needed pointers and
 integers for the typical available memory of the machines of that time.
 
 The memory management used a simple mark\&sweep garbage collection
-algorithm, and allocated objects by blocs of 4KB dedicated to a particular
+algorithm~\cite{McCarthy1960}, and allocated objects by blocs of 4KB dedicated to a particular
 kind of objects: one bloc each for cons cells, floats, symbols, markers, and
-strings, all other objects were allocated directly with \texttt{malloc}.
+strings. All other objects were allocated directly with \texttt{malloc}.
 To avoid fragmentation in the bloc of strings, those were compacted during
 each GC.  The ``mark'' bit in each 32-bit box belonged to the object
 that contained this 32-bit box rather than to the object referenced from
@@ -1359,9 +1367,10 @@ occupy only 2 words: the extra bit needed to store the mark\&sweep's
 word (i.e. of the \texttt{car}).
 
 Over time, this tagging scheme became problematic, since it limited to 16\;MB
-the size of the Lisp heap and to 8\;MB the size of files that could be edited.
-The limit on file size is fundamentally linked to the maximum representable
+for the Lisp heap.
+Moreover, the limit on file size is fundamentally linked to the maximum representable
 integer since that is how buffer positions are represented.
+This means that 8\;MB was the size limit for a file that could be edited.
 
 So in 1995, with the release of Emacs-19.29,
 the scheme was tweaked so that the tag was reduced to
@@ -1388,67 +1397,7 @@ used the data representation of Emacs 19.30 with the release of XEmacs 19.13, al
 
 % FIXME Mike: I think this is not th end of the story for XEmacs
 
-\subsection{Scanning the stack}
-\label{sec:stack-scanning}
-
-Until Emacs-21, the mark phase of the GC was precise: the global roots were
-explicitly registered, the GC knew all the types of Lisp objects and where
-the fields were that could contain references, and the roots from the stack
-were also explicitly registered into a singly linked list itself directly
-allocated on the stack.
-
-The cost of properly registering/unregistering stack references was
-perceived to be high: it slowed down execution, both directly by adding
-administrative code and indirectly by preventing some variables from being
-kept in registers, and it was a source of bugs, especially since some code
-tried to be clever and avoid registering local references under the
-assumption that the GC could not be triggered at that particular point.
-Similarly, the relocation of strings was a frequent source of hard-to-track
-bugs because only the references known to the GC were properly updated, so
-the programmer had to be careful not to keep unboxed or unregistered
-references to a string at any point where a GC was possible.
-
-To try and address those concerns, for Emacs-21.1, Gerd Möllmann changed the
-string compaction code and implemented a conservative stack scan.
-Strings are split into the string object itself, of fixed size and
-non-relocatable, and the relocatable string data to which the code (almost)
-never keeps a direct reference.  In order to find out if a given word found
-on the stack might be a potentially valid reference to a Lisp object, it
-keeps a memory map that records which regions of the memory contains which
-kinds of Lisp objects.  This conservative stack scanning could be used
-either in addition to the singly linked list of registered references, as
-a kind of debugging aide, or replace it altogether.
-
-Thanks to the interactive nature of Emacs and its opportunistic GC strategy
-which ensures that the GC is often run when the stack is almost empty, the
-slower conservative stack scanning and the potential false positives it
-introduces have not been a problem.  The maintenance of the memory map,
-implemented as a red-black tree, was hence the main cost of this new stack
-scanning, which proved competitive with the previous scheme.  The previous
-scheme was kept in use on some rare systems until Emacs-25.1, where all the
-register/unregister code of stack references could finally be removed.
-
-\subsection{Heap management in XEmacs}
-\label{sec:heap-xemacs}
-
-XEmacs has kept precise GC, and implemented a number of improvements
-in its memory management.  In particular, Markus Kaltenbach and Marcus
-Crestani (then Michael Sperber's students)
-implemented a scanning algorithm that used the memory-layout
-descriptors that had been added to support the portable dumper.  (See
-Section~\ref{sec:image-dumping}.)  Marcus Crestani also replaced the
-allocator: The new, much simplified allocator eliminated the
-distinction between objects that were allocated in blocks and those
-allocated via \texttt{malloc}, and would make the decision
-individually based on size~\cite{Crestani2005}.
-
-In the process of these GC improvements, Crestani and Michael Sperber
-also added \emph{ephemerons} to \Elisp{}~\cite{Hayes1997}.
-
-\subsection{Squeezing the tag bits}
-\label{sec:tag-bits}
-
-Of course, a limit of 256\;MB was not actually comfortable.
+Of course, a limit of 256\;MB was still not actually comfortable.
 
 XEmacs added a ``minimal-tagbits'' configure option with the release
 of XEmacs 21.0 in 1998, yielding 31-bit integers and a 1GB maximum
@@ -1476,15 +1425,13 @@ thriftiness but rather by the need to enforce that all objects be aligned on
 a multiple of 8, so as to free the least significant 3 bits for use as
 tag bits.
 
-At that point, there was no illusion that a maximum file size of 256\;MB was
-sufficient, but at the same time, the design of Emacs made it basically
-impossible to view files larger than 4GB or edit files larger than 2GB (on
-a 32-bit system) anyway, no matter which tagging scheme was used, so there was
-not a lot of room for improvement.
-
 In Emacs-23.2 the tagging scheme was tweaked to use 2 tags for integers,
 pushing the maximum file size to 512\;MB.
 
+The design of Emacs made it basically
+impossible to view files larger than 4GB or edit files larger than 2GB (on
+a 32-bit system) anyway, no matter which tagging scheme was used, so there was
+not much room for improvement.
 To cover the remaining space, a new compilation option
 \texttt{--with-wide-int} was introduced in Emacs-24.1 to make the boxed data
 use 64-bit on 32-bit systems.  This imposes a significant extra cost in terms
@@ -1530,6 +1477,63 @@ improved sufficiently to be competitive with the special-cased
 
 %% FIXME Stefan: With the addition of bignums in the upcoming Emacs-27, there's
 %% a chance that this compilation option won't be needed any more!
+
+
+\subsection{Scanning the stack}
+\label{sec:stack-scanning}
+
+Until Emacs-21, the mark phase of the GC was precise: the global roots were
+explicitly registered, the GC knew all the types of Lisp objects and where
+the fields were that could contain references, and the roots from the stack
+were also explicitly registered into a singly linked list itself directly
+allocated on the stack.
+
+The cost of properly registering/unregistering stack references was
+perceived to be high: it slowed down execution, both directly by adding
+administrative code and indirectly by preventing some variables from being
+kept in registers, and it was a source of bugs, especially since some code
+tried to be clever and avoid registering local references under the
+assumption that the GC could not be triggered at that particular point.
+Similarly, the relocation of strings was a frequent source of hard-to-track
+bugs because only the references known to the GC were properly updated, so
+the programmer had to be careful not to keep unboxed or unregistered
+references to a string at any point where a GC was possible.
+
+To try and address those concerns, for Emacs-21.1, Gerd Möllmann changed the
+string compaction code and implemented a conservative stack scan.
+Strings are split into the string object itself, of fixed size and
+non-relocatable, and the relocatable string data to which the code (almost)
+never keeps a direct reference.  In order to find out if a given word found
+on the stack might be a potentially valid reference to a Lisp object, it
+keeps a memory map that records which regions of the memory contains which
+kinds of Lisp objects.  This conservative stack scanning could be used
+either in addition to the singly linked list of registered references, as
+a kind of debugging aid, or replace it altogether.
+
+Thanks to the interactive nature of Emacs and its opportunistic GC strategy
+which ensures that the GC is often run when the stack is almost empty, the
+slower conservative stack scanning and the potential false positives it
+introduces have not been a problem.  The maintenance of the memory map,
+implemented as a red-black tree, was hence the main cost of this new stack
+scanning, which proved competitive with the previous scheme.  The previous
+scheme was kept in use on some rare systems until Emacs-25.1, where all the
+register/unregister code of stack references could finally be removed.
+
+\subsection{Heap management in XEmacs}
+\label{sec:heap-xemacs}
+
+XEmacs has kept precise GC, and implemented a number of improvements
+in its memory management.  In particular, Markus Kaltenbach and Marcus
+Crestani (then Michael Sperber's students)
+implemented a scanning algorithm that used the memory-layout
+descriptors that had been added to support the portable dumper.  (See
+Section~\ref{sec:image-dumping}.)  Marcus Crestani also replaced the
+allocator: The new, much simplified allocator eliminated the
+distinction between objects that were allocated in blocks and those
+allocated via \texttt{malloc}, and would make the decision
+individually based on size~\cite{Crestani2005}.
+In the process of these GC improvements, Crestani and Michael Sperber
+also added \emph{ephemerons} to \Elisp{}~\cite{Hayes1997}.
 
 \subsection{New GC algorithms}
 \label{sec:gc-algorithms}
@@ -1598,7 +1602,7 @@ platform-specific C files that implemented a function called
 back into an executable file.  However, the implementations of
 \texttt{unexec} have been hard to write and required frequent maintenance.
 For example, in 2016 the Glibc maintainers decided to make internal changes
-to their \texttt{malloc} implementation which broke this functionality.
+to their \texttt{malloc} implementation which broke this functionality~\cite{UnexecGlibc}.
 
 For XEmacs, in 1999, Olivier Galibert (based on initial work by Kyle
 Jones) started writing a \emph{portable dumper} that would serialize
