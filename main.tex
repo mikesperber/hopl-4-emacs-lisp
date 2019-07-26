@@ -598,7 +598,7 @@ first element of \texttt{y}.  (The \texttt{caar} function takes the
 car is equal to x.  Finally, if none of the cases matched,
 \texttt{assoc} recurs on the cdr of \texttt{y}.
 
-This function definition works in Emacs Lisp unchanged to this day.
+This function definition works in \Elisp{} unchanged to this day.
 
 \section{Base language design}
 \label{sec:base-language-design}
@@ -1666,7 +1666,10 @@ Edebug works around this difficulty by leaving arguments to unknown macros
 non-instrumented, which is safe but suboptimal.  To improve on this default
 behavior, the macro author can annotate its macro with a \emph{debug
   specification} which describes the role of each argument using a kind of
-grammar formalism, so Edebug can know which parts should be instrumented.
+grammar formalism, so Edebug can know which parts should be
+instrumented.
+
+% FIXME Stefan: can we have an example?
 
 \subsection{Profiling}
 \label{sec:profiler}
@@ -1716,21 +1719,20 @@ being based on fairly naive interpretation techniques.
 
 \subsubsection{First attempt}
 In 2004, Matthew Mundell developed the first JIT compiler for \Elisp.
-This took byte-compiled \Elisp{} code and used the GNU Lightning library to
-turn it into native machine code on the fly.
-The speedup obtained reached a factor of about 2 in the best case, which
-was rather disappointing, so it was not included into Emacs since the extra
-maintenance burden was not considered justified.
-An important reason for the disappointing performance is that it only
-removed the immediate interpretation overhead, but did not affect function
-calls nor was it able to remove redundant type checks.
+This took byte-compiled \Elisp{} code and used the GNU Lightning
+library~\cite{GNULightning} to turn it into native machine code on the
+fly.  The speedup obtained reached a factor of about 2 in the best
+case, which was rather disappointing: It only removed the immediate
+interpretation overhead, but did not affect function calls nor was it
+able to remove redundant type checks.  Consequently, the extra
+maintenance burden was not considered justified, and this JIT compiler
+was not included into Emacs.
 
 \subsubsection{Second attempt}
 Around 2012, Burton Samograd developed a second JIT compiler for \Elisp.
-This took a similar path, but using GNU Libjit instead.  It was very
+This took a similar path, but using GNU LibJIT~\cite{GNULibjit} instead.  It was very
 simplistic, turning each byte-code into a call to a C function.
-The resulting performance was not more impressive, the author measuring
-a 25\% speedup on a \texttt{raytracer.el} test.
+Thos compiler yielded a 25\% speedup on a \texttt{raytracer.el} test.
 
 \subsubsection{Third attempt}
 In 2016, Nickolas Lloyd developed the third JIT compiler for \Elisp, again
@@ -1746,9 +1748,9 @@ In 2018, Tom Tromey took another stab at it, again using GNU Libjit.
 Compared to Lloyd's JIT compiler, Tromey's focuses exclusively on code using lexical scoping,
 which is likely to benefit more, and it implements additional optimizations
 by getting rid at compile-time of all the manipulation of the Lisp stack.
-In the best case it reaches a speed up factor of 3.5, which is not ideal,
-but is a bit more respectable.  It can be used on all Emacs code but is still
-a very naive JIT compiler which requires further work to try and avoid
+In the best case it reaches a speed up factor of 3.5.
+It can be used on all Emacs code but is still
+very naive.  Thus, it requires further work to avoid
 pathological behavior in some situations where the JIT compilation is
 performed too eagerly, leading to significant slowdowns.
 
@@ -1818,7 +1820,7 @@ The developers of Lucid Emacs foresaw these problems, and
 instead made keymaps into an opaque datatype, forbidding manipulation via the
 S-expression primitives and giving themselves a lot more implementation
 freedom.  This allowed Lucid Emacs to evolve more rapidly the
-representations of keymaps to cater to a richer set of input events
+representation of keymaps to cater to a richer set of input events
 (including mouse events, for instance).
 
 This step reflected a general difference in philosophy.  Lucid Emacs
@@ -1869,7 +1871,7 @@ build and dynamically load shared libraries (called \textit{modules})
 written in C into the running editor and call the functions defined
 therein.  Starting in 2002 with XEmacs 21.5.5, a number of such modules
 were distributed with XEmacs, among them bindings for existing C
-libraries such as Zlib, Ldap, PostgreSQL.
+libraries such as Zlib, Ldap, and PostgreSQL.
 
 Even with modules in place, developers still had to create wrappers to
 make existing C libraries accessible in \Elisp{}.  In 2005, Zajcev
@@ -1897,7 +1899,7 @@ this:
 Richard Stallman refused to incorporate features like XEmacs's FFI into Emacs for fear
 that it would open up a backdoor with which developers would be able to
 legally circumvent the GNU General Public License (GPL) and thus link
-Emacs's own code with code that does not abide by these licensing terms~\cite{RMS03}.
+Emacs's own code with code that does not abide by its licensing terms~\cite{RMS03}.
 
 After many years of pressure on this issue (not just within the Emacs
 project, since this affected several other GNU projects, most notably GCC),
@@ -1981,7 +1983,8 @@ for documentation strings it's very rarely used for byte-code.
 %% Mike: No, Ben Wing tended to submit massive patches where the details got
 %% lost in the shuffle.
 
-XEmacs added a just-in-time optimization pass to the byte code.  This
+In 1989, Martin Buchholz added a just-in-time optimization pass to the
+XEmacs byte-code interpreter.  This
 would perform some validity checks ahead (eliding them from the actual
 execution), pre-compute stack use, make byte-code jumps relative
 (saving a register), and optimize relative jumps with short offsets.
@@ -1996,7 +1999,7 @@ byte-code format, this was not a goal with Emacs, and the two
 instruction sets eventually drifted and became incompatible.
 
 In late 2009, the Emacs byte-code interpreter was modified by Tom Tromey to
-implement token threading using GCC's \emph{computed goto} feature, when
+implement token threading using GCC's \emph{computed goto} feature~\cite{ComputedGOTO}, when
 available.  A patch for this feature had been submitted in May 2004 by
 Jaeyoun Chung, but the speed improvement was not even measured at that time
 so it had not raised much enthusiasm.  Tom's implementation was no better,
@@ -2012,11 +2015,11 @@ could (or, arguably, should) be.
 As Unicode~\cite{Unicode6} became universally adopted, Emacs and XEmacs both
 supported the standard.  Emacs 21.1 added support for the \texttt{utf-8}
 coding-system, by adding it as another ``national'' character set.
-This meant that an ``é'' coming from a utf-8 file was considered a different
-character from an ``é'' coming from a latin-9 file.  This already
-existed before for example between latin-1 and latin-9 (and many other
-character sets), but during the transition to utf-8 many more users were
-using a mix of two coding-systems and were hence affected by this problem.
+This meant that an ``é'' coming from a \texttt{utf-8} file was considered a different
+character from an ``é'' coming from a \texttt{latin-9} file.  This already
+existed before for example between \texttt{latin-1} and \texttt{latin-9} (and many other
+character sets), but during the transition to \texttt{utf-8} many more users were
+using a mix of two coding systems and were hence affected by this problem.
 For this reason, in 2001, Emacs 22.1 introduced a limited form of
 unification between character sets.  XEmacs did the same in 2001 with
 release 21.4.
@@ -2039,7 +2042,7 @@ Somewhat surprisingly for Lisp, \Elisp{} had no support for
 arbitrarily large integers (\emph{bignums}) for many years.
 Integer range was restricted by word size on the underlying machine,
 and representation changes over time have affected the exact range
-available in \Elisp.
+available in \Elisp.  (See Section~\ref{sec:data-representation}.)
 As a result, various functions dealing with numbers beyond the fixnum range
 had to implement workarounds.  Notable are \texttt{file-attributes} (which
 may use a pair of two fixnums for inode numbers, device numbers, user id,
@@ -2063,7 +2066,7 @@ other developers, finally added support for bignums to Emacs (again, using
 GMP).
 
 The support for bignums in XEmacs includes arbitrary-precision integers,
-rationals, and floating point numbers and is optional at build time, so
+rationals, and floating point numbers and is optional at build time. Thus,
 while it is fairly complete, XEmacs's \Elisp{} programs still cannot rely on
 bignum support.  Consequently, \texttt{file-attributes},
 \texttt{current-time}, and Calc still do not take advantage of bignums.
@@ -2184,10 +2187,10 @@ The work on those bugs made it clear that the implementation of buffer-local
 and frame-local bindings was too hard to follow, so in 2010 the
 implementation was reworked to make the different possible states more
 explicit in the code, and at the same time it was decided that frame-local
-variables should be deprecated: while buffer-local variables are used
+variables should be deprecated.  Buffer-local variables, however, are used
 extensively in \Elisp{} and replacing them with explicit accesses to fields
-or properties of buffer objects would make \Elisp{} code heavier,
-frame-local variables were not in widespread use and could easily be
+or properties of buffer objects would make \Elisp{} code heavier.
+Frame-local variables were not in widespread use and could easily be
 replaced by more traditional use of accessors to frame properties, making it
 hard to justify the extra complexity in the implementation.  So in 2012 with
 the release of Emacs-24.1, it became impossible to let-bind frame-local
@@ -2311,8 +2314,7 @@ was to facilitate moving \Elisp{} code to Scheme eventually, but the
 overall project was too large to ever be realized.
 
 Around 2002, Miles Bader started working on a branch of Emacs called
-\emph{lexbind} with support for lexical scoping, which was finally included
-in Emacs-24.1.  The solution he adopted was to have two languages: an
+\emph{lexbind} with support for lexical scoping.  The solution he adopted was to have two languages: an
 \Elisp{} with dynamic scope for backward compatibility, and another with
 scoping rules like those of Common Lisp, i.e.~lexical scope by default
 except for those variables that have been declared as dynamically scoped (in
