@@ -333,7 +333,7 @@ listed in parentheses.
 
 %% FIXME: I think we should strive to make this fit on a single page!
 \begin{center}
-  \begin{longtabu} to \textwidth {l|X|X}
+  \begin{longtabu} to \textwidth {l|p{2in}|X}
     1985-03-20 & GNU Emacs 13.0 \\
     & (Richard Stallman)\\
     & earliest recorded release\\[1ex]
@@ -348,21 +348,26 @@ listed in parentheses.
     & (Alan M.\ Caroll, Simon Kaplan)\\[1ex]
     1989-08-23 & GNU Emacs 18.55\\
     & (Richard Stallman)\\[1ex]
-    1990 & work on GNU Emacs 19 forks from GNU Emacs 18.55\\
+    1990 & work on GNU Emacs 19 forks from GNU Emacs 18.55 &
+    text properties, Sec.~\ref{sec:strings}; \texttt{advice.el}, Sec.~\ref{sec:hooks}
+    \\
     & (Joe Arcenaux)\\[1ex]
     1990-08-27 & Epoch 4.0\\
     & (Marc Andreesen)\\[1ex]
-    1990-04 & Lucid Emacs 19.0 \\
+    1990-04 & Lucid Emacs 19.0  & extents, Sec.~\ref{sec:strings} \\
     & (Jamie Zawinski)\\[1ex]
     1992-10-31 & GNU Emacs 18.59 \\
     & (Richard Stallman)\\
     & last release of Emacs 18\\[1ex]
-    1993-05-22 & GNU Emacs 19.7 beta\\
+    1993-05-22 & GNU Emacs 19.7 beta & \texttt{lambda} macro, Sec.~\ref{sec:lambda}
+    \\
     & (Jim Blandy)\\
     & first public beta of GNU Emacs 19\\[1ex]
     1993-05-27 & GNU Emacs 19.8 beta\\
     & (Jim Blandy)\\
-    1993-09-06 & Lucid Emacs 19.8\\
+    1993-09-06 & Lucid Emacs 19.8
+    & 4-bit tags, Sec~\ref{sec:data-representation}
+    \\
     & (Jamie Zawinski)\\
     & (merged Epoch, GNU Emacs 19.8)\\[1ex]
     1994-05-17 & GNU Emacs 19.23 beta\\
@@ -371,9 +376,15 @@ listed in parentheses.
     & (Jamie Zawinski)\\[1ex]
     1994-09-13 & XEmacs 19.11\\
     & (Chuck Thompson, Ben Wing)\\[1ex]
-    1994-11-01 & GNU Emacs 19.28\\
+    1994-11-01 & GNU Emacs 19.28 &
+    proper backquote, Sec.~\ref{sec:backquote}
+    \\
     & (Richard Stallman)\\
     & first official release of GNU Emacs 19\\[1ex]
+    199X-XX-XX & GNU Emacs 19.29 &
+    3-bit tags, Sec.~\ref{sec:data-representation}
+    \\
+    & (Richard Stallman)\\
     1995 & work on XEmacs 20 with MULE support begins\\[1ex]
     1995-09-01 & XEmacs 19.13\\
     & (Chuck Thompson, Ben Wing)\\
@@ -396,21 +407,27 @@ listed in parentheses.
     & (Steve Baur)\\
     & first stable release with MULE support\\
     & packages shipped separately\\[1ex]
+    XXXX-XX-XX & XEmacs 21.0 & 1-bit tags
+    \\[1ex]
     2001-04-16 & XEmacs 21.4\\
     & (Stephen Turnbull)\\[1ex]
     2001-10-20 & GNU Emacs 21.1\\
     & (Gerd Möllmann)\\[1ex]
+    2001-XX-XX & GNU Emacs 21.2 & last version with MLisp support, Sec.~\ref{sec:mock-lisp}\\
     2007-06-01 & GNU Emacs 22.1\\
     & (Richard Stallman)\\[1ex]
     2009-07-28 & GNU Emacs 23.1\\
     %% Chong and I started as maintainers in February 2008.
     & (Chong Yidong, Stefan Monnier)\\[1ex]
-    2012-06-10 & GNU Emacs 24.1\\
+    2012-06-10 & GNU Emacs 24.1 \\
+    & (Chong Yidong, Stefan Monnier)\\[1ex]
+    201X-XX-XX & GNU Emacs 24.4 & \texttt{nadvice.el}, Sec.~\ref{sec:hooks}\\ 
     & (Chong Yidong, Stefan Monnier)\\[1ex]
     2016-09-17 & GNU Emacs 25.1\\
     & (John Wiegley, Eli Zaretskii)\\[1ex]
     2018-05-28 & GNU Emacs 26.1\\
-    & (John Wiegley, Eli Zaretskii)
+    & (John Wiegley, Eli Zaretskii)\\
+    XXXX-XX-XX & GNU Emacs 27 & old-style backquotes removed, Sec.~\ref{sec:backquote}
   \end{longtabu}
 \end{center}
 
@@ -478,6 +495,7 @@ the design of the editing primitives was influenced by Gosling Emacs's
 Mock Lisp.
 
 \subsection{Mock Lisp}
+\label{sec:mock-lisp}
 
 \emph{Gosling Emacs}, arguably the immediate predecessor of today's Emacs,
 featured an extension language called \emph{MLisp} or \emph{Mock Lisp},
@@ -514,7 +532,7 @@ The \texttt{BP} parameter is for the location, at which the insertion
 is to take place.  \texttt{INSERT-PARENS} calls the primitive
 \texttt{INSERT} function three times; \texttt{INSERT} returns a new
 location, after the insertion, which gets threaded through the
-subsequent \texttt{INSERT} calls and finally rfeturned.
+subsequent \texttt{INSERT} calls and finally returned.
 
 The Mock Lisp primitives differed from those of ZWEI in that , whereas in
 Mock Lisp primitives all operated at the current \emph{point} (the current
@@ -661,6 +679,7 @@ pragmatic aspect of the use of the language was extensibility of
 existing code via hooks, discussed in Section~\ref{sec:hooks}.
 
 \subsection{Symbols and dynamic scoping}
+\label{sec:symbols}
 
 Like any Lisp, \Elisp{} has always had a symbol data type: The literal
 \texttt{'emacs} yields a symbol named \texttt{emacs}.  One way to look
@@ -778,7 +797,7 @@ imported from MacLisp) for the alternative notation:
     (function (lambda (..ARGS..) ..BODY..))
 \end{verbatim}
 %
-Around 1991, \texttt{lambda} was added as a macro, early during the
+In 1992, \texttt{lambda} was added as a macro, early during the
 development of Emacs-19.  The macro simply returns the list representation
 wrapped inside the \texttt{function} special form.  It is not completely
 clear why it took so long to introduce this simple macro, but it was likely
@@ -1144,7 +1163,7 @@ causes auto-fill mode to be turned on whenever \TeX{} mode is entered:
 \end{verbatim}
 
 (This makes use of the ability to refer to a variable by its name
-symbol.)  The \texttt{run-hooks} function calls all functions in that
+symbol, see Section~\ref{sec:symbols}.)  The \texttt{run-hooks} function calls all functions in that
 list---there is a \texttt{(run-hooks 'TeX-mode-hook)} in the code
 setting up \TeX{} mode.
 
