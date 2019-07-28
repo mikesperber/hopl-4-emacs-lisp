@@ -663,22 +663,29 @@ existing code via hooks, discussed in Section~\ref{sec:hooks}.
 
 \subsection{Symbols and Dynamic scoping}
 
-% FIXME Mike: details about symbols and how property lists work --- A symbol
-% had an associated \emph{property list}, essentially a dictionary
-% mapping property names (also symbols) to values.
+Like any Lisp, \Elisp{} has always had a symbol data type: The literal
+\texttt{'emacs} yields a symbol named \texttt{emacs}.  One way to look
+at symbols is that they are immutable strings with a fast equality
+check (and usually fast hashing).  This makes them suitable for values
+representing enumerations or options.  Another is that symbols can
+represent names in an \Elisp{} program.  Symbols are thus a key
+feature to make \Elisp{} \textit{homoiconic}, meaning that each
+\Elisp{} form can be represented by a data structure called an
+\textit{S-expression} that prints out the same as the form.
 
 \Elisp{} took from MacLisp the choice of dynamic scoping, where the
 latest binding of a variable is simply stored in the \emph{value slot}
 of the corresponding symbol object, resulting in simple and efficient
-variable lookups and let-bindings.  Symbols could be used to refer to
+variable lookups and let-bindings.  (A symbol, again borrowing from
+MacLisp, also carries a \textit{property list}, essentially a key-value
+mapping stored in a list.)  Symbols can be used to refer to
 variables.  In particular, the \texttt{set} function, which performed
-assignment, accepted the \emph{name} of a variable as its argument. 
+assignment, accepted a symbol naming the variable as its argument. 
 
 Richard
-Stallman made this choice despite the fact that the two major emerging
+Stallman chose dynamic scoping despite the fact that the two major emerging
 Lisps at the time---Common Lisp and Scheme---were moving to lexical
 scoping~\cite{CLtL1,R2RS}.
-
 Richard Stallman chose dynamic scoping to meet extensibility
 requirements in Emacs~\cite{Stallman1981}.  The Emacs code base uses
 variables for holding configuration options.  These configuration
