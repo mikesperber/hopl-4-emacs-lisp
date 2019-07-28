@@ -439,7 +439,7 @@ developed, such as \emph{gcc} and \emph{gdb}.  Also, Richard Stallman being
 the founder of the Free Software Foundation, Emacs is part of the FSF's GNU
 project and is hence linked to the FSF by its use of FSF's resources to host
 the code and own the copyright.  The link with the FSF is of course
-particularly strong because of Richard's role in Emacs.
+particularly strong because of Stallman's role in Emacs.
 
 The organization of Emacs's development is not really codified, but in
 practice the role of the maintainer is a balancing act between the desire to
@@ -2380,7 +2380,7 @@ code compiled using lexical scoping is generally expected to be marginally
 faster than if compiled with dynamic scoping.
 
 The introduction of \texttt{lexical-binding} in Emacs-24.1 went very smoothly,
-causing very few backward incompatible changes for users, in part because
+causing only few backward incompatible changes for users, in part because
 very few of Emacs's own files made use of it.  Converting existing code to
 use the new language is usually easy (consisting mainly in adding a few
 variable declarations, with the help of warnings from the byte-compiler) but
@@ -2410,7 +2410,7 @@ this had to be changed so that the code is macro-expanded in a separate
 phase before closure conversion and the actual byte-compilation, using a new
 \texttt{macroexpand-all} function.
 This caused some visible differences in corner cases where some macros ended
-up expanded in code which earlier was eliminated by optimizations before
+up expanded in code which earlier were eliminated by optimizations before
 getting to the point of macro-expansion, but in practice this did not cause
 any serious regression.
 
@@ -2438,7 +2438,7 @@ While working on the \texttt{lexical-binding} feature, Stefan Monnier grew
 increasingly frustrated with the shape of the code used to traverse the
 abstract syntax tree, littered with \texttt{car}, \texttt{cdr} carrying too
 little information, compared to the kind of code he would write for that in
-statically typed functional languages with algebraic datatypes.
+statically-typed functional languages with algebraic datatypes.
 
 So he started working on a pattern matching construct inspired by those
 languages.  Before embarking on this project, he looked for existing
@@ -2460,7 +2460,7 @@ that the pattern does match and hence can skip all the tests, leaving only the
 operations that extract data.
 
 After the release of Emacs-24.1, Stefan was made aware of Racket's
-\texttt{match} construct~\cite{RacketReference2018}, which somehow eluded
+\texttt{match} construct~\cite{RacketReference2018}, which had somehow eluded
 his earlier search for
 existing pattern matching macros and whose design makes it easy to define
 new patterns.  The implementation of Racket's \texttt{match} could not be
@@ -2475,35 +2475,39 @@ in a modular way. %% often using the new low-level pattern \texttt{app}.
 \label{sec:cl-clib}
 
 While the core of \Elisp{} has evolved very slowly over the years, the
-evolution of other Lisps (mostly Scheme and Common Lisp) has put pressure to
+evolution of other Lisps (mostly Scheme and Common Lisp) put pressure to
 try and add various extensions to the language.  As it turns out, \Elisp{},
 to a first approximation, can be seen as a subset of Common Lisp, so already
-in 1986 Cesar Quiroz \email{<quiroz@cs.rochester.edu>} wrote a \texttt{cl.el} package which provided various
+in 1986 Cesar Quiroz \email{<quiroz@cs.rochester.edu>} wrote a \texttt{cl.el} package that provided various
 Common Lisp facilities implemented as macros.  Emacs 18.51 was the
 first Emacs release to ship with \texttt{cl.el}, in 1988.
 
+% FIXME Stefan: Some other sections mention "new cl.el by David
+% Gillespie", but this isn't mentioned here.  It should.
+
 Richard Stallman never wanted \Elisp{} to morph into Common Lisp, but he saw
 the value of offering such facilities, so this \texttt{cl.el} package was
-included fairly early on into Emacs, and has been one of the most popular
-packages, used by a large proportion of \Elisp{} packages.  Yet, Richard did
+included with Emacs fairly early, and has been one of the most popular
+packages, used by a large proportion of \Elisp{} packages.  Yet,
+Stallman did
 not want to impose \texttt{cl.el} onto any Emacs user, so he imposed
 a policy where the use of \texttt{cl.el} was restricted \emph{within} Emacs
 itself.  More specifically, \Elisp{} packages bundled with Emacs were
 restricted to limit their use of \texttt{cl.el} in such a way that
 \texttt{cl.el} never needed to be loaded during a normal editing session.
 Concretely, this meant that the only features of \texttt{cl.el} that could
-be used were: macros and inlined functions.
+be used were macros and inlined functions.
 
-The reasons why Richard did not want to use \texttt{cl.el} and turn \Elisp{}
+The reasons why Stallman did not want to use \texttt{cl.el} and turn \Elisp{}
 into Common Lisp are not completely clear, but the following elements seem
 to have been part of the motivation:
 \begin{enumerate}
 \item Common Lisp was considered a very large language back then, so in all
   likelihood it would have taken a significant effort to really make
   \Elisp{} into a reasonably complete implementation of Common Lisp.
-\item Many aspects of Common Lisp design did not make consensus, as
+\item Many aspects of Common Lisp design were decided by majority not consensus, as
   evidenced by the divide between Common Lisp and of Scheme.
-  Richard disliked several aspects of Common Lisp's design, such as the use of
+  Stallman disliked several aspects of Common Lisp's design, such as the use of
   keyword arguments, especially in low-level primitives like
   \texttt{mapcar}.
 \item Some aspects of Common Lisp's design can incur 
@@ -2512,7 +2516,7 @@ to have been part of the motivation:
   \Elisp{}'s efficiency any worse.
 \item Keeping \Elisp{} small meant that users could participate in its
   development without having to learn all of Common Lisp.  When inclusion of
-  Common Lisp features was discussed, Richard would often point out the cost
+  Common Lisp features was discussed, Stallman would often point out the cost
   in terms of the need for more, and more complex, documentation.
 \item The implementation of \texttt{cl.el} was fairly invasive, redefining
   some core \Elisp{} functions.
@@ -2537,7 +2541,8 @@ took a longer road, where over the years, various macros and functions from
   \texttt{caar}, \texttt{cadr}, \texttt{cdar}, and \texttt{cddr}.
 \item[2001] Emacs-21.1 includes the hash-table functions, reimplemented in
   C, as well as the Common Lisp concept of \emph{keywords} (though only as
-  objects, not as arguments).  Additionally the macros \texttt{dolist},
+  objects, not as arguments). % FIXME Stefan: What does "objects, not arguments" mean?
+  Additionally, the macros \texttt{dolist},
   \texttt{dotimes}, \texttt{push}, and \texttt{pop} are also added to
   \Elisp{}, which introduced some difficulties: in \texttt{cl.el} those
   macros included extra functionality which relied on parts of
@@ -2563,10 +2568,10 @@ During the development of Emacs-24.3 the issue of better integration of the
 desire to use \texttt{cl.el} \emph{functions} within packages bundled with
 Emacs.  The main resistance from Richard Stallman was coming from the last point
 above, but this time, a compromise was found: replace
-the \texttt{cl.el} package with a new package (called \texttt{cl-lib.el})
-which provides the same facilities but with names which all use the
+the \texttt{cl.el} package with a new package \texttt{cl-lib.el}
+that provides the same facilities, but with names which all use the
 \texttt{cl-} prefix.  This way, the \texttt{cl-lib.el} package doesn't turn
-\Elisp{} into the Common Lisp language, but instead provides Common Lisp
+\Elisp{} into Common Lisp, but instead provides Common Lisp
 facilities under its own namespace, leaving \Elisp{} free to evolve in its
 own way.
 
@@ -2611,7 +2616,9 @@ forms take generalized variables as operands---in particular,
 \texttt{setf}, which treats a generalized variable as a reference and
 sets its value.
 
-In Common Lisp, macros accepting a place can ask ``\texttt{get-setf-expansion}''
+% FIXME Stefan: This needs examples for setf use here
+
+In Common Lisp, macros accepting a place can ask \texttt{get-setf-expansion}
 to turn it into a list of five elements:
 \begin{displaymath}
   (\id{VARS}~\id{VALS}~\id{STORE-VAR}~\id{STORE-FORM}
@@ -2655,7 +2662,8 @@ implementing the support for \texttt{setf} and friends in \Elisp{}, a fresh
 new implementation of the concept was used.  The reasons for this new
 implementation were:
 \begin{itemize}
-\item The implementor of \texttt{cl-lib} found the existing code was hard
+\item The implementor of \texttt{cl-lib} % FIXME Stefan: Who?
+  found the existing code was hard
   to follow, arguably a case of ``not-invented-here syndrome''.
 \item The previous code made use of internal helper functions from
   \texttt{cl.el} which we did not want to move to core \Elisp, so some
@@ -2701,7 +2709,7 @@ This design generally leads to cleaner and simpler code, and we can easily
 provide backward compatibility wrappers for most of Common Lisp's
 primitives.
 
-Any 5-tuple representation of a place can easily be turned into
+A Comoon-Lisp-style representation of a place can easily be turned into
 its corresponding higher-order function.  The reverse is not true, however, so
 this design precludes compatibility with Common Lisp and
 \texttt{cl.el}'s \texttt{get-setf-expansion}, which must produce the
@@ -2747,8 +2755,8 @@ this incompatibility.
 \subsection{Object-oriented programming} %Emacs-25.1
 \label{sec:oop}
 
-While \texttt{cl.el} early on provided compatibility with Common
-Lisp's \texttt{defstruct}, including the
+While \texttt{cl.el} provided compatibility with Common
+Lisp's \texttt{defstruct} early on, including the
 ability to define new structs as extensions/subtypes of others, thus
 providing a limited form of inheritance, actual support for object-oriented
 programming in the form of method dispatch has been historically limited
@@ -2761,6 +2769,9 @@ of some ``Emacs Interpreted Objects'' package but in reality the acronym
 came before its expansion.  EIEIO started as an experiment to try use
 an object system in Emacs, first following a model like that of C++, but
 very soon switching to a CLOS-inspired model.
+
+% FIXME Stefan: Rudimentary example would be nice, as well as
+% defmethod below
 
 EIEIO is an implementation of a subset of CLOS, the Common Lisp Object
 System~\cite{DeMichielGabriel1987}.  CLOS is a somewhat unusual object
@@ -2885,7 +2896,7 @@ it.  This started as an attempt to adapt to \texttt{cl-generic.el} the EIEIO
 facilities to interactively explore EIEIO objects and methods, but is more
 modular and better integrated with the rest of Emacs's on-line help system.
 
-As of Emacs-26, object support in \Elisp{} is hence split into 4 parts: the
+As of Emacs-26, object support in \Elisp{} is hence split into four parts: the
 old \texttt{cl-defstruct} provided by \texttt{cl-lib.el} which allows
 defining new object types and supports single-inheritance; \texttt{defclass}
 provided by EIEIO which offers similar functionality plus multiple
@@ -2952,7 +2963,7 @@ waiting for the next user command.
 
 While this very limited form of cooperative concurrency was slightly
 improved in 1994's Lucid Emacs 19.9 and 1996's Emacs-19.31 by adding native support for timers (they
-were earlier implemented as an asynchronous process sending Emacs output at
+had earlier been implemented as an asynchronous process sending Emacs output at
 the requested time), it has been the only form of concurrency available for
 most of Emacs's life.
 
@@ -2971,7 +2982,7 @@ to retro-fit to existing code.
 So, shared-memory concurrency was largely considered as inapplicable to
 \Elisp{}.  Nevertheless, in November 2008, Giuseppe Scrivano posted a first
 naive attempt at adding threads to \Elisp{}.  This effort did not go much
-further, but it inspired Tom Tromey to try its own luck at the game.
+further, but it inspired Tom Tromey to try its own luck.
 In 2010, he started to work on adding shared-memory cooperative concurrency
 primitives like \texttt{make-thread} to Emacs.  Interaction with the
 implementation of dynamic scoping, which is based on a global state for
@@ -3070,24 +3081,24 @@ identifier should be considered an internal definition).
 There have been many attempts to remedy this situation by providing support
 for some form of namespacing:
 \begin{itemize}
-\item In May 2011, Christopher Wellons developed the Fakespace package which
+\item In May 2011, Christopher Wellons developed the \texttt{fakespaces} package which
   lets one define private variables and functions and then prevents them
   from escaping into the global namespace.  Non-private definitions still
   rely on the usual package-prefix naming convention to avoid conflicts.
-\item In October 2012, Chris Barrett developed the Namespaces package which
+\item In October 2012, Chris Barrett developed the \texttt{Namespaces} package which
   provides an extensive set of new macros to define namespaces, define
   functions and variables in those namespaces, and use them from
   other namespaces.
 \item In March 2013, Wilfred Hughes developed the proof-of-concept
   \texttt{with-namespace} macro which basically adds the specified namespace
   prefix to all the elements defined in its body.
-\item At the same time, Yann Hodique developed the proof-of-concept Codex
-  package which instead tries to provide a functionality similar to
+\item At the same time, Yann Hodique developed the proof-of-concept \texttt{Codex}
+  package which instead tries to provide functionality similar to
   Common Lisp's packages, where each package has its own \emph{obarray}.
-\item In early 2014, Artur Malabarba developed the Names package, which
+\item In early 2014, Artur Malabarba developed the \texttt{Names} package, which
   takes the approach of \texttt{with-namespace}, but doing a much more
   thorough job.
-\item In 2015, the same Artur Malabarba developed the Nameless package which
+\item In 2015, the same Artur Malabarba developed the \texttt{Nameless} package which
   takes a completely different approach: it does not provide any new
   \Elisp{} construct and instead focuses on making Emacs \emph{hide} the
   package prefixes from the user while working on the code.
@@ -3096,7 +3107,7 @@ for some form of namespacing:
 To date, no namespacing facility has been incorporated into Emacs, nor seen
 much use in other packages.  The last time this subject was (hotly) debated
 among Emacs maintainers and contributors, around 2013 following a blog post
-by Nic Ferrier, no consensus appeared, but other than inertia one of the
+by Nic Ferrier, no consensus emerged, but other than inertia one of the
 main arguments in favor of the status quo was that \Elisp's poor man's
 namespacing makes cross-referencing easier: any simple textual search can be
 used to find definitions and uses of any global function or variable,
@@ -3170,6 +3181,8 @@ ship with a fairly complete implementation of \Elisp{} that translates
 Guile-Emacs system, which is a work-in-progress modification of Emacs where
 the \Elisp{} engine is provided by Guile.
 %% FIXME: Motivations?
+
+% FIXME: Citation?
 
 \subsection{Emacs-Ejit}
 
