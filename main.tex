@@ -611,6 +611,12 @@ resources of the machines of the time.  So the base language of \Elisp{} is
 a straightforward subset of MacLisp~\cite{Moon1974,Pitman1983} and Lisp
 Machine Lisp~\cite{WeinrebMoon1981}.
 
+Contrary to its siblings Common-Lisp and Scheme, which both strive for
+a kind of completeness and consistency (tho in different ways), Richard has
+no such desire for \Elisp, even occasionally reminding contributors
+not to ``propose new Emacs features for mere completeness'
+sake.''~\cite{RMS-completeness}.
+
 Most basic special forms are identical to MacLisp: \texttt{defun},
 \texttt{defvar}, \texttt{defmacro}, \texttt{let}, \texttt{let*},
 \texttt{cond}, \texttt{if}, \texttt{function}, \texttt{catch}, \texttt{throw},
@@ -2500,7 +2506,7 @@ be used were macros and inlined functions.
 
 The reasons why Stallman did not want to use \texttt{cl.el} and turn \Elisp{}
 into Common Lisp are not completely clear, but the following elements seem
-to have been part of the motivation:
+to have been part of the motivations:
 \begin{enumerate}
 \item Common Lisp was considered a very large language back then, so in all
   likelihood it would have taken a significant effort to really make
@@ -2509,7 +2515,7 @@ to have been part of the motivation:
   evidenced by the divide between Common Lisp and of Scheme.
   Stallman disliked several aspects of Common Lisp's design, such as the use of
   keyword arguments, especially in low-level primitives like
-  \texttt{mapcar}.
+  \texttt{mapcar}~\cite{RMS-keyword-args-are-clunky}.
 \item Some aspects of Common Lisp's design can incur 
   significant overhead, and Emacs already carried the stigma of \emph{eight megabytes and
     constantly swapping}, so there were good reasons to try and not make
@@ -2517,7 +2523,8 @@ to have been part of the motivation:
 \item Keeping \Elisp{} small meant that users could participate in its
   development without having to learn all of Common Lisp.  When inclusion of
   Common Lisp features was discussed, Stallman would often point out the cost
-  in terms of the need for more, and more complex, documentation.
+  in terms of the need for more, and more complex,
+  documentation~\cite{RMS-cl-big-doc}.
 \item The implementation of \texttt{cl.el} was fairly invasive, redefining
   some core \Elisp{} functions.
 \item Finally, turning \Elisp{} into Common Lisp would imply a loss of control,
@@ -2573,7 +2580,7 @@ that provides the same facilities, but with names which all use the
 \texttt{cl-} prefix.  This way, the \texttt{cl-lib.el} package doesn't turn
 \Elisp{} into Common Lisp, but instead provides Common Lisp
 facilities under its own namespace, leaving \Elisp{} free to evolve in its
-own way.
+own way~\cite{RMS-cl-real}.
 
 The implementation of \texttt{cl-lib} mostly just took \texttt{cl.el} and
 added the \texttt{cl-} prefix to its definitions while at the same time a new
