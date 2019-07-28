@@ -762,7 +762,14 @@ pre-existing quoted Lisp literal mechanism:
     '(lambda (..ARGS..) ..BODY..)
 \end{verbatim}
 %
-The extra quote character was a very small price to pay for a slightly
+This expression evaluates to a nested list structure---\texttt{'}$e$
+is read as \texttt{(quote \textnormal{$e$})}---with the
+\texttt{lambda} symbol as its first element etc.  When a program calls
+\texttt{funcall} passing such a value, \texttt{funcall} would
+recognize the list structure as representing a \texttt{lambda}
+expression and invoke the interpreter on it.
+
+The extra quote character was a small price to pay for a slightly
 simpler Lisp implementation.  In order for the byte-compiler to be able
 to distinguish such an anonymous function in the source code from a mere
 quoted list, \Elisp{} needed to use the \texttt{function} special form (also
