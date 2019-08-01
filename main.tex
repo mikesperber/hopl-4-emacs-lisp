@@ -322,22 +322,18 @@ change to the current \emph{XEmacs}.
 %% between Chong Yidong and Stefan Monnier, then Richard again, then
 %% John Wiegley, later joined by and then replace by Eli Zaretskii.
 
-This section contains a timeline of significant milestones in the
-development of Emacs and Lucid Emacs/XEmacs.  It also includes a few
-milestones from \textit{Epoch}, a predecessor to Lucid Emacs that
-had support for multiple windows.
-
-For the time until 2007, the timeline in this section borrows much
-from Jamie Zawinski's timeline~\cite{JWZTimeline}.  Maintainers are
-listed in parentheses.
-
 \newcommand \EDate [2] {#1}     %Ignore second argument (day) to save space.
 
-\newpage
-%% FIXME: I think we should strive to make this fit on a single page!
+\begin{table}
+  %% FIXME: What is the role of the persons we mentions:
+  %% For Emacs it seems to be the official "head maintainer", but for
+  %% XEmacs, I'm not sure.
+  \caption{Emacs development timeline}
+  \label{tab:timeline}
 \begin{center}
-  \begin{longtabu} to \textwidth {l|l|l|X}
-    {}\EDate{1985-03}{-20}
+  \begin{tabular}{l|l|l|l}
+    Date & Version & Maintainer & Notes \\ \hline
+    \EDate{1985-03}{-20}
     & Emacs 13.0 & Richard Stallman & Earliest recorded release \\
     \EDate{1985-07}{-15}
     & Emacs 16.56 & Richard Stallman
@@ -350,54 +346,71 @@ listed in parentheses.
     1990 & Emacs 19 & Joe Arcenaux & Forks from Emacs 18.55 &
     &&& Text properties, Sec.~\ref{sec:strings};\\
     &&& \texttt{advice.el}, Sec.~\ref{sec:hooks} \\
-    \EDate{1990-08}{-27} & Epoch 4.0 & Marc Andreesen \\
     1990-04 & Lucid Emacs 19.0 & Jamie Zawinski & Extents, Sec.~\ref{sec:strings} \\
+    \EDate{1990-08}{-27} & Epoch 4.0 & Marc Andreesen \\
     \EDate{1992-10}{-31} & Emacs 18.59 & Richard Stallman
-    & Last release of Emacs 18\\[1ex]
+    & Last release of Emacs 18\\
     \EDate{1993-05}{-22} & Emacs 19.7 beta & Jim Blandy & First public beta of Emacs 19 \\
     &&& \texttt{lambda} macro, Sec.~\ref{sec:lambda}\\
     \EDate{1993-05}{-27} & Emacs 19.8 beta & Jim Blandy \\
     \EDate{1993-09}{-06} & Lucid Emacs 19.8 & Jamie Zawinski
     & 4-bit tags, Sec~\ref{sec:data-representation} \\
-    &&& Merged Epoch and Emacs 19.8 \\[1ex]
+    &&& Merged Epoch and Emacs 19.8 \\
     \EDate{1994-05}{-17} & Emacs 19.23 beta & Richard Stallman \\
-    \EDate{1994-05}{-27} & Lucid Emacs 19.10 & Jamie Zawinski \\[1ex]
-    \EDate{1994-09}{-13} & XEmacs 19.11 & Chuck Thompson, Ben Wing \\[1ex]
+    \EDate{1994-05}{-27} & Lucid Emacs 19.10 & Jamie Zawinski \\
+    \EDate{1994-09}{-13} & XEmacs 19.11 & Chuck Thompson, Ben Wing \\
     \EDate{1994-11}{-01} & Emacs 19.28 & Richard Stallman
     & Proper backquote, Sec.~\ref{sec:backquote} \\
-    &&& First real release of Emacs 19\\[1ex]
+    &&& First real release of Emacs 19\\
     \EDate{1995-06}{-19} & Emacs 19.29 & Richard Stallman
     & 3-bit tags, Sec.~\ref{sec:data-representation} \\
-    1995 & XEmacs 20 && Work on MULE support begins\\[1ex]
+    1995 & XEmacs 20 && Work on MULE support begins\\
     \EDate{1995-09}{-01} & XEmacs 19.13 & Chuck Thompson, Ben Wing
-    & Merged Emacs 19.30\\[1ex]
-    \EDate{1995-11}{-24} & Emacs 19.30 & Richard Stallman \\[1ex]
-    \EDate{1996-05}{-25} & Emacs 19.31 & Richard Stallman \\[1ex]
-    \EDate{1996-08}{-21} & Emacs 19.34 & Richard Stallman \\[1ex]
-    \EDate{1997-02}{-09} & XEmacs 20.0 & Steve Baur \\[1ex]
-    \EDate{1997-03}{-26} & XEmacs 19.15 & Steve Baur \\[1ex]
-    \EDate{1997-09}{-17} & Emacs 20.1 & Richard Stallman \\[1ex]
-    \EDate{1997-10}{-31} & XEmacs 19.16 & Steve Baur \\[1ex]
+    & Merged Emacs 19.30\\
+    %% \EDate{1995-11}{-24} & Emacs 19.30 & Richard Stallman \\
+    %% \EDate{1996-05}{-25} & Emacs 19.31 & Richard Stallman \\
+    \EDate{1996-08}{-21} & Emacs 19.34 & Richard Stallman
+    & Last release of Emacs-19 \\
+    \EDate{1997-02}{-09} & XEmacs 20.0 & Steve Baur \\
+    \EDate{1997-03}{-26} & XEmacs 19.15 & Steve Baur \\
+    \EDate{1997-09}{-17} & Emacs 20.1 & Richard Stallman
+    & First release with MULE \\
+    \EDate{1997-10}{-31} & XEmacs 19.16 & Steve Baur \\
     \EDate{1998-02}{-28} & XEmacs 20.4 & Steve Baur
     & First stable release with MULE\\ % support
-    &&& Packages shipped separately\\[1ex]
-    \EDate{1998-07}{-12} & XEmacs 21.0 && 1-bit tags \\[1ex]
-    \EDate{2001-04}{-16} & XEmacs 21.4 & Stephen Turnbull \\[1ex]
-    \EDate{2001-10}{-20} & Emacs 21.1 & Gerd Möllmann \\[1ex]
-    \EDate{2002-03}{-18} & Emacs 21.2 & Gerd Möllmann
-    & Last version with MLisp support, Sec.~\ref{sec:mock-lisp}\\
-    \EDate{2007-06}{-01} & Emacs 22.1 & Richard Stallman \\[1ex]
+    &&& Packages shipped separately\\
+    \EDate{1998-07}{-12} & XEmacs 21.0 & XXX ?FIXME? XXX & 1-bit tags \\
+    \EDate{2001-04}{-16} & XEmacs 21.4 & Stephen Turnbull \\
+    \EDate{2001-10}{-20} & Emacs 21.1 & Gerd Möllmann
+    & New redisplay engine \\
+    %% \EDate{2002-03}{-18} & Emacs 21.2 & Gerd Möllmann
+    %% FIXME: AFAICT, the mocklisp.[ch] files were removed *after* 21.4
+    %% & Last version with MLisp support, Sec.~\ref{sec:mock-lisp}\\
+    \EDate{2007-06}{-01} & Emacs 22.1 & Richard Stallman
+    & Last bits of Mock Lisp removed \\
     %% Chong and I started as maintainers in February 2008.
-    \EDate{2009-07}{-28} & Emacs 23.1 & Chong Yidong, Stefan Monnier \\[1ex]
-    \EDate{2012-06}{-10} & Emacs 24.1 & Chong Yidong, Stefan Monnier \\[1ex]
+    \EDate{2009-07}{-28} & Emacs 23.1 & Chong Yidong, Stefan Monnier
+    & Unicode internally, Sec.~\ref{sec:unicode}  \\
+    \EDate{2012-06}{-10} & Emacs 24.1 & Chong Yidong, Stefan Monnier
+    & Lexical scoping, Sec.~\ref{sec:lexical-scoping} \\
     \EDate{2014-10}{-20} & Emacs 24.4 & Chong Yidong, Stefan Monnier
     & \texttt{nadvice.el}, Sec.~\ref{sec:hooks}\\ 
-    \EDate{2016-09}{-17} & Emacs 25.1 & John Wiegley, Eli Zaretskii \\[1ex]
-    \EDate{2018-05}{-28} & Emacs 26.1 & John Wiegley, Eli Zaretskii \\
-    \EDate{20??-??}{-??} & Emacs 27 &
-        & Old-style backquotes removed, Sec.~\ref{sec:backquote} \\
-  \end{longtabu}
+    \EDate{2016-09}{-17} & Emacs 25.1 & John Wiegley, Eli Zaretskii \\
+    \EDate{2018-05}{-28} & Emacs 26.1 & John Wiegley, Eli Zaretskii
+    & Limited concurrency, Sec~\ref{sec:concurrency} \\
+    %% \EDate{20??-??}{-??} & Emacs 27 &
+    %%     & Old-style backquotes removed, Sec.~\ref{sec:backquote} \\
+  \end{tabular}
 \end{center}
+\end{table}
+
+Table~\ref{tab:timeline} contains a timeline of significant milestones in
+the development of Emacs and Lucid Emacs/XEmacs.  It also includes a few
+milestones from \textit{Epoch}, a predecessor to Lucid Emacs that had
+support for multiple windows.
+
+For the time until 2007, the timeline in this table borrows much
+from Jamie Zawinski's timeline~\cite{JWZTimeline}.
 
 % FIXME: timeline Emacs Lisp evolution?
 
@@ -471,7 +484,7 @@ which bears visual resemblance to \Elisp{}.  MLisp featured function
 definitions via \texttt{defun}, as well as many built-in functions (such as
 \texttt{eolp}, \texttt{forward-character}, \texttt{save-excursion}) whose
 names survive in \Elisp{}.  Emacs even contained some limited
-back\-ward-compatibility support for MLisp until Emacs 21.2 in 2001.
+back\-ward-compatibility support for MLisp until Emacs 22 in 2007.
 
 MLisp was a quite limited language: It lacked cons cells and lists.
 MLisp did have dynamic scoping and local variables, but a peculiar
@@ -502,10 +515,10 @@ is to take place.  \texttt{INSERT-PARENS} calls the primitive
 location, after the insertion, which gets threaded through the
 subsequent \texttt{INSERT} calls and finally returned.
 
-The Mock Lisp primitives differed from those of ZWEI in that , whereas in
-Mock Lisp primitives all operated at the current \emph{point} (the current
-``cursor position''), as was the case in TECO.  Here is the
-\texttt{in-parens} function from the Gosling Emacs manual~\cite{Gosling1981}:
+The Mock Lisp primitives differed from those of ZWEI in that they operated
+at the current \emph{point} (the current ``cursor position''), as was the
+case in TECO.  Here is the \texttt{in-parens} function from the Gosling
+Emacs manual~\cite{Gosling1981}:
 %
 \begin{verbatim}
 (defun 
@@ -2017,6 +2030,7 @@ optimized, so the relative cost of the \texttt{switch} is not as high as it
 could (or, arguably, should) be.
 
 \subsection{Unicode}
+\label{sec:unicode}
 
 As Unicode~\cite{Unicode6} became universally adopted, Emacs and XEmacs both
 supported the standard.  Emacs 21.1 added support for the \texttt{utf-8}
