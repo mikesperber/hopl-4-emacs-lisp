@@ -283,7 +283,7 @@ can be summarized as:
 %% years ago".
 In 1988, Lucid Inc., a software development company founded by Richard
 Gabriel and based in Menlo
-Park, Carlifornia, started a project called \emph{Energize}~\cite{GabrielEtAl1990,Gabriel-personal}.
+Park, California, started a project called \emph{Energize}~\cite{GabrielEtAl1990,Gabriel-personal}.
 Energize was to be a C/C++ integrated development environment based on
 Emacs~\cite{GabrielLetter}.  Lucid decided to use Emacs as the central
 component of Energize.  At the time, the current version of Emacs was
@@ -331,103 +331,71 @@ For the time until 2007, the timeline in this section borrows much
 from Jamie Zawinski's timeline~\cite{JWZTimeline}.  Maintainers are
 listed in parentheses.
 
+\newcommand \EDate [2] {#1}     %Ignore second argument (day) to save space.
+
+\newpage
 %% FIXME: I think we should strive to make this fit on a single page!
 \begin{center}
-  \begin{longtabu} to \textwidth {l|p{2in}|X}
-    1985-03-20 & GNU Emacs 13.0 \\
-    & (Richard Stallman)\\
-    & earliest recorded release\\[1ex]
-    1985-07-15 & GNU Emacs 16.56 \\
-    & (Richard Stallman)\\
-    & oldest version for which code survives, code from Gosling Emacs expunged\\[1ex]
-    1987-09-18 & GNU Emacs 18.49\\
-    & (Richard Stallman)\\[1ex]
-    1987 & Epoch forks from GNU Emacs 18.49\\
-    & (Alan M.\ Carroll)\\[1ex]
-    1988-12-14 & Epoch 1.0\\
-    & (Alan M.\ Caroll, Simon Kaplan)\\[1ex]
-    1989-08-23 & GNU Emacs 18.55\\
-    & (Richard Stallman)\\[1ex]
-    1990 & work on GNU Emacs 19 forks from GNU Emacs 18.55 &
-    text properties, Sec.~\ref{sec:strings}; \texttt{advice.el}, Sec.~\ref{sec:hooks}
-    \\
-    & (Joe Arcenaux)\\[1ex]
-    1990-08-27 & Epoch 4.0\\
-    & (Marc Andreesen)\\[1ex]
-    1990-04 & Lucid Emacs 19.0  & extents, Sec.~\ref{sec:strings} \\
-    & (Jamie Zawinski)\\[1ex]
-    1992-10-31 & GNU Emacs 18.59 \\
-    & (Richard Stallman)\\
-    & last release of Emacs 18\\[1ex]
-    1993-05-22 & GNU Emacs 19.7 beta & \texttt{lambda} macro, Sec.~\ref{sec:lambda}
-    \\
-    & (Jim Blandy)\\
-    & first public beta of GNU Emacs 19\\[1ex]
-    1993-05-27 & GNU Emacs 19.8 beta\\
-    & (Jim Blandy)\\
-    1993-09-06 & Lucid Emacs 19.8
-    & 4-bit tags, Sec~\ref{sec:data-representation}
-    \\
-    & (Jamie Zawinski)\\
-    & (merged Epoch, GNU Emacs 19.8)\\[1ex]
-    1994-05-17 & GNU Emacs 19.23 beta\\
-    & (Richard Stallman)\\[1ex]
-    1994-05-27 & Lucid Emacs 19.10\\
-    & (Jamie Zawinski)\\[1ex]
-    1994-09-13 & XEmacs 19.11\\
-    & (Chuck Thompson, Ben Wing)\\[1ex]
-    1994-11-01 & GNU Emacs 19.28 &
-    proper backquote, Sec.~\ref{sec:backquote}
-    \\
-    & (Richard Stallman)\\
-    & first official release of GNU Emacs 19\\[1ex]
-    199X-XX-XX & GNU Emacs 19.29 &
-    3-bit tags, Sec.~\ref{sec:data-representation}
-    \\
-    & (Richard Stallman)\\
-    1995 & work on XEmacs 20 with MULE support begins\\[1ex]
-    1995-09-01 & XEmacs 19.13\\
-    & (Chuck Thompson, Ben Wing)\\
-    & merged Emacs 19.30\\[1ex]
-    1995-11-24 & GNU Emacs 19.30\\
-    & (Richard Stallman)\\[1ex]
-    1996-05-25 & GNU Emacs 19.31\\
-    & (Richard Stallman)\\[1ex]
-    1996-08-21 & GNU Emacs 19.34\\
-    & (Richard Stallman)\\[1ex]
-    1997-02-09 & XEmacs 20.0\\
-    & (Steve Baur)\\[1ex]
-    1997-03-26 & XEmacs 19.15\\
-    & (Steve Baur)\\[1ex]
-    1997-09-17 & Emacs 20.1\\
-    & (Richard Stallman)\\[1ex]
-    1997-10-31 & XEmacs 19.16\\
-    & (Steve Baur)\\[1ex]
-    1998-02-28 & XEmacs 20.4\\
-    & (Steve Baur)\\
-    & first stable release with MULE support\\
-    & packages shipped separately\\[1ex]
-    XXXX-XX-XX & XEmacs 21.0 & 1-bit tags
-    \\[1ex]
-    2001-04-16 & XEmacs 21.4\\
-    & (Stephen Turnbull)\\[1ex]
-    2001-10-20 & GNU Emacs 21.1\\
-    & (Gerd Möllmann)\\[1ex]
-    2001-XX-XX & GNU Emacs 21.2 & last version with MLisp support, Sec.~\ref{sec:mock-lisp}\\
-    2007-06-01 & GNU Emacs 22.1\\
-    & (Richard Stallman)\\[1ex]
-    2009-07-28 & GNU Emacs 23.1\\
+  \begin{longtabu} to \textwidth {l|l|l|X}
+    {}\EDate{1985-03}{-20}
+    & Emacs 13.0 & Richard Stallman & Earliest recorded release \\
+    \EDate{1985-07}{-15}
+    & Emacs 16.56 & Richard Stallman
+    & Oldest version still available \\
+    &&& Gosling Emacs code expunged\\
+    \EDate{1987-09}{-18} & Emacs 18.49 & Richard Stallman \\
+    1987 & Epoch & Alan M.\ Carroll & Forks from Emacs 18.49\\
+    \EDate{1988-12}{-14} & Epoch 1.0 & Alan M.\ Caroll, Simon Kaplan\\
+    \EDate{1989-08}{-23} & Emacs 18.55 & Richard Stallman \\
+    1990 & Emacs 19 & Joe Arcenaux & Forks from Emacs 18.55 &
+    &&& Text properties, Sec.~\ref{sec:strings};\\
+    &&& \texttt{advice.el}, Sec.~\ref{sec:hooks} \\
+    \EDate{1990-08}{-27} & Epoch 4.0 & Marc Andreesen \\
+    1990-04 & Lucid Emacs 19.0 & Jamie Zawinski & Extents, Sec.~\ref{sec:strings} \\
+    \EDate{1992-10}{-31} & Emacs 18.59 & Richard Stallman
+    & Last release of Emacs 18\\[1ex]
+    \EDate{1993-05}{-22} & Emacs 19.7 beta & Jim Blandy & First public beta of Emacs 19 \\
+    &&& \texttt{lambda} macro, Sec.~\ref{sec:lambda}\\
+    \EDate{1993-05}{-27} & Emacs 19.8 beta & Jim Blandy \\
+    \EDate{1993-09}{-06} & Lucid Emacs 19.8 & Jamie Zawinski
+    & 4-bit tags, Sec~\ref{sec:data-representation} \\
+    &&& Merged Epoch and Emacs 19.8 \\[1ex]
+    \EDate{1994-05}{-17} & Emacs 19.23 beta & Richard Stallman \\
+    \EDate{1994-05}{-27} & Lucid Emacs 19.10 & Jamie Zawinski \\[1ex]
+    \EDate{1994-09}{-13} & XEmacs 19.11 & Chuck Thompson, Ben Wing \\[1ex]
+    \EDate{1994-11}{-01} & Emacs 19.28 & Richard Stallman
+    & Proper backquote, Sec.~\ref{sec:backquote} \\
+    &&& First real release of Emacs 19\\[1ex]
+    \EDate{1995-06}{-19} & Emacs 19.29 & Richard Stallman
+    & 3-bit tags, Sec.~\ref{sec:data-representation} \\
+    1995 & XEmacs 20 && Work on MULE support begins\\[1ex]
+    \EDate{1995-09}{-01} & XEmacs 19.13 & Chuck Thompson, Ben Wing
+    & Merged Emacs 19.30\\[1ex]
+    \EDate{1995-11}{-24} & Emacs 19.30 & Richard Stallman \\[1ex]
+    \EDate{1996-05}{-25} & Emacs 19.31 & Richard Stallman \\[1ex]
+    \EDate{1996-08}{-21} & Emacs 19.34 & Richard Stallman \\[1ex]
+    \EDate{1997-02}{-09} & XEmacs 20.0 & Steve Baur \\[1ex]
+    \EDate{1997-03}{-26} & XEmacs 19.15 & Steve Baur \\[1ex]
+    \EDate{1997-09}{-17} & Emacs 20.1 & Richard Stallman \\[1ex]
+    \EDate{1997-10}{-31} & XEmacs 19.16 & Steve Baur \\[1ex]
+    \EDate{1998-02}{-28} & XEmacs 20.4 & Steve Baur
+    & First stable release with MULE\\ % support
+    &&& Packages shipped separately\\[1ex]
+    \EDate{1998-07}{-12} & XEmacs 21.0 && 1-bit tags \\[1ex]
+    \EDate{2001-04}{-16} & XEmacs 21.4 & Stephen Turnbull \\[1ex]
+    \EDate{2001-10}{-20} & Emacs 21.1 & Gerd Möllmann \\[1ex]
+    \EDate{2002-03}{-18} & Emacs 21.2 & Gerd Möllmann
+    & Last version with MLisp support, Sec.~\ref{sec:mock-lisp}\\
+    \EDate{2007-06}{-01} & Emacs 22.1 & Richard Stallman \\[1ex]
     %% Chong and I started as maintainers in February 2008.
-    & (Chong Yidong, Stefan Monnier)\\[1ex]
-    2012-06-10 & GNU Emacs 24.1 \\
-    & (Chong Yidong, Stefan Monnier)\\[1ex]
-    201X-XX-XX & GNU Emacs 24.4 & \texttt{nadvice.el}, Sec.~\ref{sec:hooks}\\ 
-    & (Chong Yidong, Stefan Monnier)\\[1ex]
-    2016-09-17 & GNU Emacs 25.1\\
-    & (John Wiegley, Eli Zaretskii)\\[1ex]
-    2018-05-28 & GNU Emacs 26.1\\
-    & (John Wiegley, Eli Zaretskii)\\
-    XXXX-XX-XX & GNU Emacs 27 & old-style backquotes removed, Sec.~\ref{sec:backquote}
+    \EDate{2009-07}{-28} & Emacs 23.1 & Chong Yidong, Stefan Monnier \\[1ex]
+    \EDate{2012-06}{-10} & Emacs 24.1 & Chong Yidong, Stefan Monnier \\[1ex]
+    \EDate{2014-10}{-20} & Emacs 24.4 & Chong Yidong, Stefan Monnier
+    & \texttt{nadvice.el}, Sec.~\ref{sec:hooks}\\ 
+    \EDate{2016-09}{-17} & Emacs 25.1 & John Wiegley, Eli Zaretskii \\[1ex]
+    \EDate{2018-05}{-28} & Emacs 26.1 & John Wiegley, Eli Zaretskii \\
+    \EDate{20??-??}{-??} & Emacs 27 &
+        & Old-style backquotes removed, Sec.~\ref{sec:backquote} \\
   \end{longtabu}
 \end{center}
 
@@ -2351,8 +2319,9 @@ mechanically convert \Elisp{} packages to a lexically scoped version of
 was to facilitate moving \Elisp{} code to Scheme eventually, but the
 overall project was too large to ever be realized.
 
-Around 2002, Miles Bader started working on a branch of Emacs called
-\emph{lexbind} with support for lexical scoping.  The solution he adopted was to have two languages: an
+In late 2001, Miles Bader started working on a branch of Emacs called
+\emph{lexbind} with support for lexical scoping, which was finally included
+in Emacs-24.1.  The solution he adopted was to have two languages: an
 \Elisp{} with dynamic scope for backward compatibility, and another with
 scoping rules like those of Common Lisp, i.e.~lexical scope by default
 except for those variables that have been declared as dynamically scoped (in
@@ -2372,8 +2341,10 @@ problematic, causing progress on this branch to be slow.  This branch was
 kept up-to-date with the main Emacs development but the modifications to the
 byte-compiler were never completed.
 
+%% https://lists.gnu.org/r/emacs-devel/2001-10/msg00560.html
 Finally in 2010 Igor Kuzmin worked on a summer project under the direction
-of Stefan Monnier, in which he tried to solve the problem differently:
+of Stefan Monnier, in which he tried to add lexical scoping to the
+byte-compiler differently:
 instead of directly adding support for lexical scoping and closures to the
 single-pass byte-compiler code (which required significant changes to the
 code and was made more complex by the need to fit into a single pass), he
