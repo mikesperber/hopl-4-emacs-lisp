@@ -343,7 +343,7 @@ change to the current \emph{XEmacs}.
     1987 & Epoch & Alan M.\ Carroll & Forks from Emacs 18.49\\
     \EDate{1988-12}{-14} & Epoch 1.0 & Alan M.\ Caroll, Simon Kaplan\\
     \EDate{1989-08}{-23} & Emacs 18.55 & Richard Stallman \\
-    1990 & Emacs 19 & Joe Arcenaux & Forks from Emacs 18.55 &
+    1990 & Emacs 19 & Joe Arcenaux & Forks from Emacs 18.55 \\
     &&& Text properties, Sec.~\ref{sec:strings};\\
     &&& \texttt{advice.el}, Sec.~\ref{sec:hooks} \\
     1990-04 & Lucid Emacs 19.0 & Jamie Zawinski & Extents, Sec.~\ref{sec:strings} \\
@@ -502,11 +502,11 @@ text to operate on.  Here is what a ZWEI function might have looked
 like that inserted a string surrounded by parentheses:
 %
 \begin{verbatim}
-(DEFUN INSERT-PARENS (BP STRING)
-  (LET* ((BP1 (INSERT BP "("))
-         (BP2 (INSERT BP1 STRING))
-         (BP3 (INSERT BP2 ")")))
-    BP2))
+    (DEFUN INSERT-PARENS (BP STRING)
+      (LET* ((BP1 (INSERT BP "("))
+             (BP2 (INSERT BP1 STRING))
+             (BP3 (INSERT BP2 ")")))
+        BP2))
 \end{verbatim}
 %
 The \texttt{BP} parameter is for the location, at which the insertion
@@ -521,13 +521,13 @@ case in TECO.  Here is the \texttt{in-parens} function from the Gosling
 Emacs manual~\cite{Gosling1981}:
 %
 \begin{verbatim}
-(defun 
-      (in-parens ; The name of the function.
-        (insert-string "(") 
-        (insert-string (arg 1 "String to insert? ")) 
-        (insert-string ")") 
-      ) 
-      )
+    (defun
+          (in-parens ; The name of the function.
+            (insert-string "(")
+            (insert-string (arg 1 "String to insert? "))
+            (insert-string ")")
+          )
+          )
 \end{verbatim}
 %
 Stallman, who had worked on ZWEI, found ZWEI's approach clumsy, and
@@ -578,11 +578,11 @@ Here is a simple example of a MacLisp function definition from the
 original manual~\cite{Moon1974}:
 %
 \begin{verbatim}
-(defun assoc (x y)
-  (cond
-    ((null y) nil)
-    ((equal x (caar y)) (car y))
-    ((assoc x (cdr y)))))
+    (defun assoc (x y)
+      (cond
+        ((null y) nil)
+        ((equal x (caar y)) (car y))
+        ((assoc x (cdr y)))))
 \end{verbatim}
 %
 This looks for an entry \texttt{x} in a list of conses \texttt{y}, an
@@ -611,7 +611,7 @@ Machine Lisp~\cite{WeinrebMoon1981}.
 
 Contrary to its siblings Common-Lisp and Scheme, which both strive for
 a kind of completeness and consistency (tho in different ways), Richard has
-no such desire for \Elisp, even occasionally reminding contributors
+had no such desire for \Elisp, even occasionally reminding contributors
 not to ``propose new Emacs features for mere completeness'
 sake.''~\cite{RMS-completeness}.
 
@@ -662,7 +662,7 @@ existing code via hooks, discussed in Section~\ref{sec:hooks}.
 \subsection{Symbols and dynamic scoping}
 \label{sec:symbols}
 
-Like any Lisp, \Elisp{} has always had a symbol data type: The literal
+Like any Lisp, \Elisp{} has always had a symbol data type: The expression
 \texttt{'emacs} yields a symbol named \texttt{emacs}.  One way to look
 at symbols is that they are immutable strings with a fast equality
 check (and usually fast hashing).  This makes them suitable for values
@@ -687,7 +687,7 @@ Lisps at the time---Common Lisp and Scheme---were moving to lexical
 scoping~\cite{CLtL1,R2RS}.
 Richard Stallman chose dynamic scoping to meet extensibility
 requirements in Emacs~\cite{Stallman1981}.  The Emacs code base uses
-variables for holding configuration options.  These configuration
+variables to hold configuration options.  These configuration
 options often need to be modified temporarily, restoring the original
 value after a piece of code has run.  It would in principle be
 possible to structure the code base to pass configuration options
@@ -742,7 +742,7 @@ In Lisp dialects, anonymous functions are usually the result of
 1 to a number:
 %
 \begin{verbatim}
-(lambda (x) (+ x 1))
+    (lambda (x) (+ x 1))
 \end{verbatim}
 %
 Interestingly, \texttt{lambda} was not originally a keyword of the
@@ -761,9 +761,9 @@ pre-existing quoted Lisp literal mechanism:
     '(lambda (..ARGS..) ..BODY..)
 \end{verbatim}
 %
-This expression evaluates to a nested list structure---\texttt{'}$e$
+This \emph{expression} evaluates to a nested list structure---\texttt{'}$e$
 is read as \texttt{(quote \textnormal{$e$})}---with the
-\texttt{lambda} symbol as its first element etc.  When a program calls
+\texttt{lambda} symbol as its first element.  When a program calls
 \texttt{funcall} passing such a value, \texttt{funcall} would
 recognize the list structure as representing a \texttt{lambda}
 expression and invoke the interpreter on it.
@@ -824,7 +824,7 @@ Along with buffer-local variables (see Section~\ref{sec:buffer-local-variables})
 the cases where the core \Elisp{} language has been extended with
 a feature that specifically caters to the needs of the Emacs text editor, to
 keep track of rendering information.  It is more generally useful, of
-course, but turns strings into a much fancier datatype than in most
+course, and turns strings into a much fancier datatype than in most
 other languages.
 
 Around 1994, support for arbitrary character sets was added to Emacs and
@@ -837,9 +837,20 @@ impose a significant constraint: There is an indirection between the string
 object and the chars it holds because of the \texttt{aset} primitive.
 \texttt{(aset string index char)}
 replaces one of \texttt{string's} characters at index \texttt{index}
-with \texttt{char} by side-effect.  This will
+with \texttt{char} by side-effect.  Because of the variable number of bytes
+per character, this will
 sometimes change the string's length in bytes, which requires relocating
 the string's bytes elsewhere.
+
+In the original code, an \texttt{aset} operation which required changing the
+byte length was not allowed and signaled an error.  But when a user reported
+this limitation as a bug, the implementation was adjusted to relocate the
+string as needed: the necessary indirection was already present for the
+purpose of compacting the heap after a garbage collection, and the cost of
+an $O(n)$ operation to implement the \texttt{aset} operation which is
+usually expected to take constant time was not even discussed among the
+developers. In practice this extra cost is negligible, because
+\texttt{aset} is very rarely used on strings.
 
 %% FIXME Mike: While reading the whole document, this part seemed rather
 %% uninteresting.  I think we should either drop it, or spice it up
@@ -868,17 +879,17 @@ splice the value of expressions into the result.
 Here is a backquote example:
 %
 \begin{verbatim}
-`(do ((i 0 (+ 1 i)))
-     ((>= i ,array-size))
-  (aset ,array-name i ,init-val))
+    `(do ((i 0 (+ 1 i)))
+         ((>= i ,array-size))
+      (aset ,array-name i ,init-val))
 \end{verbatim}
 %
 This expands into the following backquote-less code:
 %
 \begin{verbatim}
-(list 'do '((i 0 (+ 1 i)))
-      (list (list '>= 'i array-size))
-      (list 'aset array-name 'i init-val))
+    (list 'do '((i 0 (+ 1 i)))
+          (list (list '>= 'i array-size))
+          (list 'aset array-name 'i init-val))
 \end{verbatim}
 %
 Curiously, \Elisp{} did not until 1994 include the reader syntax for
@@ -898,7 +909,7 @@ was written in early \Elisp{} as:
 \end{verbatim}
 %%
 The releases of Emacs-19.28 and XEmacs 19.12 in 1994 finally added the
-proper reader support to generate the latter version from the first.
+proper reader support to generate the latter version from the former.
 
 The reader had to rely on a heuristic for the translation, though,
 because \texttt{(`a)} is valid in both syntaxes but means different
@@ -922,20 +933,20 @@ of old-style backquotes, while still keeping the actual behavior unchanged.
 Then in 2012 with the release of Emacs-24.1, the behavior was changed so
 that the old format is only recognized if it follows a parenthesis and is
 followed by a space.  The main motivation for this change was the
-introduction of the \texttt{pcase} macro (see Section~\ref{sec:pcase} where patterns can also use the
+introduction of the \texttt{pcase} macro (see Section~\ref{sec:pcase}) where patterns can also use the
 backquote syntax and are commonly placed right after a parenthesis so they
 were otherwise mistaken for an old-style backquote syntax.
 
-Finally in 2018 during the development of Emacs-27, the
-old-style backquote syntax was removed.
+%% Finally in 2018 during the development of Emacs-27, the
+%% old-style backquote syntax was removed.
 
 \subsection{Docstrings}
 \label{sec:docstrings}
 
 An important feature of Emacs from the start was the idea of
 \emph{self-documentation}~\cite{Stallman1981}, which originated with
-the first, TECO-based Emacs~\cite{Stallman2018-personal}.  To that end, every
-definition form in \Elisp{} can include documentation in the form of a
+the first, TECO-based, Emacs~\cite{Stallman2018-personal}.  To that end, every
+definition in \Elisp{} can include documentation in the form of a
 string after the signature:
 %%
 \begin{verbatim}
@@ -949,7 +960,8 @@ This \emph{docstring} can be retrieved in various ways, in particular
 through the user interface.  This idea was apparently first introduced in
 the original Emacs implementation in TECO, then adapted to \Elisp{}.
 Many languages have since adopted them, notably Common
-Lisp~\cite{HyperSpec} and Clojure~\cite{ClojureDotOrg}.
+Lisp~\cite{HyperSpec} and Clojure~\cite{ClojureDotOrg}, or variants like
+Javadoc comments in Java.
 
 \subsection{Interactive functions}
 \label{sec:interactive-functions}
@@ -998,15 +1010,15 @@ non-local exits.  It inherited the \texttt{catch}, \texttt{throw}, and
 \texttt{unwind-protect} primitives from MacLisp.  Here is an example:
 %
 \begin{verbatim}
-(defun outer ()
-  (catch 'marker
-    (inner)))
-
-(defun inner ()
-  ...
-  (if x
-      (throw 'marker 'catch-value))
-  ...)
+    (defun outer ()
+      (catch 'marker
+        (inner)))
+    
+    (defun inner ()
+      ...
+      (if x
+          (throw 'marker 'catch-value))
+      ...)
 \end{verbatim}
 %
 When \texttt{outer} is called, it calls \texttt{inner}.  If that call
@@ -1020,7 +1032,7 @@ to an expression, that will run even if expression evaluates to a
 non-local exit through \texttt{catch}.
 
 MacLisp's error-handling system was quite primitive, and had poor separation
-of signalling and handling~\cite{Pitman2001}.
+of signaling and handling~\cite{Pitman2001}.
 
 As a result, \Elisp{} features
 a \emph{condition system} inspired by the Lisp Machine.  (It does
@@ -1080,7 +1092,7 @@ editing operations.
 Making a variable \emph{buffer-local} associates the value of the variable
 with the current buffer.  An assignment to a buffer-local variable
 only affects dereferences with the same current buffer in effect.
-Any variable can be made local to any buffer, so variables can take
+Any variable can be made local to any buffer, so it can take
 different values in different buffers.  For example, the variable
 \texttt{buffer-file-name} keeps the name of the file associated with the
 corresponding buffer.  This variable typically has a different value in
@@ -1140,7 +1152,7 @@ list by reassigning the variable.  For example, the following form
 causes auto-fill mode to be turned on whenever \TeX{} mode is entered:
 %
 \begin{verbatim}
-(add-hook 'TeX-mode-hook 'auto-fill-mode)
+    (add-hook 'TeX-mode-hook #'auto-fill-mode)
 \end{verbatim}
 
 (This makes use of the ability to refer to a variable by its name
@@ -1157,29 +1169,31 @@ The old TECO version of Emacs also allowed attaching hooks to variable
 changes~\cite{Stallman1981}, but this feature was not provided in \Elisp{}
 because Richard Stallman considered it a misfeature, which could make it
 difficult to debug the code.  Yet this very feature was finally added to
-\Elisp{} in 2018 in the form of \emph{variable watchers},
+\Elisp{} in Emacs-26 in the form of \emph{variable watchers},
 ironically meant to be used as debugging aides.
 
 Of course, authors do not always have the foresight to place hooks where
 users need them, so in 1992, the \texttt{advice.el} package was added to
 Emacs-19, providing a \texttt{defadvice} macro duplicating a design
 available in MacLisp and Lisp Machines, that allowed attaching code to
-a function even if it does not run hooks.\footnote{``It is bad practice
-  %% FIXME: I've often found people don't like footnotes very much.
-  %% Should we try and eliminating them (by working them into the mainline text)
-  %% or do we say that it's perfectly OK to use them?
-  to make a Lisp program put advice on another Lisp
-  program's function, because that is confusing.  When you see that the
-  program calls \texttt{mumble}, it might take you hours before you think of
-  checking whether it has advice.'' \cite{Stallman2018-personal}}
-
+a function even if it does not run hooks.  This \emph{advice} mechanism
+makes Emacs even more malleable, hence fitting very well the design goals of
+Emacs, which is why Richard was happy to include it, but he has always made
+it clear that its use should be avoided:
+\begin{quotation}
+  ``It is bad practice to make a Lisp
+  program put advice on another Lisp program's function, because that is
+  confusing.  When you see that the program calls \texttt{mumble}, it might
+  take you hours before you think of checking whether it has
+  advice.''~\cite{Stallman2018-personal}
+\end{quotation}
 Here is an example \texttt{defadvice} form:
 %
 \begin{verbatim}
-(defadvice eval-region (around cl-read activate)
-  "Use the reader::read instead of the original read if cl-read-active."
-  (with-elisp-eval-region (not cl-read-active)
-    (ad-do-it)))
+    (defadvice eval-region (around cl-read activate)
+      "Use the reader::read instead of the original read if cl-read-active."
+      (with-elisp-eval-region (not cl-read-active)
+        ad-do-it))
 \end{verbatim}
 %
 This specifies a piece of code that is run on each invocation of the
@@ -1192,16 +1206,16 @@ immediately.  The \texttt{cl-read} name can be used to disable the
 advice later.
 
 The way the \texttt{defadvice} macro gave access to function arguments did
-not work with lexical scoping; furthermore time had shown that most of the
+not work with lexical scoping; furthermore time has shown that most of the
 non-core features of \texttt{defadvice} were very rarely used, and even more
 rarely used properly.  As a result, in late 2012 Stefan Monnier developed a new
 package \texttt{nadvice.el} that provides the same core features with a much
 simpler design.  This simplification is mostly derived from better reuse of
 existing language features.  For example, the old advice system had special
 features to control whether a piece of advice should be compiled whereas in
-the new system there is no need for that because the body of a piece of
-advice is translated into a function.  Similarly, the old advice system
-has special primitives to get access to the function's original argument,
+the new system there is no need for that because a piece of
+advice is simply a normal function.  Similarly, the old advice system
+has special primitives to get access to the function's arguments,
 whereas in the new system, the function's original arguments are passed as
 normal arguments to the piece of advice and can hence be accessed without
 any special construct.  The \texttt{nadvice} package was released as part of
@@ -1277,7 +1291,7 @@ While a systematic study would likely reveal that the operations that should
 deserve their own byte-code in modern \Elisp{} code are quite different, the
 byte-code language of Emacs has changed very little over the years and is
 still essentially the same as that of 1985.  The main changes were
-those made to support lexical scoping; see Section~\ref{sec:lexical-scoping}.
+those made to better support lexical scoping; see Section~\ref{sec:lexical-scoping}.
 
 \subsection{Tail-call optimization}
 \label{sec:tco}
@@ -1316,7 +1330,7 @@ This said, there were other objections to those patches:
   So if \Elisp{} code started to rely on proper tail calls, it would tend to cause problems
   when interpreted.  One alternative is to always byte-compile the code and
   get rid of the \Elisp{} interpreter, but that's a change that would have
-  much further consequences.
+  much further consequences, such as a more complex bootstrap.
   %% Note: TCO in general does not need to have this effect, notably
   %% MIT Scheme doesn't, so Mike softened the wording here.
   %% FIXME Mike: not sure I understand.  Do you mean to say that TCO does not
@@ -1385,8 +1399,8 @@ occupy only 2 words: the extra bit needed to store the mark\&sweep's
 \emph{markbit} of each cons cell was stored in the ``mark'' bit of the first
 word (i.e. of the \texttt{car}).
 
-Over time, this tagging scheme became problematic, since it limited to 16\;MB
-for the Lisp heap.
+Over time, this tagging scheme became problematic, since it limited the Lisp
+heap to 16\;MB.
 Moreover, the limit on file size is fundamentally linked to the maximum representable
 integer since that is how buffer positions are represented.
 This means that 8\;MB was the size limit for a file that could be edited.
@@ -1395,13 +1409,14 @@ So in 1995, with the release of Emacs-19.29,
 the scheme was tweaked so that the tag was reduced to
 3 bits, pushing the maximum file size to a more comfortable 128MB and the
 maximum heap size to 256\;MB.  To reduce the tag to 3 bits,
-the types that received their own tag were ints, symbols, cons cells, and floats.
+the types that received their own tag were ints, strings, symbols, cons
+cells, buffers, and floats.
 The less important
 object types were placed into two groups: one group using the
 \texttt{Lisp\_Misc} tag and another using the \texttt{Lisp\_Vector}
 tag.
 
-The \texttt{Lisp\_Misc} tag was used for objects that could occupy the same
+The \texttt{Lisp\_Misc} tag was used for objects that could occupy
 the same space as Lisp markers (6 words), and hence be allocated from the same
 4KB bloc  (Apart from markers, these were mostly various types of
 forwarding pointers.)  For some of those objects, it imposed a slight waste of space,
@@ -1427,29 +1442,29 @@ type tags was reduced to four records (heap-allocated objects,
 characters, even and odd fixnums.)  This became default with XEmacs
 21.2 in 2002.
 
-During the development of Emacs-22 in 2007, its tagging scheme was
-similarly reworked: The mark bit was removed, and the tag bits were
-moved to the least significant bits, allowing the Lisp heap to grow as
-large as the full address space allowed.
-Moreover, the \emph{markbit} of cons cells was moved to a separate bitmap
-stored alongside each bloc of cons cells, which required allocating those
-blocs on 4KB alignment boundaries.  This avoided the use of one extra word
-per cons cell just to store the markbit, as was done previously for floats.
-This same bitmap scheme
-was of course also used for floats, thus reducing the typical memory footprint of
-floats from 96 bits to 64 bits.  Reducing the memory footprint of
-floats to 64 bits
-and avoiding the use of 3 words for cons cells was not just motivated by
-thriftiness but rather by the need to enforce that all objects be aligned on
-a multiple of 8, so as to free the least significant 3 bits for use as
-tag bits.
+During the development of Emacs-22 in 2007, Stefan Monnier reworked the
+tagging scheme of Emacs with the similar goal to be able to use all the
+address space and larger files: The mark bit was removed, and the 3 tag bits
+were moved to the least significant bits, allowing the Lisp heap to grow as
+large as the full address space allowed, in exchange for the constraint that
+all objects need to be aligned on a multiple-of-8 boundary.  Moreover, the
+\emph{markbit} of cons cells was moved to a separate bitmap stored alongside
+each bloc of cons cells, which required allocating those blocs on 4KB
+alignment boundaries.  This avoided the use of one extra word per cons cell
+just to store the markbit, as was done previously for floats.  This same
+bitmap scheme was of course also used for floats, thus reducing the typical
+memory footprint of floats from 96 bits to 64 bits.  Reducing the memory
+footprint of floats to 64 bits and avoiding the use of 3 words for cons
+cells was not just motivated by thriftiness but rather by the need to
+enforce that all objects be aligned on a multiple of 8, so as to free the
+least significant 3 bits for use as tag bits.
 
 In Emacs-23.2 the tagging scheme was tweaked to use 2 tags for integers,
 pushing the maximum file size to 512\;MB.
 
-The design of Emacs made it basically
+The design of Emacs makes it basically
 impossible to view files larger than 4GB or edit files larger than 2GB (on
-a 32-bit system) anyway, no matter which tagging scheme was used, so there was
+a 32-bit system) anyway, no matter which tagging scheme is used, so there was
 not much room for improvement.
 To cover the remaining space, a new compilation option
 \texttt{--with-wide-int} was introduced in Emacs-24.1 to make the boxed data
@@ -1485,18 +1500,17 @@ common, and second the closures used in the lexical-scoping feature of
 Emacs-24.1 also use the \texttt{Lisp\_Vector} tag.
 
 In Emacs-24.4, the representation of objects using the \texttt{Lisp\_Vector}
-tag (which is used for many more object types than just vectors) was
-improved so as to reduce their header from 2 words down to a single word.
+tag was improved further so as to reduce their header from 2 words down to
+a single word.
 
-In Emacs-27.1, the object representation was changed again: the distinction
-between \texttt{Lisp\_Misc} and \texttt{Lisp\_Vector} was dropped by making
-all objects use the \texttt{Lisp\_Vector} representation since it had been
-improved sufficiently to be competitive with the special-cased
-\texttt{Lisp\_Misc} representation.
-
-%% FIXME Stefan: With the addition of bignums in the upcoming Emacs-27, there's
-%% a chance that this compilation option won't be needed any more!
-
+In Emacs-27.1, the object representation was changed again, by Paul Eggert:
+the distinction between \texttt{Lisp\_Misc} and \texttt{Lisp\_Vector} was
+dropped by making all objects use the \texttt{Lisp\_Vector} representation
+since it had been improved sufficiently to be competitive with the
+special-cased \texttt{Lisp\_Misc} representation.  This time the motivation
+was just to simplify the code, and it came with a very
+slight performance improvement according to the limited benchmarking
+performed at the time.
 
 \subsection{Scanning the stack}
 \label{sec:stack-scanning}
@@ -1620,8 +1634,9 @@ platform-specific C files that implemented a function called
 \texttt{unexec}.  The \texttt{unexec} function turns the running process
 back into an executable file.  However, the implementations of
 \texttt{unexec} have been hard to write and required frequent maintenance.
-For example, in 2016 the Glibc maintainers decided to make internal changes
-to their \texttt{malloc} implementation which broke this functionality~\cite{UnexecGlibc}.
+To take just a single example, in 2016 the Glibc maintainers decided to make
+internal changes to their \texttt{malloc} implementation which broke this
+functionality~\cite{UnexecGlibc}.
 
 For XEmacs, in 1999, Olivier Galibert (based on initial work by Kyle
 Jones) started writing a \emph{portable dumper} that would serialize
@@ -1640,11 +1655,8 @@ While this solution proved easy to implement, the time to load such a dumped
 heap remained too high to be acceptable.  So the experiment only resulted in
 the implementation of some improvements to the performance of the code to
 read byte-compiled code.  In parallel, Daniel Colascione worked on
-a different approach more like that of XEmacs's portable dumper.  The code
-was basically finished, but Emacs maintainers so far have not accepted it
-into the official release.  The main reason for that reluctance is that it
-trades off the brittle platform-dependence of the old unexec code for more
-code which partly duplicates some of the GC's code.
+a different approach more like that of XEmacs's portable dumper, which has
+been integrated into the code for Emacs-27.
 
 \subsection{Debugging}
 \label{sec:debugger}
@@ -1656,7 +1668,7 @@ a \emph{condition} is signaled, showing the current stack backtrace and
 letting you examine the state of the application and place breakpoints
 before pursuing execution.
 
-For most developers, this is still the main debugger for \Elisp{}.
+For many developers, this is still the main debugger for \Elisp{}.
 Of course, it has seen various improvements over time, most of them
 affecting only the user interface.  The main exceptions are:
 in 1995 (for Emacs-19.31), it was refined so that the debugger is only
@@ -1711,13 +1723,19 @@ significantly reworked for Emacs-24.4 to make use of the new
 \texttt{nadvice.el} package in order to add/remove instrumentation instead
 of doing it in its own ad-hoc way.
 
+%% FIXME Mike: motivation?
 Ben Wing added an \Elisp{} profiler to XEmacs 19.14 in
 1996 by instrumenting entry points in the byte-code interpreter.
 In profiling mode, the byte-code interpreter provides timing
 information about function calls and allocation.
 
-In early 2011, Tomohiro Matsuyama started implementing in Emacs's C code
-a sampling-based profiler for \Elisp{}.  He finished the implementation as
+While \texttt{elp.el} is sufficient for many use cases, it requires prior
+instrumentation of a specific set of functions, which makes it useless when
+the potential culprits are completely unknown, as is typically the case when
+a user simply notices that ``Emacs is slow''.
+So in early 2011, Tomohiro Matsuyama started implementing in Emacs's C code
+a sampling-based profiler for \Elisp{}, which relies on the same information
+already used for the backtrace debugger.  He finished the implementation as
 part of Google's Summer of Code of 2012, and it was included in Emacs-24.3.
 The main advantage of this profiler compared to \texttt{elp.el} is that it
 does not require instrumentation, and it collects (partial) stack traces.
@@ -1749,9 +1767,10 @@ was not included into Emacs.
 
 \subsubsection{Second attempt}
 Around 2012, Burton Samograd developed a second JIT compiler for \Elisp.
-This took a similar path, but using GNU LibJIT~\cite{GNULibjit} instead.  It was very
-simplistic, turning each byte-code into a call to a C function.
-Thos compiler yielded a 25\% speedup on a \texttt{raytracer.el} test.
+This took a similar path, but using GNU LibJIT~\cite{GNULibjit} instead.
+It was very simplistic, turning each byte-code into a call to a C function.
+This compiler yielded a disappointing 25\% speedup on
+a \texttt{raytracer.el} test.
 
 \subsubsection{Third attempt}
 In 2016, Nickolas Lloyd developed the third JIT compiler for \Elisp, again
@@ -1767,14 +1786,21 @@ In 2018, Tom Tromey took another stab at it, again using GNU Libjit.
 Compared to Lloyd's JIT compiler, Tromey's focuses exclusively on code using lexical scoping,
 which is likely to benefit more, and it implements additional optimizations
 by getting rid at compile-time of all the manipulation of the Lisp stack.
-In the best case it reaches a speed up factor of 3.5.
+In the best case it reached a speed up factor of 3.5.
 It can be used on all Emacs code but is still
 very naive.  Thus, it requires further work to avoid
 pathological behavior in some situations where the JIT compilation is
 performed too eagerly, leading to significant slowdowns.
 
-The discussion whether this last JIT compiler will be integrated as an
-experimental feature into Emacs-27.1 is still on-going.
+During the discussions whether this JIT deserves further development to
+include it into Emacs, one of the hurdles that appeared is that the main
+purpose of a faster \Elisp{} implementation should be the ability to write
+new code, e.g.\ code previously written in C; but this can only work if the
+faster \Elisp{} is available for all supported platforms, whereas GNU
+Libjit does not currently support all the architectures that Emacs supports.
+
+%% The discussion whether this last JIT compiler will be integrated as an
+%% experimental feature into Emacs-27.1 is still on-going.
 
 \section{XEmacs period}         % 1992-2007 ?
 \label{sec:xemacs}
@@ -2289,8 +2315,8 @@ Dynamic scoping had two main drawbacks in practice:
   local variables of different functions.  In Elisp these tend to happen only
   in the presence of higher-order functions.  For example in code such as:
 \begin{verbatim}
-  (let ((lst (some-list)))
-    (cl-every (lambda (x) (memq x lst)) elements))
+    (let ((lst (some-list)))
+      (cl-every (lambda (x) (memq x lst)) elements))
 \end{verbatim}
   where a name conflict occurs if \texttt{cl-every} happens to bind a local
   variable \texttt{lst} before calling its first argument.  Name conflicts
