@@ -394,7 +394,7 @@ change to the current \emph{XEmacs}.
     \EDate{2012-06}{-10} & Emacs 24.1 & Chong Yidong, Stefan Monnier
     & Lexical scoping, Sec.~\ref{sec:lexical-scoping} \\
     \EDate{2014-10}{-20} & Emacs 24.4 & Chong Yidong, Stefan Monnier
-    & \texttt{nadvice.el}, Sec.~\ref{sec:hooks}\\ 
+    & record data type, Sec.~\ref{sec:structures}; \texttt{nadvice.el}, Sec.~\ref{sec:hooks}\\ 
     \EDate{2016-09}{-17} & Emacs 25.1 & John Wiegley, Eli Zaretskii \\
     \EDate{2018-05}{-28} & Emacs 26.1 & John Wiegley, Eli Zaretskii
     & Limited concurrency, Sec~\ref{sec:concurrency} \\
@@ -561,6 +561,8 @@ Maclisp had all basic properties associated with Lisp today~\cite{Moon1974}:
 \item A special \textit{symbol} data type represents identifiers in
   S-expressions, but is also often used to represent enumeration,
   status values etc.
+\item The ability to define new compound data types via the
+  \texttt{defstruct} form.
 \item The language has first-class functions via the \texttt{lambda}
   form.
 \item MacLisp also has an \texttt{apply} function that will apply a
@@ -626,6 +628,9 @@ Most basic special forms are identical to MacLisp: \texttt{defun},
 arrays) of the primitives offered in Lisp Machine Lisp, which happens to
 also be a subset of the Common Lisp primitives, rather than Maclisp's
 approach of accessing arrays as if they were functions.
+
+Unlike MacLisp, the original \Elisp{} featured no way to define new
+data types.
 
 % FIXME: elaborate on arrays?
 
@@ -863,6 +868,40 @@ developers. In practice this extra cost is negligible, because
 % unclear.  It is a straightforward parallel to the
 % \texttt{buffer-modified-tick} function that tracks modifications to
 % buffers, and which has many uses.
+
+\subsection{Structures}
+\label{sec:structures}
+
+MacLisp offers the \texttt{defstruct} form for defining new data
+types called \textit{structures}.  Here is an example for the
+\texttt{KONS} data type, which has two fields called \texttt{KAR} and \texttt{KDR}:
+%
+\begin{verbatim}
+(DEFSTRUCT KONS KAR KDR)
+\end{verbatim}
+%
+This form would define four macros, \texttt{MAKE-CONS}, \texttt{KAR},
+\texttt{KDR}, and \texttt{ALTER-KONS}.  A program could create a
+\texttt{CONS} structure with \texttt{MAKE-CONS}:
+%
+\begin{verbatim}
+(MAKE-KONS KDR 3 KAR 4)
+\end{verbatim}
+%
+\texttt{KAR} and \texttt{KDR} can then be used to access the
+respective field contents of a \texttt{KONS} structure, and
+\texttt{ALTER-KONS} to mutate these contents.
+
+\Elisp{} never had \texttt{defstruct} as a primitive form.  This
+reflects a more general design philosophy, which uses the existing
+data types of pairs and vectors for even complicated data structures
+such as keymaps, see Section~\ref{sec:keymaps}.
+
+Instead, a Common-Lisp-compatible \texttt{defstruct} has been part of
+the \texttt{cl.el} package, see Section~\ref{sec:cl-clib}.  Use of
+\texttt{defstruct} in \Elisp{} code only began after 2010 so.  Until
+2013, structures were simply vectors, when Lars Brinkhoff added the
+record data type to make structures distinct from them.
 
 \subsection{Backquote}
 \label{sec:backquote}
@@ -1812,6 +1851,7 @@ Emacs / XEmacs were to support the move from a TTY-based purely
 textual model to a graphical model.
 
 \subsection{Event and keymap representations}
+\label{sec:keymaps}
 
 One significant departure from Emacs in Lucid Emacs was the
 representation of keymaps.  A keymap maps a sequence of keystrokes to
@@ -1869,9 +1909,10 @@ freedom.  This allowed Lucid Emacs to evolve more rapidly the
 representation of keymaps to cater to a richer set of input events
 (including mouse events, for instance).
 
-This step reflected a general difference in philosophy.  Lucid Emacs
-also used opaque data types for case tables and input events, both of
-which retain transparent representations in Emacs to this day.
+This step reflected a general difference in philosophy, see
+Section~\ref{sec:structures}.  Lucid Emacs also used opaque data types
+for case tables and input events, both of which retain transparent
+representations in Emacs to this day.
 
 \subsection{Character representation}
 \label{sec:character-representation}
