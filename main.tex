@@ -372,7 +372,8 @@ change to the current \emph{XEmacs}.
     %% \EDate{1996-05}{-25} & Emacs 19.31 & Richard Stallman \\
     \EDate{1996-08}{-21} & Emacs 19.34 & Richard Stallman
     & Last release of Emacs-19 \\
-    \EDate{1997-02}{-09} & XEmacs 20.0 & Steve Baur \\
+    \EDate{1997-02}{-09} & XEmacs 20.0 & Steve Baur & Custom library,
+    Sec.~\ref{sec:custom} \\
     \EDate{1997-03}{-26} & XEmacs 19.15 & Steve Baur \\
     \EDate{1997-09}{-17} & Emacs 20.1 & Richard Stallman
     & First release with MULE \\
@@ -2066,6 +2067,83 @@ improvement is a bit disappointing was not really investigated, but the
 general consensus is that the byte-code interpreter is simply not very
 optimized, so the relative cost of the \texttt{switch} is not as high as it
 could (or, arguably, should) be.
+
+\subsection{Custom library}
+\label{sec:custom}
+
+One of the tenets of Emacs's original design was that customization
+would happen via \Elisp.  For example, whether Emacs allows selecting
+a region via shifted motion keys is controlled by an \Elisp{} variable
+called \texttt{shift-select-mode}.  If a user wanted to change a default
+behavior controlled through a variable, she could put appropriate
+\Elisp{} code into an ``init file'', a file loaded by default on
+startup, like so:
+%
+\begin{verbatim}
+(setq shift-select-mode)
+\end{verbatim}
+%
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.8\textwidth]{custom}  
+  \caption{Custom user interface}
+  \label{fig:custom}
+\end{figure}
+%
+Expecting the user to use \Elisp{} for customization creates a high
+barrier.  As a reaction, Per Abrahamsen in 1996 contributed two
+libraries called \texttt{Custom} and \texttt{Widget}, which enabled
+users to change the values of customization variables via a a UI
+rather than through \Elisp{}.  Figure~\ref{fig:custom} shows the UI
+for \texttt{shift-select-mode}.
+
+Custom was originally created to customize the Gnus news reader.  With
+the integration into both Emacs and XEmacs, Custom also gained an
+\Elisp{} programming interface.  The original declaration of
+\texttt{shift-select-mode} via the \texttt{defvar} primitive would
+have looked like this:
+%
+\begin{verbatim}
+(defvar shift-select-mode t
+  "When non-nil, shifted motion keys activate the mark momentarily.
+   ...")
+\end{verbatim}
+%
+The Custom library provides the \texttt{defcustom} form, which enables
+this declaration:
+%
+\begin{verbatim}
+(defcustom shift-select-mode t
+  "When non-nil, shifted motion keys activate the mark momentarily.
+   ..."
+  :type 'boolean
+  :group 'editing-basics)
+\end{verbatim}
+%
+This declaration instantly enables the UI for customizing
+\texttt{shift-select-mode}.  The \texttt{:type} declaration as a
+boolean makes Custom display a \texttt{Toggle} button.  \Elisp{}
+programmers can further gather multiple \texttt{defcustom} variables
+into group, creating a hierarchy that Custom also turns into a
+navigation API.  The \texttt{:type} declaration can be quite
+elaborate, , leading to a similarly elaborate UI, and in some cases
+supplanting potentially convoluted documentation, as in this example:
+%
+\begin{verbatim}
+(defcustom cc-other-file-alist
+  '(("\\.cc\\'"  (".hh" ".h")) ...)
+  "Alist of extensions to find given the current file's extension.
+
+This list should contain the most used extensions before the others,
+since the search algorithm searches sequentially through each directory
+specified in `ff-search-directories'.  If a file is not found, a new one
+is created with the first matching extension (`.cc' yields `.hh')."
+  :type '(repeat (list regexp (choice (repeat string) function)))
+  :group 'ff)
+\end{verbatim}
+%
+Custom is now used pervasively in \Elisp{} code, and closely ties the
+programming language to the UI.
 
 \subsection{Unicode}
 \label{sec:unicode}
