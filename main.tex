@@ -650,21 +650,7 @@ order to make it work on Unix systems with one megabyte of memory~\cite{Stallman
 
 This section discusses the choice of dynamic scoping, as well as
 some notable differences from and additions to
-MacLisp.  Lambda expressions worked slightly differently, as discussed
-in Section~\ref{sec:lambda}.  Section~\ref{sec:strings} discusses the
-string representation (absent in MacLisp).
-MacLisp-style backquote reader syntax was only added later to \Elisp{}---see Section~\ref{sec:backquote}.
-A feature supporting easy extensibility was self-documentation
-through \emph{docstrings}, described in
-Section~\ref{sec:docstrings}.
-Section~\ref{sec:interactive-functions} describes how Emacs ties
-functions to interactive commands.
-Section~\ref{sec:non-local-exits} describes \Elisp{}'s improvements
-over MacLisp's error handling.
-Section~\ref{sec:buffer-local-variables} describes buffer-local
-variables, which tie the language to the editor.  One important
-pragmatic aspect of the use of the language was extensibility of
-existing code via hooks, discussed in Section~\ref{sec:hooks}.
+MacLisp.
 
 \subsection{Symbols and dynamic scoping}
 \label{sec:symbols}
@@ -1289,23 +1275,6 @@ received from the sub-process or the remote host.
 At least initially, the \Elisp{} language was defined by its sole
 implementation.  Various design aspects had impact on the users of the
 language, and this section discusses some of them.
-Section~\ref{sec:byte-code-interpreter} describes the byte-code
-interpreter.
-Section~\ref{sec:tco} discusses tail-call optimization.
-Section~\ref{sec:bootstrap} touches on issues related to bootstrapping.
-Section~\ref{sec:data-representation} describes the
-essential data representation of the implementation.  The following
-sections touch on other issues related to memory management:
-Section~\ref{sec:stack-scanning} describes the evolution of scanning
-GC roots. Section ~\ref{sec:heap-xemacs} describes changes in XEmacs
-to simplify heap management.  Improvements to
-the GC algorithm are described in Section~\ref{sec:gc-algorithms}.
-Section~\ref{sec:image-dumping} describes the
-image-dumping mechanism in Emacs and XEmacs and how it changed over time.
-Sections~\ref{sec:debugger} and \ref{sec:profiler} document
-debugging and profiling efforts, respectively.  Finally,
-Section~\ref{sec:jit} describes recent efforts to add JIT compilation
-to \Elisp{}.
 
 \subsection{Byte-code interpreter}
 \label{sec:byte-code-interpreter}
@@ -2298,22 +2267,7 @@ started to lose momentum starting about 2010.
 %% incorporated back into Emacs.
 
 This section discusses some notable evolution of the design of
-\Elisp{} after 2010: lexical scoping
-(Section~\ref{sec:lexical-scoping}),
-eager macro expansion (Section~\ref{sec:eager-macro-expansion}),
-pattern matching (Section~\ref{sec:pcase}),
-Common Lisp compatibility
-(Section~\ref{sec:cl-clib}), generalized variables
-(Section~\ref{sec:generalized-variables}), object-oriented programming
-(Section~\ref{sec:oop}), native support for objects
-(Section~\ref{sec:actual-objects}), generators
-(Section~\ref{sec:generators}), concurrency
-(Section~\ref{sec:concurrency}), inline functions
-(Section~\ref{sec:inline-functions}) and various attempts at module
-systems (Section~\ref{sec:module-system}).
-
-None of those have found their way into XEmacs so far.
-%% FIXME: Section overview
+\Elisp{} after 2010 which have not found their way into XEmacs so far.
 
 \subsection{Lexical scoping}
 \label{sec:lexical-scoping}
