@@ -286,11 +286,13 @@ Comments for author
 *** DONE Please use author-year citations throughout.
     CLOSED: [2019-07-05 Fri 16:26]
 
-*** TODO Many sections of the paper have no citations. In all these cases,
+*** DONE Many sections of the paper have no citations. In all these cases,
+    CLOSED: [2019-08-06 Tue 15:32]
 are we to assume there is no documentation and it is down to personal
 knowledge of the authors? Please add citations wherever possible.
 
-*** TODO Throughout, I had a lot of trouble mapping release numbers to
+*** DONE Throughout, I had a lot of trouble mapping release numbers to
+    CLOSED: [2019-08-06 Tue 15:32]
 years, and relating release numbers for Emacs to those for XEmacs.
 Could you give a table with a chronology of releases?
 
@@ -300,12 +302,14 @@ the introduction a little about your involvement with Emacs and
 to what extent (if any) you consulted with the community in writing
 this paper.
 
-*** TODO Also, bring out some details about the people involved. For instance,
+*** DONE Also, bring out some details about the people involved. For instance,
+    CLOSED: [2019-08-06 Tue 15:33]
 you should say something regarding Stallman's biography. He is
 mentioned with regard to specific details, but you should also say
 something about his overall role in the history.
 
-*** TODO Occasionally you refer to the Emacs community in the first person.
+*** DONE Occasionally you refer to the Emacs community in the first person.
+    CLOSED: [2019-08-06 Tue 15:32]
 I recommend you use third person throughout.
 
 *** DONE p4, Section 3
@@ -433,7 +437,8 @@ paragraph.
     CLOSED: [2019-03-25 Mon 11:17]
 "but did get" --> "But it did get"
 
-*** TODO "stable enough to be used globally" What does this mean? (I gather it
+*** DONE "stable enough to be used globally" What does this mean? (I gather it
+    CLOSED: [2019-08-06 Tue 15:33]
 does not mean the feature was released, since it is still an
 attempt.)
 
@@ -777,7 +782,8 @@ SPECIFIC COMMENTS and ADVICE
   choice by the authors to blend these descriptions, and is probably
   justified, but at the same time it left me off kilter.
 
-*** TODO - I would appreciate a timeline or figure near the beginning of the paper that
+*** DONE - I would appreciate a timeline or figure near the beginning of the paper that
+    CLOSED: [2019-08-06 Tue 15:34]
   outlines the major milestones in the development of Emacs. In particular,
   the discussion lists various version releases (e.g. Emacs-24.3) without
   providing dates for these releases. Also, sometimes the discussion includes
@@ -813,7 +819,8 @@ SPECIFIC COMMENTS and ADVICE
   you are referring to with the name "Emacs" at this point. Who wrote it?
   When?
 
-*** TODO - Section 3. When was Stallman's Emacs (and Elisp) developed and released?
+*** DONE - Section 3. When was Stallman's Emacs (and Elisp) developed and released?
+    CLOSED: [2019-08-06 Tue 15:34]
 
 *** TODO - Please be careful with the use of "in jokes" such as "Greenspun's tenth
   rule" and "Eight Megs And Constantly Swapping". These are both presented as
@@ -822,7 +829,8 @@ SPECIFIC COMMENTS and ADVICE
   only expect people already familiar with them to read this article. How
   limiting!
 
-*** TODO - I generally find "table of contents" sections, such as the one right before
+*** DONE - I generally find "table of contents" sections, such as the one right before
+    CLOSED: [2019-08-06 Tue 15:35]
   4.1, to be boring, repetitive and unhelpful. I never read them.
 
 *** TODO - 4.1: What is the time period/Emacs versions covered in Section 4? What are the
@@ -852,7 +860,8 @@ SPECIFIC COMMENTS and ADVICE
 
 *** TODO - 4.5: "C-u (to specify powers of 4)" ? What is this design? Why powers of 4?
 
-*** TODO - 4.6: How does Elisp's support for non-local exits compare to other language
+*** DONE - 4.6: How does Elisp's support for non-local exits compare to other language
+    CLOSED: [2019-08-06 Tue 15:36]
   features, like exceptions? What influenced the design? (It appears to be
   constraints of general purpose software engineering, right? Nothing specific
   to the context of Emacs...)
@@ -896,7 +905,8 @@ SPECIFIC COMMENTS and ADVICE
   uninteresting and really reads like a changelog. I have no idea what these
   functions are or why their integration is important.
 
-*** TODO - 8.11: The fact that still Elisp rejects a module system because the
+*** DONE - 8.11: The fact that still Elisp rejects a module system because the
+    CLOSED: [2019-08-06 Tue 15:37]
   developers don't want to rely on an IDE makes me despair as a language
   researcher. If any language can make assumptions about its development
   environment...
