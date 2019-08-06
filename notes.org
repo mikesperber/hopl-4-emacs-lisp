@@ -1418,4 +1418,4 @@ Or that you actually started before Sep 1984?
 
 *** Why was lambda-as-a-macro only added so late?
 *** When was the byte-code compiler added?
-
+*** Can you give some background on why early Emacs Lisp shunned opaque data types and defstruct?
