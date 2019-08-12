@@ -1112,6 +1112,11 @@ page---the interpreter).
 *** Should we explain more of core Emacs Lisp instead of deferring to the MacLisp manual?
 
 * Conf calls
+** 2019-08-12
+*** TODO 5.4 data representation - doesn't have who did what
+*** TODO Conclusion is a bit short
+*** TODO Section 9 long
+*** TODO more code examples
 * Interview procecure
 ** Todos
 - copyright waiver
