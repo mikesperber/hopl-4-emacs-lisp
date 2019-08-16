@@ -422,8 +422,9 @@ from Jamie Zawinski's timeline~\cite{JWZTimeline}.
 
 % FIXME: timeline Emacs Lisp evolution?
 
-\subsection{Model of development}
+\subsection{Development model}
 
+\paragraph{Emacs}
 Emacs is a Free Software project, developed by a loosely connected
 %% FIXME: *mostly* but not completely (e.g. not true at least for Gerd Möllmann
 %% and Joe, probably others)
@@ -470,9 +471,26 @@ change's quality, which can lead to requiring further changes or even
 a complete revert, so over time contributors learn to judge on their own
 what makes a change acceptable.
 
-%% FIXME: Discuss the XEmacs organization?
+\paragraph{Lucid Emacs/XEmacs}
+Lucid Emacs was initially managed by the respective maintainers, who
+integrated patches sent by contributors, and published tarballs for
+releases on ftp sites.
 
+This changed when Steve Baur took over as maintainer in 1996: He
+imorted the source code into a publically accessible CVS repository on
+SourceForge platform for open-source software.  Steve Baur then
+established a \textit{review board} whose members received commit
+access to the repository, and whose job was to review and apply
+patches via a special mailing list, \texttt{xemacs-patches}, which
+exists to this day.
 
+For XEmacs 19.15, Steve Baur also split off many \Elisp{} packages
+into a separate repository, with the ability to manage and update the
+packages independently from the core releases, and installed
+individual maintainers for many of these packages.
+
+In 2007, Michael Sperber migrated the source code from CVS to
+Mercurial, hosted on the Bitbucket platform.
 
 \section{Early language design}         % -1992?
 \label{sec:early-history}
