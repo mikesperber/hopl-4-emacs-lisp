@@ -1441,16 +1441,16 @@ which was justified by the fact that objects using the \texttt{Lisp\_Vector}
 tag had other extra costs: 2 words of header, plus the overhead of having
 each object be allocated directly by \texttt{malloc}.
 
-XEmacs implemented a similar change in 1993 with Lucid Emacs 19.8,
-giving \Elisp{} 28-bit integers and a 28-bit address space, and
-used the data representation of Emacs 19.30 with the release of XEmacs 19.13, also in
-1995.
+Richard Mlynarik implemented a similar change in 1993 for Lucid Emacs 19.8,
+giving \Elisp{} 28-bit integers and a 28-bit address space.
+For the release of XEmacs 19.13 in 1995, Ben Wing
+merged the data representation from Emacs 19.30.
 
 % FIXME Mike: I think this is not th end of the story for XEmacs
 
 Of course, a limit of 256\;MB was still not actually comfortable.
 
-XEmacs added a ``minimal-tagbits'' configure option with the release
+Kyle Jones added a ``minimal-tagbits'' configure option to XEmacs with the release
 of XEmacs 21.0 in 1998, yielding 31-bit integers and a 1GB maximum
 file size.  The mark bits moved to the object headers, which were also
 added to cons cells, making them three-word objects.
