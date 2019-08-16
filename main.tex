@@ -169,10 +169,12 @@ Section~\ref{sec:coevolution}.  After 2007, XEmacs development slowed
 down, and we describe this post-XEmacs period in
 Section~\ref{sec:post-xemacs}.
 
+Our conclusions are in
+Section~\ref{sec:conclusion}.
+
 \Elisp{} was re-implemented in several other projects outside this
 succession.  We briefly touch upon those projects in
-Section~\ref{sec:alternative-implementations}.  Our conclusions are in
-Section~\ref{sec:conclusion}.
+Appendix~\ref{sec:alternative-implementations}.  
 
 \section{Emacs history}
 \label{sec:emacs-history}
@@ -3250,11 +3252,56 @@ particular namespacing used when browsing the code.
 
 %% FIXME: Compilation of Elisp to C by Tom Tromey!
 
+\section{Conclusion}
+\label{sec:conclusion}
+
+Many steps of \Elisp's evolution have been the result of efforts of single
+individuals, driven by a specific purpose, yet it has managed to keep an
+arguably sane and cohesive overall design, thanks on the one hand to
+a maintainership which was more interested in improving the text editor than
+the language and kept an eye on the longer term, and on the other to the
+willingness to break backward compatibility in specific cases, in order to
+gradually address problems encountered over time.
+
+Like Lisp in general, the development of Emacs has seen plenty of
+discord, with unbridgeable personal differences, heated debates, and
+forks along the way.  However, througout these differences, \Elisp{}
+has steered a remarkably stable course of conservative development and
+gradual extension.  It has mostly grown by slowly incorporating popular
+features from other languages, both in the language itself and in its
+implementation.  But it has also come up with its own features, such as
+docstrings, buffer-local variables, and the addition of text-properties
+to strings.
+
+The composability of the existing \Elisp{} packages relies on social
+mechanisms, and the organic growth of all the \Elisp{} packages has
+been able to maintain it for more than 30 years, keeping balkanization
+at bay to date.  Given the vast amount of changes Emacs users and
+developers have made to the system over the last decade alone, we are
+looking forward to the \Elisp{} of the next 30 years.
+
+%% FIXME: Discuss whether \Elisp{} is more of a sponge
+%% that incorporated other languages's features, or one that comes up
+%% with its own solutions which are sometimes then picked up by
+%% other languages?
+
+\subsection{Acknowledgments}
+
+Emacs and \Elisp{} are the result of the contribution of an impressive
+number of individuals.  We thank them all for their contributions.
+With respect to this article, while the efforts put into maintaining the
+revision history of Emacs through the various revision systems it has used
+have been very helpful, we'd like to thank also Lars Brinkhoff for his
+archiving work at \url{https://github.com/larsbrinkhoff/emacs-history} which
+fills some of the holes of the early life of Emacs.
+
+\appendix
+
 \section{Alternative implementations}
 \label{sec:alternative-implementations}
 
 Implementation of \Elisp{} have not been confined to Emacs and its
-derivatives.  Two implementations---Edwin and JEmacs---are notable for
+derivatives.  Two imp\-lemen\-tations---Edwin and JEmacs---are notable for
 running \Elisp code on editors implemented independently from Emacs.
 Moreover, a Common Lisp package emulates Emacs Lisp, and Guile Scheme
 also comes with support for the \Elisp{} language.
@@ -3324,48 +3371,6 @@ as well.  It does not really aim to run any \Elisp{} package in your
 browser, so its runtime library only provides a small subset of \Elisp's
 standard primitives.
 
-\section{Conclusion}
-\label{sec:conclusion}
-
-Many steps of \Elisp's evolution have been the result of efforts of single
-individuals, driven by a specific purpose, yet it has managed to keep an
-arguably sane and cohesive overall design, thanks on the one hand to
-a maintainership which was more interested in improving the text editor than
-the language and kept an eye on the longer term, and on the other to the
-willingness to break backward compatibility in specific cases, in order to
-gradually address problems encountered over time.
-
-Like Lisp in general, the development of Emacs has seen plenty of
-discord, with unbridgeable personal differences, heated debates, and
-forks along the way.  However, througout these differences, \Elisp{}
-has steered a remarkably stable course of conservative development and
-gradual extension.  It has mostly grown by slowly incorporating popular
-features from other languages, both in the language itself and in its
-implementation.  But it has also come up with its own features, such as
-docstrings, buffer-local variables, and the addition of text-properties
-to strings.
-
-The composability of the existing \Elisp{} packages relies on social
-mechanisms, and the organic growth of all the \Elisp{} packages has
-been able to maintain it for more than 30 years, keeping balkanization
-at bay to date.  Given the vast amount of changes Emacs users and
-developers have made to the system over the last decade alone, we are
-looking forward to the \Elisp{} of the next 30 years.
-
-%% FIXME: Discuss whether \Elisp{} is more of a sponge
-%% that incorporated other languages's features, or one that comes up
-%% with its own solutions which are sometimes then picked up by
-%% other languages?
-
-\subsection{Acknowledgments}
-
-Emacs and \Elisp{} are the result of the contribution of an impressive
-number of individuals.  We thank them all for their contributions.
-With respect to this article, while the efforts put into maintaining the
-revision history of Emacs through the various revision systems it has used
-have been very helpful, we'd like to thank also Lars Brinkhoff for his
-archiving work at \url{https://github.com/larsbrinkhoff/emacs-history} which
-fills some of the holes of the early life of Emacs.
 
 \bibliographystyle{abbrvnat}
 \bibliography{refs}
