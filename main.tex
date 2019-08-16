@@ -1459,12 +1459,16 @@ which was justified by the fact that objects using the \texttt{Lisp\_Vector}
 tag had other extra costs: 2 words of header, plus the overhead of having
 each object be allocated directly by \texttt{malloc}.
 
-Richard Mlynarik implemented a similar change in 1993 for Lucid Emacs 19.8,
-giving \Elisp{} 28-bit integers and a 28-bit address space.
-For the release of XEmacs 19.13 in 1995, Ben Wing
-merged the data representation from Emacs 19.30.
-
-% FIXME Mike: I think this is not th end of the story for XEmacs
+Richard Mlynarik implemented a similar change in 1993 for Lucid Emacs
+19.8, giving \Elisp{} 28-bit integers and a 28-bit address space.  For
+the same release, an alterntive C-level representation for the
+\texttt{Lisp\_Object} type for object descriptors was added that used
+the C \texttt{union} feature and bit fields rather than ``manual''
+manipulation of bits in the machine word.  This has been maintained
+since, but needed to be disabled on many platforms beause of bugs in
+the implementation of unions and bit fields in C compilers.  For the
+release of XEmacs 19.13 in 1995, Ben Wing merged the data
+representation from Emacs 19.30.
 
 Of course, a limit of 256\;MB was still not actually comfortable.
 
