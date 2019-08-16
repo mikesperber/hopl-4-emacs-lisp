@@ -127,11 +127,15 @@ years of
 experience in (X)Emacs and \Elisp{}, which made us well positioned to write
 this article.
 
-\paragraph{Stefan} has been a core contributor to Emacs since
+\smallskip
+
+\noindent\textbf{Stefan Monnier} has been a core contributor to Emacs since
 1999 and head maintainer from 2008 to 2015, and he supervised student
 projects on the \Elisp{} implementation in Emacs.
 
-\paragraph{Mike} has been a core contributor to XEmacs since 1994.
+\smallskip
+
+\noindent\textbf{Michael Sperber} has been a core contributor to XEmacs since 1994.
 Most of his work was done from 1995 to 2003, when he was a research
 assistant at the University of Tübingen.  Apart from his own work on
 the XEmacs codebase, he supervised several student projects on the
@@ -205,7 +209,7 @@ Emacs were written in Lisp, notably \emph{EINE} (recursive acronym for
 \emph{ZWEI} (for ``ZWEI was EINE Initially'') by Dan Weinreb and Mike
 McMahon~\cite{Weinreb1979}), and \emph{Multics Emacs} by Bernie Greenberg in
 1978~\cite{MulticsEmacs1996,Stallman2002} written in MacLisp~\cite{Moon1974,Pitman1983}.
-Given Lisp's dynamic nature, is was only natural that those systems used
+Given Lisp's dynamic nature, it was only natural that those systems used
 Lisp as their extension language.
 
 \emph{Unix Emacs}, written by James Gosling in 1980/1981~\cite{Gosling1981}
@@ -252,7 +256,7 @@ rule.\footnote{``Any sufficiently complicated C or Fortran program contains an
 ad-hoc, informally-specified, bug-ridden, slow implementation of half of
 Common Lisp.''~\cite{GreenspunsRule}}
 
-Moreover, Richard Stallman, made the design of Emacs embody and showcase
+Moreover, Richard Stallman made the design of Emacs embody and showcase
 the ideals of Free Software.  For example, not only is it permitted to get
 and modify the source code, but every effort is made to encourage the
 end-user to do so.  The resulting requirements had a profound influence on
@@ -431,7 +435,7 @@ mailing-lists.
 
 Richard Stallman was the original maintainer and still participates: even
 though several other people have been official maintainers at various points
-in time, he always acted as a ``default maintainer'' when noone wanted to
+in time, he always acted as a ``default maintainer'' when no one wanted to
 step up and he has followed Emacs's development very closely even when he
 was not officially the maintainer, contrary to most of the other programs he
 developed, such as \emph{gcc} and \emph{gdb}.  Also, Richard Stallman being
@@ -2835,7 +2839,7 @@ This design generally leads to cleaner and simpler code, and we can easily
 provide backward compatibility wrappers for most of Common Lisp's
 primitives.
 
-A Comoon-Lisp-style representation of a place can easily be turned into
+A Common-Lisp-style representation of a place can easily be turned into
 its corresponding higher-order function.  The reverse is not true, however, so
 this design precludes compatibility with Common Lisp and
 \texttt{cl.el}'s \texttt{get-setf-expansion}, which must produce the
@@ -3301,7 +3305,7 @@ running the result.
 
 Guile Scheme~\cite{Guile2018} was conceived as the universal extension
 language of the GNU project, with the specific intention of replacing
-\Elisp in Emacs at one point.  This has not happened (yet), but Guile does
+\Elisp{} in Emacs at one point.  This has not happened (yet), but Guile does
 ship with a fairly complete implementation of \Elisp{} that translates
 \Elisp{} programs to Guile's intermediate language.  It is used in the
 Guile-Emacs system, which is a work-in-progress modification of Emacs where
