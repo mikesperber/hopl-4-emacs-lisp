@@ -860,7 +860,8 @@ SPECIFIC COMMENTS and ADVICE
   users react to them? What changed so that the old-style syntax could be
   removed in 2018? Why could it not be changed earlier?
 
-*** TODO - 4.4: Is there more to say about the docstring feature? Has it been studied
+*** DONE - 4.4: Is there more to say about the docstring feature? Has it been studied
+    CLOSED: [2019-08-17 Sat 15:53]
   by language designers? Are there trade-offs in including this feature in
   Elisp? What percentage of Elisp code uses docstrings? How searchable is it?
   What other languages, besides Common Lisp, have adopted it?
@@ -880,7 +881,8 @@ SPECIFIC COMMENTS and ADVICE
   I wonder if focusing on the dynamic to lexical scoping evolution would make
   for a tighter, more compelling read.
 
-*** TODO - Section 5: I found this section, which mainly focuses on changes to the
+*** DONE - Section 5: I found this section, which mainly focuses on changes to the
+    CLOSED: [2019-08-17 Sat 15:54]
   implementation of Elisp, underwhelming. Partly it is my biases --- most of
   these changes are invisible to users, except when they remove limitations on
   heap size and file size. However, partly this is because this section does
@@ -901,7 +903,8 @@ SPECIFIC COMMENTS and ADVICE
   a particular data structure in the implementation of Emacs be represented
   concretely or abstractly. How does this relate to the design of Elisp?
 
-*** TODO - In the middle part of the paper, we start to see the introduction of new
+*** DONE - In the middle part of the paper, we start to see the introduction of new
+    CLOSED: [2019-08-17 Sat 15:54]
   characters, as the development team grows. However, there is no high-level
   discussion about how the development teams for Emacs and XEmacs were
   composed, lead and organized. Were they both open-source projects? How big
@@ -918,7 +921,8 @@ SPECIFIC COMMENTS and ADVICE
   researcher. If any language can make assumptions about its development
   environment...
 
-*** TODO - Section 9: This section reads like a laundry list, or a "we didn't want to
+*** DONE - Section 9: This section reads like a laundry list, or a "we didn't want to
+    CLOSED: [2019-08-17 Sat 15:55]
   offend anyone by leaving them out". As a reader, I didn't get much out of
   it.
 
