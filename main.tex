@@ -285,7 +285,7 @@ can be summarized as:
 \end{itemize}
 
 \subsection{The great schism}
-
+\label{sec:schism}
 %% Note: I put "1988" here based on Richard Gabriel's email (quoted in
 %% https://www.jwz.org/doc/lemacs.html) from 22 Jun 1992 where he says "4
 %% years ago".
@@ -308,15 +308,16 @@ Software Foundation had for Emacs 19 were incompatible,
 and the required cooperation between Lucid and
 the Free Software Foundation broke down~\cite{Arcenaux-interview}.
 
-As a result, Lucid
-forked Emacs development, creating its own Emacs variant \emph{Lucid
-Emacs}.  Jamie Zawinski was the primary developer of Lucid Emacs.
+As a result, Lucid forked Emacs development, creating its own Emacs
+variant \emph{Lucid Emacs}, whose primary developer and maintainer was
+Jamie Zawinski.
+
 In 1994, Lucid went bankrupt.  Sun subsequently wanted to ship
 Lucid Emacs with their operating system, and ended up financing some
 of the continued development of Lucid Emacs, and effected a name
 change to the current \emph{XEmacs}.
-
-% FIXME: End of XEmacs
+Sun eventually lost interest in XEmacs, which continued as an
+open-source community effort.
 
 \subsection{Timeline}
 
@@ -1869,7 +1870,16 @@ Libjit does not currently support all the architectures that Emacs supports.
 The focus of Lucid Emacs was on providing a proper graphical user
 interface.  As a result, most of the changes to \Elisp{} in Lucid
 Emacs / XEmacs were to support the move from a TTY-based purely
-textual model to a graphical model.
+textual model to a graphical model.  Lucid's original requirements
+described in Section~\ref{sec:schism} led to the creation of
+additional library features and data types, such as events, keymaps,
+characters, and extents, but put no immediate pressure on the core
+language or its implementation.  Hence this section, which describes
+those changers, is rather short.  The numerous changes to the
+implementation in Lucid Emacs / XEmacs happened as a matter of more
+general efforts to improve both the editor and the programming
+experience and are described in
+Section~\ref{sec:base-language-implementation}.
 
 \subsection{Event and keymap representations}
 \label{sec:keymaps}
