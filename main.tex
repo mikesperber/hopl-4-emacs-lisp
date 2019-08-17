@@ -576,7 +576,6 @@ Maclisp had all basic properties associated with Lisp today~\cite{Moon1974}:
 \item Code forms have an internal representation as
   \textit{S-expressions}, which print the same as the code, making the
   language homoiconic.
-  % FIXME: explain quote somewhere
 \item There is an \texttt{eval} function that evaluates an expression
   represented as an S-expression.
 \item The basic data structure is \textit{cons}, which pairs two
@@ -921,14 +920,31 @@ record data type to make structures distinct from them.
 Quasiquotation is a classic feature of Lisp readers, including
 MacLisp's~\cite{Bawden1999}: It allows creating nested list
 structures---particularly those representing code---via templates.
-Quasiquotation is usually introduced via \verb|`|, where the reader
-translates \verb|`|\textit{exp} to \texttt{(quasiquote \textit{exp})}.
-Nevertheless, the mechanism is often referred to as
-\textit{backquote}.  Backquote operates like \verb|'|, but a backquote
-form may contain \texttt{,} and \texttt{,@} subforms, which insert or
-splice the value of expressions into the result.
 
-Here is a backquote example:
+Quasiquotation is a more general mechanism than \texttt{quote} for
+creating nested list structure without using constructors explicitly:
+\texttt{quote} is usually introduced via \verb|'|where the reader
+translates \verb|'|\textit{exp} to \texttt{(quote \textit{exp})},
+evaluates to a constant list structure whose external representation.
+For example:
+%
+\begin{verbatim}
+'(a (b c d) c)
+\end{verbatim}
+%
+evalutes to a list whose first element is the symbol \texttt{a}, the
+second a list consisting of elements \texttt{b}, \texttt{c}, and
+\texttt{d}, and whose third element is \texttt{c}.
+
+Quasiquotation is usually introduced via \verb|`|,
+where the reader translates \verb|`|\textit{exp} to
+\texttt{(quasiquote \textit{exp})}.  (Nevertheless, the mechanism is
+often referred to as \textit{backquote}.)  Quasiquotation operates like
+\verb|'|, but a \texttt{quasiquote} form may contain \texttt{,} and \texttt{,@}
+subforms, which insert or splice the value of expressions into the
+result.
+
+Here is a \texttt{quasiquote} example:
 %
 \begin{verbatim}
     `(do ((i 0 (+ 1 i)))
@@ -936,7 +952,7 @@ Here is a backquote example:
       (aset ,array-name i ,init-val))
 \end{verbatim}
 %
-This expands into the following backquote-less code:
+This expands into the following \texttt{quasiquote}-less code:
 %
 \begin{verbatim}
     (list 'do '((i 0 (+ 1 i)))
