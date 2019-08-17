@@ -254,7 +254,8 @@ languages that were either too obscure or too weak to support this vision.
 Consequently, Richard Stallman took inspiration from MacLisp, and \Elisp{}
 started right from the beginning as a full-featured programming language with
 powerful abstraction facilities, thus foregoing Greenspun's tenth
-rule.\footnote{``Any sufficiently complicated C or Fortran program contains an
+rule, a popular epigram on programming that came up in  1993: `Any
+sufficiently complicated C or Fortran program contains an
 ad-hoc, informally-specified, bug-ridden, slow implementation of half of
 Common Lisp.''~\cite{GreenspunsRule}}
 
@@ -2683,8 +2684,10 @@ to have been part of the motivations:
   keyword arguments, especially in low-level primitives like
   \texttt{mapcar}~\cite{RMS-keyword-args-are-clunky}.
 \item Some aspects of Common Lisp's design can incur 
-  significant overhead, and Emacs already carried the stigma of \emph{eight megabytes and
-    constantly swapping}, so there were good reasons to try and not make
+  significant overhead, and Emacs already carried the stigma of being
+  too big.  (\texttt{vi} advocates used the derogatory name \emph{eight megabytes and
+    constantly swapping} in the days when eight megabytes were a
+  significant amount of memory.)  Consequently, were good reasons to try and not make
   \Elisp{}'s efficiency any worse.
 \item Keeping \Elisp{} small meant that users could participate in its
   development without having to learn all of Common Lisp.  When inclusion of

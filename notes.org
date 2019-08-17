@@ -754,7 +754,8 @@ true for other LISP variants. What is unique here? Perhaps it would be better
 to focus on the ones that have more close connection to Elisp----for example,
 the ones that are difficult to implement in the presence of dynamic binding.
 
-*** TODO Dynamic binding is itself one of the most famous (mis-)features of Elisp, and
+*** DONE Dynamic binding is itself one of the most famous (mis-)features of Elisp, and
+    CLOSED: [2019-08-17 Sat 15:46]
 I wish the paper described this feature & the introduction of static binding
 in a more self-contained way, rather than scattering it throughout the text. I
 also wish that it were more complete. What were the initial advantages of
@@ -779,7 +780,8 @@ SPECIFIC COMMENTS and ADVICE
   knowledge of because you were there, or is this something that you heard
   from someone else?
 
-*** TODO - Overall, I kept confusing the description of Elisp the language with the
+*** DONE - Overall, I kept confusing the description of Elisp the language with the
+    CLOSED: [2019-08-17 Sat 15:47]
   description of Emacs the software artifact. I believe this is a deliberate
   choice by the authors to blend these descriptions, and is probably
   justified, but at the same time it left me off kilter.
@@ -796,7 +798,8 @@ SPECIFIC COMMENTS and ADVICE
   This timeline, and a capsule summary of the major software artifacts discussed
   in the paper, will help later discussion immensely.
 
-*** TODO - The paper needs a short introduction to who Richard Stallman is, what the
+*** DONE - The paper needs a short introduction to who Richard Stallman is, what the
+    CLOSED: [2019-08-17 Sat 15:47]
   free software movement is, and what the GPL requires. Although many readers
   may already know this story, establishing the details that are important to
   later design decisions is a good introduction. Instead, the first time
@@ -804,7 +807,8 @@ SPECIFIC COMMENTS and ADVICE
   reimplement the basis for the new Emacs in C..." which I found really
   confusing. What was his first implementation?
 
-*** TODO - In fact, I found the entirety of Section 2 (PREHISTORY) confusing. It is too
+*** DONE - In fact, I found the entirety of Section 2 (PREHISTORY) confusing. It is too
+    CLOSED: [2019-08-17 Sat 15:48]
   short and jumps around too much. The introductory sentence "While Emacs's
   original inception was a set of macros for the TECO editor" puts me off
   right from the start. Should I know what the TECO editor is? Was this the
@@ -824,7 +828,8 @@ SPECIFIC COMMENTS and ADVICE
 *** DONE - Section 3. When was Stallman's Emacs (and Elisp) developed and released?
     CLOSED: [2019-08-06 Tue 15:34]
 
-*** TODO - Please be careful with the use of "in jokes" such as "Greenspun's tenth
+*** DONE - Please be careful with the use of "in jokes" such as "Greenspun's tenth
+    CLOSED: [2019-08-17 Sat 15:52]
   rule" and "Eight Megs And Constantly Swapping". These are both presented as
   if the reader is already familiar with them, which is a way to turn off
   readers. Mentioning them without explanation gives the impression that you
