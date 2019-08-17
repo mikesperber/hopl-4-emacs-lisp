@@ -402,7 +402,8 @@ worthwhile to list them all?
     CLOSED: [2019-03-25 Mon 11:13]
 this phrase refers to, please rewrite.
 
-*** TODO p13
+*** DONE p13
+    CLOSED: [2019-08-17 Sat 15:30]
 "ephemerons" Are these so uninteresting that they deserve no
 description in the paper?
 

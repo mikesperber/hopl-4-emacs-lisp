@@ -1604,8 +1604,14 @@ allocator: The new, much simplified allocator eliminated the
 distinction between objects that were allocated in blocks and those
 allocated via \texttt{malloc}, and would make the decision
 individually based on size~\cite{Crestani2005}.
+
 In the process of these GC improvements, Crestani and Michael Sperber
-also added \emph{ephemerons} to \Elisp{}~\cite{Hayes1997}.
+also added \emph{ephemerons} to \Elisp{}: \texttt{(make-ephemeron
+  \id{KEY} \id{VALUE} \id{FINALIZER})} returns an ephemeron, a reference
+to \id{VALUE}.  \id{VALUE} is only reachable through the ephemeron as
+long as \id{KEY} is reachable.  When \id{KEY} becomes unreachable while
+the ephemeron itself is still reachable, \id{VALUE} is queued for
+finalization.
 
 \subsection{New GC algorithms}
 \label{sec:gc-algorithms}
