@@ -689,7 +689,8 @@ how the evolution was handled, and how successful it was.
 the way" These are all great topics for a history! But the paper largely
 ignores or downplays these.
 
-*** TODO "But it has also come up with its own features" Interestingly, all three
+*** DONE "But it has also come up with its own features" Interestingly, all three
+    CLOSED: [2019-08-17 Sat 15:46]
 that you list are already covered in Section 4! Were there later ones?
 
 Mike: want to cover customize
