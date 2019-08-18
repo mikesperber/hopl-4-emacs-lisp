@@ -1408,7 +1408,8 @@ it. Harlan Sexton and Jamie Zawinski were more in that loop.
 
 ** Richard Stallman
 
-*** When was GNU Emacs started?
+*** DONE When was GNU Emacs started?
+    CLOSED: [2019-08-18 Sun 16:58]
 
 In some message you suggested it was started in Sep 1984, IIRC,
 based on Gosling Emacs.
@@ -1431,7 +1432,8 @@ sell Gosling Emacs but did not yet own the code?  Or is that reddit post
 just confused about something?
 
 Or that you actually started before Sep 1984?
+*** DONE When was the byte-code compiler added?
+    CLOSED: [2019-08-18 Sun 17:00]
 
 *** Why was lambda-as-a-macro only added so late?
-*** When was the byte-code compiler added?
 *** Can you give some background on why early Emacs Lisp shunned opaque data types and defstruct?
