@@ -272,7 +272,8 @@ development with no citations, not even to its documentation. The
 exposition often assumed knowledge I did not have, such as familiarity
 with CLOS.
 
-*** TODO The development is quite detailed, and I wonder how much interest it
+*** DONE The development is quite detailed, and I wonder how much interest it
+    CLOSED: [2019-08-19 Mon 13:36]
 will hold for the general community. There certainly are points of
 interest.  The conclusion refers to "willingness to break backward
 compatibility in specific cases" and "unbridgeable personal
