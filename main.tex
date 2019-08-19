@@ -1516,8 +1516,9 @@ cells was not just motivated by thriftiness but rather by the need to
 enforce that all objects be aligned on a multiple of 8, so as to free the
 least significant 3 bits for use as tag bits.
 
-In Emacs-23.2 the tagging scheme was tweaked to use 2 tags for integers,
-pushing the maximum file size to 512\;MB.
+In Emacs-23.2 the tagging scheme was tweaked to use two tags for integers,
+pushing the maximum file size to 512\;MB, similar to what XEmacs had
+done for XEmacs 21.0..
 
 The design of Emacs makes it basically
 impossible to view files larger than 4GB or edit files larger than 2GB (on
@@ -1667,12 +1668,12 @@ The first issue is that various parts of Emacs's code assume that
 a collection can only occur during \Elisp{} code execution and not during
 heap allocation, and of course those assumptions are not explicitly recorded
 in the code.  The second issue is that Emacs currently implements various
-forms of ad-hoc weak references which need to be adapted to the more
+forms of ad-hoc weak references which which do not match the ones
+offered by Boehm's GC.
 %% FIXME: Is it worth going through the details of hash-tables's weakness
 %% and markers's weakness (and their removal from undo lists)?
 %% Mike: I think it might be, as it affects design.  I suggest leaving
 %% it for the final version, however.
-standard forms of weak references.
 
 \label{sec:incremental-gc}
 In XEmacs, GC pauses continued to be a perceived problem.  In 2005, Marcus

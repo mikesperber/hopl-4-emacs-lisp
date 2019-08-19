@@ -368,13 +368,13 @@ or at some other time?
       I added two examples of the simplification
 give a citation.
 
-*** TODO I could not discern an order to the subsections of Section 4. Possibly
+*** TODO Mike I could not discern an order to the subsections of Section 4. Possibly
 best to reorder them, with the ones directly related to Emacs first
 (e.g., 4.2, 4.5, 4.7, 4.9), then ones tied to Emacs goals (e.g., 4.4,
 4.8), and the ones that are only incidental later (e.g., 4.1, 4.3,
 4.6).
 
-*** TODO p10 Section 5.1
+*** TODO Stefan p10 Section 5.1
 Who developed the byte-code compiler? Citations, please.
 
 *** DONE p11
@@ -413,13 +413,16 @@ description in the paper?
 "no matter which tagging scheme we used" Change from first to third
 person.
 
-*** TODO "tweaked to use two tags for integers" Link this to the odd and
+*** DONE "tweaked to use two tags for integers" Link this to the odd and
+    CLOSED: [2019-08-19 Mon 13:40]
 even fixnum tags mentioned earlier.
 
-*** TODO "cl.el's defstruct" What is cl.el? I guess it is a library inspired
+*** DONE "cl.el's defstruct" What is cl.el? I guess it is a library inspired
+    CLOSED: [2019-08-19 Mon 13:41]
 by Common Lisp, but you ought to be clear about this.
 
-*** TODO p15
+*** DONE p15
+    CLOSED: [2019-08-19 Mon 13:42]
 "the more standard forms of weak references" I don't know what this
 means.
 
@@ -653,7 +656,7 @@ please explain.
     CLOSED: [2019-05-12 Sun 18:02]
 "async.el" Cite its documentation.
 
-*** TODO A word or two on uses of the concurrency package would be welcome.
+*** TODO Stefan A word or two on uses of the concurrency package would be welcome.
 Have the uses led to concurrency bugs? If there aren't many uses
 of the package yet that would also be valuable information.
 
@@ -680,7 +683,7 @@ with the older systems for inlining?
 "Emacs-Ejit" I presume this is the compiler from Emacs to Javascript?
 Please make this explicit.
 
-*** TODO p35
+*** TODO Stefan p35
 
 "willingness to break backward compatibility in specific cases" It would
 be good to make this a theme of the paper, stressing where it happened,
@@ -741,11 +744,13 @@ language for an editor, and of the constraints that come from being part of
 the free software movement. I wish this part of the story were told more
 consistently and more prominently.
 
-*** TODO In contrast, many evolutionary changes are presented without discussion or
+*** DONE In contrast, many evolutionary changes are presented without discussion or
+    CLOSED: [2019-08-19 Mon 13:44]
 analysis. I can only assume that the there were other reasons for these
 changes, besides the two listed above, but I would rather not have to guess.
 
-*** TODO Indeed, many parts of the paper read like a changelog. Throughout these
+*** DONE Indeed, many parts of the paper read like a changelog. Throughout these
+    CLOSED: [2019-08-19 Mon 13:45]
 sections, I found myself wondering, what should I take away from this section?
 What can I learn from it? How does it fit into the overall story? In
 particular, although it is notable that some features that require primitive
@@ -763,7 +768,8 @@ also wish that it were more complete. What were the initial advantages of
 dynamic binding? What made static binding ultimately possible? How has the
 change affected the community?
 
-*** TODO Another issue with the paper is that it is targeted to Elisp experts. As a
+*** DONE Another issue with the paper is that it is targeted to Elisp experts. As a
+    CLOSED: [2019-08-19 Mon 13:46]
 casual Emacs user for over twenty years (I am using it now to type this
 review), I have encountered some of Elisp, and as a programming language
 researcher, I am curious about its history. However, some parts of this paper
@@ -841,12 +847,14 @@ SPECIFIC COMMENTS and ADVICE
     CLOSED: [2019-08-06 Tue 15:35]
   4.1, to be boring, repetitive and unhelpful. I never read them.
 
-*** TODO - 4.1: What is the time period/Emacs versions covered in Section 4? What are the
+*** DONE - 4.1: What is the time period/Emacs versions covered in Section 4? What are the
+    CLOSED: [2019-08-19 Mon 13:46]
   consequences of lambda being a macro. Why wasn't the original Elisp code
   ever updated to use this new lambda form over 30 years?
   What is the #' ... reader shorthand referred to at the end of page 6?
 
-*** TODO - 4.2: I was confused by this section, especially since the discussion seems
+*** DONE - 4.2: I was confused by this section, especially since the discussion seems
+    CLOSED: [2019-08-19 Mon 13:48]
    to be split between it and 4.7. What are buffer local variables? How does
    that make strings a fancier datatype than in most other languages?  What is
    the impact of storing strings with variable numbers of bytes? Why is moving
@@ -854,7 +862,7 @@ SPECIFIC COMMENTS and ADVICE
    "modified-tick" feature worth mentioning when it has apparently never been
    used?
 
-*** TODO - 4.3: This section is an example of the Emacs communities' approach to
+*** TODO Stefan - 4.3: This section is an example of the Emacs communities' approach to
   backwards-incompatible changes, which is both tedious in detail but leaves
   me wanting to know more. What is the context of the design changes discussed
   in this section (i.e. introducing explicit warnings in Emacs-22.2)? How did
@@ -867,7 +875,7 @@ SPECIFIC COMMENTS and ADVICE
   Elisp? What percentage of Elisp code uses docstrings? How searchable is it?
   What other languages, besides Common Lisp, have adopted it?
 
-*** TODO - 4.5: "C-u (to specify powers of 4)" ? What is this design? Why powers of 4?
+*** TODO Stefan - 4.5: "C-u (to specify powers of 4)" ? What is this design? Why powers of 4?
 
 *** DONE - 4.6: How does Elisp's support for non-local exits compare to other language
     CLOSED: [2019-08-06 Tue 15:36]
@@ -875,10 +883,11 @@ SPECIFIC COMMENTS and ADVICE
   constraints of general purpose software engineering, right? Nothing specific
   to the context of Emacs...)
 
-*** TODO - 4.8: Is the defadvice feature used in practice? How? How was nadvice
+*** TODO Stefan - 4.8: Is the defadvice feature used in practice? How? How was nadvice
   different? What sort of advance was it?
 
-*** TODO - Section 5: "The main changes were those made to support lexical scoping..."
+*** DONE - Section 5: "The main changes were those made to support lexical scoping..."
+    CLOSED: [2019-08-19 Mon 13:51]
   I wonder if focusing on the dynamic to lexical scoping evolution would make
   for a tighter, more compelling read.
 
@@ -891,14 +900,14 @@ SPECIFIC COMMENTS and ADVICE
   did changes, to say, data representation, affect users? libraries? runtime?
   FFI?
 
-*** TODO - 5.7: "These were solved very simply in Emacs-19.31 by removing messages that
+*** TODO Mike - 5.7: "These were solved very simply in Emacs-19.31 by removing messages that
   indicated when GC was in progress." This sentence, presented with minimal
   discussion, makes me sad. Sure, user complaints about GC decreased as a
   result, but is that because users were deceived? Or were the messages
   incorrect? Or were the user perceptions wrong to begin with? Was this the
   right thing to do?
 
-*** TODO - 6.1: Am I supposed to understand the keymap representation from this
+*** TODO Mike - 6.1: Am I supposed to understand the keymap representation from this
   example? What is important about the current representation? Overall, the
   discussion in this section is one of software engineering experience: should
   a particular data structure in the implementation of Emacs be represented
@@ -912,7 +921,7 @@ SPECIFIC COMMENTS and ADVICE
   were the teams? Did Stallman always control everything to do with GNU Emacs?
   How did the teams communicate with each other (if they did so)?
 
-*** TODO - 8.4: The timeline of integration of common lisp functions into Elisp seems
+*** TODO Stefan - 8.4: The timeline of integration of common lisp functions into Elisp seems
   uninteresting and really reads like a changelog. I have no idea what these
   functions are or why their integration is important.
 
@@ -968,7 +977,8 @@ Stallman, comes through - which is nice for an open source project
 that doesnt have the usual corporate funding/management issues that
 Jean Sammet used to ask about in earlier HOPLs.
 
-*** TODO - At this point my main complaint is that the paper attempts to bring
+*** DONE - At this point my main complaint is that the paper attempts to bring
+    CLOSED: [2019-08-19 Mon 13:55]
 the history up the present day and even hints at future plans...a
 natural thing to do, but probably not right for a history paper.
 There are a few obvious typos to that will have to be fixed.
