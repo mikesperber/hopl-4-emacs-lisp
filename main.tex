@@ -76,32 +76,6 @@
 
 \tableofcontents
 
-%% FIXME:
-%%
-%% - History is first and foremost about humans. The history in this article
-%% is quite technical. I think it would be very interesting to know more
-%% about the people behind ELisp and Emacs. Ex : Why did XEmacs fork?
-%% Who decided in 199X how the language evolved? How does that compare to
-%% the current sitution in 2018? How many programmers are involved? Does
-%% functionnality XYZ required the joint efforts of 300 programmers or just
-%% a summer intern at MIT? Lisp what shinny in 198X ... how is ELisp
-%% perceived by its younger users today in 2018?
-%%
-%% - Most of the sections describe a new feature. Why not provide a before
-%% and after short code snippet to illustrate why this features is important
-%% and why should the reader know about it.
-%%
-%% - History is more than a compiled list of facts.  A good historian helps us
-%% see the big picture, identify the main forces at play and also help us see
-%% how things could have played out differently.  I think this article is
-%% missing a narrative thread.  Why is feature X implemented in year 20XX.  Did
-%% the previous features you talked made it feasable, did another
-%% language featured this and people wanted to copy it, did the community
-%% wanted to pioneer new technology, were the users complaining about speed?
-%% Why was that feature implemented instead of the next one in the subsequent
-%% years? Is there a common theme to features implemented in the 90s, 2000s,
-%% 2010s?
-
 \section{Introduction}
 
 Emacs is a text editor originally developed by Richard Stallman, who is also
@@ -321,22 +295,9 @@ open-source community effort.
 
 \subsection{Timeline}
 
-%% %% FIXME: Do we really care about those details?
-%% Joseph Arceneaux was the first to take over maintenance, not sure when it
-%% started, but he was maintainer in October 1990 when he started being
-%% paid as consultant by Lucid.  By summer 1991, maintainership had shifted to
-%% Jim Blandy who was paid by the FSF.
-%% then followed by Gerd Möllman until the release of Emacs-22.1, after which
-%% Richard came back as maintainer until 2008 when the maintenance was shared
-%% between Chong Yidong and Stefan Monnier, then Richard again, then
-%% John Wiegley, later joined by and then replace by Eli Zaretskii.
-
 \newcommand \EDate [2] {#1}     %Ignore second argument (day) to save space.
 
 \begin{table}
-  %% FIXME: What is the role of the persons we mentions:
-  %% For Emacs it seems to be the official "head maintainer", but for
-  %% XEmacs, I'm not sure.
   \caption{Emacs development timeline}
   \label{tab:timeline}
 \begin{center}
@@ -394,7 +355,6 @@ open-source community effort.
     \EDate{2001-10}{-20} & Emacs 21.1 & Gerd Möllmann
     & New redisplay engine \\
     %% \EDate{2002-03}{-18} & Emacs 21.2 & Gerd Möllmann
-    %% FIXME: AFAICT, the mocklisp.[ch] files were removed *after* 21.4
     %% & Last version with MLisp support, Sec.~\ref{sec:mock-lisp}\\
     \EDate{2007-06}{-01} & Emacs 22.1 & Richard Stallman
     & Last bits of Mock Lisp removed \\
@@ -422,16 +382,14 @@ support for multiple windows.
 For the time until 2007, the timeline in this table borrows much
 from Jamie Zawinski's timeline~\cite{JWZTimeline}.
 
-% FIXME: timeline Emacs Lisp evolution?
-
 \subsection{Development model}
 
 \paragraph{Emacs}
 Emacs is a Free Software project, developed by a loosely connected
-%% FIXME: *mostly* but not completely (e.g. not true at least for Gerd Möllmann
+%% FIXME Mike: *mostly* but not completely (e.g. not true at least for Gerd Möllmann
 %% and Joe, probably others)
 set of volunteers doing it mostly in their spare time, and several of them
-do not consider themselves as computer professionals.  Development is not
+do not consider themselves computer professionals.  Development is not
 really organized, in the sense that volunteers work on what they find
 appealing rather than follow some agreed upon plan, and the overall
 direction of evolution is in effect controlled by the \emph{head
@@ -720,39 +678,6 @@ necessary~\cite{Stallman1981}.  More recently, lexical scoping has
 been added as on option to Emacs---see
 Section~\ref{sec:lexical-scoping}.
 
-%% FIXME Stefan: I elided this because Stallman1981 lays out the
-%% motivation quite clearly
-%% FIXME Mike: Indeed, it explains well why dynamic scoping is provided,
-%% but I think it's worth summarizing it here and it's worth adding
-%% explanations for why it was the *only* scoping provided (Stallman1981
-%% only argues for the importance of having dynamic scoping).
-%%
-%% FIXME Stefan: Sure - but do we know that the text that was there
-%% before is correct?  To me, Stallman1981 seems to say "we needed at
-%% least dynamic scoping, and implementing lexical scoping in addition
-%% would have been more work".  I may be wrong though, so feel free to
-%% put the text back in.
-%%
-%% The motivation for this
-%% decision is not completely clear but seems to include:
-%% \begin{itemize}
-%% \item Familiarity: Richard Stallman was more familiar with MacLisp than Scheme, and
-%%   lexical scoping was new whereas dynamic scoping was the
-%%   tried-and-tested alternative.
-%% \item Hackability: Scheme's lexical scoping makes it impossible to access
-%%   variables in other scopes, so it provides a strong form of abstraction,
-%%   which is great in many cases, but can be annoying to the end user who just
-%%   wants to do a quick and dirty hack.
-%%   % FIXME: evidence?
-%%   Similarly, Richard Stallman has often
-%%   preferred to avoid the use of opaque datatypes, most famously for the
-%%   representation of keymaps and characters.
-%%   % FIXME: Needs to tie in with XEmacs above
-%% \item Efficiency: It was perceived that closures would incur a cost that was
-%%   not justified.  This was especially true in the context of the early Emacs
-%%   which relied exclusively on interpretation to evaluate its \Elisp{} code.
-%% \end{itemize}
-
 \subsection{Lambda}
 \label{sec:lambda}
 
@@ -870,17 +795,6 @@ an $O(n)$ operation to implement the \texttt{aset} operation which is
 usually expected to take constant time was not even discussed among the
 developers. In practice this extra cost is negligible, because
 \texttt{aset} is very rarely used on strings.
-
-%% FIXME Mike: While reading the whole document, this part seemed rather
-%% uninteresting.  I think we should either drop it, or spice it up
-%% with information, stating at least in which context it was added.
-% In XEmacs, strings have a ``modified-tick'' that is bumped every time
-% a string is modified in-place.  This count can be retrieved with the
-% new function \texttt{string-modified-tick}.  The XEmacs codebase never
-% contained a use for this function, so the motivation for this is
-% unclear.  It is a straightforward parallel to the
-% \texttt{buffer-modified-tick} function that tracks modifications to
-% buffers, and which has many uses.
 
 \subsection{Structures}
 \label{sec:structures}
@@ -1322,16 +1236,14 @@ language, and this section discusses some of them.
 \subsection{Byte-code interpreter}
 \label{sec:byte-code-interpreter}
 
-Emacs has two execution engines for \Elisp: The first is a very simple
-interpreter written in C operating directly on the S-expression
-representation of the code.
-%% FIXME: This makes it sound like it was introduced in Emacs-16.56,
-%% whereas I don't know when it was introduced: 16.56 is simply the first
-%% revision I could get my hands on!
-Some time before the release of Emacs-16.56 in July 1985,
-Richard Stallman added the \texttt{byte-code} function, which interpreted its string
-argument as a sequence of stack-based byte codes to execute, along with
-a compiler, written in \Elisp{}, which translated \Elisp{} code to that
+Emacs has two execution engines for \Elisp, the original versions of
+which were already in Emacs-16.56, and both written by Richard
+Stallman. The first is a very simple interpreter written in C
+operating directly on the S-expression representation of the code.
+The second one is a byte-code engine, implemented as a primitive
+\texttt{byte-code} function that interprets its string
+argument as a sequence of stack-based byte codes to execute.  
+A compiler, written in \Elisp{}, translates \Elisp{} code to that
 byte-code language.
 
 While \Elisp{} is basically a ``run of the mill'' programming language, just
@@ -1384,19 +1296,6 @@ This said, there were other objections to those patches:
   when interpreted.  One alternative is to always byte-compile the code and
   get rid of the \Elisp{} interpreter, but that's a change that would have
   much further consequences, such as a more complex bootstrap.
-  %% Note: TCO in general does not need to have this effect, notably
-  %% MIT Scheme doesn't, so Mike softened the wording here.
-  %% FIXME Mike: not sure I understand.  Do you mean to say that TCO does not
-  %% necessarily reduce the stack usage?  That doesn't correspond to my
-  %% understanding of TCO (unless you're thinking of stack in a literal
-  %% way, where it may be unaffected for implementation that allocate
-  %% their activation frames in the heap, but for those, I'd consider
-  %% the linked list of activation frames to be the (heap-allocated) stack,
-  %% and TCP still reduces that stack usage).
-  %% FIXME Stefan: No, I just meant to say that it's not necessarily
-  %% detrimental to debugging.  MIT Scheme uses you a ring buffer for
-  %% the activation frames, giving *improved* debugging.  Maybe the
-  %% two issues need to be detangled in the sentence.
 \item The available implementations of TCO affect the behavior not only in
   terms of reducing the stack
   allocation and increasing performance, but they also eliminate some
@@ -1645,10 +1544,6 @@ generating much garbage.
 
 Over time, there have been several attempts to replace the GC.
 
-%% FIXME: Gerd says: "It was just one of the things I have been working on, or
-%% playing with, during the long time I had to wait to get the new redisplay
-%% into Emacs, which was from 19.34 (?), when the new redisplay was more or
-%% less ready (only variable-width fonts, AFAIR), to the end of the 20.x line"
 Some time between 1996 and 1999, while waiting for Emacs-21 development to
 start to be able to add his new redisplay engine, Gerd
 Möllman worked on a generational incremental mostly-copying GC based on
@@ -1656,9 +1551,6 @@ a read barrier implemented using the operating system's VM primitives, but
 it was never completed nor even actually integrated into Emacs's code.
 Gerd gave up on this work when he realized that it was infringing on
 a patent and hence wouldn't be distributable with Emacs anyway.
-%% Its implementation did not get far enough to know its
-%% performance characteristics and when Gerd stepped down as Emacs maintainer
-%% in 2002 he stopped working on it and noone picked it up either.
 
 During 2003, Dave Love worked on replacing Emacs's GC with Boehm's
 conservative GC.  The effort went far enough to get a usable Emacs but it
@@ -1670,7 +1562,7 @@ heap allocation, and of course those assumptions are not explicitly recorded
 in the code.  The second issue is that Emacs currently implements various
 forms of ad-hoc weak references which which do not match the ones
 offered by Boehm's GC.
-%% FIXME: Is it worth going through the details of hash-tables's weakness
+%% FIXME Stefan: Is it worth going through the details of hash-tables's weakness
 %% and markers's weakness (and their removal from undo lists)?
 %% Mike: I think it might be, as it affects design.  I suggest leaving
 %% it for the final version, however.
@@ -1807,12 +1699,6 @@ functions might be involved but it can show an actual call tree.
 
 \subsection{JIT compilation}
 \label{sec:jit}
-%% FIXME Mike: Why is this in this early section, even though it's a pretty
-%% late effort that only affects Emacs, so it can be considered "post-XEmacs"?
-%% Is that in preparation for the addition of some XEmacs-JIT efforts?
-%% FIXME Stefan: No, I think the section is too lonely in the back,
-%% which really is all about design now.  The supersection here is
-%% about Base-language implementation.
 
 The existing implementations of \Elisp{} are relatively inefficient, all
 being based on fairly naive interpretation techniques.
@@ -3305,8 +3191,6 @@ particular namespacing used when browsing the code.
 
 %% FIXME: Should we talk about "package systems" in XEmacs / ELPA etc.?
 
-%% FIXME: Compilation of Elisp to C by Tom Tromey!
-
 \section{Conclusion}
 \label{sec:conclusion}
 
@@ -3413,9 +3297,8 @@ ship with a fairly complete implementation of \Elisp{} that translates
 \Elisp{} programs to Guile's intermediate language.  It is used in the
 Guile-Emacs system, which is a work-in-progress modification of Emacs where
 the \Elisp{} engine is provided by Guile.
-%% FIXME: Motivations?
 
-% FIXME: Citation?
+% FIXME Mike: Citation?
 
 \subsection{Emacs-Ejit}
 
