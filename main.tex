@@ -3194,28 +3194,59 @@ particular namespacing used when browsing the code.
 \section{Conclusion}
 \label{sec:conclusion}
 
-Many steps of \Elisp's evolution have been the result of efforts of single
-individuals, driven by a specific purpose, yet it has managed to keep an
-arguably sane and cohesive overall design, thanks on the one hand to
-a maintainership which was more interested in improving the text editor than
-the language and kept an eye on the longer term, and on the other to the
-willingness to break backward compatibility in specific cases, in order to
-gradually address problems encountered over time.
+\Elisp{} started out primarily driven by the demands of the
+application at hand: Richard Stallman was interested in developing a
+programmable editor, not primarily in language design.  His choice of
+Lisp, however, was not not motivated by immediate requirements, but
+rather framed by Stallman's environment and experience at the time. As
+a result, the original \Elisp{} as the simplest it could be while
+still avoiding the pitfalls of TECO.
 
-\Elisp{}
-has steered a remarkably stable course of conservative development and
-gradual extension.  It has mostly grown by slowly incorporating popular
-features from other languages, both in the language itself and in its
-implementation.  But it has also come up with its own features, such as
-docstrings, buffer-local variables, the addition of text-properties
-to strings, and the custom library.
+Being a Lisp has meant that the core language did not have to change
+significantly since its original inception.  What would have been a
+language addition in many other languages is often just a library in \Elisp{}.
+For many years, the
+things that were added were some conveniences or driven by new editor
+features (notably the graphical UI).  Some differences that evolved
+between the Emacs and XEmacs dialects were driven by different
+convictions about programming-language design, most notably the use of
+opaque datatypes.
 
-The composability of the existing \Elisp{} packages relies on social
-mechanisms, and the organic growth of all the \Elisp{} packages has
-been able to maintain it for more than 30 years, keeping balkanization
-at bay to date.  Given the vast amount of changes Emacs users and
-developers have made to the system over the last decade alone, we are
-looking forward to the \Elisp{} of the next 30 years.
+With Stefan Monnier taking over maintainership in 2008, language
+design received more attention as goal in itself.  The language
+designer's perspective has driven changes such as the introduction of
+lexical scope, features from Common Lisp, and \texttt{pcase}.
+
+The core language of \Elisp{} is still present, essentially unchanged
+from its original form, as is its implementation:  Any substantial
+change would have invalidated a substantial code base.  Moreover, the
+implementation has generally been good enough to fulfill the
+requirements of the Emacs editor for over 30 years.  Consequently,
+\Elisp{} is showing no signs of going away any time time.  We are
+looking forward to its next 30 years.
+
+% Many steps of \Elisp's evolution have been the result of efforts of single
+% individuals, driven by a specific purpose, yet it has managed to keep an
+% arguably sane and cohesive overall design, thanks on the one hand to
+% a maintainership which was more interested in improving the text editor than
+% the language and kept an eye on the longer term, and on the other to the
+% willingness to break backward compatibility in specific cases, in order to
+% gradually address problems encountered over time.
+
+% \Elisp{}
+% has steered a remarkably stable course of conservative development and
+% gradual extension.  It has mostly grown by slowly incorporating popular
+% features from other languages, both in the language itself and in its
+% implementation.  But it has also come up with its own features, such as
+% docstrings, buffer-local variables, the addition of text-properties
+% to strings, and the custom library.
+
+% The composability of the existing \Elisp{} packages relies on social
+% mechanisms, and the organic growth of all the \Elisp{} packages has
+% been able to maintain it for more than 30 years, keeping balkanization
+% at bay to date.  Given the vast amount of changes Emacs users and
+% developers have made to the system over the last decade alone, we are
+% looking forward to the \Elisp{} of the next 30 years.
 
 %% FIXME: Discuss whether \Elisp{} is more of a sponge
 %% that incorporated other languages's features, or one that comes up
