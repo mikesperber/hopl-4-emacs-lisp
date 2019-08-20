@@ -27,7 +27,7 @@
 %% Paper history
 \received{August 2018}
 
-%% FIXME: While Richard prefers "Emacs Lisp" I find it unnecessarily verbose
+%% While Richard prefers "Emacs Lisp" I find it unnecessarily verbose
 %% and much prefer "Elisp" which is also very widely used.
 \newcommand \Elisp {Emacs Lisp}
 \newcommand \MAlign [1] {\begin{array}{@{}l@{}}#1\end{array}}
@@ -1591,11 +1591,8 @@ a collection can only occur during \Elisp{} code execution and not during
 heap allocation, and of course those assumptions are not explicitly recorded
 in the code.  The second issue is that Emacs currently implements various
 forms of ad-hoc weak references which which do not match the ones
-offered by Boehm's GC.
-%% FIXME Stefan: Is it worth going through the details of hash-tables's weakness
-%% and markers's weakness (and their removal from undo lists)?
-%% Mike: I think it might be, as it affects design.  I suggest leaving
-%% it for the final version, however.
+offered by Boehm's GC (for example, hash-tables can be weak in their keys,
+or their values, or both, or either).
 
 \label{sec:incremental-gc}
 In XEmacs, GC pauses continued to be a perceived problem.  In 2005, Marcus
@@ -1684,9 +1681,17 @@ non-instrumented, which is safe but suboptimal.  To improve on this default
 behavior, the macro author can annotate its macro with a \emph{debug
   specification} which describes the role of each argument using a kind of
 grammar formalism, so Edebug can know which parts should be
-instrumented.
-
-% FIXME Stefan: can we have an example?
+instrumented.  For example, \texttt{dolist} is defined as:
+\begin{verbatim}
+    (defmacro dolist (spec &rest body)
+      (declare (debug ((symbolp form &optional form) body)))
+      ...)
+\end{verbatim}
+where \texttt{(symbolp form \&optional form)} explains that the first
+argument is expected to be a list whose first element is just a mere symbol
+rather than an expression and hence should not be instrumented, whereas the
+subsequent element is expected to be a \texttt{form} which means a normal
+expression that can be instrumented.
 
 \subsection{Profiling}
 \label{sec:profiler}
@@ -2190,23 +2195,32 @@ arbitrary-precision integers but the feature is provided unconditionally by
 bundling the \texttt{mini-gmp} library with Emacs for those systems where
 GMP is not installed.  The lack of support for rationals and
 arbitrary-precision floats is only a reflection of the lack of interest for
-these features.  The support was made unconditional so that the code does
+these features.  The support was made unconditional so as to simplify the
+system for programmers: the code does
 not need to keep alternate code paths for when bignums are not available.
 As a result, \texttt{file-attributes} and Calc have been modified to use
-native bignums (but not \texttt{current-time} which would need
-arbitrary-precision rationals or floating points).
+native bignums.
+
+Interestingly, bignums in Emacs were always perceived as desirable but never
+important enough to overcome the hassle of requiring GMP or some other
+multiprecision library.  The deciding factor which changed the tradeoff was
+the fact that by Emacs-25, most builds of Emacs made use of the GNUtls
+library (because HTTPS support is more than just desirable), which
+internally uses GMP for its cryptography anyway.
 
 The introduction of bignums raises some design issues in \Elisp, as
 previously integers were always unboxed.  This meant that the fast
 \texttt{eq} only behaved differently from \texttt{eql} on floating point
-numbers.  As a result, \Elisp{} could assume that, if two integers
-represented the same number, \texttt{eq} would return true on them.
+numbers.  As a result, some \Elisp{} code assumes that, if two integers
+represent the same number, \texttt{eq} will return true on them.
 Bignums are heap-allocated, so the same is not necessarily true for two
 bignums.  In XEmacs, \texttt{eq} can return \texttt{nil} in this case, and
-this seems to have caused no serious problems.
-%% FIXME Stefan: Update this when the discussion is over!
-This issue is still being discussed in the Emacs community.
-
+this seems to have caused no serious problems.  After a long discussion that
+did not reach a consensus, Emacs's maintainers followed XEmacs's design,
+because the cost of making \texttt{eq} behave like \texttt{eql} was
+considered to be too high, and also because it's a decision that can easily
+be changed later without any significant risks of introducing bugs, whereas
+the reverse isn't true.
 
 %% ** Major Differences Between 19.11 and 19.12
 %% ============================================
@@ -2580,10 +2594,10 @@ try and add various extensions to the language.  As it turns out, \Elisp{},
 to a first approximation, can be seen as a subset of Common Lisp, so already
 in 1986 Cesar Quiroz \email{<quiroz@cs.rochester.edu>} wrote a \texttt{cl.el} package that provided various
 Common Lisp facilities implemented as macros.  Emacs 18.51 was the
-first Emacs release to ship with \texttt{cl.el}, in 1988.
-
-% FIXME Stefan: Some other sections mention "new cl.el by David
-% Gillespie", but this isn't mentioned here.  It should.
+first Emacs release to ship with \texttt{cl.el}, in 1988.  It was superceded
+5 years later for Emacs-19.18 by a new version contributed by Dave
+Gillespie with a more detailed emulation of Common Lisp as well as a few
+extensions.
 
 Richard Stallman never wanted \Elisp{} to morph into Common Lisp, but he saw
 the value of offering such facilities, so this \texttt{cl.el} package was
@@ -2713,18 +2727,15 @@ or performance.
 \label{sec:generalized-variables}
 
 To facilitate the move to \texttt{cl-lib.el}, some frequently used
-functionality from \texttt{cl.el} was moved directly to \Elisp{}.  The
-most visible one is the support for \emph{generalized variables}, also
-variously known as \emph{places}, \emph{generalized references}, or
-\emph{lvalues}.  A generalized variable is a form that can be used both as
-an expression and as an updateable reference.  The concept comes from
-Common Lisp, and the Emacs implementation originally a part of
-\texttt{cl.el}.  In both Common Lisp and Emacs, a number of special
-forms take generalized variables as operands---in particular,
-\texttt{setf}, which treats a generalized variable as a reference and
-sets its value.
-
-% FIXME Stefan: This needs examples for setf use here
+functionality from \texttt{cl.el} was moved directly to \Elisp{}.  The most
+visible one is the support for \emph{generalized variables}, also variously
+known as \emph{places}, \emph{generalized references}, or \emph{lvalues}.
+A generalized variable is a form that can be used both as an expression and
+as an updateable reference.  The concept comes from Common Lisp, and the
+Emacs implementation originally a part of \texttt{cl.el}.  In both Common
+Lisp and Emacs, a number of special forms take generalized variables as
+operands---in particular, \texttt{(setf \id{PLACE} \id{VALUE})}, which treats
+a generalized variable as a reference and sets its value.
 
 In Common Lisp, macros accepting a place can ask \texttt{get-setf-expansion}
 to turn it into a list of five elements:
@@ -2770,13 +2781,13 @@ implementing the support for \texttt{setf} and friends in \Elisp{}, a fresh
 new implementation of the concept was used.  The reasons for this new
 implementation were:
 \begin{itemize}
-\item The implementor of \texttt{cl-lib} % FIXME Stefan: Who?
-  found the existing code was hard
-  to follow, arguably a case of ``not-invented-here syndrome''.
+\item The implementor of \texttt{cl-lib} (Stefan Monnier) found the existing
+  code was hard to follow, arguably a case of
+  ``not-invented-here syndrome''.
 \item The previous code made use of internal helper functions from
   \texttt{cl.el} which we did not want to move to core \Elisp, so some
   significant massaging was needed anyway.
-\item the implementor of \texttt{cl-lib} considered this part of Common Lisp's
+\item Stefan Monnier considered this part of Common Lisp's
   design ugly.
 \end{itemize}
 %% For example, if we want to define a place
@@ -2828,38 +2839,6 @@ a downside, but in practice this function was almost never used outside of
 \texttt{cl.el} itself so very few packages were impacted by
 this incompatibility.
 
-%% %% FIXME: The above is already borderline for a *history* of Elisp, but
-%% %% I think the examples below are past the line.
-%% For reference here is the definition of the \texttt{nthcdr} place, in Emacs-23:
-%% \begin{verbatim}
-%% (define-setf-method nthcdr (n place)
-%%   (let ((method (get-setf-method place cl-macro-environment))
-%%         (n-temp (make-symbol "--cl-nthcdr-n--"))
-%%         (store-temp (make-symbol "--cl-nthcdr-store--")))
-%%     (list (cons n-temp (car method))
-%%           (cons n (nth 1 method))
-%%           (list store-temp)
-%%           (list 'let (list (list (car (nth 2 method))
-%%                                  (list 'cl-set-nthcdr n-temp (nth 4 method)
-%%                                        store-temp)))
-%%                 (nth 3 method) store-temp)
-%%           (list 'nthcdr n-temp (nth 4 method)))))
-%% \end{verbatim}
-%% And here is the corresponding definition in Emacs-24:
-%% \begin{verbatim}
-%% (gv-define-expander nthcdr
-%%   (lambda (do n place)
-%%     (macroexp-let2 nil idx n
-%%       (gv-letplace (getter setter) place
-%%         (funcall do `(nthcdr ,idx ,getter)
-%%                  (lambda (v) `(if (<= ,idx 0) ,(funcall setter v)
-%%                            (setcdr (nthcdr (1- ,idx) ,getter) ,v))))))))
-%% \end{verbatim}
-%% While the intensive use of higher-order functions may be a bit of an
-%% obstacle for some programmers, this code has much less plumbing, and it is
-%% much easier to see that \texttt{n} and \texttt{place} are evaluated in the
-%% proper order.
-
 \subsection{Object-oriented programming} %Emacs-25.1
 \label{sec:oop}
 
@@ -2874,7 +2853,8 @@ The first real step in that direction was the development of EIEIO by Eric
 Ludlam around the end of 1995, beginning of 1996.  The official name ``Enhanced
 Implementation of Emacs Interpreted Objects'' hints at the earlier existence
 of some ``Emacs Interpreted Objects'' package but in reality the acronym
-came before its expansion.  EIEIO started as an experiment to try use
+came before its expansion was chosen, because of the way it sounds.
+EIEIO started as an experiment to try to use
 an object system in Emacs, first following a model like that of C++, but
 very soon switching to a CLOS-inspired model.
 
@@ -2897,7 +2877,7 @@ example by adding \emph{qualifiers} (like \texttt{:after}, or
 \texttt{defclass} macro to define new types by listing their parents,
 fields, and various other properties.
 
-The development of EIEIO was mostly
+Just like \Elisp{}, the development of EIEIO was mostly
 driven by actual needs more than as an end in itself: the original
 motivation was to try and play with an object request broker, then a widget
 toolkit, and later switched to providing support for the CEDET
@@ -2972,16 +2952,6 @@ it, though: not only was it clearly desirable to be able to define new
 specializers, but it also made the implementation of the main specializers
 cleaner, and most importantly it seemed like an interesting problem
 to solve.
-
-%% FIXME Stefan: I elided this, as it's tangential to design
-%% Just as in the CLOS MOP, there is a fair bit of delicate bootstrapping
-%% involved: new specializers are defined by adding methods to the
-%% \texttt{cl-generic-generalizers} generic function, so we first define the
-%% \texttt{t} specializer in a somewhat ad-hoc way, of course, then we define
-%% the \texttt{head} specializer (where $\texttt{(head \textsl{VAL})}$ means
-%% that the method is only applicable if the argument's \texttt{car} is equal
-%% to \textsl{VAL}), after which we use this new specializer to implement the
-%% \texttt{eql} specializer.
 
 Some existing \Elisp{} functions appeared like good candidates to use that
 machinery to split them into independent methods but required dispatching
@@ -3255,13 +3225,14 @@ particular namespacing used when browsing the code.
 \Elisp{} started out primarily driven by the demands of the
 application at hand: Richard Stallman was interested in developing a
 programmable editor, not primarily in language design.  His choice of
-Lisp, however, was not not motivated by immediate requirements, but
-rather framed by Stallman's environment and experience at the time. As
-a result, the original \Elisp{} as the simplest it could be while
-still avoiding the pitfalls of TECO.
+Lisp, however, was not only motivated by immediate requirements, but
+rather framed by Stallman's environment and experience at the time.  As
+a result, the original \Elisp{} was the simplest it could be while
+still avoiding the pitfalls of TECO and getting most of the benefits that
+Multics Emacs enjoyed from Maclisp.
 
 Being a Lisp has meant that the core language did not have to change
-significantly since its original inception.  What would have been a
+significantly since its original inception.  What would have to be a
 language addition in many other languages is often just a library in \Elisp{}.
 For many years, the
 things that were added were some conveniences or driven by new editor
@@ -3270,10 +3241,11 @@ between the Emacs and XEmacs dialects were driven by different
 convictions about programming-language design, most notably the use of
 opaque datatypes.
 
-With Stefan Monnier taking over maintainership in 2008, language
-design received more attention as goal in itself.  The language
-designer's perspective has driven changes such as the introduction of
-lexical scope, features from Common Lisp, and \texttt{pcase}.
+Over time, starting around 2000 with Gerd Möllmann's maintainership and then
+even more so when Stefan Monnier took over maintainership in 2008, language
+design received more attention as a goal in itself.  The language designer's
+perspective has driven changes such as the introduction of lexical scope,
+features from Common Lisp, and \texttt{pcase}.
 
 The core language of \Elisp{} is still present, essentially unchanged
 from its original form, as is its implementation:  Any substantial
@@ -3305,11 +3277,6 @@ looking forward to its next 30 years.
 % at bay to date.  Given the vast amount of changes Emacs users and
 % developers have made to the system over the last decade alone, we are
 % looking forward to the \Elisp{} of the next 30 years.
-
-%% FIXME: Discuss whether \Elisp{} is more of a sponge
-%% that incorporated other languages's features, or one that comes up
-%% with its own solutions which are sometimes then picked up by
-%% other languages?
 
 \subsection{Acknowledgments}
 
@@ -3358,16 +3325,16 @@ and first-class continuations.
 
 \subsection{Elisp in Common Lisp}
 
-%% FIXME: Ask Sam what were his motivations for this work and how complete
-%% it is.
 In 1999, Sam Steingold also implemented the \Elisp{} language as a Common
 Lisp package~\cite{Steingold99}.  He was motivated by the hope of moving
-Emacs to work with a Common Lisp language instead of \Elisp{}.
-His \texttt{elisp.lisp} package does not attempt to reimplement the library
-of functions provided in Emacs to manipulate buffers and other related
-objects, so it focuses on the ``pure'' \Elisp{} language; but it was able to
-run the non-UI parts of the Emacs Calendar, which provides sophisticated
-functions to manipulate and convert dates between many historical calendars.
+Emacs to work with a Common Lisp language instead of \Elisp{}, as well as
+the desire to reuse some Emacs Lisp code elsewhere, most notably from
+Emacs's Calendar package.  His \texttt{elisp.lisp} package does not attempt
+to reimplement the library of functions provided in Emacs to manipulate
+buffers and other related objects, so it focuses on the ``pure'' \Elisp{}
+language; but it was able to run the non-UI parts of the Emacs Calendar,
+which provides sophisticated functions to manipulate and convert dates
+between many historical calendars.
 
 \subsection{JEmacs}
 
