@@ -1,0 +1,41 @@
+We appreciate the many suggestions for improvement to the paper we
+received from the reviewers: With the help of Brent Hailpern we have
+tried to do them justice by making extensive revisions.
+
+While we did make a todo list of all the individual suggestions to the
+reviewers and ultimately (hopefully) ended up addressing the vast
+majority of them, listing for each one what we did exactly would be
+tedious and (we feel) pointless: The paper is overall quite different
+from the original submission - in particular, it is significantly longer.
+
+Here are some of the major improvements:
+
+- We added a timeline of the Emacs evolution to the paper with
+  references/links to the specific sections explaining the changes.
+
+- We expanded the explanation of many Lisp constructs.
+
+- We conducted a phone interview with Joseph Arceneaux (first
+  maintainer of Emacs 19) about the Lucid Eamcs schism and reflected
+  the results in the paper.
+
+- Several people (notably Richard Stallman, Richard Gabriel, Richard
+  Mlynarik and Jamie Zawinski) answered questions about specific
+  aspects of the history and rationales by e-mail, whose answers are
+  reflected in the paper.
+
+- We tracked down many additional sources, and added the appropriate
+  citations.
+
+- We tracked down authorship for many aspects of Emacs Lisp that
+  weren't part of the original submissions.
+
+- We rewrote the conclusion to adequately summarize the trajectory the
+  material takes now.
+
+- In the end, we ended up not significantly restructuring the paper.
+  The notable change we made was relegating the section on alternative
+  implementations to the appendix.
+
+We hope the revision meets your approval, and would be honored to be
+included in HOPL IV.
