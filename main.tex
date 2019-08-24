@@ -1378,14 +1378,21 @@ each object be allocated directly by \texttt{malloc}.
 
 Richard Mlynarik implemented a similar change in 1993 for Lucid Emacs
 19.8, giving \Elisp{} 28-bit integers and a 28-bit address space.  For
-the same release, an alterntive C-level representation for the
-\texttt{Lisp\_Object} type for object descriptors was added that used
+the same release, Mlynarik added an alternative C-level representation for the
+\texttt{Lisp\_Object} type for object descriptors that used
 the C \texttt{union} feature and bit fields rather than ``manual''
-manipulation of bits in the machine word.  This has been maintained
-since, but needed to be disabled on many platforms beause of bugs in
-the implementation of unions and bit fields in C compilers.  For the
-release of XEmacs 19.13 in 1995, Ben Wing merged the data
-representation from Emacs 19.30.
+manipulation of bits in the machine word.
+
+This change reflected a general difference in attitude towards using
+custom data type definitions for representing \Elisp{} entities, which
+went back to discussions between Richard Mlynarik and Richard Stallman
+years earlier at MIT~\cite{Mlynarik-personal}.  Lucid Emacs was open
+to Mlynarik's changes, while Emacs was not.
+
+The union representation has been maintained in XEmacs since, but needed to be
+disabled on many platforms beause of bugs in the implementation of
+unions and bit fields in C compilers.  For the release of XEmacs 19.13
+in 1995, Ben Wing merged the data representation from Emacs 19.30.
 
 Of course, a limit of 256\;MB was still not actually comfortable.
 
@@ -1820,15 +1827,17 @@ support for inheritance was fundamentally flawed until Emacs-24.1 where it
 was extended to multiple-inheritance, but at the cost of a fairly significant
 and delicate rewrite of the code.
 
-The developers of Lucid Emacs foresaw these problems, and
+The developers of Lucid Emacs (specifically Richard Mlynarik) foresaw these problems, and
 instead made keymaps into an opaque datatype, forbidding manipulation via the
-S-expression primitives and giving themselves a lot more implementation
-freedom.  This allowed Lucid Emacs to evolve more rapidly the
+S-expression primitives and giving themselves significantly more implementation
+freedom~\cite{Mlynarik-personal}.  This allowed Lucid Emacs to evolve more rapidly the
 representation of keymaps to cater to a richer set of input events
 (including mouse events, for instance).
 
 This step reflected a general difference in philosophy, see
-Section~\ref{sec:structures}.  Lucid Emacs also used opaque data types
+Section~\ref{sec:structures} and
+Section~\ref{sec:data-representation}.
+Lucid Emacs also used custom opaque data types
 for case tables and input events, both of which retain transparent
 representations in Emacs to this day.
 
