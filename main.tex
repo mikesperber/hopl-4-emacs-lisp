@@ -1545,7 +1545,9 @@ During the early years of Emacs, the main complaints from users about the
 simple mark\&sweep algorithm were the GC pauses.  These were solved very
 simply in Emacs-19.31 by removing the messages that indicated when GC was in
 progress.  Since then complaints about the performance of the GC have been
-rare.  Most of them have to do with the amount of time wasted in the
+rare, possibly because it is not apparent to the user when a pause is
+actually due to GC.  Most of the remaining complaints have to do with
+the amount of time wasted in the
 GC during initialization phases, where a lot of data is allocated without
 generating much garbage.
 
@@ -1575,7 +1577,10 @@ offered by Boehm's GC.
 %% it for the final version, however.
 
 \label{sec:incremental-gc}
-In XEmacs, GC pauses continued to be a perceived problem.  In 2005, Marcus
+In XEmacs, GC pauses continued to be a perceived problem.  (And to
+former XEmacs users, Emacs's GC pauses are quite recognizable and
+annoying.)
+In 2005, Marcus
 Crestani developed an incremental collector for XEmacs, again using
 a VM-based write barrier.  It was released with XEmacs 21.5.21 in
 2005~\cite{Crestani2005} and soon was turned on by default.  It
