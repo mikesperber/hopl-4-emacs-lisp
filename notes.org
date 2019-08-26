@@ -374,7 +374,10 @@ best to reorder them, with the ones directly related to Emacs first
 4.8), and the ones that are only incidental later (e.g., 4.1, 4.3,
 4.6).
 
-*** TODO Stefan p10 Section 5.1
+*** DONE Stefan p10 Section 5.1
+    CLOSED: [2019-08-19 lun 18:22]
+    - CLOSING NOTE [2019-08-19 lun 18:22] \\
+      Clarified that the byte-compiler was there from the very beginning
 Who developed the byte-code compiler? Citations, please.
 
 *** DONE p11
@@ -656,7 +659,10 @@ please explain.
     CLOSED: [2019-05-12 Sun 18:02]
 "async.el" Cite its documentation.
 
-*** TODO Stefan A word or two on uses of the concurrency package would be welcome.
+*** DONE Stefan A word or two on uses of the concurrency package would be welcome.
+    CLOSED: [2019-08-19 lun 19:10]
+    - CLOSING NOTE [2019-08-19 lun 19:10] \\
+      Explained the current state of use
 Have the uses led to concurrency bugs? If there aren't many uses
 of the package yet that would also be valuable information.
 
@@ -875,15 +881,21 @@ SPECIFIC COMMENTS and ADVICE
   Elisp? What percentage of Elisp code uses docstrings? How searchable is it?
   What other languages, besides Common Lisp, have adopted it?
 
-*** TODO Stefan - 4.5: "C-u (to specify powers of 4)" ? What is this design? Why powers of 4?
+*** DONE Stefan - 4.5: "C-u (to specify powers of 4)" ? What is this design? Why powers of 4?
+    CLOSED: [2019-08-19 lun 19:26]
 
+    - CLOSING NOTE [2019-08-19 lun 19:26] \\
+      Removed this irrelevant detail
 *** DONE - 4.6: How does Elisp's support for non-local exits compare to other language
     CLOSED: [2019-08-06 Tue 15:36]
   features, like exceptions? What influenced the design? (It appears to be
   constraints of general purpose software engineering, right? Nothing specific
   to the context of Emacs...)
 
-*** TODO Stefan - 4.8: Is the defadvice feature used in practice? How? How was nadvice
+*** DONE Stefan - 4.8: Is the defadvice feature used in practice? How? How was nadvice
+    CLOSED: [2019-08-19 lun 19:55]
+    - CLOSING NOTE [2019-08-19 lun 19:55] \\
+      Mentioned its popularity with example uses; gave more details about nadvice
   different? What sort of advance was it?
 
 *** DONE - Section 5: "The main changes were those made to support lexical scoping..."
@@ -921,7 +933,10 @@ SPECIFIC COMMENTS and ADVICE
   were the teams? Did Stallman always control everything to do with GNU Emacs?
   How did the teams communicate with each other (if they did so)?
 
-*** TODO Stefan - 8.4: The timeline of integration of common lisp functions into Elisp seems
+*** DONE Stefan - 8.4: The timeline of integration of common lisp functions into Elisp seems
+    CLOSED: [2019-08-19 lun 20:37]
+    - CLOSING NOTE [2019-08-19 lun 20:37] \\
+      I added a paragraph explaining the relevance
   uninteresting and really reads like a changelog. I have no idea what these
   functions are or why their integration is important.
 
@@ -1036,7 +1051,10 @@ I think there are quite a few lessons for language developers here.   It may be 
     CLOSED: [2019-05-26 Sun 17:39]
 *** DONE - p5 "a Lisp-2" -> "a Lisp-2 language"
     CLOSED: [2019-05-26 Sun 17:38]
-*** TODO Stefan - p6 "Richard Stallman felt" it would be great if you could provide references to such comments (I understand that this may not be possible).
+*** DONE Stefan - p6 "Richard Stallman felt" it would be great if you could provide references to such comments (I understand that this may not be possible).
+    CLOSED: [2019-08-19 lun 20:49]
+    - CLOSING NOTE [2019-08-19 lun 20:49] \\
+      Added citation
 *** DONE - p6 "With buffer-local" -> "Along with buffer-local"
     CLOSED: [2019-05-26 Sun 17:38]
 *** DONE - p6 "requires to relocate" -> "requires relocating"
@@ -1047,7 +1065,11 @@ I think there are quite a few lessons for language developers here.   It may be 
     CLOSED: [2019-05-26 Sun 17:38]
 *** DONE - p9 "instead because" -> "instead, because"
     CLOSED: [2019-05-26 Sun 17:37]
-*** TODO Stefan - p11 the comment connecting bootstrap with RCS -> CVS transition is interesting, but needs a little bit more information. 
+*** DONE Stefan - p11 the comment connecting bootstrap with RCS -> CVS 
+    CLOSED: [2019-08-19 lun 20:52]
+    - CLOSING NOTE [2019-08-19 lun 20:52] \\
+      Explained the use of RCS in more details and the problem with CVS
+transition is interesting, but needs a little bit more information.
 The reader may not understand that RCS required local operation, while
 CVS did not.  Its not clear why the necessary files could not be kept
 around in CVS, nor how the original bootstrap began (answer on next
@@ -1074,7 +1096,10 @@ page---the interpreter).
     CLOSED: [2019-05-26 Sun 17:05]
 *** DONE - p16 "show a an" -> "show an"
     CLOSED: [2019-05-26 Sun 17:05]
-*** TODO Stefan - p17 "affect function calls" what does this mean?  Are you referring to inlining?
+*** DONE Stefan - p17 "affect function calls" what does this mean?  Are you referring to inlining?
+    CLOSED: [2019-08-19 lun 20:55]
+    - CLOSING NOTE [2019-08-19 lun 20:55] \\
+      Replaced "affect" with "speed up" to clarify
 *** DONE - p17 "costly. but" -> "costly. But"
     CLOSED: [2019-05-24 Fri 21:38]
 *** DONE - p17 "used globally" what does this mean? (again later in the page)
