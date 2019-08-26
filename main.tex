@@ -637,9 +637,10 @@ accompanying \texttt{return} and \texttt{go} forms for non-local
 control transfer.  This was to reduce Emacs's memory footprint, in
 order to make it work on Unix systems with one megabyte of memory~\cite{Stallman2018-personal}.
 
-This section discusses the choice of dynamic scoping, as well as
-some notable differences from and additions to
-MacLisp.
+This section discusses the notable choices in language design such as
+the choice of dynamic scoping, notable differences from and additions to
+MacLisp, and language features designed to satisfy requirements of the
+Emacs editor.
 
 \subsection{Symbols and dynamic scoping}
 \label{sec:symbols}
@@ -742,65 +743,6 @@ packages, even though it prevents byte-compilation of the function's body.
 Somewhat relatedly, only in 1993 did Lucid Emacs 19.8 import the
 \verb|#'...| reader shorthand for \texttt{(function ...)} from MacLisp.
 Emacs followed suit the year after.
-
-\subsection{Strings}
-\label{sec:strings}
-
-\Elisp{} included support for string objects from the beginning of course.
-Originally, they were just byte arrays.
-
-In 1992, during the early development of Emacs-19, this basic type was
-extended by Joseph Arceneaux with support for \emph{text properties}: each
-char of a string can be annotated with a set of properties, which maps
-property names to values, where property names can be any symbol.  This can
-be used to carry information such as color and font to use when displaying
-the various parts of the string.
-
-XEmacs added a similar, though incompatible, feature to their strings at
-around the same time, called \emph{extents}.  The incompatibility was due to
-a fundamental disagreement about how those annotations should be propagated
-when strings are manipulated: XEmacs's extents cover a contiguous span of
-characters and they are objects in their own right with their own identity,
-so they need to be duplicated when a substring is selected, with the new
-extents not necessarily covering the same characters, and concatenation may
-end up bringing two ``identical'' extents next to each other 
-without merging them.  Richard Stallman felt~\cite{RMS-text-props} like
-this was introducing
-undesired complexities, and decided that Emacs's text properties should not
-have identity and should apply to the characters of the string so there is
-never a question of splitting or merging text properties.
-
-Along with buffer-local variables (see Section~\ref{sec:buffer-local-variables}), this is one of
-the cases where the core \Elisp{} language has been extended with
-a feature that specifically caters to the needs of the Emacs text editor, to
-keep track of rendering information.  It is more generally useful, of
-course, and turns strings into a much fancier datatype than in most
-other languages.
-
-Around 1994, support for arbitrary character sets was added to Emacs and
-XEmacs, which required distinguishing between bytes and characters, and
-hence changing its string objects.  Characters are represented with
-a variable number of bytes, similar to \texttt{utf-8}, favoring a compact
-representation at the cost of a slower random access.  In practice, random
-access to strings is fairly rare, but it does
-impose a significant constraint: There is an indirection between the string
-object and the chars it holds because of the \texttt{aset} primitive.
-\texttt{(aset string index char)}
-replaces one of \texttt{string's} characters at index \texttt{index}
-with \texttt{char} by side-effect.  Because of the variable number of bytes
-per character, this will
-sometimes change the string's length in bytes, which requires relocating
-the string's bytes elsewhere.
-
-In the original code, an \texttt{aset} operation which required changing the
-byte length was not allowed and signaled an error.  But when a user reported
-this limitation as a bug, the implementation was adjusted to relocate the
-string as needed: the necessary indirection was already present for the
-purpose of compacting the heap after a garbage collection, and the cost of
-an $O(n)$ operation to implement the \texttt{aset} operation which is
-usually expected to take constant time was not even discussed among the
-developers. In practice this extra cost is negligible, because
-\texttt{aset} is very rarely used on strings.
 
 \subsection{Structures}
 \label{sec:structures}
@@ -934,68 +876,6 @@ were otherwise mistaken for an old-style backquote syntax.
 %% Finally in 2018 during the development of Emacs-27, the
 %% old-style backquote syntax was removed.
 
-\subsection{Docstrings}
-\label{sec:docstrings}
-
-An important feature of Emacs from the start was the idea of
-\emph{self-documentation}~\cite{Stallman1981}, which originated with
-the first, TECO-based, Emacs~\cite{Stallman2018-personal}.  To that end, every
-definition in \Elisp{} can include documentation in the form of a
-string after the signature:
-%%
-\begin{verbatim}
-    (defun ignore (&rest _ignore)
-      "Do nothing and return nil.
-    This function accepts any number of arguments, but ignores them."
-      nil)
-\end{verbatim}
-%%
-This \emph{docstring} can be retrieved in various ways, in particular
-through the user interface.  This idea was apparently first introduced in
-the original Emacs implementation in TECO, then adapted to \Elisp{}.
-Many languages have since adopted them, notably Common
-Lisp~\cite{HyperSpec} and Clojure~\cite{ClojureDotOrg}, or variants like
-Javadoc comments in Java.
-
-\subsection{Interactive functions}
-\label{sec:interactive-functions}
-
-The most direct method to make a function implemented in \Elisp{}
-accessible to a user is to provide a keybinding for it.  This is not
-realistic for all functions, however---there are too many of them.
-
-A user can also invoke a function by typing \texttt{M-x}
-\emph{function-name}.  This only makes sense for a certain subset of
-all defined functions, namely \emph{interactive} functions, which
-are specially marked with an \texttt{interactive} form at the
-beginning of the body, like this:
-%%
-\begin{verbatim}
-    (defun forward-symbol (arg)
-      "Move point to the next position that is the end of a symbol.
-    A symbol is any sequence of characters that are in either the
-    word constituent or symbol constituent syntax class.
-    With prefix argument ARG, do it ARG times if positive, or move
-    backwards ARG times if negative."
-      (interactive "^p")
-      (if (natnump arg)
-          (re-search-forward "\\(\\sw\\|\\s_\\)+" nil 'move arg)
-        (while (< arg 0)
-          (if (re-search-backward "\\(\\sw\\|\\s_\\)+" nil 'move)
-              (skip-syntax-backward "w_"))
-          (setq arg (1+ arg)))))
-\end{verbatim}
-The \texttt{interactive} form also has an optional string operand that
-regulates how such a function receives its arguments.  (It can also be
-an expression that is evaluated to produce a list of arguments.)  In the above
-example, \verb|p| means that the function accepts a \emph{prefix
-  argument}: The user can type \texttt{C-u} \emph{number}
-prior to invoking the function,
-and the number will be passed to the function as an argument, in this
-case as \texttt{arg}.  The \verb|^| (a more recent addition) has to do with
-region selection with a pressed shift key---it may lead to the region
-being activated.
-
 \subsection{Non-local exits}
 \label{sec:non-local-exits}
 
@@ -1069,67 +949,6 @@ consisting of the error symbol and the data argument passed to
 
 Emacs comes with a set of standard errors, establishing a protocol
 between signaling and handling code.
-
-\subsection{Buffer-local variables}
-\label{sec:buffer-local-variables}
-
-Buffer-local variables are the prominent feature marking \Elisp{} as the
-extension language of a text editor.  In Emacs, \emph{buffers} are objects
-that store the contents of a file while it is being edited.  In addition to
-the file's content, buffers store auxiliary information such
-as the name of the associated file, the rules to use to highlight its
-contents, the editing mode to use, the character encoding used, etc.
-Additionally, there is a global reference managed by Emacs called the
-\emph{current buffer}, that determines the implicit target of
-editing operations.
-
-Making a variable \emph{buffer-local} associates the value of the variable
-with the current buffer.  An assignment to a buffer-local variable
-only affects dereferences with the same current buffer in effect.
-Any variable can be made local to any buffer, so it can take
-different values in different buffers.  For example, the variable
-\texttt{buffer-file-name} keeps the name of the file associated with the
-corresponding buffer.  This variable typically has a different value in
-every buffer.  In the absence of such a buffer-local assignment, a variable
-is said to have its \emph{default} or \emph{global} value.
-
-Variables can be both buffer-local and dynamically bound at the same time:
-\begin{verbatim}
-    (let ((buffer-file-name "/home/rms/.emacs"))
-      (with-current-buffer "some-other-buffer"
-        buffer-file-name))
-\end{verbatim}
-This example will not return \texttt{"/home/rms/.emacs"} but the
-buffer-local value of \texttt{buffer-file-name} in the buffer
-\texttt{"some-other-buffer"} instead, because \texttt{with-current-buffer}
-temporarily changes which buffer is current.
-
-The presence of buffer-local values significantly complicates the
-implementation of looking up, setting, and let-binding a variable, so the
-code is optimized for the ``normal'' case of variables that have not been
-made local to any buffer.
-
-Over the years many bugs were fixed in the implementation of let-binding
-buffer-local variables.  The most famous one was fixed in Emacs-21.1.
-%% Stefan: When did it get fixed in XEmacs?
-%% Mike: I don't see that it was ever "fixed".  What's the bug
-%% anyway - any behavior I can imagine seems surprising to some.
-%% Stefan: I explained the bug.
-%% Mike: I can see that it was fixed in XEmacs, but can't see when
-%% that was.
-This bug affected code like
-\begin{verbatim}
-    (let ((buffer-file-name "/home/rms/.emacs"))
-      ...
-      (set-buffer other-buffer)
-      ...)
-\end{verbatim}
-where the current buffer was different when the let-binding is entered from
-when it is left\footnote{\texttt{set-buffer} is like
-  \texttt{with-current-buffer} except that it is not scoped, so it takes
-  effect until the next \texttt{set-buffer}.}; the bug was that this code
-ended up ``restoring'' the value of \texttt{buffer-file-name} into the
-wrong buffer when exiting the \texttt{let}.
 
 \subsection{Hooks}
 \label{sec:hooks}
@@ -1228,6 +1047,188 @@ package was released as part of Emacs-24.4, and has proved popular in the
 sense that it has largely replaced the old \texttt{defadvice} in new code,
 but rather few packages that used \texttt{defadvice} have been converted to
 the new system.
+
+\subsection{Docstrings}
+\label{sec:docstrings}
+
+An important feature of Emacs from the start was the idea of
+\emph{self-documentation}~\cite{Stallman1981}, which originated with
+the first, TECO-based, Emacs~\cite{Stallman2018-personal}.  To that end, every
+definition in \Elisp{} can include documentation in the form of a
+string after the signature:
+%%
+\begin{verbatim}
+    (defun ignore (&rest _ignore)
+      "Do nothing and return nil.
+    This function accepts any number of arguments, but ignores them."
+      nil)
+\end{verbatim}
+%%
+This \emph{docstring} can be retrieved in various ways, in particular
+through the user interface.  This idea was apparently first introduced in
+the original Emacs implementation in TECO, then adapted to \Elisp{}.
+Many languages have since adopted them, notably Common
+Lisp~\cite{HyperSpec} and Clojure~\cite{ClojureDotOrg}, or variants like
+Javadoc comments in Java.
+
+\subsection{Interactive functions}
+\label{sec:interactive-functions}
+
+The most direct method to make a function implemented in \Elisp{}
+accessible to a user is to provide a keybinding for it.  This is not
+realistic for all functions, however---there are too many of them.
+
+A user can also invoke a function by typing \texttt{M-x}
+\emph{function-name}.  This only makes sense for a certain subset of
+all defined functions, namely \emph{interactive} functions, which
+are specially marked with an \texttt{interactive} form at the
+beginning of the body, like this:
+%%
+\begin{verbatim}
+    (defun forward-symbol (arg)
+      "Move point to the next position that is the end of a symbol.
+    A symbol is any sequence of characters that are in either the
+    word constituent or symbol constituent syntax class.
+    With prefix argument ARG, do it ARG times if positive, or move
+    backwards ARG times if negative."
+      (interactive "^p")
+      (if (natnump arg)
+          (re-search-forward "\\(\\sw\\|\\s_\\)+" nil 'move arg)
+        (while (< arg 0)
+          (if (re-search-backward "\\(\\sw\\|\\s_\\)+" nil 'move)
+              (skip-syntax-backward "w_"))
+          (setq arg (1+ arg)))))
+\end{verbatim}
+The \texttt{interactive} form also has an optional string operand that
+regulates how such a function receives its arguments.  (It can also be
+an expression that is evaluated to produce a list of arguments.)  In the above
+example, \verb|p| means that the function accepts a \emph{prefix
+  argument}: The user can type \texttt{C-u} \emph{number}
+prior to invoking the function,
+and the number will be passed to the function as an argument, in this
+case as \texttt{arg}.  The \verb|^| (a more recent addition) has to do with
+region selection with a pressed shift key---it may lead to the region
+being activated.
+
+\subsection{Buffer-local variables}
+\label{sec:buffer-local-variables}
+
+Buffer-local variables are the prominent feature marking \Elisp{} as the
+extension language of a text editor.  In Emacs, \emph{buffers} are objects
+that store the contents of a file while it is being edited.  In addition to
+the file's content, buffers store auxiliary information such
+as the name of the associated file, the rules to use to highlight its
+contents, the editing mode to use, the character encoding used, etc.
+Additionally, there is a global reference managed by Emacs called the
+\emph{current buffer}, that determines the implicit target of
+editing operations.
+
+Making a variable \emph{buffer-local} associates the value of the variable
+with the current buffer.  An assignment to a buffer-local variable
+only affects dereferences with the same current buffer in effect.
+Any variable can be made local to any buffer, so it can take
+different values in different buffers.  For example, the variable
+\texttt{buffer-file-name} keeps the name of the file associated with the
+corresponding buffer.  This variable typically has a different value in
+every buffer.  In the absence of such a buffer-local assignment, a variable
+is said to have its \emph{default} or \emph{global} value.
+
+Variables can be both buffer-local and dynamically bound at the same time:
+\begin{verbatim}
+    (let ((buffer-file-name "/home/rms/.emacs"))
+      (with-current-buffer "some-other-buffer"
+        buffer-file-name))
+\end{verbatim}
+This example will not return \texttt{"/home/rms/.emacs"} but the
+buffer-local value of \texttt{buffer-file-name} in the buffer
+\texttt{"some-other-buffer"} instead, because \texttt{with-current-buffer}
+temporarily changes which buffer is current.
+
+The presence of buffer-local values significantly complicates the
+implementation of looking up, setting, and let-binding a variable, so the
+code is optimized for the ``normal'' case of variables that have not been
+made local to any buffer.
+
+Over the years many bugs were fixed in the implementation of let-binding
+buffer-local variables.  The most famous one was fixed in Emacs-21.1.
+%% Stefan: When did it get fixed in XEmacs?
+%% Mike: I don't see that it was ever "fixed".  What's the bug
+%% anyway - any behavior I can imagine seems surprising to some.
+%% Stefan: I explained the bug.
+%% Mike: I can see that it was fixed in XEmacs, but can't see when
+%% that was.
+This bug affected code like
+\begin{verbatim}
+    (let ((buffer-file-name "/home/rms/.emacs"))
+      ...
+      (set-buffer other-buffer)
+      ...)
+\end{verbatim}
+where the current buffer was different when the let-binding is entered from
+when it is left\footnote{\texttt{set-buffer} is like
+  \texttt{with-current-buffer} except that it is not scoped, so it takes
+  effect until the next \texttt{set-buffer}.}; the bug was that this code
+ended up ``restoring'' the value of \texttt{buffer-file-name} into the
+wrong buffer when exiting the \texttt{let}.
+
+\subsection{Strings}
+\label{sec:strings}
+
+\Elisp{} included support for string objects from the beginning of course.
+Originally, they were just byte arrays.
+
+In 1992, during the early development of Emacs-19, this basic type was
+extended by Joseph Arceneaux with support for \emph{text properties}: each
+char of a string can be annotated with a set of properties, which maps
+property names to values, where property names can be any symbol.  This can
+be used to carry information such as color and font to use when displaying
+the various parts of the string.
+
+XEmacs added a similar, though incompatible, feature to their strings at
+around the same time, called \emph{extents}.  The incompatibility was due to
+a fundamental disagreement about how those annotations should be propagated
+when strings are manipulated: XEmacs's extents cover a contiguous span of
+characters and they are objects in their own right with their own identity,
+so they need to be duplicated when a substring is selected, with the new
+extents not necessarily covering the same characters, and concatenation may
+end up bringing two ``identical'' extents next to each other 
+without merging them.  Richard Stallman felt~\cite{RMS-text-props} like
+this was introducing
+undesired complexities, and decided that Emacs's text properties should not
+have identity and should apply to the characters of the string so there is
+never a question of splitting or merging text properties.
+
+Along with buffer-local variables (see Section~\ref{sec:buffer-local-variables}), this is one of
+the cases where the core \Elisp{} language has been extended with
+a feature that specifically caters to the needs of the Emacs text editor, to
+keep track of rendering information.  It is more generally useful, of
+course, and turns strings into a much fancier datatype than in most
+other languages.
+
+Around 1994, support for arbitrary character sets was added to Emacs and
+XEmacs, which required distinguishing between bytes and characters, and
+hence changing its string objects.  Characters are represented with
+a variable number of bytes, similar to \texttt{utf-8}, favoring a compact
+representation at the cost of a slower random access.  In practice, random
+access to strings is fairly rare, but it does
+impose a significant constraint: There is an indirection between the string
+object and the chars it holds because of the \texttt{aset} primitive.
+\texttt{(aset string index char)}
+replaces one of \texttt{string's} characters at index \texttt{index}
+with \texttt{char} by side-effect.  Because of the variable number of bytes
+per character, this will
+sometimes change the string's length in bytes, which requires relocating
+the string's bytes elsewhere.
+
+In the original code, an \texttt{aset} operation which required changing the
+byte length was not allowed and signaled an error.  But when a user reported
+this limitation as a bug, the implementation was adjusted to relocate the
+string as needed: the necessary indirection was already present for the
+purpose of compacting the heap after a garbage collection, and the cost of
+an $O(n)$ operation to implement the \texttt{aset} operation which is
+usually expected to take constant time was not even discussed among the
+developers. In practice this extra cost is negligible, because
+\texttt{aset} is very rarely used on strings.
 
 \subsection{I/O}
 

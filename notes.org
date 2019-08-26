@@ -368,11 +368,39 @@ or at some other time?
       I added two examples of the simplification
 give a citation.
 
-*** TODO Mike I could not discern an order to the subsections of Section 4. Possibly
+*** DONE Mike I could not discern an order to the subsections of Section 4. Possibly
+    CLOSED: [2019-08-26 Mon 16:48]
 best to reorder them, with the ones directly related to Emacs first
 (e.g., 4.2, 4.5, 4.7, 4.9), then ones tied to Emacs goals (e.g., 4.4,
 4.8), and the ones that are only incidental later (e.g., 4.1, 4.3,
 4.6).
+
+4.1 Lambda
+4.2 Strings
+4.3 Backquote
+4.4 Docstrings
+4.5 Interactive functions
+4.6 Non-local exits
+4.7 Buffer-local variables
+4.8 Hooks
+4.9 I/O
+
+Suggestions:
+
+4.2 Strings
+4.5 Interactive functions
+4.7 Buffer-local variables
+4.9 I/O
+
+4.4 Docstrings
+4.8 Hooks
+
+4.1 Lambda
+4.3 Backquote
+4.6 Non-local exits
+
+Note from Mike: I ordered it a bit differently, with core language
+features being first - connecting to the MacLisp section immediately prior.
 
 *** DONE Stefan p10 Section 5.1
     CLOSED: [2019-08-19 lun 18:22]
