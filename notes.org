@@ -912,7 +912,8 @@ SPECIFIC COMMENTS and ADVICE
   did changes, to say, data representation, affect users? libraries? runtime?
   FFI?
 
-*** TODO Mike - 5.7: "These were solved very simply in Emacs-19.31 by removing messages that
+*** DONE Mike - 5.7: "These were solved very simply in Emacs-19.31 by removing messages that
+    CLOSED: [2019-08-26 Mon 16:29]
   indicated when GC was in progress." This sentence, presented with minimal
   discussion, makes me sad. Sure, user complaints about GC decreased as a
   result, but is that because users were deceived? Or were the messages
