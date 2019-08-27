@@ -981,7 +981,8 @@ SPECIFIC COMMENTS and ADVICE
   offend anyone by leaving them out". As a reader, I didn't get much out of
   it.
 
-*** TODO - Section 10: The conclusion should never introduce new material. Yet, I don't
+*** DONE - Section 10: The conclusion should never introduce new material. Yet, I don't
+    CLOSED: [2019-08-27 Tue 16:37]
   see where "a maintainership which was more interested in improving the text
   editor than the language" was discussed earlier in the paper. What actions
   is this comment in reference to? The paper also is rather oblique about
