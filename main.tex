@@ -1855,6 +1855,15 @@ largely the same design---here is an example~\cite{ELispManual2018}:
          (17 . indent-sexp)))
 \end{verbatim}
 %%
+Reading from the top, 3 is ASCII for Control-C and 26 is ASCII for
+Control-Z.  The nesting in the keymap means that the sequence
+Control-C Control-Z runs the \texttt{run-lisp} function.  Next, 27 is
+ASCII for Escape, which, in Emacs, doubles as the ``Meta'' modifier,
+Thus, both Escape Control-X and Meta-Control-X trigger
+\texttt{lisp-send-defun}.  Similarly, 127 is ASCII for Delete, which
+triggers \texttt{backward-delete-char-untabify}.  Finally, Escape
+Control-Q and Meta-Control-Q both trigger \texttt{indent-sexp}.
+
 This creates problems with software evolution: While Emacs offered
 constructors and mutators for keymaps, Emacs code could, in principle,
 just use the tools for manipulating S-expressions for creating

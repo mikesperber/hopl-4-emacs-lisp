@@ -948,7 +948,8 @@ SPECIFIC COMMENTS and ADVICE
   incorrect? Or were the user perceptions wrong to begin with? Was this the
   right thing to do?
 
-*** TODO Mike - 6.1: Am I supposed to understand the keymap representation from this
+*** DONE Mike - 6.1: Am I supposed to understand the keymap representation from this
+    CLOSED: [2019-08-27 Tue 16:36]
   example? What is important about the current representation? Overall, the
   discussion in this section is one of software engineering experience: should
   a particular data structure in the implementation of Emacs be represented
