@@ -208,10 +208,10 @@ and a Lisp interpreter) so as to be more widely available.
 
 In 1984, Richard Stallman took Gosling Emacs as a starting point for this
 endeavor, and began replacing
-the \emph{Mock Lisp} interpreter and data structures of \emph{Gosling Emacs}
+the \emph{Mock Lisp} interpreter and data structures of Gosling Emacs
 with a new interpreter for the language that is now \Elisp{}, adapting
 internal data structures to those of
-this \Elisp{} interpreter.  At that time, \emph{Gosling Emacs} was distributed
+this \Elisp{} interpreter.  At that time, Gosling Emacs was distributed
 commercially by Unipress under the name \emph{Unipress Emacs}, and Unipress
 ordered Richard Stallman to stop distributing his version of Emacs, which
 forced him to replace or rewrite the rest of Emacs's code as well, such as
@@ -228,7 +228,7 @@ languages that were either too obscure or too weak to support this vision.
 Consequently, Richard Stallman took inspiration from MacLisp, and \Elisp{}
 started right from the beginning as a full-featured programming language with
 powerful abstraction facilities, thus foregoing Greenspun's tenth
-rule, a popular epigram on programming that came up in  1993: `Any
+rule, a popular epigram on programming that came up in  1993: ``Any
 sufficiently complicated C or Fortran program contains an
 ad-hoc, informally-specified, bug-ridden, slow implementation of half of
 Common Lisp.''~\cite{GreenspunsRule}
@@ -252,7 +252,8 @@ can be summarized as:
   to modify Emacs's behavior.  This has driven the development of elements
   such as the \emph{docstrings} (see Section~\ref{sec:docstrings}) and more generally the self-documenting
   aspect of the language.  It also imposes constraints on the evolution of
-  the language: the use of some facilities, such as \emph{advice}, is
+  the language: the use of some facilities, such as \emph{advice} (see
+  Section~\ref{sec:advice}), is
   discouraged because it makes the code more opaque.
 \item Emacs should be easily portable to as many platforms as possible.
   This largely explains why \Elisp{} still runs in a simple byte-code interpreter.
@@ -390,6 +391,9 @@ from Jamie Zawinski's timeline~\cite{JWZTimeline}.
 
 \subsection{Development model}
 
+This section describes the development organization of Emacs and Lucid
+Emacs/XEmacs, respectively.
+
 \paragraph{Emacs}
 Emacs is a Free Software project, developed by a loosely connected
 set of volunteers doing it mostly in their spare time, and several of them
@@ -405,8 +409,7 @@ Richard Stallman was the original maintainer and still participates: even
 though several other people have been official maintainers at various points
 in time, he always acted as a ``default maintainer'' when no one wanted to
 step up and he has followed Emacs's development very closely even when he
-was not officially the maintainer, contrary to most of the other programs he
-developed, such as \emph{gcc} and \emph{gdb}.  Also, Richard Stallman being
+was not officially the maintainer.  Also, Richard Stallman being
 the founder of the Free Software Foundation, Emacs is part of the FSF's GNU
 project and is hence linked to the FSF by its use of FSF's resources to host
 the code and own the copyright.  The link with the FSF is of course
@@ -416,7 +419,7 @@ The organization of Emacs's development is not really codified, but in
 practice the role of the maintainer is a balancing act between the desire to
 maintain a sane code base, to promote Free Software, to be attractive to its
 users, and to encourage contributions.  There is also more structure to the
-organization: the maintenance is really shared among a handful of people who
+organization: maintenance is really shared among a handful of people who
 earned each other's respect by the weight of their past contributions and
 who can then make more or less any change they like to the code, and accept
 or reject external contributions, as long as nobody complains.  In case of
@@ -469,7 +472,7 @@ Mock Lisp.
 \subsection{Mock Lisp}
 \label{sec:mock-lisp}
 
-\emph{Gosling Emacs}, arguably the immediate predecessor of today's Emacs,
+Gosling Emacs, arguably the immediate predecessor of today's Emacs,
 featured an extension language called \emph{MLisp} or \emph{Mock Lisp},
 which bears visual resemblance to \Elisp{}.  MLisp featured function
 definitions via \texttt{defun}, as well as many built-in functions (such as
@@ -497,7 +500,7 @@ like that inserted a string surrounded by parentheses:
       (LET* ((BP1 (INSERT BP "("))
              (BP2 (INSERT BP1 STRING))
              (BP3 (INSERT BP2 ")")))
-        BP2))
+        BP3))
 \end{verbatim}
 %
 The \texttt{BP} parameter is for the location, at which the insertion
@@ -551,7 +554,7 @@ Maclisp had all basic properties associated with Lisp today~\cite{Moon1974}:
 \item A special \textit{symbol} data type represents identifiers in
   S-expressions, but is also often used to represent enumeration,
   status values etc.
-\item The ability to define new compound data types via the
+\item It is possible to define new compound data types via the
   \texttt{defstruct} form.
 \item The language has first-class functions via the \texttt{lambda}
   form.
@@ -601,8 +604,8 @@ resources of the machines of the time.  So the base language of \Elisp{} is
 a straightforward subset of MacLisp~\cite{Moon1974,Pitman1983} and Lisp
 Machine Lisp~\cite{WeinrebMoon1981}.
 
-Contrary to its siblings Common-Lisp and Scheme, which both strive for
-a kind of completeness and consistency (tho in different ways),
+Contrary to its siblings Common Lisp and Scheme, which both strive for
+a kind of completeness and consistency (although in different ways),
 Richard Stallman has
 had no such desire for \Elisp, even occasionally reminding contributors
 not to ``propose new Emacs features for mere completeness'
@@ -672,7 +675,27 @@ Richard Stallman chose dynamic scoping to meet extensibility
 requirements in Emacs~\cite{Stallman1981}.  The Emacs code base uses
 variables to hold configuration options.  These configuration
 options often need to be modified temporarily, restoring the original
-value after a piece of code has run.  It would in principle be
+value after a piece of code has run.  Here is an example:
+%
+\begin{verbatim}
+(defun dired-smart-shell-command (command &optional output-buffer error-buffer)
+  "Like function `shell-command', but in the current Virtual Dired directory."
+  (interactive ...)
+  (let ((default-directory (or (and (eq major-mode 'dired-mode)
+                                    (dired-current-directory))
+                               default-directory)))
+    (shell-command command output-buffer error-buffer)))
+\end{verbatim}
+%
+This function invokes \texttt{shell-command} to execute an external
+command.  The working directory of that command is determined by the
+\texttt{default-directory} variable: In Dired mode (a built-in file
+manager) that directory needs to be the directory the cursor is at.
+So in this case, the \texttt{let} is used to temporarily bind
+\texttt{default-directory} to the return value of
+\texttt{(dired-current-directory)}.
+
+It would in principle be
 possible to structure the code base to pass configuration options
 explicitly, but this would make the code verbose, and require changing
 many function signatures once a new configuration option gets added to
@@ -683,104 +706,6 @@ scope rule early, but deemed the availability of dynamic scoping
 necessary~\cite{Stallman1981}.  More recently, lexical scoping has
 been added as on option to Emacs---see
 Section~\ref{sec:lexical-scoping}.
-
-\subsection{Lambda}
-\label{sec:lambda}
-
-In Lisp dialects, anonymous functions are usually the result of
-\texttt{lambda} expressions.  Here is an anomymous function that adds
-1 to a number:
-%
-\begin{verbatim}
-    (lambda (x) (+ x 1))
-\end{verbatim}
-%
-Interestingly, \texttt{lambda} was not originally a keyword of the
-\Elisp{} language (unlike in MacLisp).  Up to Emacs-18, anonymous
-function \emph{values} could be lists of the following form:
-%
-\begin{verbatim}
-    (lambda (..ARGS..) ..BODY..)
-\end{verbatim}
-%
-The use of dynamic scope made it unnecessary to create closures, so it was
-possible to write these anonymous functions in source code using the
-pre-existing quoted Lisp literal mechanism:
-%
-\begin{verbatim}
-    '(lambda (..ARGS..) ..BODY..)
-\end{verbatim}
-%
-This \emph{expression} evaluates to a nested list structure---\texttt{'}$e$
-is read as \texttt{(quote \textnormal{$e$})}---with the
-\texttt{lambda} symbol as its first element.  When a program calls
-\texttt{funcall} passing such a value, \texttt{funcall} would
-recognize the list structure as representing a \texttt{lambda}
-expression and invoke the interpreter on it.
-
-The extra quote character was a small price to pay for a slightly
-simpler Lisp implementation.  In order for the byte-compiler to be able
-to distinguish such an anonymous function in the source code from a mere
-quoted list, \Elisp{} needed to use the \texttt{function} special form (also
-imported from MacLisp) for the alternative notation:
-%
-\begin{verbatim}
-    (function (lambda (..ARGS..) ..BODY..))
-\end{verbatim}
-%
-In 1992, \texttt{lambda} was added as a macro, early during the
-development of Emacs-19.  The macro simply returns the list representation
-wrapped inside the \texttt{function} special form.  It is not completely
-clear why it took so long to introduce this simple macro, but it was likely
-due to the fact that anonymous functions were not used very often and that
-they were mostly used in places that were not very sensitive to performance.
-
-While the \texttt{lambda} macro has made this quote unnecessary for almost
-30 years now, instances of this practice can still be found in many code
-snippets in web pages, users's configuration files, and third party \Elisp{}
-packages, even though it prevents byte-compilation of the function's body.
-
-Somewhat relatedly, only in 1993 did Lucid Emacs 19.8 import the
-\verb|#'...| reader shorthand for \texttt{(function ...)} from MacLisp.
-Emacs followed suit the year after.
-
-\subsection{Structures}
-\label{sec:structures}
-
-MacLisp offers the \texttt{defstruct} form for defining new data
-types called \textit{structures}.  Here is an example for the
-\texttt{KONS} data type, which has two fields called \texttt{KAR} and \texttt{KDR}:
-%
-\begin{verbatim}
-(DEFSTRUCT KONS KAR KDR)
-\end{verbatim}
-%
-This form would define four macros, \texttt{MAKE-CONS}, \texttt{KAR},
-\texttt{KDR}, and \texttt{ALTER-KONS}.  A program could create a
-\texttt{CONS} structure with \texttt{MAKE-CONS}:
-%
-\begin{verbatim}
-(MAKE-KONS KDR 3 KAR 4)
-\end{verbatim}
-%
-\texttt{KAR} and \texttt{KDR} can then be used to access the
-respective field contents of a \texttt{KONS} structure, and
-\texttt{ALTER-KONS} to mutate these contents.
-
-\Elisp{} never had \texttt{defstruct} as a primitive form.  This
-reflects a more general design philosophy, which uses the existing
-data types of pairs and vectors for even complicated data structures
-such as keymaps, see Section~\ref{sec:keymaps}.
-
-Instead, a Common-Lisp-compatible \texttt{defstruct} has been part of the
-\texttt{cl.el} package, see Section~\ref{sec:cl-lib}.  Use of
-\texttt{defstruct} in \Elisp{} code only began to be commonplace around
-2010.  Until 2013, structures were simply vectors, when Lars Brinkhoff added
-the record data type to make structures distinct from them.
-Making \texttt{defstruct} use this new data type introduced some backward
-incompatibilities, so the change lived in a separate branch for 4 years
-during which various mitigation strategies were developed, until it was
-finally included in Emacs-26.1.
 
 \subsection{Backquote}
 \label{sec:backquote}
@@ -846,8 +771,7 @@ was written in early \Elisp{} as:
 %%
 The releases of Emacs-19.28 and XEmacs 19.12 in 1994 finally added the
 proper reader support to generate the latter version from the former.
-
-The reader had to rely on a heuristic for the translation, though,
+The extended reader had to rely on a heuristic for the translation, however,
 because \texttt{(`a)} is valid in both syntaxes but means different
 things: It could either denote an old-style backquote expression
 (\verb|(` a)| in the old notation) or a single-element list containing
@@ -862,7 +786,7 @@ unquote was only recognized within a new backquote, and the new
 backquote was only recognized if it occurred within a new backquote or
 if it did not immediately follow an open parenthesis.
 
-Seeing how uses of old-style backquotes were not going away, in 2007
+Seeing how uses of old-style backquotes were not going away by themselves, in 2007
 Emacs-22.2 introduced explicit tests and warnings to bring attention to uses
 of old-style backquotes, while still keeping the actual behavior unchanged.
 
@@ -875,6 +799,103 @@ were otherwise mistaken for an old-style backquote syntax.
 
 %% Finally in 2018 during the development of Emacs-27, the
 %% old-style backquote syntax was removed.
+
+\subsection{Lambda}
+\label{sec:lambda}
+
+In Lisp dialects, anonymous functions are usually the result of
+\texttt{lambda} expressions.  Here is an anomymous function that adds
+1 to a number:
+%
+\begin{verbatim}
+    (lambda (x) (+ x 1))
+\end{verbatim}
+%
+Interestingly, \texttt{lambda} was not originally a keyword of the
+\Elisp{} language (unlike in MacLisp).  Up to Emacs-18, anonymous
+function \emph{values} could be lists of the following form:
+%
+\begin{verbatim}
+    (lambda (..ARGS..) ..BODY..)
+\end{verbatim}
+%
+The use of dynamic scope made it unnecessary to create closures, so it was
+possible to write these anonymous functions in source code using the
+pre-existing quoted Lisp literal mechanism:
+%
+\begin{verbatim}
+    '(lambda (..ARGS..) ..BODY..)
+\end{verbatim}
+%
+This \emph{expression} evaluates to a nested list structure with the
+\texttt{lambda} symbol as its first element.  When a program calls
+\texttt{funcall} passing such a value, \texttt{funcall} would
+recognize the list structure as representing a \texttt{lambda}
+expression and invoke the interpreter on it.
+
+The extra quote character was a small price to pay for a slightly
+simpler Lisp implementation.  In order for the byte-compiler to be able
+to distinguish such an anonymous function in the source code from a mere
+quoted list, \Elisp{} needed to use the \texttt{function} special form (also
+imported from MacLisp) for the alternative notation:
+%
+\begin{verbatim}
+    (function (lambda (..ARGS..) ..BODY..))
+\end{verbatim}
+%
+In 1992, \texttt{lambda} was added as a macro, early during the
+development of Emacs-19.  The macro simply returns the list representation
+wrapped inside the \texttt{function} special form.  It is not completely
+clear why it took so long to introduce this simple macro, but it was likely
+due to the fact that anonymous functions were not used very often and that
+they were mostly used in places that were not very sensitive to performance.
+
+While the \texttt{lambda} macro has made this quote unnecessary for almost
+30 years now, instances of this practice can still be found in many code
+snippets in web pages, users's configuration files, and third party \Elisp{}
+packages, even though it prevents byte-compilation of the function's body.
+
+Somewhat relatedly, only in 1993 did Lucid Emacs 19.8 import the
+\verb|#'...| reader shorthand for \texttt{(function ...)} from MacLisp.
+Emacs followed suit the year after.
+
+\subsection{Structures}
+\label{sec:structures}
+
+MacLisp offers the \texttt{defstruct} form for defining new data
+types called \textit{structures}.  Here is an example for the
+\texttt{KONS} data type, which has two fields called \texttt{KAR} and \texttt{KDR}:
+%
+\begin{verbatim}
+(DEFSTRUCT KONS KAR KDR)
+\end{verbatim}
+%
+This form would define four macros, \texttt{MAKE-CONS}, \texttt{KAR},
+\texttt{KDR}, and \texttt{ALTER-KONS}.  A program could create a
+\texttt{CONS} structure with \texttt{MAKE-CONS}:
+%
+\begin{verbatim}
+(MAKE-KONS KDR 3 KAR 4)
+\end{verbatim}
+%
+\texttt{KAR} and \texttt{KDR} can then be used to access the
+respective field contents of a \texttt{KONS} structure, and
+\texttt{ALTER-KONS} to mutate these contents.
+
+\Elisp{} never had \texttt{defstruct} as a primitive form.  This
+reflects a more general design philosophy, which uses the existing
+data types of pairs and vectors for even complicated data structures
+such as keymaps, see Section~\ref{sec:keymaps}.
+
+Instead, a Common-Lisp-compatible \texttt{defstruct} has been part of the
+\texttt{cl.el} package, see Section~\ref{sec:cl-lib}.  Use of
+\texttt{defstruct} in \Elisp{} code only began to be commonplace around
+2010.  Until 2013, structures were simply vectors, when Lars Brinkhoff added
+the record data type to make structures distinct from them.
+Making \texttt{defstruct} use this new data type introduced some backward
+incompatibilities, so the change lived in a separate branch for four years
+during which various mitigation strategies were developed, until it was
+finally included in Emacs-26.1.
 
 \subsection{Non-local exits}
 \label{sec:non-local-exits}
@@ -952,6 +973,7 @@ between signaling and handling code.
 
 \subsection{Hooks}
 \label{sec:hooks}
+\label{sec:advice}
 
 One important aspect of the extensibility Richard Stallman originally
 conceived for Emacs was the ability to make existing functions run
@@ -974,7 +996,7 @@ list---there is a \texttt{(run-hooks 'TeX-mode-hook)} in the code
 setting up \TeX{} mode.
 
 Hooks are not a core language feature, but their use has been a
-pervasive convention in Emacs from the start.  In particular, many
+pervasive convention in Emacs since the beginning.  In particular, many
 libraries run a hook when they are loaded to allow customization.
 Also, modes generally run hooks to allow modifying their behavior.
 
@@ -983,15 +1005,15 @@ changes~\cite{Stallman1981}, but this feature was not provided in \Elisp{}
 because Richard Stallman considered it a misfeature, which could make it
 difficult to debug the code.  Yet this very feature was finally added to
 \Elisp{} in Emacs-26 in the form of \emph{variable watchers},
-ironically meant to be used as debugging aides.
+ironically meant to be used as debugging aids.
 
 Of course, authors do not always have the foresight to place hooks where
 users need them, so in 1992, the \texttt{advice.el} package was added to
 Emacs-19, providing a \texttt{defadvice} macro duplicating a design
-available in MacLisp and Lisp Machines, that allowed attaching code to
+available in MacLisp and Lisp Machines. This form allows attaching code to
 a function even if it does not run hooks.  This \emph{advice} mechanism
 makes Emacs even more malleable, hence fitting very well the design goals of
-Emacs, which is why Richard was happy to include it, but he has always made
+Emacs, which is why Richard Stallman was happy to include it, but he has always made
 it clear that its use should be avoided:
 \begin{quotation}
   ``It is bad practice to make a Lisp
@@ -1001,10 +1023,10 @@ it clear that its use should be avoided:
   advice.''~\cite{Stallman2018-personal}
 \end{quotation}
 Nevertheless, the advice functionality is very popular, used in many
-packages, including within Emacs's own packages.  For some packages, it is
+packages, including within Emacs's own \Elisp{} code.  For some packages, it is
 merely used to address corner-case interoperability with another package,
 but for others it is the core mechanism on which they are built (such as
-the Emacspeak package which advises hundreds of \Elisp{} functions to
+the \emph{Emacspeak} package, which advises hundreds of \Elisp{} functions to
 make Emacs better suited for visually impaired users).
 
 Here is an example \texttt{defadvice} form:
@@ -1030,7 +1052,7 @@ were very rarely used, and even more rarely used properly because the
 original design did not match actual usage patterns.  Furthermore, the way
 the \texttt{defadvice} macro gave access to function arguments did not work
 with lexical scoping.  This was solved in late 2012: as a result of
-a discussion with a user querying how to ``put several functions into
+a discussion with a user asking how to ``put several functions into
 a single variable'', Stefan Monnier developed a new package
 \texttt{nadvice.el} that can not only combine several functions into
 a single variable, but uses that to provide the same core features as
@@ -1068,7 +1090,8 @@ This \emph{docstring} can be retrieved in various ways, in particular
 through the user interface.  This idea was apparently first introduced in
 the original Emacs implementation in TECO, then adapted to \Elisp{}.
 Many languages have since adopted them, notably Common
-Lisp~\cite{HyperSpec} and Clojure~\cite{ClojureDotOrg}, or variants like
+Lisp~\cite{HyperSpec} and Clojure~\cite{ClojureDotOrg}.  More distant
+descendants generate documentation from the source code, such as
 Javadoc comments in Java.
 
 \subsection{Interactive functions}
@@ -1120,7 +1143,7 @@ the file's content, buffers store auxiliary information such
 as the name of the associated file, the rules to use to highlight its
 contents, the editing mode to use, the character encoding used, etc.
 Additionally, there is a global reference managed by Emacs called the
-\emph{current buffer}, that determines the implicit target of
+\emph{current buffer} that determines the implicit target of
 editing operations.
 
 Making a variable \emph{buffer-local} associates the value of the variable
@@ -1165,9 +1188,9 @@ This bug affected code like
       ...)
 \end{verbatim}
 where the current buffer was different when the let-binding is entered from
-when it is left\footnote{\texttt{set-buffer} is like
+when it is left;\footnote{\texttt{set-buffer} is like
   \texttt{with-current-buffer} except that it is not scoped, so it takes
-  effect until the next \texttt{set-buffer}.}; the bug was that this code
+  effect until the next \texttt{set-buffer}.} the bug was that this code
 ended up ``restoring'' the value of \texttt{buffer-file-name} into the
 wrong buffer when exiting the \texttt{let}.
 
@@ -1179,7 +1202,7 @@ Originally, they were just byte arrays.
 
 In 1992, during the early development of Emacs-19, this basic type was
 extended by Joseph Arceneaux with support for \emph{text properties}: each
-char of a string can be annotated with a set of properties, which maps
+char of a string can be annotated with a set of properties, mapping1
 property names to values, where property names can be any symbol.  This can
 be used to carry information such as color and font to use when displaying
 the various parts of the string.
@@ -1192,11 +1215,11 @@ characters and they are objects in their own right with their own identity,
 so they need to be duplicated when a substring is selected, with the new
 extents not necessarily covering the same characters, and concatenation may
 end up bringing two ``identical'' extents next to each other 
-without merging them.  Richard Stallman felt~\cite{RMS-text-props} like
+without merging them.  Richard Stallman felt that
 this was introducing
 undesired complexities, and decided that Emacs's text properties should not
 have identity and should apply to the characters of the string so there is
-never a question of splitting or merging text properties.
+never a question of splitting or merging text properties~\cite{RMS-text-props}.
 
 Along with buffer-local variables (see Section~\ref{sec:buffer-local-variables}), this is one of
 the cases where the core \Elisp{} language has been extended with
@@ -1207,7 +1230,7 @@ other languages.
 
 Around 1994, support for arbitrary character sets was added to Emacs and
 XEmacs, which required distinguishing between bytes and characters, and
-hence changing its string objects.  Characters are represented with
+hence changing the representation of string objects.  Characters are represented with
 a variable number of bytes, similar to \texttt{utf-8}, favoring a compact
 representation at the cost of a slower random access.  In practice, random
 access to strings is fairly rare, but it does
@@ -1220,7 +1243,7 @@ per character, this will
 sometimes change the string's length in bytes, which requires relocating
 the string's bytes elsewhere.
 
-In the original code, an \texttt{aset} operation which required changing the
+Originally, an \texttt{aset} call that would have required changing the
 byte length was not allowed and signaled an error.  But when a user reported
 this limitation as a bug, the implementation was adjusted to relocate the
 string as needed: the necessary indirection was already present for the
@@ -1326,8 +1349,8 @@ This said, there were other objections to those patches:
   terms of reducing the stack
   allocation and increasing performance, but they also eliminate some
   activation frames from stack backtraces, which would be detrimental to
-  debugging.  This is particularly true for tail-calls to
-  other functions, such as non-recursive tail-calls.
+  debugging.  This is particularly true for tail calls to
+  other functions, such as non-recursive tail calls.
 \end{itemize}
 
 \subsection{Bootstrap}
@@ -1373,9 +1396,9 @@ To avoid fragmentation in the bloc of strings, those were compacted during
 each GC.  The ``mark'' bit in each 32-bit box belonged to the object
 that contained this 32-bit box rather than to the object referenced from
 this box.  More specifically it was used so that cons cells could
-occupy only 2 words: the extra bit needed to store the mark\&sweep's
+occupy only two words: the extra bit needed to store the mark\&sweep's
 \emph{markbit} of each cons cell was stored in the ``mark'' bit of the first
-word (i.e. of the \texttt{car}).
+word (i.e.\ of the \texttt{car}).
 
 Over time, this tagging scheme became problematic, since it limited the Lisp
 heap to 16\;MB.
@@ -1384,7 +1407,7 @@ integer since that is how buffer positions are represented.
 This means that 8\;MB was the size limit for a file that could be edited.
 
 So in 1995, with the release of Emacs-19.29,
-the scheme was tweaked so that the tag was reduced to
+the scheme was tweaked and the tag was reduced to
 3 bits, pushing the maximum file size to a more comfortable 128MB and the
 maximum heap size to 256\;MB.  To reduce the tag to 3 bits,
 the types that received their own tag were ints, strings, symbols, cons
@@ -1410,7 +1433,8 @@ the C \texttt{union} feature and bit fields rather than ``manual''
 manipulation of bits in the machine word.
 
 This change reflected a general difference in attitude towards using
-custom data type definitions for representing \Elisp{} entities, which
+custom data type definitions for representing \Elisp{} entities  (see
+Section~\ref{sec:structures}), which
 went back to discussions between Richard Mlynarik and Richard Stallman
 years earlier at MIT~\cite{Mlynarik-personal}.  Lucid Emacs was open
 to Mlynarik's changes, while Emacs was not.
