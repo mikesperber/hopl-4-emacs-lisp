@@ -103,13 +103,13 @@ this article.
 
 \smallskip
 
-\noindent\textbf{Stefan Monnier} has been a core contributor to Emacs since
-1999 and head maintainer from 2008 to 2015, and he supervised student
-projects on the \Elisp{} implementation in Emacs.
+\noindent{Stefan Monnier} has been (and is still) a core contributor to
+Emacs since 1999, was head maintainer from 2008 to 2015, and he supervised
+student projects on the \Elisp{} implementation in Emacs.
 
 \smallskip
 
-\noindent\textbf{Michael Sperber} has been a core contributor to XEmacs since 1994.
+\noindent{Michael Sperber} has been a core contributor to XEmacs since 1994.
 Most of his work was done from 1995 to 2003, when he was a research
 assistant at the University of Tübingen.  Apart from his own work on
 the XEmacs codebase, he supervised several student projects on the
@@ -135,15 +135,13 @@ language design, and Section \ref{sec:base-language-implementation}
 its implementation.
 Development continued at a high pace until about 1991.
 Around that time, its development slowed down and
-was overtaken by Lucid Emacs, later renamed XEmacs, whose development of
+was overtaken by Lucid Emacs, later renamed XEmacs, whose impact on
 \Elisp{} we describe in Section~\ref{sec:xemacs}.  Eventually,
 development of Emacs picked up again, and both co-evolved until about
 2007.  We describe the relevant aspects of that evolution in
 Section~\ref{sec:coevolution}.  After 2007, XEmacs development slowed
 down, and we describe this post-XEmacs period in
-Section~\ref{sec:post-xemacs}.
-
-Our conclusions are in
+Section~\ref{sec:post-xemacs}, to finally conclude in
 Section~\ref{sec:conclusion}.
 
 \Elisp{} was re-implemented in several other projects outside this
@@ -753,11 +751,11 @@ This expands into the following \texttt{quasiquote}-less code:
           (list 'aset array-name 'i init-val))
 \end{verbatim}
 %
-Curiously, \Elisp{} did not until 1994 include the reader syntax for
+\Elisp{} did not until 1994 include the reader syntax for
 quasiquotation.
 Instead, the special forms that came with quasiquotation---backquote
 (\verb|`|), unquote (\verb|,|) and unquote-splicing (\verb|,@|) were
-the names of special forms.   Thus, what is usually written as:
+simply the names of special forms.   Thus, what is usually written as:
 %%
 \begin{verbatim}
     `(a b ,c)
@@ -786,7 +784,8 @@ unquote was only recognized within a new backquote, and the new
 backquote was only recognized if it occurred within a new backquote or
 if it did not immediately follow an open parenthesis.
 
-Seeing how uses of old-style backquotes were not going away by themselves, in 2007
+Seeing how uses of old-style backquotes were not going away by themselves,
+in 2007
 Emacs-22.2 introduced explicit tests and warnings to bring attention to uses
 of old-style backquotes, while still keeping the actual behavior unchanged.
 
@@ -797,8 +796,11 @@ introduction of the \texttt{pcase} macro (see Section~\ref{sec:pcase}) where pat
 backquote syntax and are commonly placed right after a parenthesis so they
 were otherwise mistaken for an old-style backquote syntax.
 
-%% Finally in 2018 during the development of Emacs-27, the
-%% old-style backquote syntax was removed.
+Support for the old-style syntax has been preserved so far because it was
+used very widely and removing it would have broken many third-party packages
+still in use, yet lacking any maintainer.  Over the years, these packages
+have been slowly updated, so this syntax is expected to be finally
+removed soon.
 
 \subsection{Lambda}
 \label{sec:lambda}
@@ -845,15 +847,21 @@ imported from MacLisp) for the alternative notation:
 %
 In 1992, \texttt{lambda} was added as a macro, early during the
 development of Emacs-19.  The macro simply returns the list representation
-wrapped inside the \texttt{function} special form.  It is not completely
+wrapped inside the \texttt{function} special form:
+\begin{verbatim}
+    (defmacro lambda (&rest args)
+      (list 'function (cons 'lambda args)))
+\end{verbatim}
+It is not completely
 clear why it took so long to introduce this simple macro, but it was likely
 due to the fact that anonymous functions were not used very often and that
 they were mostly used in places that were not very sensitive to performance.
 
 While the \texttt{lambda} macro has made this quote unnecessary for almost
-30 years now, instances of this practice can still be found in many code
-snippets in web pages, users's configuration files, and third party \Elisp{}
-packages, even though it prevents byte-compilation of the function's body.
+30 years now, instances of this practice can still be found, thanks to the
+power of copy\&paste, in many code snippets in web pages, users's
+configuration files, and third party \Elisp{} packages, even though it
+prevents byte-compilation of the function's body.
 
 Somewhat relatedly, only in 1993 did Lucid Emacs 19.8 import the
 \verb|#'...| reader shorthand for \texttt{(function ...)} from MacLisp.
@@ -890,13 +898,14 @@ such as keymaps, see Section~\ref{sec:keymaps}.
 Instead, a Common-Lisp-compatible \texttt{defstruct} has been part of the
 \texttt{cl.el} package, see Section~\ref{sec:cl-lib}.  Use of
 \texttt{defstruct} in \Elisp{} code only began to be commonplace around
-2010.  Until 2013, structures were simply vectors, when Lars Brinkhoff added
-the record data type to make structures distinct from them.  (See
-also Section~\ref{sec:actual-objects.})
-Making \texttt{defstruct} use this new data type introduced some backward
-incompatibilities, so the change lived in a separate branch for four years
-during which various mitigation strategies were developed, until it was
-finally included in Emacs-26.1.
+2010.  Originally \texttt{defstruct} used plain vectors to represent the
+structures, making it impossible to reliably distinguish them from vectors,
+but in 2013 Lars Brinkhoff added the \emph{record} data type to make
+structures distinct from vectors (See also
+Section~\ref{sec:actual-objects}).  Making \texttt{defstruct} use this new
+data type introduced some backward incompatibilities, so the change lived in
+a separate branch for four years during which various mitigation strategies
+were developed, until it was finally included in Emacs-26.1.
 
 \subsection{Non-local exits}
 \label{sec:non-local-exits}
@@ -1288,7 +1297,7 @@ language, and this section discusses some of them.
 Emacs has two execution engines for \Elisp, the original versions of
 which were both already in Emacs-1.1 (the earliest version mentioned in the
 release notes), and both written by Richard
-Stallman.  The first is a very simple interpreter written in C
+Stallman~\cite{RMS-compiler}.  The first is a very simple interpreter written in C
 operating directly on the S-expression representation of the source code.
 The second one is a byte-code engine, implemented as a primitive
 \texttt{byte-code} function that interprets its string
@@ -1379,9 +1388,16 @@ functions are \emph{autoloaded}, and some of that code is used to build the
 file that contains all those \texttt{autoload} declarations.  Consequently,
 a pre-built copy of that file is checked into revision control.
 
-\subsection{Data representation and memory management}
+\subsection{Data representation}
 \label{sec:data-representation}
 
+The representation of Lisp objects has only slowly evolved over the years in
+response to changes in the usage patterns.  The main changes have been in
+the representation of an immediate \emph{boxed} Lisp value, which can be
+either a number or a reference to a heap object, and in heap objects used to
+represent user-defined objects such as closures and records.
+
+\subsubsection{Tag bits}
 Emacs started with a data representation of its boxed data based on 32-bit
 words.  Those used a 7-bit tag located in the most significant bits, an extra
 ``mark'' bit (see below), and 24-bit of immediate data: either an integer or
@@ -1477,14 +1493,16 @@ least significant 3 bits for use as tag bits.
 
 In Emacs-23.2 the tagging scheme was tweaked to use two tags for integers,
 pushing the maximum file size to 512\;MB, similar to what XEmacs had
-done for XEmacs 21.0..
+done for XEmacs 21.0.
 
 The design of Emacs makes it basically
 impossible to view files larger than 4\;GB or edit files larger than 2\;GB (on
 a 32-bit system) anyway, no matter which tagging scheme is used, so there was
 not much room for improvement.
-To cover the remaining space, a new compilation option
-\texttt{--with-wide-int} was introduced in Emacs-24.1 to make the boxed data
+Nevertheless repeated complaints from users about the inability to edit
+large files motivated Paul Eggert to cover the remaining space between
+512\;MB and 2\;GB by adding a new compilation option
+\texttt{--with-wide-int} in Emacs-24.1 to make the boxed data
 use 64 bits on 32-bit systems.  This imposes a significant extra cost in terms
 of space and time but makes it possible to edit files up to about 2\;GB.
 When this compilation option is used, tag bits are placed in the most
@@ -1498,13 +1516,15 @@ cost at all.
 %% it?
 %% Mike: I think it's fine now.
 
+\subsubsection{Vectors}
 In Emacs-24.3, the allocation of objects using the \texttt{Lisp\_Vector} tag
 (which is used for many more object types than just vectors) was modified:
 instead of calling \texttt{malloc} for each such objects, they are now
 allocated from ``vector blocs''.  The motivation was not that
-\texttt{malloc} was too slow, but that the implementation of
-conservative stack scanning keeps track of every part of the Lisp heap
-allocated with \texttt{malloc} in a balanced tree, so every such
+\texttt{malloc} was too slow, but that the implementation of conservative
+stack scanning (see Sec.\ref{sec:stack-scanning}) keeps track of every part
+of the Lisp
+heap allocated with \texttt{malloc} in a balanced tree, so every such
 \texttt{malloc} costs an $O(N \textsf{log} N)$ operation plus a heap
 allocation of an extra tree node, which was very costly for small objects
 both in time and space.  The reason why it took until Emacs-24.3 to fix this
@@ -1513,21 +1533,24 @@ historically not used in large numbers in early \Elisp{} code.  There were
 two factors that changed this situation: first, over time the style of
 \Elisp{} coding evolved and the use of \texttt{cl.el}'s \texttt{defstruct}
 (which internally represents those objects as vectors, see
-Section~\ref{sec:structures}) became much more
-common, and second the closures used in the lexical-scoping feature of
-Emacs-24.1 also use the \texttt{Lisp\_Vector} tag.
+Section~\ref{sec:structures}) became much more common, and second the
+closures used in the lexical-scoping feature of Emacs-24.1 also use the
+\texttt{Lisp\_Vector} tag.
 
 In Emacs-24.4, the representation of objects using the \texttt{Lisp\_Vector}
 tag was improved further so as to reduce their header from 2 words down to
-a single word.
+a single word.  This was not motivated by any concrete performance problem,
+but by the general desire to reduce the cost of those objects since it was
+expected that their use would keep increasing as more code is converted to
+use lexical binding and \texttt{defstruct}.
 
-In Emacs-27.1, the object representation was changed again, by Paul Eggert:
-the distinction between \texttt{Lisp\_Misc} and \texttt{Lisp\_Vector} was
-dropped by making all objects use the \texttt{Lisp\_Vector} representation
-since it had been improved sufficiently to be competitive with the
-special-cased \texttt{Lisp\_Misc} representation.  This time the motivation
-was just to simplify the code, and it came with a very
-slight performance improvement according to the limited benchmarking
+Finally, for Emacs-27, the object representation was changed again, by Paul
+Eggert: the distinction between \texttt{Lisp\_Misc} and
+\texttt{Lisp\_Vector} was dropped by making all objects use the
+\texttt{Lisp\_Vector} representation since it had been improved sufficiently
+to be competitive with the special-cased \texttt{Lisp\_Misc} representation.
+This time the motivation was just to simplify the code, tho it came with
+a very slight performance improvement according to the limited benchmarking
 performed at the time.
 
 \subsection{Scanning the stack}
@@ -2254,8 +2277,7 @@ native bignums.
 
 Interestingly, bignums in Emacs were always perceived as desirable but never
 important enough to overcome the hassle of requiring GMP or some other
-multiprecision library.  The deciding factor which changed the tradeoff was
-the fact that by Emacs-25, most builds of Emacs made use of the GNUtls
+multiprecision library.  The deciding factor which changed the tradeoff was probably the fact that by Emacs-25, most builds of Emacs made use of the GNUtls
 library (because HTTPS support is more than just desirable), which
 internally uses GMP for its cryptography anyway.
 
@@ -2434,7 +2456,7 @@ Dynamic scoping had two main drawbacks in practice:
     (let ((lst (some-list)))
       (cl-every (lambda (x) (memq x lst)) elements))
 \end{verbatim}
-  where a name conflict occurs if \texttt{cl-every} happens to bind a local
+  where a variable capture occurs if \texttt{cl-every} happens to bind a local
   variable \texttt{lst} before calling its first argument.  Name conflicts
   were also problematic in one other special case, the byte-compiler: in
   order to emit warnings about the use of undeclared variables, the
@@ -2909,8 +2931,7 @@ EIEIO started as an experiment to try to use
 an object system in Emacs, first following a model like that of C++, but
 very soon switching to a CLOS-inspired model.
 
-% FIXME Stefan: Rudimentary example would be nice, as well as
-% defmethod below
+\subsubsection{CLOS}
 
 EIEIO is an implementation of a subset of CLOS, the Common Lisp Object
 System~\cite{DeMichielGabriel1987}.  CLOS is a somewhat unusual object
@@ -2927,6 +2948,20 @@ example by adding \emph{qualifiers} (like \texttt{:after}, or
 \texttt{:before}).  Beside generic functions, CLOS also provides the
 \texttt{defclass} macro to define new types by listing their parents,
 fields, and various other properties.
+
+Here is an example of CLOS code which defines a new \texttt{point3d} subclass
+of a pre-existing \texttt{point2d} class, and add a new method to the
+generic function \texttt{point-distance} which is executed after the other
+methods of that generic function, but only when both
+arguments are subtypes of \texttt{point3d}:
+\begin{verbatim}
+    (defclass point3d (point2d)
+      (z :documentation "Third dimension"))
+    (defmethod point-distance :after ((p1 point3d) (p2 point3d))
+      (message "We just compared two point3d objects!"))
+\end{verbatim}
+
+\subsubsection{EIEIO}
 
 Just like \Elisp{}, the development of EIEIO was mostly
 driven by actual needs more than as an end in itself: the original
@@ -2945,8 +2980,10 @@ EIEIO spent most of its life as part of the CEDET package
 before being integrated into Emacs-23.2 in
 2010, along with most of CEDET.  Use of EIEIO within Emacs stayed fairly
 limited, partly for reasons of inertia, but also because EIEIO suffered some
-of the same problems as \texttt{cl.el} in that it was not
+of the same problems as \texttt{cl.el} in that it is not
 ``namespace clean''.
+
+\subsubsection{CL-generic}
 
 At the end of 2014, Stefan Monnier started to try and clean up EIEIO so as
 to be able to use it in more parts of Emacs.  The intention was basically to
@@ -2960,7 +2997,7 @@ It became quickly evident that the implementation of method dispatch
 needed a complete overhaul: rather than constructing combined methods
 up-front and memoizing the result, as in typical CLOS implementations,
 EIEIO's dispatch and \texttt{call-next-method} did all their work
-dynamically, relying on dynamically-scoped variables to preserve state in
+dynamically, relying on global variables to preserve state in
 a way that was both brittle and somewhat inefficient.
 
 So, instead of improving EIEIO's \texttt{defmethod}, a completely new
@@ -3013,12 +3050,14 @@ applicable when \id{EXP} evaluates to a value that satisfies the
 are only applicable in specific contexts, such as in specific major modes or
 in frames using a particular kind of GUI.
 
+\subsubsection{Overall support for classes}
+
 The implementation of \texttt{cl-generic.el} was accompanied by an extension
 of the on-line help system so as to be able to give information not just
 about \Elisp{} variables, functions, and faces but also other kinds of named
 elements, starting with types.  And to go along with that, the implementation
 of \texttt{cl-defstruct} was improved to better preserve information about
-the type hierarchy so that the on-line help system can be used to traverse
+the type hierarchy so that the on-line help system can be used to browse
 it.  This started as an attempt to adapt to \texttt{cl-generic.el} the EIEIO
 facilities to interactively explore EIEIO objects and methods, but is more
 modular and better integrated with the rest of Emacs's on-line help system.
@@ -3035,7 +3074,7 @@ creation and field accesses; \texttt{cl-defmethod} provided by
 has been reimplemented as a wrapper on top of the new \texttt{cl-defmethod}
 (this backward compatibility library is deprecated and a bit less efficient
 than using \texttt{cl-defmethod} directly but still more efficient than its
-earlier implementation, and it's fully implemented using documented features
+earlier implementation, and it is fully implemented using documented features
 of \texttt{cl-defmethod}, so it doesn't impose any performance or
 maintenance issue).  We will likely live with both \texttt{cl-defstruct} and
 \texttt{defclass} for the foreseeable future.
@@ -3255,12 +3294,14 @@ for some form of namespacing:
 %%
 To date, no namespacing facility has been incorporated into Emacs, nor seen
 much use in other packages.  The last time this subject was (hotly) debated
-among Emacs maintainers and contributors, around 2013 following a blog post
-by Nic Ferrier.
-% FIXME Stefan: Bibref?
+among Emacs maintainers and contributors, was around 2013, following a blog
+post by Nic Ferrier.
 No consensus emerged, but other than inertia one of the
 main arguments in favor of the status quo was that \Elisp's poor man's
-namespacing makes cross-referencing easier: any simple textual search can be
+namespacing is only a mild annoyance and in return it makes life for the
+uninitiated and for cross-referencing easier~\cite{namespace-discussion}:
+any simple textual
+search can be
 used to find definitions and uses of any global function or variable,
 including filesystem-wide searches or even web searches,
 whereas all the alternatives introduce names that need to be interpreted
@@ -3294,18 +3335,19 @@ convictions about programming-language design, most notably the use of
 opaque datatypes.
 
 Over time, starting around 2000 with Gerd Möllmann's maintainership and then
-even more so when Stefan Monnier took over maintainership in 2008, language
-design received more attention as a goal in itself.  The language designer's
-perspective has driven changes such as the introduction of lexical scope,
-features from Common Lisp, and \texttt{pcase}.
+even more so when Stefan Monnier and Chong Yidong took over maintainership
+in 2008, language design received more attention as a goal in itself.
+The language designer's perspective has driven changes such as the
+introduction of lexical scope, features from Common Lisp, and
+\texttt{pcase}.
 
 The core language of \Elisp{} is still present, essentially unchanged
 from its original form, as is its implementation:  Any substantial
 change would have invalidated a substantial code base.  Moreover, the
 implementation has generally been good enough to fulfill the
 requirements of the Emacs editor for over 30 years.  Consequently,
-\Elisp{} is showing no signs of going away any time time.  We are
-looking forward to its next 30 years.
+\Elisp{} is showing no signs of going away any time soon: we are
+looking forward to reporting about its next 30 years of evolution.
 
 % Many steps of \Elisp's evolution have been the result of efforts of single
 % individuals, driven by a specific purpose, yet it has managed to keep an

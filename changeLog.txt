@@ -27,6 +27,9 @@ Here are some of the major improvements:
 - We tracked down many additional sources, and added the appropriate
   citations.
 
+- We added more information about the motivation between the
+  various changes.
+
 - We tracked down authorship for many aspects of Emacs Lisp that
   weren't part of the original submissions.
 
@@ -36,6 +39,32 @@ Here are some of the major improvements:
 - In the end, we ended up not significantly restructuring the paper.
   The notable change we made was relegating the section on alternative
   implementations to the appendix.
+
+The main comments we failed to address completely are:
+
+- Discussion about how Elisp dealt with "breaking backward compatibility":
+  we added various relevant details throughout the paper, but we have not
+  "structur[ed the paper] around these issues".  It was not clear to us what
+  that would entail nor that the result would be better overall.
+
+- Reordering of section 4: rather than follow the reviewer's suggested
+  order, we decided to start with the core language features, in the same
+  order as in the MacLisp section immediately prior.
+
+- Rather than "playing up" the "unbridgeable personal differences", we removed
+  this from the conclusion, since in retrospect fairly few such differences
+  had a significant impact on the Elisp language.  But we did go into more
+  details for the few cases where that happened.
+
+- We kept the "table of contents section" at the end of the intro, because
+  while we don't very much like it either it seems to benefit those who like
+  them more than it harms the ones who don't.
+  If the reviewers all agree it should go, we'll be happy to remove it.
+
+- We have not really provided a high-level summary of the highlights of the
+  evolution.  We're still struggling to decide what should be in it.  But we
+  rewrote the conclusion in a way that might reduce the desire for such
+  a summary.
 
 We hope the revision meets your approval, and would be honored to be
 included in HOPL IV.
