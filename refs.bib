@@ -1,3 +1,10 @@
+@string{Irwin   = { John Irwin }}
+@string{Loingtier= { Jean-Marc Loingtier }}
+@string{Lopes   = { Cristina Lopes }}
+@string{Maeda   = { Chris Maeda }}
+@string{Mendhekar= { Anurag Mendhekar }}
+@string{Lamping = { John Lamping }}
+@string{Kiczales= { Gregor Kiczales }}
 @string{Sperber = { Michael Sperber }}
 @string{Appel	= { Andrew W. Appel }}
 @string{Tolmach = { Andrew Tolmach }}
@@ -27,7 +34,32 @@
   url =          {http://www.deinprogramm.de/sperber/papers/dynamic-scope-analysis.pdf}
 }
 
-
+@InProceedings{Kiczales97,
+  author =       Kiczales #{and}# Lamping #{and}# Mendhekar #{and}# Maeda
+                  #{and}# Lopes #{and}# Loingtier #{and}# Irwin,
+  title =        {Aspect-oriented programming},
+  crossref =     {ECOOP97},
+  pages =        {220-242},
+  doi =          {10.1145/503209.503260},
+  abstract =     {We have found many programming problems for which neither
+                  procedural nor object-oriented programming techniques are
+                  sufficient to clearly capture some of the important design
+                  decisions the program must implement.  This forces the
+                  implementation of those design decisions to be scattered
+                  throughout the code, resulting in “tangled” code that is
+                  excessively difficult to develop and maintain.  We present
+                  an analysis of why certain design decisions have been so
+                  difficult to clearly capture in actual code.  We call the
+                  properties these decisions address aspects, and show that
+                  the reason they have been hard to capture is that they
+                  cross-cut the system's basic functionality.  We present
+                  the basis for a new programming technique, called
+                  aspect-oriented programming, that makes it possible to
+                  clearly express programs involving such aspects, including
+                  appropriate isolation, composition and reuse of the aspect
+                  code.  The discussion is rooted in systems we have built
+                  using aspect-oriented programming.}
+}
 
 @Misc{WhyNotTcl,
   title = {Why you should not use {Tcl}},
@@ -556,6 +588,7 @@
    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+@string{ECOOP	= {European Conference on Object-Oriented Programming}}
 @string{ELS	= {European Lisp Symposium}}
 @string{ICFP	= {International Conference on Functional Programming}}
 @string{LFP	= {Conference on Lisp and Functional Programming}}
@@ -742,3 +775,8 @@
   year = 	 2019,
   url = {https://gcc.gnu.org/onlinedocs/gcc/Labels-as-Values.html]}}
 
+@proceedings{ECOOP97,
+  title =        ECOOP,
+  booktitle =    ECOOP,
+  year =         1997
+}

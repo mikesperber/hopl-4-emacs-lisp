@@ -241,7 +241,7 @@ As written, this is not true.  Lots of Emacs Lisp programs bind global
 variables that serve as parameters to certain operations.  They depend
 on these bindings to be dynamic.
 
-* Reviews
+* Reviews 1st round
 ** Review #16A
 ===========================================================================
 
@@ -1190,51 +1190,112 @@ By and large, the paper appears in relatively good shape.  The authors have
 done a reasonable job of disentangling a complex history of two
 intertwined developments.
 
-*** TODO 298. Why does Emacs begin with 13.0 rather than 1.0?
-*** TODO 569 “soon” does this mean within months, a year, a few years, or a decade?
-*** TODO 591. When does one use “quote” and when does one use the alternative “function”?
-*** TODO 612. CONS —> KONS, twice
-*** TODO 667. Spell out contents of <handle>.
+*** DONE 298. Why does Emacs begin with 13.0 rather than 1.0?
+    CLOSED: [2020-02-11 mar 13:32]
+    - CLOSING NOTE [2020-02-11 mar 13:32] \\
+      Explained the change in numbering
+*** DONE 569 “soon” does this mean within months, a year, a few years, or a decade?
+    CLOSED: [2020-02-11 mar 13:52]
+    - CLOSING NOTE [2020-02-11 mar 13:52] \\
+      Made the timeline more precise
+*** DONE 591. When does one use “quote” and when does one use the alternative “function”?
+    CLOSED: [2020-02-11 mar 14:03]
+    - CLOSING NOTE [2020-02-11 mar 14:03] \\
+      Rewrote the explanation to make it hopefully more clear
+*** DONE 612. CONS —> KONS, twice
+    CLOSED: [2020-02-11 mar 14:07]
+*** DONE 667. Spell out contents of <handle>.
+    CLOSED: [2020-02-11 mar 14:10]
+    - CLOSING NOTE [2020-02-11 mar 14:10] \\
+      Changed the example to be more concrete here, indeed
 It is obvious to you, but not to the reader.
-*** TODO 718. Does “code in defadvice form” mean
+*** DONE 718. Does “code in defadvice form” mean
+    CLOSED: [2020-02-11 mar 14:14]
+    - CLOSING NOTE [2020-02-11 mar 14:14] \\
+      Used the term "body" instead of "code" to clarify
 (about ...) or (with-elisp-eval-region ...)?
-*** TODO 719. What is the difference between explicit and implicit delegation?
-*** TODO 821. mapping1 —> mapping
-*** TODO 988-993. So there are 31-bit integers but 30-bit pointers?
+*** DONE 719. What is the difference between explicit and implicit delegation?
+    CLOSED: [2020-02-11 mar 14:22]
+    - CLOSING NOTE [2020-02-11 mar 14:22] \\
+      Reworked the after/before explanation to try and clarify
+*** DONE 821. mapping1 —> mapping
+    CLOSED: [2020-02-11 mar 14:22]
+*** DONE 988-993. So there are 31-bit integers but 30-bit pointers?
+    CLOSED: [2020-02-11 mar 14:27]
+    - CLOSING NOTE [2020-02-11 mar 14:27] \\
+      Yes, 30-bit pointers.  Made it explicit
 If this is correct, best to say so explicitly; if not, I have misunderstood
 and you need to rewrite.
-*** TODO 1004. “multiple of 8” —> “multiple of 8 bytes”
+*** DONE 1004. “multiple of 8” —> “multiple of 8 bytes”
+    CLOSED: [2020-02-11 mar 14:30]
 (to clarify the connection to 64 bits)
 *** TODO 1040. Maybe better if 5.4.1 and 5.4.2 are separate sections?
 They don’t have that much in common, and it would parallel breaking GC over
 sections 5.5-5.7, rather than having a single section on GC.
-*** TODO 1126. mmaped —> mmapped?
-*** TODO 1175. And the third argument is optional, and also a form to be instrumented if present.
-*** TODO 1284. “This creates problems” What does?
+*** DONE 1126. mmaped —> mmapped?
+    CLOSED: [2020-02-11 mar 14:31]
+    - CLOSING NOTE [2020-02-11 mar 14:31] \\
+      Hmm... \texttt{mmap}ped looks odd to me, but it's probably better, indeed
+*** DONE 1175. And the third argument is optional, and also a form to be instrumented if present.
+    CLOSED: [2020-02-11 mar 14:36]
+    - CLOSING NOTE [2020-02-11 mar 14:36] \\
+      Made it more explicit
+*** DONE 1284. “This creates problems” What does?
+    CLOSED: [2020-02-11 mar 14:38]
+    - CLOSING NOTE [2020-02-11 mar 14:38] \\
+      Made it explicit
 “This” should only be used when it refers to an immediately preceding noun
 phrase, which here it does not. Rephrase.
-*** TODO 1440. “First shipped with XEmacs 19.15 and XEmacs 20.1”
+*** DONE 1440. “First shipped with XEmacs 19.15 and XEmacs 20.1”
+    CLOSED: [2020-02-11 mar 14:57]
+    - CLOSING NOTE [2020-02-11 mar 14:57] \\
+      Reminded the reader that 19.15 was released after 20.0
 What does this mean? How does this differ from just shipping with XEmacs 19.15?
-*** TODO 1458. “, ,”
-*** TODO 1459. “supplanting potentially convoluted documentation”
-I have no idea of what the given :type means or what documentation it might supplant.
-*** TODO 1543. analog —> analogy
-*** TODO 1724. There is a whole other paper on hygiene,
+*** DONE 1458. “, ,”
+    CLOSED: [2020-02-11 mar 14:59]
+*** DONE 1459. “supplanting potentially convoluted documentation”
+    CLOSED: [2020-02-11 mar 15:11]
+    - CLOSING NOTE [2020-02-11 mar 15:11] \\
+      Added a description of the meaning of the :type example
+I have no idea of what the given :type means or what documentation it
+might supplant.
+*** DONE 1543. analog —> analogy
+    CLOSED: [2020-02-11 mar 15:12]
+*** DONE 1724. There is a whole other paper on hygiene,
+    CLOSED: [2020-02-11 mar 15:44]
+    - CLOSING NOTE [2020-02-11 mar 15:44] \\
+      We added a (sub)section on macros and mention that they are not hygienic
 so possibly a few words on hygiene (or lack of it?) in Emacs Lisp macros is
 in order.
 *** TODO 1755-1756. Emacs 18.51 vs Emacs-19.18. Be consistent throughout the paper.
-*** TODO 1833. “reworked in cl-lib.el to provide those features
+*** DONE 1833. “reworked in cl-lib.el to provide those features
+    CLOSED: [2020-02-11 mar 15:51]
+    - CLOSING NOTE [2020-02-11 mar 15:51] \\
+      Reworked to clarify that the standard code was adjusted
 while still using the standard macro-expansion code.” What does this mean?
 Are the features in cl-lib.el given new names? Or something else?
-*** TODO 1854. —> “macros can invoke get-setf-expansion to turn a place into ...”
-*** TODO 1881. “we” does this mean Stefan Monnier again, or a group of people?
+*** DONE 1854. —> “macros can invoke get-setf-expansion to turn a place into ...”
+    CLOSED: [2020-02-11 mar 15:54]
+    - CLOSING NOTE [2020-02-11 mar 15:54] \\
+      Thanks
+*** DONE 1881. “we” does this mean Stefan Monnier again, or a group of people?
+    CLOSED: [2020-02-11 mar 15:56]
+    - CLOSING NOTE [2020-02-11 mar 15:56] \\
+      Clarified a bit
 If the latter, who?
-*** TODO 1934. Please include the actual body of distance for 3d points
+*** DONE 1934. Please include the actual body of distance for 3d points
+    CLOSED: [2020-02-11 mar 16:05]
+    - CLOSING NOTE [2020-02-11 mar 16:05] \\
+      Changed example accordingly
 rather than a message.
-*** TODO 2061. “its own luck” —> “his own luck”
-*** TODO 2117-2125. This discussion left me unclear on how define-inline actually works.
+*** DONE 2061. “its own luck” —> “his own luck”
+    CLOSED: [2020-02-11 mar 16:07]
+*** TODO for Stef 2117-2125. This discussion left me unclear on how define-inline actually works.
 Perhaps an example of how it is used to define cl-typep would help.
-*** TODO 2152. What was not thorough about with-namespace?
+*** DONE 2152. What was not thorough about with-namespace?
+    CLOSED: [2020-02-11 mar 16:21]
+    - CLOSING NOTE [2020-02-11 mar 16:21] \\
+      Added examples of extra features supported by Names
 
 ** Review #16B
 
@@ -1260,25 +1321,52 @@ support, generators).
 
 Minor comments and typos:
 
-*** TODO 322 - No maintainer is listed for XEmacs 20. Is this deliberate? (Also this
-     line is a bit different than the others, as it talks about a version in
-     development not the most recently released version.)
-*** TODO 355 - "imported"
-*** TODO 356 - "CVS repository on *the* SourceForge"
-*** TODO 393 - extra comma
-*** TODO 400 - is this comment added by you, from the manual, or from the original
-      source code?
-*** TODO 419 - define homoiconic (I see you do below, but it is referred to prior here)
-*** TODO 488 - this text is hard to follow. What is a "symbol object" ?
-*** TODO 516 - "added as on option"
-*** TODO 551 - (and elsewhere) The quote used here (and elsewhere in the text) is like
-      neither of the quotes used earlier. There is something weird going on
-		with the font.
-*** TODO 569 - Is it possible to mechanically convert these packages? If not, why?
-*** TODO 583 - Does this mean that the lambda symbol could be computed? Did any code
-      ever do this?
-*** TODO 697 - Is defadvice the same idea as "Aspect-Oriented Programming"?
-*** TODO 821 - "mapping1"
+*** TODO for Mike: 322 - No maintainer is listed for XEmacs 20.
+Is this deliberate? (Also this line is a bit different than the others,
+as it talks about a version in development not the most recently
+released version.)
+*** DONE 355 - "imported"
+    CLOSED: [2020-02-11 mar 16:24]
+*** DONE 356 - "CVS repository on *the* SourceForge"
+    CLOSED: [2020-02-11 mar 16:25]
+*** DONE 393 - extra comma
+    CLOSED: [2020-02-11 mar 16:25]
+*** TODO for Mike: 400 - is this comment added by you, from the manual, or from the original
+source code?
+*** DONE 419 - define homoiconic (I see you do below, but it is referred to prior here)
+    CLOSED: [2020-02-11 mar 16:27]
+    - CLOSING NOTE [2020-02-11 mar 16:27] \\
+      Rewritten to clarify
+*** DONE 488 - this text is hard to follow. What is a "symbol object" ?
+    CLOSED: [2020-02-11 mar 16:29]
+    - CLOSING NOTE [2020-02-11 mar 16:29] \\
+      Reworded to clarify
+*** DONE 516 - "added as on option"
+    CLOSED: [2020-02-11 mar 16:35]
+*** DONE 551 - (and elsewhere) The quote used here (and elsewhere in the text) is like
+    CLOSED: [2020-02-11 mar 16:39]
+    - CLOSING NOTE [2020-02-11 mar 16:39] \\
+      Indeed, that's when we use \texttt instead of \verb!
+      Huh!  Should be fixed now.
+neither of the quotes used earlier. There is something weird going on
+with the font.
+*** DONE 569 - Is it possible to mechanically convert these packages?
+    CLOSED: [2020-02-11 mar 16:46]
+    - CLOSING NOTE [2020-02-11 mar 16:46] \\
+      Reworded to clarify that the problem was not in fixing the code but in
+      getting the users to replace the old package with the newer one
+If not, why?
+*** DONE 583 - Does this mean that the lambda symbol could be computed?
+    CLOSED: [2020-02-11 mar 16:49]
+    - CLOSING NOTE [2020-02-11 mar 16:49] \\
+      Reworded to try and clarify
+Did any code ever do this?
+*** DONE 697 - Is defadvice the same idea as "Aspect-Oriented Programming"?
+    CLOSED: [2020-02-11 mar 17:12]
+    - CLOSING NOTE [2020-02-11 mar 17:12] \\
+      Yes, clarified
+*** DONE 821 - "mapping1"
+    CLOSED: [2020-02-11 mar 16:53]
 
 ** Review #16C
 
@@ -1293,51 +1381,119 @@ My high-level comments on this draft are that I think it reads well and captures
 
 I only have minor comments / corrections to make at this stage.   You've done a great job.   Below I refer to the line numbers in the draft I reviewed.
 
-*** TODO [355] "imorted" -> "imported"
-*** TODO [356] "on SourceForge" -> "on the SourceForge"
-*** TODO [431] "runtime" -> "run time"
-*** TODO [611] I believe there are typos here in reference to the example code: "MAKE-CONS" -> "MAKE-KONS", "CONS" -> "KONS".
-*** TODO [619] You write ", see Section 6.1."  You may wish to check a style guide on this, but I suggest either make it non-parenthetical -> "as discussed in Section 6.1." or explicitly parenthetical -> "(Section 6.1)".    You should settle on a style and apply it consistently.  See for example [1128].
-*** TODO [624] ditto.
-*** TODO [656] "if expression" -> "if the expression"
-*** TODO [699] "fitting very well the design goals" -> "fitting the design goals very well"
-*** TODO [821] "mapping1" -> "mapping"
-*** TODO [873] "design aspects" -> "aspects of the design"
-*** TODO [885] "just with" -> "with"
-*** TODO [901] "There have been" -> "There were"
-*** TODO [925] "Until 2002 during" -> "Until 2002, during"
-*** TODO [949] "24-bit of" -> "24-bits of"
-*** TODO [954] "objects:" -> "object:"
-*** TODO [969] Minor style issue.  Some style guides suggest spelling out numbers when they arise in prose and have a single word in English, so "6" -> "six", "2 words of header" -> "two words of header".   This is a minor issue, but you may wish to consider it, and if so apply the style consistently.
-*** TODO [983] "beause" -> "because"
-*** TODO [995] "use all the" -> "use all of the"
-*** TODO [1019] "objects" -> "object"
-*** TODO [1027] "second" -> "second,"
-*** TODO [1038] "tho" -> "though"
-*** TODO [1096] you say that it is based on a _read_ barrier, but on [1110] the text suggests it was a _write_ barrier.   You may want to check this.
-*** TODO [1128] misplaced period at end of sentence
-*** TODO [1173] "is just a mere" -> " is a mere"
-*** TODO [1233] "discussions whether" -> "discussions of whether"
+*** DONE [355] "imorted" -> "imported"
+    CLOSED: [2020-02-11 mar 17:13]
+*** DONE [356] "on SourceForge" -> "on the SourceForge"
+    CLOSED: [2020-02-11 mar 17:13]
+*** DONE [431] "runtime" -> "run time"
+    CLOSED: [2020-02-11 mar 17:14]
+*** DONE [611] I believe there are typos here in reference to the example code: "MAKE-CONS" -> "MAKE-KONS", "CONS" -> "KONS".
+    CLOSED: [2020-02-11 mar 17:14]
+    - CLOSING NOTE [2020-02-11 mar 17:14] \\
+      Indeed, thanks
+*** DONE [619] You write ", see Section 6.1."
+    CLOSED: [2020-02-11 mar 17:19]
+    - CLOSING NOTE [2020-02-11 mar 17:19] \\
+      We tried to use "(Section 6.1)" consistently
+You may wish to check a style guide on this, but I suggest either make it
+non-parenthetical -> "as discussed in Section 6.1." or explicitly
+parenthetical -> "(Section 6.1)".    You should settle on a style and apply
+it consistently.  See for example [1128].
+*** DONE [624] ditto.
+    CLOSED: [2020-02-11 mar 17:20]
+*** DONE [656] "if expression" -> "if the expression"
+    CLOSED: [2020-02-11 mar 17:21]
+*** DONE [699] "fitting very well the design goals" -> "fitting the design goals very well"
+    CLOSED: [2020-02-11 mar 17:21]
+*** DONE [821] "mapping1" -> "mapping"
+    CLOSED: [2020-02-11 mar 17:21]
+*** DONE [873] "design aspects" -> "aspects of the design"
+    CLOSED: [2020-02-11 mar 17:22]
+*** DONE [885] "just with" -> "with"
+    CLOSED: [2020-02-11 mar 17:22]
+*** DONE [901] "There have been" -> "There were"
+    CLOSED: [2020-02-11 mar 17:22]
+*** DONE [925] "Until 2002 during" -> "Until 2002, during"
+    CLOSED: [2020-02-11 mar 17:23]
+*** DONE [949] "24-bit of" -> "24-bits of"
+    CLOSED: [2020-02-11 mar 17:23]
+*** DONE [954] "objects:" -> "object:"
+    CLOSED: [2020-02-11 mar 17:23]
+*** TODO for Mike: [969] Minor style issue.
+    - Note taken on [2020-02-11 mar 17:26] \\
+      Stef says: In those bit-size and word size discussions, I tend to do
+      a bit of trivial arithmetic in my head, and in that case I typically
+      prefer the number over the word.
+Some style guides suggest spelling out numbers when they arise in prose and
+have a single word in English, so "6" -> "six", "2 words of header" -> "two
+words of header".   This is a minor issue, but you may wish to consider it,
+and if so apply the style consistently.
+
+*** DONE [983] "beause" -> "because"
+    CLOSED: [2020-02-11 mar 17:27]
+*** DONE [995] "use all the" -> "use all of the"
+    CLOSED: [2020-02-11 mar 17:28]
+*** DONE [1019] "objects" -> "object"
+    CLOSED: [2020-02-11 mar 17:28]
+*** DONE [1027] "second" -> "second,"
+    CLOSED: [2020-02-11 mar 17:29]
+*** DONE [1038] "tho" -> "though"
+    CLOSED: [2020-02-11 mar 17:29]
+*** DONE [1096] you say that it is based on a _read_ barrier,
+    CLOSED: [2020-02-11 mar 17:32]
+    - CLOSING NOTE [2020-02-11 mar 17:32] \\
+      Indeed, the wording suggested it was a typo, clarified
+but on [1110] the text suggests it was a _write_ barrier.
+You may want to check this.
+*** DONE [1128] misplaced period at end of sentence
+    CLOSED: [2020-02-11 mar 17:35]
+*** DONE [1173] "is just a mere" -> " is a mere"
+    CLOSED: [2020-02-11 mar 17:35]
+*** DONE [1233] "discussions whether" -> "discussions of whether"
+    CLOSED: [2020-02-11 mar 17:35]
 *** TODO [1237] "all the" -> "all of the"
-*** TODO [1259] "design---here" -> "design. Here"
+    - Note taken on [2020-02-11 mar 17:36] \\
+      Stef notes: really?  "all the" here seems better to me
+*** DONE [1259] "design---here" -> "design. Here"
+    CLOSED: [2020-02-11 mar 17:37]
 *** TODO [1287] "Eventually however" -> "Eventually, however"
-*** TODO [1458] ", ," -> ","
-*** TODO [1506] "It's only in August" -> "It was only in August"
-*** TODO [1527] "that, if" -> "that if"
-*** TODO [1549] "specifiers. which" -> "specifiers, which"
+*** DONE [1458] ", ," -> ","
+    CLOSED: [2020-02-11 mar 17:37]
+*** DONE [1506] "It's only in August" -> "It was only in August"
+    CLOSED: [2020-02-11 mar 17:38]
+*** DONE [1527] "that, if" -> "that if"
+    CLOSED: [2020-02-11 mar 17:38]
+*** DONE [1549] "specifiers. which" -> "specifiers, which"
+    CLOSED: [2020-02-11 mar 17:38]
 *** TODO [1695] I didn't know Emacsen was a word.  I do [now](https://www.emacswiki.org/emacs/Emacsen)!
-*** TODO [1754] "so already in 1986 .. wrote" -> "so by 1986 .. had already written"
-*** TODO [1774] "name" -> "epithet" ?
-*** TODO [1779] "and of" -> "and"
-*** TODO [1816] "lead to poorly readable code" -> "lead to code that is difficult to read"
-*** TODO [1880] "not-invented-here syndrome" - I wasn't clear on whose part (Stefan? or the community?)
-*** TODO [1905] "4.4" -> "4.4)"
-*** TODO [1913] "the way it sounds" I suspect rather, it's a because of the comic reference to the nursery rhyme.
-*** TODO [1945] "that it is" -> "that it was"
-*** TODO [1973] incorrect citation style 
-*** TODO [2004] "supports equally ..." -> "supports ... equally"
-*** TODO [2010] "We" who?  The community?  The authors? Perhaps disambiguate.
-*** TODO [2092] "that buffers's contents" -> "that the buffer's contents" (or plural "that the contents of the buffers")
+*** DONE [1754] "so already in 1986 .. wrote" -> "so by 1986 .. had already written"
+    CLOSED: [2020-02-11 mar 17:40]
+*** DONE [1774] "name" -> "epithet" ?
+    CLOSED: [2020-02-11 mar 17:40]
+*** DONE [1779] "and of" -> "and"
+    CLOSED: [2020-02-11 mar 17:41]
+*** DONE [1816] "lead to poorly readable code" -> "lead to code that is difficult to read"
+    CLOSED: [2020-02-11 mar 17:41]
+*** DONE [1880] "not-invented-here syndrome" - I wasn't clear on whose part (Stefan? or the community?)
+    CLOSED: [2020-02-11 mar 17:42]
+    - CLOSING NOTE [2020-02-11 mar 17:42] \\
+      Clarified
+*** DONE [1905] "4.4" -> "4.4)"
+    CLOSED: [2020-02-11 mar 17:42]
+*** DONE [1913] "the way it sounds" I suspect rather, it's a because of the comic reference to the nursery rhyme.
+    CLOSED: [2020-02-11 mar 17:43]
+    - CLOSING NOTE [2020-02-11 mar 17:43] \\
+      That's what we meant, thanks
+*** DONE [1945] "that it is" -> "that it was"
+    CLOSED: [2020-02-11 mar 17:44]
+*** DONE [1973] incorrect citation style 
+    CLOSED: [2020-02-11 mar 17:46]
+*** DONE [2004] "supports equally ..." -> "supports ... equally"
+    CLOSED: [2020-02-11 mar 17:46]
+*** DONE [2010] "We" who?  The community?  The authors? Perhaps disambiguate.
+    CLOSED: [2020-02-11 mar 17:47]
+*** DONE [2092] "that buffers's contents" -> "that the buffer's contents" (or plural "that the contents of the buffers")
+    CLOSED: [2020-02-11 mar 17:48]
 
 * Questions
 ** Brent
