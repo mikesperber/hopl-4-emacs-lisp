@@ -275,9 +275,9 @@ program source code.
 
 Lucid hired Joseph Arcenaux,
 the principal Emacs developer at that time, to add these features
-for Lucid while continuing to work on the upcoming release of Emacs
-19.  It soon became clear that the respective goals Lucid and the Free
-Software Foundation had for Emacs 19 were incompatible,
+for Lucid while continuing to work on the upcoming release of Emacs-19.
+It soon became clear that the respective goals Lucid and the Free
+Software Foundation had for Emacs-19 were incompatible,
 and the required cooperation between Lucid and
 the Free Software Foundation broke down~\cite{Arcenaux-interview}.
 
@@ -479,7 +479,7 @@ which bears visual resemblance to \Elisp{}.  MLisp featured function
 definitions via \texttt{defun}, as well as many built-in functions (such as
 \texttt{eolp}, \texttt{forward-character}, \texttt{save-excursion}) whose
 names survive in \Elisp{}.  Emacs even contained some limited
-back\-ward-compatibility support for MLisp until Emacs 22 in 2007.
+back\-ward-compatibility support for MLisp until Emacs-22 in 2007.
 
 MLisp was a quite limited language: It lacked cons cells and lists.
 MLisp did have dynamic scoping and local variables, but a peculiar
@@ -1498,7 +1498,7 @@ disabled on many platforms because of bugs in the implementation of
 unions and bit fields in C compilers.
 
 For the release of XEmacs 19.13 in 1995, Ben Wing merged the data
-representation from Emacs 19.30.
+representation from Emacs-19.30.
 
 Of course, a limit of 256\;MB was still not actually comfortable.
 
@@ -2069,7 +2069,7 @@ functionality implemented in C for performance reasons.
 \subsection{Aliases}
 
 During the development of XEmacs 19.12, which was 1995, the first
-official release of Emacs 19 appeared, Emacs-19.28.  Emacs had
+official release of Emacs-19 appeared, Emacs-19.28.  Emacs had
 implemented some XEmacs functionality, notably the support for
 multiple open GUI windows.  XEmacs had called these windows
 ``screens,'' while Emacs called them ``frames.''  Compatibility with
@@ -2189,7 +2189,7 @@ Expecting the user to use \Elisp{} for customization creates a high
 barrier.  As a reaction, Per Abrahamsen in 1996 contributed two
 libraries called \texttt{Custom} and \texttt{Widget}, which enabled
 users to change the values of customization variables via a a UI
-rather than through \Elisp{}.  Custom first shipped with Emacs 20.1, XEmacs
+rather than through \Elisp{}.  Custom first shipped with Emacs-20.1, XEmacs
 20.1 and XEmacs 19.15 (which was released after XEmacs 20.0).
 Figure~\ref{fig:custom} shows the UI
 for \texttt{shift-select-mode}.
@@ -2242,21 +2242,21 @@ programming language to the UI.
 \label{sec:unicode}
 
 As Unicode~\cite{Unicode6} became universally adopted, Emacs and XEmacs both
-supported the standard.  Emacs 21.1 added support for the \texttt{utf-8}
+supported the standard.  Emacs-21.1 added support for the \texttt{utf-8}
 coding-system, by adding it as another ``national'' character set.
 This meant that an ``é'' coming from a \texttt{utf-8} file was considered a different
 character from an ``é'' coming from a \texttt{latin-9} file.  This already
 existed before for example between \texttt{latin-1} and \texttt{latin-9} (and many other
 character sets), but during the transition to \texttt{utf-8} many more users were
 using a mix of two coding systems and were hence affected by this problem.
-For this reason, in 2001, Emacs 22.1 introduced a limited form of
+For this reason, in 2001, Emacs-22.1 introduced a limited form of
 unification between character sets.  XEmacs did the same in 2001 with
 release 21.4.
 
 As Unicode became a universal text representation and supplanted many
 of the earlier encodings, Emacs and XEmacs both started efforts to
 replace the internal MULE representation by Unicode altogether.  This
-appeared in Emacs 23 (2007) and XEmacs 21.5 (starting about 2010 in a
+appeared in Emacs-23 (2007) and XEmacs 21.5 (starting about 2010 in a
 separate branch).  As a result, the integer representation of a
 character in both Emacs and XEmacs is now its Unicode scalar value.
 
@@ -2703,7 +2703,7 @@ try and add various extensions to the language.  As it turns out, \Elisp{},
 to a first approximation, can be seen as a subset of Common Lisp, so by
 1986 Cesar Quiroz \email{<quiroz@cs.rochester.edu>} had already written
 a \texttt{cl.el} package that provided various
-Common Lisp facilities implemented as macros.  Emacs 18.51 was the
+Common Lisp facilities implemented as macros.  Emacs-18.51 was the
 first Emacs release to ship with \texttt{cl.el}, in 1988.  It was superceded
 5 years later for Emacs-19.18 by a new version contributed by Dave
 Gillespie with a more detailed emulation of Common Lisp as well as a few

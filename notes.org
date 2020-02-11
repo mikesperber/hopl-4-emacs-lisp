@@ -1267,7 +1267,15 @@ might supplant.
       We added a (sub)section on macros and mention that they are not hygienic
 so possibly a few words on hygiene (or lack of it?) in Emacs Lisp macros is
 in order.
-*** TODO 1755-1756. Emacs 18.51 vs Emacs-19.18. Be consistent throughout the paper.
+*** TODO for Mike 1755-1756. Emacs 18.51 vs Emacs-19.18. Be consistent throughout the paper.
+    - Note taken on [2020-02-11 mar 17:52] \\
+      Stef says: I've fixed it to the point were it's consistently inconsistent:
+      "-" used with Emacs, and " " used for XEmacs and Lucid Emacs (except
+      in the timeline where I kept "Emacs NN.MM")
+      I generally much prefer "Emacs-NN.MM" but it admittedly doesn't work
+      for Lucid Emacs and you seem to prefer "XEmacs NN.MM", so maybe we
+      should go with "Emacs NN.MM" tho I think we should be careful to use
+      a non-breaking space then.
 *** DONE 1833. “reworked in cl-lib.el to provide those features
     CLOSED: [2020-02-11 mar 15:51]
     - CLOSING NOTE [2020-02-11 mar 15:51] \\
