@@ -1298,7 +1298,13 @@ If the latter, who?
 rather than a message.
 *** DONE 2061. “its own luck” —> “his own luck”
     CLOSED: [2020-02-11 mar 16:07]
-*** TODO for Stef 2117-2125. This discussion left me unclear on how define-inline actually works.
+*** TODO for Mike 2117-2125. This discussion left me unclear on how define-inline actually works.
+    - Note taken on [2020-02-18 mar 14:35] \\
+      I added the cl-typep example, along with some brief description of what
+      happens with it.  Please double check that it's understandable (although
+      there's clearly not enough room to explain the details of what happens.
+      I don't even know how to clearly describe the semantics of define-inline
+      (which is why it's still basically undocumented :-( ))
 Perhaps an example of how it is used to define cl-typep would help.
 *** DONE 2152. What was not thorough about with-namespace?
     CLOSED: [2020-02-11 mar 16:21]
@@ -1464,7 +1470,8 @@ You may want to check this.
       Stef notes: really?  "all the" here seems better to me
 *** DONE [1259] "design---here" -> "design. Here"
     CLOSED: [2020-02-11 mar 17:37]
-*** TODO [1287] "Eventually however" -> "Eventually, however"
+*** DONE [1287] "Eventually however" -> "Eventually, however"
+    CLOSED: [2020-02-18 mar 14:46]
 *** DONE [1458] ", ," -> ","
     CLOSED: [2020-02-11 mar 17:37]
 *** DONE [1506] "It's only in August" -> "It was only in August"
