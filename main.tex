@@ -618,7 +618,7 @@ Most basic special forms are identical to MacLisp: \texttt{defun},
 \texttt{unwind-protect}.  So are basic data structures: symbols,
 \texttt{nil}, cons cells, and many familiar Lisp functions.
 
-\Elisp{} also supports arrays, using a subset (e.g. only uni-dimensional
+\Elisp{} also supports arrays, using a subset (specifically only uni-dimensional
 arrays) of the primitives offered in Lisp Machine Lisp, which happens to
 also be a subset of the Common Lisp primitives, rather than Maclisp's
 approach of accessing arrays as if they were functions.
@@ -1453,7 +1453,7 @@ that contained this 32-bit box rather than to the object referenced from
 this box.  More specifically, it was used so that cons cells could
 occupy only two words: the extra bit needed to store the mark\&sweep's
 \emph{markbit} of each cons cell was stored in the ``mark'' bit of the first
-word (i.e.\ of the \texttt{car}).
+word (that is, of the \texttt{car}).
 
 Over time, this tagging scheme became problematic, since it limited the Lisp
 heap to 16\;MB.
@@ -1881,7 +1881,8 @@ performed too eagerly, leading to significant slowdowns.
 During the discussions of whether this JIT deserves further development to
 include it into Emacs, one of the hurdles that appeared is that the main
 purpose of a faster \Elisp{} implementation should be the ability to write
-new code, e.g.\ code previously written in C; but this can only work if the
+new code---for example code that previously would have been written in
+C.  However, this can only work if the
 faster \Elisp{} is available for all supported platforms, whereas GNU
 Libjit does not currently support all the architectures that Emacs supports.
 
@@ -2261,8 +2262,8 @@ separate branch).  As a result, the integer representation of a
 character in both Emacs and XEmacs is now its Unicode scalar value.
 
 %% FIXME: We should talk about string representations and
-%% unibyte-vs-multibyte issues (e.g. whether "\351" should be a string
-%% containing the *character* #o351 (i.e. "é") or the string containing the
+%% unibyte-vs-multibyte issues (for example, whether "\351" should be a string
+%% containing the *character* #o351 (that is, "é") or the string containing the
 %% *byte* #o351.
 
 \subsection{Bignums}
@@ -2537,7 +2538,7 @@ In late 2001, Miles Bader started working on a branch of Emacs called
 \emph{lexbind} with support for lexical scoping, which was finally included
 in Emacs-24.1.  The solution he adopted was to have two languages: an
 \Elisp{} with dynamic scope for backward compatibility, and another with
-scoping rules like those of Common Lisp, i.e.~lexical scope by default
+scoping rules like those of Common Lisp, that is, lexical scope by default
 except for those variables that have been declared as dynamically scoped (in
 practice, these are all the global variables).  Each file is tagged to
 indicate which language is to be used (defaulting to the backward compatible
@@ -3083,7 +3084,7 @@ to solve.
 
 Some existing \Elisp{} functions appeared like good candidates to use that
 machinery to split them into independent methods but required dispatching
-on contextual information (i.e.\ on the current state) rather than only on
+on contextual information (that is, on the current state) rather than only on
 arguments.  Consequently, \texttt{cl-generic.el} also adds support to its
 \texttt{cl-defmethod} for pseudo-arguments of the form ``\texttt{\&context
   (\id{EXP} \id{SPECIALIZER})}'' which means that this method is
@@ -3165,7 +3166,8 @@ subset of \Elisp{}, because CPS conversion of forms like
 on side-effects to a global state.  Yet, its use in an interactive program
 has inevitably lead to a desire for concurrency to try and improve
 responsiveness.  Concurrency appeared very early on: since
-Emacs-16.56, Emacs has included support for asynchronous processes, i.e.~the
+Emacs-16.56, Emacs has included support for asynchronous processes,
+that is, the
 execution of separate programs whose output was processed by so-called
 \emph{process filters} whenever the \Elisp{} execution engine is idly
 waiting for the next user input.
