@@ -628,7 +628,7 @@ data types.
 
 % FIXME: elaborate on arrays?
 
-Like MacLisp, \Elisp{} only offered
+Like MacLisp, \Elisp{} offered only
 dynamic scoping of variables.  Also like MacLisp, \Elisp{} was (and still is) a Lisp-2
 language~\cite{SteeleGabriel1993}, which means that the namespaces for
 functions and ``ordinary values'' are separate, and to call a function bound
@@ -784,9 +784,9 @@ notation).
 %% Stefan: I can't see when/where it was actually declared obsolete,
 %% but it clearly was made obsolete by the introduction of the new syntax.
 So the old format, though obsolete, was still supported, and the
-new format was only recognized in some cases; more specifically the new
-unquote was only recognized within a new backquote, and the new
-backquote was only recognized if it occurred within a new backquote or
+new format was recognized only in some cases; more specifically the new
+unquote was recognized only within a new backquote, and the new
+backquote was recognized only if it occurred within a new backquote or
 if it did not immediately follow an open parenthesis.
 
 Seeing how uses of old-style backquotes were not going away by themselves,
@@ -795,7 +795,7 @@ Emacs-22.2 introduced explicit tests and warnings to bring attention to uses
 of old-style backquotes, while still keeping the actual behavior unchanged.
 
 Then in 2012 with the release of Emacs-24.1, the behavior was changed so
-that the old format is only recognized if it follows a parenthesis and is
+that the old format is recognized only if it follows a parenthesis and is
 followed by a space.  The main motivation for this change was the
 introduction of the \texttt{pcase} macro (Section~\ref{sec:pcase}) where
 patterns can also use the
@@ -844,7 +844,7 @@ expression and invoke the interpreter on it.
 The extra quote character was a small price to pay for a slightly simpler
 Lisp implementation.  But the byte-compiler is not allowed to compile the
 content of such a quoted list except in those rare cases where it can
-determine that it will only be used as a function, so \Elisp{} acquired in
+determine that it will be used only as a function, so \Elisp{} acquired in
 version 1.4 the \texttt{function} special form (also imported from MacLisp)
 for the alternative notation:
 %
@@ -927,7 +927,7 @@ such as keymaps (Section~\ref{sec:keymaps}).
 
 Instead, a Common-Lisp-compatible \texttt{defstruct} has been part of the
 \texttt{cl.el} package (Section~\ref{sec:cl-lib}).  Use of
-\texttt{defstruct} in \Elisp{} code only began to be commonplace around
+\texttt{defstruct} in \Elisp{} code began to be commonplace only around
 2010.  Originally \texttt{defstruct} used plain vectors to represent the
 structures, making it impossible to reliably distinguish them from vectors,
 but in 2013 Lars Brinkhoff added the \emph{record} data type to make
@@ -1147,7 +1147,7 @@ accessible to a user is to provide a keybinding for it.  This is not
 realistic for all functions, however---there are too many of them.
 
 A user can also invoke a function by typing \texttt{M-x}
-\emph{function-name}.  This only makes sense for a certain subset of
+\emph{function-name}.  This makes sense only for a certain subset of
 all defined functions, namely \emph{interactive} functions, which
 are specially marked with an \texttt{interactive} form at the
 beginning of the body, like this:
@@ -1193,7 +1193,7 @@ editing operations.
 
 Making a variable \emph{buffer-local} associates the value of the variable
 with the current buffer.  An assignment to a buffer-local variable
-only affects dereferences with the same current buffer in effect.
+affects only dereferences with the same current buffer in effect.
 Any variable can be made local to any buffer, so it can take
 different values in different buffers.  For example, the variable
 \texttt{buffer-file-name} keeps the name of the file associated with the
@@ -1304,8 +1304,8 @@ developers. In practice this extra cost is negligible, because
 One of the ways \Elisp{} distinguishes itself from most other programming
 languages is in its treatment of input/output. Rather than follow the usual
 design based on some kind of file or stream object and primitives like
-\texttt{open}/\texttt{read}/\texttt{write}/\texttt{close}, \Elisp{} only
-offers coarser access to files via two primitive functions
+\texttt{open}/\texttt{read}/\texttt{write}/\texttt{close}, \Elisp{}
+offers only coarser access to files via two primitive functions
 \texttt{insert-file-contents} and \texttt{write-region} that transfer file
 contents between a file and a buffer.  So all file manipulation takes place
 by reading the file into a buffer, performing the desired manipulation in
@@ -1385,7 +1385,7 @@ in turn makes TCO rarely beneficial on existing code.
 
 This said, there were other objections to those patches:
 \begin{itemize}
-\item They only affected byte-compiled code, and while it is expected that
+\item They affected only byte-compiled code, and while it is expected that
   most code is byte-compiled before being executed, it's very common to run
   non-compiled \Elisp{} code, especially during development or debugging.
   So if \Elisp{} code started to rely on proper tail calls, it would tend to cause problems
@@ -1649,7 +1649,7 @@ individually based on size~\cite{Crestani2005}.
 In the process of these GC improvements, Crestani and Michael Sperber
 also added \emph{ephemerons} to \Elisp{}: \texttt{(make-ephemeron
   \id{KEY} \id{VALUE} \id{FINALIZER})} returns an ephemeron, a reference
-to \id{VALUE}.  \id{VALUE} is only reachable through the ephemeron as
+to \id{VALUE}.  \id{VALUE} is reachable only through the ephemeron as
 long as \id{KEY} is reachable.  When \id{KEY} becomes unreachable while
 the ephemeron itself is still reachable, \id{VALUE} is queued for
 finalization.
@@ -1686,7 +1686,7 @@ conservative GC.  The effort went far enough to get a usable Emacs but it
 was never completed, mostly because the early performance results were
 disappointing.  It also showed that such a replacement is non-trivial.
 The first issue is that various parts of Emacs's code assume that
-a collection can only occur during \Elisp{} code execution and not during
+a collection can occur only during \Elisp{} code execution and not during
 heap allocation, and of course those assumptions are not explicitly recorded
 in the code.  The second issue is that Emacs currently implements various
 forms of ad-hoc weak references which which do not match the ones
@@ -1756,8 +1756,8 @@ before pursuing execution.
 For many developers, this is still the main debugger for \Elisp{}.
 Of course, it has seen various improvements over time, most of them
 affecting only the user interface.  The main exceptions are:
-in 1995 (for Emacs-19.31), it was refined so that the debugger is only
-invoked for some conditions, making it possible for developers to keep this
+in 1995 (for Emacs-19.31), it was refined so that the debugger is invoked
+only for some conditions, making it possible for developers to keep this
 debugger enabled all the time, without impeding normal use, and in 2012
 (for Emacs-24.1) it was improved so as to be able to execute code in the
 context of any activation frame, which was necessary to allow access to
@@ -1803,7 +1803,7 @@ In 1992, during early development of Emacs-19, Boaz Ben-Zvi implemented the
 profiler all in \Elisp{}.  This implementation was based on instrumenting
 a set of user-specified \Elisp{} functions by modifying their bodies in-place
 to keep track of time spent in those functions. Modifying function
-bodies was brittle and inconvenient and only worked for functions
+bodies was brittle and inconvenient and worked only for functions
 defined in \Elisp.
 
 In 1994, Barry A.~Warsaw implemented the \texttt{elp.el} package, which took
@@ -1845,7 +1845,7 @@ In 2004, Matthew Mundell developed the first JIT compiler for \Elisp.
 This took byte-compiled \Elisp{} code and used the GNU Lightning
 library~\cite{GNULightning} to turn it into native machine code on the
 fly.  The speedup obtained reached a factor of about 2 in the best
-case, which was rather disappointing: It only removed the immediate
+case, which was rather disappointing: It removed only the immediate
 interpretation overhead, but did not speed up function calls nor was it
 able to remove redundant type checks.  Consequently, the extra
 maintenance burden was not considered justified, and this JIT compiler
@@ -1881,7 +1881,7 @@ performed too eagerly, leading to significant slowdowns.
 During the discussions of whether this JIT deserves further development to
 include it into Emacs, one of the hurdles that appeared is that the main
 purpose of a faster \Elisp{} implementation should be the ability to write
-new code, e.g.\ code previously written in C; but this can only work if the
+new code, e.g.\ code previously written in C; but this can work only if the
 faster \Elisp{} is available for all supported platforms, whereas GNU
 Libjit does not currently support all the architectures that Emacs supports.
 
@@ -2056,8 +2056,8 @@ Emacs's own code with code that does not abide by its licensing terms~\cite{RMS0
 
 After many years of pressure on this issue (not just within the Emacs
 project, since this affected several other GNU projects, most notably GCC),
-a solution was agreed to, which was to implement an FFI that would only
-accept to load libraries that come with a special symbol attesting that this
+a solution was agreed to, which was to implement an FFI that would accept
+to load only libraries that come with a special symbol attesting that this
 library is compatible with the GPL.  As a result, after a very long wait,
 2016 finally saw the release of Emacs-25.1 with the ability to load external
 libraries, somewhat like XEmacs's FFI.  So far, we do not know of any publicly
@@ -2090,7 +2090,7 @@ functionality could be based.\footnote{Curiously, \texttt{defalias}
 aliases, \texttt{defvaralias}, and functions \texttt{variable-alias}
 and \texttt{indirect-variable} to examine the alias chains.
 
-These additions were only merged into Emacs-22.1 in 2007.
+These additions were merged only into Emacs-22.1 in 2007.
 
 \section{Emacs/XEmacs co-evolution}
 \label{sec:coevolution}
@@ -2157,7 +2157,7 @@ available.  A patch for this feature had been submitted in May 2004 by
 Jaeyoun Chung, but the speed improvement was not even measured at that time
 so it had not raised much enthusiasm.  Tom's implementation was no better,
 and the speed up was a meager 5\% but he pushed stronger for its inclusion,
-which only happened with Emacs-24.3, in 2012.  The reason why the speed
+which happened only with Emacs-24.3, in 2012.  The reason why the speed
 improvement is a bit disappointing was not really investigated, but the
 general consensus is that the byte-code interpreter is simply not very
 optimized, so the relative cost of the \texttt{switch} is not as high as it
@@ -2319,7 +2319,7 @@ internally uses GMP for its cryptography anyway.
 
 The introduction of bignums raises some design issues in \Elisp, as
 previously integers were always unboxed.  This meant that the fast
-\texttt{eq} only behaved differently from \texttt{eql} on floating point
+\texttt{eq} behaved differently from \texttt{eql} only on floating point
 numbers.  As a result, some \Elisp{} code assumes that if two integers
 represent the same number, \texttt{eq} will return true on them.
 Bignums are heap-allocated, so the same is not necessarily true for two
@@ -2465,7 +2465,7 @@ due to the fact that the code generated by the macro was less efficient than
 equivalent dynamically-scoped code and was more difficult to debug because
 the backtrace-based debugger showed you the gory details of the
 macro-expansion rather than the corresponding source.  For these reasons,
-\texttt{lexical-let} was only used in those particular cases where lexical
+\texttt{lexical-let} was used only in those particular cases where lexical
 scoping was really beneficial.
 
 Dynamic scoping had two main drawbacks in practice:
@@ -2549,7 +2549,7 @@ simply has to add the corresponding ``\texttt{-*- lexical-binding:t -*-}''
 annotation at the beginning of the file.
 
 The two languages were sufficiently similar that the new lexically scoped
-variant only required minor changes to the existing interpreter.  But the
+variant required only minor changes to the existing interpreter.  But the
 changes needed to support this new language in the byte-compiler were more
 problematic, causing progress on this branch to be slow.  This branch was
 kept up-to-date with the main Emacs development but the modifications to the
@@ -2584,7 +2584,7 @@ closure conversion.  The main focus at that point was to:
 Changes to the byte code were introduced as part of the lexical scoping
 feature that appeared in 2012 in Emacs-24.1, but were actually developed
 much earlier, probably around 2003: until the introduction of
-lexical-scoping, the stack-based byte-code only used its stack in the most
+lexical-scoping, the stack-based byte-code used its stack only in the most
 simple way, and did not include any stack operation beyond
 \texttt{pop}/\texttt{dup}/\texttt{exch}, so to better support lexical
 scoping where the lexical variables are stored on the stack, several
@@ -3013,8 +3013,8 @@ package, a package providing IDE-like features~\cite{Ludlam18}.
 It included support for most of CLOS's \texttt{defclass}, as well as support
 for a subset of \texttt{defmethod}, more specifically it was limited to
 single-dispatch methods, dispatching on the first argument, and it could
-only dispatch based on types of \texttt{defclass} objects.  It also had
-incomplete support for method combinations, only allowing \texttt{:before}
+dispatch only based on types of \texttt{defclass} objects.  It also had
+incomplete support for method combinations, allowing only \texttt{:before}
 and \texttt{:after} methods but not \texttt{:around} nor any user-defined
 additional qualifiers.
 
@@ -3061,7 +3061,7 @@ differences:
 \item The set of supported specializers is not hard-coded.  In CLOS,
   a specializer can be either a type (indicating the this method applies when the argument is of
   this type) or of the form \texttt{(eql \id{VAL})}, indicating that the
-  method only applies when the argument is equal to \id{VAL}.
+  method applies only when the argument is equal to \id{VAL}.
   \Elisp{} extends this so new specializers
   can be defined in a modular way via the notion of \emph{generalizer}
   inspired from~\citet{Rhodes14}.  This is used both internally (to define
@@ -3089,7 +3089,7 @@ arguments.  Consequently, \texttt{cl-generic.el} also adds support to its
   (\id{EXP} \id{SPECIALIZER})}'' which means that this method is
 applicable when \id{EXP} evaluates to a value that satisfies the
 \id{SPECIALIZER} constraint.  This is used for methods which
-are only applicable in specific contexts, such as in specific major modes or
+are applicable only in specific contexts, such as in specific major modes or
 in frames using a particular kind of GUI.
 
 \subsubsection{Overall support for classes}
@@ -3154,7 +3154,7 @@ macros \texttt{iter-lambda} and \texttt{iter-yield}.  Its implementation is
 based on a kind of local conversion to continuation-passing style (CPS) and
 hence relies extensively on the use of lexical scoping, to work around the
 fact that \Elisp{} does not directly provide something like \texttt{call/cc}
-to access underlying continuations.  It only handles a (relatively large)
+to access underlying continuations.  It handles only a (relatively large)
 subset of \Elisp{}, because CPS conversion of forms like
 \texttt{unwind-protect}~\cite{HaynesFriedman1987} cannot be defined in general in \Elisp.
 
@@ -3200,7 +3200,7 @@ particularly painful and most approaches were abandoned simply because it
 was too difficult to keep them up-to-date with the evolving Emacs codebase.
 
 A working approach was finally released in 2018, as part of Emacs-26.1.
-Context switches still only take place at a few known points where \Elisp{}
+Context switches still take place only at a few known points where \Elisp{}
 is idle (or via explicit calls to \texttt{thread-yield}).  The current
 implementation of this feature makes context switches take time proportional
 to the current stack depth, because the dynamic bindings of the old thread
@@ -3291,7 +3291,7 @@ compiler macro.
 %%
 The \texttt{cl-typep} function takes two arguments and tests if the first is
 a value of the type specified by the second.  The function definition takes
-care of the general case where the type argument is only known at run-time.
+care of the general case where the type argument is known only at run-time.
 The compiler macro enables optimizations---for example, it turns
 \texttt{(cl-typep x 'integer)} into \texttt{(integerp x)}.  While this
 optimization could arguably be performed automatically by a sufficiently
@@ -3315,7 +3315,7 @@ functions in the Emacs distribution are defined using
 
 %% Daniel Colascione: Do you want to mention how Emacs Lisp is _defined_ to
 %% expand compiler macros, which, AIUI, distinguishes it from other lisps?
-%% Stefan: I don't think it's defined to do that (after all, it only happens
+%% Stefan: I don't think it's defined to do that (after all, it happens only
 %% in `macroexpand-all` but not in `macroexpand` so it doesn't happen
 %% for interpreted code that's not eagerly macroexpanded).
 
@@ -3528,7 +3528,7 @@ Javascript, written in \Elisp{}.  This was designed so as to be able to write co
 all in \Elisp{}, using the Elnode \Elisp{} package to do the server-side
 processing and using Emacs-Ejit to write the client-side code in \Elisp{}
 as well.  It does not really aim to run any \Elisp{} package in your
-browser, so its runtime library only provides a small subset of \Elisp's
+browser, so its runtime library provides only a small subset of \Elisp's
 standard primitives.
 
 
