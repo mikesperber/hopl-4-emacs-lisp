@@ -13,19 +13,52 @@
 @Unpublished{Ludlam18,
   author =       {Eric Ludlam},
   title =        {private communication},
-  note =         {},
-  month =        jul,
-  year =         2018,
-  synopsis = {FIXME}
+  date =         {2018-08-13T19:44:23-04:00},
+  synopsis =     {\begin{quote}``Back around 1995 or 6, I was
+                  working at Raytheon and taking a class on using Object
+                  request brokers, and the concept looked like something
+                  that would be fun to hack in Emacs.  To support that
+                  however I needed an object system, so I wrote something
+                  that looked like c++ because I didn't know much of
+                  anything about CLOS.  There was also a widget toolkit
+                  I built on it as a demo. \\ Anyway, I got tons of feedback
+                  about that, and why not CLOS.  I looked into CLOS and it
+                  seemed fine so I converted it over to that style of
+                  syntax.  Small bits of the old C++ variant remained
+                  however, such as the array based storage and slot
+                  protection, and the :custom slot feature which I had
+                  originally intended to be based on the widget set I built
+                  on EIEIO. \\ As for the name, finding a name for an object
+                  system is tricky.  There was no "eio" predecessor.
+                  I think it was always eieio once I had hit upon the name
+                  idea.  I never did decide what the first "ei" should stand
+                  for, I just knew it needed all the Es and Is.  If I'd
+                  known about CLOS originally, I probably would have named
+                  it ECLOS or something boring like that.  I still prefer
+                  the full EIEIO name though.''\end{quote}}
 }
 
 @Unpublished{RMS-compiler,
   author =       {Richard Stallman},
   title =        {private communication},
-  note =         {},
-  month =        aug,
-  year =         2019,
-  synopsis = {FIXME}
+  date = {2019-08-26T19:19:01-04:00},
+  synopsis = {In response to an email message from Stefan Monnier:
+\begin{quote}
+\ttfamily
+> 3- I see in etc/NEWS.1-17 that byte-recompile-directory was introduced in \\
+>    Emacs-1.1, which implies the byte-compiler already existed pretty much \\
+>    from the very beginning of Emacs.  I assume you're the author of the   \\
+>    original `byte-code` primitive and associated byte-compiler, right?    \\
+\\
+I don't remember whether anyone else contributed code for it, but I certainly\\
+did this early on.\\
+\\
+     > Do you remember why you immediately wrote a byte-code implementation of\\
+     > Elisp\\
+\\
+For speed.
+\end{quote}
+},
 }
 
 @InProceedings{Neubauer01,
@@ -153,6 +186,7 @@
   author =       {Christopher Rhodes and Jan Moringen and David Lichteblau},
   title =        {Generalizers: New Metaobjects for Generalized Dispatch},
   crossref =     {ELS14},
+  pages =        {20-27},
   url =          {http://research.gold.ac.uk/9924/1/els-specializers.pdf},
   abstract =     {This paper introduces a new metaobject, the generalizer,
                   which complements the existing specializer metaobject.
@@ -206,7 +240,7 @@
   journal =      {Software Practice\&Experience},
   volume =       15,
   number =       7,
-  page =         {637-654},
+  pages =        {637-654},
   year =         1985,
   url =          {https://www.gnu.org/software/rcs/tichy-paper.pdf}
 }
