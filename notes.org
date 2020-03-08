@@ -1348,8 +1348,9 @@ released version.)
     CLOSED: [2020-02-11 mar 16:25]
 *** DONE 393 - extra comma
     CLOSED: [2020-02-11 mar 16:25]
-*** TODO for Mike: 400 - is this comment added by you, from the manual, or from the original
-source code?
+*** DONE for Mike: 400 - is this comment added by you, from the manual, or from the original source code?
+CLOSED: [2020-03-08 Sun 18:14]
+Not in the original; deleted.
 *** DONE 419 - define homoiconic (I see you do below, but it is referred to prior here)
     CLOSED: [2020-02-11 mar 16:27]
     - CLOSING NOTE [2020-02-11 mar 16:27] \\
