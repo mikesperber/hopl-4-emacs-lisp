@@ -1337,7 +1337,8 @@ support, generators).
 
 Minor comments and typos:
 
-*** TODO for Mike: 322 - No maintainer is listed for XEmacs 20.
+*** DONE for Mike: 322 - No maintainer is listed for XEmacs 20.
+CLOSED: [2020-03-08 Sun 18:10]
 Is this deliberate? (Also this line is a bit different than the others,
 as it talks about a version in development not the most recently
 released version.)
