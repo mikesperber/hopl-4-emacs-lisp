@@ -1439,7 +1439,6 @@ the representation of an immediate \emph{boxed} Lisp value, which can be
 either a number or a reference to a heap object, and in heap objects used to
 represent user-defined objects such as closures and records.
 
-\subsubsection{Tag bits}
 Emacs started with a data representation of its boxed data based on 32-bit
 words.  Those used a 7-bit tag located in the most significant bits, an extra
 ``mark'' bit (see below), and 24-bits of immediate data: either an integer or
@@ -1560,13 +1559,15 @@ cost at all.
 %% it?
 %% Mike: I think it's fine now.
 
-\subsubsection{Vectors}
+\subsection{Vector-bloc allocation}
+\label{sec:vectors}
+
 In Emacs-24.3, the allocation of objects using the \texttt{Lisp\_Vector} tag
 (which is used for many more object types than just vectors) was modified:
-instead of calling \texttt{malloc} for each such object, they are now
-allocated from ``vector blocs''.  The motivation was not that
+instead of calling \texttt{malloc} for each such object, Emacs
+allocates them from ``vector blocs''.  The motivation was not that
 \texttt{malloc} was too slow, but that the implementation of conservative
-stack scanning (Section\ref{sec:stack-scanning}) keeps track of every part
+stack scanning (Section~<\ref{sec:stack-scanning}) keeps track of every part
 of the Lisp
 heap allocated with \texttt{malloc} in a balanced tree, so every such
 \texttt{malloc} costs an $O(N \textsf{log} N)$ operation plus a heap
@@ -1576,8 +1577,9 @@ performance issue is that objects using the \texttt{Lisp\_Vector} tag were
 historically not used in large numbers in early \Elisp{} code.  There were
 two factors that changed this situation: first, over time the style of
 \Elisp{} coding evolved and the use of \texttt{cl.el}'s \texttt{defstruct}
-(which internally represents those objects as vectors
-(Section~\ref{sec:structures})) became much more common, and second, the
+(which internally represents those objects as vectors---see
+Section~\ref{sec:structures})
+became much more common, and second, the
 closures used in the lexical-scoping feature of Emacs-24.1 also use the
 \texttt{Lisp\_Vector} tag.
 
@@ -1980,8 +1982,8 @@ freedom~\cite{Mlynarik-personal}.  This allowed Lucid Emacs to evolve more rapid
 representation of keymaps to cater to a richer set of input events,
 including mouse events, for instance.
 
-This step reflected a general difference in philosophy
-(Sections~\ref{sec:structures} and~\ref{sec:data-representation}).
+This step reflected a general difference in philosophy.
+(Sections~\ref{sec:structures}, \ref{sec:data-representation}, and \ref{sec:vectors}.)
 Lucid Emacs also used custom opaque data types
 for case tables and input events, both of which retain transparent
 representations in Emacs to this day.

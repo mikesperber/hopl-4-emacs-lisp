@@ -1229,7 +1229,8 @@ and you need to rewrite.
 *** DONE 1004. “multiple of 8” —> “multiple of 8 bytes”
     CLOSED: [2020-02-11 mar 14:30]
 (to clarify the connection to 64 bits)
-*** TODO 1040. Maybe better if 5.4.1 and 5.4.2 are separate sections?
+*** DONE 1040. Maybe better if 5.4.1 and 5.4.2 are separate sections?
+CLOSED: [2020-03-08 Sun 17:56]
 They don’t have that much in common, and it would parallel breaking GC over
 sections 5.5-5.7, rather than having a single section on GC.
 *** DONE 1126. mmaped —> mmapped?
