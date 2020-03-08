@@ -261,6 +261,7 @@ can be summarized as:
 
 \subsection{The great schism}
 \label{sec:schism}
+\label{sec:energize}
 %% Note: I put "1988" here based on Richard Gabriel's email (quoted in
 %% https://www.jwz.org/doc/lemacs.html) from 22 Jun 1992 where he says "4
 %% years ago".
@@ -281,7 +282,8 @@ for Lucid while continuing to work on the upcoming release of Emacs-19.
 It soon became clear that the respective goals Lucid and the Free
 Software Foundation had for Emacs-19 were incompatible,
 and the required cooperation between Lucid and
-the Free Software Foundation broke down~\cite{Arcenaux-interview}.
+the Free Software Foundation broke down---see
+Sec.~\ref{appendix:arceneaux}.
 
 As a result, Lucid forked Emacs development, creating its own Emacs
 variant \emph{Lucid Emacs}, whose primary developer and maintainer was
@@ -1248,7 +1250,8 @@ wrong buffer when exiting the \texttt{let}.
 Originally, they were just byte arrays.
 
 In 1992, during the early development of Emacs-19, this basic type was
-extended by Joseph Arceneaux with support for \emph{text properties}: each
+extended by Joseph Arceneaux with support for \emph{text properties}.
+(See Sec.~\ref{appendix:arceneaux}.)   Each
 char of a string can be annotated with a set of properties, mapping
 property names to values, where property names can be any symbol.  This can
 be used to carry information such as color and font to use when displaying
@@ -3458,7 +3461,7 @@ revision history of Emacs through the various revision systems it has used
 have been very helpful, we'd like to thank also Lars Brinkhoff for his
 archiving work at \url{https://github.com/larsbrinkhoff/emacs-history} which
 fills some of the holes of the early life of Emacs.
-Moreover, we thank Joseph Arceneaux for an extensive
+Moreover, we thank Joseph Arceneaux for an
 interview~\cite{Arcenaux-interview}, as well as Richard Gabriel,
 Richard Stallman and Jamie Zawinski for patiently answering our questions.
 
@@ -3534,6 +3537,288 @@ processing and using Emacs-Ejit to write the client-side code in \Elisp{}
 as well.  It does not really aim to run any \Elisp{} package in your
 browser, so its runtime library provides only a small subset of \Elisp's
 standard primitives.
+
+\section{Interview with Joseph Arceneaux}
+\label{appendix:arceneaux}
+\newenvironment{question}{\begin{quote}\itshape}{\end{quote}}
+
+Joseph Arceneaux is an American software architect. In the early 1990,
+Arcenaux was the maintainer of GNU Emacs, working first for the Free
+Software Foundation, then for Lucid, Inc.  Lucid Inc.\ wanted to base
+its Energize development environment for C++ on Emacs---see Sec.\
+\ref{sec:energize}.  During
+Arcenaux's tenture, the commercial interests of Lucid Inc.\ and those
+of Emacs's original author, Richard Stallman, clashed, which finally
+resulted in Lucid creating its own fork of Emacs, Lucid Emacs.
+
+Arcenaux graciously agreed to be interviewed by Michael Sperber on
+Mayx 30, 2019.  The purpose of the interview was to provide background
+material for this, specifically what role Emacs Lisp played in the
+rift.
+%
+\begin{question}
+Could you tell me how you got into software, tracing a line to how
+you got involved with Emacs.
+\end{question}
+%
+When I was 15 or 16, I was planning to become a veterinarian.  I
+got out of high school early because I took a test, and then I took a
+course in computer science and got really absorbed.  I went to what is
+now the University of Louisiana, then the University of Southwest
+Louisiana, and I had a Finnish professor who used Emacs and who
+convinced me to use it.  By the time I got out of graduate school , I
+was not just using Emacs but contributing code to the project, and I
+became interested philosophically in the Free Software movement.
+
+After I graduated I went to work doing research for the INRIA in
+France.  Since I was a researcher, I had a fair amount of spare time
+doing Emacs development, and I got to know Richard Stallman pretty
+well.  I had him come over and give a couple of talks at INRIA.  This
+was the first time Stallman rode a motorcycle when I took him to give
+a talk.  He was scared to death.
+
+We formed this professional
+relationship, and I continued to contribute code to Emacs, and then my
+research group started a startup company.  It was an X terminal on
+steroids.  This was about the time X windows was really becoming
+popular.  We had a our own hardware design, and our main windows guy
+ported X windows to it.  I was the systems guy, so I wrote the BIOS,
+and we adopted a new microkernel operating system, similar to Mach, called
+Chorus. At some point, when our company grew, it became more and more
+political, and at the same time, Stallman, whom we all called RMS,
+because that was his login name, invited me to work for the Free
+Software Foundation, and I thought this would be a great career move,
+plus I was having a lot of fun writing code for Emacs. Emacs at that
+point had been mostly been written by Stallman and contributors like
+myself, with the main structure written by Stallman.  I found that the
+structure of the code was such that it was mostly easy to understand
+but especially easy to make extensions to.  Occasionally I would
+submit something and RMS would say no, but most of time, he accepted
+my stuff.  There were some clever things he did that required
+pretty deep insight into how computers worked, but apart from two or
+three of those examples, it was really easy to
+write new code.
+
+At the FSF, I spent a couple of years having a really good time at the
+MIT AI lab.  RMS and I would have occasional arguments about how to do
+something in Emacs.  And RMS is a really smart guy.  He was a
+MacArthur genius award grantee.  Weird things would happen, like I'd
+get this phone call, and it would be somebody from Norway inquiring
+about chaos maths.  It turned out that RMS was this expert in chaos
+maths.  So when we had arguments, he won a lot of arguments.  But I'd
+say that only part of this was because he was a really smart guy.
+Part of this was because he was very passionate.  I remember going
+down the stairwell, with him behind me screaming, and then me
+going back up chasing him up the stairwell with him covering his ears,
+so he couldn't hear my argument.  So he's kind of an interesting guy.
+I did win some arguments, though.
+
+One of the big ones that came up was the window system.  So as I said
+X windows was becoming really popular.  The X windows development
+group was on the 2nd floor of our building.  It seemed natural to me
+that we needed Emacs to become a full-blown X-windows-integrated
+system.  RMS was adamantly opposed to this.  Not for a philosophical
+reason, but he thought there were more important things to do.  A
+version of Emacs that had been integrated with X10 worked pretty well,
+but once the move to X11 was made, that didn't work anymore, and
+nobody had bothered to port it (and, as I recall, the two systems were
+rather incompatible).
+
+There were some interesting technical questions, such as: At the time,
+it wasn't computationally advisable to have characteristics associated
+with every character in the buffer.  So a guy named Dan LaLiberte came
+up with this system that he called "intervals".  Basically the idea
+there was that you would have this shadow structure to the contents of
+a buffer.  And it was essentially: From here to there the face that
+we're using is this, and from there to over there is this other face.
+A ``face'' was a structure that encompassed color, font, background, and
+all
+those characteristics.  So I took that stuff that he'd written and
+prototyped, and I fleshed some stuff out and I added some other
+features like caching, where we were in the buffer, etc.  I was doing
+this in my
+spare time while I was maintainer of Emacs, and integrating
+contributions.  I started to push this as a major feature development
+for Emacs.  RMS continued to be adamantly opposed to this.  So I
+wasn't sure what to do, and I had a lot of discussions with the board
+members of the FSF.  At some conference I met a French guy from Lucid,
+Matthieu.  And partially because I spoke French, we got along.
+Eventually Lucid offered me a contract to do this integration with X11
+because they had a project to do an IDE for C and C++, and wanted to
+use Emacs as the primary interface.  RMS and I had a big fight about
+it because he didn't want me to do it.  My argument was "Hey, these
+guys are going to basically pay my salary for a while, and I get this
+done, and it won't cost the FSF anything."  And the board members
+supported me on this, but RMS didn't want to do it.  So I went on to
+do that, and RMS didn't talk to me for a year or so.  Also, I moved to
+California after I got the contract at Lucid.
+
+My contract with Lucid was in three parts.  The first one was the
+most challenging, because it had to conform to certain specs,
+performance-wise.  So if we had all of this visual annotation information,
+and you did a search for some string, the requirement was that that
+search should not be any slower than on any version of Emacs without
+visual annotation.  So I passed that part.  I forget what the other
+two parts were, but after the first phase of my contract, Lucid
+changed the direction they wanted to go on, and tried to hire me as a
+full-time employee.
+
+\begin{question}
+Do you remember why Lucid changed direction, or why their
+requirements changed?
+\end{question}
+%
+I don't remember exactly.  I feel that some of that was political.
+But I don't remember the details.  I just remember that we had
+arguments about which way to go.  By then I was back in contact with
+RMS and I started checking in my code to the main repository of
+Emacs.  And RMS was not always happy with this.  So there was a
+conflict with this between Lucid and RMS about where we should go, and
+I was trying to mediate that difference.
+
+\begin{question}
+But you were working mainly on a fork of Emacs at Lucid, or were
+you always checking things into the Emacs mainline?
+\end{question}
+%
+No, it was a fork.  And that was probably a big mistake.  If
+git had been around back then, it wouldn't have been that big a deal.
+The extent of changes was such that there would still have been
+conflicts.  So we had a fork that was going to be version 19 of
+Emacs.  Had I just continually incrementally checked in my changes, I
+think that would have avoided a lot of political issues that came down
+the road.
+
+\begin{question}
+I'm not sure that was an official position, but were you still been
+maintainer of Emacs, or had you been and then went back to being that?
+\end{question}
+%
+No. Eventually, the FSF hired a guy named Jim Blandy as the
+official maintainer.  But again, this bifurcation became a big
+political issue, and I was struggling to mediate between these two
+somewhat contradictory sources of requests.  If I had just continued
+in my role as maintainer and incrementally checked stuff into the
+Emacs 19 fork, I think it would have avoided all of those issues.
+
+\begin{question}
+You said that for a long time RMS was opposed to the X11 windowing
+stuff that ended up in Emacs 19.  But eventually Emacs 19 came out
+with it.  So was that something that was forced onto the project or
+did RMS come around and agree that it was a good idea?
+\end{question}
+%
+As I recall, I think it was mostly that I convinced Jim Blandy that
+this was really what we should do.  He and I worked on integrating all
+of my changes into the Emacs 19 fork.  I think together we overcame
+RMS's opposition.  This was 1992, I went to a conference to the Isle
+of Jersey with RMS.  He basically had done an extensive review of my
+code.  We talked about that, and when I saw that he had spent so much
+time reviewing my code, I knew that he had been sold on the idea.
+
+\begin{question}
+So the various actors involved didn't just pull you in different
+political directions but also technical directions.  But eventually
+things came either to a head or an end, right?
+\end{question}
+%
+Yes.  Lucid, when I declined their offer to hire me, essentially
+took the position that they were going to create their own version of
+Emacs.  They assigned a guy to be in charge of that.
+
+\begin{question}
+Probably Jamie Zawinski \ldots{}
+\end{question}
+%
+I think so.  So he went off maintaining that, and they publicized
+it, and it became known as Lucid Emacs, and later XEmacs.  And
+meanwhile, there was some guy from Carnegie Mellon.  He was also
+working on an X11 integration.  So for a while there were at least
+three versions of Emacs that were integrated with X \ldots{}
+
+\begin{question}
+There was a windowed version of Emacs called Epoch at some point.
+\end{question}
+%
+Yeah, that's it.
+
+\begin{question}
+After you declined Lucid's offer to hire you, did you continue
+working for them on that contract basis, or was it done by then?
+\end{question}
+%
+I continued working on that for a little while, but at some point,
+especially after I went to that conference and talked to RMS, I went
+back to mostly maintaining Emacs, and doing some of the other things.
+I was also maintainer of GNU Indent.  My transition from Lucid was
+gradual.  They didn't tell me at first that they were forking their
+own version.  I was working out of my house, rather than the offices
+of Lucid.
+
+\begin{question}
+I'm still trying to understand. I got that part where you worked on
+the interval implementation, and how that performed to the speed that
+Lucid needed.  Do you remember anything about the technical change of
+direction that happened at Lucid?
+\end{question}
+%
+As best as I can remember, it was about integrating with the
+compiler to build a complete IDE.  So that had specific requirements
+about how that should look like, how that should be.  As I recall, some of
+those crossed a boundary between the vision I and RMS had for Emacs,
+and the more commercial direction that Lucid wanted to go into.
+
+\begin{question}
+One thing that, looking back, surprised me was: You mentioned that
+what Lucid was doing required quite significant performance.  They
+wanted to stick annotations on every single letter of a C program or a
+C++ program as you were editing it.
+\end{question}
+%
+Not just C, but any text.
+
+\begin{question}
+Lucid ended up working on a development environment for C and C++,
+and a compiler that would actually generate the data that would go
+into these annotations.  What I'm getting at is: You got the
+performance out of the redisplay and the buffer management.  I'm also
+interested in Emacs Lisp, which was always a slow Lisp, it was never
+very fast.  Was that never seen as a potential issue with Lucid that
+Emacs Lisp would not be fast enough?
+\end{question}
+%
+I remember doing an improvement to the string garbage collection.
+But I would not say that the Lisp environment really entered the
+picture due to performance because all of the annotation code was
+done in C.  But over the years, there were several improvements.  RMS
+and I came up with this algorithm for block-based storage management.
+It basically replaced the Unix \texttt{sbrk()} system calls.  That greatly
+improved the performance of Emacs in general.  So that was the C
+world, hence I can't say what the impact was on Lisp, although the C
+world was the base of the Lisp world, so I'm sure that had some
+impact.
+
+With respect to Emacs Lisp, I should add, one of the great pleasures
+was that I got to work with some Lisp machines.  The Lisp machines
+were really great because you could just do Meta-Dot (as in Emacs) and
+you could see
+the function definition of the thing that you'd just invoked, in the
+very source code itself.
+
+Richard Greenblatt, who invented the Lisp machine, had been absent from
+the AI lab for years (see the book \textit{Hackers}, by Steven Levy for this story),
+but---just after Steve Job's formation of NeXT, Inc---someone donated one
+of their machines to us, and this attracted Greenblatt (aka `rg') to come
+visit us. We started hanging out, and (apart from performing some amazing
+technical feats to help me out) he gave me much insight into how
+Lisp came about.  Perhaps due to those conversations I changed my view on
+the interaction between the C and Lisp world, and started doing more Lisp-y
+things, like adding infinite minibuffer history, and some of that was all
+in Lisp.
+
+\begin{question}
+  Excellent.  Thank you very much!
+\end{question}
 
 \clearpage % Revised HOPL IV Style Guide
 
