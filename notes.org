@@ -1268,7 +1268,8 @@ might supplant.
       We added a (sub)section on macros and mention that they are not hygienic
 so possibly a few words on hygiene (or lack of it?) in Emacs Lisp macros is
 in order.
-*** TODO for Mike 1755-1756. Emacs 18.51 vs Emacs-19.18. Be consistent throughout the paper.
+*** DONE for Mike 1755-1756. Emacs 18.51 vs Emacs-19.18. Be consistent throughout the paper.
+CLOSED: [2020-03-08 Sun 18:09]
     - Note taken on [2020-02-11 mar 17:52] \\
       Stef says: I've fixed it to the point were it's consistently inconsistent:
       "-" used with Emacs, and " " used for XEmacs and Lucid Emacs (except
