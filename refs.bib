@@ -10,11 +10,16 @@
 @string{Tolmach = { Andrew Tolmach }}
 @string{Pitman =  { Kent M. Pitman }}
 
-@Unpublished{Ludlam18,
+@Misc{Ludlam18,
   author =       {Eric Ludlam},
-  title =        {Answer to an email message by Stefan Monnier},
+  title =        {Personal Communication},
   date =         {2018-08-13T19:44:23-04:00},
-  excerpt =     {Back around 1995 or 6, I was
+  month = {bug},
+  howpublished = {Email},
+  synopsis =     {In response to an email message from Stefan Monnier about
+                  the early history of EIEIO, he wrote:
+                  \begin{quote}
+                  Back around 1995 or 6, I was
                   working at Raytheon and taking a class on using Object
                   request brokers, and the concept looked like something
                   that would be fun to hack in Emacs.  To support that
@@ -35,14 +40,20 @@
                   for, I just knew it needed all the Es and Is.  If I'd
                   known about CLOS originally, I probably would have named
                   it ECLOS or something boring like that.  I still prefer
-                  the full EIEIO name though.}
+                  the full EIEIO name though.
+                  \end{quote}
+}
 }
 
-@Unpublished{RMS-compiler,
+@Misc{RMS-compiler,
   author =       {Richard Stallman},
-  title =        {Answer to an email message by Stefan Monnier},
+  title =        {Personal communication},
   date = {2019-08-26T19:19:01-04:00},
-  excerpt = {
+  month = {bug},
+  howpublished = {Email},
+  synopsis = {In response to an email message by Stefan Monnier asking
+                  details about the history of the byte-compiler, he wrote:
+\begin{quote}
 > 3- I see in etc/NEWS.1-17 that byte-recompile-directory was introduced in \\
 >    Emacs-1.1, which implies the byte-compiler already existed pretty much \\
 >    from the very beginning of Emacs.  I assume you're the author of the   \\
@@ -55,6 +66,7 @@ did this early on. \smallskip \\
        Elisp \smallskip \\
 
 For speed.
+\end{quote}
 },
 }
 
@@ -722,8 +734,7 @@ For speed.
   howpublished = {Email},
   month = 	 nov,
   year = 	 2018,
-  note = {{\\ \noindent
-This email exchange originated from a review Richard Stallman conducted on an early version of this paper.
+  synopsis = {This email exchange originated from a review Richard Stallman conducted on an early version of this paper.
 In this exchange, he provided detailed comments on selected sections.
 In particular, he mentioned his work on ZWEI and the fact
 that docstrings were already present in the first TECO-based Emacs.
@@ -741,7 +752,7 @@ Stallman, referring to the docstrings feature, also wrote:
 \begin{quote}
 These came from the original TECO-based Emacs.
 \end{quote}
-}}}
+}}
 
 
 @TechReport{Weinreb1979,
@@ -879,11 +890,11 @@ These came from the original TECO-based Emacs.
   howpublished = {Email},
   month = 	 may,
   year = 	 2019,
-  note = {{\\ \noindent Richard Gabriel responded to a series of questions asked via email by Michael Sperber about the role
+  synopsis = {Richard Gabriel responded to a series of questions asked via email by Michael Sperber about the role
   of Emacs in the design of Lucid's Energize IDE.  In particular, Gabriel wrote that Emacs
   was chosen in response to a series of interviews with potential users, who wanted to use their favorite interactive tools.
   Gabriel also confirmed that Emacs Lisp was not a big factor in the implementation of Energize, which meant
-  that its performance did not matter much for the technical success of the Energize implementation.}}}
+  that its performance did not matter much for the technical success of the Energize implementation.}}
 
 @Misc{Mlynarik-personal,
   author = 	 {Richard Mlynarik},
@@ -891,7 +902,7 @@ These came from the original TECO-based Emacs.
   howpublished = {Email},
   month = 	 aug,
   year = 	 2019,
-  note = {{\\ \noindent Richard Mlynarik responded to an email from Michael Sperber about the
+  synopsis = {Mlynarik responded to an email from Michael Sperber about the
   authorship of the union implementation.  Mlynarik wrote about the philosophical differences he
   had with Richard Stallman over the use of type-safe abstractions in Emacs Lisp.  He wrote:
 
@@ -899,7 +910,7 @@ These came from the original TECO-based Emacs.
 Actually having a real C structure representing the base
 Lisp object implementation was MASSIVELY helpful in debugging,
 since GDB started with at least a clue about what was in them.
-\end{quote}}}}
+\end{quote}}}
 
 @Misc{EmacsLore,
   author = 	 {David Moon and others},
