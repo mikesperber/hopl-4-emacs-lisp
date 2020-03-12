@@ -1300,7 +1300,8 @@ If the latter, who?
 rather than a message.
 *** DONE 2061. “its own luck” —> “his own luck”
     CLOSED: [2020-02-11 mar 16:07]
-*** TODO for Mike 2117-2125. This discussion left me unclear on how define-inline actually works.
+*** DONE for Mike 2117-2125. This discussion left me unclear on how define-inline actually works.
+CLOSED: [2020-03-12 Thu 16:53]
     - Note taken on [2020-02-18 mar 14:35] \\
       I added the cl-typep example, along with some brief description of what
       happens with it.  Please double check that it's understandable (although
@@ -1308,6 +1309,9 @@ rather than a message.
       I don't even know how to clearly describe the semantics of define-inline
       (which is why it's still basically undocumented :-( ))
 Perhaps an example of how it is used to define cl-typep would help.
+
+I rewrote a little bit.
+
 *** DONE 2152. What was not thorough about with-namespace?
     CLOSED: [2020-02-11 mar 16:21]
     - CLOSING NOTE [2020-02-11 mar 16:21] \\
@@ -1471,9 +1475,11 @@ You may want to check this.
     CLOSED: [2020-02-11 mar 17:35]
 *** DONE [1233] "discussions whether" -> "discussions of whether"
     CLOSED: [2020-02-11 mar 17:35]
-*** TODO [1237] "all the" -> "all of the"
+*** DONE [1237] "all the" -> "all of the"
+CLOSED: [2020-03-12 Thu 16:41]
     - Note taken on [2020-02-11 mar 17:36] \\
       Stef notes: really?  "all the" here seems better to me
+Mike: Really.
 *** DONE [1259] "design---here" -> "design. Here"
     CLOSED: [2020-02-11 mar 17:37]
 *** DONE [1287] "Eventually however" -> "Eventually, however"
@@ -1486,7 +1492,8 @@ You may want to check this.
     CLOSED: [2020-02-11 mar 17:38]
 *** DONE [1549] "specifiers. which" -> "specifiers, which"
     CLOSED: [2020-02-11 mar 17:38]
-*** TODO [1695] I didn't know Emacsen was a word.  I do [now](https://www.emacswiki.org/emacs/Emacsen)!
+*** DONE [1695] I didn't know Emacsen was a word.  I do [now](https://www.emacswiki.org/emacs/Emacsen)!
+CLOSED: [2020-03-12 Thu 16:42]
 *** DONE [1754] "so already in 1986 .. wrote" -> "so by 1986 .. had already written"
     CLOSED: [2020-02-11 mar 17:40]
 *** DONE [1774] "name" -> "epithet" ?

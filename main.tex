@@ -977,7 +977,7 @@ MacLisp's error-handling system was quite primitive, and had poor separation
 of signaling and handling~\cite{Pitman2001}.
 As a result, \Elisp{} features
 a \emph{condition system} inspired by the Lisp Machine.  (It does
-not cover all the features of the Lisp Machine exception system, such as the ability
+not cover all of the features of the Lisp Machine exception system, such as the ability
 to recover from an error.)
 The \texttt{signal} function takes an error symbol classifying the
 exceptional situation and an additional \texttt{DATA} argument.  An error
@@ -3282,6 +3282,26 @@ implementation does not correctly preserve the semantics of
 the dynamically scoped formal arguments, which are instead replaced by
 substitution with the actual arguments.
 
+A third way to implement an ``inlinable function'' in \Elisp{} is by
+defining it as a macro, although this comes with the drawback that it does
+not define a proper function.
+
+In late 2014, while working to adapt the \texttt{cl-lib} library to the
+changes in EIEIO and \texttt{cl-defstruct} objects, Stefan Monnier became
+frustrated by the redundancy between \texttt{cl-typep}'s definition and its
+compiler macro.
+%%
+The \texttt{cl-typep} function takes two arguments and tests if the first is
+a value of the type specified by the second.  The function definition takes
+care of the general case where the type argument is known only at run-time.
+The compiler macro enables optimizations---for example, it turns
+\texttt{(cl-typep x 'integer)} into \texttt{(integerp x)}.  The type
+specification can also take the form \texttt{(not \id{TYPE})} to
+specify ``any type other than \id{TYPE}'', \texttt{(eql \id{VAL})} to
+specify the type containing a specific value, or \texttt{(satisfies
+  \id{PRED})} to specify the type of values for which a given
+predicate returns true.
+
 \begin{figure}
 \begin{verbatim}
     (define-inline cl-typep (val type)
@@ -3299,31 +3319,17 @@ substitution with the actual arguments.
   \label{fig:define-inline}
 \end{figure}
 
-A third way to implement an ``inlinable function'' in \Elisp{} is by
-defining it as a macro, although this comes with the drawback that it does
-not define a proper function.
-
-In late 2014, while working to adapt the \texttt{cl-lib} library to the
-changes in EIEIO and \texttt{cl-defstruct} objects, Stefan Monnier became
-frustrated by the redundancy between \texttt{cl-typep}'s definition and its
-compiler macro.
-%%
-The \texttt{cl-typep} function takes two arguments and tests if the first is
-a value of the type specified by the second.  The function definition takes
-care of the general case where the type argument is known only at run-time.
-The compiler macro enables optimizations---for example, it turns
-\texttt{(cl-typep x 'integer)} into \texttt{(integerp x)}.
-
 Consequently, Monnier developed the new macro \texttt{define-inline}, which
 was included in Emacs~25.1.  It lets the programmer define a normal function
 and a corresponding optimizing compiler macro with a single form.
 Figure~\ref{fig:define-inline} shows the skeleton of the current version of
-\texttt{cl-typep}, using \texttt{define-inline}: it defines the normal
-recursive \texttt{cl-typep} function, basically the result of stripping the
-code of all the \texttt{inline-\textit{foo}} annotations, and at the same
-time defines the compiler macro that performs the \texttt{pcase}
-dispatch at
-compile-time.  This inlines the corresponding branch if \texttt{type} is
+\texttt{cl-typep}, using \texttt{define-inline}: it interprets the
+body as both a function definition by removing the
+\texttt{inline-} prefixes from the various forms in the body, and at the same
+time defines the compiler macro.
+The former performs the \texttt{pcase}
+dispatch at run time, the latter at compile time.  This inlines the
+corresponding branch if \texttt{type} is
 statically known and, if not, \texttt{inline-const-val} will detect
 the problem and give up on inlining altogether.  Nowadays a bit short of 50
 functions in the Emacs distribution are defined using
