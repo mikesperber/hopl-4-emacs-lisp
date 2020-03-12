@@ -19,6 +19,7 @@
   synopsis =     {In response to an email message from Stefan Monnier about
                   the early history of EIEIO, he wrote:
                   \begin{quote}
+		  \sffamily
                   Back around 1995 or 6, I was
                   working at Raytheon and taking a class on using Object
                   request brokers, and the concept looked like something
@@ -278,6 +279,7 @@ For speed.
 @Misc{GMP,
   title =        {The {GNU} {M}ultiple {P}recision Arithmetic Library},
   key =          {GMP},
+  year = 2020,
   urlprefix = {{\NA}},
   urldate = {2020-03-03},
   url =          {https://gmplib.org/},
@@ -741,7 +743,7 @@ that docstrings were already present in the first TECO-based Emacs.
 Here is the relevant section from that exchange on ZWEI, written by Richard Stallman:
 
 \begin{quote}
-I did some work on ZWEI, the second iteration of EINE.  In ZWEI (Zwei
+\sffamily I did some work on ZWEI, the second iteration of EINE.  In ZWEI (Zwei
 Was Eine Initially), buffer-modifying primitives took arguments to
 specify what text to operate on.  I found that clumsy, so in Emacs
 Lisp I made them operate at point.
@@ -750,7 +752,7 @@ Lisp I made them operate at point.
 Stallman, referring to the docstrings feature, also wrote:
 
 \begin{quote}
-These came from the original TECO-based Emacs.
+\textsf{These came from the original TECO-based Emacs.}
 \end{quote}
 }}
 
@@ -907,7 +909,7 @@ These came from the original TECO-based Emacs.
   had with Richard Stallman over the use of type-safe abstractions in Emacs Lisp.  He wrote:
 
 \begin{quote}
-Actually having a real C structure representing the base
+\sffamily Actually having a real C structure representing the base
 Lisp object implementation was MASSIVELY helpful in debugging,
 since GDB started with at least a clue about what was in them.
 \end{quote}}}
@@ -923,6 +925,18 @@ since GDB started with at least a clue about what was in them.
   url =          {https://ban.ai/multics/doc/emacs.lore.txt},
   secondurl = {https://web.archive.org/web/20200306154734/https://ban.ai/multics/doc/emacs.lore.txt}
 }
+
+@Misc{FerrierNamespaces,
+  author = {Nic Ferrier},
+  title = {Hatching a plan to add namespaces to {EmacsLisp}},
+  howpublished = {Blog post},
+  month = jun,
+  year = 2013,
+  urlprefix = {{\NA}},
+  urldate = {2020-03-12},
+  url = {http://nic.ferrier.me.uk/blog/2013_06/adding-namespaces-to-elisp},
+  secondurl = {https://web.archive.org/web/20190921040559/http://nic.ferrier.me.uk/blog/2013_06/adding-namespaces-to-elisp}
+  }
 
 @Manual{WeinrebMoon1981,
   title = 	 {{Lisp Machine} Manual},
@@ -999,6 +1013,7 @@ since GDB started with at least a clue about what was in them.
 
 @Misc{GNULightning,
   title = 	 {{GNU Lightning}},
+  year = {2020},
   key = {Lightning},
   howpublished = {Project web page},
   urlprefix = {{\NA}},
@@ -1009,6 +1024,7 @@ since GDB started with at least a clue about what was in them.
 
 @Misc{GNULibjit,
   title = 	 {{GNU LibJIT}},
+  year = {2020},
   key = {LibJIT},
   howpublished = {Project web page},
   urlprefix = {{\NA}},
