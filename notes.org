@@ -1437,7 +1437,8 @@ it consistently.  See for example [1128].
     CLOSED: [2020-02-11 mar 17:23]
 *** DONE [954] "objects:" -> "object:"
     CLOSED: [2020-02-11 mar 17:23]
-*** TODO for Mike: [969] Minor style issue.
+*** DONE for Mike: [969] Minor style issue.
+CLOSED: [2020-03-12 Thu 16:40]
     - Note taken on [2020-02-11 mar 17:26] \\
       Stef says: In those bit-size and word size discussions, I tend to do
       a bit of trivial arithmetic in my head, and in that case I typically
@@ -1447,6 +1448,7 @@ have a single word in English, so "6" -> "six", "2 words of header" -> "two
 words of header".   This is a minor issue, but you may wish to consider it,
 and if so apply the style consistently.
 
+Mike agrees.
 *** DONE [983] "beause" -> "because"
     CLOSED: [2020-02-11 mar 17:27]
 *** DONE [995] "use all the" -> "use all of the"
