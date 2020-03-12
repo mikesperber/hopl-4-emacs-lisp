@@ -2785,8 +2785,13 @@ moving them into \Elisp{} proper:
 \item[2001] Then maintainer Gerd Möllmann had a more favorable opinion of
   Common Lisp.  As a result, Emacs~21.1 included the hash-table functions,
   reimplemented in C and extended.  It also adopted the Common Lisp concept
-  of keyword symbols, to ease the work of \texttt{cl.el} as well as
-  for the benefit of other packages making use of them.  Additionally, the
+  of \textit{keyword symbols}, to ease the work of \texttt{cl.el} as well as
+  for the benefit of other packages making use of them.  A keyword
+  symbol is a symbol starting with a colon; its literals are
+  ``self-quoting''---the expression \texttt{:foo} evaluates to \texttt{:foo}.  This
+  makes keyword symbols notationally convenient for specifying keyword arguments.
+
+  Additionally, the
   macros \texttt{dolist}, \texttt{dotimes}, \texttt{push}, and \texttt{pop}
   were also added to \Elisp{}, although they introduced some difficulties: in
   \texttt{cl.el} those macros included extra functionality, which relied on
