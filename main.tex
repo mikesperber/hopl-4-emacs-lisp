@@ -1,4 +1,4 @@
-\documentclass[format=acmsmall, review]{acmart}
+\documentclass[format=acmsmall,screen]{acmart}
 \settopmatter{printfolios=true,printccs=false,printacmref=false}
 
 \usepackage{booktabs} % For formal tables
@@ -10,31 +10,42 @@
 \usepackage{acmshepherd}
 
 %% Metadata Information
-\copyrightyear{2018}
+\copyrightyear{2020}
 %%\acmArticleSeq{9}
 \acmNumber{HOPL} % CONF = POPL or ICFP or OOPSLA
 
-%% Copyright
-%%\setcopyright{acmcopyright}
-%% \setcopyright{acmlicensed}
-\setcopyright{rightsretained}
-%%\setcopyright{usgov}
-%%\setcopyright{usgovmixed}
-%%\setcopyright{cagov}
-%%\setcopyright{cagovmixed}
 \usepackage{natbib}
 \citestyle{acmauthoryear}
 
 %% Paper history
 \received{August 2018}
+\received[Revised]{August 2019}
+\received[Final]{March 2020}
 
 %% While Richard prefers "Emacs Lisp" I find it unnecessarily verbose
 %% and much prefer "Elisp" which is also very widely used.
 \newcommand \Elisp {Emacs Lisp}
 \newcommand \MAlign [1] {\begin{array}{@{}l@{}}#1\end{array}}
+\newcommand \TAlign [1] {\begin{tabular}{@{}l@{}}#1\end{tabular}}
 \newcommand \id[1] {\textrm{\textsl{#1}}}
 
 \hyphenation{na-me-spa-ce}
+
+%%% The following is specific to HOPL '20 and the paper
+%%% 'Evolution of Emacs Lisp'
+%%% by Stefan Monnier and Michael Sperber.
+%%%
+\setcopyright{rightsretained}
+\acmPrice{}
+\acmDOI{10.1145/3386324}
+\acmYear{2020}
+\copyrightyear{2020}
+\acmSubmissionID{hopl20main-p16-p}
+\acmJournal{PACMPL}
+\acmVolume{4}
+\acmNumber{HOPL}
+\acmArticle{74}
+\acmMonth{6}
 
 %% Document starts
 \begin{document}
@@ -63,22 +74,33 @@
 
 \input abstract
 
-\ccsdesc{Social and professional topics}
-\ccsdesc{Professional topics}
-\ccsdesc{History of computing}
-\ccsdesc{History of programming languages}
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10003456.10003457.10003521.10003525</concept_id>
+<concept_desc>Social and professional topics~History of programming languages</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
+\ccsdesc[500]{Social and professional topics~History of programming languages}
+
+%% \ccsdesc{Social and professional topics}
+%% \ccsdesc{Professional topics}
+%% \ccsdesc{History of computing}
+%% \ccsdesc{History of programming languages}
 
 %%
 %% End generated code
 %%
 
 
-\keywords{history of programming languages, Lisp, Emacs Lisp}
+\keywords{History of programming languages, Lisp, Emacs Lisp}
 
 
 \maketitle
 
-\tableofcontents
+\clearpage\tableofcontents\clearpage
 
 \section{Introduction}
 
@@ -97,7 +119,7 @@ used dialects of Lisp.
 
 %% FIXME: I feel like we should add something here, but not sure what.
 
-\subsection{The authors}
+\subsection{The Authors}
 
 Neither of us was around when Emacs and \Elisp{} were designed, but we are
 two researchers in programming languages with a keen interest and many
@@ -120,7 +142,7 @@ the XEmacs codebase, he supervised several student projects on the
 \Elisp{} implementation in XEmacs, including a co-authored paper on the
 analysis of dynamic scope~\cite{Neubauer01}.
 
-\subsection{Paper organization}
+\subsection{Paper Organization}
 
 \Elisp{} has evolved in several strands and implementations over the
 years, and thus its evolution did not happen along a single timeline.
@@ -154,14 +176,15 @@ Appendix~\ref{sec:alternative-implementations}.
 Appendix~\ref{appendix:arceneaux} contains the transcript of an
 interview with Joseph Arcenaux, the initial maintainer of Emacs 19.
 
-\section{Emacs history}
+\clearpage
+\section{Emacs History}
 \label{sec:emacs-history}
 
 While in theory \Elisp{} exists independently from Emacs, its design,
 implementation, and history are inextricably linked to that of Emacs, so we
 present here a short overview of the important events in Emacs's life.
 
-\subsection{Emacs's early history}
+\subsection{Emacs's Early History}
 \label{sec:emacs-early-history}
 
 Emacs's original inception was as a set of macros and keybindings for the
@@ -170,7 +193,7 @@ TECO text editor.  TECO was written by Dan Murphy starting in
 programming language.  In the mid-1970s Richard
 Stallman, then also at MIT, added to TECO a ``real-time edit mode'' (then
 a novelty) that updated the display of the text being edited as typing
-happened~\cite{MulticsEmacs1996}.  This mode allowed mapping characters to little TECO programs, and
+happened~\cite{MulticsEmacs1996}.  This mode allowed mapping key strokes to little TECO programs, and
 users would typically configure TECO to bind printing characters to
 self-insert, and control characters to perform other tasks such as
 navigation to other parts of the text via so-called \textit{macros}.  Guy Steele
@@ -187,7 +210,7 @@ reimplemented in various other systems.  Several of those incarnations of
 Emacs were written in Lisp, notably \emph{EINE} (recursive acronym for
 ``EINE Is Not Emacs'') on the Lisp Machine by Dan Weinreb, followed by
 \emph{ZWEI} (for ``ZWEI was EINE Initially'') by Dan Weinreb and Mike
-McMahon~\cite{Weinreb1979}), and \emph{Multics Emacs} by Bernie Greenberg in
+McMahon~\cite{Weinreb1979}, and \emph{Multics Emacs} by Bernie Greenberg in
 1978~\cite{MulticsEmacs1996,Stallman2002} written in MacLisp~\cite{Moon1974,Pitman1983}.
 Given Lisp's dynamic nature, it was only natural that those systems used
 Lisp as their extension language.
@@ -223,7 +246,7 @@ the code responsible for the redisplay.  It also motivated him to invent the
 GNU General Public License \cite{GPLHistory}, to try and ensure that users
 of his code would never have to go through such an experience.
 
-\subsection{Design goals}
+\subsection{Design Goals}
 
 The initial design of \Elisp{} was motivated by the pervasive requirement of
 \emph{extensibility}: users ``must be able to redefine each
@@ -263,7 +286,7 @@ can be summarized as:
   This largely explains why \Elisp{} still runs in a simple byte-code interpreter.
 \end{itemize}
 
-\subsection{The great schism}
+\subsection{The Great Schism}
 \label{sec:schism}
 \label{sec:energize}
 %% Note: I put "1988" here based on Richard Gabriel's email (quoted in
@@ -286,8 +309,8 @@ for Lucid while continuing to work on the upcoming release of Emacs~19.
 It soon became clear that the respective goals Lucid and the Free
 Software Foundation had for Emacs~19 were incompatible,
 and the required cooperation between Lucid and
-the Free Software Foundation broke down---see
-Appendix~\ref{appendix:arceneaux}.
+the Free Software Foundation broke down
+(Appendix~\ref{appendix:arceneaux}).
 
 As a result, Lucid forked Emacs development, creating its own Emacs
 variant \emph{Lucid Emacs}, whose primary developer and maintainer was
@@ -398,7 +421,7 @@ According to the \texttt{etc/NEWS.1-17} file, Emacs versions counted from
 1.1 to 1.12 and then switched to 13 which was the first version announced
 publicly on usenet.
 
-\subsection{Development model}
+\subsection{Development Model}
 
 This section describes the development organization of Emacs and Lucid
 Emacs/XEmacs, respectively.
@@ -465,18 +488,18 @@ For XEmacs~19.15, Steve Baur also split off many \Elisp{} packages
 into a separate repository, with the ability to manage and update the
 packages independently from the core releases, and installed
 individual maintainers for many of these packages.
-
+%%
 In 2007, Michael Sperber migrated the source code from CVS to
 Mercurial, hosted on the Bitbucket platform.
 
-\section{Early language design}         % -1992?
+\section{Early Language Design}         % -1992?
 \label{sec:early-history}
 
 The design of \Elisp{} was based on the past experiences with the extension
 languages of TECO, ZWEI, Gosling Emacs, and Multics Emacs.
 Arguably, the strongest influence for the language itself was MacLisp while
 the design of the editing primitives was influenced by Gosling Emacs's
-Mock Lisp.
+MLisp.
 
 \subsection{Mock Lisp}
 \label{sec:mock-lisp}
@@ -500,8 +523,8 @@ the dynamic environment of the callee.
 
 With the design of the primitives, Richard Stallman adopted MLisp's
 basic approach~\cite{Stallman2018-personal}, diverging from ZWEI.
-ZWEI primitives would always take explicit arguments to specify what
-text to operate on.  Here is what a ZWEI function might have looked
+ZWEI primitives would always take explicit arguments to specify on what
+text to operate.  Here is what a ZWEI function might have looked
 like that inserted a string surrounded by parentheses:
 %
 \begin{verbatim}
@@ -529,12 +552,11 @@ Emacs manual~\cite{Gosling1981}:
             (insert-string "(")
             (insert-string (arg 1 "String to insert? "))
             (insert-string ")")
-          )
-          )
+          ))
 \end{verbatim}
 %
-Stallman, who had worked on ZWEI, found ZWEI's approach clumsy, and
-adapted MLisp's approach for Emacs.
+Stallman, who had worked on ZWEI, found ZWEI's approach clumsy and
+adopted MLisp's approach for Emacs.
 
 \subsection{Maclisp}
 
@@ -546,6 +568,7 @@ related fields.  It descended from Lisp 1.5, albeit with many changes~\cite{Moon
 MacLisp ran on the DEC PDP-10 series machines under various operating
 systems, and on the Honeywell 6180/6880 under Multics.
 
+\noindent
 Maclisp had all basic properties associated with Lisp today~\cite{Moon1974}:
 %
 \begin{itemize}
@@ -591,7 +614,7 @@ original manual~\cite{Moon1974}:
 %
 This looks for an entry \texttt{x} in a list of conses \texttt{y}, an
 association list.  The \texttt{cond} is a branching construct with
-three branches.  The first one has condition \texttt{(null y)}, which
+a list of branches.  The first one has condition \texttt{(null y)}, which
 checks whether the \texttt{y} list is empty.  If it is, \texttt{assoc}
 returns \texttt{nil}.  The second branch has condition \texttt{(equal
   x (caar y))}, which checks whether \texttt{x} is equal to the car of the
@@ -602,7 +625,7 @@ car is equal to x.  Finally, if none of the cases matched,
 
 This function definition works in \Elisp{} unchanged to this day.
 
-\section{Base language design}
+\section{Base Language Design}
 \label{sec:base-language-design}
 
 When designing \Elisp{}, Richard Stallman was not really interested in the
@@ -631,9 +654,6 @@ arrays) of the primitives offered in Lisp Machine Lisp, which happens to
 also be a subset of the Common Lisp primitives, rather than Maclisp's
 approach of accessing arrays as if they were functions.
 
-Unlike MacLisp, the original \Elisp{} featured no way to define new
-data types.
-
 % FIXME: elaborate on arrays?
 
 Like MacLisp, \Elisp{} offered only
@@ -643,7 +663,10 @@ functions and ``ordinary values'' are separate, and to call a function bound
 to a variable, a program must use \texttt{funcall}.  Also, symbols can be
 used as function values.
 
-Some specialized control structures were missing in the original
+Unlike MacLisp, the original \Elisp{} featured no way to define new
+data types and
+%% 
+some specialized control structures were missing in the original
 \Elisp{}, among them the \texttt{do} loop construct, and the
 accompanying \texttt{return} and \texttt{go} forms for non-local
 control transfer.  This reduced Emacs's memory footprint
@@ -654,7 +677,7 @@ the choice of dynamic scoping, notable differences from and additions to
 MacLisp, and language features designed to satisfy requirements of the
 Emacs editor.
 
-\subsection{Symbols and dynamic scoping}
+\subsection{Symbols and Dynamic Scoping}
 \label{sec:symbols}
 
 Like any Lisp, \Elisp{} has always had a symbol data type: The expression
@@ -671,11 +694,12 @@ feature to make \Elisp{} \textit{homoiconic}, meaning that each
 \emph{shallow binding}, where the
 latest binding of a variable is simply stored in the \emph{value slot}
 of the heap object that represents the symbol, resulting in simple and efficient
-variable lookups and let-bindings.  (A symbol, again borrowing from
-MacLisp, also carries a \textit{property list}, essentially a key-value
-mapping stored in a list.)  Symbols can be used to refer to
+variable lookups and let-bindings.  Symbols can be used to refer to
 variables.  In particular, the \texttt{set} function, which performs
-assignment, accepts a symbol naming the variable as its argument. 
+assignment, accepts a symbol naming the variable as its argument.
+A symbol, again borrowing from
+MacLisp, also carries a \textit{property list}, essentially a key-value
+mapping stored in a list.
 
 Richard
 Stallman chose dynamic scoping despite the fact that the two major emerging
@@ -714,7 +738,7 @@ the system.
 Richard Stallman considered the possibility of having an alternate
 scope rule early, but deemed the availability of dynamic scoping
 necessary~\cite{Stallman1981}.  More recently, lexical scoping has
-been added as an option to Emacs, see Section~\ref{sec:lexical-scoping}.
+been added as an option to Emacs (Section~\ref{sec:lexical-scoping}).
 
 \subsection{Backquote}
 \label{sec:backquote}
@@ -725,23 +749,25 @@ structures---particularly those representing code---via templates.
 
 Quasiquotation is a more general mechanism than \texttt{quote} for
 creating nested list structure without using constructors explicitly:
-\texttt{quote} is usually introduced via \verb|'|where the reader
-translates \verb|'|\textit{exp} to \texttt{(quote \textit{exp})},
-evaluates to a constant list structure whose external representation.
+\texttt{quote} is usually introduced via \verb|'| where the \emph{reader}
+translates \verb|'|\textsl{SEXP} to \texttt{(quote }\textsl{SEXP}\texttt{)},
+and this expression evaluates to the value \textsl{SEXP}.
 For example:
 %
 \begin{verbatim}
-'(a (b c d) c)
+    '(a (b c d) c)
 \end{verbatim}
 %
 evalutes to a list whose first element is the symbol \texttt{a}, the
 second a list consisting of elements \texttt{b}, \texttt{c}, and
-\texttt{d}, and whose third element is \texttt{c}.
+\texttt{d}, and whose third element is \texttt{c}.  It does so in constant
+time, by always returning the same value already present in the source code
+returned by the \emph{reader}.
 
 Quasiquotation is usually introduced via \verb|`|,
 where the reader translates \verb|`|\textit{exp} to
-\texttt{(quasiquote \textit{exp})}.  (Nevertheless, the mechanism is
-often referred to as \textit{backquote}.)  Quasiquotation operates like
+\texttt{(quasiquote }\textit{exp}\texttt{)} (nevertheless, the mechanism is
+often referred to as \textit{backquote}).  Quasiquotation operates like
 \verb|'|, but a \texttt{quasiquote} form may contain \texttt{,} and \texttt{,@}
 subforms, which insert or splice the value of expressions into the
 result.
@@ -754,7 +780,7 @@ Here is a \texttt{quasiquote} example:
       (aset ,array-name i ,init-val))
 \end{verbatim}
 %
-This expands into the following \texttt{quasiquote}-less code:
+This might expand into the following \texttt{quasiquote}-less code:
 %
 \begin{verbatim}
     (list 'do '((i 0 (+ 1 i)))
@@ -784,8 +810,8 @@ The extended reader had to rely on a heuristic for the translation, however,
 %% FIXME: Using ` within a \texttt gives a different quote than using \verb !!
 because \verb|(`a)| is valid in both syntaxes but means different
 things: It could either denote an old-style backquote expression
-(\verb|(` a)| in the old notation) or a single-element list containing
-the new-style backquoted symbol \texttt{a} (\verb|((` a))| in the old
+(i.e., \verb|(` a)| in the old notation) or a single-element list containing
+the new-style backquoted symbol \texttt{a} (i.e., \verb|((` a))| in the old
 notation).
 
 %% Stefan: I can't see when/where it was actually declared obsolete,
@@ -809,11 +835,11 @@ patterns can also use the
 backquote syntax and are commonly placed right after a parenthesis so they
 were otherwise mistaken for an old-style backquote syntax.
 
-Support for the old-style syntax has been preserved so far because it was
-used very widely and removing it would have caused regressions for too many
-users relying on outdated or unmaintained third-party packages.  Over the
-years, users have slowly updated or stopped using those packages, so this
-syntax is planned to be finally removed in Emacs~27.
+Support for the old-style syntax has been preserved for many years because
+it was used very widely and removing it would have caused regressions for
+too many users relying on outdated or unmaintained third-party packages.
+But over the years, users have slowly updated or stopped using those
+packages, so this syntax is finally removed in Emacs~27.
 
 \subsection{Lambda}
 \label{sec:lambda}
@@ -827,7 +853,7 @@ In Lisp dialects, anonymous functions are usually the result of
 \end{verbatim}
 %
 Interestingly, \texttt{lambda} was not originally a keyword of the
-\Elisp{} language (unlike in MacLisp).  Up to Emacs~18, anonymous
+\Elisp{} language (unlike in MacLisp).  But anonymous
 function \emph{values} could be lists of the following form:
 %
 \begin{verbatim}
@@ -874,7 +900,7 @@ they were mostly used in places that were not very sensitive to performance.
 While the \texttt{lambda} macro has made \texttt{(lambda ..)} superior to
 \texttt{'(lambda ..)} for almost
 30 years now, instances of this practice can still be found, thanks to the
-power of copy\&paste, in many code snippets in web pages, users'
+power of copy\&paste, in many code snippets posted on the web, users'
 configuration files, and third party \Elisp{} packages, even though it
 prevents byte-code compilation of the function's body.
 
@@ -908,19 +934,19 @@ choice of identifiers.
 \label{sec:structures}
 
 MacLisp offers the \texttt{defstruct} form for defining new data
-types called \textit{structures}.  Here is an example for the
+types called \textit{structures}.  Here is an example which defines a
 \texttt{KONS} data type, which has two fields called \texttt{KAR} and \texttt{KDR}:
 %
 \begin{verbatim}
-(DEFSTRUCT KONS KAR KDR)
+    (DEFSTRUCT KONS KAR KDR)
 \end{verbatim}
 %
-This form would define four macros, \texttt{MAKE-KONS}, \texttt{KAR},
+This form would define four functions, \texttt{MAKE-KONS}, \texttt{KAR},
 \texttt{KDR}, and \texttt{ALTER-KONS}.  A program could create a
 \texttt{KONS} structure with \texttt{MAKE-KONS}:
 %
 \begin{verbatim}
-(MAKE-KONS KDR 3 KAR 4)
+    (MAKE-KONS KDR 3 KAR 4)
 \end{verbatim}
 %
 \texttt{KAR} and \texttt{KDR} can then be used to access the
@@ -935,16 +961,16 @@ such as keymaps (Section~\ref{sec:keymaps}).
 Instead, a Common-Lisp-compatible \texttt{defstruct} has been part of the
 \texttt{cl.el} package (Section~\ref{sec:cl-lib}).  Use of
 \texttt{defstruct} in \Elisp{} code began to be commonplace only around
-2010.  Originally \texttt{defstruct} used plain vectors to represent the
+2010.  Originally \texttt{defstruct} used plain vectors under the hood to represent the
 structures, making it impossible to reliably distinguish them from vectors,
 but in 2013 Lars Brinkhoff added the \emph{record} data type to make
-structures distinct from vectors, see also
-Section~\ref{sec:actual-objects}.  Making \texttt{defstruct} use this new
+structures distinct from vectors
+(Section~\ref{sec:actual-objects}).  Making \texttt{defstruct} use this new
 data type introduced some backward incompatibilities, so the change lived in
 a separate branch for four years during which various mitigation strategies
 were developed, until it was finally included in Emacs~26.1.
 
-\subsection{Non-local exits}
+\subsection{Non-Local Exits}
 \label{sec:non-local-exits}
 
 Very early on, \Elisp{} featured primitives to handle
@@ -976,9 +1002,9 @@ non-local exit through \texttt{catch}.
 MacLisp's error-handling system was quite primitive, and had poor separation
 of signaling and handling~\cite{Pitman2001}.
 As a result, \Elisp{} features
-a \emph{condition system} inspired by the Lisp Machine.  (It does
+a \emph{condition system} inspired by the Lisp Machine (it does
 not cover all of the features of the Lisp Machine exception system, such as the ability
-to recover from an error.)
+to recover from an error).
 The \texttt{signal} function takes an error symbol classifying the
 exceptional situation and an additional \texttt{DATA} argument.  An error
 symbol is a symbol with an \texttt{error-conditions} property that is a list
@@ -1031,14 +1057,15 @@ behavior.  Emacs supports this at well-defined points called
 A hook is a variable bound to a list of zero-argument
 functions.  The \texttt{add-hook} function adds a function to such a
 list by reassigning the variable.  For example, the following form
-causes auto-fill mode to be turned on whenever \TeX{} mode is entered:
+causes auto-fill mode to be turned on whenever \TeX{} mode is entered:%
+\footnote{\texttt{add-hook} makes use of the ability to refer to a variable
+          like \texttt{TeX-mode-hook} by its name symbol (Section~\ref{sec:symbols}).}
 %
 \begin{verbatim}
     (add-hook 'TeX-mode-hook #'auto-fill-mode)
 \end{verbatim}
-
-(This makes use of the ability to refer to a variable by its name
-symbol, see Section~\ref{sec:symbols}.)  The \texttt{run-hooks} function calls all functions in that
+%%
+The \texttt{run-hooks} function calls all functions in that
 list---there is a \texttt{(run-hooks 'TeX-mode-hook)} in the code
 setting up \TeX{} mode.
 
@@ -1057,9 +1084,9 @@ ironically meant to be used as debugging aids.
 Of course, authors do not always have the foresight to place hooks where
 users need them, so in 1992, the \texttt{advice.el} package was added to
 Emacs~19, providing a \texttt{defadvice} macro duplicating a design
-available in MacLisp and Lisp Machines.  It is a mechanism similar to
-aspect-oriented programming~\cite{Kiczales97} (as well as CLOS's method
-combination~\cite{DeMichielGabriel1987}) which allows attaching code to
+available in MacLisp and Lisp Machines.  This mechanism, similar to
+aspect-oriented programming~\cite{Kiczales97} as well as CLOS's method
+combination~\cite{DeMichielGabriel1987}, allows attaching code to
 a function even if it does not run hooks.
 This mechanism
 makes Emacs even more malleable, hence fitting the design goals of
@@ -1145,7 +1172,7 @@ Lisp~\cite{HyperSpec} and Clojure~\cite{ClojureDotOrg}.  More distant
 descendants generate documentation from the source code, such as
 Javadoc comments in Java.
 
-\subsection{Interactive functions}
+\subsection{Interactive Functions}
 \label{sec:interactive-functions}
 
 The most direct method to make a function implemented in \Elisp{}
@@ -1174,8 +1201,8 @@ beginning of the body, like this:
           (setq arg (1+ arg)))))
 \end{verbatim}
 The \texttt{interactive} form also has an optional string operand that
-regulates how such a function receives its arguments.  (It can also be
-an expression that is evaluated to produce a list of arguments.)  In the above
+regulates how such a function receives its arguments (it can also be
+an expression that is evaluated to produce a list of arguments).  In the above
 example, \verb|p| means that the function accepts a \emph{prefix
   argument}: The user can type \texttt{C-u} \emph{number}
 prior to invoking the function,
@@ -1184,7 +1211,7 @@ case as \texttt{arg}.  The \verb|^| (a more recent addition) has to do with
 region selection with a pressed shift key---it may lead to the region
 being activated.
 
-\subsection{Buffer-local variables}
+\subsection{Buffer-Local Variables}
 \label{sec:buffer-local-variables}
 
 Buffer-local variables are the prominent feature marking \Elisp{} as the
@@ -1252,8 +1279,8 @@ wrong buffer when exiting the \texttt{let}.
 Originally, they were just byte arrays.
 
 In 1992, during the early development of Emacs~19, this basic type was
-extended by Joseph Arceneaux with support for \emph{text properties}.
-(See Appendix~\ref{appendix:arceneaux}.)   Each
+extended by Joseph Arceneaux with support for \emph{text properties}
+(Appendix~\ref{appendix:arceneaux}).   Each
 char of a string can be annotated with a set of properties, mapping
 property names to values, where property names can be any symbol.  This can
 be used to carry information such as color and font to use when displaying
@@ -1293,7 +1320,7 @@ object and the chars it holds because of the \texttt{aset} primitive.
 replaces one of \texttt{string's} characters at index \texttt{index}
 with \texttt{char} by side-effect.  Because of the variable number of bytes
 per character, this will
-sometimes change the string's length in bytes, which requires relocating
+sometimes change the string's length in bytes, which can require relocating
 the string's bytes elsewhere.
 
 Originally, an \texttt{aset} call that would have required changing the
@@ -1327,22 +1354,22 @@ corresponding to the traditional \texttt{write}, but where the traditional
 \texttt{read} is replaced by execution of a callback whenever data is
 received from the sub-process or the remote host.
 
-\section{Base language Implementation}
+\section{Base Language Implementation}
 \label{sec:base-language-implementation}
 
 At least initially, the \Elisp{} language was defined by its sole
 implementation.  Various aspects of the design had impact on the users of the
 language, and this section discusses some of them.
 
-\subsection{Byte-code interpreter}
+\subsection{Byte-Code Interpreter}
 \label{sec:byte-code-interpreter}
 
 Emacs has two execution engines for \Elisp, the original versions of
 which were both already in Emacs~1.1 (the earliest version mentioned in the
 release notes), and both written by Richard
-Stallman~\cite{RMS-compiler}.  The first is a very simple interpreter written in C
+Stallman~\cite{RMS-compiler}.  One is a very simple interpreter written in C
 operating directly on the S-expression representation of the source code.
-The second one is a byte-code engine, implemented as a primitive
+The other is a byte-code engine, implemented as a primitive
 \texttt{byte-code} function that interprets its string
 argument as a sequence of stack-based byte codes to execute.  
 A compiler, written in \Elisp{}, translates \Elisp{} code to that
@@ -1358,9 +1385,9 @@ While a systematic study would likely reveal that the operations that should
 deserve their own byte-code in modern \Elisp{} code are quite different, the
 byte-code language of Emacs has changed very little over the years and is
 still essentially the same as that of 1985.  The main changes were
-those made to better support lexical scoping, see Section~\ref{sec:lexical-scoping}.
+those made to better support lexical scoping (Section~\ref{sec:lexical-scoping}).
 
-\subsection{Tail-call optimization}
+\subsection{Tail-Call Optimization}
 \label{sec:tco}
 
 \Elisp{} does not implement proper tail calls~\cite{Clinger1998}: Each
@@ -1381,7 +1408,7 @@ maintainers in late 2012 (by Troels Nielsen first and Chris Gay two months
 later) to optimize away tail calls in lexically-scoped byte-compiled code,
 but so far none of them have made it into an official release.
 
-The main reason for that is partly a chicken-and-eggs problem.  Tail-call
+The main reason for that is partly a chicken-or-egg problem.  Tail-call
 optimization (TCO) is largely incompatible with dynamic scoping, so it was
 basically inapplicable until the introduction of lexical scoping in 2012;
 furthermore, function calls are relatively expensive in the current
@@ -1431,7 +1458,7 @@ functions are \emph{autoloaded}, and some of that code is used to build the
 file that contains all those \texttt{autoload} declarations.  Consequently,
 a pre-built copy of that file is checked into revision control.
 
-\subsection{Data representation}
+\subsection{Data Representation}
 \label{sec:data-representation}
 
 The representation of Lisp objects has only slowly evolved over the years in
@@ -1479,8 +1506,8 @@ tag.
 
 The \texttt{Lisp\_Misc} tag was used for objects that could occupy
 the same space as Lisp markers (6 words), and hence be allocated from the same
-4KB block  (Apart from markers, these were mostly various types of
-forwarding pointers.)  For some of those objects, it imposed a slight waste of space,
+4KB block (apart from markers, these were mostly various types of
+forwarding pointers).  For some of those objects, it imposed a slight waste of space,
 which was justified by the fact that objects using the \texttt{Lisp\_Vector}
 tag had other extra costs: 2 words of header, plus the overhead of having
 each object be allocated directly by \texttt{malloc}.
@@ -1504,7 +1531,7 @@ unions and bit fields in C compilers.
 
 For the release of XEmacs~19.13 in 1995, Ben Wing merged the data
 representation from Emacs~19.30.
-
+%%
 Of course, a limit of 256\;MB was still not actually comfortable on
 machines becoming common at the time.
 
@@ -1562,7 +1589,7 @@ cost at all.
 %% it?
 %% Mike: I think it's fine now.
 
-\subsection{Vector-bloc allocation}
+\subsection{Vector-Bloc Allocation}
 \label{sec:vectors}
 
 In Emacs~24.3, the allocation of objects using the \texttt{Lisp\_Vector} tag
@@ -1570,7 +1597,7 @@ In Emacs~24.3, the allocation of objects using the \texttt{Lisp\_Vector} tag
 instead of calling \texttt{malloc} for each such object, Emacs
 allocates them from ``vector blocs''.  The motivation was not that
 \texttt{malloc} was too slow, but that the implementation of conservative
-stack scanning (see Section~\ref{sec:stack-scanning}) keeps track of every part
+stack scanning (Section~\ref{sec:stack-scanning}) keeps track of every part
 of the Lisp
 heap allocated with \texttt{malloc} in a balanced tree, so every such
 \texttt{malloc} costs an $O(N \textsf{log} N)$ operation plus a heap
@@ -1579,9 +1606,9 @@ both in time and space.  The reason why it took until Emacs~24.3 to fix this
 performance issue is that objects using the \texttt{Lisp\_Vector} tag were
 historically not used in large numbers in early \Elisp{} code.  There were
 two factors that changed this situation: first, over time the style of
-\Elisp{} coding evolved and the use of \texttt{cl.el}'s \texttt{defstruct}
-(which internally represents those objects as vectors---see
-Section~\ref{sec:structures})
+\Elisp{} coding evolved and the use of \texttt{cl.el}'s \texttt{defstruct},
+which internally represents those objects as vectors
+(Section~\ref{sec:structures}),
 became much more common, and second, the
 closures used in the lexical-scoping feature of Emacs~24.1 also use the
 \texttt{Lisp\_Vector} tag.
@@ -1602,7 +1629,7 @@ This time the motivation was just to simplify the code, though it came with
 a very slight performance improvement according to the limited benchmarking
 performed at the time.
 
-\subsection{Scanning the stack}
+\subsection{Scanning the Stack}
 \label{sec:stack-scanning}
 
 Until Emacs~21, the mark phase of the GC was precise: the global roots were
@@ -1642,29 +1669,29 @@ scanning, which proved competitive with the previous scheme.  The previous
 scheme was kept in use on some rare systems until Emacs~25.1, where all the
 register/unregister code of stack references could finally be removed.
 
-\subsection{Heap management in XEmacs}
+\subsection{Heap Management in XEmacs}
 \label{sec:heap-xemacs}
 
 XEmacs has kept precise GC, and implemented a number of improvements
 in its memory management.  In particular, Markus Kaltenbach and Marcus
 Crestani (then Michael Sperber's students)
 implemented a scanning algorithm that used the memory-layout
-descriptors that had been added to support the portable dumper.  (See
-Section~\ref{sec:image-dumping}.)  Marcus Crestani also replaced the
+descriptors that had been added to support the portable dumper (Section~\ref{sec:image-dumping}).
+Marcus Crestani also replaced the
 allocator: The new, much simplified allocator eliminated the
 distinction between objects that were allocated in blocks and those
 allocated via \texttt{malloc}, and would make the decision
 individually based on size~\cite{Crestani2005}.
 
 In the process of these GC improvements, Crestani and Michael Sperber
-also added \emph{ephemerons}~\cite{Hayes1997} to \Elisp{}: \texttt{(make-ephemeron
+also added \emph{ephemerons} \cite{Hayes1997} to \Elisp{}: \texttt{(make-ephemeron
   \id{KEY} \id{VALUE} \id{FINALIZER})} returns an ephemeron, a reference
-to \id{VALUE}.  \id{VALUE} is reachable only through the ephemeron as
-long as \id{KEY} is reachable.  When \id{KEY} becomes unreachable while
+to \id{VALUE}.  \id{VALUE} is reachable through the ephemeron only as
+long as \id{KEY} is reachable.  When \id{KEY} becomes unreachable, while
 the ephemeron itself is still reachable, \id{VALUE} is queued for
 finalization.
 
-\subsection{New GC algorithms}
+\subsection{New GC Algorithms}
 \label{sec:gc-algorithms}
 
 During the early years of Emacs, the main complaints from users about the
@@ -1684,7 +1711,7 @@ Over time, there have been several attempts to replace the GC.
 %% into Emacs, which was from 19.34 (?), when the new redisplay was more or
 %% less ready (only variable-width fonts, AFAIR), to the end of the 20.x line"
 Some time between 1996 and 1999, while waiting for Emacs~21 development to
-start to be able to add his new redisplay engine, Gerd
+start to be able to integrate his new redisplay engine, Gerd
 Möllmann worked on a generational incremental mostly-copying GC based on
 a read barrier implemented using the operating system's VM primitives, but
 it was never completed nor even actually integrated into Emacs's code.
@@ -1699,14 +1726,14 @@ The first issue is that various parts of Emacs's code assume that
 a collection can occur only during \Elisp{} code execution and not during
 heap allocation, and of course those assumptions are not explicitly recorded
 in the code.  The second issue is that Emacs currently implements various
-forms of ad-hoc weak references which which do not match the ones
+forms of ad-hoc weak references which do not match the ones
 offered by Boehm's GC (for example, hash-tables can be weak in their keys,
 or their values, or both, or either).
 
 \label{sec:incremental-gc}
-In XEmacs, GC pauses continued to be a perceived problem.  (And to
+In XEmacs, GC pauses continued to be a perceived problem (and to
 former XEmacs users, Emacs's GC pauses are quite recognizable and
-annoying.)
+annoying).
 In 2005, Marcus Crestani developed an incremental collector for XEmacs,
 again using a VM-based barrier but a (cheaper) \emph{write} barrier this time.
 It was released with XEmacs~21.5.21 in
@@ -1715,7 +1742,7 @@ It was released with XEmacs~21.5.21 in
 eliminates GC pauses from the user experience, and its asymptotic
 performance is competitive with the old collector.
 
-\subsection{Image dumping}
+\subsection{Image Dumping}
 \label{sec:image-dumping}
 
 An important feature of \Elisp{} has been the \texttt{dump-emacs}
@@ -1738,8 +1765,7 @@ Jones) started writing a \emph{portable dumper} that would serialize
 just the heap of the running XEmacs into a file, which could later be
 \texttt{mmap}ped.  Galibert added explicit memory-layout descriptors
 for all Lisp types to the system, which would later also benefit the
-new incremental garbage collector (See
-Section~\ref{sec:incremental-gc}.)  This required pervasive changes to
+new incremental garbage collector (Section~\ref{sec:incremental-gc}).  This required pervasive changes to
 the C code, and so it took until 2001 for the first version of the
 portable dumper to be released.
 
@@ -1844,7 +1870,7 @@ does not require instrumentation, and it collects (partial) stack traces.
 This means that not only the user does not need to know beforehand which
 functions might be involved but it can show an actual call tree.
 
-\subsection{JIT compilation}
+\subsection{JIT Compilation}
 \label{sec:jit}
 
 The existing implementations of \Elisp{} are 
@@ -1901,24 +1927,24 @@ Libjit does not currently support all the architectures that Emacs supports.
 %% The discussion whether this last JIT compiler will be integrated as an
 %% experimental feature into Emacs~27.1 is still on-going.
 
-\section{XEmacs period}         % 1992-2007 ?
+\section{XEmacs Period}         % 1992-2007 ?
 \label{sec:xemacs}
 
 The focus of Lucid Emacs was on providing a proper graphical user
 interface.  As a result, most of the changes to \Elisp{} in Lucid
-Emacs / XEmacs were to support the move from a TTY-based purely
+Emacs / XEmacs were made to support the move from a TTY-based purely
 textual model to a graphical model.  Lucid's original requirements
 described in Section~\ref{sec:schism} led to the creation of
 additional library features and data types, such as events, keymaps,
 characters, and extents, but put no immediate pressure on the core
 language or its implementation.  Hence this section, which describes
-those changers, is rather short.  The numerous changes to the
+those changes, is rather short.  The numerous changes to the
 implementation in Lucid Emacs / XEmacs happened as a matter of more
 general efforts to improve both the editor and the programming
 experience and are described in
 Section~\ref{sec:base-language-implementation}.
 
-\subsection{Event and keymap representations}
+\subsection{Event and Keymap Representations}
 \label{sec:keymaps}
 
 One significant departure from Emacs in Lucid Emacs was the
@@ -1987,13 +2013,13 @@ freedom~\cite{Mlynarik-personal}.  This allowed Lucid Emacs to evolve more rapid
 representation of keymaps to cater to a richer set of input events,
 including mouse events, for instance.
 
-This step reflected a general difference in philosophy.
-(See also Sections~\ref{sec:structures}, \ref{sec:data-representation}, and \ref{sec:vectors}.)
+This step reflected a general difference in philosophy
+(Sections~\ref{sec:structures}, \ref{sec:data-representation}, and \ref{sec:vectors}).
 Lucid Emacs also used custom opaque data types
 for case tables and input events, both of which retain transparent
 representations in Emacs to this day.
 
-\subsection{Character representation}
+\subsection{Character Representation}
 \label{sec:character-representation}
 
 Another instance of a change in representation happened with the
@@ -2011,14 +2037,14 @@ This situation was no longer tenable when multi-language support came
 to XEmacs.  The work on MULE~\cite{Ohmaki2002} predates widespread
 adoption of Unicode, and at the time XEmacs adopted MULE (around
 1994), a number of other text encodings were still in use.  The MULE
-character representation was based in ISO-2022 and encoded a character as an
+character representation was based on ISO-2022 and encoded a character as an
 integer divided in two parts: One represented the national character set,
-the other the associated codepoint within that character set.
+the other the associated codepoint within that set.
 
 To enforce the separation between characters and their associated
 encodings, XEmacs~20 made characters a separate data type.  XEmacs had
 functions to convert between a character and its numerical
-representation (\texttt{make-char} and \texttt{char-int}).  Generally,
+representation (i.e., \texttt{make-char} and \texttt{char-int}).  Generally,
 \Elisp{} allows programs to mostly handle text as strings,
 and avoid manipulating the numerical representation.  Making
 characters an opaque type additionally discouraged the practice.
@@ -2041,7 +2067,7 @@ libraries such as Zlib, Ldap, and PostgreSQL.
 
 Even with modules in place, developers still had to create wrappers to
 make existing C libraries accessible in \Elisp{}.  In 2005, Zajcev
-Evgeny wrote an FFI for SXEmacs~\cite{SXEmacs}, a fork of
+Evgeny wrote an FFI for \citet{SXEmacs}, a fork of
 XEmacs.\footnote{SXEmacs was forked XEmacs~21.4.16 by Steve Youngs at
   the end of 2004, due to perceived problems with the code quality and
 stability of XEmacs, and to allow more significant changes than XEmacs
@@ -2061,7 +2087,7 @@ this:
            (result (ffi-call-function curl:curl_escape str len))
       (ffi-get result))
 \end{verbatim}
-
+%%
 Richard Stallman refused to incorporate features like XEmacs's FFI into Emacs for fear
 that it would open up a backdoor with which developers would be able to
 legally circumvent the GNU General Public License (GPL) and thus link
@@ -2069,15 +2095,15 @@ Emacs's own code with code that does not abide by its licensing terms~\cite{RMS0
 
 After many years of pressure on this issue (not just within the Emacs
 project, since this affected several other GNU projects, most notably GCC),
-a solution was agreed to, which was to implement an FFI that would accept
-to load only libraries that come with a special symbol attesting that this
+a solution was agreed to, which was to implement an FFI that would accept to
+load only libraries that come with a special symbol attesting that this
 library is compatible with the GPL.  As a result, after a very long wait,
 2016 finally saw the release of Emacs~25.1 with the ability to load external
-libraries, somewhat like XEmacs's FFI.  So far, we do not know of any publicly
-available package which makes use of this new functionality, sadly.
-But rumors indicate that it has been used in a few private projects, either
-to link Emacs with another language or to extend Emacs with ad-hoc
-functionality implemented in C for performance reasons.
+libraries, somewhat like XEmacs's FFI.  This functionality was highly
+anticipated, but is still not used very widely, maybe in part because
+packages that use it, unlike Emacs Lisp packages, cannot be installed
+directly from source without the end user having a C compiler on
+his machine, which can be a significant barrier to distribution.
 
 \subsection{Aliases}
 
@@ -2090,7 +2116,7 @@ Emacs was an important goal for the XEmacs developers at the time.
 Consequently, they renamed the associated functionality.
 
 To preserve compatibility for \Elisp{} code written for previous
-versions of XEmacs, XEmacs introduced forms
+versions, XEmacs introduced forms
 \texttt{define-obsolete-functional-alias} and
 \texttt{define-obsolete-variable-alias}.  The byte-code compiler would
 emit warnings if these aliases were used, but still compile the code.
@@ -2103,15 +2129,15 @@ functionality could be based.\footnote{Curiously, \texttt{defalias}
 aliases, \texttt{defvaralias}, and functions \texttt{variable-alias}
 and \texttt{indirect-variable} to examine the alias chains.
 
-These additions were merged only into Emacs~22.1 in 2007.
+In took more than ten years until these additions were merged into Emacs~22.1 in 2007.
 
-\section{Emacs/XEmacs co-evolution}
+\section{Emacs/XEmacs Co-Evolution}
 \label{sec:coevolution}
 
 Some aspects of \Elisp{} evolved in both Emacs and XEmacs, with both
 versions borrowing design and code from the other.
 
-\subsection{Performance improvements}
+\subsection{Performance Improvements}
 
 Both Emacs and XEmacs made various performance improvements, most of
 which were merged back and forth between the two versions.
@@ -2129,7 +2155,7 @@ merged into the Emacs codebase by 1992.
 
 Also around 1992, during the early development of Emacs~19, the
 implementation of the byte-code interpreter was rewritten, and the
-result ended up in both in Emacs and XEmacs.
+result ended up in both Emacs and XEmacs.
 As part of this rewrite, a new object type for byte-compiled \Elisp{}
 functions was introduced.  Prior to that, a byte-compiled function had
 looked like this:
@@ -2176,7 +2202,7 @@ general consensus is that the byte-code interpreter is simply not very
 optimized, so the relative cost of the \texttt{switch} is not as high as it
 could (or, arguably, should) be.
 
-\subsection{Custom library}
+\subsection{Custom Library}
 \label{sec:custom}
 
 One of the tenets of Emacs's original design was that customization
@@ -2185,10 +2211,10 @@ a region via shifted motion keys is controlled by an \Elisp{} variable
 called \texttt{shift-select-mode}.  If a user wanted to change a default
 behavior controlled through a variable, they could put appropriate
 \Elisp{} code into an ``init file'', a file loaded by default on
-startup, like so:
+startup, like this:
 %
 \begin{verbatim}
-(setq shift-select-mode nil)
+    (setq shift-select-mode nil)
 \end{verbatim}
 %
 \begin{figure}[tb]
@@ -2214,35 +2240,35 @@ the integration into both Emacs and XEmacs, Custom also gained an
 have looked like this:
 %
 \begin{verbatim}
-(defvar shift-select-mode t
-  "When non-nil, shifted motion keys activate the mark momentarily.
-   ...")
+    (defvar shift-select-mode t
+      "When non-nil, shifted motion keys activate the mark momentarily.
+       ...")
 \end{verbatim}
 %
 The Custom library provides the \texttt{defcustom} form, which enables
 this declaration:
 %
 \begin{verbatim}
-(defcustom shift-select-mode t
-  "When non-nil, shifted motion keys activate the mark momentarily.
-   ..."
-  :type 'boolean
-  :group 'editing-basics)
+    (defcustom shift-select-mode t
+      "When non-nil, shifted motion keys activate the mark momentarily.
+       ..."
+      :type 'boolean
+      :group 'editing-basics)
 \end{verbatim}
 %
 This declaration instantly enables the UI for customizing
 \texttt{shift-select-mode}.  The \texttt{:type} declaration as a
 boolean makes Custom display a \texttt{Toggle} button.  \Elisp{}
 programmers can further gather multiple \texttt{defcustom} variables
-into group, creating a hierarchy that Custom also turns into a
+into groups, creating a hierarchy that Custom also turns into a
 navigation API.  The \texttt{:type} declaration can concisely describe
 elaborate structures, as in this example:
 \begin{verbatim}
-(defcustom cc-other-file-alist
-  '(("\\.cc\\'"  (".hh" ".h")) ...)
-  "Alist of extensions to find given the current file's extension.
-..."
-  :type '(repeat (list regexp (choice (repeat string) function))))
+    (defcustom cc-other-file-alist
+      '(("\\.cc\\'"  (".hh" ".h")) ...)
+      "Alist of extensions to find given the current file's extension.
+    ..."
+      :type '(repeat (list regexp (choice (repeat string) function))))
 \end{verbatim}
 From this \texttt{:type}, Custom will generate an appropriate UI to
 manipulate the value knowing that it is a list of elements, each of which is
@@ -2258,10 +2284,11 @@ As Unicode~\cite{Unicode6} became universally adopted, Emacs and XEmacs both
 supported the standard.  Emacs~21.1 added support for the \texttt{utf-8}
 coding-system, by adding it as another ``national'' character set.
 This meant that an ``é'' coming from a \texttt{utf-8} file was considered a different
-character from an ``é'' coming from a \texttt{latin-9} file.  This already
+character from an ``é'' coming from a \texttt{latin-9} file.  This sort of
+distinction already
 existed before.  For example between \texttt{latin-1} and \texttt{latin-9} (and many other
 character sets), but during the transition to \texttt{utf-8} many more users were
-using a mix of two coding systems and were hence affected by this problem.
+using a mix of two coding systems and were hence exposed to this problem.
 For this reason, in 2001, Emacs~22.1 introduced a limited form of
 unification between character sets.  XEmacs did the same in 2001 with
 release 21.4.
@@ -2284,7 +2311,7 @@ Somewhat surprisingly for Lisp, \Elisp{} had no support for
 arbitrarily large integers (\emph{bignums}) for many years.
 Integer range was restricted by word size on the underlying machine,
 and representation changes over time have affected the exact range
-available in \Elisp.  (See Section~\ref{sec:data-representation}.)
+available in \Elisp{} (Section~\ref{sec:data-representation}).
 As a result, various functions dealing with numbers beyond the fixnum range
 had to implement workarounds.  Notable are \texttt{file-attributes}
 and \texttt{current-time}.  The former
@@ -2292,7 +2319,7 @@ may use a pair of two fixnums for inode numbers, device numbers, user id,
 and group id, and may use a float for the file size.  The latter
 returns a list of numbers to encode the time.
 Another place where the limited range of integers has caused friction has
-been in the fact that it also limits the maximum size of file that can
+been in the fact that it also limits the maximum size of files that can
 be edited.
 
 Moreover, \Elisp{} was used for more and more applications beyond
@@ -2328,7 +2355,7 @@ native bignums.
 Interestingly, bignums in Emacs were always perceived as desirable but never
 important enough to overcome the hassle of requiring GMP or some other
 multiprecision library.  The deciding factor which changed the tradeoff was probably the fact that by Emacs~25, most builds of Emacs linked the GNUtls
-library. which included GMP to perform cryptography. (HTTPS support requires GNUtls.)
+library, which included GMP to perform cryptography (HTTPS support requires GNUtls).
 
 The introduction of bignums raises some design issues in \Elisp, as
 previously integers were always unboxed.  This meant that the fast
@@ -2387,7 +2414,7 @@ the reverse is not true.
 %% How did XEmacs bootstrap?
 %% Strings with text-properties? No.
 
-\subsection{Terminal-local and frame-local variables, specifiers}
+\subsection{Terminal-Local and Frame-Local Variables, Specifiers}
 
 In 1995, Emacs~19.29 added the ability to have \emph{frames} on
 several different X11 servers at the same time.  XEmacs evolved
@@ -2414,7 +2441,7 @@ from a prototype by Chuck Thompson) implemented
 depend on a generalized notion of \emph{display
   context}~\cite{XEmacsLispRef1998}.  The first prototype
 implementation was released with XEmacs~19.12.
-
+%%
 A specifier's value (its \emph{instance}) depends on its
 \emph{locale}, which can be a buffer, a window, a frame, a device, or a MULE
 character set, or certain properties of these.
@@ -2424,11 +2451,11 @@ value.  Contrary to terminal-local variables, any variable can be made
 frame-local, and additionally, a variable can be both frame-local and
 buffer-local at the same time.
 
-In 2008, during the development of Emacs~23.1 several bugs were found and
-fixed in corner-case interactions between let-bindings and buffer-local and
+In 2008, during the development of Emacs~23.1, several bugs were found and
+fixed in corner-case interactions between let-bindings, buffer-local, and
 frame-local variables (for example, when a variable is made buffer-local
-between the moment a let-binding is entered and when it is left), and at
-that occasion it was decided that variables should not be allowed to be both
+between the moment a let-binding is entered and when it is left), and
+it was then decided that variables should not be allowed to be both
 buffer-local and frame-local.
 
 The work on those bugs made it clear that the implementation of buffer-local
@@ -2438,14 +2465,14 @@ explicit in the code, and at the same time it was decided that frame-local
 variables should be deprecated.  Buffer-local variables, however, are used
 extensively in \Elisp{} and replacing them with explicit accesses to fields
 or properties of buffer objects would make \Elisp{} code heavier.
-Frame-local variables were not in widespread use and could easily be
+In contrast, frame-local variables were not in widespread use and could easily be
 replaced by more traditional use of accessors to frame properties, making it
 hard to justify the extra complexity in the implementation.  So in 2012 with
 the release of Emacs~24.1, it became impossible to let-bind frame-local
 variables any more, and in 2018 with the release of Emacs~26.1, frame-local
 variables have been removed altogether.
 
-\section{Post-XEmacs period}           % 2007-now ?
+\section{Post-XEmacs Period}           % 2007-now ?
 \label{sec:post-xemacs}
 
 Between 1991 and 2001, Emacs improved rather slowly compared to XEmacs.
@@ -2459,7 +2486,7 @@ started to lose momentum starting about 2010.
 This section discusses some notable evolution of the design of
 \Elisp{} after 2010 which have not found their way into XEmacs so far.
 
-\subsection{Lexical scoping}
+\subsection{Lexical Scoping}
 \label{sec:lexical-scoping}
 
 When Richard Stallman started working on \Elisp, lexical scoping
@@ -2469,7 +2496,8 @@ scoping to \Elisp{} has been brought up many times.
 
 The first implementation appeared quite early, in the form of the
 \texttt{lexical-let} macro, which was part of the new \texttt{cl.el} Dave
-Gillespie \email{<daveg@synaptics.com>} introduced in 1993.
+Gillespie %% Doesn't work and not needed: \email{<daveg@synaptics.com>}
+introduced in 1993.
 The \texttt{lexical-let} macro performed a local form of closure-conversion.
 While this macro was used in many packages, it was never considered as
 a good solution to the problem of providing lexical scoping.
@@ -2497,7 +2525,7 @@ Dynamic scoping had two main drawbacks in practice:
   choice of local names.  The convention to name all
   global variables with a package-specific prefix works well to avoid name
   conflicts: it not only avoids conflicts between global variables, but also
-  between local variable and global variables since local variables do not
+  between local variables and global variables since local variables do not
   have such a prefix.  The only remaining possible conflicts occur between
   local variables of different functions.  In \Elisp{} these tend to happen only
   in the presence of higher-order functions.  For example in code such as:
@@ -2525,7 +2553,7 @@ a non-negotiable need to preserve compatibility with existing \Elisp{} code,
 although some limited breakage for rare situations could be tolerated.
 
 The vast majority of existing \Elisp{} code was (and still is) agnostic to
-the kind of scoping used in the sense that either dynamic or lexical scoping
+the kind of scoping used, in the sense that either dynamic or lexical scoping
 of local variables gives the same result in almost all circumstances.  This was true of early
 \Elisp{} code and has become even more true over time as the byte-code compiler
 started to warn about references to undeclared variables.  Warnings about
@@ -2546,14 +2574,14 @@ mechanically convert \Elisp{} packages to a lexically scoped version of
 was to facilitate moving \Elisp{} code to Scheme eventually, but the
 overall project was too large to ever be realized.
 
-In late 2001, Miles Bader started working on a branch of Emacs called
+In late 2001, Miles Bader started working on a branch of Emacs he called
 \emph{lexbind} with support for lexical scoping, which was finally included
 in Emacs~24.1.  The solution he adopted was to have two languages: an
 \Elisp{} with dynamic scope for backward compatibility, and another with
 scoping rules like those of Common Lisp: lexical scope by default
 except for those variables that have been declared as dynamically
-scoped.  (In
-practice, these are all the global variables.)  Each file is tagged to
+scoped (in
+practice, these are all the global variables).  Each file is tagged to
 indicate which language is to be used, defaulting to the backward compatible
 mode.  In turn, each function value is tagged with the language it is
 using, so functions using dynamic scope can seamlessly call functions with
@@ -2631,7 +2659,7 @@ convert.  For example, as of Emacs~26, only a third of Emacs's own Lisp code
 has been converted to use lexical scoping.
 
 
-\subsection{Eager macro-expansion} %Emacs~24.3?
+\subsection{Eager Macro-Expansion} %Emacs~24.3?
 \label{sec:eager-macro-expansion}
 
 The exact time at which a macro is expanded has never been clearly specified
@@ -2668,7 +2696,7 @@ while loading a file and while compiling them) according to the section
 handling of macros that expand to both definitions and uses of
 those definitions.
 
-\subsection{Pattern matching}           %Released in Emacs~24.1
+\subsection{Pattern Matching}           %Released in Emacs~24.1
 \label{sec:pcase}
 
 While working on the \texttt{lexical-binding} feature, Stefan Monnier grew
@@ -2701,8 +2729,8 @@ After the release of Emacs~24.1, Stefan Monnier was made aware of Racket's
 his earlier search for
 existing pattern matching macros and whose design makes it easy to define
 new patterns.  The implementation of Racket's \texttt{match} could not be
-easily reused in \Elisp{} because it relies too much on the compiler's
-efficient handling of locally defined functions, but \texttt{pcase.el} was
+easily reused in \Elisp{} because it relies too much on Racket's
+efficient handling of locally defined functions and tail calls, but \texttt{pcase.el} was
 improved to follow some of the design of Racket's \texttt{match}.
 The new version appeared in Emacs~25.1 and the main resulting novelty was the
 introduction of \texttt{pcase-defmacro} which can define new patterns
@@ -2713,10 +2741,11 @@ in a modular way. %% often using the new low-level pattern \texttt{app}.
 
 While the core of \Elisp{} has evolved very slowly over the years, the
 evolution of other Lisps (mostly Scheme and Common Lisp) progressed,
-purring put pressure on \Elisp{} to
+putting pressure on \Elisp{} to
 try and add various extensions to the language.  As it turns out, \Elisp{},
 to a first approximation, can be seen as a subset of Common Lisp, so by
-1986 Cesar Quiroz \email{<quiroz@cs.rochester.edu>} had already written
+1986 Cesar Quiroz %% Doesn't work and not needed: \email{<quiroz@cs.rochester.edu>}
+had already written
 a \texttt{cl.el} package that provided various
 Common Lisp facilities implemented as macros.  Emacs~18.51 was the
 first Emacs release to ship with \texttt{cl.el}, in 1988.  It was superceded
@@ -2735,7 +2764,7 @@ itself: \Elisp{} packages bundled with Emacs
 could only use \texttt{cl.el} in such a way that
 \texttt{cl.el} never needed to be loaded during a normal editing session.
 Concretely, this meant that the only features of \texttt{cl.el} that could
-be used were macros and inlined functions.
+be used within Emacs were macros and inlined functions.
 
 The reasons why Stallman did not want to use \texttt{cl.el} and turn \Elisp{}
 into Common Lisp are not completely clear, but the following elements seem
@@ -2746,10 +2775,10 @@ to have been part of the motivations:
   \Elisp{} into a reasonably complete implementation of Common Lisp.
 \item Some aspects of Common Lisp's design can incur 
   significant overhead, and Emacs already carried the stigma of being
-  too big.  (\texttt{vi} advocates used the derogatory epithet \emph{eight
+  too big (\texttt{vi} advocates used the derogatory epithet \emph{eight
   megabytes and
     constantly swapping} in the days when eight megabytes were a
-  significant amount of memory.)  Consequently, there were good reasons to avoid making
+  significant amount of memory).  Consequently, there were good reasons to avoid making
   \Elisp{}'s efficiency any worse.
 \item Many aspects of Common Lisp design were decided by majority not consensus, as
   evidenced by the divide between Common Lisp and Scheme.
@@ -2804,9 +2833,9 @@ moving them into \Elisp{} proper:
   \texttt{cl.el}'s \texttt{delete-duplicates}.
 \item[2012] Emacs~24.1 added \texttt{macroexpand-all} and lexical scoping,
   which obsoleted  the  \texttt{lexical-let} form from \texttt{cl.el}.
-\item[2013] Emacs~24.3 added compiler macros, \texttt{setf} and
+\item[2013] Emacs~24.3 added compiler macros, \texttt{setf}, and
   generalized variables.
-\item[2018] To the \texttt{cXXXr} functions incorporated in Emacs~20.1,
+\item[2018] To the \texttt{cXXr} functions incorporated in Emacs~20.1,
   Emacs~26.1 added the remaining \texttt{cXXXr} functions.  The resistance
   against those was mostly one of style, since they tend to lead to code
   that is difficult to read.
@@ -2856,7 +2885,7 @@ more, and it is expected to be declared obsolete in Emacs~27.
 But it has been very popular for many years, so it will take a long time
 before we can really retire it.  
 
-\subsection{Generalized variables} %Released in Emacs~24.3
+\subsection{Generalized Variables} %Released in Emacs~24.3
 \label{sec:generalized-variables}
 
 To facilitate the move to \texttt{cl-lib.el}, some frequently used
@@ -2871,7 +2900,7 @@ operands.  For example, \texttt{(setf \id{PLACE} \id{VALUE})} treats
 a generalized variable as a reference and sets its value.
 
 In Common Lisp, macros can invoke \texttt{get-setf-expansion}
-to turn a place into a list of five elements:
+to turn a \emph{place} into a list of five elements:
 \begin{displaymath}
   (\id{VARS}~\id{VALS}~\id{STORE-VAR}~\id{STORE-FORM}
   ~\id{ACCESS-FORM})
@@ -2883,13 +2912,15 @@ reads the current value of the place; and \id{STORE-VAR} and \id{STORE-FORM}
 specify how to \emph{set} the place (by binding \id{STORE-VAR} to the
 desired value and then executing \id{STORE-FORM}).
 
-For example the macro \texttt{(push \id{EXP} \id{PLACE})} adds
+For example, the macro \texttt{(push \id{EXP} \id{PLACE})} which adds
 \id{EXP} to the head of the list stored in \id{PLACE}, could be defined to
 expand to:
 %
-\begin{center}
-\texttt{(setf \id{PLACE} (cons \id{EXP} \id{PLACE}))}
-\end{center}
+\begin{displaymath}
+  \MAlign{
+    \texttt{(let ((v \id{EXP}))} \\
+    \;\;\;\texttt{(setf \id{PLACE} (cons v \id{PLACE})))}}
+\end{displaymath}
 %
 But that would duplicate \id{PLACE} which could perform a costly operation
 and have side-effects.  So the macro instead uses
@@ -2915,7 +2946,7 @@ new implementation of the concept was used.  The reasons for this new
 implementation were:
 \begin{itemize}
 \item The implementor of \texttt{cl-lib} (Stefan Monnier) found the existing
-  code was hard to follow, arguably a case of
+  code hard to follow, arguably a case of
   ``not-invented-here syndrome'' on Stefan's part.
 \item The previous code made use of internal helper functions from
   \texttt{cl.el}, which the maintainers did not want to move to core \Elisp,
@@ -2972,11 +3003,11 @@ a downside, but in practice this function was almost never used outside of
 \texttt{cl.el} itself so very few packages were impacted by
 this incompatibility.
 
-\subsection{Object-oriented programming} %Emacs~25.1
+\subsection{Object-Oriented Programming} %Emacs~25.1
 \label{sec:oop}
 
 While \texttt{cl.el} provided compatibility with Common
-Lisp's \texttt{defstruct} early on (see Section~\ref{sec:structures}), including the
+Lisp's \texttt{defstruct} early on (Section~\ref{sec:structures}), including the
 ability to define new structs as extensions/subtypes of others, thus
 providing a limited form of inheritance, actual support for object-oriented
 programming in the form of method dispatch has been historically limited
@@ -3011,12 +3042,13 @@ example by adding \emph{qualifiers} (like \texttt{:after}, or
 fields, and various other properties.
 
 Here is an example of CLOS code which defines a new \texttt{point3d} subclass
-of a pre-existing \texttt{point2d} class, and add a new method to the
+of a pre-existing \texttt{point2d} class, and adds a new method to the
 generic function \texttt{point-distance}, but only when both
 arguments are subtypes of \texttt{point3d}:
 \begin{verbatim}
     (defclass point3d (point2d)
       (z :documentation "Third dimension"))
+
     (defmethod point-distance ((p1 point3d) (p2 point3d))
       (let ((distance2d (call-next-method))
             (distancez (- (slot-value p1 'z) (slot-value p2 'z))))
@@ -3074,13 +3106,14 @@ same featureset as CLOS's \texttt{defmethod}, except for some important
 differences:
 \begin{enumerate}
 \item Method combinations cannot be specified per method like in CLOS, but
-  instead new method combinations can be added globally by adding
+  instead new method combinations can be added only globally by adding
   appropriate methods to
   \texttt{cl-\linebreak[0]generic-\linebreak[0]combine-\linebreak[0]methods}.
-  This seemed like a good idea, but there is no known user of this feature
-  at this time, not even internally.
+  This was trivial to implement but is basically unusable, as
+  evidenced by the fact that there is no known user of this feature at this
+  time, not even internally.
 \item The set of supported specializers is not hard-coded.  In CLOS,
-  a specializer can be either a type (indicating the this method applies when the argument is of
+  a specializer can be either a type (indicating that this method applies when the argument is of
   this type) or of the form \texttt{(eql \id{VAL})}, indicating that the
   method applies only when the argument is equal to \id{VAL}.
   \Elisp{} extends this so new specializers
@@ -3113,7 +3146,7 @@ applicable when \id{EXP} evaluates to a value that satisfies the
 are applicable only in specific contexts, such as in specific major modes or
 in frames using a particular kind of GUI.
 
-\subsubsection{Overall support for classes}
+\subsubsection{Overall Support for Classes}
 
 The implementation of \texttt{cl-generic.el} was accompanied by an extension
 of the on-line help system so as to be able to give information not just
@@ -3134,15 +3167,15 @@ creation and field accesses; \texttt{cl-defmethod} provided by
 \texttt{cl-generic.el} which allows defining methods and supports
 \texttt{cl-defstruct} objects and \texttt{defclass} objects equally; and finally
 \texttt{defmethod}, which
-has been reimplemented as a wrapper on top of the new \texttt{cl-defmethod}.
-(This backward compatibility library is deprecated and a bit less efficient
+has been reimplemented as a wrapper on top of the new \texttt{cl-defmethod}
+(this backward compatibility library is deprecated and a bit less efficient
 than using \texttt{cl-defmethod} directly but still more efficient than its
 earlier implementation, and it is fully implemented using documented features
 of \texttt{cl-defmethod}, so it does not impose any performance or
-maintenance issue.)  Emacs will likely live with both \texttt{cl-defstruct} and
+maintenance issue).  Emacs will likely live with both \texttt{cl-defstruct} and
 \texttt{defclass} for the foreseeable future.
 
-\subsection{Actual objects}  %Emacs~26.1
+\subsection{Actual Objects}  %Emacs~26.1
 \label{sec:actual-objects}
 
 While Emacs~25's \texttt{cl-generic.el} introduced object-oriented
@@ -3152,8 +3185,8 @@ still represented as vectors and hence couldn't be reliably distinguished
 from vectors, for example to pretty-print them.
 
 This was addressed in Emacs~26 by the introduction of records via the
-\texttt{make-record} primitive and a corresponding new object type.
-(See also Section~\ref{sec:structures}.)
+\texttt{make-record} primitive and a corresponding new object type
+(Section~\ref{sec:structures}).
 Records are implemented just like the vectors used previously,
 except that their tag indicates that they should be treated as records
 instead of vectors, and that by convention the first field of a record is
@@ -3194,10 +3227,10 @@ waiting for the next user input.
 
 While this very limited form of cooperative concurrency was slightly
 improved in 1994's Lucid Emacs 19.9 and 1996's Emacs~19.31 by adding
-native support for timers.
-Timers
+native support for timers
+(timers
 had earlier been implemented as an asynchronous process sending Emacs output at
-the requested time, it has been the only form of concurrency available for
+the requested time), it has been the only form of concurrency available for
 most of Emacs's life.
 
 Adding true shared-memory concurrency to \Elisp{} is problematic because of
@@ -3206,7 +3239,7 @@ cases, shared state is not a problem and concurrency can be mimicked via
 asynchronous programming: When a program waits for an operation (such as an
 external program), instead of blocking, it registers a continuation callback
 and returns control to the main event loop.  Yet many \Elisp{} packages
-instead block, because slicing the execution via callback means effectively
+instead block, because slicing the execution via callbacks means effectively
 writing code in continuation-passing style which is poorly supported in
 \Elisp{}, interacts badly with dynamic scoping, and requires significant
 surgery to retro-fit to existing code.
@@ -3264,7 +3297,7 @@ of the main process---the subprocess may even be another version of Emacs in
 some cases.  Still, several third party packages make limited use of
 \texttt{async.el}.
 
-\subsection{Inline functions}
+\subsection{Inline Functions}
 \label{sec:inline-functions}
 
 Function calls are fairly expensive in \Elisp{}, and their semantics
@@ -3274,18 +3307,19 @@ semantically visible.
 
 So during the development of the new byte-code compiler for Emacs~19, a new
 \texttt{defsubst} macro was added, which works like \texttt{defun} except
-that it annotates the function so the byte-code compiler inlines it whenever it
+that it annotates the function to tell the byte-code compiler it should inline it whenever it
 can.  This inlining was fairly naive, but worked both for compiled and
 non-compiled functions (by either inlining the function's body into the
 source code or into the generated byte-code of the caller).
 
 The new \texttt{cl.el} package by Dave Gillespie included in 1993 introduced
-a new way of inlining in the form of the \texttt{defsubst*} macro, which is
-almost identical to \texttt{defsubst} from the outside, except for including
+a new way of inlining in the form of the \texttt{defsubst*} macro, which
+from the outside is
+almost identical to \texttt{defsubst}, except for including
 support for Common Lisp extensions like keyword arguments, but its
-implementation does not correctly preserve the semantics of
-the dynamically scoped formal arguments, which are instead replaced by
-substitution with the actual arguments.
+implementation tries to generate more efficient code by substitution with
+the actual arguments (without quite preserving the usual Emacs Lisp semantics of
+function calls).
 
 A third way to implement an ``inlinable function'' in \Elisp{} is by
 defining it as a macro, although this comes with the drawback that it does
@@ -3347,7 +3381,7 @@ functions in the Emacs distribution are defined using
 %% in `macroexpand-all` but not in `macroexpand` so it does not happen
 %% for interpreted code that's not eagerly macroexpanded).
 
-\subsection{Module system}
+\subsection{Module System}
 \label{sec:module-system}
 
 While \Elisp{} was designed from the beginning as a real programming
@@ -3411,6 +3445,7 @@ particular namespacing used when browsing the code.
 
 %% FIXME: Should we talk about "package systems" in XEmacs / ELPA etc.?
 
+\clearpage
 \section{Conclusion}
 \label{sec:conclusion}
 
@@ -3475,7 +3510,7 @@ looking forward to reporting about its next 30 years of evolution.
 
 \subsection{Acknowledgments}
 
-Emacs and \Elisp{} are the result of the contribution of an impressive
+Emacs and \Elisp{} are the result of the contributions of an impressive
 number of individuals.  We thank them all for their contributions.
 While the efforts put into maintaining the
 revision history of Emacs through the various revision systems it has used
@@ -3484,15 +3519,23 @@ archiving work at \url{https://github.com/larsbrinkhoff/emacs-history} which
 fills some of the holes of the early life of Emacs.
 Moreover, we thank Joseph Arceneaux for the
 interview in Appendix~\ref{appendix:arceneaux}, as well as Richard Gabriel,
-Richard Stallman and Jamie Zawinski for patiently answering our questions.
+Richard Stallman, and Jamie Zawinski for patiently answering our questions.
+
+This work was partially supported by the \grantsponsor{NSERC}{Natural
+  Sciences and Engineering Research Council of
+  Canada}{http://nserc-crsng.gc.ca/} grant
+N$^o$~\grantnum{NSERC}{298311/2012} and \grantnum{NSERC}{RGPIN-2018-06225}.
+Any opinions, findings, and conclusions or recommendations expressed in this
+material are those of the author and do not necessarily reflect the views of
+the NSERC.
 
 \clearpage                      %Looks cleaner, IMO  --Stef
 \appendix
 
-\section{Alternative implementations}
+\section{Alternative Implementations}
 \label{sec:alternative-implementations}
 
-Implementation of \Elisp{} have not been confined to Emacs and its
+Implementations of \Elisp{} have not been confined to Emacs and its
 derivatives.  Two imp\-lemen\-tations---Edwin and JEmacs---are notable for
 running \Elisp{} code on editors implemented independently from Emacs.
 Moreover, a Common Lisp package emulates Emacs Lisp, and Guile Scheme
@@ -3503,7 +3546,7 @@ significant language changes.
 
 \subsection{Edwin}
 
-Edwin is the editor that ships with MIT Scheme~\cite{MITScheme2014}.
+Edwin is the editor that ships with MIT Scheme~\cite{MITScheme2014}. %FIXME
 Its user interface is based on that of Emacs.  Edwin is implemented
 completely in Scheme, and Scheme is its native extension language.
 Additionally, Matthew Birkholz implemented an \Elisp{} interpreter
@@ -3542,7 +3585,8 @@ running the result.
 
 \subsection{Guile}
 
-Guile Scheme~\cite{Guile2020} was conceived as the universal extension
+Guile Scheme~\cite{Guile2020}   %FIXME
+was conceived as the universal extension
 language of the GNU project, with the specific intention of replacing
 \Elisp{} in Emacs at one point~\cite{WhyNotTcl}.  This has not happened (yet), but Guile does
 ship with a fairly complete implementation of \Elisp{} that translates
@@ -3567,9 +3611,8 @@ standard primitives.
 Joseph Arceneaux is an American software architect. In the early 1990,
 Arcenaux was the maintainer of GNU Emacs, working first for the Free
 Software Foundation, then for Lucid, Inc.  Lucid Inc.\ wanted to base
-its Energize development environment for C++ on Emacs---see
-Section~\ref{sec:energize}.  During
-Arcenaux's tenure, the commercial interests of Lucid Inc.\ and those
+its Energize development environment for C++ on Emacs (Section~\ref{sec:energize}).
+During Arcenaux's tenure, the commercial interests of Lucid Inc.\ and those
 of Emacs's original author, Richard Stallman, clashed, which finally
 resulted in Lucid creating its own fork of Emacs, Lucid Emacs.
 
