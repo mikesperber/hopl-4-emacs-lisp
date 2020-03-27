@@ -6,6 +6,7 @@
 \usepackage{tabu}
 \usepackage{alltt}
 \usepackage{microtype}
+\usepackage{fancyvrb}
 \usepackage[utf8]{inputenc}
 \usepackage{acmshepherd}
 
@@ -13,9 +14,11 @@
 \citestyle{acmauthoryear}
 
 %% Paper history
-\received{August 2018}
-\received[Revised]{August 2019}
-\received[Final]{March 2020}
+%% Not sure where we got this from, but the HOPL editors ended asking it be
+%% removed ;-)
+%% \received{August 2018}
+%% \received[Revised]{August 2019}
+%% \received[Final]{March 2020}
 
 %% While Richard prefers "Emacs Lisp" I find it unnecessarily verbose
 %% and much prefer "Elisp" which is also very widely used.
@@ -65,7 +68,7 @@
 }
 \email{sperber@deinprogramm.de}
 
-\shepherd{Brent Hailpern, IBM Research}
+\shepherd{Brent Hailpern, IBM Research, USA}
 
 \begin{abstract}
 While Emacs proponents largely agree that it is the world's greatest text editor, it is almost as much a Lisp machine disguised as an editor.  Indeed, one of its chief appeals is that it is \emph{programmable} via its own programming language.  Emacs Lisp is a Lisp in the classic tradition.  In this article, we present the history of this language over its more than 30 years of evolution.  Its core has remained remarkably stable since its inception in 1985, in large part to preserve compatibility with the many third-party packages providing a multitude of extensions.  Still, Emacs Lisp has evolved and continues to do so.
@@ -103,7 +106,9 @@ The timeline of Emacs Lisp development is closely tied to the projects and peopl
 
 \maketitle
 
-\clearpage\tableofcontents\clearpage
+\clearpage
+\tableofcontents
+%% \clearpage
 
 \section{Introduction}
 
@@ -179,7 +184,7 @@ Appendix~\ref{sec:alternative-implementations}.
 Appendix~\ref{appendix:arceneaux} contains the transcript of an
 interview with Joseph Arcenaux, the initial maintainer of Emacs 19.
 
-\clearpage
+%% \clearpage
 \section{Emacs History}
 \label{sec:emacs-history}
 
@@ -1030,12 +1035,12 @@ and \texttt{error} to work.
 
 Here is an example for \texttt{condition-case}:
 %%
-\begin{verbatim}
+\begin{Verbatim}
     (condition-case err
         (key-binding (this-command-keys))
       (wrong-type-argument
        (message "Incorrect type error: %S" err)))
-\end{verbatim}
+\end{Verbatim}
 %%
 This evaluates \texttt{(key-binding ...)}.  If a
 \texttt{wrong-type-argument} is signalled during evaluation,
@@ -1188,7 +1193,7 @@ all defined functions, namely \emph{interactive} functions, which
 are specially marked with an \texttt{interactive} form at the
 beginning of the body, like this:
 %%
-\begin{verbatim}
+\begin{Verbatim}[samepage=true]
     (defun forward-symbol (arg)
       "Move point to the next position that is the end of a symbol.
     A symbol is any sequence of characters that are in either the
@@ -1202,7 +1207,7 @@ beginning of the body, like this:
           (if (re-search-backward "\\(\\sw\\|\\s_\\)+" nil 'move)
               (skip-syntax-backward "w_"))
           (setq arg (1+ arg)))))
-\end{verbatim}
+\end{Verbatim}
 The \texttt{interactive} form also has an optional string operand that
 regulates how such a function receives its arguments (it can also be
 an expression that is evaluated to produce a list of arguments).  In the above
@@ -1238,11 +1243,11 @@ every buffer.  In the absence of such a buffer-local assignment, a variable
 is said to have its \emph{default} or \emph{global} value.
 
 Variables can be both buffer-local and dynamically bound at the same time:
-\begin{verbatim}
+\begin{Verbatim}
     (let ((buffer-file-name "/home/rms/.emacs"))
       (with-current-buffer "some-other-buffer"
         buffer-file-name))
-\end{verbatim}
+\end{Verbatim}
 This example will not return \texttt{"/home/rms/.emacs"} but the
 buffer-local value of \texttt{buffer-file-name} in the buffer
 \texttt{"some-other-buffer"} instead, because \texttt{with-current-buffer}
@@ -1262,12 +1267,12 @@ buffer-local variables.  The most famous one was fixed in Emacs~21.1.
 %% Mike: I can see that it was fixed in XEmacs, but can't see when
 %% that was.
 This bug affected code like
-\begin{verbatim}
+\begin{Verbatim}[samepage=true]
     (let ((buffer-file-name "/home/rms/.emacs"))
       ...
       (set-buffer other-buffer)
       ...)
-\end{verbatim}
+\end{Verbatim}
 where the current buffer was different when the let-binding is entered from
 when it is left;\footnote{\texttt{set-buffer} is like
   \texttt{with-current-buffer} except that it is not scoped, so it takes
@@ -1967,7 +1972,7 @@ simply a two-element list whose car is the symbol \texttt{keymap} and
 whose second element is either a vector indexed by character code or an
 %% This option was already present in Emacs~16.56!
 \emph{association list}.
-The current representation for keymaps in Emacs is richer but follows
+The current keymap representation in Emacs is richer but follows
 largely the same design.  Here is an example~\cite{ELispManual2018}:
 %%
 \begin{verbatim}
@@ -2080,7 +2085,7 @@ without intervening wrappers, by declaring the type signatures of C
 functions in \Elisp{}.  For example, the FFI allows using Curl like
 this:
 %%
-\begin{verbatim}
+\begin{Verbatim}[samepage=true]
     (ffi-load "libcurl.so")
     (setq curl:curl_escape
           (ffi-defun '(function c-string c-string int) "curl_escape"))
@@ -2089,7 +2094,7 @@ this:
            (len (ffi-create-fo 'int (length url)))
            (result (ffi-call-function curl:curl_escape str len))
       (ffi-get result))
-\end{verbatim}
+\end{Verbatim}
 %%
 Richard Stallman refused to incorporate features like XEmacs's FFI into Emacs for fear
 that it would open up a backdoor with which developers would be able to
@@ -3048,7 +3053,7 @@ Here is an example of CLOS code which defines a new \texttt{point3d} subclass
 of a pre-existing \texttt{point2d} class, and adds a new method to the
 generic function \texttt{point-distance}, but only when both
 arguments are subtypes of \texttt{point3d}:
-\begin{verbatim}
+\begin{Verbatim}[samepage=true]
     (defclass point3d (point2d)
       (z :documentation "Third dimension"))
 
@@ -3057,7 +3062,7 @@ arguments are subtypes of \texttt{point3d}:
             (distancez (- (slot-value p1 'z) (slot-value p2 'z))))
         (sqrt (+ (* distance2d distance2d)
                  (* distancez distancez)))))
-\end{verbatim}
+\end{Verbatim}
 
 \subsubsection{EIEIO}
 
@@ -3084,19 +3089,20 @@ of the same problems as \texttt{cl.el} in that it was not
 \subsubsection{CL-generic}
 
 At the end of 2014, Stefan Monnier started to try and clean up EIEIO so as
-to be able to use it in more parts of Emacs.  The intention was basically to
-add a ``\texttt{cl-}'' prefix as was done for \texttt{cl-lib} (because it
-was perceived that an ``\texttt{eieio-}'' prefix would be too verbose to be
-popular), but there was also a desire to improve the \texttt{defmethod} with
+to be able to use it in more parts of Emacs.  The intention was mostly to
+add a ``\texttt{cl-}'' prefix as was done for \texttt{cl-lib} (rather than
+an ``\texttt{eieio-}'' prefix, perceived as too verbose to be
+popular), as well as improve \texttt{defmethod} with
 support for \texttt{:around} methods and dispatch on other types than those
 defined with \texttt{defclass}.
-
-It became quickly evident that the implementation of method dispatch
+%%
+But it became quickly evident that the implementation of method dispatch
 needed a complete overhaul: rather than constructing combined methods
 up-front and memoizing the result, as in typical CLOS implementations,
 EIEIO's dispatch and \texttt{call-next-method} did all their work
 dynamically, relying on global variables to preserve state in
-a way that was both brittle and somewhat inefficient.
+a way that was not only brittle and somewhat inefficient but made it
+hard to extend with \texttt{:around} methods.
 
 So, instead of improving EIEIO's \texttt{defmethod}, a completely new
 version of CLOS's \texttt{defmethod} was implemented in the new
@@ -3448,7 +3454,7 @@ particular namespacing used when browsing the code.
 
 %% FIXME: Should we talk about "package systems" in XEmacs / ELPA etc.?
 
-\clearpage
+%% \clearpage
 \section{Conclusion}
 \label{sec:conclusion}
 
@@ -3511,7 +3517,7 @@ looking forward to reporting about its next 30 years of evolution.
 % developers have made to the system over the last decade alone, we are
 % looking forward to the \Elisp{} of the next 30 years.
 
-\subsection{Acknowledgments}
+\section*{Acknowledgments}
 
 Emacs and \Elisp{} are the result of the contributions of an impressive
 number of individuals.  We thank them all for their contributions.
@@ -3532,7 +3538,7 @@ Any opinions, findings, and conclusions or recommendations expressed in this
 material are those of the author and do not necessarily reflect the views of
 the NSERC.
 
-\clearpage                      %Looks cleaner, IMO  --Stef
+%% \clearpage                      %Looks cleaner, IMO  --Stef
 \appendix
 
 \section{Alternative Implementations}
@@ -3887,7 +3893,7 @@ in Lisp.
   Excellent.  Thank you very much!
 \end{question}
 
-\clearpage % Revised HOPL IV Style Guide
+%% \clearpage % Revised HOPL IV Style Guide
 
 \bibliographystyle{ACM-HOPL-Reference-Format}
 \bibliography{refs}
