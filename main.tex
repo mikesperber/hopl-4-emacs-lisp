@@ -1048,7 +1048,7 @@ then \texttt{(message ...)} is evaluated and will print the content of
 \texttt{err} which will be a pair
 consisting of the error symbol and the data argument passed to
 \texttt{signal}.
-
+%%
 Emacs comes with a set of standard errors, establishing a protocol
 between signaling and handling code.
 
@@ -2744,7 +2744,7 @@ The new version appeared in Emacs~25.1 and the main resulting novelty was the
 introduction of \texttt{pcase-defmacro} which can define new patterns
 in a modular way. %% often using the new low-level pattern \texttt{app}.
 
-\subsection{CL-lib}          %Released in Emacs~24.3
+\subsection{CL-Lib}          %Released in Emacs~24.3
 \label{sec:cl-lib}
 
 While the core of \Elisp{} has evolved very slowly over the years, the
@@ -3086,7 +3086,7 @@ limited, partly for reasons of inertia, but also because EIEIO suffered some
 of the same problems as \texttt{cl.el} in that it was not
 ``namespace clean''.
 
-\subsubsection{CL-generic}
+\subsubsection{CL-Generic}
 
 At the end of 2014, Stefan Monnier started to try and clean up EIEIO so as
 to be able to use it in more parts of Emacs.  The intention was mostly to
@@ -3517,8 +3517,7 @@ looking forward to reporting about its next 30 years of evolution.
 % developers have made to the system over the last decade alone, we are
 % looking forward to the \Elisp{} of the next 30 years.
 
-\section*{Acknowledgments}
-
+\begin{acks}
 Emacs and \Elisp{} are the result of the contributions of an impressive
 number of individuals.  We thank them all for their contributions.
 While the efforts put into maintaining the
@@ -3537,6 +3536,7 @@ N$^o$~\grantnum{NSERC}{298311/2012} and \grantnum{NSERC}{RGPIN-2018-06225}.
 Any opinions, findings, and conclusions or recommendations expressed in this
 material are those of the author and do not necessarily reflect the views of
 the NSERC.
+\end{acks}
 
 %% \clearpage                      %Looks cleaner, IMO  --Stef
 \appendix
