@@ -1,0 +1,81 @@
+Everyone has a 1h slot, apparently, so that's about 45min for the talk
+plus 15min for questions.
+
+There are 5minutes in the plan below, but I suspect that the XEmacs and
+post-XEmacs period could be cut down significantly, and or partly merged
+into the previous parts
+
+* Background              10min
+
+** Emacs                   8min
+- TECO Emacs => Multics Emacs => Gosling Emacs => GNU Emacs
+- ELisp designed as the implementation language of Emacs
+- Free Software philosophy embodied in the design
+- Development model
+  - During TECO Emacs => early GNU Emacs
+  - Around Emacs-19 (schism and such)
+  - in XEmacs
+  - in Emacs≥21
+
+** Early language design   2min
+- maclisp
+- mocklisp
+
+* Base ELisp              10min
+
+** "Normal" language       5min
+- scoping
+- macros
+- absence of records/structs/...
+- non-local exits
+
+** Emacs-specific          5min
+- hooks
+- docstrings
+- interactive functions
+- strings
+- buffer-local vars
+- I/O
+
+* Implementation          10min
+** code
+- byte-code
+- bootstrap
+- debugging
+- profiling
+- jit
+- tail calls
+** data
+- overview
+- stack scanning
+- tag bits
+- vectors
+- weak pointers
+- incremental GC
+- dumping
+
+* XEmacs period           10min
+- events&keymaps
+- characters
+- ffi
+- aliases
+- unicode
+- bignums
+- specifiers
+- performance improvements
+- Custom
+
+* post-XEmacs             10min
+- lexical scoping
+- cl-lib
+- pattern matching
+- gv
+- OO
+- generators
+- concurrency
+- inline functions
+- modules or lack thereof
+
+* Conclusion               5min
+- macros allow "wild" experimentation and domain-specific extensions
+- simple core, with conservative evolution

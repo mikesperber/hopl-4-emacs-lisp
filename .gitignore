@@ -9,4 +9,7 @@
 /main.out
 /main.toc
 /main.pdf
+*.log
+*.zip
+*.pdf
 *~
