@@ -5,9 +5,11 @@ There are 5minutes in the plan below, but I suspect that the XEmacs and
 post-XEmacs period could be cut down significantly, and or partly merged
 into the previous parts
 
-* Background              10min
+* Stefan
 
-** Emacs                   8min
+** Background              10min
+
+*** Emacs                   8min
 - TECO Emacs => Multics Emacs => Gosling Emacs => GNU Emacs
 - ELisp designed as the implementation language of Emacs
 - Free Software philosophy embodied in the design
@@ -17,19 +19,19 @@ into the previous parts
   - in XEmacs
   - in Emacs≥21
 
-** Early language design   2min
+*** Early language design   2min
 - maclisp
 - mocklisp
 
-* Base ELisp              10min
+** Base ELisp              10min
 
-** "Normal" language       5min
+*** "Normal" language       5min
 - scoping
 - macros
 - absence of records/structs/...
 - non-local exits
 
-** Emacs-specific          5min
+*** Emacs-specific          5min
 - hooks
 - docstrings
 - interactive functions
@@ -37,15 +39,15 @@ into the previous parts
 - buffer-local vars
 - I/O
 
-* Implementation          10min
-** code
+** Implementation          10min
+*** code
 - byte-code
 - bootstrap
 - debugging
 - profiling
 - jit
 - tail calls
-** data
+*** data
 - overview
 - stack scanning
 - tag bits
@@ -54,7 +56,7 @@ into the previous parts
 - incremental GC
 - dumping
 
-* XEmacs period           10min
+** XEmacs period           10min
 - events&keymaps
 - characters
 - ffi
@@ -65,7 +67,7 @@ into the previous parts
 - performance improvements
 - Custom
 
-* post-XEmacs             10min
+** post-XEmacs             10min
 - lexical scoping
 - cl-lib
 - pattern matching
@@ -76,6 +78,64 @@ into the previous parts
 - inline functions
 - modules or lack thereof
 
-* Conclusion               5min
+** Conclusion               5min
 - macros allow "wild" experimentation and domain-specific extensions
 - simple core, with conservative evolution
+
+* Mike
+
+Issues:
+
+- When to do "Stefan = Emacs, Mike = XEmacs"?
+- How much of the Emacs vs. XEmacs history?
+- Where to put free software ideals?
+
+** Steele + Stallman: TECO => Emacs keybindings
+
+Reenact the original scene.
+
+** Lisp overview
+
+Come from TECO language.
+
+Then have a conversation.
+
+"Obscure PL" vs. Scheme (academic) / Lua (didn't exist) / Python
+(didn't exist) / Tcl (didn't exist) / JavaScript (haha)
+
+** Dynamic binding: What is it good for?
+
+Stefan can show what dynamic binding is good for.
+
+Mike's a Schemer, so likes static binding -> early work in XEmacs.
+
+Stefan: "So where is it now?"
+
+Mike: "Research!"
+
+Stefan: "Static scoping in Emacs implemented."
+
+Mike: "Boring! What do you do for a day job?"
+
+** Macros
+
+
+** XEmacs vs. Emacs
+
+Mike: It's 1990, Emacs is dead. ...
+
+Mike: "We did this 20 years ago."
+Stefan: "But look where we got without it."
+
+- opaque datatypes
+- portable dumper
+- incremental GC vs. "we turn off the message"
+
+** What's Next
+
+"But isn't Emacs dead, given how old it is?"
+
+Stefan can tell the native-codee story, Mike can complain.
+
+
+
