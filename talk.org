@@ -137,5 +137,101 @@ Stefan: "But look where we got without it."
 
 Stefan can tell the native-codee story, Mike can complain.
 
+** Free Software
 
+Empowerment / Accessibility / Free Software
+
+M: So Stefan, I noticed when we were working on the paper, you use
+*only* free software, right?
+
+S: Right.
+
+M: Isn't that pretty extreme?
+
+S: ...
+
+M: What does Emacs Lisp have to do with these goals?
+
+S: Well, the central goal of Free Software is to free users from the
+restrictions of commercial software.
+
+M: What do you mean restrictions?  Can't I just buy any piece of
+software I want?
+
+S: As long as that piece of software is Microsoft Office or SAP.
+
+M: That seems to be what a lot of people want.
+
+S: But it seems a waste of computers, the most adaptable machine in
+human history, to only be used in a couple of ways.
+
+M: Yeah, well, I work on a lot of digital-transformation projects, and
+boy are people not served by stock software when that happens.  So I
+understand how Emacs Lisp, being the language of Emacs, empowers
+programmers to configure their IDE.
+
+S: What do you use for e-mail, Mike?
+
+M: Gnus in Emacs.
+
+S: How do you organize your daily work?
+
+M: org-mode in Emacs.
+
+S: How do you write letters?
+
+M: AUC-TeX in Emacs.
+
+S: How does your administrative assistant write letters?
+
+M: AUC-TeX in Emacs.
+
+S: Now, other people in your office use Emacs, right?  Are their
+setups all like yours?
+
+M: No, they're completely different.
+
+S: So Emacs - and Emacs Lisp - has empowered all of these people to
+have a productivity tool that fits their needs.  Could that have been
+achieved by just setting a bunch of configuration options?
+
+M: No, there's a bunch of code in my init.el.
+
+S: Get the point?
+
+M: Yeah.  But it's still a restricted set of applications, right?
+"Things that require an editor."
+
+S: Well, at one point, German air-traffic control was running in Emacs
+Lisp.
+
+M: Was that a good thing?
+
+S: Well, if you read it up, it really enabled folks on a clunky VMS
+system to do high-level programming.  In one of the better-debugged
+runtimes available.
+
+M: But what if there'd been a bug in that runtime - with commercial
+software, you can call support, and they'll fix the bug.
+
+S: Ever tried that?
+
+M: I was being sarcastic.  So with free software, you have what I
+guess you'd call a fighting chance: If you can't fix a problem
+yourself, you can hire somebody to do it.
+
+I'll still point out that Emacs is mostly a tool for experts.  I'm
+running a software company, we're all computer people.  When Stallman
+founded the GNU project, he did it to empower users, but when he said
+"user" he really meant "people who hang out at MIT lab".
+
+S: If you look at the Emacs Lisp manual, you'll see that it's written
+for programmer newbies.
+
+M: Yeah, well´, I guess he was envisioning a future where more people
+would routinely program.  That never happened.
+
+S: None of Stallman's fault.  At least he tried, and if you're a user,
+you at least have that chance you mentioned.
+ 
 
