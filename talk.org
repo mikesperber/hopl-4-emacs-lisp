@@ -235,3 +235,78 @@ S: None of Stallman's fault.  At least he tried, and if you're a user,
 you at least have that chance you mentioned.
  
 
+** XEmacs and Emacs
+
+M: Hi, I'm XEmacs.  I'm glad you noobs finally figured out how to do
+portable image dumping.  We did that 20 years ago.
+
+S: But then you fell asleep at some point.
+
+M: Yeah, well I fell asleep waiting for the GC in Emacs.  We have an
+incremental GC.  You just turned off the message that tells users
+Emacs Lisp is GCing.
+
+S: You just had one of your students do the work on that one for
+free.  You could have told him to do it in Emacs instead.
+
+M: No, I couldn't.  Because you didn't have portable image dumping
+figured out.
+
+S: What does that have to do with it?
+
+M: The portable dumper works from a uniform description of the object
+layout.  The XEmacs GC uses the same uniform description to do pointer
+tracing.  You have that now, right?
+
+S: FIXME Stefan
+
+M: Why didn't you implement that earlier?
+
+S: FIXME Stefan
+
+M: So what you're saying is that Emacs's internal architecture still
+sucks, after all these years.
+
+S: At least we're still around.  And speaking of architecture, we have
+static scoping now, which you failed at.
+
+M: At least we had data abstraction.
+
+S: What is that supposed to mean?
+
+M: You still use lists for keymaps, right?
+
+S: Yeah, you have a problem with that?
+
+M: Well, you invite people to just use list functions on keymaps,
+breaking any abstractions you might have in place.  That means you can
+never change the format.
+
+S: Well, we *did* change the format a bunch of times.
+
+M: And how did that go?
+
+S: So how did you fix this problem in XEmacs?
+
+M: XEmacs, from the beginning, had more *opaque* datatypes which you
+could only manipulate using specific functions for that datatype.
+Keymaps are an example.  This way, we can change the underlying
+implementation without changing the interface.
+
+S: Is that the reason you forked from Emacs?
+
+M: No, that was because a company named Lucid needed a more advanced
+version of Emacs for one of their products.  That version was supposed
+to be Emacs 19, but it didn't come out for like forever.  So Lucid
+made their own version.  It was called Lucid Emacs originally.
+
+S: So it seems you did a bunch of things right technologically but
+couldn't hold it together long enough.
+
+M: Yup.  Fun times, though.
+
+S: By the way, Mike - the Clojure folks seem to be doing the same -
+expressing everything in terms of the built-in data types like lists
+and vectors and maps, instead of defining new ones.
+
+M: Yup.  Same mistake there.
