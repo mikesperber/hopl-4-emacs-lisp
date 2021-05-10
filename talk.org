@@ -5,7 +5,163 @@ There are 5minutes in the plan below, but I suspect that the XEmacs and
 post-XEmacs period could be cut down significantly, and or partly merged
 into the previous parts
 
+* Scoping
+
+FIXME: Mention buffer-local scoping and interactions with `let`?
+[ Why oh why dynamic scoping? ]
+
+** Why dynamic scoping
+
+[ Unaware of lexical scoping? ]
+
+- Scheme guys next door!
+- Familiarity with efficient implementation via shallow binding
+- Experience with Multics Emacs (Maclisp) suggested API styles
+  relying on implicit arguments passed by state or dynamic scoping
+- Dynamic scoping's "transparency" increases extensibility.
+- In hindsight this can be read as "Gives more power to end users, in line
+  with Free Software ideals!"  "Free Software ideals" arguably did not exist
+  at the time, at least not under that name, but the underlying idea of
+  empowering users was clearly part of Richard's general approach to
+  program design.
+
+=> Dynamic scoping was considered a /necessary/!
+
+** Why not lexical scoping?
+
+[ Fair enough, but why not /also/ lexical scoping? ]
+
+- The desire to keep the language simple
+- The need to fit the limited resources available at the time
+- Dynamic scoping was /sufficient/!
+
+** Difficulties retro-fitting lexical scoping
+
+[ This was then, but those limitations disappeared at least 20 years ago! ]
+
+- Early ELisp code relied heavily (and silently) on dynamic scoping.
+  Converting all that code to lexical scoping seemed daunting
+- A lot of that code was "out there", so can't be fixed easily
+- Need some "automatic way" to keep supporting that old code
+- Eli Zaretskii and Richard remind developers to stop working on
+  language infrastructure and improve the end user experience instead
+- Dynamic scoping was /sufficient/!
+
+** First path to lexical scoping
+
+[ Is it really so hard to just /add/ lexical scoping constructs? ]
+
+The CL package offered a ~lexical-let~ macro, back in 1993, but it never
+really caught on:
+- Richard did not like the CL package (nor Common-Lisp for that matter)
+  and discouraged its use (and hence the use of ~lexical-let~)
+- It was a bit verbose
+- It did not include a similar facility for lexically scoped formal arguments
+- More painful to debug
+- Somewhat inefficient
+- Did I mention that dynamic scoping is /sufficient/?
+
+** Second path to lexical scoping
+
+[ If a purely additive lexical scoping won't fly, how about auto-conversion? ]
+
+Guys over in XEmacs land tried that.
+
+- In 2001, Matthias Neubauer implemented a code analysis to
+  discover all the places where lexical scoping could be used without
+  affecting the semantics
+
+- This opened the way to automatically convert old ELisp file to start using
+  lexical scoping; the plan was to convert ELisp code to Scheme eventually
+
+- But nobody took up the challenge
+  [Mike says it's "research"]
+
+- Do I hear someone in the audience say that dynamic scoping is /sufficient/?
+
+** Third path to lexical scoping
+
+[ Surely, there's a way to add enough annotations to solve this problem, no? ]
+
+Meanwhile, in Emacs land, I managed to tell Miles Bader that it was possible
+to just use lexical binding by default and still preserve the old semantics
+in most cases (by relying on enough dynamic ad-hoc tricks and heuristics)
+
+- I was wrong, of course, but he didn't know, so he started working on it
+- His approach was to add /a new ELisp dialect/
+  Mixes lexical and dynamic scoping in a similarly was to Common-Lisp
+- Every ELisp file now has to declare which dialect it uses
+- Every function remembers which dialect it's using internally
+- The two dialects are (mostly) indistinguishable
+- Easily preserves full backward compatibility, without ad-hoc tricks
+- Bringing full support for the new dialect proved hard
+  (arguably for lack of expertise in implementation of closures)
+- The branch lingered unloved
+- After all, dynamic scoping is /sufficient/!
+
+** Final path to lexical scoping
+
+[ Really?  It's all designed and working and it's left there because no one
+  can be bothered to learn how to do a simple closure conversion?  ]
+
+Finally, in 2010, I got a student to implement a proper closure conversion
+phase as a summer project
+- Scrapped Miles's attempt to adjust the byte-compiler
+- Changed the compiler from single-pass to multiple-passes
+- In turn forced macro-expansion as a separate pass
+- It took 2 more years to fully integrate it
+- Ended up affecting a lot of other code (sometimes simplifying it)
+- Luckily I was head maintainer so I had a freer hand to take such risks
+
+** Is dynamic scoping is /sufficient/?
+
+[ Wait! If it's /sufficient/, then why does Emacs now offer lexical scoping? ]
+
+- Peer pressure
+  - Developers with backgrounds in programming language design and theory
+  - Even a head maintainer doing research in type theory
+
+- Little annoyances that accumulate
+  - Not the need to follow naming conventions (we need that for lack of
+    modules anyway)
+  - Not the lack of closures (can be approximated with ~`(lambda ..)~)
+  - The need for obfuscated names in local variables in select places like
+    higher-order functions and in the byte-compiler
+
+- The belief that dynamic scoping will be a hindrance in the long term:
+  incompatible with optimization, poor interaction with concurrency;
+  exclusive reliance on it for all bindings imposes tight constraints on
+  the implementation of dynamic and buffer-local scoping
+
+** Popularity of lexical scoping
+
+[ So if it's not that important, will it end like ~lexical-let~? ]
+
+By 2010, most ELisp code was agnostic, because coding styles had changed,
+partly because of conscious effort in terms of compiler warnings and
+in terms of changes to Emacs's own code (which people tend to copy).
+- The new dialect with lexical scoping is not more verbose
+- It's not less efficient
+- It's not harder to debug
+- It's more like what people are used to
+- There's no reason to use the old dynamically scoped dialect for new code
+- For most well-maintained code, the conversion is easy
+- Emacs's own 60MB of ELisp code has now been fully converted, by hand
+
+=
 * Stefan
+
+Important things:
+- opaque (XEmacs-vs-Emacs approach to GC/pdump and redisplay)
+- user-power (Free Software, language powerful, language accessible, hooks)
+
+Mike prepares:
+- an implementation language rather than an extension language
+- macros
+
+Stef prepares:
+- dynamic scoping
+- tail calls & modules (what would bob harper say?)
 
 ** Background              10min
 
@@ -141,6 +297,9 @@ Stefan can tell the native-codee story, Mike can complain.
 
 Empowerment / Accessibility / Free Software
 
+# SM: I'm worried this is getting too much into promoting Free Software
+# and leaving "history of ELisp" pretty far in the background
+
 M: So Stefan, I noticed when we were working on the paper, you use
 *only* free software, right?
 
@@ -165,6 +324,9 @@ M: That seems to be what a lot of people want.
 S: But it seems a waste of computers, the most adaptable machine in
 human history, to only be used in a couple of ways.
 
+# SM: Here you seem to say you understand the power of Free Software
+# already, even though the rest of the conversation seems to be about me
+# trying to convince you still.
 M: Yeah, well, I work on a lot of digital-transformation projects, and
 boy are people not served by stock software when that happens.  So I
 understand how Emacs Lisp, being the language of Emacs, empowers
