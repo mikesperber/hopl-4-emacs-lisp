@@ -39,6 +39,21 @@ FIXME: Mention buffer-local scoping and interactions with `let`?
 - The need to fit the limited resources available at the time
 - Dynamic scoping was /sufficient/!
 
+** Living with dynamic scoping
+
+[ So, what's it like to live with dynamic scoping?  ]
+
+- You avoid conflicts with a naming convention
+- You build "closures" by hand as `(lambda (arg) (+ ',arg 1))
+  Occasionally it's quite handy since you can plug in actual code instead
+  of values in there (in both senses) ;-)
+
+- GOOD: mouse-save-then-kill-delete-region:trunk/lisp/mouse.el
+        (uses inhibit-modification-hooks
+         and protects buffer-undo-list)
+  but BAD: mouse-save-then-kill-delete-region:old/lisp/mouse.el
+        (binds after-change-functions)
+
 ** Difficulties retro-fitting lexical scoping
 
 [ This was then, but those limitations disappeared at least 20 years ago! ]
@@ -132,6 +147,13 @@ phase as a summer project
   - The need for obfuscated names in local variables in select places like
     higher-order functions and in the byte-compiler
 
+  - BAD: let-binding of minibuffer-completion-table in
+       completing-read-default:emacs-27/lisp/minibuffer.el
+
+  - BAD: from cvs-every:old/lisp/pcvs-util.el:
+
+  - BAD: batch-byte-compile:old/lisp/emacs-lisp/bytecomp.el
+
 - The belief that dynamic scoping will be a hindrance in the long term:
   incompatible with optimization, poor interaction with concurrency;
   exclusive reliance on it for all bindings imposes tight constraints on
@@ -180,7 +202,7 @@ in terms of changes to Emacs's own code (which people tend to copy).
 
 ** So ... never?
 
-- Patches have been submitted several time.
+- Patches have been submitted several time for the byte-compiler.
 - Long discussions, several times.
 - It's never been completely ruled out, but it never convinced either:
   The immediate gain is small at best, and noone has bothered yet
@@ -189,8 +211,10 @@ in terms of changes to Emacs's own code (which people tend to copy).
 - In Emacs-28 `cl-labels` circumvents this by doing self-TCO during
   macro-expansion.  The main purpose is to provide a reasonably efficient
   implementation of Scheme's `named-let`.
+  Doing it via macroexpansion ensures it applies to all backends
+  (interpreter, byte-compiler, you nameit), so source code can rely on it.
   "Classical" TCO would only make `named-let` work with a finite stack, but
-  it would still run slow because the overhead of a function call.
+  it would still run slow because of the overhead of a function call.
 
 ** So you don't care about safe for space?
 
@@ -202,6 +226,39 @@ in terms of changes to Emacs's own code (which people tend to copy).
 
 =
 * Modules
+
+** So, XXI century and no modules, eh?
+
+- Of course, they were absent at first, to keep the system simple
+- Richard does not like Common-Lisp's package system
+- Dynamic-scoping imposes a naming convention, so in practice we
+  do have some poor man's namespace mechanism in place
+- More than 100MB of ELisp code says this works
+
+EXAMPLE: isearch-mb
+
+** OK, it works, but there are other ways, no?
+
+- Indeed, and there have been many attempts to add such things to ELisp:
+  names.el
+  nameless.el
+  ...
+- Lots of long discussions
+
+** And?
+
+- The benefit is unclear.
+- There are some downsides:
+  - Of course the added complexity
+    Not so much in the language implementation but in the documentation,
+    and the surrounding tooling.  Currently you can use `grep` or
+    even duckduckgo to find uses or definitions of ELisp functions and
+    variables!
+  - The cost of retrofitting a namespace mechanism onto those 100MB
+    is fairly high.
+- The most workable solution appears to be a very lightweight and
+  simplistic/lexical one which is compatible with the current naming
+  convention, so we can start using with existing code without any change.
 
 =
 * Stefan
