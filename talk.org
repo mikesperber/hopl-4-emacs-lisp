@@ -25,7 +25,11 @@ FIXME: Mention buffer-local scoping and interactions with `let`?
   empowering users was clearly part of Richard's general approach to
   program design.
 
-=> Dynamic scoping was considered a /necessary/!
+- dynamic scoping gives the user more freedom to take existing code and
+  change its behavior without touching it (tho not enough yet, hence the
+  addition of hooks)
+
+=> Dynamic scoping was considered /necessary/!
 
 ** Why not lexical scoping?
 
@@ -147,6 +151,57 @@ in terms of changes to Emacs's own code (which people tend to copy).
 - There's no reason to use the old dynamically scoped dialect for new code
 - For most well-maintained code, the conversion is easy
 - Emacs's own 60MB of ELisp code has now been fully converted, by hand
+
+=
+* Tail calls
+
+** Why no proper tail calls?
+
+- ELisp function calls use the C stack, and the C compilers did not do TCO,
+  so it would have required extra work.
+- ELisp implementation makes function calls relatively expensive,
+  so a `while` loop is a lot more efficient than a recursion
+- TCO is incompatible with dynamic scoping
+- ELisp coding style was very imperative, with a lot of global state.
+  Not sure which is the cause and the consequence.
+
+** But ... even after 30 years?
+
+- Indeed, now that we have lexical scoping TCO is an option
+- Coding style is less imperative
+- But the other points still hold
+- 30 years of dynamic scoping and no-TCO have shaped the coding style,
+  so on existing code TCO brings no benefit
+- "non-self-TCO" would negatively affect the debugger's backtraces
+- If it's only an opportunistic optimization,
+  code cannot rely on it, so style won't change.
+- But if it's guaranteed, then it imposes an extra burden on current and
+  future implementations.  How do you define "self-TCO"?
+
+** So ... never?
+
+- Patches have been submitted several time.
+- Long discussions, several times.
+- It's never been completely ruled out, but it never convinced either:
+  The immediate gain is small at best, and noone has bothered yet
+  to provide TCO for the ELisp interpreter, so it always falls into
+  the "opportunistic optimization" trap.
+- In Emacs-28 `cl-labels` circumvents this by doing self-TCO during
+  macro-expansion.  The main purpose is to provide a reasonably efficient
+  implementation of Scheme's `named-let`.
+  "Classical" TCO would only make `named-let` work with a finite stack, but
+  it would still run slow because the overhead of a function call.
+
+** So you don't care about safe for space?
+
+- I've completely let down my thesis advisor, indeed.
+- But not to worry: it's much worse than that.  The conservative stack
+  scanning already breaks space safety, and to add insult to injury, the
+  construction of closures in the interpreter captures the complete
+  environment rather than only the free variables!
+
+=
+* Modules
 
 =
 * Stefan
