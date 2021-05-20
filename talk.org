@@ -5,6 +5,15 @@ There are 5minutes in the plan below, but I suspect that the XEmacs and
 post-XEmacs period could be cut down significantly, and or partly merged
 into the previous parts
 
+* Intro
+- Why are we here?
+- Why is Emacs's language a Lisp?
+- How did it started?
+- What did TECO code look like?
+- What's the relation between Emacs and the GNU project?
+- So Emacs's purpose is to empower the user?
+- What does Emacs Lisp look like?
+  
 * Scoping
 
 FIXME: Mention buffer-local scoping and interactions with `let`?
@@ -103,7 +112,7 @@ Guys over in XEmacs land tried that.
 [ Surely, there's a way to add enough annotations to solve this problem, no? ]
 
 Meanwhile, in Emacs land, I managed to tell Miles Bader that it was possible
-to just use lexical binding by default and still preserve the old semantics
+to just use lexical scoping by default and still preserve the old semantics
 in most cases (by relying on enough dynamic ad-hoc tricks and heuristics)
 
 - I was wrong, of course, but he didn't know, so he started working on it
