@@ -5,6 +5,15 @@ There are 5minutes in the plan below, but I suspect that the XEmacs and
 post-XEmacs period could be cut down significantly, and or partly merged
 into the previous parts
 
+* Intro
+- Why are we here?
+- Why is Emacs's language a Lisp?
+- How did it started?
+- What did TECO code look like?
+- What's the relation between Emacs and the GNU project?
+- So Emacs's purpose is to empower the user?
+- What does Emacs Lisp look like?
+  
 * Scoping
 
 FIXME: Mention buffer-local scoping and interactions with `let`?
@@ -25,7 +34,11 @@ FIXME: Mention buffer-local scoping and interactions with `let`?
   empowering users was clearly part of Richard's general approach to
   program design.
 
-=> Dynamic scoping was considered a /necessary/!
+- dynamic scoping gives the user more freedom to take existing code and
+  change its behavior without touching it (tho not enough yet, hence the
+  addition of hooks)
+
+=> Dynamic scoping was considered /necessary/!
 
 ** Why not lexical scoping?
 
@@ -34,6 +47,21 @@ FIXME: Mention buffer-local scoping and interactions with `let`?
 - The desire to keep the language simple
 - The need to fit the limited resources available at the time
 - Dynamic scoping was /sufficient/!
+
+** Living with dynamic scoping
+
+[ So, what's it like to live with dynamic scoping?  ]
+
+- You avoid conflicts with a naming convention
+- You build "closures" by hand as `(lambda (arg) (+ ',arg 1))
+  Occasionally it's quite handy since you can plug in actual code instead
+  of values in there (in both senses) ;-)
+
+- GOOD: mouse-save-then-kill-delete-region:trunk/lisp/mouse.el
+        (uses inhibit-modification-hooks
+         and protects buffer-undo-list)
+  but BAD: mouse-save-then-kill-delete-region:old/lisp/mouse.el
+        (binds after-change-functions)
 
 ** Difficulties retro-fitting lexical scoping
 
@@ -84,7 +112,7 @@ Guys over in XEmacs land tried that.
 [ Surely, there's a way to add enough annotations to solve this problem, no? ]
 
 Meanwhile, in Emacs land, I managed to tell Miles Bader that it was possible
-to just use lexical binding by default and still preserve the old semantics
+to just use lexical scoping by default and still preserve the old semantics
 in most cases (by relying on enough dynamic ad-hoc tricks and heuristics)
 
 - I was wrong, of course, but he didn't know, so he started working on it
@@ -128,6 +156,13 @@ phase as a summer project
   - The need for obfuscated names in local variables in select places like
     higher-order functions and in the byte-compiler
 
+  - BAD: let-binding of minibuffer-completion-table in
+       completing-read-default:emacs-27/lisp/minibuffer.el
+
+  - BAD: from cvs-every:old/lisp/pcvs-util.el:
+
+  - BAD: batch-byte-compile:old/lisp/emacs-lisp/bytecomp.el
+
 - The belief that dynamic scoping will be a hindrance in the long term:
   incompatible with optimization, poor interaction with concurrency;
   exclusive reliance on it for all bindings imposes tight constraints on
@@ -147,6 +182,92 @@ in terms of changes to Emacs's own code (which people tend to copy).
 - There's no reason to use the old dynamically scoped dialect for new code
 - For most well-maintained code, the conversion is easy
 - Emacs's own 60MB of ELisp code has now been fully converted, by hand
+
+=
+* Tail calls
+
+** Why no proper tail calls?
+
+- ELisp function calls use the C stack, and the C compilers did not do TCO,
+  so it would have required extra work.
+- ELisp implementation makes function calls relatively expensive,
+  so a `while` loop is a lot more efficient than a recursion
+- TCO is incompatible with dynamic scoping
+- ELisp coding style was very imperative, with a lot of global state.
+  Not sure which is the cause and the consequence.
+
+** But ... even after 30 years?
+
+- Indeed, now that we have lexical scoping TCO is an option
+- Coding style is less imperative
+- But the other points still hold
+- 30 years of dynamic scoping and no-TCO have shaped the coding style,
+  so on existing code TCO brings no benefit
+- "non-self-TCO" would negatively affect the debugger's backtraces
+- If it's only an opportunistic optimization,
+  code cannot rely on it, so style won't change.
+- But if it's guaranteed, then it imposes an extra burden on current and
+  future implementations.  How do you define "self-TCO"?
+
+** So ... never?
+
+- Patches have been submitted several time for the byte-compiler.
+- Long discussions, several times.
+- It's never been completely ruled out, but it never convinced either:
+  The immediate gain is small at best, and noone has bothered yet
+  to provide TCO for the ELisp interpreter, so it always falls into
+  the "opportunistic optimization" trap.
+- In Emacs-28 `cl-labels` circumvents this by doing self-TCO during
+  macro-expansion.  The main purpose is to provide a reasonably efficient
+  implementation of Scheme's `named-let`.
+  Doing it via macroexpansion ensures it applies to all backends
+  (interpreter, byte-compiler, you nameit), so source code can rely on it.
+  "Classical" TCO would only make `named-let` work with a finite stack, but
+  it would still run slow because of the overhead of a function call.
+
+** So you don't care about safe for space?
+
+- I've completely let down my thesis advisor, indeed.
+- But not to worry: it's much worse than that.  The conservative stack
+  scanning already breaks space safety, and to add insult to injury, the
+  construction of closures in the interpreter captures the complete
+  environment rather than only the free variables!
+
+=
+* Modules
+
+** So, XXI century and no modules, eh?
+
+- Of course, they were absent at first, to keep the system simple
+- Richard does not like Common-Lisp's package system
+- Dynamic-scoping imposes a naming convention, so in practice we
+  do have some poor man's namespace mechanism in place
+- More than 100MB of ELisp code says this works
+
+EXAMPLE: isearch-mb
+
+** OK, it works, but there are other ways, no?
+
+- Indeed, and there have been many attempts to add such things to ELisp:
+  names.el
+  nameless.el
+  ...
+- Lots of long discussions
+
+** And?
+
+- The benefit is unclear.
+- There are some downsides:
+  - Of course the added complexity
+    Not so much in the language implementation but in the documentation,
+    and the surrounding tooling.  Currently you can use `grep` or
+    even duckduckgo to find uses or definitions of ELisp functions and
+    variables!
+  - The cost of retrofitting a namespace mechanism onto those 100MB
+    is fairly high.
+- The most workable solution appears to be a very lightweight and
+  simplistic/lexical one which is compatible with the current naming
+  convention, so we can start using with existing code without any change.
 
 =
 * Stefan
