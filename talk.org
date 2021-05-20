@@ -472,3 +472,109 @@ expressing everything in terms of the built-in data types like lists
 and vectors and maps, instead of defining new ones.
 
 M: Yup.  Same mistake there.
+
+* Outline 2021-05-20
+
+** personal intro
+
+Why are we the authors of this paper?
+
+** Why Lisp?
+
+- Stallman's favorite language
+- not first Emacs
+- first one written in TECO
+
+** Emacs as founding stone of the GNU project
+
+- users have right to modify
+- Emacs lisp directed at non-programmers
+
+** Emacs Lisp as a classic Lisp
+
+[Mike]
+- parenthesized syntax
+- expressions
+
+#+begin_src 
+
+#+end_src
+- indentation to enable readability
+- bindings and scoping
+
+All this essentially MacLisp
+
+** Dynamic Scoping
+
+#+begin_src elisp
+(defun f (x)
+  (+ x y))
+
+(let ((y 17))
+  (f 5))
+#+end_src
+
+- why: Stefan demos isearch-mb--message
+- [also: string properties]
+- buffer-local variables
+
+** Evolution
+
+*** Static scoping
+
+- static scoping: example does not work in Emacs
+- Stefan: story of static scoping
+- Mike: You know, I also worked on static scoping once.
+
+*** Macros
+
+- other than that, not much evolution in core language because of macros
+- syntax as data
+- macro example
+
+#+begin_src elisp
+(let ((array-size 11)
+      (init-val 'init)
+      (array-name 'a))
+  `(do ((i 0 (+ 1 i)))
+       ((>= i ,array-size))
+     (aset ,array-name i ,init-val)))
+
+(defmacro fill-array (array-name array-size init-val)
+    `(do ((i 0 (+ 1 i)))
+	 ((>= i ,array-size))
+       (aset ,array-name i ,init-val)))
+
+(defvar s "foobar")
+
+(fill-array s 6 65)
+
+(macroexpand '(fill-array s 6 65))
+(macroexpand-1 '(fill-array s 6 65))
+#+end_src
+- lambda expressions as functions
+
+#+begin_src elisp
+(mapcar '(lambda (n) (1+ n)) '(1 2 3))
+
+(macroexpand '(lambda (n) (1+ n)))
+#'(lambda (n) (1+ n))
+#+end_src
+- -> compilation
+
+** Emacs vs. XEmacs
+
+- Stefan: Why do you have this XEmacs thing open?
+- What are notable differences?
+- portable dumper
+- GC
+- opaque datatypes
+
+#+begin_src elisp
+(defstruct kons kar kdr)
+
+(make-kons :kar 1 :kdr 2)
+
+#+end_src** What else
+
+- module system
