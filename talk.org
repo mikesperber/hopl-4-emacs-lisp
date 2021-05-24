@@ -644,6 +644,48 @@ All this essentially MacLisp
 *** Static scoping
 
 - static scoping: example does not work in Emacs
+
+Questions:
+- Why dynamic?  Wasn't RMS aware of lexical scoping?
+  - Scheme guys next door
+  - Efficient implementation
+  - Experience with Multics Emacs
+  - "Transparency" (empower the user)
+  => dynamic scoping was /necessary/
+- OK, but why not both like in CL?
+  - keep language simple
+  - resource constraints
+  - dynamic scoping is /sufficient/
+- How do you live with dynamic scoping?
+  - naming convention
+  - hand-made closures
+  - Examples in mouse-save-then-kill-delete-region:lisp/mouse.el
+- Resource constraints don't exist any more, so?
+  - more than 20 years of code relies on dynscope
+  - code "out of reach", so have to preserve compatibility
+  - changing ELisp does not directly benefit the user
+  - dynamic scoping is /sufficient/
+- Is it so hard to add lexical scoping?
+  CL offered lexical-let in 1993, but it never caught on
+  - Richard didn't like CL
+  - Verbose
+  - Not available for lambda/defun
+  - Ugly in debugger
+  - Inefficient
+  - dynamic scoping is /sufficient/
+- How 'bout auto-conversion?
+  [ Mike ]
+  ...
+  - Do I hear someone in the audience say that dynamic scoping is /sufficient/?
+
+- Surely we can solve this problem?
+  describe Miles's solution
+
+- So it was left there to rot?
+
+- 
+  
+    
 - Stefan: story of static scoping
 - Mike: You know, I also worked on static scoping once.
 
