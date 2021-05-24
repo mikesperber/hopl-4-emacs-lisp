@@ -704,9 +704,9 @@ Questions:
      (aset ,array-name i ,init-val)))
 
 (defmacro fill-array (array-name array-size init-val)
-    `(do ((i 0 (+ 1 i)))
-	 ((>= i ,array-size))
-       (aset ,array-name i ,init-val)))
+  `(do ((i 0 (+ 1 i)))
+       ((>= i ,array-size))
+     (aset ,array-name i ,init-val)))
 
 (defvar s "foobar")
 
