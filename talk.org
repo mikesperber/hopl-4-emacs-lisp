@@ -141,7 +141,7 @@ phase as a summer project
 - Ended up affecting a lot of other code (sometimes simplifying it)
 - Luckily I was head maintainer so I had a freer hand to take such risks
 
-** Is dynamic scoping is /sufficient/?
+** Is dynamic scoping /sufficient/?
 
 [ Wait! If it's /sufficient/, then why does Emacs now offer lexical scoping? ]
 
