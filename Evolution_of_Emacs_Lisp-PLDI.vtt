@@ -1,2 +1,6733 @@
 WEBVTT
 
+1
+00:00:12.340 --> 00:00:12.910
+Hi Stefan.
+
+2
+00:00:12.910 --> 00:00:13.860
+Good seeing you.
+
+3
+00:00:14.440 --> 00:00:15.160
+Hi,
+
+4
+00:00:15.160 --> 00:00:15.520
+mike.
+
+5
+00:00:15.530 --> 00:00:16.430
+How you doing?
+
+6
+00:00:16.440 --> 00:00:17.480
+Pretty good.
+
+7
+00:00:17.490 --> 00:00:20.950
+I guess we're here to talk about the evolution of imax list.
+
+8
+00:00:21.440 --> 00:00:23.060
+You wanna introduce yourself briefly?
+
+9
+00:00:24.040 --> 00:00:24.390
+Yes.
+
+10
+00:00:24.390 --> 00:00:25.720
+So I'm stephan money.
+
+11
+00:00:25.720 --> 00:00:30.560
+I I do research and teaching in programming languages at University of Montreal.
+
+12
+00:00:31.140 --> 00:00:31.360
+Oh,
+
+13
+00:00:31.360 --> 00:00:31.480
+yeah.
+
+14
+00:00:31.490 --> 00:00:32.330
+Uh,
+
+15
+00:00:32.340 --> 00:00:32.680
+yeah.
+
+16
+00:00:32.689 --> 00:00:35.660
+I'm ceo of a software consultancy in southern Germany.
+
+17
+00:00:36.140 --> 00:00:39.920
+So how do how do we get into this thing writing this paper?
+
+18
+00:00:39.920 --> 00:00:40.120
+Right.
+
+19
+00:00:40.120 --> 00:00:43.860
+I think a lot of people that are seeing a paper on the evolution of something,
+
+20
+00:00:43.860 --> 00:00:47.150
+something imax would expect Richard Stallman to be here.
+
+21
+00:00:49.040 --> 00:00:49.790
+Right.
+
+22
+00:00:49.790 --> 00:00:50.050
+Well,
+
+23
+00:00:50.050 --> 00:00:50.470
+at least,
+
+24
+00:00:50.480 --> 00:00:50.800
+you know,
+
+25
+00:00:50.800 --> 00:00:52.100
+I work in programming languages.
+
+26
+00:00:52.100 --> 00:00:56.860
+So there is some relationship and I think I've been contributing to the
+
+27
+00:00:56.860 --> 00:00:58.020
+max for for many,
+
+28
+00:00:58.020 --> 00:00:58.580
+many years.
+
+29
+00:00:58.580 --> 00:01:00.660
+I've been maintaining the maximum.
+
+30
+00:01:00.670 --> 00:01:02.380
+That's that's how I ended up here.
+
+31
+00:01:02.390 --> 00:01:02.950
+Okay.
+
+32
+00:01:02.960 --> 00:01:03.460
+I think,
+
+33
+00:01:03.460 --> 00:01:08.220
+I think I was contacted by guys tear and by you to to see there was some
+
+34
+00:01:08.220 --> 00:01:09.860
+interest in working on this.
+
+35
+00:01:09.940 --> 00:01:10.360
+Yeah,
+
+36
+00:01:10.370 --> 00:01:11.070
+so that's right.
+
+37
+00:01:11.070 --> 00:01:11.240
+So,
+
+38
+00:01:11.240 --> 00:01:12.030
+you know,
+
+39
+00:01:12.040 --> 00:01:14.980
+even even though I work in the software consultancy today,
+
+40
+00:01:14.980 --> 00:01:18.090
+I also used to be a research and programming languages many years ago.
+
+41
+00:01:18.100 --> 00:01:18.880
+Uh,
+
+42
+00:01:18.880 --> 00:01:22.750
+I remember when I started working there at the University of Tubingen about 30 years ago,
+
+43
+00:01:23.140 --> 00:01:24.240
+um you know,
+
+44
+00:01:24.240 --> 00:01:25.830
+we were uh,
+
+45
+00:01:25.840 --> 00:01:30.830
+we were looking at the max and we started using X windows and the version of the max that existed at the time
+
+46
+00:01:30.830 --> 00:01:33.160
+would only run in a terminal or an X term.
+
+47
+00:01:33.640 --> 00:01:38.400
+And but there was a version of the max out that would allow you to open
+
+48
+00:01:38.400 --> 00:01:40.660
+multiple windows called lucid imax.
+
+49
+00:01:41.040 --> 00:01:45.730
+And so we started using that and then I think it didn't run on
+
+50
+00:01:45.730 --> 00:01:46.160
+Lennox.
+
+51
+00:01:46.160 --> 00:01:50.160
+We started usually using at the time and I reported that and I started contributing code.
+
+52
+00:01:50.160 --> 00:01:55.140
+And that kind of segued into me doing more and more development on first loosen the
+
+53
+00:01:55.140 --> 00:01:57.560
+max and lucy max was done by a company called Lucid.
+
+54
+00:01:57.570 --> 00:01:59.250
+That company folded eventually,
+
+55
+00:01:59.540 --> 00:02:02.440
+and the project moved to Sun Microsystems,
+
+56
+00:02:02.440 --> 00:02:02.970
+actually,
+
+57
+00:02:02.980 --> 00:02:05.080
+where it was renamed to X.
+
+58
+00:02:05.080 --> 00:02:06.840
+Imax by the marketing people there.
+
+59
+00:02:06.850 --> 00:02:08.039
+And uh,
+
+60
+00:02:08.050 --> 00:02:08.620
+so,
+
+61
+00:02:08.630 --> 00:02:09.270
+uh,
+
+62
+00:02:09.280 --> 00:02:13.600
+so I started using imax at the time and then I was a programming Languages researcher,
+
+63
+00:02:13.600 --> 00:02:13.890
+I think.
+
+64
+00:02:13.890 --> 00:02:14.060
+So,
+
+65
+00:02:14.060 --> 00:02:17.740
+I think we're like the two people among the recipients of guys,
+
+66
+00:02:17.750 --> 00:02:18.220
+uh,
+
+67
+00:02:18.230 --> 00:02:19.460
+email who,
+
+68
+00:02:20.440 --> 00:02:20.890
+right,
+
+69
+00:02:20.890 --> 00:02:23.440
+or who used to write papers for living.
+
+70
+00:02:23.450 --> 00:02:25.260
+And we didn't say no.
+
+71
+00:02:26.140 --> 00:02:27.880
+Yeah,
+
+72
+00:02:27.890 --> 00:02:28.920
+so it was a lot of work.
+
+73
+00:02:28.930 --> 00:02:29.870
+Um,
+
+74
+00:02:29.880 --> 00:02:31.100
+so,
+
+75
+00:02:31.110 --> 00:02:31.410
+um,
+
+76
+00:02:31.420 --> 00:02:34.460
+but we're here to talk about imax lisp,
+
+77
+00:02:34.470 --> 00:02:34.750
+right?
+
+78
+00:02:34.750 --> 00:02:36.190
+Not primarily the editor,
+
+79
+00:02:36.190 --> 00:02:38.670
+but the programming language of the editor.
+
+80
+00:02:38.680 --> 00:02:40.730
+So how come,
+
+81
+00:02:40.740 --> 00:02:44.310
+how come lisP is like the language of imax?
+
+82
+00:02:44.310 --> 00:02:46.060
+Or what does that have to do with the editor?
+
+83
+00:02:46.070 --> 00:02:46.660
+The language?
+
+84
+00:02:48.040 --> 00:02:48.450
+Yeah,
+
+85
+00:02:48.460 --> 00:02:48.790
+actually,
+
+86
+00:02:48.790 --> 00:02:50.940
+it it's interesting you ask it this way,
+
+87
+00:02:50.940 --> 00:02:53.760
+because the first language of imax was not listed,
+
+88
+00:02:54.440 --> 00:02:54.950
+it was like,
+
+89
+00:02:54.950 --> 00:02:56.010
+oh it was like,
+
+90
+00:02:56.010 --> 00:02:56.650
+oh yeah,
+
+91
+00:02:57.040 --> 00:02:57.660
+okay.
+
+92
+00:02:58.340 --> 00:03:03.300
+Uh so why didn't why didn't I think Richard Stallman worked on tico as
+
+93
+00:03:03.300 --> 00:03:03.530
+well.
+
+94
+00:03:03.530 --> 00:03:05.880
+We're on the Cipro version of the max at the time.
+
+95
+00:03:05.890 --> 00:03:06.470
+That's right.
+
+96
+00:03:06.480 --> 00:03:11.450
+So the first version of the max was written by by Richard and many others in in
+
+97
+00:03:11.450 --> 00:03:12.150
+Chico.
+
+98
+00:03:12.840 --> 00:03:16.120
+And so I think you have an example of,
+
+99
+00:03:16.130 --> 00:03:17.230
+I have an example.
+
+100
+00:03:17.230 --> 00:03:20.360
+So here let's try this fancy switching feature here.
+
+101
+00:03:20.370 --> 00:03:25.150
+So here's an example of tico code and you can kind of see what you got an inkling why
+
+102
+00:03:25.150 --> 00:03:29.230
+it wasn't Richard Stallman favorite language to put into,
+
+103
+00:03:29.240 --> 00:03:33.960
+you know the the version of the max that he then uh started developing later.
+
+104
+00:03:34.240 --> 00:03:39.150
+So the code looks fairly cryptic and you can see every single line kind of requires a comment to explain
+
+105
+00:03:39.160 --> 00:03:40.080
+what it is.
+
+106
+00:03:40.440 --> 00:03:45.440
+So you can kind of see that it maybe would not scale so well to both to larger code basis
+
+107
+00:03:45.440 --> 00:03:49.930
+and also to lots of people were interested in um and doing something with the max,
+
+108
+00:03:49.930 --> 00:03:50.250
+right?
+
+109
+00:03:51.040 --> 00:03:54.660
+So that explains why it's not Chico but why is it the next list?
+
+110
+00:03:56.140 --> 00:03:56.640
+Well,
+
+111
+00:03:56.650 --> 00:04:01.310
+uh Richard was working in uh mitt
+
+112
+00:04:01.320 --> 00:04:05.260
+where list was very popular in the in the lab where he was working.
+
+113
+00:04:05.260 --> 00:04:07.490
+So he was very familiar with the list.
+
+114
+00:04:07.500 --> 00:04:09.500
+He was using list all the time.
+
+115
+00:04:09.510 --> 00:04:12.280
+He was probably editing list with Chico.
+
+116
+00:04:12.280 --> 00:04:12.940
+Imax.
+
+117
+00:04:12.950 --> 00:04:13.860
+Okay.
+
+118
+00:04:14.540 --> 00:04:15.970
+But I think that was you know,
+
+119
+00:04:15.970 --> 00:04:18.950
+there was the main the main reason for using it.
+
+120
+00:04:19.540 --> 00:04:24.060
+It was the anxious choice and I think it is to this day it is his favorite language.
+
+121
+00:04:24.640 --> 00:04:25.450
+Okay.
+
+122
+00:04:25.460 --> 00:04:26.500
+But I guess,
+
+123
+00:04:26.510 --> 00:04:29.360
+I mean Richard Stallman also founded the new project,
+
+124
+00:04:29.360 --> 00:04:29.580
+right?
+
+125
+00:04:29.580 --> 00:04:33.030
+And imax is kind of the founding piece of software of that project.
+
+126
+00:04:33.040 --> 00:04:33.300
+Right?
+
+127
+00:04:33.300 --> 00:04:33.960
+Is there?
+
+128
+00:04:33.970 --> 00:04:38.040
+Uh So we all know that it's a very political and idealistic project.
+
+129
+00:04:38.040 --> 00:04:42.760
+So can we can we draw a line from imax list to the ideals of the new project?
+
+130
+00:04:43.740 --> 00:04:43.920
+Yeah,
+
+131
+00:04:43.920 --> 00:04:44.530
+I think so.
+
+132
+00:04:44.540 --> 00:04:49.170
+I think I think um access in you know really
+
+133
+00:04:49.180 --> 00:04:53.690
+embodies the some of the ideas he has the idea of empowering the
+
+134
+00:04:53.690 --> 00:04:56.060
+user and okay,
+
+135
+00:04:56.070 --> 00:05:00.450
+this is this is a driving line in in the design of imax and imax list
+
+136
+00:05:01.140 --> 00:05:06.060
+and and it also in his his promotion of free software.
+
+137
+00:05:06.640 --> 00:05:11.580
+So empowering the user I guess means not just being able to use the software to its full
+
+138
+00:05:11.580 --> 00:05:12.250
+ability,
+
+139
+00:05:12.640 --> 00:05:16.540
+but also to be able to customize it and modify it.
+
+140
+00:05:16.550 --> 00:05:16.960
+Right.
+
+141
+00:05:17.740 --> 00:05:18.050
+Right.
+
+142
+00:05:18.060 --> 00:05:18.290
+Yeah.
+
+143
+00:05:18.300 --> 00:05:22.290
+If you think of the the ideals of free software and you have this,
+
+144
+00:05:22.300 --> 00:05:22.870
+you know,
+
+145
+00:05:22.880 --> 00:05:27.700
+being allowed to read the code or they say
+
+146
+00:05:27.700 --> 00:05:30.130
+studying the code and modify the code,
+
+147
+00:05:30.130 --> 00:05:31.360
+redistribute the code.
+
+148
+00:05:31.370 --> 00:05:33.170
+This is all all nice.
+
+149
+00:05:33.170 --> 00:05:36.360
+But for richard this is actually not sufficient
+
+150
+00:05:37.040 --> 00:05:41.060
+because you also wanted to be fairly easy to do
+
+151
+00:05:41.740 --> 00:05:43.550
+for in practice.
+
+152
+00:05:43.560 --> 00:05:46.120
+So you also have kind of pragmatic,
+
+153
+00:05:46.130 --> 00:05:48.120
+pragmatic aspect to it.
+
+154
+00:05:48.130 --> 00:05:48.850
+Okay.
+
+155
+00:05:48.860 --> 00:05:49.670
+So I guess,
+
+156
+00:05:49.680 --> 00:05:50.320
+yeah.
+
+157
+00:05:50.330 --> 00:05:51.040
+Today,
+
+158
+00:05:51.040 --> 00:05:53.020
+when we look at a programming language like imax list,
+
+159
+00:05:53.020 --> 00:05:53.220
+right?
+
+160
+00:05:53.220 --> 00:05:55.830
+We think of it mainly as a programmer's language.
+
+161
+00:05:55.840 --> 00:05:56.260
+Right?
+
+162
+00:05:56.270 --> 00:05:58.450
+Um and I think it wasn't until,
+
+163
+00:05:58.450 --> 00:05:58.680
+you know,
+
+164
+00:05:58.680 --> 00:06:03.590
+you pointed this out to me uh switch
+
+165
+00:06:03.590 --> 00:06:05.860
+here to the documentation here.
+
+166
+00:06:05.870 --> 00:06:07.850
+Um So you pointed out to me that,
+
+167
+00:06:07.850 --> 00:06:08.080
+well,
+
+168
+00:06:08.080 --> 00:06:13.050
+here's the introduction of imax list as it sits in the imax editor in Chief Ships with the ex
+
+169
+00:06:13.050 --> 00:06:17.710
+editor and says this is an introduction to programming indexes for people who are not
+
+170
+00:06:17.710 --> 00:06:18.550
+programmers.
+
+171
+00:06:19.040 --> 00:06:23.910
+So um uh and I never saw this all these years uh that I was using
+
+172
+00:06:23.920 --> 00:06:28.460
+imax and imax that it was that there's actually a fair amount of effort being made
+
+173
+00:06:28.470 --> 00:06:32.750
+uh to make it accessible to do non programmers as well.
+
+174
+00:06:32.760 --> 00:06:33.100
+Right?
+
+175
+00:06:33.110 --> 00:06:36.020
+I think that's kind of gone out of fashion fashion since then.
+
+176
+00:06:36.020 --> 00:06:36.290
+Right.
+
+177
+00:06:36.290 --> 00:06:39.050
+That that ordinary users would program,
+
+178
+00:06:39.540 --> 00:06:44.520
+it's definitely not in fashion in the world of of android and those kinds of and
+
+179
+00:06:44.520 --> 00:06:45.090
+facebook,
+
+180
+00:06:45.100 --> 00:06:46.560
+you know,
+
+181
+00:06:46.570 --> 00:06:48.960
+empowering user is not definitely not the goal.
+
+182
+00:06:49.340 --> 00:06:53.590
+But but back then it was it was I think also you know,
+
+183
+00:06:53.600 --> 00:06:56.730
+mentioned experience with uh with having,
+
+184
+00:06:56.740 --> 00:06:57.010
+you know,
+
+185
+00:06:57.020 --> 00:07:01.950
+secretaries using imax and secretaries who had no experience with programming
+
+186
+00:07:01.960 --> 00:07:05.120
+right to make it here and using imax and writing.
+
+187
+00:07:05.120 --> 00:07:09.360
+Little chance of Avila's code to customize their their editor for their particular use.
+
+188
+00:07:09.740 --> 00:07:10.140
+So,
+
+189
+00:07:10.150 --> 00:07:14.960
+I think that's always been a very important aspect to Richard.
+
+190
+00:07:15.440 --> 00:07:15.910
+Yeah,
+
+191
+00:07:15.910 --> 00:07:16.090
+I mean,
+
+192
+00:07:16.090 --> 00:07:16.970
+I guess even,
+
+193
+00:07:16.980 --> 00:07:17.240
+you know,
+
+194
+00:07:17.240 --> 00:07:18.250
+if you can't program,
+
+195
+00:07:18.250 --> 00:07:19.050
+you expressed yourself,
+
+196
+00:07:19.050 --> 00:07:20.340
+you might get somebody else to do it,
+
+197
+00:07:20.350 --> 00:07:20.720
+right.
+
+198
+00:07:20.730 --> 00:07:21.250
+Um,
+
+199
+00:07:21.260 --> 00:07:26.140
+which is something that you can't do with software that isn't customizable or it doesn't have
+
+200
+00:07:26.140 --> 00:07:29.260
+its own programming language or extension language that comes with it.
+
+201
+00:07:29.740 --> 00:07:30.420
+And so,
+
+202
+00:07:30.430 --> 00:07:30.850
+um,
+
+203
+00:07:31.240 --> 00:07:31.960
+well I see it,
+
+204
+00:07:32.440 --> 00:07:32.670
+you know,
+
+205
+00:07:32.670 --> 00:07:37.330
+I work in a lot of sort of digital transformation projects and there I talk to the managers a lot.
+
+206
+00:07:37.340 --> 00:07:42.010
+This idea that the users would be able to modify or to a larger degree customize the
+
+207
+00:07:42.010 --> 00:07:44.820
+software is really something it's very alien to them.
+
+208
+00:07:44.830 --> 00:07:45.700
+So,
+
+209
+00:07:45.710 --> 00:07:45.970
+um,
+
+210
+00:07:45.980 --> 00:07:49.600
+I wish we would get back to the ideals of imax um,
+
+211
+00:07:49.600 --> 00:07:51.550
+and imax lisp at some point.
+
+212
+00:07:51.840 --> 00:07:54.060
+So I guess that's that's what we're going to talk about today.
+
+213
+00:07:55.440 --> 00:07:55.880
+Okay.
+
+214
+00:07:55.880 --> 00:07:59.860
+So I guess we should give like a brief overview of what imax list is,
+
+215
+00:07:59.870 --> 00:08:02.890
+at least for the younger people who don't want lisp in the audience.
+
+216
+00:08:02.890 --> 00:08:03.230
+Right?
+
+217
+00:08:03.240 --> 00:08:07.790
+So imax list is a list and that means uh well it's instantly
+
+218
+00:08:07.790 --> 00:08:10.500
+recognizable to anyone By the syntax,
+
+219
+00:08:10.500 --> 00:08:10.700
+right?
+
+220
+00:08:10.700 --> 00:08:13.840
+The syntax works in that there's a lot of round parentheses,
+
+221
+00:08:13.840 --> 00:08:15.680
+and also there's prefix notation.
+
+222
+00:08:15.690 --> 00:08:19.220
+So if you want to add two numbers like 23 and 42,
+
+223
+00:08:19.220 --> 00:08:22.820
+you write it like this open paren operator goes at the front,
+
+224
+00:08:22.820 --> 00:08:25.150
+then the operations and then close parent.
+
+225
+00:08:25.540 --> 00:08:29.110
+And you can see I'm typing that into the scratch buffer of X.
+
+226
+00:08:29.110 --> 00:08:29.250
+M.
+
+227
+00:08:29.250 --> 00:08:29.460
+X.
+
+228
+00:08:29.460 --> 00:08:33.780
+And I can just close your button control J and it will display the result of
+
+229
+00:08:33.789 --> 00:08:36.460
+evaluating um that expression.
+
+230
+00:08:36.940 --> 00:08:38.320
+And uh you know,
+
+231
+00:08:38.330 --> 00:08:39.200
+these parentheses,
+
+232
+00:08:39.200 --> 00:08:40.250
+you can also nest them.
+
+233
+00:08:40.250 --> 00:08:41.990
+So there's no precedence rules,
+
+234
+00:08:41.990 --> 00:08:44.280
+like there are in a lot of other programming languages,
+
+235
+00:08:44.290 --> 00:08:49.090
+or I can You don't have like the sum of 23 and the product of
+
+236
+00:08:49.090 --> 00:08:50.390
+15 and 42.
+
+237
+00:08:50.390 --> 00:08:51.070
+And again,
+
+238
+00:08:51.080 --> 00:08:56.040
+I can press control J and it will instantly display the result of evaluating
+
+239
+00:08:56.040 --> 00:09:00.460
+that a lot of people looking at this kind of get scared by all of these parentheses.
+
+240
+00:09:00.460 --> 00:09:03.700
+But experienced list programmers just look at the indentation.
+
+241
+00:09:03.700 --> 00:09:04.500
+And in fact,
+
+242
+00:09:04.510 --> 00:09:04.720
+you know,
+
+243
+00:09:04.720 --> 00:09:06.460
+imax will automatically identify,
+
+244
+00:09:06.460 --> 00:09:11.010
+press a button uh in a way that is uh that is just pretty much standardized and that
+
+245
+00:09:11.020 --> 00:09:14.560
+everybody everybody adheres to that standard when they end their program.
+
+246
+00:09:15.440 --> 00:09:16.110
+All right,
+
+247
+00:09:16.120 --> 00:09:17.840
+we could also do like a variable.
+
+248
+00:09:17.850 --> 00:09:19.250
+So here's a variable,
+
+249
+00:09:19.260 --> 00:09:21.050
+I don't know.
+
+250
+00:09:21.440 --> 00:09:23.260
+Uh huh.
+
+251
+00:09:23.640 --> 00:09:25.010
+Something like this.
+
+252
+00:09:25.460 --> 00:09:26.190
+So,
+
+253
+00:09:26.190 --> 00:09:27.910
+here's here's Pie.
+
+254
+00:09:28.140 --> 00:09:28.640
+Right?
+
+255
+00:09:28.640 --> 00:09:30.170
+And then I can just evaluate Pie.
+
+256
+00:09:30.170 --> 00:09:33.710
+And it will give me It will give me the value that comes with it.
+
+257
+00:09:33.720 --> 00:09:35.660
+And I could also write a function,
+
+258
+00:09:35.670 --> 00:09:35.920
+you know,
+
+259
+00:09:35.920 --> 00:09:40.590
+let me write a function that computes the circumference of a circle with a radius
+
+260
+00:09:40.600 --> 00:09:41.910
+might look like this.
+
+261
+00:09:41.920 --> 00:09:44.410
+Uh and again,
+
+262
+00:09:44.410 --> 00:09:47.570
+I can evaluate that will define that function and all I can say,
+
+263
+00:09:47.570 --> 00:09:47.780
+well,
+
+264
+00:09:47.780 --> 00:09:50.350
+what's the circumference of a circle of radius 10?
+
+265
+00:09:50.540 --> 00:09:52.800
+And it will display the result of that.
+
+266
+00:09:52.810 --> 00:09:56.570
+So it's not just the fact that it's this programming language with parentheses,
+
+267
+00:09:56.570 --> 00:09:57.880
+but also with the max,
+
+268
+00:09:57.880 --> 00:10:02.150
+there's also instantly an interactive programming environment for it.
+
+269
+00:10:02.640 --> 00:10:07.510
+Now you can also locally bind variables in uh the
+
+270
+00:10:07.510 --> 00:10:10.730
+next list with a construct called let so you can do this,
+
+271
+00:10:10.740 --> 00:10:11.300
+you know?
+
+272
+00:10:11.310 --> 00:10:16.160
+Um and so 10 and 20 bound to
+
+273
+00:10:16.540 --> 00:10:18.520
+variables X and Y.
+
+274
+00:10:18.530 --> 00:10:21.510
+You could evaluate this and get a result.
+
+275
+00:10:21.510 --> 00:10:23.260
+So that gives me local variables.
+
+276
+00:10:23.740 --> 00:10:28.740
+And now here's something that I guess nowadays is pretty unique to the
+
+277
+00:10:28.740 --> 00:10:29.320
+next list.
+
+278
+00:10:29.330 --> 00:10:29.670
+You know,
+
+279
+00:10:29.670 --> 00:10:34.190
+I could write a function called F takes a parameter called
+
+280
+00:10:34.190 --> 00:10:35.040
+X.
+
+281
+00:10:35.050 --> 00:10:37.760
+And I could add X to Y.
+
+282
+00:10:37.770 --> 00:10:40.520
+And now there's no visible binding for why?
+
+283
+00:10:40.530 --> 00:10:41.110
+Right.
+
+284
+00:10:41.120 --> 00:10:44.060
+Um And of course if I kind of do you know F.
+
+285
+00:10:44.060 --> 00:10:44.590
+F five?
+
+286
+00:10:44.590 --> 00:10:45.680
+It will say oh,
+
+287
+00:10:45.690 --> 00:10:45.990
+symbols,
+
+288
+00:10:45.990 --> 00:10:46.870
+variable is void.
+
+289
+00:10:46.880 --> 00:10:48.960
+Is symbols value as variables void.
+
+290
+00:10:48.960 --> 00:10:49.270
+Why?
+
+291
+00:10:49.270 --> 00:10:50.560
+So why is not bound?
+
+292
+00:10:50.570 --> 00:10:54.140
+But I can't bind it using lit.
+
+293
+00:10:54.150 --> 00:10:54.510
+Right?
+
+294
+00:10:54.510 --> 00:10:56.060
+So I can do this.
+
+295
+00:10:56.070 --> 00:11:00.870
+I can bind Y 27 and then I can call effort five
+
+296
+00:11:00.880 --> 00:11:03.110
+and it will give me the value of 12.
+
+297
+00:11:03.110 --> 00:11:06.850
+And this is a feature known as dynamic scoping.
+
+298
+00:11:07.340 --> 00:11:10.440
+And you know every every piece of code that we've seen so far.
+
+299
+00:11:10.450 --> 00:11:11.020
+Actually,
+
+300
+00:11:11.030 --> 00:11:13.940
+an imax list could also be a matchless program.
+
+301
+00:11:13.940 --> 00:11:18.560
+So necklace was one of the predecessors of the imax list was just a regular list implementation that
+
+302
+00:11:18.560 --> 00:11:20.420
+existed at the time.
+
+303
+00:11:20.430 --> 00:11:20.910
+Right?
+
+304
+00:11:20.990 --> 00:11:22.100
+So,
+
+305
+00:11:22.110 --> 00:11:26.920
+so there's a strange thing is that the binding that we do with let
+
+306
+00:11:26.930 --> 00:11:28.850
+uh works more like an assignment.
+
+307
+00:11:28.850 --> 00:11:29.170
+Right?
+
+308
+00:11:29.180 --> 00:11:29.690
+So,
+
+309
+00:11:29.690 --> 00:11:34.170
+so when f refers to why it doesn't refer to kind of electrically
+
+310
+00:11:34.180 --> 00:11:37.890
+bound binding of of why,
+
+311
+00:11:37.890 --> 00:11:41.050
+but to the one that was done last at runtime.
+
+312
+00:11:41.840 --> 00:11:46.150
+So uh there's dynamic scoping and it seems just
+
+313
+00:11:46.160 --> 00:11:48.280
+very unusual to do that.
+
+314
+00:11:48.280 --> 00:11:48.470
+Right?
+
+315
+00:11:48.470 --> 00:11:48.850
+Why?
+
+316
+00:11:48.860 --> 00:11:53.060
+Why Stefan is their dynamic scoping in imax list?
+
+317
+00:11:54.040 --> 00:11:55.860
+Is that a feature or is it a bug?
+
+318
+00:11:57.040 --> 00:11:57.240
+Oh,
+
+319
+00:11:57.240 --> 00:11:57.980
+there's a feature.
+
+320
+00:11:58.080 --> 00:11:58.750
+Okay,
+
+321
+00:11:59.440 --> 00:12:02.460
+so can you show me something I can actually do with dynamic scoping?
+
+322
+00:12:03.440 --> 00:12:03.680
+Yeah,
+
+323
+00:12:03.680 --> 00:12:05.890
+I can show you an example here.
+
+324
+00:12:05.900 --> 00:12:07.960
+I'm switching to your index.
+
+325
+00:12:08.640 --> 00:12:09.260
+Yeah.
+
+326
+00:12:09.740 --> 00:12:12.080
+So it's pretty over the next few months.
+
+327
+00:12:13.340 --> 00:12:14.750
+Um,
+
+328
+00:12:15.140 --> 00:12:17.460
+it's boring or than X M X.
+
+329
+00:12:17.470 --> 00:12:18.460
+I can say that much.
+
+330
+00:12:19.040 --> 00:12:20.100
+Okay,
+
+331
+00:12:20.110 --> 00:12:24.230
+so here is here is an example of an imax this package.
+
+332
+00:12:24.240 --> 00:12:25.390
+Okay,
+
+333
+00:12:25.400 --> 00:12:30.230
+shows that somewhat randomly was just passing through the other day and you can see
+
+334
+00:12:30.230 --> 00:12:34.560
+has a bunch of variable declarations and then a bunch of function declarations
+
+335
+00:12:35.140 --> 00:12:36.790
+and I haven't hear folded.
+
+336
+00:12:36.790 --> 00:12:38.970
+So so you don't know overwhelmed with everything.
+
+337
+00:12:38.970 --> 00:12:40.280
+But so here,
+
+338
+00:12:40.290 --> 00:12:40.970
+for example,
+
+339
+00:12:40.970 --> 00:12:43.900
+the the search mv message function,
+
+340
+00:12:43.910 --> 00:12:44.890
+it doesn't really matter,
+
+341
+00:12:44.900 --> 00:12:49.770
+you know what it's for and but you can see that the first thing you can see
+
+342
+00:12:49.770 --> 00:12:52.390
+here is that it has a strange at the beginning.
+
+343
+00:12:52.400 --> 00:12:53.260
+Okay.
+
+344
+00:12:53.270 --> 00:12:55.970
+And that's not what you were asking me.
+
+345
+00:12:55.970 --> 00:12:56.890
+But since we see it,
+
+346
+00:12:56.890 --> 00:12:59.050
+I I just mentioned it.
+
+347
+00:12:59.440 --> 00:13:01.680
+So that's a that's a documentation string.
+
+348
+00:13:01.690 --> 00:13:02.910
+That's a kind of,
+
+349
+00:13:02.920 --> 00:13:03.220
+you know,
+
+350
+00:13:03.220 --> 00:13:06.460
+ancestor to the java doc style of programming.
+
+351
+00:13:06.940 --> 00:13:08.890
+It was actually introduced by richard Stallman,
+
+352
+00:13:08.890 --> 00:13:09.960
+but not in in access.
+
+353
+00:13:10.640 --> 00:13:12.760
+It was originally introduced in tico.
+
+354
+00:13:13.440 --> 00:13:18.410
+So he added into tico and then and then carried it to the MAX west and from there
+
+355
+00:13:18.410 --> 00:13:20.180
+it spread to other languages.
+
+356
+00:13:20.190 --> 00:13:20.630
+Okay,
+
+357
+00:13:20.640 --> 00:13:23.490
+so I guess that's another kind of facet of user empowerment.
+
+358
+00:13:23.490 --> 00:13:23.720
+Right?
+
+359
+00:13:23.720 --> 00:13:27.960
+That you I mean you can then easily look up that documentation and it kind of comes with the code.
+
+360
+00:13:28.540 --> 00:13:29.220
+Exactly.
+
+361
+00:13:29.230 --> 00:13:34.050
+So that that you know that is that there was also something that he
+
+362
+00:13:34.060 --> 00:13:34.970
+found as you know,
+
+363
+00:13:34.980 --> 00:13:35.800
+very,
+
+364
+00:13:35.810 --> 00:13:38.810
+very useful of the users.
+
+365
+00:13:38.820 --> 00:13:40.860
+And the one thing here you wanted,
+
+366
+00:13:40.870 --> 00:13:45.550
+you asked about it was this message Lloyd max binding here.
+
+367
+00:13:45.560 --> 00:13:46.920
+Not because it has this name,
+
+368
+00:13:46.920 --> 00:13:51.610
+but if you look this horrible is not used because it's it's using dynamic
+
+369
+00:13:51.620 --> 00:13:52.360
+binding,
+
+370
+00:13:52.740 --> 00:13:53.610
+dining scoping.
+
+371
+00:13:53.610 --> 00:13:54.060
+Sorry.
+
+372
+00:13:54.740 --> 00:13:59.470
+Um so this variable is really fundamentally past as a
+
+373
+00:13:59.480 --> 00:14:02.460
+configuration argument through the message function here.
+
+374
+00:14:02.940 --> 00:14:04.970
+The message function here is a kind of printer,
+
+375
+00:14:04.980 --> 00:14:05.330
+you know,
+
+376
+00:14:05.330 --> 00:14:08.410
+that just displays something in the media battle in the little window.
+
+377
+00:14:08.410 --> 00:14:13.380
+You have to be very bottom here and and
+
+378
+00:14:13.390 --> 00:14:17.020
+as it does that also it kind of records the message analog somewhere.
+
+379
+00:14:17.020 --> 00:14:19.160
+So you can recover the messages you've seen in the past.
+
+380
+00:14:19.740 --> 00:14:22.010
+And message log max is a variable.
+
+381
+00:14:22.010 --> 00:14:25.470
+You can you can use to tell the message,
+
+382
+00:14:25.480 --> 00:14:30.260
+you know how many messages to keep And more specifically in this case to just not log anything.
+
+383
+00:14:30.840 --> 00:14:31.250
+Okay,
+
+384
+00:14:31.260 --> 00:14:32.590
+so the implementation,
+
+385
+00:14:32.600 --> 00:14:36.450
+so the implementation of the message function looks at the message log max variable
+
+386
+00:14:36.940 --> 00:14:37.810
+exactly.
+
+387
+00:14:37.820 --> 00:14:39.820
+This is actually the C code,
+
+388
+00:14:39.830 --> 00:14:40.660
+you know,
+
+389
+00:14:41.240 --> 00:14:43.550
+we could show you but I don't think that's the point here.
+
+390
+00:14:44.040 --> 00:14:48.710
+Uh So so it's it's looked up in the C code in the as a normal
+
+391
+00:14:48.710 --> 00:14:53.610
+variable and here is bound to affect the behavior of message.
+
+392
+00:14:53.620 --> 00:14:55.720
+And this is used very commonly.
+
+393
+00:14:55.720 --> 00:14:59.910
+Not specifically for this variable but all kinds of functions have this
+
+394
+00:14:59.920 --> 00:15:03.250
+extra configuration passed in the and dynamic scoping.
+
+395
+00:15:03.940 --> 00:15:04.540
+Okay.
+
+396
+00:15:04.550 --> 00:15:07.230
+So the alternative to that I guess would be to have,
+
+397
+00:15:07.240 --> 00:15:07.510
+you know,
+
+398
+00:15:07.510 --> 00:15:09.610
+all the functions have lots of parameters.
+
+399
+00:15:09.620 --> 00:15:09.960
+Right.
+
+400
+00:15:10.340 --> 00:15:10.790
+Right.
+
+401
+00:15:10.800 --> 00:15:15.760
+Or some extra config parameter that's threaded through the code or pass code
+
+402
+00:15:15.760 --> 00:15:16.380
+everywhere.
+
+403
+00:15:16.390 --> 00:15:20.270
+So that that I guess makes dynamic scoping via feature.
+
+404
+00:15:20.280 --> 00:15:20.710
+Right?
+
+405
+00:15:20.720 --> 00:15:22.170
+Um Yes.
+
+406
+00:15:22.180 --> 00:15:22.510
+Yeah.
+
+407
+00:15:22.520 --> 00:15:23.350
+Very much so.
+
+408
+00:15:23.740 --> 00:15:24.250
+Okay.
+
+409
+00:15:24.260 --> 00:15:26.270
+Uh It's used,
+
+410
+00:15:26.280 --> 00:15:26.490
+you know,
+
+411
+00:15:26.490 --> 00:15:29.610
+it's using in in many places in the in the A.
+
+412
+00:15:29.610 --> 00:15:29.810
+P.
+
+413
+00:15:29.810 --> 00:15:29.920
+I.
+
+414
+00:15:29.920 --> 00:15:32.460
+In the core api o of imax is Okay.
+
+415
+00:15:33.040 --> 00:15:37.790
+Uh So Stefan the other day I tried the dynamic scoping example that I had earlier that f
+
+416
+00:15:37.790 --> 00:15:38.920
+function in group B.
+
+417
+00:15:38.920 --> 00:15:39.030
+M.
+
+418
+00:15:39.030 --> 00:15:39.330
+X.
+
+419
+00:15:39.330 --> 00:15:39.530
+Right.
+
+420
+00:15:39.530 --> 00:15:42.630
+The mx that you're working on and it it didn't work.
+
+421
+00:15:42.640 --> 00:15:43.890
+What's what's the matter?
+
+422
+00:15:43.900 --> 00:15:44.950
+What's up with that?
+
+423
+00:15:45.640 --> 00:15:50.110
+Could you could you take that into your imax just Yes of course you can
+
+424
+00:15:50.530 --> 00:15:51.580
+be fun at.
+
+425
+00:15:51.590 --> 00:15:52.540
+Yeah.
+
+426
+00:15:53.240 --> 00:15:54.670
+Just sex.
+
+427
+00:15:54.670 --> 00:15:55.780
+Ny Right.
+
+428
+00:15:55.890 --> 00:16:00.740
+Wine and then you let wider seven and call F.
+
+429
+00:16:00.740 --> 00:16:01.460
+With five.
+
+430
+00:16:03.040 --> 00:16:06.530
+Right so and Okay.
+
+431
+00:16:06.540 --> 00:16:06.740
+Right.
+
+432
+00:16:06.740 --> 00:16:07.070
+Right.
+
+433
+00:16:07.080 --> 00:16:08.290
+Uh Yeah.
+
+434
+00:16:08.360 --> 00:16:13.270
+Come well it's because a few
+
+435
+00:16:13.270 --> 00:16:18.250
+years back we actually changed the the default coping to be to be lexical scoping
+
+436
+00:16:18.250 --> 00:16:21.060
+instead of prostatic scoping instead of dynamic scoping.
+
+437
+00:16:21.640 --> 00:16:22.090
+Okay.
+
+438
+00:16:22.090 --> 00:16:24.360
+Yeah of course now this doesn't work anymore.
+
+439
+00:16:24.370 --> 00:16:24.760
+That's right.
+
+440
+00:16:25.740 --> 00:16:29.500
+So so but but all that I mean they're they're like a zillion code.
+
+441
+00:16:29.500 --> 00:16:32.180
+The zillion lines of code written in imax list.
+
+442
+00:16:32.190 --> 00:16:34.760
+Did that all break when you make that change?
+
+443
+00:16:35.640 --> 00:16:39.120
+It would have if we if we changed it just like that.
+
+444
+00:16:39.120 --> 00:16:39.700
+Yes of course.
+
+445
+00:16:39.700 --> 00:16:42.380
+But okay we just added a new direct instead.
+
+446
+00:16:42.390 --> 00:16:45.290
+Okay so there's now two dialects of imax list.
+
+447
+00:16:45.300 --> 00:16:49.180
+uh so there's statically scoped and then there's dynamically scoped.
+
+448
+00:16:49.770 --> 00:16:50.520
+So,
+
+449
+00:16:50.530 --> 00:16:53.210
+so I guess you found a way to kind of make,
+
+450
+00:16:53.220 --> 00:16:58.020
+I mean we said dynamic scoping is a feature and you needed to kind of configure things
+
+451
+00:16:58.140 --> 00:17:00.520
+um and and add additional parameters.
+
+452
+00:17:00.520 --> 00:17:03.040
+Pass additional parameters into imax list functions.
+
+453
+00:17:03.050 --> 00:17:06.060
+So um so I guess you made that work.
+
+454
+00:17:06.069 --> 00:17:08.460
+Why didn't Stallman do that originally?
+
+455
+00:17:08.460 --> 00:17:08.730
+Right.
+
+456
+00:17:08.730 --> 00:17:10.420
+I mean he started working on,
+
+457
+00:17:10.430 --> 00:17:13.810
+you know this version of imax in the eighties and at that time,
+
+458
+00:17:13.810 --> 00:17:13.990
+you know,
+
+459
+00:17:13.990 --> 00:17:14.950
+skiing was available,
+
+460
+00:17:14.950 --> 00:17:18.089
+Communist was available every other language on the planet.
+
+461
+00:17:18.089 --> 00:17:19.859
+Pretty much used Sadiq scoping,
+
+462
+00:17:20.339 --> 00:17:21.060
+how come?
+
+463
+00:17:22.640 --> 00:17:22.790
+Well,
+
+464
+00:17:22.790 --> 00:17:27.339
+I think I think it was mostly because first he had a lot of experience with dynamic scoping.
+
+465
+00:17:27.349 --> 00:17:28.630
+The group.
+
+466
+00:17:28.630 --> 00:17:31.970
+There was working was using Macallister and least machine list.
+
+467
+00:17:31.980 --> 00:17:34.550
+All of these were using dynamic scoping.
+
+468
+00:17:35.140 --> 00:17:36.130
+He also,
+
+469
+00:17:36.140 --> 00:17:36.670
+you know,
+
+470
+00:17:37.140 --> 00:17:39.130
+he also liked multex imax,
+
+471
+00:17:39.140 --> 00:17:40.000
+as you know,
+
+472
+00:17:40.000 --> 00:17:44.360
+there were lots of lots of variants of imax back then when louis max was started
+
+473
+00:17:44.940 --> 00:17:49.830
+and I think multi C max was definitely the one that was to him are one of the
+
+474
+00:17:49.840 --> 00:17:50.850
+most successful ones.
+
+475
+00:17:51.240 --> 00:17:51.560
+Mhm.
+
+476
+00:17:52.440 --> 00:17:57.200
+And multi screen actors using Macallister and uses dynamic scoping and in the style of
+
+477
+00:17:57.200 --> 00:17:57.450
+code,
+
+478
+00:17:57.450 --> 00:17:59.160
+you're right in in multi C max,
+
+479
+00:17:59.540 --> 00:18:01.990
+your dynamic scoping was also used very,
+
+480
+00:18:02.000 --> 00:18:02.920
+very commonly.
+
+481
+00:18:02.930 --> 00:18:05.310
+So he had a fair bit of experience.
+
+482
+00:18:05.310 --> 00:18:06.140
+Also back then,
+
+483
+00:18:06.150 --> 00:18:06.480
+you know,
+
+484
+00:18:06.480 --> 00:18:11.270
+we should not forget that back then in in in this particular context,
+
+485
+00:18:11.740 --> 00:18:14.050
+dynamic scoping was considered insufficient,
+
+486
+00:18:14.740 --> 00:18:19.560
+whereas lexical scoping was kind of the new guy on the block and it wasn't
+
+487
+00:18:20.040 --> 00:18:22.110
+quite clear exactly what they would,
+
+488
+00:18:22.120 --> 00:18:22.950
+you know,
+
+489
+00:18:23.340 --> 00:18:26.370
+it seems kind of expensive to implement,
+
+490
+00:18:26.380 --> 00:18:29.230
+there were ideas of how to make it work efficiently,
+
+491
+00:18:29.230 --> 00:18:29.990
+but you know,
+
+492
+00:18:29.990 --> 00:18:31.520
+it was not as obvious.
+
+493
+00:18:31.530 --> 00:18:32.160
+Okay,
+
+494
+00:18:32.840 --> 00:18:34.980
+so I guess the point is right with lexical scoping,
+
+495
+00:18:34.980 --> 00:18:37.930
+you need to create closures when there's a lambda expression in your program.
+
+496
+00:18:37.940 --> 00:18:38.700
+Right?
+
+497
+00:18:38.710 --> 00:18:43.660
+And uh so you need to come out somehow package up all the variables or use in
+
+498
+00:18:43.660 --> 00:18:44.660
+the body of the lambda,
+
+499
+00:18:45.040 --> 00:18:45.400
+right?
+
+500
+00:18:45.400 --> 00:18:50.110
+And then you have to look for them in the different levels of the environment and
+
+501
+00:18:50.110 --> 00:18:52.550
+depending on how you represent your environment,
+
+502
+00:18:52.560 --> 00:18:57.540
+at least in It wasn't exactly how the true word back.
+
+503
+00:18:57.550 --> 00:18:58.670
+Okay,
+
+504
+00:18:58.680 --> 00:18:59.010
+so,
+
+505
+00:18:59.010 --> 00:19:01.750
+but but how did how did people work for like 20 years,
+
+506
+00:19:01.750 --> 00:19:05.310
+2030 years with just dynamic scoping available to them?
+
+507
+00:19:05.320 --> 00:19:05.890
+Right.
+
+508
+00:19:05.900 --> 00:19:09.590
+If λ doesn't bind local three variables,
+
+509
+00:19:09.600 --> 00:19:10.200
+then,
+
+510
+00:19:10.210 --> 00:19:10.490
+you know,
+
+511
+00:19:10.490 --> 00:19:11.560
+that must be a major pain.
+
+512
+00:19:11.560 --> 00:19:11.860
+Right?
+
+513
+00:19:13.740 --> 00:19:16.930
+Um No,
+
+514
+00:19:16.990 --> 00:19:17.410
+no,
+
+515
+00:19:17.410 --> 00:19:21.360
+actually you can you can live dynamic scoping is perfectly sufficient.
+
+516
+00:19:21.740 --> 00:19:22.790
+Okay,
+
+517
+00:19:22.800 --> 00:19:26.670
+so we had this,
+
+518
+00:19:27.040 --> 00:19:32.000
+technically there's only two main issues with diarrhea scoping is one of them.
+
+519
+00:19:32.000 --> 00:19:34.270
+Is is a name conflict.
+
+520
+00:19:35.040 --> 00:19:35.410
+Okay.
+
+521
+00:19:35.420 --> 00:19:39.060
+You have to you have to be more careful when you how you name your variables.
+
+522
+00:19:39.440 --> 00:19:43.960
+If you if we go back to my example of I search many buffer,
+
+523
+00:19:43.970 --> 00:19:45.860
+I search and package,
+
+524
+00:19:46.240 --> 00:19:48.750
+you'll see that all the variables declared here,
+
+525
+00:19:48.920 --> 00:19:52.730
+they all start with the search and be okay.
+
+526
+00:19:52.750 --> 00:19:55.540
+And so this is basically we use what they call,
+
+527
+00:19:55.540 --> 00:19:59.820
+what we call a name space prefix that makes it clear that this variable
+
+528
+00:19:59.830 --> 00:20:04.370
+belongs to this package and so it tries to avoid
+
+529
+00:20:04.370 --> 00:20:08.460
+or it aims to avoid conflict with other packages,
+
+530
+00:20:08.460 --> 00:20:10.110
+uses using the same variable.
+
+531
+00:20:10.110 --> 00:20:11.360
+Further other purposes.
+
+532
+00:20:11.370 --> 00:20:11.940
+Okay.
+
+533
+00:20:11.950 --> 00:20:15.320
+So you can still have conflicts within the package,
+
+534
+00:20:15.320 --> 00:20:16.040
+but you know,
+
+535
+00:20:16.050 --> 00:20:18.170
+presumably the author knows what he's doing so,
+
+536
+00:20:18.540 --> 00:20:19.860
+but it's easy to avoid,
+
+537
+00:20:20.440 --> 00:20:24.050
+but if you look inside inside functions then you'll see,
+
+538
+00:20:24.050 --> 00:20:24.550
+for example,
+
+539
+00:20:24.550 --> 00:20:25.210
+here,
+
+540
+00:20:25.220 --> 00:20:25.490
+you know,
+
+541
+00:20:25.490 --> 00:20:27.390
+we're just buying the count variable here.
+
+542
+00:20:27.390 --> 00:20:29.340
+We by buying the land variable.
+
+543
+00:20:29.350 --> 00:20:30.930
+There's no no name for,
+
+544
+00:20:30.940 --> 00:20:34.850
+no need for name space prefix for the local local variables.
+
+545
+00:20:34.860 --> 00:20:36.810
+It's not as costly as you think.
+
+546
+00:20:36.820 --> 00:20:41.700
+It makes it reasonably clear when you have a dynamically scoped variable like we had
+
+547
+00:20:41.700 --> 00:20:46.350
+here in the example of message log max as opposed to a local
+
+548
+00:20:46.350 --> 00:20:46.730
+variable.
+
+549
+00:20:46.730 --> 00:20:51.570
+This that could use lexical scoping or that doesn't really matter because just local.
+
+550
+00:20:51.580 --> 00:20:52.170
+Yeah.
+
+551
+00:20:52.180 --> 00:20:52.600
+Okay.
+
+552
+00:20:52.600 --> 00:20:55.360
+Can you pull up the example that you just had with a comparable?
+
+553
+00:20:55.840 --> 00:20:57.330
+Uh All right.
+
+554
+00:20:57.340 --> 00:20:59.090
+So I guess here really,
+
+555
+00:20:59.100 --> 00:20:59.920
+I guess,
+
+556
+00:20:59.930 --> 00:21:00.210
+you know,
+
+557
+00:21:00.210 --> 00:21:04.210
+the count variables only used kind of within the lexical extent of the lead.
+
+558
+00:21:04.220 --> 00:21:04.670
+Right?
+
+559
+00:21:05.140 --> 00:21:06.860
+Uh so so there,
+
+560
+00:21:06.870 --> 00:21:10.210
+I mean at least as it pertains to that particular variable,
+
+561
+00:21:10.220 --> 00:21:13.170
+um there's no difference between dynamic and static scoping.
+
+562
+00:21:13.180 --> 00:21:13.940
+Right.
+
+563
+00:21:13.950 --> 00:21:14.260
+Right.
+
+564
+00:21:14.270 --> 00:21:19.240
+And so uh well I remember you know in the late 90s when I was
+
+565
+00:21:19.240 --> 00:21:20.780
+still a research assistant at the university,
+
+566
+00:21:20.780 --> 00:21:23.910
+we were thinking that in fact a lot of imax list code,
+
+567
+00:21:23.910 --> 00:21:24.080
+right,
+
+568
+00:21:24.080 --> 00:21:28.710
+There is kind of the configuration variables that you have up there that are global,
+
+569
+00:21:28.710 --> 00:21:33.690
+but kind of when you have purely local bindings are usually used in a way that would
+
+570
+00:21:33.690 --> 00:21:36.600
+work just the same with status scoping and dynamic scoping.
+
+571
+00:21:36.610 --> 00:21:37.450
+Right.
+
+572
+00:21:37.460 --> 00:21:37.820
+Right.
+
+573
+00:21:37.830 --> 00:21:39.030
+And so you know,
+
+574
+00:21:39.030 --> 00:21:41.400
+we actually did this shameless plug.
+
+575
+00:21:41.410 --> 00:21:46.310
+So this is an ICMP paper and I think into that came out in 2000 and
+
+576
+00:21:46.310 --> 00:21:51.280
+one where primarily my student at the time that he has no Ebola implemented analysis that
+
+577
+00:21:51.280 --> 00:21:54.890
+would figure out whether kind of static and dynamic scoping would coincide.
+
+578
+00:21:54.890 --> 00:21:58.160
+We found out that indeed they do coincide for most,
+
+579
+00:21:58.160 --> 00:21:58.370
+you know,
+
+580
+00:21:58.370 --> 00:21:59.820
+a large percentage,
+
+581
+00:21:59.830 --> 00:22:00.210
+you know,
+
+582
+00:22:00.210 --> 00:22:03.540
+99 something percent of all the variables.
+
+583
+00:22:03.540 --> 00:22:05.050
+And so we thought,
+
+584
+00:22:05.140 --> 00:22:09.750
+I think you did the smart thing by evolving uh max listen to two different
+
+585
+00:22:09.750 --> 00:22:14.630
+dialects and we just thought we were just going to transform all the code into a form that was
+
+586
+00:22:14.630 --> 00:22:19.540
+agnostic to whether it was dynamically or statically scoped and then we would just change the
+
+587
+00:22:19.540 --> 00:22:24.410
+language underneath and the code wouldn't notice uh alas uh as it goes with many
+
+588
+00:22:24.410 --> 00:22:29.030
+things that originate a research that unfortunately never materialized actually.
+
+589
+00:22:29.030 --> 00:22:29.440
+Yeah,
+
+590
+00:22:29.450 --> 00:22:30.720
+I was wondering,
+
+591
+00:22:30.720 --> 00:22:31.020
+you know,
+
+592
+00:22:31.020 --> 00:22:35.740
+I back then I thought it was a very promising path and I'm
+
+593
+00:22:35.750 --> 00:22:40.100
+curious why you didn't go any further but he has
+
+594
+00:22:40.100 --> 00:22:44.200
+graduated is probably the reason um OK.
+
+595
+00:22:44.210 --> 00:22:48.340
+As as it goes right as we know that goes yeah,
+
+596
+00:22:48.350 --> 00:22:53.260
+it does take many years of dedication to push through such a
+
+597
+00:22:53.260 --> 00:22:53.820
+change.
+
+598
+00:22:53.870 --> 00:22:54.510
+Yeah.
+
+599
+00:22:54.520 --> 00:22:55.510
+And to your credit.
+
+600
+00:22:55.520 --> 00:22:56.690
+Uh you've done that for me.
+
+601
+00:22:56.690 --> 00:22:57.050
+Yes,
+
+602
+00:22:57.240 --> 00:23:01.450
+we we have seen we have seen this on the impact by the
+
+603
+00:23:01.460 --> 00:23:03.640
+here you you staying on.
+
+604
+00:23:03.640 --> 00:23:05.360
+If you go back to my to my example.
+
+605
+00:23:05.840 --> 00:23:07.060
+Uh huh.
+
+606
+00:23:07.540 --> 00:23:08.420
+Okay.
+
+607
+00:23:08.620 --> 00:23:09.760
+Okay.
+
+608
+00:23:10.640 --> 00:23:14.680
+So you can see here at the top it says lexical binding.
+
+609
+00:23:15.420 --> 00:23:15.810
+Okay.
+
+610
+00:23:16.640 --> 00:23:16.760
+No,
+
+611
+00:23:16.770 --> 00:23:19.250
+we actually call it lexical binding and not coping.
+
+612
+00:23:19.250 --> 00:23:22.740
+I guess that was the type of thing doesn't stay up there.
+
+613
+00:23:22.740 --> 00:23:24.420
+There's a type of No,
+
+614
+00:23:24.420 --> 00:23:24.610
+no,
+
+615
+00:23:24.610 --> 00:23:27.420
+it's not the type of just keeping anyway,
+
+616
+00:23:27.430 --> 00:23:32.180
+so this is actually the little notes in the file that says
+
+617
+00:23:32.190 --> 00:23:36.620
+this fight is using the new direct as opposed to the old dynamic least
+
+618
+00:23:36.620 --> 00:23:37.600
+coat.
+
+619
+00:23:38.110 --> 00:23:38.960
+Okay.
+
+620
+00:23:39.940 --> 00:23:41.970
+And this was introduced.
+
+621
+00:23:41.970 --> 00:23:43.470
+This took many years.
+
+622
+00:23:43.480 --> 00:23:44.680
+This is not,
+
+623
+00:23:44.690 --> 00:23:45.240
+you know,
+
+624
+00:23:45.250 --> 00:23:49.850
+it's a it's a very simple feature if you think about it and it took many years to introduce
+
+625
+00:23:49.900 --> 00:23:53.050
+uh again details in the paper.
+
+626
+00:23:54.040 --> 00:23:54.810
+So,
+
+627
+00:23:54.820 --> 00:23:55.410
+um,
+
+628
+00:23:55.420 --> 00:23:56.980
+Stefan looking at your code.
+
+629
+00:23:56.980 --> 00:23:57.280
+Right?
+
+630
+00:23:57.280 --> 00:23:58.280
+I see that.
+
+631
+00:23:58.290 --> 00:24:00.730
+Um Well you're you're assembling a string there.
+
+632
+00:24:00.730 --> 00:24:00.960
+Right.
+
+633
+00:24:00.960 --> 00:24:02.170
+With a contact function.
+
+634
+00:24:02.180 --> 00:24:02.670
+Right.
+
+635
+00:24:03.040 --> 00:24:06.580
+But then you have this function called proper ties and face.
+
+636
+00:24:06.580 --> 00:24:08.350
+Can you explain what that piece of code does?
+
+637
+00:24:09.240 --> 00:24:09.570
+Right.
+
+638
+00:24:09.580 --> 00:24:14.270
+So in in the maximum strength don't contain only characters,
+
+639
+00:24:14.280 --> 00:24:19.030
+but every character can have extra additional properties.
+
+640
+00:24:19.040 --> 00:24:20.360
+They call text properties.
+
+641
+00:24:20.940 --> 00:24:25.770
+And so you can you can use those properties to add all kinds of information to your strength.
+
+642
+00:24:26.140 --> 00:24:30.630
+One of the important information is this face property which is used to affect the way
+
+643
+00:24:30.630 --> 00:24:32.480
+the tax would be printed.
+
+644
+00:24:32.480 --> 00:24:35.260
+If they are displayed if it is to be displayed.
+
+645
+00:24:35.840 --> 00:24:36.280
+So here,
+
+646
+00:24:36.280 --> 00:24:36.820
+for example,
+
+647
+00:24:36.820 --> 00:24:41.740
+replace the media buffer prompt face onto that that text
+
+648
+00:24:41.750 --> 00:24:43.050
+so that when it's displayed,
+
+649
+00:24:43.050 --> 00:24:47.860
+it uses a particular color that corresponds to the the face
+
+650
+00:24:47.860 --> 00:24:49.030
+called me a lot of problems.
+
+651
+00:24:49.040 --> 00:24:49.760
+Okay,
+
+652
+00:24:49.770 --> 00:24:51.500
+so remember an imax 18,
+
+653
+00:24:51.500 --> 00:24:51.750
+you know,
+
+654
+00:24:51.760 --> 00:24:52.300
+early,
+
+655
+00:24:52.310 --> 00:24:53.180
+early nineties.
+
+656
+00:24:53.180 --> 00:24:53.520
+Right.
+
+657
+00:24:53.530 --> 00:24:54.840
+It didn't have properties yet.
+
+658
+00:24:54.840 --> 00:24:59.490
+So I guess the language evolved to meet the requirements of displaying like
+
+659
+00:24:59.490 --> 00:25:02.250
+multicolored and multi phone texas like that.
+
+660
+00:25:02.250 --> 00:25:02.690
+Right.
+
+661
+00:25:02.700 --> 00:25:07.560
+And so I think that's a good example where for a change of programming language
+
+662
+00:25:07.560 --> 00:25:12.090
+actually evolves according to the requirements of the users as opposed to the
+
+663
+00:25:12.100 --> 00:25:16.070
+requirements of the programming language researchers uh like ourselves.
+
+664
+00:25:16.080 --> 00:25:16.300
+Yeah,
+
+665
+00:25:16.300 --> 00:25:16.950
+that's right.
+
+666
+00:25:16.960 --> 00:25:17.420
+That's right.
+
+667
+00:25:17.430 --> 00:25:18.070
+Okay.
+
+668
+00:25:18.080 --> 00:25:20.250
+So but uh that's cool.
+
+669
+00:25:20.250 --> 00:25:24.860
+So there's this fancy string data type but I want to get back to variables uh just briefly.
+
+670
+00:25:25.040 --> 00:25:27.200
+So it's not just that we have dynamic scoping,
+
+671
+00:25:27.200 --> 00:25:27.610
+right.
+
+672
+00:25:27.620 --> 00:25:32.100
+Uh There's another feature kind of baked into the core language called buffer local variables.
+
+673
+00:25:32.100 --> 00:25:33.560
+Could you illustrate what that is?
+
+674
+00:25:33.640 --> 00:25:34.890
+Mhm Yeah,
+
+675
+00:25:34.890 --> 00:25:37.170
+I think we have some example here actually.
+
+676
+00:25:38.040 --> 00:25:38.490
+That's right.
+
+677
+00:25:38.490 --> 00:25:43.030
+Here we have an example but here we see this tool bar
+
+678
+00:25:43.030 --> 00:25:45.140
+map variable Okay,
+
+679
+00:25:45.150 --> 00:25:49.540
+Which is a which is assigned a particular value using sexual local.
+
+680
+00:25:49.540 --> 00:25:53.930
+So set your local is a is a in this case particular macro.
+
+681
+00:25:53.940 --> 00:25:57.950
+But what it does really is actually it sets the variable but you know,
+
+682
+00:25:57.960 --> 00:25:58.940
+in a buffer local way,
+
+683
+00:25:58.950 --> 00:26:02.360
+which means that it only changes the value in this particular buffet.
+
+684
+00:26:03.040 --> 00:26:04.710
+So you know,
+
+685
+00:26:04.720 --> 00:26:07.730
+every every piece of text is toward in,
+
+686
+00:26:07.740 --> 00:26:12.500
+you know in the buffer and and you always have the
+
+687
+00:26:12.500 --> 00:26:13.400
+current buffer,
+
+688
+00:26:13.410 --> 00:26:13.630
+you know,
+
+689
+00:26:13.630 --> 00:26:16.660
+whenever you're working in a mini max list,
+
+690
+00:26:16.670 --> 00:26:21.560
+there's always the current buffer and the current position within this buffer is part of the normal
+
+691
+00:26:21.560 --> 00:26:22.050
+state.
+
+692
+00:26:22.540 --> 00:26:27.140
+And so when you look up a variable global variables such as this google map,
+
+693
+00:26:27.150 --> 00:26:32.070
+it will well look it up in the current buffer so every
+
+694
+00:26:32.070 --> 00:26:34.260
+buffer can have a different value for this variable.
+
+695
+00:26:34.640 --> 00:26:39.610
+Those variables are actually fully global so they have the same value and all buffers but you can you can set
+
+696
+00:26:39.610 --> 00:26:43.670
+specific values in specific buffers like this is you here,
+
+697
+00:26:44.040 --> 00:26:48.810
+this is used here for this tool bar map which is as the,
+
+698
+00:26:48.820 --> 00:26:49.050
+you know,
+
+699
+00:26:49.050 --> 00:26:51.270
+the map here refers to a key map.
+
+700
+00:26:51.640 --> 00:26:52.140
+Okay.
+
+701
+00:26:52.150 --> 00:26:56.620
+It's a data structure used to say what happens in response to a particular
+
+702
+00:26:56.620 --> 00:26:57.160
+event.
+
+703
+00:26:57.840 --> 00:27:02.110
+Which which which command which which current should be
+
+704
+00:27:02.110 --> 00:27:02.890
+executed?
+
+705
+00:27:02.900 --> 00:27:03.570
+Responsive,
+
+706
+00:27:03.570 --> 00:27:04.860
+particularly user event.
+
+707
+00:27:05.340 --> 00:27:08.630
+So in this case it's what would happen when you use the toolbar?
+
+708
+00:27:08.640 --> 00:27:13.020
+You can actually you can see I think you can see the toolbar right now but you access a
+
+709
+00:27:13.020 --> 00:27:16.510
+toolbar which you can now see at the top.
+
+710
+00:27:16.520 --> 00:27:17.060
+Ok,
+
+711
+00:27:17.070 --> 00:27:19.930
+So here you see there are various buttons.
+
+712
+00:27:19.940 --> 00:27:24.810
+And so these two warriors is actually created by uh was
+
+713
+00:27:24.820 --> 00:27:26.410
+described by a particular list,
+
+714
+00:27:26.410 --> 00:27:27.170
+data structure.
+
+715
+00:27:27.740 --> 00:27:30.850
+And you can you can have every buffer,
+
+716
+00:27:30.850 --> 00:27:35.370
+can have a different toolbar to adapt it to the particular contents in the in the buffer.
+
+717
+00:27:35.370 --> 00:27:37.340
+So if it's a buffer that displays,
+
+718
+00:27:37.340 --> 00:27:37.650
+you know,
+
+719
+00:27:37.660 --> 00:27:39.640
+a normal piece of codes,
+
+720
+00:27:39.650 --> 00:27:44.040
+then you're going to have buttons which are specific to editing codes.
+
+721
+00:27:44.050 --> 00:27:46.100
+But then if you're walker contains,
+
+722
+00:27:46.100 --> 00:27:50.860
+for example the least of your your email and then you will
+
+723
+00:27:50.870 --> 00:27:55.290
+have other buttons so that you can create and you and your main message or send me
+
+724
+00:27:55.290 --> 00:27:55.950
+etcetera.
+
+725
+00:27:56.440 --> 00:27:58.550
+So that's that's what this set to local.
+
+726
+00:27:58.550 --> 00:28:03.140
+Does it lets you change the toolbar according to which water is
+
+727
+00:28:03.140 --> 00:28:03.670
+current.
+
+728
+00:28:04.440 --> 00:28:04.990
+Alright,
+
+729
+00:28:05.000 --> 00:28:05.640
+so here,
+
+730
+00:28:05.640 --> 00:28:10.610
+really the core semantics of the programming language interact with the fact that is running an editor,
+
+731
+00:28:10.620 --> 00:28:10.920
+right?
+
+732
+00:28:10.920 --> 00:28:15.710
+This is this is like a feature that's probably pretty much no other appropriate language has
+
+733
+00:28:15.720 --> 00:28:19.370
+uh you really need this concept of buffer and the current buffer and things like that.
+
+734
+00:28:19.380 --> 00:28:19.770
+Right.
+
+735
+00:28:20.440 --> 00:28:20.760
+Alright.
+
+736
+00:28:20.770 --> 00:28:21.360
+Alright.
+
+737
+00:28:21.360 --> 00:28:21.640
+Yeah,
+
+738
+00:28:21.650 --> 00:28:26.160
+maximus to a large extent is normal list but there are a few places where it
+
+739
+00:28:26.160 --> 00:28:26.970
+was.
+
+740
+00:28:26.980 --> 00:28:28.360
+Yeah,
+
+741
+00:28:28.670 --> 00:28:29.620
+that's one of them.
+
+742
+00:28:29.630 --> 00:28:29.820
+Well,
+
+743
+00:28:29.820 --> 00:28:33.720
+I bet there's interesting interactions between dynamic scoping and buffer local variables.
+
+744
+00:28:33.720 --> 00:28:34.060
+Right?
+
+745
+00:28:34.440 --> 00:28:35.330
+Yes.
+
+746
+00:28:35.340 --> 00:28:35.730
+Yeah.
+
+747
+00:28:35.730 --> 00:28:40.680
+There's been lots of bugs over the years and that have been I think for the last few years has
+
+748
+00:28:40.680 --> 00:28:41.670
+been stable.
+
+749
+00:28:42.340 --> 00:28:42.930
+Yes.
+
+750
+00:28:42.940 --> 00:28:43.360
+Yeah.
+
+751
+00:28:43.370 --> 00:28:45.660
+So and we talk about that in the paper you should mention.
+
+752
+00:28:45.670 --> 00:28:46.500
+Right,
+
+753
+00:28:46.510 --> 00:28:47.350
+okay.
+
+754
+00:28:49.040 --> 00:28:50.600
+So um apart,
+
+755
+00:28:50.610 --> 00:28:52.060
+I mean lexical scoping,
+
+756
+00:28:52.060 --> 00:28:54.860
+I mean you said it's not a big feature but it really is pretty big,
+
+757
+00:28:54.870 --> 00:28:55.080
+right?
+
+758
+00:28:55.080 --> 00:28:57.540
+It's one of the core parts of language that you've changed,
+
+759
+00:28:57.550 --> 00:29:00.400
+but apart from lexical scoping and you know,
+
+760
+00:29:00.410 --> 00:29:01.230
+I think,
+
+761
+00:29:01.240 --> 00:29:01.490
+you know,
+
+762
+00:29:01.490 --> 00:29:04.030
+the string representation that we looked at earlier is kind of a detail.
+
+763
+00:29:04.040 --> 00:29:08.960
+Was there a lot of fundamental evolution of the underlying core language and the next list over the years?
+
+764
+00:29:10.740 --> 00:29:11.210
+No,
+
+765
+00:29:11.210 --> 00:29:12.260
+very little.
+
+766
+00:29:12.270 --> 00:29:16.040
+You actually have been very stable.
+
+767
+00:29:16.040 --> 00:29:18.860
+If you think in terms of the actual language itself,
+
+768
+00:29:18.860 --> 00:29:21.270
+the core language has not evolved very much.
+
+769
+00:29:21.270 --> 00:29:22.860
+The style has changed,
+
+770
+00:29:23.340 --> 00:29:25.350
+the implementation has changed to some extent,
+
+771
+00:29:25.840 --> 00:29:29.170
+but the core languages stayed pretty much the same.
+
+772
+00:29:29.180 --> 00:29:30.060
+So how do they do that?
+
+773
+00:29:30.060 --> 00:29:30.240
+Right?
+
+774
+00:29:30.240 --> 00:29:30.420
+I mean,
+
+775
+00:29:30.420 --> 00:29:31.130
+the Haskell people,
+
+776
+00:29:31.130 --> 00:29:33.060
+they add a new features of the language every week.
+
+777
+00:29:33.540 --> 00:29:33.960
+Right,
+
+778
+00:29:33.970 --> 00:29:34.580
+pretty much.
+
+779
+00:29:34.590 --> 00:29:39.480
+Uh So how come the next list doesn't seem there doesn't seem to be a strong call
+
+780
+00:29:39.490 --> 00:29:41.460
+on extending the core language every week there,
+
+781
+00:29:42.140 --> 00:29:43.470
+but of course there's first,
+
+782
+00:29:43.470 --> 00:29:46.610
+the fact that I'm actually is just a tool for imax,
+
+783
+00:29:46.610 --> 00:29:51.120
+so there's no point in improving immaculate itself,
+
+784
+00:29:51.130 --> 00:29:51.320
+you know,
+
+785
+00:29:51.320 --> 00:29:52.210
+that's not the goal.
+
+786
+00:29:52.220 --> 00:29:55.590
+The goal is to improve the editor and so the experience for the,
+
+787
+00:29:55.600 --> 00:29:56.480
+for the end user,
+
+788
+00:29:56.490 --> 00:29:57.040
+you know,
+
+789
+00:29:57.050 --> 00:30:01.840
+when I was a language re social like to add thanks to my
+
+790
+00:30:01.840 --> 00:30:02.350
+language,
+
+791
+00:30:02.360 --> 00:30:03.860
+it's put forward.
+
+792
+00:30:04.540 --> 00:30:05.170
+But you know,
+
+793
+00:30:05.180 --> 00:30:09.660
+Richard and eli the one of the current maintain is you keep reminding us that,
+
+794
+00:30:09.670 --> 00:30:10.080
+you know?
+
+795
+00:30:10.090 --> 00:30:10.590
+Yeah,
+
+796
+00:30:10.600 --> 00:30:11.200
+well this,
+
+797
+00:30:11.200 --> 00:30:12.210
+this is all nice and good,
+
+798
+00:30:12.210 --> 00:30:12.860
+but,
+
+799
+00:30:12.870 --> 00:30:13.290
+you know,
+
+800
+00:30:13.300 --> 00:30:15.820
+can we actually see features for the end user instead?
+
+801
+00:30:15.830 --> 00:30:20.010
+So that's part of the reason for the stability,
+
+802
+00:30:20.020 --> 00:30:23.050
+I think the other reason is is that it's not it's not needed.
+
+803
+00:30:23.840 --> 00:30:24.180
+Okay,
+
+804
+00:30:24.180 --> 00:30:25.980
+so that we can extend the language,
+
+805
+00:30:25.980 --> 00:30:29.060
+we are changing the core language because we can use macros.
+
+806
+00:30:29.070 --> 00:30:29.850
+Okay,
+
+807
+00:30:29.860 --> 00:30:31.560
+let me show something there.
+
+808
+00:30:31.570 --> 00:30:32.540
+Uh,
+
+809
+00:30:32.540 --> 00:30:35.610
+I'm just gonna do that in my favorite the next uh for a moment.
+
+810
+00:30:35.610 --> 00:30:36.020
+Right.
+
+811
+00:30:36.030 --> 00:30:39.560
+I think the enabling feature that pretty much every list pass.
+
+812
+00:30:39.560 --> 00:30:39.780
+Right.
+
+813
+00:30:39.780 --> 00:30:41.760
+Is that um you know,
+
+814
+00:30:41.760 --> 00:30:42.680
+program code?
+
+815
+00:30:42.680 --> 00:30:43.640
+Program source code.
+
+816
+00:30:43.640 --> 00:30:46.010
+There's a data structure that looks just the same,
+
+817
+00:30:46.020 --> 00:30:46.340
+Right?
+
+818
+00:30:46.350 --> 00:30:47.150
+And so if we,
+
+819
+00:30:47.150 --> 00:30:47.720
+for example,
+
+820
+00:30:47.720 --> 00:30:49.660
+have Like FA five,
+
+821
+00:30:50.040 --> 00:30:53.180
+we can add a quote an apostrophe to the beginning,
+
+822
+00:30:53.190 --> 00:30:57.570
+and we have something that evaluates to a piece of data that prints out
+
+823
+00:30:57.580 --> 00:31:01.720
+exactly like the function called source code that you see above.
+
+824
+00:31:01.730 --> 00:31:02.010
+Right.
+
+825
+00:31:02.010 --> 00:31:02.490
+And so,
+
+826
+00:31:02.500 --> 00:31:07.010
+so program source code can be manipulated via imax list code.
+
+827
+00:31:07.020 --> 00:31:07.560
+Right?
+
+828
+00:31:07.840 --> 00:31:11.560
+And so you could have fancier coke and you can't have an example here.
+
+829
+00:31:11.740 --> 00:31:16.660
+Um So here's a slightly fancier
+
+830
+00:31:16.660 --> 00:31:21.320
+piece of code that doesn't just use a quote that uses a back would also one of the fundamental features that all this is
+
+831
+00:31:21.330 --> 00:31:22.490
+pretty much have.
+
+832
+00:31:22.500 --> 00:31:27.480
+And with back won't you can kind of slice little things in there um by
+
+833
+00:31:27.480 --> 00:31:30.230
+evaluating expression inside the quoted forum,
+
+834
+00:31:30.230 --> 00:31:30.760
+so for example,
+
+835
+00:31:30.760 --> 00:31:32.110
+like area size here,
+
+836
+00:31:32.120 --> 00:31:36.700
+area name and then it val uh and we can see here that uh,
+
+837
+00:31:36.710 --> 00:31:38.140
+there's a data type in imax list,
+
+838
+00:31:38.140 --> 00:31:38.920
+the symbol,
+
+839
+00:31:38.930 --> 00:31:40.080
+which would print it out,
+
+840
+00:31:40.080 --> 00:31:42.960
+looks just like a variable and has exactly the same syntax.
+
+841
+00:31:43.340 --> 00:31:44.090
+So you can see here,
+
+842
+00:31:44.090 --> 00:31:47.130
+we bind a bunch of variables and then these variables through the comma here,
+
+843
+00:31:47.130 --> 00:31:49.090
+get inserted into the output.
+
+844
+00:31:49.100 --> 00:31:50.600
+And so if I evaluate this,
+
+845
+00:31:50.610 --> 00:31:52.080
+I see a form here.
+
+846
+00:31:52.090 --> 00:31:52.300
+I mean,
+
+847
+00:31:52.300 --> 00:31:52.940
+never mind that.
+
+848
+00:31:52.940 --> 00:31:55.910
+It's a special form called do that Stefan.
+
+849
+00:31:55.910 --> 00:31:56.860
+You you never use,
+
+850
+00:31:56.860 --> 00:31:58.280
+but it's also the same and scheme.
+
+851
+00:31:58.280 --> 00:32:00.050
+So I I've used it on occasion,
+
+852
+00:32:00.340 --> 00:32:00.760
+Uh,
+
+853
+00:32:00.770 --> 00:32:03.270
+and you don't you don't like it.
+
+854
+00:32:03.280 --> 00:32:03.850
+Yeah,
+
+855
+00:32:03.860 --> 00:32:04.730
+well that's your loss.
+
+856
+00:32:04.730 --> 00:32:07.200
+But you can see that it splits the area size,
+
+857
+00:32:07.200 --> 00:32:08.040
+for example,
+
+858
+00:32:08.050 --> 00:32:08.590
+in here.
+
+859
+00:32:08.590 --> 00:32:08.970
+Right?
+
+860
+00:32:08.980 --> 00:32:09.960
+11 here.
+
+861
+00:32:10.340 --> 00:32:11.370
+And also,
+
+862
+00:32:11.380 --> 00:32:11.720
+you know,
+
+863
+00:32:11.720 --> 00:32:14.630
+in advance this is variable in it here.
+
+864
+00:32:14.640 --> 00:32:18.370
+And so so you can assemble program called programmatically.
+
+865
+00:32:18.380 --> 00:32:22.090
+And not only that you can turn this into what's called a macro,
+
+866
+00:32:22.100 --> 00:32:23.500
+which is what you mentioned.
+
+867
+00:32:23.510 --> 00:32:26.610
+So macron looks looks very similar to a function,
+
+868
+00:32:26.620 --> 00:32:28.690
+but the difference is that,
+
+869
+00:32:28.700 --> 00:32:28.990
+you know,
+
+870
+00:32:28.990 --> 00:32:31.020
+kind of the function that gets defined here,
+
+871
+00:32:31.020 --> 00:32:35.750
+gets called by the computer whenever it sees a parenthesis
+
+872
+00:32:35.750 --> 00:32:37.430
+form that starts with Phil array.
+
+873
+00:32:37.440 --> 00:32:37.840
+Right?
+
+874
+00:32:37.850 --> 00:32:39.950
+So if I do this right,
+
+875
+00:32:39.960 --> 00:32:44.710
+I can then go or an array is kind of the sequence abstraction in imax
+
+876
+00:32:44.720 --> 00:32:46.850
+so I can define a variable here.
+
+877
+00:32:46.850 --> 00:32:47.410
+That's a string,
+
+878
+00:32:47.410 --> 00:32:52.230
+which is also a kind of um which is also a kind of um uh sequence.
+
+879
+00:32:52.230 --> 00:32:55.460
+And I can use this Phil array form and it will
+
+880
+00:32:56.240 --> 00:33:00.920
+Um well just execute and we can see that it overwrites all the
+
+881
+00:33:00.920 --> 00:33:02.830
+characters in the string by 65,
+
+882
+00:33:02.830 --> 00:33:05.830
+essentially by expanding um into,
+
+883
+00:33:05.840 --> 00:33:06.140
+you know,
+
+884
+00:33:06.140 --> 00:33:09.100
+this new form that we saw above and and compiling that,
+
+885
+00:33:09.110 --> 00:33:09.560
+right?
+
+886
+00:33:09.840 --> 00:33:12.020
+And we can also kind of uh you know,
+
+887
+00:33:12.020 --> 00:33:13.110
+see what it's doing,
+
+888
+00:33:13.110 --> 00:33:15.620
+we can call a function called macro expand,
+
+889
+00:33:15.620 --> 00:33:17.300
+which will just say,
+
+890
+00:33:17.300 --> 00:33:17.800
+see,
+
+891
+00:33:17.810 --> 00:33:18.100
+you know,
+
+892
+00:33:18.100 --> 00:33:19.040
+show us that,
+
+893
+00:33:19.050 --> 00:33:19.300
+you know,
+
+894
+00:33:19.300 --> 00:33:23.250
+Phil array forum evaluates into core code here,
+
+895
+00:33:23.250 --> 00:33:25.600
+and we can see that do was also a macro right?
+
+896
+00:33:25.600 --> 00:33:29.600
+It expands into that let while combination that we see here.
+
+897
+00:33:29.610 --> 00:33:33.170
+Um And so it's pretty easy with the facilities of the language.
+
+898
+00:33:34.040 --> 00:33:34.290
+Yeah,
+
+899
+00:33:34.300 --> 00:33:35.410
+talking about this actually,
+
+900
+00:33:35.410 --> 00:33:37.460
+that reminds me we have a,
+
+901
+00:33:37.470 --> 00:33:37.850
+you know,
+
+902
+00:33:38.240 --> 00:33:41.980
+rather than manipulate codes during macro expansion,
+
+903
+00:33:41.990 --> 00:33:44.140
+uh we can manipulate codas data,
+
+904
+00:33:44.150 --> 00:33:44.500
+you know,
+
+905
+00:33:44.510 --> 00:33:47.400
+during runtime and name actually with dynamics,
+
+906
+00:33:47.400 --> 00:33:49.560
+hoping we could do things like like this,
+
+907
+00:33:50.240 --> 00:33:51.650
+I really could say,
+
+908
+00:33:51.710 --> 00:33:51.960
+oh,
+
+909
+00:33:51.960 --> 00:33:53.060
+let's say,
+
+910
+00:33:55.140 --> 00:33:55.560
+you know,
+
+911
+00:33:55.940 --> 00:33:59.270
+he said that we're Function that Adds 42.
+
+912
+00:33:59.940 --> 00:34:00.270
+Yeah,
+
+913
+00:34:00.280 --> 00:34:01.440
+all my brand sees.
+
+914
+00:34:01.450 --> 00:34:04.690
+So it's like a data structure that looks like a lambda expression.
+
+915
+00:34:04.700 --> 00:34:05.130
+Okay,
+
+916
+00:34:05.140 --> 00:34:05.410
+right.
+
+917
+00:34:05.410 --> 00:34:05.820
+Exactly.
+
+918
+00:34:05.830 --> 00:34:06.830
+That's what you manipulate.
+
+919
+00:34:06.830 --> 00:34:08.230
+Typically macro expansion time.
+
+920
+00:34:08.230 --> 00:34:08.460
+Right?
+
+921
+00:34:08.840 --> 00:34:11.130
+But you can actually use it at runtime directly.
+
+922
+00:34:11.139 --> 00:34:13.850
+I can fund call this function directly,
+
+923
+00:34:14.440 --> 00:34:15.920
+Which is actually not a function.
+
+924
+00:34:15.920 --> 00:34:20.469
+It's a list I can plan called list and it does give me the 46 you would expect.
+
+925
+00:34:20.940 --> 00:34:21.710
+Okay,
+
+926
+00:34:21.719 --> 00:34:23.300
+that's that's bizarre.
+
+927
+00:34:23.310 --> 00:34:24.020
+So,
+
+928
+00:34:24.030 --> 00:34:26.639
+so it has to be kind of whenever it calls a function,
+
+929
+00:34:26.639 --> 00:34:28.020
+it has to check whether well,
+
+930
+00:34:28.030 --> 00:34:29.449
+it's not actually a function,
+
+931
+00:34:29.449 --> 00:34:30.270
+but it's a list.
+
+932
+00:34:30.270 --> 00:34:33.730
+And maybe that list looks like the source of a function.
+
+933
+00:34:33.810 --> 00:34:34.469
+Okay.
+
+934
+00:34:34.480 --> 00:34:39.120
+This is because originally this is exactly how functions were represented at one
+
+935
+00:34:39.120 --> 00:34:39.590
+time.
+
+936
+00:34:39.600 --> 00:34:41.540
+There was no difference between,
+
+937
+00:34:41.550 --> 00:34:41.929
+you know,
+
+938
+00:34:41.940 --> 00:34:46.590
+the the legs that represent the TsX that represents
+
+939
+00:34:46.590 --> 00:34:49.590
+the number and the actual value.
+
+940
+00:34:49.600 --> 00:34:50.610
+So the,
+
+941
+00:34:50.620 --> 00:34:52.500
+the evaluation of the land,
+
+942
+00:34:52.500 --> 00:34:53.670
+that was just the Land itself,
+
+943
+00:34:53.670 --> 00:34:54.960
+the member list.
+
+944
+00:34:55.540 --> 00:34:56.969
+So that's like the ultimate,
+
+945
+00:34:57.340 --> 00:34:59.030
+that's like the ultimate abstraction leak.
+
+946
+00:34:59.040 --> 00:34:59.700
+Right?
+
+947
+00:34:59.710 --> 00:35:03.520
+The representation of abstractions themselves leak.
+
+948
+00:35:03.530 --> 00:35:04.260
+Exactly.
+
+949
+00:35:04.270 --> 00:35:05.290
+Okay.
+
+950
+00:35:05.300 --> 00:35:06.390
+So of course,
+
+951
+00:35:06.390 --> 00:35:08.010
+then when by code was introduced,
+
+952
+00:35:08.020 --> 00:35:13.010
+it was a notion of a real actual function objects distinct from
+
+953
+00:35:13.010 --> 00:35:13.470
+a list.
+
+954
+00:35:14.340 --> 00:35:15.470
+But that state,
+
+955
+00:35:15.470 --> 00:35:17.260
+because a lot of course existed,
+
+956
+00:35:17.300 --> 00:35:20.550
+there's a lot of code that quotes Lando's with a quote.
+
+957
+00:35:21.140 --> 00:35:25.570
+We don't actually need to quote Landers because land itself is a macro that just adds
+
+958
+00:35:25.570 --> 00:35:27.660
+a little function around it.
+
+959
+00:35:27.670 --> 00:35:29.060
+And we can actually see it here.
+
+960
+00:35:29.540 --> 00:35:32.560
+Let's say where is it cylinder.
+
+961
+00:35:34.840 --> 00:35:35.670
+Okay.
+
+962
+00:35:36.440 --> 00:35:37.460
+So we'll see.
+
+963
+00:35:38.040 --> 00:35:39.640
+Look at the definition of lambda.
+
+964
+00:35:39.880 --> 00:35:40.230
+Oh,
+
+965
+00:35:40.240 --> 00:35:40.860
+look at that.
+
+966
+00:35:42.140 --> 00:35:42.760
+Mm hmm.
+
+967
+00:35:43.240 --> 00:35:43.640
+Okay.
+
+968
+00:35:43.650 --> 00:35:44.020
+Cure.
+
+969
+00:35:44.020 --> 00:35:44.300
+Yeah.
+
+970
+00:35:45.940 --> 00:35:46.160
+Oh,
+
+971
+00:35:46.160 --> 00:35:48.360
+there's a lot of dark string.
+
+972
+00:35:49.440 --> 00:35:54.360
+And then we see just the definition just as the function in France of the landlord.
+
+973
+00:35:54.740 --> 00:35:57.110
+And uh,
+
+974
+00:35:57.120 --> 00:35:59.330
+the function means it's going to get compiled,
+
+975
+00:35:59.330 --> 00:35:59.660
+right?
+
+976
+00:36:00.030 --> 00:36:00.570
+Hopefully.
+
+977
+00:36:00.580 --> 00:36:00.950
+Well,
+
+978
+00:36:00.950 --> 00:36:05.770
+the function means that it quote said as a function instead of quoting it as raw
+
+979
+00:36:05.770 --> 00:36:06.430
+data.
+
+980
+00:36:06.930 --> 00:36:07.910
+So,
+
+981
+00:36:07.910 --> 00:36:11.570
+so the compiler is going to see that this is a function and invite them by it.
+
+982
+00:36:11.570 --> 00:36:11.980
+Exactly.
+
+983
+00:36:11.980 --> 00:36:12.350
+Okay.
+
+984
+00:36:13.430 --> 00:36:14.050
+Okay.
+
+985
+00:36:14.060 --> 00:36:18.630
+But but because presumably because because this was,
+
+986
+00:36:18.640 --> 00:36:19.120
+you know,
+
+987
+00:36:19.130 --> 00:36:24.030
+not didn't exist at the very beginning of imax of actually
+
+988
+00:36:24.030 --> 00:36:24.290
+max.
+
+989
+00:36:24.290 --> 00:36:24.550
+Yes.
+
+990
+00:36:25.230 --> 00:36:28.550
+The habit of just using quote to Portland does
+
+991
+00:36:30.030 --> 00:36:30.450
+tom.
+
+992
+00:36:31.130 --> 00:36:31.570
+Okay.
+
+993
+00:36:31.580 --> 00:36:35.010
+So even even nowadays you can still see a lot of code and if you,
+
+994
+00:36:35.020 --> 00:36:37.160
+if you look for it on on the web even more,
+
+995
+00:36:37.630 --> 00:36:38.330
+uh,
+
+996
+00:36:38.340 --> 00:36:38.500
+you know,
+
+997
+00:36:38.500 --> 00:36:43.240
+there's lots of lots of code snippets that had the language quoted with a little quote.
+
+998
+00:36:43.630 --> 00:36:44.250
+Okay,
+
+999
+00:36:44.830 --> 00:36:48.030
+I bet that's a pain for your static scoping stuff.
+
+1000
+00:36:48.040 --> 00:36:48.350
+Right.
+
+1001
+00:36:48.360 --> 00:36:48.920
+Exactly.
+
+1002
+00:36:48.930 --> 00:36:49.380
+Exactly.
+
+1003
+00:36:49.380 --> 00:36:50.540
+If the dynamic scoping,
+
+1004
+00:36:50.550 --> 00:36:52.950
+this doesn't really matter because,
+
+1005
+00:36:52.960 --> 00:36:53.240
+you know,
+
+1006
+00:36:53.240 --> 00:36:54.340
+the code is,
+
+1007
+00:36:54.350 --> 00:36:56.490
+it doesn't need to know anything.
+
+1008
+00:36:56.500 --> 00:36:56.720
+You know,
+
+1009
+00:36:56.720 --> 00:36:57.600
+you don't need to comply,
+
+1010
+00:36:57.610 --> 00:37:00.750
+especially in order to to preserve dynamic scoping.
+
+1011
+00:37:01.430 --> 00:37:03.310
+But the likes of Mexico scoping,
+
+1012
+00:37:03.310 --> 00:37:04.550
+you actually need your,
+
+1013
+00:37:04.560 --> 00:37:05.550
+when you value your lender,
+
+1014
+00:37:05.550 --> 00:37:06.850
+you need to capture the environment,
+
+1015
+00:37:06.850 --> 00:37:07.040
+right?
+
+1016
+00:37:07.630 --> 00:37:08.040
+Yeah.
+
+1017
+00:37:08.050 --> 00:37:09.600
+Oh yeah.
+
+1018
+00:37:09.600 --> 00:37:12.340
+I can't do that when you just have the source code.
+
+1019
+00:37:12.830 --> 00:37:13.100
+When you,
+
+1020
+00:37:13.110 --> 00:37:14.630
+when you just have the quote,
+
+1021
+00:37:14.640 --> 00:37:19.280
+the evaluation of the quotes by definition just returns the lists and has no
+
+1022
+00:37:19.280 --> 00:37:21.050
+opportunity to capture the environment.
+
+1023
+00:37:21.630 --> 00:37:22.250
+So.
+
+1024
+00:37:22.260 --> 00:37:23.300
+And of course the same thing,
+
+1025
+00:37:23.300 --> 00:37:28.180
+the compiler can look inside and see that there's a reference to some of the variable which were
+
+1026
+00:37:28.180 --> 00:37:29.550
+renamed and those kinds of things.
+
+1027
+00:37:29.930 --> 00:37:30.370
+Okay.
+
+1028
+00:37:30.380 --> 00:37:33.400
+So it seemed compatible with lexical scoping and introduces,
+
+1029
+00:37:33.410 --> 00:37:34.160
+you know,
+
+1030
+00:37:34.630 --> 00:37:39.520
+a federal of pain when doing the conversion of going from the old
+
+1031
+00:37:39.520 --> 00:37:40.910
+dialect to the new dialect.
+
+1032
+00:37:40.920 --> 00:37:41.350
+Okay.
+
+1033
+00:37:41.730 --> 00:37:43.790
+So here's an evolution that still needs to happen,
+
+1034
+00:37:43.790 --> 00:37:44.040
+right.
+
+1035
+00:37:44.040 --> 00:37:46.230
+The evolution of coding style and the nice list.
+
+1036
+00:37:46.240 --> 00:37:47.430
+It's still ongoing.
+
+1037
+00:37:47.430 --> 00:37:47.750
+Yes.
+
+1038
+00:37:48.230 --> 00:37:48.680
+Okay.
+
+1039
+00:37:48.690 --> 00:37:48.980
+We,
+
+1040
+00:37:48.980 --> 00:37:53.690
+we fix those and within the actual code base of imax by now
+
+1041
+00:37:53.700 --> 00:37:56.240
+actually it's recently that we finished doing that,
+
+1042
+00:37:57.030 --> 00:37:57.770
+but,
+
+1043
+00:37:57.780 --> 00:37:59.860
+but in the code out there,
+
+1044
+00:37:59.870 --> 00:38:00.650
+it's still,
+
+1045
+00:38:01.820 --> 00:38:04.700
+It will be around us for another 20 years at least.
+
+1046
+00:38:04.710 --> 00:38:05.330
+Okay,
+
+1047
+00:38:05.920 --> 00:38:06.450
+wow.
+
+1048
+00:38:08.320 --> 00:38:08.690
+Okay.
+
+1049
+00:38:08.700 --> 00:38:12.410
+So talking about imax list within the context of the max is fine.
+
+1050
+00:38:12.410 --> 00:38:13.540
+But also called X.
+
+1051
+00:38:13.540 --> 00:38:18.320
+Max for many years with the the kind of more feature full implementation with
+
+1052
+00:38:18.330 --> 00:38:23.070
+graphical bells and whistles and and what happened at the
+
+1053
+00:38:23.070 --> 00:38:27.730
+language level in terms of maybe of implementation or or language
+
+1054
+00:38:27.730 --> 00:38:28.240
+itself,
+
+1055
+00:38:29.020 --> 00:38:30.150
+you tell us something about it?
+
+1056
+00:38:31.020 --> 00:38:31.430
+Well,
+
+1057
+00:38:31.440 --> 00:38:35.280
+I mean the focus in the development of lucY MX,
+
+1058
+00:38:35.280 --> 00:38:36.780
+which is what it was called back then,
+
+1059
+00:38:36.780 --> 00:38:38.350
+wasn't so much on the surface language,
+
+1060
+00:38:38.350 --> 00:38:41.710
+but there were a few nobel things that happened on the implementation side.
+
+1061
+00:38:41.720 --> 00:38:46.520
+I think one of the first things would that that happened was that James Lewinsky wrote a new bike code
+
+1062
+00:38:46.520 --> 00:38:47.150
+compiler,
+
+1063
+00:38:47.620 --> 00:38:52.240
+um that that ended up in lucid imax and I think later migrated back
+
+1064
+00:38:52.250 --> 00:38:53.770
+into a canoe imax.
+
+1065
+00:38:53.780 --> 00:38:54.720
+Um,
+
+1066
+00:38:54.730 --> 00:38:59.650
+I think one other notable differences has to do with when imax starts
+
+1067
+00:38:59.660 --> 00:39:00.610
+starts up.
+
+1068
+00:39:00.620 --> 00:39:01.020
+Right.
+
+1069
+00:39:01.030 --> 00:39:01.950
+So imax,
+
+1070
+00:39:01.960 --> 00:39:02.960
+when it starts up,
+
+1071
+00:39:02.970 --> 00:39:06.840
+a whole bunch of list code has to be present in order for it to work properly.
+
+1072
+00:39:07.020 --> 00:39:11.880
+And we don't want to compile or evaluate or even load all that list code each
+
+1073
+00:39:11.880 --> 00:39:16.640
+time the editor starts up where at least we didn't want to do that in the nineties
+
+1074
+00:39:16.650 --> 00:39:18.240
+when computers were still slower.
+
+1075
+00:39:18.250 --> 00:39:18.730
+Right?
+
+1076
+00:39:18.740 --> 00:39:19.830
+You don't want to do that?
+
+1077
+00:39:19.840 --> 00:39:20.720
+Yeah.
+
+1078
+00:39:20.730 --> 00:39:23.430
+So the idea is that you would fire up.
+
+1079
+00:39:23.430 --> 00:39:24.710
+So during the build process right,
+
+1080
+00:39:24.710 --> 00:39:29.310
+you would fire up imax or x imax uh load all that this code and then somehow
+
+1081
+00:39:29.310 --> 00:39:30.380
+dump,
+
+1082
+00:39:30.390 --> 00:39:31.750
+you know dump imax.
+
+1083
+00:39:31.920 --> 00:39:35.560
+Uh so that you could then start up much faster.
+
+1084
+00:39:35.570 --> 00:39:40.090
+And the way it was originally done was there was a very operating specific operating system
+
+1085
+00:39:40.090 --> 00:39:44.510
+specific facility that which is dumped the operating system process
+
+1086
+00:39:44.520 --> 00:39:47.750
+uh to disk and then be able to start that up again.
+
+1087
+00:39:47.760 --> 00:39:52.740
+And I remember that being very very fragile and I remember
+
+1088
+00:39:52.750 --> 00:39:57.670
+you know spending countless hours debugging ai X code because you know some field
+
+1089
+00:39:57.670 --> 00:40:01.250
+and the binary format had shifted or something like that.
+
+1090
+00:40:01.260 --> 00:40:06.010
+And so um there was a long running effort and ex imax to
+
+1091
+00:40:06.010 --> 00:40:10.810
+improve on the internal data representation to make it possible to just dump the heap of X.
+
+1092
+00:40:10.820 --> 00:40:15.820
+Max and then be able to load that heap quickly into the running process later.
+
+1093
+00:40:15.830 --> 00:40:20.800
+And um so um and and and the way that that happened was that you know
+
+1094
+00:40:20.800 --> 00:40:25.640
+every object would get a run time description of the runtime
+
+1095
+00:40:25.640 --> 00:40:30.460
+format that was written and that was then used to write out the heat representation of able to
+
+1096
+00:40:30.460 --> 00:40:31.330
+load it back in.
+
+1097
+00:40:31.810 --> 00:40:36.720
+Uh Did did I remember we were doing that just by ourselves for X.
+
+1098
+00:40:36.720 --> 00:40:36.820
+M.
+
+1099
+00:40:36.820 --> 00:40:36.960
+X.
+
+1100
+00:40:36.960 --> 00:40:39.330
+Did something similar happened with with new imax?
+
+1101
+00:40:40.610 --> 00:40:42.790
+Actually it happened just a few years ago,
+
+1102
+00:40:42.800 --> 00:40:47.560
+so we suffered through the what was called an exact process
+
+1103
+00:40:47.560 --> 00:40:52.280
+of figuring out some way to dump the
+
+1104
+00:40:52.280 --> 00:40:56.550
+state of the process into a form that can be started again.
+
+1105
+00:40:56.560 --> 00:40:56.990
+Okay.
+
+1106
+00:40:56.990 --> 00:41:01.880
+And only a couple of years ago that that was changing any max version 27 that came out
+
+1107
+00:41:01.890 --> 00:41:02.900
+fairly recently,
+
+1108
+00:41:02.910 --> 00:41:03.370
+wow.
+
+1109
+00:41:03.380 --> 00:41:04.120
+Okay.
+
+1110
+00:41:04.130 --> 00:41:05.850
+I was I was curious what about those,
+
+1111
+00:41:05.860 --> 00:41:10.640
+you know those data structures you say that describes the data to help dump it where they
+
+1112
+00:41:10.640 --> 00:41:11.940
+used for something else?
+
+1113
+00:41:12.410 --> 00:41:12.690
+Yeah,
+
+1114
+00:41:12.700 --> 00:41:16.090
+well we also used them then to feed the garbage collector right?
+
+1115
+00:41:16.090 --> 00:41:20.890
+To tell the garbage collector what the object layout was and that enabled us to implement new garbage collector.
+
+1116
+00:41:20.890 --> 00:41:21.830
+Actually one of our students,
+
+1117
+00:41:21.830 --> 00:41:26.720
+my students Marcus Castellani developed an incremental garbage collector because one
+
+1118
+00:41:26.720 --> 00:41:31.530
+thing that people really really hated in imax and imax was when there was a message appearance had
+
+1119
+00:41:31.530 --> 00:41:33.520
+said garbage collecting right?
+
+1120
+00:41:33.520 --> 00:41:38.430
+And then you knew you were in for a little weight um and even if it was just one second wait
+
+1121
+00:41:38.440 --> 00:41:40.010
+it was it was annoying.
+
+1122
+00:41:40.010 --> 00:41:40.940
+So we fixed that in X.
+
+1123
+00:41:40.940 --> 00:41:41.050
+M.
+
+1124
+00:41:41.050 --> 00:41:41.220
+X.
+
+1125
+00:41:41.220 --> 00:41:44.610
+By just having an incremental collector that got rid of the pauses,
+
+1126
+00:41:44.620 --> 00:41:45.080
+right?
+
+1127
+00:41:45.090 --> 00:41:48.230
+I don't know about the just because that seems like a lot of work.
+
+1128
+00:41:48.240 --> 00:41:49.940
+We fixed it in a simple way.
+
+1129
+00:41:49.950 --> 00:41:51.430
+We just removed the message.
+
+1130
+00:41:53.110 --> 00:41:58.050
+Well okay so that's so when I
+
+1131
+00:41:58.050 --> 00:42:02.090
+use glue imax I sometimes weight but I don't know who to blame.
+
+1132
+00:42:02.100 --> 00:42:03.180
+So now I know.
+
+1133
+00:42:03.190 --> 00:42:04.550
+Okay back.
+
+1134
+00:42:04.560 --> 00:42:09.320
+So but maybe maybe one there's one notable difference really on the language
+
+1135
+00:42:09.320 --> 00:42:13.070
+side that is um that is significant between new imax and imax,
+
+1136
+00:42:13.070 --> 00:42:13.290
+right?
+
+1137
+00:42:13.290 --> 00:42:15.620
+When lucy gimmicks was originally developed,
+
+1138
+00:42:16.000 --> 00:42:20.150
+a few of the things that were relevant for window and got their own data structures.
+
+1139
+00:42:20.150 --> 00:42:22.540
+So let me maybe try to show that here.
+
+1140
+00:42:22.550 --> 00:42:23.500
+So here's my X.
+
+1141
+00:42:23.500 --> 00:42:23.620
+M.
+
+1142
+00:42:23.620 --> 00:42:23.790
+X.
+
+1143
+00:42:23.790 --> 00:42:24.220
+Again.
+
+1144
+00:42:24.600 --> 00:42:27.140
+Uh So one example is for example the mod map,
+
+1145
+00:42:27.140 --> 00:42:27.400
+right?
+
+1146
+00:42:27.410 --> 00:42:31.580
+Imax at the time just represented characters as numbers and um
+
+1147
+00:42:31.590 --> 00:42:36.570
+so uh and the idea was that you would have a
+
+1148
+00:42:36.580 --> 00:42:37.950
+mode map which was a key map.
+
+1149
+00:42:37.960 --> 00:42:40.380
+It would map key bindings to functions that were called.
+
+1150
+00:42:40.380 --> 00:42:40.840
+Right?
+
+1151
+00:42:40.850 --> 00:42:43.990
+And uh if you evaluate something like this mode map,
+
+1152
+00:42:43.990 --> 00:42:48.980
+you can see that there's like a hash mark and then there's angle brackets and they show you
+
+1153
+00:42:48.980 --> 00:42:53.810
+that there is an internal data structure um uh that that
+
+1154
+00:42:53.810 --> 00:42:58.400
+represents the key map and that was a departure from the way it was in gooey max,
+
+1155
+00:42:58.410 --> 00:42:58.810
+right?
+
+1156
+00:42:58.810 --> 00:42:59.990
+And I think it still is that way.
+
+1157
+00:42:59.990 --> 00:43:01.180
+And can we max to this day?
+
+1158
+00:43:01.190 --> 00:43:01.520
+Right.
+
+1159
+00:43:02.000 --> 00:43:02.540
+Oh yes,
+
+1160
+00:43:02.540 --> 00:43:05.020
+very much so you can see the mood man.
+
+1161
+00:43:05.030 --> 00:43:05.960
+Yeah.
+
+1162
+00:43:05.970 --> 00:43:06.340
+For us,
+
+1163
+00:43:06.350 --> 00:43:06.890
+you know,
+
+1164
+00:43:06.900 --> 00:43:08.230
+we actually see the map.
+
+1165
+00:43:08.800 --> 00:43:09.430
+Okay.
+
+1166
+00:43:09.440 --> 00:43:09.700
+Oh,
+
+1167
+00:43:09.700 --> 00:43:11.230
+it's a list.
+
+1168
+00:43:11.240 --> 00:43:15.310
+So of course another another abstraction leak right there.
+
+1169
+00:43:15.320 --> 00:43:15.850
+Right.
+
+1170
+00:43:15.860 --> 00:43:19.150
+Um and you know,
+
+1171
+00:43:19.150 --> 00:43:24.040
+I think it it goes to the core of the design of of imax and imax
+
+1172
+00:43:24.040 --> 00:43:24.310
+miss.
+
+1173
+00:43:24.700 --> 00:43:25.100
+Okay.
+
+1174
+00:43:25.110 --> 00:43:25.350
+You know,
+
+1175
+00:43:25.350 --> 00:43:27.190
+we were talking about you know,
+
+1176
+00:43:27.200 --> 00:43:31.690
+the idea of free software and how it influenced the design of the max.
+
+1177
+00:43:31.700 --> 00:43:33.230
+I think there's you know,
+
+1178
+00:43:33.240 --> 00:43:37.980
+there was a very clear and and there still is a clear desire to try to
+
+1179
+00:43:37.990 --> 00:43:39.750
+avoid abstraction boundaries.
+
+1180
+00:43:39.760 --> 00:43:40.440
+Okay.
+
+1181
+00:43:40.450 --> 00:43:41.410
+If you want to have,
+
+1182
+00:43:41.420 --> 00:43:41.790
+you know,
+
+1183
+00:43:41.800 --> 00:43:44.520
+you want to have abstraction just by by a convention,
+
+1184
+00:43:45.000 --> 00:43:49.700
+so you you want to have data structures which you can you can look inside
+
+1185
+00:43:49.700 --> 00:43:54.700
+and dig in and you see all the messy details and change them as
+
+1186
+00:43:54.700 --> 00:43:59.120
+much as you want if you want to you want to have some kind of distraction on top of it,
+
+1187
+00:43:59.120 --> 00:44:00.300
+so you don't have to do that.
+
+1188
+00:44:00.790 --> 00:44:04.210
+But there's no effort to try to hide it to make it make it OK.
+
+1189
+00:44:04.890 --> 00:44:05.200
+Right.
+
+1190
+00:44:05.200 --> 00:44:10.110
+But at the time there was a lot of code which was aware of the fact that key
+
+1191
+00:44:10.110 --> 00:44:13.490
+maps were lists and just manipulated them using the list functions.
+
+1192
+00:44:13.490 --> 00:44:13.660
+Right?
+
+1193
+00:44:13.660 --> 00:44:15.400
+And we got rid of that for losing the max.
+
+1194
+00:44:15.400 --> 00:44:15.850
+Right?
+
+1195
+00:44:15.860 --> 00:44:16.900
+But it also means,
+
+1196
+00:44:16.910 --> 00:44:17.150
+I mean,
+
+1197
+00:44:17.150 --> 00:44:19.930
+you're you're talking as though that's uh you know,
+
+1198
+00:44:19.930 --> 00:44:20.930
+it's it's a wind city.
+
+1199
+00:44:20.930 --> 00:44:24.000
+It's a wind only situation where users are empowered.
+
+1200
+00:44:24.290 --> 00:44:25.880
+But the problem is of course,
+
+1201
+00:44:25.880 --> 00:44:30.430
+you probably it probably have a very hard time than ever changing the format of these data structures.
+
+1202
+00:44:30.430 --> 00:44:30.860
+Right?
+
+1203
+00:44:30.870 --> 00:44:33.110
+Should that prove advantageous?
+
+1204
+00:44:33.690 --> 00:44:34.230
+Yeah,
+
+1205
+00:44:34.230 --> 00:44:34.630
+that's true.
+
+1206
+00:44:34.630 --> 00:44:35.490
+Actually,
+
+1207
+00:44:35.500 --> 00:44:40.300
+we changed the extended the format of the key map Early Max
+
+1208
+00:44:40.300 --> 00:44:41.310
+24 I think,
+
+1209
+00:44:41.690 --> 00:44:45.690
+so that they could have several parents like in X c max.
+
+1210
+00:44:45.690 --> 00:44:45.850
+You know,
+
+1211
+00:44:45.850 --> 00:44:46.140
+there's,
+
+1212
+00:44:46.150 --> 00:44:46.380
+you know,
+
+1213
+00:44:46.390 --> 00:44:50.540
+key maps have have a notion of a hierarchy where the key map and have a parent key map.
+
+1214
+00:44:50.550 --> 00:44:53.890
+So until imax 20 for there was only one parent.
+
+1215
+00:44:53.890 --> 00:44:58.810
+Then we tried to add more and that was very difficult to retrofit without breaking existing
+
+1216
+00:44:58.810 --> 00:45:00.310
+cause you had Yeah.
+
+1217
+00:45:00.690 --> 00:45:01.340
+Yeah.
+
+1218
+00:45:01.350 --> 00:45:04.820
+And so that's a lot easier when you have abstraction uh reasons.
+
+1219
+00:45:04.830 --> 00:45:09.300
+But I guess this is about making life easier for the developer is not so much the users maybe.
+
+1220
+00:45:09.690 --> 00:45:11.810
+Uh So there's an interesting trade off there.
+
+1221
+00:45:12.190 --> 00:45:12.720
+All right.
+
+1222
+00:45:13.190 --> 00:45:18.030
+You mentioned the fact that you use conventions in order to
+
+1223
+00:45:18.040 --> 00:45:19.750
+deal with abstraction boundaries.
+
+1224
+00:45:19.750 --> 00:45:20.040
+Right.
+
+1225
+00:45:20.050 --> 00:45:21.340
+And the obvious place,
+
+1226
+00:45:21.350 --> 00:45:26.080
+uh we should talk about this is that has to do with the module system.
+
+1227
+00:45:26.080 --> 00:45:26.320
+Right?
+
+1228
+00:45:26.320 --> 00:45:29.900
+We have lots of people are developing packages for imax.
+
+1229
+00:45:29.900 --> 00:45:30.120
+You know,
+
+1230
+00:45:30.120 --> 00:45:34.700
+there's surely more a couple of million lines of code of external
+
+1231
+00:45:34.700 --> 00:45:37.510
+packages for imax that people load all the time.
+
+1232
+00:45:37.890 --> 00:45:40.920
+Um How do we deal with us these days?
+
+1233
+00:45:41.690 --> 00:45:42.120
+Right.
+
+1234
+00:45:42.130 --> 00:45:42.640
+Yeah,
+
+1235
+00:45:42.640 --> 00:45:43.000
+there is,
+
+1236
+00:45:43.000 --> 00:45:43.990
+there is a good question.
+
+1237
+00:45:43.990 --> 00:45:44.490
+Yeah.
+
+1238
+00:45:44.500 --> 00:45:46.630
+So we go back to this,
+
+1239
+00:45:46.640 --> 00:45:49.610
+uh I search example we have,
+
+1240
+00:45:49.620 --> 00:45:54.470
+you can see right right away what is the solution we we
+
+1241
+00:45:54.480 --> 00:45:55.420
+we settled on,
+
+1242
+00:45:55.890 --> 00:45:58.900
+we just have a kind of poor man's name,
+
+1243
+00:45:58.900 --> 00:46:02.240
+space construct where every function,
+
+1244
+00:46:02.250 --> 00:46:05.400
+every global function and global terrible definitions.
+
+1245
+00:46:05.880 --> 00:46:06.100
+Okay,
+
+1246
+00:46:06.100 --> 00:46:06.500
+it's true.
+
+1247
+00:46:07.080 --> 00:46:09.190
+But with the prefects we should all name,
+
+1248
+00:46:09.190 --> 00:46:09.750
+prefix,
+
+1249
+00:46:10.040 --> 00:46:10.880
+name,
+
+1250
+00:46:10.880 --> 00:46:14.750
+space prefects and there's nothing magical about it.
+
+1251
+00:46:14.750 --> 00:46:14.950
+You know,
+
+1252
+00:46:14.950 --> 00:46:19.860
+we just use usually you're the fine name and then a dash or something like this
+
+1253
+00:46:21.380 --> 00:46:25.910
+and people have to follow that principle and not everybody follows it in this.
+
+1254
+00:46:25.920 --> 00:46:27.160
+Sometimes some surprises,
+
+1255
+00:46:27.160 --> 00:46:29.210
+but over the years it has served us very well.
+
+1256
+00:46:29.580 --> 00:46:30.460
+Okay,
+
+1257
+00:46:30.470 --> 00:46:31.400
+that's pretty amazing,
+
+1258
+00:46:31.400 --> 00:46:31.710
+right?
+
+1259
+00:46:31.710 --> 00:46:33.930
+Because if you believe all the module systems,
+
+1260
+00:46:33.930 --> 00:46:34.420
+people,
+
+1261
+00:46:34.420 --> 00:46:36.500
+and all the ml researchers and so on,
+
+1262
+00:46:36.500 --> 00:46:41.070
+its impossible to manage a couple of million lines of code using just social conventions and without the
+
+1263
+00:46:41.070 --> 00:46:45.210
+abstraction boundaries of like a module system with strong interfaces.
+
+1264
+00:46:47.180 --> 00:46:47.440
+Yeah,
+
+1265
+00:46:47.440 --> 00:46:47.760
+I'm not sure.
+
+1266
+00:46:47.760 --> 00:46:52.030
+It's actually why they think it's it's uh they think it's necessary.
+
+1267
+00:46:52.040 --> 00:46:52.640
+Clearly,
+
+1268
+00:46:52.640 --> 00:46:53.560
+it's convenient,
+
+1269
+00:46:53.570 --> 00:46:56.040
+it's convenient to be able to use whichever name,
+
+1270
+00:46:56.040 --> 00:46:57.710
+and also to be able to use short names.
+
+1271
+00:46:58.180 --> 00:47:02.200
+Part of it is probably has to do with just the syntax of uh of list
+
+1272
+00:47:02.780 --> 00:47:07.440
+that doesn't make it too painful to have long function names where the
+
+1273
+00:47:07.450 --> 00:47:10.710
+indentation and those kinds of things place reasonably well,
+
+1274
+00:47:11.080 --> 00:47:15.050
+because you can easily have the arguments below the function is on the side,
+
+1275
+00:47:15.050 --> 00:47:16.410
+I guess something like this,
+
+1276
+00:47:17.080 --> 00:47:19.410
+but to a large extent is just,
+
+1277
+00:47:19.420 --> 00:47:19.680
+you know,
+
+1278
+00:47:19.680 --> 00:47:21.000
+you see extra,
+
+1279
+00:47:21.380 --> 00:47:21.670
+you know,
+
+1280
+00:47:21.680 --> 00:47:26.580
+you have your your function and global variables with the longer name and what you would
+
+1281
+00:47:26.590 --> 00:47:27.500
+ideally have,
+
+1282
+00:47:27.980 --> 00:47:32.300
+but you will live with this very successful.
+
+1283
+00:47:32.470 --> 00:47:36.680
+There's constantly pressure to try to to introduce
+
+1284
+00:47:36.690 --> 00:47:40.500
+some new mechanism for having actual name space,
+
+1285
+00:47:41.280 --> 00:47:42.800
+but it still hasn't happened yet.
+
+1286
+00:47:43.580 --> 00:47:44.090
+Okay,
+
+1287
+00:47:45.180 --> 00:47:47.690
+so yeah,
+
+1288
+00:47:48.380 --> 00:47:50.990
+Uh I think the next 20 years are gonna be interesting,
+
+1289
+00:47:50.990 --> 00:47:51.250
+right?
+
+1290
+00:47:51.250 --> 00:47:52.490
+There's pressure to make changes.
+
+1291
+00:47:52.490 --> 00:47:53.040
+On the other hand,
+
+1292
+00:47:53.040 --> 00:47:54.710
+the language has stayed very stable.
+
+1293
+00:47:55.180 --> 00:47:55.850
+Um Yeah,
+
+1294
+00:47:55.860 --> 00:47:58.970
+and actually there's a there's a good argument for keeping the long,
+
+1295
+00:47:58.980 --> 00:47:59.890
+long names.
+
+1296
+00:47:59.900 --> 00:48:03.280
+One of the strongest argument is is that,
+
+1297
+00:48:03.290 --> 00:48:03.550
+you know,
+
+1298
+00:48:03.560 --> 00:48:05.860
+in in on the side of the tooling,
+
+1299
+00:48:05.870 --> 00:48:10.850
+it makes the tooling much easier because you don't need to pay attention to the context in order
+
+1300
+00:48:10.850 --> 00:48:13.590
+to know what is the meaning of each identified.
+
+1301
+00:48:13.670 --> 00:48:14.280
+So when you,
+
+1302
+00:48:14.290 --> 00:48:15.500
+when you look for a function,
+
+1303
+00:48:15.570 --> 00:48:15.720
+well,
+
+1304
+00:48:15.720 --> 00:48:18.390
+if you look at the function I search and we have to change,
+
+1305
+00:48:19.170 --> 00:48:20.030
+that's the function.
+
+1306
+00:48:20.030 --> 00:48:20.260
+You know,
+
+1307
+00:48:20.260 --> 00:48:21.290
+you don't have to say oh,
+
+1308
+00:48:21.290 --> 00:48:26.270
+in which name space am I should I should I use look for other users that
+
+1309
+00:48:26.270 --> 00:48:28.080
+correspond to this particular name space,
+
+1310
+00:48:28.670 --> 00:48:33.320
+which also means that you can do searches with tools that know nothing about your language.
+
+1311
+00:48:33.330 --> 00:48:34.200
+Yeah,
+
+1312
+00:48:34.210 --> 00:48:39.000
+like I can go I can go on on that dot go and search for I search and we have to change.
+
+1313
+00:48:39.970 --> 00:48:42.630
+They couldn't give me actual actual results,
+
+1314
+00:48:42.630 --> 00:48:43.390
+actual matters.
+
+1315
+00:48:43.870 --> 00:48:44.740
+Yeah,
+
+1316
+00:48:44.740 --> 00:48:45.130
+I agree.
+
+1317
+00:48:45.130 --> 00:48:46.570
+That's not advantage.
+
+1318
+00:48:46.580 --> 00:48:47.360
+So,
+
+1319
+00:48:47.360 --> 00:48:47.810
+Stefan,
+
+1320
+00:48:47.810 --> 00:48:49.980
+I think we're pretty much out of time.
+
+1321
+00:48:49.990 --> 00:48:52.710
+Uh so we should wrap this up.
+
+1322
+00:48:52.720 --> 00:48:53.240
+Right.
+
+1323
+00:48:53.250 --> 00:48:57.750
+Um so imax list has seen a great deal of evolution is staying
+
+1324
+00:48:57.750 --> 00:48:58.920
+remarkably stable.
+
+1325
+00:48:58.930 --> 00:49:03.520
+Uh We're looking I'm looking forward to another 20 years of imax uh on my
+
+1326
+00:49:03.520 --> 00:49:06.590
+desktop and programming imax list in 20 years.
+
+1327
+00:49:08.070 --> 00:49:08.430
+Yes,
+
+1328
+00:49:08.430 --> 00:49:08.870
+same thing.
+
+1329
+00:49:08.870 --> 00:49:13.320
+I'm I I think evolution has been very limited at the core level,
+
+1330
+00:49:13.320 --> 00:49:16.560
+but in terms of the actual language being used,
+
+1331
+00:49:16.560 --> 00:49:18.590
+there's been a lot of changes because of macros.
+
+1332
+00:49:19.070 --> 00:49:23.090
+So I'm looking forward to what is going to look like in Mhm.
+
+1333
+00:49:23.670 --> 00:49:26.050
+In 20 or so years Hubble.
+
+1334
+00:49:26.050 --> 00:49:26.730
+What happened?
+
+1335
+00:49:26.730 --> 00:49:27.500
+Seven maybe?
+
+1336
+00:49:27.870 --> 00:49:29.520
+Yeah,
+
+1337
+00:49:29.530 --> 00:49:30.100
+that'd be nice.
+
+1338
+00:49:30.100 --> 00:49:30.680
+I'm not sure.
+
+1339
+00:49:30.680 --> 00:49:34.010
+I'm up for spending that much time on writing a paper though,
+
+1340
+00:49:34.020 --> 00:49:36.130
+but I think it's time to give your hair again.
+
+1341
+00:49:36.140 --> 00:49:37.350
+Yeah,
+
+1342
+00:49:37.360 --> 00:49:41.710
+but I guess it's time to give the audience an opportunity to ask some questions and engage in some interactions,
+
+1343
+00:49:41.710 --> 00:49:44.280
+See you around and hope you'll have a great conference.
+
+1344
+00:49:44.670 --> 00:49:44.850
+Yeah,
+
+1345
+00:49:45.470 --> 00:49:46.280
+thank you very much.
+
+1346
+00:49:47.374 --> 00:49:47.534
+well,
+
+1347
+00:49:47.534 --> 00:49:51.184
+thank you both for an excellent and enjoyable taught.
+
+1348
+00:49:51.574 --> 00:49:56.344
+Uh this is a an area that's a little different some of the
+
+1349
+00:49:56.354 --> 00:49:56.734
+shows,
+
+1350
+00:49:56.734 --> 00:50:01.594
+they were conventional language presentations and I thought both the content and the style
+
+1351
+00:50:01.594 --> 00:50:02.194
+was great.
+
+1352
+00:50:02.574 --> 00:50:07.424
+I have a couple questions and slack remind other people if you have other questions for
+
+1353
+00:50:07.424 --> 00:50:08.834
+the for the authors,
+
+1354
+00:50:08.834 --> 00:50:11.784
+please add that to slack the first one.
+
+1355
+00:50:11.794 --> 00:50:12.534
+By the way,
+
+1356
+00:50:12.534 --> 00:50:16.534
+there are a lot of comments in slack that all said not a question.
+
+1357
+00:50:16.534 --> 00:50:17.594
+So after you're done,
+
+1358
+00:50:17.594 --> 00:50:22.554
+please read through those a lot of arguments about origins of different kind of list
+
+1359
+00:50:22.554 --> 00:50:25.664
+and corrections on your t co expertise.
+
+1360
+00:50:25.664 --> 00:50:30.084
+But back to the questions um from uh will christian
+
+1361
+00:50:30.084 --> 00:50:31.854
+in stanford.
+
+1362
+00:50:31.864 --> 00:50:36.774
+One trend I've noticed in recent systems adopting
+
+1363
+00:50:36.784 --> 00:50:41.284
+dynamically scoped features is to promote extensive bility.
+
+1364
+00:50:41.574 --> 00:50:42.284
+For example,
+
+1365
+00:50:42.284 --> 00:50:44.554
+context objects in react us.
+
+1366
+00:50:44.774 --> 00:50:49.774
+What do you think are the main lessons from imax list that these systems should use
+
+1367
+00:50:49.774 --> 00:50:52.484
+in designing the next generation of dynamic scoping?
+
+1368
+00:50:54.274 --> 00:50:54.474
+Yeah.
+
+1369
+00:50:55.674 --> 00:50:58.494
+Should I take that one Stefan uh for you?
+
+1370
+00:50:58.974 --> 00:50:59.334
+Yeah.
+
+1371
+00:50:59.344 --> 00:51:03.934
+So so we actually talked about this right just a couple of weeks ago in
+
+1372
+00:51:03.934 --> 00:51:04.424
+that.
+
+1373
+00:51:04.434 --> 00:51:09.104
+Um so so I mean these days I work a lot in software architecture and software
+
+1374
+00:51:09.114 --> 00:51:10.294
+architecture Education.
+
+1375
+00:51:10.294 --> 00:51:10.454
+Right?
+
+1376
+00:51:10.454 --> 00:51:15.304
+And there's this issue of modularity and I remember talking to the author of pickled list,
+
+1377
+00:51:15.304 --> 00:51:19.804
+which is dynamically type lisp many years ago uh about modularity.
+
+1378
+00:51:19.804 --> 00:51:24.594
+And we were fighting and I was uh I was working on scheme 48 which is statically scoped at the
+
+1379
+00:51:24.594 --> 00:51:25.164
+time.
+
+1380
+00:51:25.174 --> 00:51:25.884
+And he said,
+
+1381
+00:51:25.884 --> 00:51:26.224
+well,
+
+1382
+00:51:26.224 --> 00:51:31.134
+modularity is the ability to take an existing system and we reach into its guts so you can make
+
+1383
+00:51:31.134 --> 00:51:33.094
+it do what you want done,
+
+1384
+00:51:33.674 --> 00:51:34.294
+right.
+
+1385
+00:51:34.304 --> 00:51:37.564
+Um Which is an unconventional view of modularity.
+
+1386
+00:51:37.574 --> 00:51:40.684
+Um but but I can't really say it's completely wrong,
+
+1387
+00:51:40.684 --> 00:51:41.054
+right?
+
+1388
+00:51:41.064 --> 00:51:45.864
+Um I mean I mean we want modular software to be reusable and in
+
+1389
+00:51:45.864 --> 00:51:50.764
+many ways the dynamic scoping in imax lisp or some of the other dynamic features that you can
+
+1390
+00:51:50.764 --> 00:51:53.274
+just sort of set a function to be a different one,
+
+1391
+00:51:53.284 --> 00:51:55.324
+replace it by something else and so on.
+
+1392
+00:51:55.334 --> 00:52:00.024
+Are what makes it possible for users to modify and to make imax
+
+1393
+00:52:00.034 --> 00:52:00.584
+um you know,
+
+1394
+00:52:00.584 --> 00:52:01.784
+do what you want done.
+
+1395
+00:52:01.794 --> 00:52:06.784
+So um I think that's one side of it that it's uh you know
+
+1396
+00:52:06.784 --> 00:52:08.934
+that it's important to have these kinds of capabilities.
+
+1397
+00:52:08.944 --> 00:52:10.294
+On the other hand,
+
+1398
+00:52:10.304 --> 00:52:15.104
+it's really um I think it's really easy to kind of lose an overview and
+
+1399
+00:52:15.104 --> 00:52:17.784
+and to lose a good understanding of what's going on in your system right?
+
+1400
+00:52:17.784 --> 00:52:21.344
+With with imax list you can usually get it to do what you want done,
+
+1401
+00:52:21.354 --> 00:52:25.194
+but you often get unexpected interactions between parts of the system.
+
+1402
+00:52:25.194 --> 00:52:29.974
+And the paper talks a little bit about this uh when it comes to a mechanism known as advice right?
+
+1403
+00:52:29.974 --> 00:52:33.084
+Which is also a kind of a dynamic extension mechanism in the language.
+
+1404
+00:52:33.474 --> 00:52:35.414
+Um And so I think,
+
+1405
+00:52:35.424 --> 00:52:35.644
+you know,
+
+1406
+00:52:35.644 --> 00:52:38.814
+kind of the trend at the conferences that I've gone to in recent years,
+
+1407
+00:52:38.814 --> 00:52:39.054
+I C.
+
+1408
+00:52:39.054 --> 00:52:43.714
+F P and so on has been to create like unbreakable abstractions and
+
+1409
+00:52:43.724 --> 00:52:48.084
+but also the systems that result from that or that result from tighter abstractions are
+
+1410
+00:52:48.094 --> 00:52:52.934
+particularly editors are just not as flexible at runtime
+
+1411
+00:52:52.944 --> 00:52:56.534
+in making it possible to change their behavior um as imax is.
+
+1412
+00:52:56.534 --> 00:52:59.464
+So I think there's I don't have an answer to that question.
+
+1413
+00:52:59.464 --> 00:53:01.634
+I think that's an avenue for research.
+
+1414
+00:53:01.644 --> 00:53:04.674
+Um and in particular the context mechanism and react.
+
+1415
+00:53:04.674 --> 00:53:09.604
+I I happen to be familiar with that also went underwent a redesign substantial
+
+1416
+00:53:09.604 --> 00:53:10.514
+redesigning its time.
+
+1417
+00:53:10.514 --> 00:53:13.684
+It's just difficult to get this kind of stuff to get the right balance between,
+
+1418
+00:53:13.874 --> 00:53:14.174
+you know,
+
+1419
+00:53:14.174 --> 00:53:18.914
+changeability and adaptability of the system and at the same time um you know,
+
+1420
+00:53:18.914 --> 00:53:22.694
+getting the system completely keeping the system comprehensible if that makes any sense.
+
+1421
+00:53:23.974 --> 00:53:24.504
+Yeah,
+
+1422
+00:53:24.514 --> 00:53:26.904
+if I can add something to that.
+
+1423
+00:53:26.914 --> 00:53:31.404
+Uh I think I think the experience we've had with imax list and and the dynamic
+
+1424
+00:53:31.414 --> 00:53:32.494
+facilities in there,
+
+1425
+00:53:33.074 --> 00:53:37.934
+all that you can have a lot of dynamic features like dynamic scoping,
+
+1426
+00:53:37.944 --> 00:53:38.474
+you know,
+
+1427
+00:53:38.484 --> 00:53:43.174
+kind of unchecked ways despite all my my own notions
+
+1428
+00:53:43.174 --> 00:53:47.964
+of how it should work as a you know static typing kind of
+
+1429
+00:53:47.974 --> 00:53:48.794
+researcher.
+
+1430
+00:53:49.274 --> 00:53:53.994
+But I think one element that is important is that it has to be
+
+1431
+00:53:54.004 --> 00:53:58.004
+you need to to develop a set of conventions along with it.
+
+1432
+00:53:58.014 --> 00:54:00.584
+And that takes that probably takes a lot more time.
+
+1433
+00:54:05.174 --> 00:54:06.193
+Okay,
+
+1434
+00:54:06.874 --> 00:54:07.494
+all right,
+
+1435
+00:54:07.494 --> 00:54:10.854
+so the next question is from trolls,
+
+1436
+00:54:10.864 --> 00:54:11.604
+Henrickson,
+
+1437
+00:54:11.604 --> 00:54:16.574
+The University of Copenhagen list isn't particularly known for its text processing
+
+1438
+00:54:16.574 --> 00:54:20.964
+capabilities and many other highly dynamic languages now exists.
+
+1439
+00:54:20.974 --> 00:54:25.084
+His list still the best language for creating imax style editors,
+
+1440
+00:54:27.774 --> 00:54:28.094
+So.
+
+1441
+00:54:28.674 --> 00:54:30.194
+Absolutely right.
+
+1442
+00:54:30.204 --> 00:54:35.084
+Uh I'm not sure it's somewhat it's it's as much a language question as a question of
+
+1443
+00:54:35.094 --> 00:54:38.264
+if it offers the right data types for processing text.
+
+1444
+00:54:38.264 --> 00:54:38.614
+Right.
+
+1445
+00:54:38.624 --> 00:54:42.674
+I remember reading an article about the the the editor buffer representation,
+
+1446
+00:54:42.674 --> 00:54:46.584
+they using visual studio code and they needed to go to a horrendous lengths
+
+1447
+00:54:46.974 --> 00:54:48.204
+uh you know,
+
+1448
+00:54:48.204 --> 00:54:50.084
+to work to make it work efficiently.
+
+1449
+00:54:50.094 --> 00:54:54.264
+That is all done in c but it's available at the maximalist language level?
+
+1450
+00:54:54.274 --> 00:54:58.964
+Um arguably uh you know,
+
+1451
+00:54:58.964 --> 00:55:00.904
+arguably there's some facilities in other languages.
+
+1452
+00:55:00.904 --> 00:55:02.184
+I recall snowball,
+
+1453
+00:55:02.194 --> 00:55:02.864
+for example,
+
+1454
+00:55:02.864 --> 00:55:06.724
+which has advanced text processing but given the flexibility of list,
+
+1455
+00:55:06.734 --> 00:55:11.164
+there is no reason why you can't have any text processing capability that you want an imax lift.
+
+1456
+00:55:11.164 --> 00:55:11.304
+So,
+
+1457
+00:55:11.304 --> 00:55:11.854
+absolutely,
+
+1458
+00:55:11.854 --> 00:55:12.784
+it's the best language.
+
+1459
+00:55:16.074 --> 00:55:16.974
+Okay,
+
+1460
+00:55:16.984 --> 00:55:17.934
+let's see,
+
+1461
+00:55:17.934 --> 00:55:20.754
+the next one is from marc laws.
+
+1462
+00:55:20.764 --> 00:55:25.764
+It's been pointed out the dynamic scoping is really not a historical artifact but
+
+1463
+00:55:25.764 --> 00:55:30.524
+a means for allowing some parameter ization without having to explicitly plum state
+
+1464
+00:55:30.524 --> 00:55:32.204
+context through every function.
+
+1465
+00:55:32.214 --> 00:55:34.784
+Do you have any remarks on the implications?
+
+1466
+00:55:34.784 --> 00:55:39.584
+This has for the possibility of even being able to make imax multi threaded,
+
+1467
+00:55:40.074 --> 00:55:40.994
+for example,
+
+1468
+00:55:40.994 --> 00:55:45.194
+using TLS to simulate dynamic scope while being thread friendly.
+
+1469
+00:55:47.574 --> 00:55:48.744
+That's one for you with Stefan,
+
+1470
+00:55:48.924 --> 00:55:49.394
+I think.
+
+1471
+00:55:50.574 --> 00:55:51.794
+Mm
+
+1472
+00:55:55.874 --> 00:55:56.264
+Yeah,
+
+1473
+00:55:56.264 --> 00:55:58.464
+I think that is a hard one.
+
+1474
+00:55:58.474 --> 00:56:03.474
+Multi threading is is clearly a hard problem for
+
+1475
+00:56:03.484 --> 00:56:04.194
+imax list,
+
+1476
+00:56:05.274 --> 00:56:09.584
+mostly because of all these states and this
+
+1477
+00:56:09.594 --> 00:56:12.984
+heavy reliance on dynamic scoping
+
+1478
+00:56:13.774 --> 00:56:18.144
+and so yeah,
+
+1479
+00:56:18.144 --> 00:56:20.254
+I'm not sure exactly what I can say about this,
+
+1480
+00:56:20.264 --> 00:56:21.874
+but it you know,
+
+1481
+00:56:21.884 --> 00:56:24.484
+it can be an opportunity,
+
+1482
+00:56:24.484 --> 00:56:29.014
+but I think at least in the context of imax it's more of a problem than a
+
+1483
+00:56:29.024 --> 00:56:29.694
+solution.
+
+1484
+00:56:31.174 --> 00:56:31.824
+Well,
+
+1485
+00:56:31.834 --> 00:56:33.314
+maybe I can contribute something.
+
+1486
+00:56:33.314 --> 00:56:33.504
+I mean,
+
+1487
+00:56:33.504 --> 00:56:33.964
+I mean,
+
+1488
+00:56:34.094 --> 00:56:35.984
+I mean there's a sexual multi threading in the paper,
+
+1489
+00:56:35.984 --> 00:56:36.694
+first of all,
+
+1490
+00:56:36.704 --> 00:56:38.884
+and about how that relates to dynamic scoping.
+
+1491
+00:56:39.374 --> 00:56:44.274
+Uh getting the interaction between threading and dynamic scoping tends to be difficult and
+
+1492
+00:56:44.274 --> 00:56:46.994
+also difficult to reconcile with modularity.
+
+1493
+00:56:47.574 --> 00:56:48.294
+Ah,
+
+1494
+00:56:48.674 --> 00:56:51.044
+so yeah,
+
+1495
+00:56:51.044 --> 00:56:51.404
+I think,
+
+1496
+00:56:51.404 --> 00:56:54.764
+I think in the case of in the case of the max,
+
+1497
+00:56:54.774 --> 00:56:54.994
+you know,
+
+1498
+00:56:54.994 --> 00:56:56.114
+the diaries coping,
+
+1499
+00:56:56.124 --> 00:57:00.694
+Making dynamic scoping work was multi cheap.
+
+1500
+00:57:01.374 --> 00:57:01.774
+Yeah,
+
+1501
+00:57:01.774 --> 00:57:03.214
+I think Okay,
+
+1502
+00:57:03.224 --> 00:57:04.344
+blanked out on that one.
+
+1503
+00:57:04.354 --> 00:57:06.244
+Internet clips.
+
+1504
+00:57:06.244 --> 00:57:06.634
+That's fine.
+
+1505
+00:57:06.634 --> 00:57:07.744
+We'll go on to the next one.
+
+1506
+00:57:07.764 --> 00:57:08.964
+Okay,
+
+1507
+00:57:08.974 --> 00:57:10.904
+the next one is a multi part.
+
+1508
+00:57:10.904 --> 00:57:15.874
+I'm just going to ask 11 part of it uh from Yoshiki Takashima
+
+1509
+00:57:15.884 --> 00:57:20.744
+cmu do you think the number of Ellis programmers is hindering its development?
+
+1510
+00:57:20.754 --> 00:57:23.424
+So is it worth considering thinking of Ellis.
+
+1511
+00:57:23.424 --> 00:57:25.884
+Bassett compiler Target for other languages.
+
+1512
+00:57:28.674 --> 00:57:28.874
+Yeah.
+
+1513
+00:57:29.374 --> 00:57:29.794
+Mhm.
+
+1514
+00:57:30.874 --> 00:57:31.964
+Isn't it?
+
+1515
+00:57:31.964 --> 00:57:34.084
+Isn't an imax list back in for idris.
+
+1516
+00:57:38.174 --> 00:57:38.484
+Well,
+
+1517
+00:57:38.484 --> 00:57:42.754
+I always considered a list to be implemented in a fairly inefficient way.
+
+1518
+00:57:42.764 --> 00:57:45.134
+And so to be fundamentally fairly slow.
+
+1519
+00:57:45.144 --> 00:57:48.374
+Uh I've since had the opportunity to learn that.
+
+1520
+00:57:48.384 --> 00:57:49.574
+It's actually not that slow,
+
+1521
+00:57:49.574 --> 00:57:49.794
+it,
+
+1522
+00:57:49.804 --> 00:57:50.354
+you know,
+
+1523
+00:57:50.354 --> 00:57:53.844
+it's a fairly average performance,
+
+1524
+00:57:53.844 --> 00:57:54.674
+let's say.
+
+1525
+00:57:54.684 --> 00:57:56.054
+But I wouldn't,
+
+1526
+00:57:56.064 --> 00:57:56.394
+you know,
+
+1527
+00:57:56.394 --> 00:57:57.564
+I wouldn't promote it as a,
+
+1528
+00:57:57.574 --> 00:57:58.344
+as a target,
+
+1529
+00:57:58.354 --> 00:57:59.314
+very compiler,
+
+1530
+00:57:59.314 --> 00:57:59.924
+you know,
+
+1531
+00:57:59.934 --> 00:58:01.894
+I don't think it's very adapted to that.
+
+1532
+00:58:04.874 --> 00:58:05.624
+Okay.
+
+1533
+00:58:05.634 --> 00:58:07.484
+One could imagine targeting the byte code.
+
+1534
+00:58:07.494 --> 00:58:07.874
+Right,
+
+1535
+00:58:07.874 --> 00:58:08.304
+Stefan,
+
+1536
+00:58:08.314 --> 00:58:08.794
+I'm sorry.
+
+1537
+00:58:09.174 --> 00:58:09.674
+Yeah,
+
+1538
+00:58:09.684 --> 00:58:14.444
+you can imagine talking to the byte code for for slightly different front line,
+
+1539
+00:58:14.454 --> 00:58:16.134
+but then you might as well just use,
+
+1540
+00:58:16.144 --> 00:58:16.794
+you know,
+
+1541
+00:58:17.474 --> 00:58:21.374
+use uh another another approach as well.
+
+1542
+00:58:21.374 --> 00:58:21.834
+So,
+
+1543
+00:58:21.844 --> 00:58:22.324
+you know,
+
+1544
+00:58:22.334 --> 00:58:24.814
+why would you want to use another source language basically.
+
+1545
+00:58:24.814 --> 00:58:26.854
+So if you want to run with an imax,
+
+1546
+00:58:26.854 --> 00:58:31.744
+it's probably easier to just write you actually code directly so that the set of
+
+1547
+00:58:31.744 --> 00:58:32.884
+features matches.
+
+1548
+00:58:34.174 --> 00:58:34.374
+Yeah.
+
+1549
+00:58:35.774 --> 00:58:36.334
+Okay,
+
+1550
+00:58:36.334 --> 00:58:36.764
+from God,
+
+1551
+00:58:36.764 --> 00:58:38.994
+I steal what changes,
+
+1552
+00:58:38.994 --> 00:58:39.634
+if any,
+
+1553
+00:58:39.644 --> 00:58:44.564
+have been made to imax this primarily for the sake of improved performance rather
+
+1554
+00:58:44.564 --> 00:58:46.094
+than for a new functionality.
+
+1555
+00:58:48.974 --> 00:58:53.454
+Very little performance has rarely been
+
+1556
+00:58:53.454 --> 00:58:57.254
+a an issue when it comes to the language that is,
+
+1557
+00:58:57.254 --> 00:58:58.904
+the language has a fairly,
+
+1558
+00:58:58.914 --> 00:58:59.514
+you know,
+
+1559
+00:58:59.524 --> 00:59:04.084
+fairly simple implementation is reasonably slowing in this respect,
+
+1560
+00:59:04.674 --> 00:59:09.184
+but most of the elements that take time are actually implemented in c anyway.
+
+1561
+00:59:09.184 --> 00:59:12.294
+They're part of the library basically.
+
+1562
+00:59:12.774 --> 00:59:16.254
+And so the negative self has naturally been changed to,
+
+1563
+00:59:16.254 --> 00:59:17.184
+to accommodate speed.
+
+1564
+00:59:18.874 --> 00:59:19.144
+Yeah,
+
+1565
+00:59:19.154 --> 00:59:20.724
+if we're talking about the source language.
+
+1566
+00:59:20.724 --> 00:59:21.014
+Right.
+
+1567
+00:59:21.024 --> 00:59:21.714
+Um of course,
+
+1568
+00:59:21.714 --> 00:59:23.884
+implementation has seen quite a few improvements,
+
+1569
+00:59:24.474 --> 00:59:24.864
+Yes.
+
+1570
+00:59:24.874 --> 00:59:28.364
+Um Okay,
+
+1571
+00:59:28.374 --> 00:59:30.544
+10 to 1 or two more I think.
+
+1572
+00:59:30.554 --> 00:59:35.554
+Andrew black from Portland State says the first version of the max list that I used
+
+1573
+00:59:35.554 --> 00:59:37.784
+was in Gosselin's imax for UNIX.
+
+1574
+00:59:38.174 --> 00:59:40.754
+The early versions did not have function parameters.
+
+1575
+00:59:40.754 --> 00:59:41.694
+As I recall,
+
+1576
+00:59:42.004 --> 00:59:46.314
+the convention was used dynamically bound variables to get information into functions.
+
+1577
+00:59:46.544 --> 00:59:50.024
+Was this just a limitation of the Gosling implementation?
+
+1578
+00:59:50.104 --> 00:59:53.384
+Was it also a feature of the early tico based versions?
+
+1579
+00:59:56.174 --> 01:00:00.164
+Uh I have no idea.
+
+1580
+01:00:00.174 --> 01:00:04.994
+So my impression was I I never got to the point where I fully learned uh
+
+1581
+01:00:05.004 --> 01:00:05.684
+Tico language,
+
+1582
+01:00:05.684 --> 01:00:08.174
+my impression was that it did not have named parameters.
+
+1583
+01:00:08.204 --> 01:00:11.774
+So Ticos extended language is completely enlist like we should note.
+
+1584
+01:00:11.784 --> 01:00:12.164
+Right.
+
+1585
+01:00:12.174 --> 01:00:16.774
+Um and I think we had an example of that in the talk and I don't think named
+
+1586
+01:00:17.204 --> 01:00:19.004
+max also had a completely different list.
+
+1587
+01:00:19.014 --> 01:00:19.734
+Yeah,
+
+1588
+01:00:19.744 --> 01:00:19.904
+yeah,
+
+1589
+01:00:19.904 --> 01:00:20.324
+that's right.
+
+1590
+01:00:20.334 --> 01:00:20.624
+No,
+
+1591
+01:00:20.634 --> 01:00:22.724
+I mean the characterization of gasoline taxes correct.
+
+1592
+01:00:22.724 --> 01:00:22.904
+Right.
+
+1593
+01:00:22.904 --> 01:00:27.284
+It did not have named function parameters and that's in the paper as well but um
+
+1594
+01:00:27.294 --> 01:00:30.314
+I don't think Tico had that notion either.
+
+1595
+01:00:30.324 --> 01:00:33.594
+Uh like a programming language with regular named parameters.
+
+1596
+01:00:34.374 --> 01:00:34.794
+Mom,
+
+1597
+01:00:35.674 --> 01:00:37.184
+I think it had registered,
+
+1598
+01:00:37.194 --> 01:00:39.694
+it's just basically wearables.
+
+1599
+01:00:40.274 --> 01:00:44.954
+That sounds familiar going back a lot of years um from
+
+1600
+01:00:44.954 --> 01:00:49.424
+paul uh when and how does external packages get bundled into
+
+1601
+01:00:49.424 --> 01:00:50.684
+MX's core?
+
+1602
+01:00:54.374 --> 01:00:59.294
+Oh and it just happens and it
+
+1603
+01:00:59.294 --> 01:01:03.954
+happens in ways that nobody notices because there is there is no
+
+1604
+01:01:03.964 --> 01:01:06.374
+technical definition of what is the core?
+
+1605
+01:01:06.384 --> 01:01:09.924
+It's more what people consider as being part of the core.
+
+1606
+01:01:09.934 --> 01:01:12.084
+So there are packages to be part of the court,
+
+1607
+01:01:12.084 --> 01:01:13.764
+you have to be distributed with imax,
+
+1608
+01:01:13.774 --> 01:01:18.184
+but just being distributed with imax is not sufficient for people to consider it us
+
+1609
+01:01:18.374 --> 01:01:18.994
+cord.
+
+1610
+01:01:19.174 --> 01:01:21.174
+And I think if you asked different people,
+
+1611
+01:01:21.174 --> 01:01:25.394
+different people would consider different parts of being part of core or not.
+
+1612
+01:01:25.394 --> 01:01:27.554
+So it's a fuzzy,
+
+1613
+01:01:27.564 --> 01:01:28.894
+fuzzy notion.
+
+1614
+01:01:30.274 --> 01:01:34.794
+It's not a question of a habit and what is commonly used within within the code.
+
+1615
+01:01:37.274 --> 01:01:37.694
+Okay.
+
+1616
+01:01:38.274 --> 01:01:38.594
+Yeah.
+
+1617
+01:01:39.074 --> 01:01:39.494
+All right.
+
+1618
+01:01:39.494 --> 01:01:43.964
+So I think this will be the last question from Karen doping often of us.
+
+1619
+01:01:43.974 --> 01:01:48.904
+I love the extensive bility of the list when it provides an editing experience unlike any
+
+1620
+01:01:48.904 --> 01:01:49.994
+other editor out there.
+
+1621
+01:01:50.474 --> 01:01:51.974
+But out of curiosity,
+
+1622
+01:01:51.984 --> 01:01:56.934
+are there lessons that Ellis may be able to learn from the scripting languages
+
+1623
+01:01:56.944 --> 01:01:58.794
+of other modern editors,
+
+1624
+01:01:58.794 --> 01:02:02.484
+such as Js for V S code or neo them?
+
+1625
+01:02:04.374 --> 01:02:04.574
+Yeah.
+
+1626
+01:02:05.874 --> 01:02:06.384
+Mike,
+
+1627
+01:02:07.574 --> 01:02:08.984
+I think the answer is no.
+
+1628
+01:02:09.374 --> 01:02:10.224
+Uh,
+
+1629
+01:02:10.234 --> 01:02:10.894
+so,
+
+1630
+01:02:10.904 --> 01:02:11.584
+um,
+
+1631
+01:02:11.594 --> 01:02:12.584
+I mean,
+
+1632
+01:02:12.584 --> 01:02:13.054
+as I,
+
+1633
+01:02:13.064 --> 01:02:13.724
+as I said,
+
+1634
+01:02:13.724 --> 01:02:14.004
+right,
+
+1635
+01:02:14.004 --> 01:02:15.714
+I mean the great advantages an email list,
+
+1636
+01:02:15.714 --> 01:02:17.014
+you can really do things at runtime.
+
+1637
+01:02:17.014 --> 01:02:17.964
+Whereas uh,
+
+1638
+01:02:17.974 --> 01:02:20.234
+these modern editors love them,
+
+1639
+01:02:20.234 --> 01:02:21.074
+I don't know much about,
+
+1640
+01:02:21.084 --> 01:02:21.684
+but um,
+
+1641
+01:02:21.694 --> 01:02:25.834
+I think you customize it in lieu uh,
+
+1642
+01:02:25.844 --> 01:02:26.544
+these days,
+
+1643
+01:02:26.554 --> 01:02:29.294
+the main question is so much isn't so much about the language,
+
+1644
+01:02:29.294 --> 01:02:33.654
+but if the language enables being able to do things at runtime.
+
+1645
+01:02:33.654 --> 01:02:33.964
+Right?
+
+1646
+01:02:33.964 --> 01:02:35.874
+And a lot of like visual studio code,
+
+1647
+01:02:35.874 --> 01:02:37.274
+you modify any of its plug ins,
+
+1648
+01:02:37.274 --> 01:02:39.634
+you have to restart the editor as an example.
+
+1649
+01:02:39.644 --> 01:02:40.144
+Right.
+
+1650
+01:02:40.154 --> 01:02:44.864
+And so that's something that we don't need to do uh in imax.
+
+1651
+01:02:44.864 --> 01:02:49.494
+And so I'm not sure there's a great lesson for either system organization or
+
+1652
+01:02:49.874 --> 01:02:51.274
+or language design there.
+
+1653
+01:02:51.284 --> 01:02:55.414
+I don't think I would change email list to accommodate um the way their way of doing
+
+1654
+01:02:55.414 --> 01:02:56.794
+things.
+
+1655
+01:02:58.274 --> 01:02:58.684
+Yeah,
+
+1656
+01:02:58.684 --> 01:03:03.504
+I think in terms of in terms of the language that I don't think there is much to be gained from
+
+1657
+01:03:03.504 --> 01:03:04.164
+there,
+
+1658
+01:03:04.174 --> 01:03:09.074
+there are some very interesting aspects that we do want to integrate from from those
+
+1659
+01:03:09.074 --> 01:03:09.684
+editors,
+
+1660
+01:03:09.694 --> 01:03:11.384
+but they're not really part of the language there.
+
+1661
+01:03:11.384 --> 01:03:14.444
+More part of the design of how you structure,
+
+1662
+01:03:14.454 --> 01:03:14.904
+you know,
+
+1663
+01:03:14.904 --> 01:03:19.804
+the the description of the language that you want to parse so that you do highlighting for example and
+
+1664
+01:03:19.804 --> 01:03:22.294
+those kinds of things and re display for example,
+
+1665
+01:03:23.224 --> 01:03:25.894
+might be my favorite thing to borrow from these.
+
+1666
+01:03:26.574 --> 01:03:27.494
+Mhm.
+
+1667
+01:03:27.974 --> 01:03:28.814
+Okay,
+
+1668
+01:03:28.814 --> 01:03:29.154
+well,
+
+1669
+01:03:29.164 --> 01:03:31.014
+I'm going to cut off the questions there,
+
+1670
+01:03:31.014 --> 01:03:34.154
+but I want to thank you both for like I said,
+
+1671
+01:03:34.164 --> 01:03:35.244
+an excellent paper,
+
+1672
+01:03:35.244 --> 01:03:36.544
+wonderful presentation.
+
+1673
+01:03:36.554 --> 01:03:39.724
+And for what I can see from the non question discussions,
+
+1674
+01:03:39.734 --> 01:03:44.254
+bringing back a lot of arguments and discussions from the history of
+
+1675
+01:03:44.264 --> 01:03:48.054
+editors and list that I haven't seen in decades.
+
+1676
+01:03:48.054 --> 01:03:49.494
+So thank you both very,
+
+1677
+01:03:49.494 --> 01:03:50.334
+very much.
+
+1678
+01:03:50.344 --> 01:03:52.084
+And thanks Brent for your hard work.
+
+1679
+01:03:52.084 --> 01:03:52.304
+Right?
+
+1680
+01:03:52.304 --> 01:03:56.594
+If the paper is any good uh It's at least as much as much your fault as it is ours.
+
+1681
+01:03:56.974 --> 01:03:57.454
+Yeah,
+
+1682
+01:03:57.464 --> 01:03:58.494
+that's kind of you to say it,
+
+1683
+01:03:58.494 --> 01:03:59.884
+but thank you.
