@@ -1,24 +1,12 @@
 WEBVTT
 
 1
-00:00:12.340 --> 00:00:12.910
-Hi Stefan.
-
-2
-00:00:12.910 --> 00:00:13.860
-Good seeing you.
+00:00:12.340 --> 00:00:13.860
+Hi Stefan! Good seeing you!
 
 3
-00:00:14.440 --> 00:00:15.160
-Hi,
-
-4
-00:00:15.160 --> 00:00:15.520
-mike.
-
-5
-00:00:15.530 --> 00:00:16.430
-How you doing?
+00:00:14.440 --> 00:00:00:16.430
+Hi, Mike. How you doing?
 
 6
 00:00:16.440 --> 00:00:17.480
@@ -26,11 +14,11 @@ Pretty good.
 
 7
 00:00:17.490 --> 00:00:20.950
-I guess we're here to talk about the evolution of imax list.
+I guess we're here to talk about the evolution of Emacs Lisp.
 
 8
 00:00:21.440 --> 00:00:23.060
-You wanna introduce yourself briefly?
+You want to introduce yourself briefly?
 
 9
 00:00:24.040 --> 00:00:24.390
@@ -38,35 +26,27 @@ Yes.
 
 10
 00:00:24.390 --> 00:00:25.720
-So I'm stephan money.
+So I'm Stefan Monnier.
 
 11
 00:00:25.720 --> 00:00:30.560
-I I do research and teaching in programming languages at University of Montreal.
+I do research and teaching in programming languages at University of Montreal.
 
 12
 00:00:31.140 --> 00:00:31.360
-Oh,
-
-13
-00:00:31.360 --> 00:00:31.480
-yeah.
-
-14
-00:00:31.490 --> 00:00:32.330
-Uh,
+How about you?
 
 15
 00:00:32.340 --> 00:00:32.680
-yeah.
+Yeah.
 
 16
 00:00:32.689 --> 00:00:35.660
-I'm ceo of a software consultancy in southern Germany.
+I'm CEO of a software consultancy in southern Germany.
 
 17
 00:00:36.140 --> 00:00:39.920
-So how do how do we get into this thing writing this paper?
+So how do how did we get into this thing writing this paper?
 
 18
 00:00:39.920 --> 00:00:40.120
@@ -74,11 +54,11 @@ Right.
 
 19
 00:00:40.120 --> 00:00:43.860
-I think a lot of people that are seeing a paper on the evolution of something,
+I think a lot of people that are seeing a paper on the evolution of something
 
 20
 00:00:43.860 --> 00:00:47.150
-something imax would expect Richard Stallman to be here.
+something Emacs would expect Richard Stallman to be here.
 
 21
 00:00:49.040 --> 00:00:49.790
@@ -102,23 +82,23 @@ I work in programming languages.
 
 26
 00:00:52.100 --> 00:00:56.860
-So there is some relationship and I think I've been contributing to the
+So there is some relationship. I've been contributing to Emacs
 
 27
 00:00:56.860 --> 00:00:58.020
-max for for many,
+for many,
 
 28
 00:00:58.020 --> 00:00:58.580
-many years.
+many years,
 
 29
 00:00:58.580 --> 00:01:00.660
-I've been maintaining the maximum.
+I've been maintainer of Emacs.
 
 30
 00:01:00.670 --> 00:01:02.380
-That's that's how I ended up here.
+So that's how I ended up here.
 
 31
 00:01:02.390 --> 00:01:02.950
@@ -130,19 +110,15 @@ I think,
 
 33
 00:01:03.460 --> 00:01:08.220
-I think I was contacted by guys tear and by you to to see there was some
+I think I was contacted by Guy Steele and by you to to see there was some
 
 34
 00:01:08.220 --> 00:01:09.860
 interest in working on this.
 
-35
-00:01:09.940 --> 00:01:10.360
-Yeah,
-
 36
 00:01:10.370 --> 00:01:11.070
-so that's right.
+How about you?
 
 37
 00:01:11.070 --> 00:01:11.240
@@ -154,31 +130,19 @@ you know,
 
 39
 00:01:12.040 --> 00:01:14.980
-even even though I work in the software consultancy today,
+even though I work in the software consultancy today,
 
 40
 00:01:14.980 --> 00:01:18.090
 I also used to be a research and programming languages many years ago.
 
-41
-00:01:18.100 --> 00:01:18.880
-Uh,
-
 42
 00:01:18.880 --> 00:01:22.750
-I remember when I started working there at the University of Tubingen about 30 years ago,
-
-43
-00:01:23.140 --> 00:01:24.240
-um you know,
-
-44
-00:01:24.240 --> 00:01:25.830
-we were uh,
+I remember when I started working there at the University of Tübingen about 30 years ago,
 
 45
 00:01:25.840 --> 00:01:30.830
-we were looking at the max and we started using X windows and the version of the max that existed at the time
+we were looking at Emacs and we started using X windows and the version of Emacs that existed at the time
 
 46
 00:01:30.830 --> 00:01:33.160
@@ -186,31 +150,27 @@ would only run in a terminal or an X term.
 
 47
 00:01:33.640 --> 00:01:38.400
-And but there was a version of the max out that would allow you to open
+but there was a version of the Emacs that would allow you to open
 
 48
 00:01:38.400 --> 00:01:40.660
-multiple windows called lucid imax.
+multiple windows called Lucid Emacs.
 
 49
-00:01:41.040 --> 00:01:45.730
-And so we started using that and then I think it didn't run on
-
-50
-00:01:45.730 --> 00:01:46.160
-Lennox.
+00:01:41.040 --> 00:01:46.160
+So we started using that and then I think it didn't run on Linux.
 
 51
 00:01:46.160 --> 00:01:50.160
-We started usually using at the time and I reported that and I started contributing code.
+We started usually using at the time and I ported that and I started contributing code.
 
 52
 00:01:50.160 --> 00:01:55.140
-And that kind of segued into me doing more and more development on first loosen the
+And that kind of segued into me doing more and more development on first Lucid Emacs
 
 53
 00:01:55.140 --> 00:01:57.560
-max and lucy max was done by a company called Lucid.
+and Lucid Emacs was done by a company called Lucid.
 
 54
 00:01:57.570 --> 00:01:59.250
@@ -225,28 +185,12 @@ and the project moved to Sun Microsystems,
 actually,
 
 57
-00:02:02.980 --> 00:02:05.080
-where it was renamed to X.
-
-58
-00:02:05.080 --> 00:02:06.840
-Imax by the marketing people there.
-
-59
-00:02:06.850 --> 00:02:08.039
-And uh,
-
-60
-00:02:08.050 --> 00:02:08.620
-so,
-
-61
-00:02:08.630 --> 00:02:09.270
-uh,
+00:02:02.980 --> 00:02:06.840
+where it was renamed to XEmacs by the marketing people there.
 
 62
 00:02:09.280 --> 00:02:13.600
-so I started using imax at the time and then I was a programming Languages researcher,
+So I started using Emacs at the time and then I was a programming Languages researcher,
 
 63
 00:02:13.600 --> 00:02:13.890
@@ -258,11 +202,7 @@ So,
 
 65
 00:02:14.060 --> 00:02:17.740
-I think we're like the two people among the recipients of guys,
-
-66
-00:02:17.750 --> 00:02:18.220
-uh,
+I think we were like the two people among the recipients of Guy's
 
 67
 00:02:18.230 --> 00:02:19.460
@@ -270,7 +210,7 @@ email who,
 
 68
 00:02:20.440 --> 00:02:20.890
-right,
+write,
 
 69
 00:02:20.890 --> 00:02:23.440
@@ -288,25 +228,9 @@ Yeah,
 00:02:27.890 --> 00:02:28.920
 so it was a lot of work.
 
-73
-00:02:28.930 --> 00:02:29.870
-Um,
-
-74
-00:02:29.880 --> 00:02:31.100
-so,
-
-75
-00:02:31.110 --> 00:02:31.410
-um,
-
 76
-00:02:31.420 --> 00:02:34.460
-but we're here to talk about imax lisp,
-
-77
-00:02:34.470 --> 00:02:34.750
-right?
+00:02:31.420 --> 00:02:34.750
+But we're here to talk about Emacs lisp, right?
 
 78
 00:02:34.750 --> 00:02:36.190
@@ -322,7 +246,7 @@ So how come,
 
 81
 00:02:40.740 --> 00:02:44.310
-how come lisP is like the language of imax?
+how come Lisp is like the language of Emacs?
 
 82
 00:02:44.310 --> 00:02:46.060
@@ -346,51 +270,35 @@ it it's interesting you ask it this way,
 
 87
 00:02:50.940 --> 00:02:53.760
-because the first language of imax was not listed,
+because the first language of Emacs was not Lisp,
 
 88
 00:02:54.440 --> 00:02:54.950
-it was like,
-
-89
-00:02:54.950 --> 00:02:56.010
-oh it was like,
+it was TECO.
 
 90
 00:02:56.010 --> 00:02:56.650
-oh yeah,
-
-91
-00:02:57.040 --> 00:02:57.660
-okay.
+It was TECO, yeah. Ok.
 
 92
-00:02:58.340 --> 00:03:03.300
-Uh so why didn't why didn't I think Richard Stallman worked on tico as
-
-93
-00:03:03.300 --> 00:03:03.530
-well.
+00:02:58.340 --> 00:03:03.530
+So I think Richard Stallman worked on TECO as well.
 
 94
 00:03:03.530 --> 00:03:05.880
-We're on the Cipro version of the max at the time.
+Or on the TECO version of Emacs at the time.
 
 95
 00:03:05.890 --> 00:03:06.470
 That's right.
 
 96
-00:03:06.480 --> 00:03:11.450
-So the first version of the max was written by by Richard and many others in in
-
-97
-00:03:11.450 --> 00:03:12.150
-Chico.
+00:03:06.480 --> 00:03:12.150
+So the first version of Emacs was written by Richard and many others in TECO.
 
 98
 00:03:12.840 --> 00:03:16.120
-And so I think you have an example of,
+And so I think you have an example ...
 
 99
 00:03:16.130 --> 00:03:17.230
@@ -402,7 +310,7 @@ So here let's try this fancy switching feature here.
 
 101
 00:03:20.370 --> 00:03:25.150
-So here's an example of tico code and you can kind of see what you got an inkling why
+So here's an example of TECO code and you can kind of see well you get an inkling why
 
 102
 00:03:25.150 --> 00:03:29.230
@@ -410,7 +318,7 @@ it wasn't Richard Stallman favorite language to put into,
 
 103
 00:03:29.240 --> 00:03:33.960
-you know the the version of the max that he then uh started developing later.
+the version of Emacs that he then started developing later.
 
 104
 00:03:34.240 --> 00:03:39.150
@@ -422,19 +330,15 @@ what it is.
 
 106
 00:03:40.440 --> 00:03:45.440
-So you can kind of see that it maybe would not scale so well to both to larger code basis
+So you can kind of see that it maybe would not scale so well to both to larger code bases
 
 107
 00:03:45.440 --> 00:03:49.930
-and also to lots of people were interested in um and doing something with the max,
-
-108
-00:03:49.930 --> 00:03:50.250
-right?
+and also to lots of people were interested in doing something with Emacs,
 
 109
 00:03:51.040 --> 00:03:54.660
-So that explains why it's not Chico but why is it the next list?
+So that explains why it's not Chico but why is it Emacs Lisp?
 
 110
 00:03:56.140 --> 00:03:56.640
@@ -442,27 +346,23 @@ Well,
 
 111
 00:03:56.650 --> 00:04:01.310
-uh Richard was working in uh mitt
+Richard was working at MIT
 
 112
 00:04:01.320 --> 00:04:05.260
-where list was very popular in the in the lab where he was working.
+where Lisp was very popular in the in the lab where he was working.
 
 113
 00:04:05.260 --> 00:04:07.490
-So he was very familiar with the list.
+So he was very familiar with Lisp.
 
 114
 00:04:07.500 --> 00:04:09.500
-He was using list all the time.
+He was using Lisp all the time.
 
 115
-00:04:09.510 --> 00:04:12.280
-He was probably editing list with Chico.
-
-116
-00:04:12.280 --> 00:04:12.940
-Imax.
+00:04:09.510 --> 00:04:12.940
+He was probably editing Lisp with TECO Emacs.
 
 117
 00:04:12.950 --> 00:04:13.860
@@ -478,7 +378,7 @@ there was the main the main reason for using it.
 
 120
 00:04:19.540 --> 00:04:24.060
-It was the anxious choice and I think it is to this day it is his favorite language.
+It was the obvious choice and I think it is to this day it is his favorite language.
 
 121
 00:04:24.640 --> 00:04:25.450
@@ -489,40 +389,24 @@ Okay.
 But I guess,
 
 123
-00:04:26.510 --> 00:04:29.360
-I mean Richard Stallman also founded the new project,
-
-124
-00:04:29.360 --> 00:04:29.580
-right?
+00:04:26.510 --> 00:04:29.580
+I mean Richard Stallman also founded the GNU project, right?
 
 125
 00:04:29.580 --> 00:04:33.030
-And imax is kind of the founding piece of software of that project.
-
-126
-00:04:33.040 --> 00:04:33.300
-Right?
-
-127
-00:04:33.300 --> 00:04:33.960
-Is there?
+And Emacs is kind of the founding piece of software of that project.
 
 128
 00:04:33.970 --> 00:04:38.040
-Uh So we all know that it's a very political and idealistic project.
+So we all know that it's a very political and idealistic project.
 
 129
 00:04:38.040 --> 00:04:42.760
-So can we can we draw a line from imax list to the ideals of the new project?
+So can we can we draw a line from Emacs Lisp to the ideals of the GNU project?
 
 130
-00:04:43.740 --> 00:04:43.920
-Yeah,
-
-131
-00:04:43.920 --> 00:04:44.530
-I think so.
+00:04:43.740 --> 00:04:44.530
+Yeah, I think so.
 
 132
 00:04:44.540 --> 00:04:49.170
@@ -538,7 +422,7 @@ user and okay,
 
 135
 00:04:56.070 --> 00:05:00.450
-this is this is a driving line in in the design of imax and imax list
+this is this is a driving line in in the design of Emacs and Emacs list
 
 136
 00:05:01.140 --> 00:05:06.060
@@ -630,7 +514,7 @@ Today,
 
 158
 00:05:51.040 --> 00:05:53.020
-when we look at a programming language like imax list,
+when we look at a programming language like Emacs list,
 
 159
 00:05:53.020 --> 00:05:53.220
@@ -670,7 +554,7 @@ well,
 
 168
 00:06:08.080 --> 00:06:13.050
-here's the introduction of imax list as it sits in the imax editor in Chief Ships with the ex
+here's the introduction of Emacs list as it sits in the Emacs editor in Chief Ships with the ex
 
 169
 00:06:13.050 --> 00:06:17.710
@@ -686,7 +570,7 @@ So um uh and I never saw this all these years uh that I was using
 
 172
 00:06:23.920 --> 00:06:28.460
-imax and imax that it was that there's actually a fair amount of effort being made
+Emacs and Emacs that it was that there's actually a fair amount of effort being made
 
 173
 00:06:28.470 --> 00:06:32.750
@@ -738,11 +622,11 @@ you know,
 
 185
 00:06:57.020 --> 00:07:01.950
-secretaries using imax and secretaries who had no experience with programming
+secretaries using Emacs and secretaries who had no experience with programming
 
 186
 00:07:01.960 --> 00:07:05.120
-right to make it here and using imax and writing.
+right to make it here and using Emacs and writing.
 
 187
 00:07:05.120 --> 00:07:09.360
@@ -838,11 +722,11 @@ um,
 
 210
 00:07:45.980 --> 00:07:49.600
-I wish we would get back to the ideals of imax um,
+I wish we would get back to the ideals of Emacs um,
 
 211
 00:07:49.600 --> 00:07:51.550
-and imax lisp at some point.
+and Emacs lisp at some point.
 
 212
 00:07:51.840 --> 00:07:54.060
@@ -854,7 +738,7 @@ Okay.
 
 214
 00:07:55.880 --> 00:07:59.860
-So I guess we should give like a brief overview of what imax list is,
+So I guess we should give like a brief overview of what Emacs list is,
 
 215
 00:07:59.870 --> 00:08:02.890
@@ -866,7 +750,7 @@ Right?
 
 217
 00:08:03.240 --> 00:08:07.790
-So imax list is a list and that means uh well it's instantly
+So Emacs list is a list and that means uh well it's instantly
 
 218
 00:08:07.790 --> 00:08:10.500
@@ -970,7 +854,7 @@ you know,
 
 243
 00:09:04.720 --> 00:09:06.460
-imax will automatically identify,
+Emacs will automatically identify,
 
 244
 00:09:06.460 --> 00:09:11.010
@@ -1066,7 +950,7 @@ So it's not just the fact that it's this programming language with parentheses,
 
 267
 00:09:56.570 --> 00:09:57.880
-but also with the max,
+but also with Emacs,
 
 268
 00:09:57.880 --> 00:10:02.150
@@ -1198,11 +1082,11 @@ Actually,
 
 300
 00:11:11.030 --> 00:11:13.940
-an imax list could also be a matchless program.
+an Emacs list could also be a matchless program.
 
 301
 00:11:13.940 --> 00:11:18.560
-So necklace was one of the predecessors of the imax list was just a regular list implementation that
+So necklace was one of the predecessors of the Emacs list was just a regular list implementation that
 
 302
 00:11:18.560 --> 00:11:20.420
@@ -1262,7 +1146,7 @@ Why?
 
 316
 00:11:48.860 --> 00:11:53.060
-Why Stefan is their dynamic scoping in imax list?
+Why Stefan is their dynamic scoping in Emacs list?
 
 317
 00:11:54.040 --> 00:11:55.860
@@ -1322,7 +1206,7 @@ Okay,
 
 331
 00:12:20.110 --> 00:12:24.230
-so here is here is an example of an imax this package.
+so here is here is an example of an Emacs this package.
 
 332
 00:12:24.240 --> 00:12:25.390
@@ -1414,7 +1298,7 @@ It was originally introduced in tico.
 
 354
 00:13:13.440 --> 00:13:18.410
-So he added into tico and then and then carried it to the MAX west and from there
+So he added into tico and then and then carried it to Emacs west and from there
 
 355
 00:13:18.410 --> 00:13:20.180
@@ -1654,7 +1538,7 @@ I.
 
 414
 00:15:29.920 --> 00:15:32.460
-In the core api o of imax is Okay.
+In the core api o of Emacs is Okay.
 
 415
 00:15:33.040 --> 00:15:37.790
@@ -1690,7 +1574,7 @@ What's up with that?
 
 423
 00:15:45.640 --> 00:15:50.110
-Could you could you take that into your imax just Yes of course you can
+Could you could you take that into your Emacs just Yes of course you can
 
 424
 00:15:50.530 --> 00:15:51.580
@@ -1762,7 +1646,7 @@ So so but but all that I mean they're they're like a zillion code.
 
 441
 00:16:29.500 --> 00:16:32.180
-The zillion lines of code written in imax list.
+The zillion lines of code written in Emacs list.
 
 442
 00:16:32.190 --> 00:16:34.760
@@ -1782,7 +1666,7 @@ But okay we just added a new direct instead.
 
 446
 00:16:42.390 --> 00:16:45.290
-Okay so there's now two dialects of imax list.
+Okay so there's now two dialects of Emacs list.
 
 447
 00:16:45.300 --> 00:16:49.180
@@ -1806,7 +1690,7 @@ um and and add additional parameters.
 
 452
 00:17:00.520 --> 00:17:03.040
-Pass additional parameters into imax list functions.
+Pass additional parameters into Emacs list functions.
 
 453
 00:17:03.050 --> 00:17:06.060
@@ -1826,7 +1710,7 @@ I mean he started working on,
 
 457
 00:17:10.430 --> 00:17:13.810
-you know this version of imax in the eighties and at that time,
+you know this version of Emacs in the eighties and at that time,
 
 458
 00:17:13.810 --> 00:17:13.990
@@ -1878,7 +1762,7 @@ you know,
 
 470
 00:17:37.140 --> 00:17:39.130
-he also liked multex imax,
+he also liked multex Emacs,
 
 471
 00:17:39.140 --> 00:17:40.000
@@ -1886,7 +1770,7 @@ as you know,
 
 472
 00:17:40.000 --> 00:17:44.360
-there were lots of lots of variants of imax back then when louis max was started
+there were lots of lots of variants of Emacs back then when louis max was started
 
 473
 00:17:44.940 --> 00:17:49.830
@@ -2262,7 +2146,7 @@ still a research assistant at the university,
 
 566
 00:21:20.780 --> 00:21:23.910
-we were thinking that in fact a lot of imax list code,
+we were thinking that in fact a lot of Emacs list code,
 
 567
 00:21:23.910 --> 00:21:24.080
@@ -2550,7 +2434,7 @@ Right.
 
 638
 00:24:09.580 --> 00:24:14.270
-So in in the maximum strength don't contain only characters,
+So in in Emacsimum strength don't contain only characters,
 
 639
 00:24:14.280 --> 00:24:19.030
@@ -2606,7 +2490,7 @@ Okay,
 
 652
 00:24:49.770 --> 00:24:51.500
-so remember an imax 18,
+so remember an Emacs 18,
 
 653
 00:24:51.500 --> 00:24:51.750
@@ -3126,7 +3010,7 @@ but of course there's first,
 
 782
 00:29:43.470 --> 00:29:46.610
-the fact that I'm actually is just a tool for imax,
+the fact that I'm actually is just a tool for Emacs,
 
 783
 00:29:46.610 --> 00:29:51.120
@@ -3302,7 +3186,7 @@ And so,
 
 826
 00:31:02.500 --> 00:31:07.010
-so program source code can be manipulated via imax list code.
+so program source code can be manipulated via Emacs list code.
 
 827
 00:31:07.020 --> 00:31:07.560
@@ -3346,7 +3230,7 @@ area name and then it val uh and we can see here that uh,
 
 837
 00:31:36.710 --> 00:31:38.140
-there's a data type in imax list,
+there's a data type in Emacs list,
 
 838
 00:31:38.140 --> 00:31:38.920
@@ -3498,7 +3382,7 @@ So if I do this right,
 
 875
 00:32:39.960 --> 00:32:44.710
-I can then go or an array is kind of the sequence abstraction in imax
+I can then go or an array is kind of the sequence abstraction in Emacs
 
 876
 00:32:44.720 --> 00:32:46.850
@@ -3946,7 +3830,7 @@ you know,
 
 987
 00:36:19.130 --> 00:36:24.030
-not didn't exist at the very beginning of imax of actually
+not didn't exist at the very beginning of Emacs of actually
 
 988
 00:36:24.030 --> 00:36:24.290
@@ -4158,7 +4042,7 @@ We,
 
 1040
 00:37:48.980 --> 00:37:53.690
-we fix those and within the actual code base of imax by now
+we fix those and within the actual code base of Emacs by now
 
 1041
 00:37:53.700 --> 00:37:56.240
@@ -4194,7 +4078,7 @@ Okay.
 
 1049
 00:38:08.700 --> 00:38:12.410
-So talking about imax list within the context of the max is fine.
+So talking about Emacs list within the context of Emacs is fine.
 
 1050
 00:38:12.410 --> 00:38:13.540
@@ -4250,11 +4134,11 @@ compiler,
 
 1063
 00:38:47.620 --> 00:38:52.240
-um that that ended up in lucid imax and I think later migrated back
+um that that ended up in lucid Emacs and I think later migrated back
 
 1064
 00:38:52.250 --> 00:38:53.770
-into a canoe imax.
+into a canoe Emacs.
 
 1065
 00:38:53.780 --> 00:38:54.720
@@ -4262,7 +4146,7 @@ Um,
 
 1066
 00:38:54.730 --> 00:38:59.650
-I think one other notable differences has to do with when imax starts
+I think one other notable differences has to do with when Emacs starts
 
 1067
 00:38:59.660 --> 00:39:00.610
@@ -4274,7 +4158,7 @@ Right.
 
 1069
 00:39:01.030 --> 00:39:01.950
-So imax,
+So Emacs,
 
 1070
 00:39:01.960 --> 00:39:02.960
@@ -4318,7 +4202,7 @@ So during the build process right,
 
 1080
 00:39:24.710 --> 00:39:29.310
-you would fire up imax or x imax uh load all that this code and then somehow
+you would fire up Emacs or x Emacs uh load all that this code and then somehow
 
 1081
 00:39:29.310 --> 00:39:30.380
@@ -4326,7 +4210,7 @@ dump,
 
 1082
 00:39:30.390 --> 00:39:31.750
-you know dump imax.
+you know dump Emacs.
 
 1083
 00:39:31.920 --> 00:39:35.560
@@ -4358,7 +4242,7 @@ and the binary format had shifted or something like that.
 
 1090
 00:40:01.260 --> 00:40:06.010
-And so um there was a long running effort and ex imax to
+And so um there was a long running effort and ex Emacs to
 
 1091
 00:40:06.010 --> 00:40:10.810
@@ -4398,7 +4282,7 @@ X.
 
 1100
 00:40:36.960 --> 00:40:39.330
-Did something similar happened with with new imax?
+Did something similar happened with with new Emacs?
 
 1101
 00:40:40.610 --> 00:40:42.790
@@ -4470,7 +4354,7 @@ my students Marcus Castellani developed an incremental garbage collector because
 
 1118
 00:41:26.720 --> 00:41:31.530
-thing that people really really hated in imax and imax was when there was a message appearance had
+thing that people really really hated in Emacs and Emacs was when there was a message appearance had
 
 1119
 00:41:31.530 --> 00:41:33.520
@@ -4522,7 +4406,7 @@ Well okay so that's so when I
 
 1131
 00:41:58.050 --> 00:42:02.090
-use glue imax I sometimes weight but I don't know who to blame.
+use glue Emacs I sometimes weight but I don't know who to blame.
 
 1132
 00:42:02.100 --> 00:42:03.180
@@ -4538,7 +4422,7 @@ So but maybe maybe one there's one notable difference really on the language
 
 1135
 00:42:09.320 --> 00:42:13.070
-side that is um that is significant between new imax and imax,
+side that is um that is significant between new Emacs and Emacs,
 
 1136
 00:42:13.070 --> 00:42:13.290
@@ -4582,7 +4466,7 @@ right?
 
 1146
 00:42:27.410 --> 00:42:31.580
-Imax at the time just represented characters as numbers and um
+Emacs at the time just represented characters as numbers and um
 
 1147
 00:42:31.590 --> 00:42:36.570
@@ -4682,7 +4566,7 @@ Um and you know,
 
 1171
 00:43:19.150 --> 00:43:24.040
-I think it it goes to the core of the design of of imax and imax
+I think it it goes to the core of the design of of Emacs and Emacs
 
 1172
 00:43:24.040 --> 00:43:24.310
@@ -4702,7 +4586,7 @@ we were talking about you know,
 
 1176
 00:43:27.200 --> 00:43:31.690
-the idea of free software and how it influenced the design of the max.
+the idea of free software and how it influenced the design of Emacs.
 
 1177
 00:43:31.700 --> 00:43:33.230
@@ -4770,7 +4654,7 @@ Right?
 
 1193
 00:44:13.660 --> 00:44:15.400
-And we got rid of that for losing the max.
+And we got rid of that for losing Emacs.
 
 1194
 00:44:15.400 --> 00:44:15.850
@@ -4854,7 +4738,7 @@ key maps have have a notion of a hierarchy where the key map and have a parent k
 
 1214
 00:44:50.550 --> 00:44:53.890
-So until imax 20 for there was only one parent.
+So until Emacs 20 for there was only one parent.
 
 1215
 00:44:53.890 --> 00:44:58.810
@@ -4910,7 +4794,7 @@ Right?
 
 1228
 00:45:26.320 --> 00:45:29.900
-We have lots of people are developing packages for imax.
+We have lots of people are developing packages for Emacs.
 
 1229
 00:45:29.900 --> 00:45:30.120
@@ -4922,7 +4806,7 @@ there's surely more a couple of million lines of code of external
 
 1231
 00:45:34.700 --> 00:45:37.510
-packages for imax that people load all the time.
+packages for Emacs that people load all the time.
 
 1232
 00:45:37.890 --> 00:45:40.920
@@ -5290,7 +5174,7 @@ Right.
 
 1323
 00:48:53.250 --> 00:48:57.750
-Um so imax list has seen a great deal of evolution is staying
+Um so Emacs list has seen a great deal of evolution is staying
 
 1324
 00:48:57.750 --> 00:48:58.920
@@ -5298,11 +5182,11 @@ remarkably stable.
 
 1325
 00:48:58.930 --> 00:49:03.520
-Uh We're looking I'm looking forward to another 20 years of imax uh on my
+Uh We're looking I'm looking forward to another 20 years of Emacs uh on my
 
 1326
 00:49:03.520 --> 00:49:06.590
-desktop and programming imax list in 20 years.
+desktop and programming Emacs list in 20 years.
 
 1327
 00:49:08.070 --> 00:49:08.430
@@ -5462,7 +5346,7 @@ context objects in react us.
 
 1366
 00:50:44.774 --> 00:50:49.774
-What do you think are the main lessons from imax list that these systems should use
+What do you think are the main lessons from Emacs list that these systems should use
 
 1367
 00:50:49.774 --> 00:50:52.484
@@ -5554,7 +5438,7 @@ Um I mean I mean we want modular software to be reusable and in
 
 1389
 00:51:45.864 --> 00:51:50.764
-many ways the dynamic scoping in imax lisp or some of the other dynamic features that you can
+many ways the dynamic scoping in Emacs lisp or some of the other dynamic features that you can
 
 1390
 00:51:50.764 --> 00:51:53.274
@@ -5566,7 +5450,7 @@ replace it by something else and so on.
 
 1392
 00:51:55.334 --> 00:52:00.024
-Are what makes it possible for users to modify and to make imax
+Are what makes it possible for users to modify and to make Emacs
 
 1393
 00:52:00.034 --> 00:52:00.584
@@ -5598,7 +5482,7 @@ and to lose a good understanding of what's going on in your system right?
 
 1400
 00:52:17.784 --> 00:52:21.344
-With with imax list you can usually get it to do what you want done,
+With with Emacs list you can usually get it to do what you want done,
 
 1401
 00:52:21.354 --> 00:52:25.194
@@ -5642,7 +5526,7 @@ particularly editors are just not as flexible at runtime
 
 1411
 00:52:52.944 --> 00:52:56.534
-in making it possible to change their behavior um as imax is.
+in making it possible to change their behavior um as Emacs is.
 
 1412
 00:52:56.534 --> 00:52:59.464
@@ -5690,7 +5574,7 @@ if I can add something to that.
 
 1423
 00:53:26.914 --> 00:53:31.404
-Uh I think I think the experience we've had with imax list and and the dynamic
+Uh I think I think the experience we've had with Emacs list and and the dynamic
 
 1424
 00:53:31.414 --> 00:53:32.494
@@ -5754,7 +5638,7 @@ capabilities and many other highly dynamic languages now exists.
 
 1439
 00:54:20.974 --> 00:54:25.084
-His list still the best language for creating imax style editors,
+His list still the best language for creating Emacs style editors,
 
 1440
 00:54:27.774 --> 00:54:28.094
@@ -5794,7 +5678,7 @@ to work to make it work efficiently.
 
 1449
 00:54:50.094 --> 00:54:54.264
-That is all done in c but it's available at the maximalist language level?
+That is all done in c but it's available at Emacsimalist language level?
 
 1450
 00:54:54.274 --> 00:54:58.964
@@ -5818,7 +5702,7 @@ which has advanced text processing but given the flexibility of list,
 
 1455
 00:55:06.734 --> 00:55:11.164
-there is no reason why you can't have any text processing capability that you want an imax lift.
+there is no reason why you can't have any text processing capability that you want an Emacs lift.
 
 1456
 00:55:11.164 --> 00:55:11.304
@@ -5862,7 +5746,7 @@ Do you have any remarks on the implications?
 
 1466
 00:55:34.784 --> 00:55:39.584
-This has for the possibility of even being able to make imax multi threaded,
+This has for the possibility of even being able to make Emacs multi threaded,
 
 1467
 00:55:40.074 --> 00:55:40.994
@@ -5898,7 +5782,7 @@ Multi threading is is clearly a hard problem for
 
 1475
 00:56:03.484 --> 00:56:04.194
-imax list,
+Emacs list,
 
 1476
 00:56:05.274 --> 00:56:09.584
@@ -5926,7 +5810,7 @@ it can be an opportunity,
 
 1482
 00:56:24.484 --> 00:56:29.014
-but I think at least in the context of imax it's more of a problem than a
+but I think at least in the context of Emacs it's more of a problem than a
 
 1483
 00:56:29.024 --> 00:56:29.694
@@ -5982,7 +5866,7 @@ I think,
 
 1496
 00:56:51.404 --> 00:56:54.764
-I think in the case of in the case of the max,
+I think in the case of in the case of Emacs,
 
 1497
 00:56:54.774 --> 00:56:54.994
@@ -6058,7 +5942,7 @@ Isn't it?
 
 1515
 00:57:31.964 --> 00:57:34.084
-Isn't an imax list back in for idris.
+Isn't an Emacs list back in for idris.
 
 1516
 00:57:38.174 --> 00:57:38.484
@@ -6178,7 +6062,7 @@ why would you want to use another source language basically.
 
 1545
 00:58:24.814 --> 00:58:26.854
-So if you want to run with an imax,
+So if you want to run with an Emacs,
 
 1546
 00:58:26.854 --> 00:58:31.744
@@ -6210,7 +6094,7 @@ if any,
 
 1553
 00:58:39.644 --> 00:58:44.564
-have been made to imax this primarily for the sake of improved performance rather
+have been made to Emacs this primarily for the sake of improved performance rather
 
 1554
 00:58:44.564 --> 00:58:46.094
@@ -6286,11 +6170,11 @@ Um Okay,
 
 1572
 00:59:30.554 --> 00:59:35.554
-Andrew black from Portland State says the first version of the max list that I used
+Andrew black from Portland State says the first version of Emacs list that I used
 
 1573
 00:59:35.554 --> 00:59:37.784
-was in Gosselin's imax for UNIX.
+was in Gosselin's Emacs for UNIX.
 
 1574
 00:59:38.174 --> 00:59:40.754
@@ -6426,11 +6310,11 @@ So there are packages to be part of the court,
 
 1607
 01:01:12.084 --> 01:01:13.764
-you have to be distributed with imax,
+you have to be distributed with Emacs,
 
 1608
 01:01:13.774 --> 01:01:18.184
-but just being distributed with imax is not sufficient for people to consider it us
+but just being distributed with Emacs is not sufficient for people to consider it us
 
 1609
 01:01:18.374 --> 01:01:18.994
@@ -6598,7 +6482,7 @@ Right.
 
 1650
 01:02:40.154 --> 01:02:44.864
-And so that's something that we don't need to do uh in imax.
+And so that's something that we don't need to do uh in Emacs.
 
 1651
 01:02:44.864 --> 01:02:49.494
