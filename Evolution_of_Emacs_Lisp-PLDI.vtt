@@ -422,7 +422,7 @@ user and okay,
 
 135
 00:04:56.070 --> 00:05:00.450
-this is this is a driving line in in the design of Emacs and Emacs list
+this is this is a driving line in in the design of Emacs and Emacs Lisp
 
 136
 00:05:01.140 --> 00:05:06.060
@@ -514,7 +514,7 @@ Today,
 
 158
 00:05:51.040 --> 00:05:53.020
-when we look at a programming language like Emacs list,
+when we look at a programming language like Emacs Lisp,
 
 159
 00:05:53.020 --> 00:05:53.220
@@ -554,7 +554,7 @@ well,
 
 168
 00:06:08.080 --> 00:06:13.050
-here's the introduction of Emacs list as it sits in the Emacs editor in Chief Ships with the ex
+here's the introduction of Emacs Lisp as it sits in the Emacs editor in Chief Ships with the ex
 
 169
 00:06:13.050 --> 00:06:17.710
@@ -738,7 +738,7 @@ Okay.
 
 214
 00:07:55.880 --> 00:07:59.860
-So I guess we should give like a brief overview of what Emacs list is,
+So I guess we should give like a brief overview of what Emacs Lisp is,
 
 215
 00:07:59.870 --> 00:08:02.890
@@ -750,7 +750,7 @@ Right?
 
 217
 00:08:03.240 --> 00:08:07.790
-So Emacs list is a list and that means uh well it's instantly
+So Emacs Lisp is a list and that means uh well it's instantly
 
 218
 00:08:07.790 --> 00:08:10.500
@@ -1082,11 +1082,11 @@ Actually,
 
 300
 00:11:11.030 --> 00:11:13.940
-an Emacs list could also be a matchless program.
+an Emacs Lisp could also be a matchless program.
 
 301
 00:11:13.940 --> 00:11:18.560
-So necklace was one of the predecessors of the Emacs list was just a regular list implementation that
+So necklace was one of the predecessors of the Emacs Lisp was just a regular list implementation that
 
 302
 00:11:18.560 --> 00:11:20.420
@@ -1146,7 +1146,7 @@ Why?
 
 316
 00:11:48.860 --> 00:11:53.060
-Why Stefan is their dynamic scoping in Emacs list?
+Why Stefan is their dynamic scoping in Emacs Lisp?
 
 317
 00:11:54.040 --> 00:11:55.860
@@ -1646,7 +1646,7 @@ So so but but all that I mean they're they're like a zillion code.
 
 441
 00:16:29.500 --> 00:16:32.180
-The zillion lines of code written in Emacs list.
+The zillion lines of code written in Emacs Lisp.
 
 442
 00:16:32.190 --> 00:16:34.760
@@ -1666,7 +1666,7 @@ But okay we just added a new direct instead.
 
 446
 00:16:42.390 --> 00:16:45.290
-Okay so there's now two dialects of Emacs list.
+Okay so there's now two dialects of Emacs Lisp.
 
 447
 00:16:45.300 --> 00:16:49.180
@@ -1690,7 +1690,7 @@ um and and add additional parameters.
 
 452
 00:17:00.520 --> 00:17:03.040
-Pass additional parameters into Emacs list functions.
+Pass additional parameters into Emacs Lisp functions.
 
 453
 00:17:03.050 --> 00:17:06.060
@@ -2146,7 +2146,7 @@ still a research assistant at the university,
 
 566
 00:21:20.780 --> 00:21:23.910
-we were thinking that in fact a lot of Emacs list code,
+we were thinking that in fact a lot of Emacs Lisp code,
 
 567
 00:21:23.910 --> 00:21:24.080
@@ -3186,7 +3186,7 @@ And so,
 
 826
 00:31:02.500 --> 00:31:07.010
-so program source code can be manipulated via Emacs list code.
+so program source code can be manipulated via Emacs Lisp code.
 
 827
 00:31:07.020 --> 00:31:07.560
@@ -3230,7 +3230,7 @@ area name and then it val uh and we can see here that uh,
 
 837
 00:31:36.710 --> 00:31:38.140
-there's a data type in Emacs list,
+there's a data type in Emacs Lisp,
 
 838
 00:31:38.140 --> 00:31:38.920
@@ -4078,7 +4078,7 @@ Okay.
 
 1049
 00:38:08.700 --> 00:38:12.410
-So talking about Emacs list within the context of Emacs is fine.
+So talking about Emacs Lisp within the context of Emacs is fine.
 
 1050
 00:38:12.410 --> 00:38:13.540
@@ -5174,7 +5174,7 @@ Right.
 
 1323
 00:48:53.250 --> 00:48:57.750
-Um so Emacs list has seen a great deal of evolution is staying
+Um so Emacs Lisp has seen a great deal of evolution is staying
 
 1324
 00:48:57.750 --> 00:48:58.920
@@ -5186,7 +5186,7 @@ Uh We're looking I'm looking forward to another 20 years of Emacs uh on my
 
 1326
 00:49:03.520 --> 00:49:06.590
-desktop and programming Emacs list in 20 years.
+desktop and programming Emacs Lisp in 20 years.
 
 1327
 00:49:08.070 --> 00:49:08.430
@@ -5346,7 +5346,7 @@ context objects in react us.
 
 1366
 00:50:44.774 --> 00:50:49.774
-What do you think are the main lessons from Emacs list that these systems should use
+What do you think are the main lessons from Emacs Lisp that these systems should use
 
 1367
 00:50:49.774 --> 00:50:52.484
@@ -5482,7 +5482,7 @@ and to lose a good understanding of what's going on in your system right?
 
 1400
 00:52:17.784 --> 00:52:21.344
-With with Emacs list you can usually get it to do what you want done,
+With with Emacs Lisp you can usually get it to do what you want done,
 
 1401
 00:52:21.354 --> 00:52:25.194
@@ -5574,7 +5574,7 @@ if I can add something to that.
 
 1423
 00:53:26.914 --> 00:53:31.404
-Uh I think I think the experience we've had with Emacs list and and the dynamic
+Uh I think I think the experience we've had with Emacs Lisp and and the dynamic
 
 1424
 00:53:31.414 --> 00:53:32.494
@@ -5782,7 +5782,7 @@ Multi threading is is clearly a hard problem for
 
 1475
 00:56:03.484 --> 00:56:04.194
-Emacs list,
+Emacs Lisp,
 
 1476
 00:56:05.274 --> 00:56:09.584
@@ -5942,7 +5942,7 @@ Isn't it?
 
 1515
 00:57:31.964 --> 00:57:34.084
-Isn't an Emacs list back in for idris.
+Isn't an Emacs Lisp back in for idris.
 
 1516
 00:57:38.174 --> 00:57:38.484
@@ -6170,7 +6170,7 @@ Um Okay,
 
 1572
 00:59:30.554 --> 00:59:35.554
-Andrew black from Portland State says the first version of Emacs list that I used
+Andrew black from Portland State says the first version of Emacs Lisp that I used
 
 1573
 00:59:35.554 --> 00:59:37.784
