@@ -410,23 +410,19 @@ Yeah, I think so.
 
 132
 00:04:44.540 --> 00:04:49.170
-I think I think um access in you know really
+I think Emacs Lisp really
 
 133
 00:04:49.180 --> 00:04:53.690
-embodies the some of the ideas he has the idea of empowering the
+embodies some of the ideas he has, the idea of empowering the
 
 134
-00:04:53.690 --> 00:04:56.060
-user and okay,
-
-135
-00:04:56.070 --> 00:05:00.450
-this is this is a driving line in in the design of Emacs and Emacs Lisp
+00:04:53.690 --> 00:05:00.450
+user and this is a driving line in in the design of Emacs and Emacs Lisp
 
 136
 00:05:01.140 --> 00:05:06.060
-and and it also in his his promotion of free software.
+and also in his promotion of free software.
 
 137
 00:05:06.640 --> 00:05:11.580
@@ -462,11 +458,11 @@ you know,
 
 145
 00:05:22.880 --> 00:05:27.700
-being allowed to read the code or they say
+being allowed to read the code or
 
 146
 00:05:27.700 --> 00:05:30.130
-studying the code and modify the code,
+study the code and modify the code,
 
 147
 00:05:30.130 --> 00:05:31.360
@@ -478,23 +474,23 @@ This is all all nice.
 
 149
 00:05:33.170 --> 00:05:36.360
-But for richard this is actually not sufficient
+But for Richard this is actually not sufficient
 
 150
 00:05:37.040 --> 00:05:41.060
-because you also wanted to be fairly easy to do
+because you also want it to be fairly easy to do
 
 151
 00:05:41.740 --> 00:05:43.550
-for in practice.
+in practice.
 
 152
 00:05:43.560 --> 00:05:46.120
-So you also have kind of pragmatic,
+So you also have kind of pragmatic
 
 153
 00:05:46.130 --> 00:05:48.120
-pragmatic aspect to it.
+aspect to it.
 
 154
 00:05:48.130 --> 00:05:48.850
@@ -504,10 +500,6 @@ Okay.
 00:05:48.860 --> 00:05:49.670
 So I guess,
 
-156
-00:05:49.680 --> 00:05:50.320
-yeah.
-
 157
 00:05:50.330 --> 00:05:51.040
 Today,
@@ -516,13 +508,9 @@ Today,
 00:05:51.040 --> 00:05:53.020
 when we look at a programming language like Emacs Lisp,
 
-159
-00:05:53.020 --> 00:05:53.220
-right?
-
 160
 00:05:53.220 --> 00:05:55.830
-We think of it mainly as a programmer's language.
+we think of it mainly as a programmers' language.
 
 161
 00:05:55.840 --> 00:05:56.260
@@ -530,15 +518,11 @@ Right?
 
 162
 00:05:56.270 --> 00:05:58.450
-Um and I think it wasn't until,
-
-163
-00:05:58.450 --> 00:05:58.680
-you know,
+I think it wasn't until,
 
 164
 00:05:58.680 --> 00:06:03.590
-you pointed this out to me uh switch
+you pointed this out to me - let me switch
 
 165
 00:06:03.590 --> 00:06:05.860
@@ -546,7 +530,7 @@ here to the documentation here.
 
 166
 00:06:05.870 --> 00:06:07.850
-Um So you pointed out to me that,
+So you pointed out to me that,
 
 167
 00:06:07.850 --> 00:06:08.080
@@ -554,11 +538,11 @@ well,
 
 168
 00:06:08.080 --> 00:06:13.050
-here's the introduction of Emacs Lisp as it sits in the Emacs editor in Chief Ships with the ex
+here's the introduction of Emacs Lisp as it sits in the Emacs editor and ships with the
 
 169
 00:06:13.050 --> 00:06:17.710
-editor and says this is an introduction to programming indexes for people who are not
+editor and says this is an introduction to programming Emacs LIsp for people who are not
 
 170
 00:06:17.710 --> 00:06:18.550
@@ -566,15 +550,15 @@ programmers.
 
 171
 00:06:19.040 --> 00:06:23.910
-So um uh and I never saw this all these years uh that I was using
+and I never saw this all these years that I was using
 
 172
 00:06:23.920 --> 00:06:28.460
-Emacs and Emacs that it was that there's actually a fair amount of effort being made
+Emacs and XEmacs and that there was actually a fair amount of effort being made
 
 173
 00:06:28.470 --> 00:06:32.750
-uh to make it accessible to do non programmers as well.
+to make it accessible to non-programmers as well.
 
 174
 00:06:32.760 --> 00:06:33.100
@@ -582,7 +566,7 @@ Right?
 
 175
 00:06:33.110 --> 00:06:36.020
-I think that's kind of gone out of fashion fashion since then.
+I think that's kind of gone out of fashion since then.
 
 176
 00:06:36.020 --> 00:06:36.290
@@ -590,15 +574,15 @@ Right.
 
 177
 00:06:36.290 --> 00:06:39.050
-That that ordinary users would program,
+That that ordinary users would program.
 
 178
 00:06:39.540 --> 00:06:44.520
-it's definitely not in fashion in the world of of android and those kinds of and
+It's definitely not in fashion in the world of of Android and 
 
 179
 00:06:44.520 --> 00:06:45.090
-facebook,
+Facebook,
 
 180
 00:06:45.100 --> 00:06:46.560
@@ -606,15 +590,15 @@ you know,
 
 181
 00:06:46.570 --> 00:06:48.960
-empowering user is not definitely not the goal.
+empowering the user is definitely not the goal.
 
 182
 00:06:49.340 --> 00:06:53.590
-But but back then it was it was I think also you know,
+But back then it was and also, you know,
 
 183
 00:06:53.600 --> 00:06:56.730
-mentioned experience with uh with having,
+he mentioned experience with having,
 
 184
 00:06:56.740 --> 00:06:57.010
@@ -626,43 +610,31 @@ secretaries using Emacs and secretaries who had no experience with programming
 
 186
 00:07:01.960 --> 00:07:05.120
-right to make it here and using Emacs and writing.
+to make it clear and using Emacs and writing
 
 187
 00:07:05.120 --> 00:07:09.360
-Little chance of Avila's code to customize their their editor for their particular use.
+little chunks of Elisp code to customize their editor for their particular use.
 
 188
 00:07:09.740 --> 00:07:10.140
-So,
+That's right.
 
 189
 00:07:10.150 --> 00:07:14.960
 I think that's always been a very important aspect to Richard.
 
-190
-00:07:15.440 --> 00:07:15.910
-Yeah,
-
-191
-00:07:15.910 --> 00:07:16.090
-I mean,
-
-192
-00:07:16.090 --> 00:07:16.970
-I guess even,
-
 193
 00:07:16.980 --> 00:07:17.240
-you know,
+You know,
 
 194
 00:07:17.240 --> 00:07:18.250
-if you can't program,
+if you can't program
 
 195
 00:07:18.250 --> 00:07:19.050
-you expressed yourself,
+in Emacs Lisp yourself,
 
 196
 00:07:19.050 --> 00:07:20.340
@@ -670,15 +642,11 @@ you might get somebody else to do it,
 
 197
 00:07:20.350 --> 00:07:20.720
-right.
-
-198
-00:07:20.730 --> 00:07:21.250
-Um,
+right,
 
 199
 00:07:21.260 --> 00:07:26.140
-which is something that you can't do with software that isn't customizable or it doesn't have
+which is something that you can't do with software that isn't customizable or doesn't have
 
 200
 00:07:26.140 --> 00:07:29.260
@@ -686,19 +654,7 @@ its own programming language or extension language that comes with it.
 
 201
 00:07:29.740 --> 00:07:30.420
-And so,
-
-202
-00:07:30.430 --> 00:07:30.850
-um,
-
-203
-00:07:31.240 --> 00:07:31.960
-well I see it,
-
-204
-00:07:32.440 --> 00:07:32.670
-you know,
+That's right.
 
 205
 00:07:32.670 --> 00:07:37.330
@@ -710,19 +666,11 @@ This idea that the users would be able to modify or to a larger degree customize
 
 207
 00:07:42.010 --> 00:07:44.820
-software is really something it's very alien to them.
-
-208
-00:07:44.830 --> 00:07:45.700
-So,
-
-209
-00:07:45.710 --> 00:07:45.970
-um,
+software is very alien to them.
 
 210
 00:07:45.980 --> 00:07:49.600
-I wish we would get back to the ideals of Emacs um,
+I wish we would get back to the ideals of Emacs
 
 211
 00:07:49.600 --> 00:07:51.550
@@ -738,7 +686,7 @@ Okay.
 
 214
 00:07:55.880 --> 00:07:59.860
-So I guess we should give like a brief overview of what Emacs Lisp is,
+So I guess we should give a brief overview of what Emacs Lisp is,
 
 215
 00:07:59.870 --> 00:08:02.890
@@ -750,11 +698,11 @@ Right?
 
 217
 00:08:03.240 --> 00:08:07.790
-So Emacs Lisp is a list and that means uh well it's instantly
+So Emacs Lisp is a Lisp and that means it's instantly
 
 218
 00:08:07.790 --> 00:08:10.500
-recognizable to anyone By the syntax,
+recognizable to anyone.  By the syntax,
 
 219
 00:08:10.500 --> 00:08:10.700
@@ -778,31 +726,23 @@ you write it like this open paren operator goes at the front,
 
 224
 00:08:22.820 --> 00:08:25.150
-then the operations and then close parent.
+then the operations and then close paren.
 
 225
 00:08:25.540 --> 00:08:29.110
-And you can see I'm typing that into the scratch buffer of X.
-
-226
-00:08:29.110 --> 00:08:29.250
-M.
-
-227
-00:08:29.250 --> 00:08:29.460
-X.
+And you can see I'm typing that into the scratch buffer of XEmacs.
 
 228
 00:08:29.460 --> 00:08:33.780
-And I can just close your button control J and it will display the result of
+And I can push close a button control-J and it will display the result of
 
 229
 00:08:33.789 --> 00:08:36.460
-evaluating um that expression.
+evaluating that expression.
 
 230
 00:08:36.940 --> 00:08:38.320
-And uh you know,
+And you know,
 
 231
 00:08:38.330 --> 00:08:39.200
@@ -822,7 +762,7 @@ like there are in a lot of other programming languages,
 
 235
 00:08:44.290 --> 00:08:49.090
-or I can You don't have like the sum of 23 and the product of
+and you have like the sum of 23 and the product of
 
 236
 00:08:49.090 --> 00:08:50.390
@@ -834,15 +774,15 @@ And again,
 
 238
 00:08:51.080 --> 00:08:56.040
-I can press control J and it will instantly display the result of evaluating
+I can press control-J and it will instantly display the result of evaluating that.
 
 239
 00:08:56.040 --> 00:09:00.460
-that a lot of people looking at this kind of get scared by all of these parentheses.
+A lot of people looking at this kind of get scared by all of these parentheses.
 
 240
 00:09:00.460 --> 00:09:03.700
-But experienced list programmers just look at the indentation.
+But experienced Lisp programmers just look at the indentation.
 
 241
 00:09:03.700 --> 00:09:04.500
@@ -854,15 +794,15 @@ you know,
 
 243
 00:09:04.720 --> 00:09:06.460
-Emacs will automatically identify,
+Emacs will automatically indent if I
 
 244
 00:09:06.460 --> 00:09:11.010
-press a button uh in a way that is uh that is just pretty much standardized and that
+press a button, in a way that is pretty much standardized, and 
 
 245
 00:09:11.020 --> 00:09:14.560
-everybody everybody adheres to that standard when they end their program.
+everybody adheres to that standard when they indent their program.
 
 246
 00:09:15.440 --> 00:09:16.110
@@ -880,21 +820,13 @@ So here's a variable,
 00:09:19.260 --> 00:09:21.050
 I don't know.
 
-250
-00:09:21.440 --> 00:09:23.260
-Uh huh.
-
 251
 00:09:23.640 --> 00:09:25.010
 Something like this.
 
-252
-00:09:25.460 --> 00:09:26.190
-So,
-
 253
 00:09:26.190 --> 00:09:27.910
-here's here's Pie.
+So here's pi.
 
 254
 00:09:28.140 --> 00:09:28.640
@@ -906,7 +838,7 @@ And then I can just evaluate Pie.
 
 256
 00:09:30.170 --> 00:09:33.710
-And it will give me It will give me the value that comes with it.
+And it will give me the value that comes with it.
 
 257
 00:09:33.720 --> 00:09:35.660
@@ -918,7 +850,7 @@ you know,
 
 259
 00:09:35.920 --> 00:09:40.590
-let me write a function that computes the circumference of a circle with a radius
+let me write a function that computes the circumference of a circle with a given radius
 
 260
 00:09:40.600 --> 00:09:41.910
@@ -926,7 +858,7 @@ might look like this.
 
 261
 00:09:41.920 --> 00:09:44.410
-Uh and again,
+And again,
 
 262
 00:09:44.410 --> 00:09:47.570
@@ -958,11 +890,11 @@ there's also instantly an interactive programming environment for it.
 
 269
 00:10:02.640 --> 00:10:07.510
-Now you can also locally bind variables in uh the
+Now you can also locally bind variables in
 
 270
 00:10:07.510 --> 00:10:10.730
-next list with a construct called let so you can do this,
+Emacs Lisp with a construct called let.  So you can do this,
 
 271
 00:10:10.740 --> 00:10:11.300
@@ -970,7 +902,7 @@ you know?
 
 272
 00:10:11.310 --> 00:10:16.160
-Um and so 10 and 20 bound to
+And so 10 and 20 bound to
 
 273
 00:10:16.540 --> 00:10:18.520
@@ -986,11 +918,11 @@ So that gives me local variables.
 
 276
 00:10:23.740 --> 00:10:28.740
-And now here's something that I guess nowadays is pretty unique to the
+And now here's something that I guess nowadays is pretty unique to
 
 277
 00:10:28.740 --> 00:10:29.320
-next list.
+Emacs Lisp.
 
 278
 00:10:29.330 --> 00:10:29.670
@@ -998,7 +930,7 @@ You know,
 
 279
 00:10:29.670 --> 00:10:34.190
-I could write a function called F takes a parameter called
+I could write a function called F that takes a parameter called
 
 280
 00:10:34.190 --> 00:10:35.040
@@ -1010,7 +942,7 @@ And I could add X to Y.
 
 282
 00:10:37.770 --> 00:10:40.520
-And now there's no visible binding for why?
+And now there's no visible binding for Y.
 
 283
 00:10:40.530 --> 00:10:41.110
@@ -1018,11 +950,11 @@ Right.
 
 284
 00:10:41.120 --> 00:10:44.060
-Um And of course if I kind of do you know F.
+And of course if I kind of do
 
 285
 00:10:44.060 --> 00:10:44.590
-F five?
+F of 5.
 
 286
 00:10:44.590 --> 00:10:45.680
@@ -1030,15 +962,15 @@ It will say oh,
 
 287
 00:10:45.690 --> 00:10:45.990
-symbols,
+symbol's
 
 288
 00:10:45.990 --> 00:10:46.870
-variable is void.
+variable is void,
 
 289
 00:10:46.880 --> 00:10:48.960
-Is symbols value as variables void.
+symbol's value as variable is void.
 
 290
 00:10:48.960 --> 00:10:49.270
@@ -1046,11 +978,11 @@ Why?
 
 291
 00:10:49.270 --> 00:10:50.560
-So why is not bound?
+So why is it not bound?
 
 292
 00:10:50.570 --> 00:10:54.140
-But I can't bind it using lit.
+But I can bind it using let.
 
 293
 00:10:54.150 --> 00:10:54.510
@@ -1062,11 +994,11 @@ So I can do this.
 
 295
 00:10:56.070 --> 00:11:00.870
-I can bind Y 27 and then I can call effort five
+I can bind Y to 7 and then I can call F of 5
 
 296
 00:11:00.880 --> 00:11:03.110
-and it will give me the value of 12.
+and it will give me the value 12.
 
 297
 00:11:03.110 --> 00:11:06.850
@@ -1082,11 +1014,11 @@ Actually,
 
 300
 00:11:11.030 --> 00:11:13.940
-an Emacs Lisp could also be a matchless program.
+an Emacs Lisp could also be a MacLisp program.
 
 301
 00:11:13.940 --> 00:11:18.560
-So necklace was one of the predecessors of the Emacs Lisp was just a regular list implementation that
+So MacLisp was one of the predecessors of the Emacs Lisp, and was just a regular Lisp implementation that
 
 302
 00:11:18.560 --> 00:11:20.420
@@ -1106,7 +1038,7 @@ so there's a strange thing is that the binding that we do with let
 
 306
 00:11:26.930 --> 00:11:28.850
-uh works more like an assignment.
+works more like an assignment.
 
 307
 00:11:28.850 --> 00:11:29.170
@@ -1118,19 +1050,19 @@ So,
 
 309
 00:11:29.690 --> 00:11:34.170
-so when f refers to why it doesn't refer to kind of electrically
+so when F refers to Y it doesn't refer to kind of electrically
 
 310
 00:11:34.180 --> 00:11:37.890
-bound binding of of why,
+bound binding of of Y,
 
 311
 00:11:37.890 --> 00:11:41.050
-but to the one that was done last at runtime.
+but to the one that was done last at run time.
 
 312
 00:11:41.840 --> 00:11:46.150
-So uh there's dynamic scoping and it seems just
+So there's dynamic scoping and it seems just
 
 313
 00:11:46.160 --> 00:11:48.280
@@ -1146,7 +1078,7 @@ Why?
 
 316
 00:11:48.860 --> 00:11:53.060
-Why Stefan is their dynamic scoping in Emacs Lisp?
+Why Stefan is there dynamic scoping in Emacs Lisp?
 
 317
 00:11:54.040 --> 00:11:55.860
@@ -1166,7 +1098,7 @@ Okay,
 
 321
 00:11:59.440 --> 00:12:02.460
-so can you show me something I can actually do with dynamic scoping?
+So can you show me something I can actually do with dynamic scoping?
 
 322
 00:12:03.440 --> 00:12:03.680
@@ -1178,7 +1110,7 @@ I can show you an example here.
 
 324
 00:12:05.900 --> 00:12:07.960
-I'm switching to your index.
+I'm switching to your Emacs.
 
 325
 00:12:08.640 --> 00:12:09.260
@@ -2218,7 +2150,7 @@ And so we thought,
 
 584
 00:22:05.140 --> 00:22:09.750
-I think you did the smart thing by evolving uh max listen to two different
+I think you did the smart thing by evolving Emacs Lisp to two different
 
 585
 00:22:09.750 --> 00:22:14.630
@@ -2638,7 +2570,7 @@ you know,
 
 689
 00:26:13.630 --> 00:26:16.660
-whenever you're working in a mini max list,
+whenever you're working in Emacs Lisp,
 
 690
 00:26:16.670 --> 00:26:21.560
@@ -2734,7 +2666,7 @@ And so these two warriors is actually created by uh was
 
 713
 00:27:24.820 --> 00:27:26.410
-described by a particular list,
+described by a particular Lisp,
 
 714
 00:27:26.410 --> 00:27:27.170
@@ -2834,7 +2766,7 @@ Yeah,
 
 738
 00:28:21.650 --> 00:28:26.160
-maximus to a large extent is normal list but there are a few places where it
+maximus to a large extent is normal Lisp but there are a few places where it
 
 739
 00:28:26.160 --> 00:28:26.970
@@ -2934,7 +2866,7 @@ the string representation that we looked at earlier is kind of a detail.
 
 763
 00:29:04.040 --> 00:29:08.960
-Was there a lot of fundamental evolution of the underlying core language and the next list over the years?
+Was there a lot of fundamental evolution of the underlying core language and the Emacs Lisp over the years?
 
 764
 00:29:10.740 --> 00:29:11.210
@@ -2998,7 +2930,7 @@ pretty much.
 
 779
 00:29:34.590 --> 00:29:39.480
-Uh So how come the next list doesn't seem there doesn't seem to be a strong call
+Uh So how come the Emacs Lisp doesn't seem there doesn't seem to be a strong call
 
 780
 00:29:39.490 --> 00:29:41.460
@@ -3126,7 +3058,7 @@ Right.
 
 811
 00:30:36.030 --> 00:30:39.560
-I think the enabling feature that pretty much every list pass.
+I think the enabling feature that pretty much every Lisp has.
 
 812
 00:30:39.560 --> 00:30:39.780
@@ -3578,7 +3510,7 @@ Which is actually not a function.
 
 924
 00:34:15.920 --> 00:34:20.469
-It's a list I can plan called list and it does give me the 46 you would expect.
+It's a Lisp I can plan called list and it does give me the 46 you would expect.
 
 925
 00:34:20.940 --> 00:34:21.710
