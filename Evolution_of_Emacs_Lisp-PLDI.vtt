@@ -1930,19 +1930,15 @@ you know,
 
 541
 00:20:25.490 --> 00:20:27.390
-we're just binding the count variable here,
+we just bind the count variable here,
 
 542
 00:20:27.390 --> 00:20:29.340
-we binding the len variable.
+we bind the len variable.
 
 543
-00:20:29.350 --> 00:20:30.930
-There's
-
-544
-00:20:30.940 --> 00:20:34.850
-no need for name space prefix for the local variables.
+00:20:29.350 --> 00:20:34.850
+There's no need for name space prefix for the local variables.
 
 545
 00:20:34.860 --> 00:20:36.810
@@ -1953,12 +1949,8 @@ It's not as costly as you think.
 It makes it reasonably clear when you have a dynamically scoped variable like we had
 
 547
-00:20:41.700 --> 00:20:46.350
-here in the example of message-log-max as opposed to a local
-
-548
-00:20:46.350 --> 00:20:46.730
-variable.
+00:20:41.700 --> 00:20:46.730
+here in the example of message-log-max as opposed to a local variable
 
 549
 00:20:46.730 --> 00:20:51.570
@@ -1974,7 +1966,7 @@ Okay.
 
 552
 00:20:52.600 --> 00:20:55.360
-Can you pull up the example that you just had with a count variable?
+Can you pull up the example that you just had with the count variable?
 
 553
 00:20:55.840 --> 00:20:57.330
@@ -1994,11 +1986,11 @@ you know,
 
 557
 00:21:00.210 --> 00:21:04.210
-the count variables only used kind of within the lexical extent of the let.
+the count variable is only used kind of within the lexical extent of the let.
 
 558
 00:21:04.220 --> 00:21:04.670
-Right?
+Right.
 
 559
 00:21:05.140 --> 00:21:06.860
@@ -2014,15 +2006,15 @@ there's no difference between dynamic and static scoping.
 
 562
 00:21:13.180 --> 00:21:13.940
-Right.
+Right?
 
 563
 00:21:13.950 --> 00:21:14.260
-Right.
+That's right.
 
 564
 00:21:14.270 --> 00:21:19.240
-And so uh well I remember you know in the late 90s when I was
+I remember you know in the late 90s when I was
 
 565
 00:21:19.240 --> 00:21:20.780
@@ -2038,11 +2030,11 @@ right,
 
 568
 00:21:24.080 --> 00:21:28.710
-There is kind of the configuration variables that you have up there that are global,
+there's kind of the configuration variables that you have up there that are global,
 
 569
 00:21:28.710 --> 00:21:33.690
-but kind of when you have purely local bindings are usually used in a way that would
+but kind of when you have purely local bindings are they're usually used in a way that would
 
 570
 00:21:33.690 --> 00:21:36.600
@@ -2050,7 +2042,7 @@ work just the same with status scoping and dynamic scoping.
 
 571
 00:21:36.610 --> 00:21:37.450
-Right.
+Right?
 
 572
 00:21:37.460 --> 00:21:37.820
@@ -2062,15 +2054,15 @@ And so you know,
 
 574
 00:21:39.030 --> 00:21:41.400
-we actually did this shameless plug.
+we actually did this - shameless plug -
 
 575
 00:21:41.410 --> 00:21:46.310
-So this is an ICMP paper and I think into that came out in 2000 and
+so this is an ICFP paper that I think came out in 2001 
 
 576
 00:21:46.310 --> 00:21:51.280
-one where primarily my student at the time that he has no Ebola implemented analysis that
+where primarily my student at the time, Matthias Neubauer, implemented an analysis that
 
 577
 00:21:51.280 --> 00:21:54.890
@@ -2078,7 +2070,7 @@ would figure out whether kind of static and dynamic scoping would coincide.
 
 578
 00:21:54.890 --> 00:21:58.160
-We found out that indeed they do coincide for most,
+He found out that indeed they do coincide for most,
 
 579
 00:21:58.160 --> 00:21:58.370
@@ -2102,7 +2094,7 @@ And so we thought,
 
 584
 00:22:05.140 --> 00:22:09.750
-I think you did the smart thing by evolving Emacs Lisp to two different
+I think you did the smart thing by evolving Emacs Lisp into two different
 
 585
 00:22:09.750 --> 00:22:14.630
@@ -2114,11 +2106,11 @@ agnostic to whether it was dynamically or statically scoped and then we would ju
 
 587
 00:22:19.540 --> 00:22:24.410
-language underneath and the code wouldn't notice uh alas uh as it goes with many
+language underneath and the code wouldn't notice.  Alas as it goes with many
 
 588
 00:22:24.410 --> 00:22:29.030
-things that originate a research that unfortunately never materialized actually.
+things that originate with research that unfortunately never materialized.
 
 589
 00:22:29.030 --> 00:22:29.440
@@ -2134,27 +2126,23 @@ you know,
 
 592
 00:22:31.020 --> 00:22:35.740
-I back then I thought it was a very promising path and I'm
+back then I thought it was a very promising path and I'm
 
 593
 00:22:35.750 --> 00:22:40.100
-curious why you didn't go any further but he has
+curious why you didn't go any further.
 
 594
 00:22:40.100 --> 00:22:44.200
-graduated is probably the reason um OK.
+Matthias graduated is probably the reason.
 
 595
 00:22:44.210 --> 00:22:48.340
-As as it goes right as we know that goes yeah,
+As it goes right as we know how it goes.
 
 596
-00:22:48.350 --> 00:22:53.260
-it does take many years of dedication to push through such a
-
-597
-00:22:53.260 --> 00:22:53.820
-change.
+00:22:48.350 --> 00:22:53.820
+It does take many years of dedication to push through such a change.
 
 598
 00:22:53.870 --> 00:22:54.510
@@ -2162,11 +2150,11 @@ Yeah.
 
 599
 00:22:54.520 --> 00:22:55.510
-And to your credit.
+And to your credit,
 
 600
 00:22:55.520 --> 00:22:56.690
-Uh you've done that for me.
+you've done that for many years.
 
 601
 00:22:56.690 --> 00:22:57.050
@@ -2174,31 +2162,23 @@ Yes,
 
 602
 00:22:57.240 --> 00:23:01.450
-we we have seen we have seen this on the impact by the
+we have seen this on the Emacs side
 
 603
 00:23:01.460 --> 00:23:03.640
-here you you staying on.
+here you can see on ...
 
 604
 00:23:03.640 --> 00:23:05.360
-If you go back to my to my example.
-
-605
-00:23:05.840 --> 00:23:07.060
-Uh huh.
-
-606
-00:23:07.540 --> 00:23:08.420
-Okay.
+you can go back to my to my example ...
 
 607
 00:23:08.620 --> 00:23:09.760
-Okay.
+Okay, let me switch.
 
 608
 00:23:10.640 --> 00:23:14.680
-So you can see here at the top it says lexical binding.
+... so you can see here at the top it says lexical binding colon t.
 
 609
 00:23:15.420 --> 00:23:15.810
@@ -2206,39 +2186,35 @@ Okay.
 
 610
 00:23:16.640 --> 00:23:16.760
-No,
+Notice that
 
 611
 00:23:16.770 --> 00:23:19.250
-we actually call it lexical binding and not coping.
+we actually call it lexical binding and not scoping.
 
 612
 00:23:19.250 --> 00:23:22.740
-I guess that was the type of thing doesn't stay up there.
+I guess that was a mistake.
 
 613
 00:23:22.740 --> 00:23:24.420
-There's a type of No,
+And there's a typo.
 
 614
 00:23:24.420 --> 00:23:24.610
-no,
+No,
 
 615
 00:23:24.610 --> 00:23:27.420
-it's not the type of just keeping anyway,
+that's not a typo.
 
 616
 00:23:27.430 --> 00:23:32.180
-so this is actually the little notes in the file that says
+So this is actually the little notes in the file that says
 
 617
 00:23:32.190 --> 00:23:36.620
-this fight is using the new direct as opposed to the old dynamic least
-
-618
-00:23:36.620 --> 00:23:37.600
-coat.
+this file is using the new dialect as opposed to the old dynamically scoped dialect.
 
 619
 00:23:38.110 --> 00:23:38.960
@@ -2246,15 +2222,15 @@ Okay.
 
 620
 00:23:39.940 --> 00:23:41.970
-And this was introduced.
+And this was introduced,
 
 621
 00:23:41.970 --> 00:23:43.470
-This took many years.
+this took many years,
 
 622
 00:23:43.480 --> 00:23:44.680
-This is not,
+this is not,
 
 623
 00:23:44.690 --> 00:23:45.240
@@ -2262,19 +2238,15 @@ you know,
 
 624
 00:23:45.250 --> 00:23:49.850
-it's a it's a very simple feature if you think about it and it took many years to introduce
+it's a very simple feature if you think about it and it took many years to introduce.
 
 625
 00:23:49.900 --> 00:23:53.050
-uh again details in the paper.
+And again details in the paper.
 
 626
 00:23:54.040 --> 00:23:54.810
 So,
-
-627
-00:23:54.820 --> 00:23:55.410
-um,
 
 628
 00:23:55.420 --> 00:23:56.980
@@ -2286,19 +2258,19 @@ Right?
 
 630
 00:23:57.280 --> 00:23:58.280
-I see that.
+I see that
 
 631
 00:23:58.290 --> 00:24:00.730
-Um Well you're you're assembling a string there.
+well you're you're assembling a string there.
 
 632
 00:24:00.730 --> 00:24:00.960
-Right.
+Right?
 
 633
 00:24:00.960 --> 00:24:02.170
-With a contact function.
+With the concat function.
 
 634
 00:24:02.180 --> 00:24:02.670
@@ -2306,7 +2278,7 @@ Right.
 
 635
 00:24:03.040 --> 00:24:06.580
-But then you have this function called proper ties and face.
+But then you have this functions called propertize and face.
 
 636
 00:24:06.580 --> 00:24:08.350
@@ -2318,7 +2290,7 @@ Right.
 
 638
 00:24:09.580 --> 00:24:14.270
-So in in Emacsimum strength don't contain only characters,
+So in in Emacs Lisp strings don't contain only characters,
 
 639
 00:24:14.280 --> 00:24:19.030
@@ -2326,11 +2298,11 @@ but every character can have extra additional properties.
 
 640
 00:24:19.040 --> 00:24:20.360
-They call text properties.
+They're called text properties.
 
 641
 00:24:20.940 --> 00:24:25.770
-And so you can you can use those properties to add all kinds of information to your strength.
+And you can use those properties to add all kinds of information to your strings.
 
 642
 00:24:26.140 --> 00:24:30.630
@@ -2338,11 +2310,11 @@ One of the important information is this face property which is used to affect t
 
 643
 00:24:30.630 --> 00:24:32.480
-the tax would be printed.
+the text would be printed
 
 644
 00:24:32.480 --> 00:24:35.260
-If they are displayed if it is to be displayed.
+or displayed if it is to be displayed.
 
 645
 00:24:35.840 --> 00:24:36.280
@@ -2354,7 +2326,7 @@ for example,
 
 647
 00:24:36.820 --> 00:24:41.740
-replace the media buffer prompt face onto that that text
+replace the minibuffer prompt face onto that text
 
 648
 00:24:41.750 --> 00:24:43.050
@@ -2366,7 +2338,7 @@ it uses a particular color that corresponds to the the face
 
 650
 00:24:47.860 --> 00:24:49.030
-called me a lot of problems.
+called minibuffer-prompt.
 
 651
 00:24:49.040 --> 00:24:49.760
@@ -2398,11 +2370,11 @@ It didn't have properties yet.
 
 658
 00:24:54.840 --> 00:24:59.490
-So I guess the language evolved to meet the requirements of displaying like
+So I guess the language evolved to meet the requirements of displaying 
 
 659
 00:24:59.490 --> 00:25:02.250
-multicolored and multi phone texas like that.
+multicolored and multi-font text like that.
 
 660
 00:25:02.250 --> 00:25:02.690
@@ -2418,7 +2390,7 @@ actually evolves according to the requirements of the users as opposed to the
 
 663
 00:25:12.100 --> 00:25:16.070
-requirements of the programming language researchers uh like ourselves.
+requirements of the programming language researchers like ourselves.
 
 664
 00:25:16.080 --> 00:25:16.300
@@ -2438,23 +2410,19 @@ Okay.
 
 668
 00:25:18.080 --> 00:25:20.250
-So but uh that's cool.
+So that's cool.
 
 669
 00:25:20.250 --> 00:25:24.860
-So there's this fancy string data type but I want to get back to variables uh just briefly.
+So there's this fancy string data type but I want to get back to variables just briefly.
 
 670
-00:25:25.040 --> 00:25:27.200
-So it's not just that we have dynamic scoping,
-
-671
-00:25:27.200 --> 00:25:27.610
-right.
+00:25:25.040 --> 00:25:27.610
+So it's not just that we have dynamic scoping, right.
 
 672
 00:25:27.620 --> 00:25:32.100
-Uh There's another feature kind of baked into the core language called buffer local variables.
+There's another feature kind of baked into the core language called buffer-local variables.
 
 673
 00:25:32.100 --> 00:25:33.560
@@ -2462,7 +2430,7 @@ Could you illustrate what that is?
 
 674
 00:25:33.640 --> 00:25:34.890
-Mhm Yeah,
+Yeah,
 
 675
 00:25:34.890 --> 00:25:37.170
@@ -2473,20 +2441,16 @@ I think we have some example here actually.
 That's right.
 
 677
-00:25:38.490 --> 00:25:43.030
-Here we have an example but here we see this tool bar
-
-678
-00:25:43.030 --> 00:25:45.140
-map variable Okay,
+00:25:38.490 --> 00:25:45.140
+Here we have an example.  Here we see this tool-bar-map variable,
 
 679
 00:25:45.150 --> 00:25:49.540
-Which is a which is assigned a particular value using sexual local.
+which is assigned a particular value using setq-local.
 
 680
 00:25:49.540 --> 00:25:53.930
-So set your local is a is a in this case particular macro.
+So setq-local is in this case a particular macro.
 
 681
 00:25:53.940 --> 00:25:57.950
@@ -2494,11 +2458,11 @@ But what it does really is actually it sets the variable but you know,
 
 682
 00:25:57.960 --> 00:25:58.940
-in a buffer local way,
+in a buffer-local way,
 
 683
 00:25:58.950 --> 00:26:02.360
-which means that it only changes the value in this particular buffet.
+which means that it only changes the value in this particular buffer.
 
 684
 00:26:03.040 --> 00:26:04.710
@@ -2506,11 +2470,11 @@ So you know,
 
 685
 00:26:04.720 --> 00:26:07.730
-every every piece of text is toward in,
+every piece of text is stored,
 
 686
 00:26:07.740 --> 00:26:12.500
-you know in the buffer and and you always have the
+in the buffer and and you always have the
 
 687
 00:26:12.500 --> 00:26:13.400
@@ -2525,20 +2489,16 @@ you know,
 whenever you're working in Emacs Lisp,
 
 690
-00:26:16.670 --> 00:26:21.560
-there's always the current buffer and the current position within this buffer is part of the normal
-
-691
-00:26:21.560 --> 00:26:22.050
-state.
+00:26:16.670 --> 00:26:22.050
+there's always the current buffer and the current position within this buffer is part of the normal state.
 
 692
 00:26:22.540 --> 00:26:27.140
-And so when you look up a variable global variables such as this google map,
+And so when you look up a variable, a global variable such as this tool-bar-map,
 
 693
 00:26:27.150 --> 00:26:32.070
-it will well look it up in the current buffer so every
+it will well look it up in the current buffer.  So every
 
 694
 00:26:32.070 --> 00:26:34.260
