@@ -2506,59 +2506,43 @@ buffer can have a different value for this variable.
 
 695
 00:26:34.640 --> 00:26:39.610
-Those variables are actually fully global so they have the same value and all buffers but you can you can set
+Those variables are actually fully global so they have the same value in all buffers but you can set
 
 696
 00:26:39.610 --> 00:26:43.670
-specific values in specific buffers like this is you here,
+specific values in specific buffers.
 
 697
 00:26:44.040 --> 00:26:48.810
-this is used here for this tool bar map which is as the,
-
-698
-00:26:48.820 --> 00:26:49.050
-you know,
+This is used here for this tool-bar-map which, as
 
 699
 00:26:49.050 --> 00:26:51.270
-the map here refers to a key map.
-
-700
-00:26:51.640 --> 00:26:52.140
-Okay.
+the map here refers to a key map,
 
 701
-00:26:52.150 --> 00:26:56.620
-It's a data structure used to say what happens in response to a particular
-
-702
-00:26:56.620 --> 00:26:57.160
-event.
+00:26:52.150 --> 00:26:57.160
+it's a data structure used to say what happens in response to a particular event.
 
 703
-00:26:57.840 --> 00:27:02.110
-Which which which command which which current should be
-
-704
-00:27:02.110 --> 00:27:02.890
-executed?
+00:26:57.840 --> 00:27:02.890
+Which command, which code should be executed
 
 705
 00:27:02.900 --> 00:27:03.570
-Responsive,
+in response to a
 
 706
 00:27:03.570 --> 00:27:04.860
-particularly user event.
+particular user event.
 
 707
 00:27:05.340 --> 00:27:08.630
-So in this case it's what would happen when you use the toolbar?
+So in this case it's what should happen when you use the toolbar.
 
 708
 00:27:08.640 --> 00:27:13.020
-You can actually you can see I think you can see the toolbar right now but you access a
+I think you can't see the toolbar right now but Emacs has a
 
 709
 00:27:13.020 --> 00:27:16.510
@@ -2566,19 +2550,19 @@ toolbar which you can now see at the top.
 
 710
 00:27:16.520 --> 00:27:17.060
-Ok,
+Okay.
 
 711
 00:27:17.070 --> 00:27:19.930
-So here you see there are various buttons.
+So here you see various buttons.
 
 712
 00:27:19.940 --> 00:27:24.810
-And so these two warriors is actually created by uh was
+And so this toolbar is actually created by
 
 713
 00:27:24.820 --> 00:27:26.410
-described by a particular Lisp,
+a particular Lisp
 
 714
 00:27:26.410 --> 00:27:27.170
@@ -2590,7 +2574,7 @@ And you can you can have every buffer,
 
 716
 00:27:30.850 --> 00:27:35.370
-can have a different toolbar to adapt it to the particular contents in the in the buffer.
+can have a different toolbar to adapt it to the particular content in the buffer.
 
 717
 00:27:35.370 --> 00:27:37.340
@@ -2602,23 +2586,23 @@ you know,
 
 719
 00:27:37.660 --> 00:27:39.640
-a normal piece of codes,
+a normal piece of code,
 
 720
 00:27:39.650 --> 00:27:44.040
-then you're going to have buttons which are specific to editing codes.
+then you're going to have buttons which are specific to editing code.
 
 721
 00:27:44.050 --> 00:27:46.100
-But then if you're walker contains,
+But then if your buffer contains,
 
 722
 00:27:46.100 --> 00:27:50.860
-for example the least of your your email and then you will
+for example, the list of your your email then you will
 
 723
 00:27:50.870 --> 00:27:55.290
-have other buttons so that you can create and you and your main message or send me
+have other buttons so that you can create your mail message or send mails
 
 724
 00:27:55.290 --> 00:27:55.950
@@ -2626,15 +2610,11 @@ etcetera.
 
 725
 00:27:56.440 --> 00:27:58.550
-So that's that's what this set to local.
+So that's that's what this setq-local
 
 726
-00:27:58.550 --> 00:28:03.140
-Does it lets you change the toolbar according to which water is
-
-727
-00:28:03.140 --> 00:28:03.670
-current.
+00:27:58.550 --> 00:28:03.670
+does.  It lets you change the toolbar according to which buffer is current.
 
 728
 00:28:04.440 --> 00:28:04.990
@@ -2646,19 +2626,19 @@ so here,
 
 730
 00:28:05.640 --> 00:28:10.610
-really the core semantics of the programming language interact with the fact that is running an editor,
+really the core semantics of the programming language interact with the fact that it's running in an editor.
 
 731
 00:28:10.620 --> 00:28:10.920
-right?
+Right.
 
 732
 00:28:10.920 --> 00:28:15.710
-This is this is like a feature that's probably pretty much no other appropriate language has
+This is a feature that probably pretty much no other programming language has.
 
 733
 00:28:15.720 --> 00:28:19.370
-uh you really need this concept of buffer and the current buffer and things like that.
+You really need this concept of buffer and the current buffer and things like that.
 
 734
 00:28:19.380 --> 00:28:19.770
@@ -2668,21 +2648,17 @@ Right.
 00:28:20.440 --> 00:28:20.760
 Alright.
 
-736
-00:28:20.770 --> 00:28:21.360
-Alright.
-
 737
 00:28:21.360 --> 00:28:21.640
 Yeah,
 
 738
 00:28:21.650 --> 00:28:26.160
-maximus to a large extent is normal Lisp but there are a few places where it
+Emacs Lisp to a large extent is a normal Lisp but there are a few places where it
 
 739
 00:28:26.160 --> 00:28:26.970
-was.
+was adapted to Emacs.
 
 740
 00:28:26.980 --> 00:28:28.360
@@ -2714,7 +2690,7 @@ Yeah.
 
 747
 00:28:35.730 --> 00:28:40.680
-There's been lots of bugs over the years and that have been I think for the last few years has
+There's been lots of bugs over the years. I think for the last few years it's
 
 748
 00:28:40.680 --> 00:28:41.670
@@ -2730,7 +2706,7 @@ Yeah.
 
 751
 00:28:43.370 --> 00:28:45.660
-So and we talk about that in the paper you should mention.
+So and we talk about that in the paper we should mention.
 
 752
 00:28:45.670 --> 00:28:46.500
@@ -2758,7 +2734,7 @@ right?
 
 758
 00:28:55.080 --> 00:28:57.540
-It's one of the core parts of language that you've changed,
+It's one of the core parts of language that you changed,
 
 759
 00:28:57.550 --> 00:29:00.400
@@ -2778,7 +2754,7 @@ the string representation that we looked at earlier is kind of a detail.
 
 763
 00:29:04.040 --> 00:29:08.960
-Was there a lot of fundamental evolution of the underlying core language and the Emacs Lisp over the years?
+Was there a lot of fundamental evolution of the underlying core language in Emacs Lisp over the years?
 
 764
 00:29:10.740 --> 00:29:11.210
@@ -2790,7 +2766,7 @@ very little.
 
 766
 00:29:12.270 --> 00:29:16.040
-You actually have been very stable.
+Emacs Lisp actually has been very stable.
 
 767
 00:29:16.040 --> 00:29:18.860
@@ -2810,7 +2786,7 @@ the implementation has changed to some extent,
 
 771
 00:29:25.840 --> 00:29:29.170
-but the core languages stayed pretty much the same.
+but the core languages has stayed pretty much the same.
 
 772
 00:29:29.180 --> 00:29:30.060
@@ -2830,7 +2806,7 @@ the Haskell people,
 
 776
 00:29:31.130 --> 00:29:33.060
-they add a new features of the language every week.
+they add a new features to the language every week.
 
 777
 00:29:33.540 --> 00:29:33.960
@@ -2842,23 +2818,23 @@ pretty much.
 
 779
 00:29:34.590 --> 00:29:39.480
-Uh So how come the Emacs Lisp doesn't seem there doesn't seem to be a strong call
+So how come with Emacs Lisp there doesn't seem to be a strong call
 
 780
 00:29:39.490 --> 00:29:41.460
-on extending the core language every week there,
+for extending the core language every week there.
 
 781
 00:29:42.140 --> 00:29:43.470
-but of course there's first,
+But of course there's, first,
 
 782
 00:29:43.470 --> 00:29:46.610
-the fact that I'm actually is just a tool for Emacs,
+the fact that Emacs Lisp actually is just a tool for Emacs,
 
 783
 00:29:46.610 --> 00:29:51.120
-so there's no point in improving immaculate itself,
+so there's no point in improving Emacs Lisp itself,
 
 784
 00:29:51.130 --> 00:29:51.320
@@ -2870,27 +2846,23 @@ that's not the goal.
 
 786
 00:29:52.220 --> 00:29:55.590
-The goal is to improve the editor and so the experience for the,
+The goal is to improve the editor and the experience
 
 787
 00:29:55.600 --> 00:29:56.480
-for the end user,
+for the end user.
 
 788
 00:29:56.490 --> 00:29:57.040
-you know,
+You know,
 
 789
 00:29:57.050 --> 00:30:01.840
-when I was a language re social like to add thanks to my
+I as a language researcher like to add things to my
 
 790
 00:30:01.840 --> 00:30:02.350
-language,
-
-791
-00:30:02.360 --> 00:30:03.860
-it's put forward.
+language.
 
 792
 00:30:04.540 --> 00:30:05.170
@@ -2898,19 +2870,11 @@ But you know,
 
 793
 00:30:05.180 --> 00:30:09.660
-Richard and eli the one of the current maintain is you keep reminding us that,
+Richard and Eli, one of the current maintainers, keep reminding us that,
 
 794
 00:30:09.670 --> 00:30:10.080
-you know?
-
-795
-00:30:10.090 --> 00:30:10.590
-Yeah,
-
-796
-00:30:10.600 --> 00:30:11.200
-well this,
+you know,
 
 797
 00:30:11.200 --> 00:30:12.210
@@ -2930,11 +2894,11 @@ can we actually see features for the end user instead?
 
 801
 00:30:15.830 --> 00:30:20.010
-So that's part of the reason for the stability,
+So that's part of the reason for the stability.
 
 802
 00:30:20.020 --> 00:30:23.050
-I think the other reason is is that it's not it's not needed.
+I think the other reason is is that it's not needed.
 
 803
 00:30:23.840 --> 00:30:24.180
@@ -2942,11 +2906,11 @@ Okay,
 
 804
 00:30:24.180 --> 00:30:25.980
-so that we can extend the language,
+since we can extend the language,
 
 805
 00:30:25.980 --> 00:30:29.060
-we are changing the core language because we can use macros.
+without changing the core language if we use macros.
 
 806
 00:30:29.070 --> 00:30:29.850
@@ -2956,13 +2920,9 @@ Okay,
 00:30:29.860 --> 00:30:31.560
 let me show something there.
 
-808
-00:30:31.570 --> 00:30:32.540
-Uh,
-
 809
 00:30:32.540 --> 00:30:35.610
-I'm just gonna do that in my favorite the next uh for a moment.
+I'm just gonna do that in my favorite Emacs for a moment.
 
 810
 00:30:35.610 --> 00:30:36.020
@@ -2978,19 +2938,19 @@ Right.
 
 813
 00:30:39.780 --> 00:30:41.760
-Is that um you know,
+Is that you know,
 
 814
 00:30:41.760 --> 00:30:42.680
-program code?
+program code,
 
 815
 00:30:42.680 --> 00:30:43.640
-Program source code.
+program source code,
 
 816
 00:30:43.640 --> 00:30:46.010
-There's a data structure that looks just the same,
+there's a data structure that looks just the same.
 
 817
 00:30:46.020 --> 00:30:46.340
@@ -3006,11 +2966,11 @@ for example,
 
 820
 00:30:47.720 --> 00:30:49.660
-have Like FA five,
+f of 5,
 
 821
 00:30:50.040 --> 00:30:53.180
-we can add a quote an apostrophe to the beginning,
+we can add a quote, an apostrophe, to the beginning,
 
 822
 00:30:53.190 --> 00:30:57.570
@@ -3018,7 +2978,7 @@ and we have something that evaluates to a piece of data that prints out
 
 823
 00:30:57.580 --> 00:31:01.720
-exactly like the function called source code that you see above.
+exactly like the function-call source code that you see above.
 
 824
 00:31:01.730 --> 00:31:02.010
@@ -3038,15 +2998,15 @@ Right?
 
 828
 00:31:07.840 --> 00:31:11.560
-And so you could have fancier coke and you can't have an example here.
+And so you could have fancier code and I have an example here.
 
 829
 00:31:11.740 --> 00:31:16.660
-Um So here's a slightly fancier
+So here's a slightly fancier
 
 830
 00:31:16.660 --> 00:31:21.320
-piece of code that doesn't just use a quote that uses a back would also one of the fundamental features that all this is
+piece of code that doesn't just use a quote but uses a backquote, also one the fundamental features that all Lisps
 
 831
 00:31:21.330 --> 00:31:22.490
@@ -3054,11 +3014,11 @@ pretty much have.
 
 832
 00:31:22.500 --> 00:31:27.480
-And with back won't you can kind of slice little things in there um by
+And with backquote you can kind of splice little things in there by
 
 833
 00:31:27.480 --> 00:31:30.230
-evaluating expression inside the quoted forum,
+evaluating expression inside the quoted form,
 
 834
 00:31:30.230 --> 00:31:30.760
@@ -3066,11 +3026,11 @@ so for example,
 
 835
 00:31:30.760 --> 00:31:32.110
-like area size here,
+like array-size here,
 
 836
 00:31:32.120 --> 00:31:36.700
-area name and then it val uh and we can see here that uh,
+array-name and init-val.  And then you can see here that,
 
 837
 00:31:36.710 --> 00:31:38.140
@@ -3082,7 +3042,7 @@ the symbol,
 
 839
 00:31:38.930 --> 00:31:40.080
-which would print it out,
+which when printed out,
 
 840
 00:31:40.080 --> 00:31:42.960
@@ -3114,31 +3074,27 @@ I mean,
 
 847
 00:31:52.300 --> 00:31:52.940
-never mind that.
+never mind that
 
 848
 00:31:52.940 --> 00:31:55.910
-It's a special form called do that Stefan.
+it's a special form called do,
 
 849
 00:31:55.910 --> 00:31:56.860
-You you never use,
+that Stefan you never use,
 
 850
 00:31:56.860 --> 00:31:58.280
-but it's also the same and scheme.
+but it's also the same in Scheme,
 
 851
 00:31:58.280 --> 00:32:00.050
-So I I've used it on occasion,
-
-852
-00:32:00.340 --> 00:32:00.760
-Uh,
+so I've used it on occasion, (I don't like it!)
 
 853
 00:32:00.770 --> 00:32:03.270
-and you don't you don't like it.
+and you don't like it.
 
 854
 00:32:03.280 --> 00:32:03.850
@@ -3150,7 +3106,7 @@ well that's your loss.
 
 856
 00:32:04.730 --> 00:32:07.200
-But you can see that it splits the area size,
+But you can see that it's spliced the array-size,
 
 857
 00:32:07.200 --> 00:32:08.040
@@ -3178,11 +3134,11 @@ you know,
 
 863
 00:32:11.720 --> 00:32:14.630
-in advance this is variable in it here.
+init-val is this variable here.
 
 864
 00:32:14.640 --> 00:32:18.370
-And so so you can assemble program called programmatically.
+And so so you can assemble program code programmatically.
 
 865
 00:32:18.380 --> 00:32:22.090
@@ -3190,11 +3146,11 @@ And not only that you can turn this into what's called a macro,
 
 866
 00:32:22.100 --> 00:32:23.500
-which is what you mentioned.
+as you mentioned.
 
 867
 00:32:23.510 --> 00:32:26.610
-So macron looks looks very similar to a function,
+So a macro looks looks very similar to a function,
 
 868
 00:32:26.620 --> 00:32:28.690
@@ -3210,11 +3166,11 @@ kind of the function that gets defined here,
 
 871
 00:32:31.020 --> 00:32:35.750
-gets called by the computer whenever it sees a parenthesis
+gets called by the computer whenever it sees a parenthesized
 
 872
 00:32:35.750 --> 00:32:37.430
-form that starts with Phil array.
+form that starts with fill-array.
 
 873
 00:32:37.440 --> 00:32:37.840
@@ -3222,11 +3178,11 @@ Right?
 
 874
 00:32:37.850 --> 00:32:39.950
-So if I do this right,
+So if I do this
 
 875
 00:32:39.960 --> 00:32:44.710
-I can then go or an array is kind of the sequence abstraction in Emacs
+I can then go ... an array is kind of the sequence abstraction in Emacs
 
 876
 00:32:44.720 --> 00:32:46.850
@@ -3238,15 +3194,15 @@ That's a string,
 
 878
 00:32:47.410 --> 00:32:52.230
-which is also a kind of um which is also a kind of um uh sequence.
+which is also a kind of sequence.
 
 879
 00:32:52.230 --> 00:32:55.460
-And I can use this Phil array form and it will
+And I can use this fill-array form and it will
 
 880
 00:32:56.240 --> 00:33:00.920
-Um well just execute and we can see that it overwrites all the
+just execute and we can see that it overwrites all the
 
 881
 00:33:00.920 --> 00:33:02.830
@@ -3254,7 +3210,7 @@ characters in the string by 65,
 
 882
 00:33:02.830 --> 00:33:05.830
-essentially by expanding um into,
+essentially by expanding into,
 
 883
 00:33:05.840 --> 00:33:06.140
