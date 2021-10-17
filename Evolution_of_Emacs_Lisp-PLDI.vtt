@@ -5338,7 +5338,7 @@ blanked out on that one.
 
 1503
 00:57:04.354 --> 00:57:06.244
-Internet blip..
+Internet blip.
 
 1504
 00:57:06.244 --> 00:57:06.634
@@ -5448,10 +5448,6 @@ Right,
 00:58:07.874 --> 00:58:08.304
 Stefan?
 
-1536
-00:58:08.314 --> 00:58:08.794
-I'm sorry.
-
 1538
 00:58:09.684 --> 00:58:14.444
 You can imagine talking to the byte code for for slightly different frontend,
@@ -5486,7 +5482,7 @@ So if you want to run within Emacs,
 
 1546
 00:58:26.854 --> 00:58:31.744
-it's probably easier to just write you actually code directly so that the set of
+it's probably easier to just write Emacs Lisp code directly so that the set of
 
 1547
 00:58:31.744 --> 00:58:32.884
@@ -5497,16 +5493,12 @@ features matches.
 Yeah.
 
 1549
-00:58:35.774 --> 00:58:36.334
-Okay,
-
-1550
-00:58:36.334 --> 00:58:36.764
-from God,
+00:58:35.774 --> 00:58:36.764
+Okay, from Guy Steele:
 
 1551
 00:58:36.764 --> 00:58:38.994
-I steal what changes,
+"What changes,
 
 1552
 00:58:38.994 --> 00:58:39.634
@@ -5518,31 +5510,27 @@ have been made to Emacs this primarily for the sake of improved performance rath
 
 1554
 00:58:44.564 --> 00:58:46.094
-than for a new functionality.
+than for a new functionality?"
 
 1555
 00:58:48.974 --> 00:58:53.454
-Very little performance has rarely been
+Very little.  Performance has rarely been
 
 1556
 00:58:53.454 --> 00:58:57.254
-a an issue when it comes to the language that is,
+an issue when it comes to the language.  That is,
 
 1557
 00:58:57.254 --> 00:58:58.904
-the language has a fairly,
-
-1558
-00:58:58.914 --> 00:58:59.514
-you know,
+the language has a
 
 1559
 00:58:59.524 --> 00:59:04.084
-fairly simple implementation is reasonably slowing in this respect,
+fairly simple implementation.  It's reasonably slow in this respect,
 
 1560
 00:59:04.674 --> 00:59:09.184
-but most of the elements that take time are actually implemented in c anyway.
+but most of the elements that take time are actually implemented in C anyway.
 
 1561
 00:59:09.184 --> 00:59:12.294
@@ -5550,7 +5538,7 @@ They're part of the library basically.
 
 1562
 00:59:12.774 --> 00:59:16.254
-And so the negative self has naturally been changed to,
+And so the language itself self has not really been changed
 
 1563
 00:59:16.254 --> 00:59:17.184
@@ -5561,20 +5549,16 @@ to accommodate speed.
 Yeah,
 
 1565
-00:59:19.154 --> 00:59:20.724
-if we're talking about the source language.
-
-1566
-00:59:20.724 --> 00:59:21.014
-Right.
+00:59:19.154 --> 00:59:21.014
+if we're talking about the source language, right?
 
 1567
 00:59:21.024 --> 00:59:21.714
-Um of course,
+Of course,
 
 1568
 00:59:21.714 --> 00:59:23.884
-implementation has seen quite a few improvements,
+the implementation has seen quite a few improvements.
 
 1569
 00:59:24.474 --> 00:59:24.864
@@ -5582,31 +5566,31 @@ Yes.
 
 1570
 00:59:24.874 --> 00:59:28.364
-Um Okay,
+Okay,
 
 1571
 00:59:28.374 --> 00:59:30.544
-10 to 1 or two more I think.
+it's time for one or two more I think.
 
 1572
 00:59:30.554 --> 00:59:35.554
-Andrew black from Portland State says the first version of Emacs Lisp that I used
+Andrew Black from Portland State says: "The first version of Emacs Lisp that I used
 
 1573
 00:59:35.554 --> 00:59:37.784
-was in Gosselin's Emacs for UNIX.
+was in Gosling's Emacs for Unix.
 
 1574
 00:59:38.174 --> 00:59:40.754
-The early versions did not have function parameters.
+The early versions did not have function parameters
 
 1575
 00:59:40.754 --> 00:59:41.694
-As I recall,
+as I recall.
 
 1576
 00:59:42.004 --> 00:59:46.314
-the convention was used dynamically bound variables to get information into functions.
+The convention was to use dynamically bound variables to get information into functions.
 
 1577
 00:59:46.544 --> 00:59:50.024
@@ -5614,27 +5598,27 @@ Was this just a limitation of the Gosling implementation?
 
 1578
 00:59:50.104 --> 00:59:53.384
-Was it also a feature of the early tico based versions?
+Was it also a feature of the early TECO-based versions?"
 
 1579
 00:59:56.174 --> 01:00:00.164
-Uh I have no idea.
+I have no idea.
 
 1580
 01:00:00.174 --> 01:00:04.994
-So my impression was I I never got to the point where I fully learned uh
+So my impression was ... I never got to the point where I fully learned
 
 1581
 01:00:05.004 --> 01:00:05.684
-Tico language,
+the TECO language.
 
 1582
 01:00:05.684 --> 01:00:08.174
-my impression was that it did not have named parameters.
+My impression was that it did not have named parameters.
 
 1583
 01:00:08.204 --> 01:00:11.774
-So Ticos extended language is completely enlist like we should note.
+So TECO's extension language is completely un-Lisp-like, we should note.
 
 1584
 01:00:11.784 --> 01:00:12.164
@@ -5642,83 +5626,59 @@ Right.
 
 1585
 01:00:12.174 --> 01:00:16.774
-Um and I think we had an example of that in the talk and I don't think named
+And I think we had an example of that in the talk and I don't think named ...
 
 1586
 01:00:17.204 --> 01:00:19.004
-max also had a completely different list.
-
-1587
-01:00:19.014 --> 01:00:19.734
-Yeah,
-
-1588
-01:00:19.744 --> 01:00:19.904
-yeah,
+Gosling Emacs also had a completely different Lisp.
 
 1589
 01:00:19.904 --> 01:00:20.324
-that's right.
-
-1590
-01:00:20.334 --> 01:00:20.624
-No,
+That's right.
 
 1591
 01:00:20.634 --> 01:00:22.724
-I mean the characterization of gasoline taxes correct.
-
-1592
-01:00:22.724 --> 01:00:22.904
-Right.
+I mean the characterization of Gosling Emacs is correct.
 
 1593
 01:00:22.904 --> 01:00:27.284
-It did not have named function parameters and that's in the paper as well but um
+It did not have named function parameters and that's in the paper as well, but
 
 1594
 01:00:27.294 --> 01:00:30.314
-I don't think Tico had that notion either.
+I don't think TECO had that notion either.
 
 1595
 01:00:30.324 --> 01:00:33.594
-Uh like a programming language with regular named parameters.
-
-1596
-01:00:34.374 --> 01:00:34.794
-Mom,
+Like a programming language with regular named parameters.
 
 1597
 01:00:35.674 --> 01:00:37.184
-I think it had registered,
+I think it had registers,
 
 1598
 01:00:37.194 --> 01:00:39.694
-it's just basically wearables.
+it's just basically global variables.
 
 1599
 01:00:40.274 --> 01:00:44.954
-That sounds familiar going back a lot of years um from
+That sounds familiar going back a lot of years. 
 
 1600
-01:00:44.954 --> 01:00:49.424
-paul uh when and how does external packages get bundled into
-
-1601
-01:00:49.424 --> 01:00:50.684
-MX's core?
+01:00:44.954 --> 01:00:50.684
+From Paul: When and how do external packages get bundled into Emacs's core?
 
 1602
 01:00:54.374 --> 01:00:59.294
-Oh and it just happens and it
+Oh ... it just happens and it
 
 1603
 01:00:59.294 --> 01:01:03.954
-happens in ways that nobody notices because there is there is no
+happens in ways that nobody notices because there is no
 
 1604
 01:01:03.964 --> 01:01:06.374
-technical definition of what is the core?
+technical definition of what is the core.
 
 1605
 01:01:06.384 --> 01:01:09.924
@@ -5726,19 +5686,15 @@ It's more what people consider as being part of the core.
 
 1606
 01:01:09.934 --> 01:01:12.084
-So there are packages to be part of the court,
+So there are packages ... To be part of the core,
 
 1607
 01:01:12.084 --> 01:01:13.764
 you have to be distributed with Emacs,
 
 1608
-01:01:13.774 --> 01:01:18.184
-but just being distributed with Emacs is not sufficient for people to consider it us
-
-1609
-01:01:18.374 --> 01:01:18.994
-cord.
+01:01:13.774 --> 01:01:18.994
+but just being distributed with Emacs is not sufficient for people to consider it as core.
 
 1610
 01:01:19.174 --> 01:01:21.174
@@ -5746,7 +5702,7 @@ And I think if you asked different people,
 
 1611
 01:01:21.174 --> 01:01:25.394
-different people would consider different parts of being part of core or not.
+different people would consider different parts as being part of core or not.
 
 1612
 01:01:25.394 --> 01:01:27.554
@@ -5758,15 +5714,7 @@ fuzzy notion.
 
 1614
 01:01:30.274 --> 01:01:34.794
-It's not a question of a habit and what is commonly used within within the code.
-
-1615
-01:01:37.274 --> 01:01:37.694
-Okay.
-
-1616
-01:01:38.274 --> 01:01:38.594
-Yeah.
+It's more a question of a habit and what is commonly used within within the code.
 
 1617
 01:01:39.074 --> 01:01:39.494
@@ -5774,11 +5722,11 @@ All right.
 
 1618
 01:01:39.494 --> 01:01:43.964
-So I think this will be the last question from Karen doping often of us.
+So I think this will be the last question, from Kiran Gopinathan of NUS.
 
 1619
 01:01:43.974 --> 01:01:48.904
-I love the extensive bility of the list when it provides an editing experience unlike any
+"I love the extensibility of the Elisp when it provides an editing experience unlike any
 
 1620
 01:01:48.904 --> 01:01:49.994
@@ -5790,7 +5738,7 @@ But out of curiosity,
 
 1622
 01:01:51.984 --> 01:01:56.934
-are there lessons that Ellis may be able to learn from the scripting languages
+are there lessons that Elisp may be able to learn from the scripting languages
 
 1623
 01:01:56.944 --> 01:01:58.794
@@ -5798,39 +5746,19 @@ of other modern editors,
 
 1624
 01:01:58.794 --> 01:02:02.484
-such as Js for V S code or neo them?
-
-1625
-01:02:04.374 --> 01:02:04.574
-Yeah.
+such as JS for VS Code or Neovim?
 
 1626
 01:02:05.874 --> 01:02:06.384
-Mike,
+Mike?
 
 1627
 01:02:07.574 --> 01:02:08.984
 I think the answer is no.
 
-1628
-01:02:09.374 --> 01:02:10.224
-Uh,
-
-1629
-01:02:10.234 --> 01:02:10.894
-so,
-
-1630
-01:02:10.904 --> 01:02:11.584
-um,
-
 1631
 01:02:11.594 --> 01:02:12.584
 I mean,
-
-1632
-01:02:12.584 --> 01:02:13.054
-as I,
 
 1633
 01:02:13.064 --> 01:02:13.724
@@ -5842,7 +5770,7 @@ right,
 
 1635
 01:02:14.004 --> 01:02:15.714
-I mean the great advantages an email list,
+I mean the great advantage is, in Emacs Lisp,
 
 1636
 01:02:15.714 --> 01:02:17.014
@@ -5850,31 +5778,27 @@ you can really do things at runtime.
 
 1637
 01:02:17.014 --> 01:02:17.964
-Whereas uh,
+Whereas
 
 1638
 01:02:17.974 --> 01:02:20.234
-these modern editors love them,
+these modern editors, Neovim
 
 1639
 01:02:20.234 --> 01:02:21.074
 I don't know much about,
 
-1640
-01:02:21.084 --> 01:02:21.684
-but um,
-
 1641
 01:02:21.694 --> 01:02:25.834
-I think you customize it in lieu uh,
+but I think you customize it in Lua
 
 1642
 01:02:25.844 --> 01:02:26.544
-these days,
+these days.
 
 1643
 01:02:26.554 --> 01:02:29.294
-the main question is so much isn't so much about the language,
+The main question isn't so much about the language,
 
 1644
 01:02:29.294 --> 01:02:33.654
@@ -5886,15 +5810,15 @@ Right?
 
 1646
 01:02:33.964 --> 01:02:35.874
-And a lot of like visual studio code,
+And a lot of ... like Visual Studio Code,
 
 1647
 01:02:35.874 --> 01:02:37.274
-you modify any of its plug ins,
+you modify any of its plugins,
 
 1648
 01:02:37.274 --> 01:02:39.634
-you have to restart the editor as an example.
+you have to restart the editor, as an example.
 
 1649
 01:02:39.644 --> 01:02:40.144
@@ -5902,7 +5826,7 @@ Right.
 
 1650
 01:02:40.154 --> 01:02:44.864
-And so that's something that we don't need to do uh in Emacs.
+And so that's something that we don't need to do in Emacs.
 
 1651
 01:02:44.864 --> 01:02:49.494
@@ -5910,35 +5834,19 @@ And so I'm not sure there's a great lesson for either system organization or
 
 1652
 01:02:49.874 --> 01:02:51.274
-or language design there.
+language design there.
 
 1653
-01:02:51.284 --> 01:02:55.414
-I don't think I would change email list to accommodate um the way their way of doing
-
-1654
-01:02:55.414 --> 01:02:56.794
-things.
-
-1655
-01:02:58.274 --> 01:02:58.684
-Yeah,
+01:02:51.284 --> 01:02:56.794
+I don't think I would change Emacs Lisp to accommodate  their way of doing things.
 
 1656
-01:02:58.684 --> 01:03:03.504
-I think in terms of in terms of the language that I don't think there is much to be gained from
-
-1657
-01:03:03.504 --> 01:03:04.164
-there,
+01:02:58.684 --> 01:03:04.164
+I think in terms of in terms of the language I don't think there is much to be gained from there,
 
 1658
-01:03:04.174 --> 01:03:09.074
-there are some very interesting aspects that we do want to integrate from from those
-
-1659
-01:03:09.074 --> 01:03:09.684
-editors,
+01:03:04.174 --> 01:03:09.684
+there are some very interesting aspects that we do want to integrate from from those editors,
 
 1660
 01:03:09.694 --> 01:03:11.384
@@ -5946,7 +5854,7 @@ but they're not really part of the language there.
 
 1661
 01:03:11.384 --> 01:03:14.444
-More part of the design of how you structure,
+More part of the design, of how you structure,
 
 1662
 01:03:14.454 --> 01:03:14.904
@@ -5958,23 +5866,11 @@ the the description of the language that you want to parse so that you do highli
 
 1664
 01:03:19.804 --> 01:03:22.294
-those kinds of things and re display for example,
+those kinds of things.  And redisplay for example,
 
 1665
 01:03:23.224 --> 01:03:25.894
 might be my favorite thing to borrow from these.
-
-1666
-01:03:26.574 --> 01:03:27.494
-Mhm.
-
-1667
-01:03:27.974 --> 01:03:28.814
-Okay,
-
-1668
-01:03:28.814 --> 01:03:29.154
-well,
 
 1669
 01:03:29.164 --> 01:03:31.014
@@ -5994,15 +5890,15 @@ wonderful presentation.
 
 1673
 01:03:36.554 --> 01:03:39.724
-And for what I can see from the non question discussions,
+And for what I can see from the non-question discussions,
 
 1674
 01:03:39.734 --> 01:03:44.254
-bringing back a lot of arguments and discussions from the history of
+we're bringing back a lot of arguments and discussions from the history of
 
 1675
 01:03:44.264 --> 01:03:48.054
-editors and list that I haven't seen in decades.
+editors and Lisp that I haven't seen in decades.
 
 1676
 01:03:48.054 --> 01:03:49.494
@@ -6022,15 +5918,15 @@ Right?
 
 1680
 01:03:52.304 --> 01:03:56.594
-If the paper is any good uh It's at least as much as much your fault as it is ours.
+If the paper is any good, it's at least as much as much your fault as it is ours.
 
 1681
 01:03:56.974 --> 01:03:57.454
-Yeah,
+Yeah.
 
 1682
 01:03:57.464 --> 01:03:58.494
-that's kind of you to say it,
+That's kind of you to say it,
 
 1683
 01:03:58.494 --> 01:03:59.884
