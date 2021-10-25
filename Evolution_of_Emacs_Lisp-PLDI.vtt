@@ -6,7 +6,7 @@ Hi Stefan! Good seeing you!
 
 3
 00:00:14.440 --> 00:00:00:16.430
-Hi, Mike. How you doing?
+Hi, Mike.  How're you doing?
 
 6
 00:00:16.440 --> 00:00:17.480
@@ -37,16 +37,12 @@ I do research and teaching in programming languages at University of Montreal.
 How about you?
 
 15
-00:00:32.340 --> 00:00:32.680
-Yeah.
-
-16
-00:00:32.689 --> 00:00:35.660
-I'm CEO of a software consultancy in southern Germany.
+00:00:32.340 --> 00:00:35.660
+Yeah, I'm CEO of a software consultancy in southern Germany.
 
 17
 00:00:36.140 --> 00:00:39.920
-So how do how did we get into this thing writing this paper?
+So how do.. how did we get into this thing writing this paper?
 
 18
 00:00:39.920 --> 00:00:40.120
@@ -54,30 +50,19 @@ Right.
 
 19
 00:00:40.120 --> 00:00:43.860
-I think a lot of people that are seeing a paper on the evolution of something
+I think a lot of people that are seeing a paper on the evolution of something..
 
 20
 00:00:43.860 --> 00:00:47.150
-something Emacs would expect Richard Stallman to be here.
+..something Emacs would expect Richard Stallman to be here.
 
 21
 00:00:49.040 --> 00:00:49.790
 Right.
 
 22
-00:00:49.790 --> 00:00:50.050
-Well,
-
-23
-00:00:50.050 --> 00:00:50.470
-at least,
-
-24
-00:00:50.480 --> 00:00:50.800
-you know,
-
-25
-00:00:50.800 --> 00:00:52.100
+00:00:49.790 --> 00:00:52.100
+Well, at least, you know,
 I work in programming languages.
 
 26
@@ -85,12 +70,8 @@ I work in programming languages.
 So there is some relationship. I've been contributing to Emacs
 
 27
-00:00:56.860 --> 00:00:58.020
-for many,
-
-28
-00:00:58.020 --> 00:00:58.580
-many years,
+00:00:56.860 --> 00:00:58.580
+for many, many years,
 
 29
 00:00:58.580 --> 00:01:00.660
@@ -101,16 +82,12 @@ I've been maintainer of Emacs.
 So that's how I ended up here.
 
 31
-00:01:02.390 --> 00:01:02.950
-Okay.
-
-32
-00:01:02.960 --> 00:01:03.460
-I think,
+00:01:02.390 --> 00:01:03.460
+Okay. I think,
 
 33
 00:01:03.460 --> 00:01:08.220
-I think I was contacted by Guy Steele and by you to to see there was some
+I think I was contacted by Guy Steele and by you to see there was some
 
 34
 00:01:08.220 --> 00:01:09.860
@@ -121,12 +98,8 @@ interest in working on this.
 How about you?
 
 37
-00:01:11.070 --> 00:01:11.240
-So,
-
-38
-00:01:11.240 --> 00:01:12.030
-you know,
+00:01:11.070 --> 00:01:12.030
+So, you know,
 
 39
 00:01:12.040 --> 00:01:14.980
@@ -134,7 +107,7 @@ even though I work in the software consultancy today,
 
 40
 00:01:14.980 --> 00:01:18.090
-I also used to be a research and programming languages many years ago.
+I also used to be in research and programming languages many years ago.
 
 42
 00:01:18.880 --> 00:01:22.750
@@ -150,15 +123,17 @@ would only run in a terminal or an X term.
 
 47
 00:01:33.640 --> 00:01:38.400
-but there was a version of the Emacs that would allow you to open
+but there was a version of Emacs that would allow you to open
 
 48
 00:01:38.400 --> 00:01:40.660
-multiple windows called Lucid Emacs.
+multiple windows, called Lucid Emacs.
 
 49
 00:01:41.040 --> 00:01:46.160
 So we started using that and then I think it didn't run on Linux.
+
+NOTE =========  Stefan reviewed til here!! ====================
 
 51
 00:01:46.160 --> 00:01:50.160
