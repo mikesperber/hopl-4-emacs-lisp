@@ -133,8 +133,6 @@ multiple windows, called Lucid Emacs.
 00:01:41.040 --> 00:01:46.160
 So we started using that and then I think it didn't run on Linux.
 
-NOTE =========  Stefan reviewed til here!! ====================
-
 51
 00:01:46.160 --> 00:01:50.160
 We started usually using at the time and I ported that and I started contributing code.
@@ -152,11 +150,8 @@ and Lucid Emacs was done by a company called Lucid.
 That company folded eventually,
 
 55
-00:01:59.540 --> 00:02:02.440
+00:01:59.540 --> 00:02:02.970
 and the project moved to Sun Microsystems,
-
-56
-00:02:02.440 --> 00:02:02.970
 actually,
 
 57
@@ -168,27 +163,15 @@ where it was renamed to XEmacs by the marketing people there.
 So I started using Emacs at the time and then I was a programming Languages researcher,
 
 63
-00:02:13.600 --> 00:02:13.890
+00:02:13.600 --> 00:02:17.740
 I think.
-
-64
-00:02:13.890 --> 00:02:14.060
 So,
-
-65
-00:02:14.060 --> 00:02:17.740
 I think we were like the two people among the recipients of Guy's
 
 67
-00:02:18.230 --> 00:02:19.460
+00:02:18.230 --> 00:02:23.440
 email who,
-
-68
-00:02:20.440 --> 00:02:20.890
 write,
-
-69
-00:02:20.890 --> 00:02:23.440
 or who used to write papers for living.
 
 70
@@ -196,16 +179,12 @@ or who used to write papers for living.
 And we didn't say no.
 
 71
-00:02:26.140 --> 00:02:27.880
-Yeah,
-
-72
-00:02:27.890 --> 00:02:28.920
-so it was a lot of work.
+00:02:26.140 --> 00:02:28.920
+Yeah, so it was a lot of work.
 
 76
 00:02:31.420 --> 00:02:34.750
-But we're here to talk about Emacs lisp, right?
+But we're here to talk about Emacs Lisp, right?
 
 78
 00:02:34.750 --> 00:02:36.190
@@ -216,12 +195,8 @@ Not primarily the editor,
 but the programming language of the editor.
 
 80
-00:02:38.680 --> 00:02:40.730
-So how come,
-
-81
-00:02:40.740 --> 00:02:44.310
-how come Lisp is like the language of Emacs?
+00:02:38.680 --> 00:02:44.310
+So how come, how come Lisp is like the language of Emacs?
 
 82
 00:02:44.310 --> 00:02:46.060
@@ -232,23 +207,12 @@ Or what does that have to do with the editor?
 The language?
 
 84
-00:02:48.040 --> 00:02:48.450
-Yeah,
-
-85
-00:02:48.460 --> 00:02:48.790
-actually,
-
-86
-00:02:48.790 --> 00:02:50.940
-it it's interesting you ask it this way,
+00:02:48.040 --> 00:02:50.940
+Yeah, actually, it it's interesting you ask it this way,
 
 87
-00:02:50.940 --> 00:02:53.760
+00:02:50.940 --> 00:02:54.950
 because the first language of Emacs was not Lisp,
-
-88
-00:02:54.440 --> 00:02:54.950
 it was TECO.
 
 90
@@ -285,23 +249,20 @@ So here let's try this fancy switching feature here.
 
 101
 00:03:20.370 --> 00:03:25.150
-So here's an example of TECO code and you can kind of see well you get an inkling why
+So here's an example of TECO code and you can kind of see, well you get an inkling why
 
 102
 00:03:25.150 --> 00:03:29.230
-it wasn't Richard Stallman favorite language to put into,
+it wasn't Richard Stallman favorite language to put into
 
 103
 00:03:29.240 --> 00:03:33.960
 the version of Emacs that he then started developing later.
 
 104
-00:03:34.240 --> 00:03:39.150
-So the code looks fairly cryptic and you can see every single line kind of requires a comment to explain
-
-105
-00:03:39.160 --> 00:03:40.080
-what it is.
+00:03:34.240 --> 00:03:40.080
+So the code looks fairly cryptic and you can see every single line kind of
+requires a comment to explain what it is.
 
 106
 00:03:40.440 --> 00:03:45.440
@@ -313,15 +274,11 @@ and also to lots of people were interested in doing something with Emacs,
 
 109
 00:03:51.040 --> 00:03:54.660
-So that explains why it's not Chico but why is it Emacs Lisp?
+So that explains why it's not TECO, but why is it Emacs Lisp?
 
 110
-00:03:56.140 --> 00:03:56.640
-Well,
-
-111
-00:03:56.650 --> 00:04:01.310
-Richard was working at MIT
+00:03:56.140 --> 00:04:01.310
+Well, Richard was working at MIT
 
 112
 00:04:01.320 --> 00:04:05.260
@@ -397,15 +354,12 @@ user and this is a driving line in in the design of Emacs and Emacs Lisp
 
 136
 00:05:01.140 --> 00:05:06.060
-and also in his promotion of free software.
+and also in his promotion of Free Software.
 
 137
-00:05:06.640 --> 00:05:11.580
-So empowering the user I guess means not just being able to use the software to its full
-
-138
-00:05:11.580 --> 00:05:12.250
-ability,
+00:05:06.640 --> 00:05:12.250
+So empowering the user I guess means not just being able to use the software
+to its full ability,
 
 139
 00:05:12.640 --> 00:05:16.540
@@ -425,14 +379,11 @@ Yeah.
 
 143
 00:05:18.300 --> 00:05:22.290
-If you think of the the ideals of free software and you have this,
+If you think of the the ideals of Free Software and you have this,
 
 144
-00:05:22.300 --> 00:05:22.870
+00:05:22.300 --> 00:05:27.700
 you know,
-
-145
-00:05:22.880 --> 00:05:27.700
 being allowed to read the code or
 
 146
@@ -452,32 +403,21 @@ This is all all nice.
 But for Richard this is actually not sufficient
 
 150
-00:05:37.040 --> 00:05:41.060
+00:05:37.040 --> 00:05:43.550
 because you also want it to be fairly easy to do
-
-151
-00:05:41.740 --> 00:05:43.550
 in practice.
 
 152
-00:05:43.560 --> 00:05:46.120
-So you also have kind of pragmatic
-
-153
-00:05:46.130 --> 00:05:48.120
-aspect to it.
+00:05:43.560 --> 00:05:48.120
+So you also have kind of pragmatic aspect to it.
 
 154
 00:05:48.130 --> 00:05:48.850
 Okay.
 
 155
-00:05:48.860 --> 00:05:49.670
-So I guess,
-
-157
-00:05:50.330 --> 00:05:51.040
-Today,
+00:05:48.860 --> 00:05:51.040
+So I guess, today,
 
 158
 00:05:51.040 --> 00:05:53.020
@@ -492,36 +432,25 @@ we think of it mainly as a programmers' language.
 Right?
 
 162
-00:05:56.270 --> 00:05:58.450
-I think it wasn't until,
-
-164
-00:05:58.680 --> 00:06:03.590
-you pointed this out to me - let me switch
+00:05:56.270 --> 00:06:03.590
+I think it wasn't until, you pointed this out to me - let me switch
 
 165
 00:06:03.590 --> 00:06:05.860
 here to the documentation here.
 
 166
-00:06:05.870 --> 00:06:07.850
-So you pointed out to me that,
-
-167
-00:06:07.850 --> 00:06:08.080
-well,
+00:06:05.870 --> 00:06:08.080
+So you pointed out to me that, well,
 
 168
 00:06:08.080 --> 00:06:13.050
 here's the introduction of Emacs Lisp as it sits in the Emacs editor and ships with the
 
 169
-00:06:13.050 --> 00:06:17.710
-editor and says this is an introduction to programming Emacs LIsp for people who are not
-
-170
-00:06:17.710 --> 00:06:18.550
-programmers.
+00:06:13.050 --> 00:06:18.550
+editor and says this is an introduction to programming Emacs Lisp for people
+who are not programmers.
 
 171
 00:06:19.040 --> 00:06:23.910
@@ -552,44 +481,32 @@ Right.
 That that ordinary users would program.
 
 178
-00:06:39.540 --> 00:06:44.520
-It's definitely not in fashion in the world of of Android and 
-
-179
-00:06:44.520 --> 00:06:45.090
-Facebook,
+00:06:39.540 --> 00:06:45.090
+It's definitely not in fashion in the world of of Android and Facebook,
 
 180
-00:06:45.100 --> 00:06:46.560
-you know,
-
-181
-00:06:46.570 --> 00:06:48.960
-empowering the user is definitely not the goal.
+00:06:45.100 --> 00:06:48.960
+you know, empowering the user is definitely not the goal.
 
 182
 00:06:49.340 --> 00:06:53.590
 But back then it was and also, you know,
 
 183
-00:06:53.600 --> 00:06:56.730
-he mentioned experience with having,
-
-184
-00:06:56.740 --> 00:06:57.010
-you know,
+00:06:53.600 --> 00:06:57.010
+he mentioned experience with having, you know,
 
 185
 00:06:57.020 --> 00:07:01.950
-secretaries using Emacs and secretaries who had no experience with programming
+secretaries using Emacs, and secretaries who had no experience with programming,
 
 186
 00:07:01.960 --> 00:07:05.120
-to make it clear and using Emacs and writing
+to make it clear, and using Emacs and writing
 
 187
 00:07:05.120 --> 00:07:09.360
-little chunks of Elisp code to customize their editor for their particular use.
+little chunks of ELisp code to customize their editor for their particular use.
 
 188
 00:07:09.740 --> 00:07:10.140
@@ -600,24 +517,12 @@ That's right.
 I think that's always been a very important aspect to Richard.
 
 193
-00:07:16.980 --> 00:07:17.240
-You know,
-
-194
-00:07:17.240 --> 00:07:18.250
-if you can't program
-
-195
-00:07:18.250 --> 00:07:19.050
-in Emacs Lisp yourself,
+00:07:16.980 --> 00:07:19.050
+You know, if you can't program in Emacs Lisp yourself,
 
 196
-00:07:19.050 --> 00:07:20.340
-you might get somebody else to do it,
-
-197
-00:07:20.350 --> 00:07:20.720
-right,
+00:07:19.050 --> 00:07:20.720
+you might get somebody else to do it, right,
 
 199
 00:07:21.260 --> 00:07:26.140
@@ -649,11 +554,11 @@ I wish we would get back to the ideals of Emacs
 
 211
 00:07:49.600 --> 00:07:51.550
-and Emacs lisp at some point.
+and Emacs Lisp at some point.
 
 212
 00:07:51.840 --> 00:07:54.060
-So I guess that's that's what we're going to talk about today.
+So I guess that's what we're going to talk about today.
 
 213
 00:07:55.440 --> 00:07:55.880
@@ -665,7 +570,7 @@ So I guess we should give a brief overview of what Emacs Lisp is,
 
 215
 00:07:59.870 --> 00:08:02.890
-at least for the younger people who don't want lisp in the audience.
+at least for the younger people who don't know Lisp in the audience.
 
 216
 00:08:02.890 --> 00:08:03.230
@@ -697,7 +602,7 @@ So if you want to add two numbers like 23 and 42,
 
 223
 00:08:19.220 --> 00:08:22.820
-you write it like this open paren operator goes at the front,
+you write it like this .. open paren operator goes at the front,
 
 224
 00:08:22.820 --> 00:08:25.150
@@ -705,23 +610,19 @@ then the operations and then close paren.
 
 225
 00:08:25.540 --> 00:08:29.110
-And you can see I'm typing that into the scratch buffer of XEmacs.
+And you can see I'm typing that into the *scratch* buffer of XEmacs.
 
 228
 00:08:29.460 --> 00:08:33.780
-And I can push close a button control-J and it will display the result of
+And I can just push a button control-J and it will display the result of
 
 229
 00:08:33.789 --> 00:08:36.460
 evaluating that expression.
 
 230
-00:08:36.940 --> 00:08:38.320
-And you know,
-
-231
-00:08:38.330 --> 00:08:39.200
-these parentheses,
+00:08:36.940 --> 00:08:39.200
+And you know, these parentheses,
 
 232
 00:08:39.200 --> 00:08:40.250
@@ -760,12 +661,8 @@ A lot of people looking at this kind of get scared by all of these parentheses.
 But experienced Lisp programmers just look at the indentation.
 
 241
-00:09:03.700 --> 00:09:04.500
-And in fact,
-
-242
-00:09:04.510 --> 00:09:04.720
-you know,
+00:09:03.700 --> 00:09:04.720
+And in fact, you know,
 
 243
 00:09:04.720 --> 00:09:06.460
@@ -780,32 +677,16 @@ press a button, in a way that is pretty much standardized, and
 everybody adheres to that standard when they indent their program.
 
 246
-00:09:15.440 --> 00:09:16.110
-All right,
-
-247
-00:09:16.120 --> 00:09:17.840
-we could also do like a variable.
+00:09:15.440 --> 00:09:17.840
+All right, we could also do like a variable.
 
 248
-00:09:17.850 --> 00:09:19.250
-So here's a variable,
-
-249
-00:09:19.260 --> 00:09:21.050
-I don't know.
+00:09:17.850 --> 00:09:21.050
+So here's a variable, I don't know.
 
 251
-00:09:23.640 --> 00:09:25.010
-Something like this.
-
-253
-00:09:26.190 --> 00:09:27.910
-So here's pi.
-
-254
-00:09:28.140 --> 00:09:28.640
-Right?
+00:09:23.640 --> 00:09:28.640
+Something like this.  So here's pi.  Right?
 
 255
 00:09:28.640 --> 00:09:30.170
@@ -828,24 +709,16 @@ you know,
 let me write a function that computes the circumference of a circle with a given radius
 
 260
-00:09:40.600 --> 00:09:41.910
-might look like this.
-
-261
-00:09:41.920 --> 00:09:44.410
-And again,
+00:09:40.600 --> 00:09:44.410
+might look like this.  And again,
 
 262
 00:09:44.410 --> 00:09:47.570
-I can evaluate that will define that function and all I can say,
+I can evaluate that will define that function and then I can say,
 
 263
-00:09:47.570 --> 00:09:47.780
-well,
-
-264
-00:09:47.780 --> 00:09:50.350
-what's the circumference of a circle of radius 10?
+00:09:47.570 --> 00:09:50.350
+well, what's the circumference of a circle of radius 10?
 
 265
 00:09:50.540 --> 00:09:52.800
@@ -872,12 +745,8 @@ Now you can also locally bind variables in
 Emacs Lisp with a construct called let.  So you can do this,
 
 271
-00:10:10.740 --> 00:10:11.300
-you know?
-
-272
-00:10:11.310 --> 00:10:16.160
-And so 10 and 20 bound to
+00:10:10.740 --> 00:10:16.160
+you know? And so 10 and 20 bound to
 
 273
 00:10:16.540 --> 00:10:18.520
@@ -892,76 +761,45 @@ You could evaluate this and get a result.
 So that gives me local variables.
 
 276
-00:10:23.740 --> 00:10:28.740
+00:10:23.740 --> 00:10:29.320
 And now here's something that I guess nowadays is pretty unique to
-
-277
-00:10:28.740 --> 00:10:29.320
 Emacs Lisp.
 
 278
-00:10:29.330 --> 00:10:29.670
-You know,
-
-279
-00:10:29.670 --> 00:10:34.190
-I could write a function called F that takes a parameter called
-
-280
-00:10:34.190 --> 00:10:35.040
-X.
+00:10:29.330 --> 00:10:35.040
+You know, I could write a function called F that takes a parameter called X.
 
 281
 00:10:35.050 --> 00:10:37.760
 And I could add X to Y.
 
 282
-00:10:37.770 --> 00:10:40.520
-And now there's no visible binding for Y.
-
-283
-00:10:40.530 --> 00:10:41.110
-Right.
+00:10:37.770 --> 00:10:41.110
+And now there's no visible binding for Y.  Right?
 
 284
-00:10:41.120 --> 00:10:44.060
-And of course if I kind of do
-
-285
-00:10:44.060 --> 00:10:44.590
-F of 5.
+00:10:41.120 --> 00:10:44.590
+And of course if I kind of do F of 5.
 
 286
 00:10:44.590 --> 00:10:45.680
-It will say oh,
+It will say, oh,
 
 287
-00:10:45.690 --> 00:10:45.990
-symbol's
-
-288
-00:10:45.990 --> 00:10:46.870
-variable is void,
+00:10:45.690 --> 00:10:46.870
+symbol's variable is void,
 
 289
 00:10:46.880 --> 00:10:48.960
 symbol's value as variable is void.
 
 290
-00:10:48.960 --> 00:10:49.270
-Why?
-
-291
-00:10:49.270 --> 00:10:50.560
-So why is it not bound?
+00:10:48.960 --> 00:10:50.560
+Why?  Y is not bound.
 
 292
-00:10:50.570 --> 00:10:54.140
-But I can bind it using let.
-
-293
-00:10:54.150 --> 00:10:54.510
-Right?
+00:10:50.570 --> 00:10:54.510
+But I can bind it using let.  Right?
 
 294
 00:10:54.510 --> 00:10:56.060
@@ -980,52 +818,32 @@ and it will give me the value 12.
 And this is a feature known as dynamic scoping.
 
 298
-00:11:07.340 --> 00:11:10.440
-And you know every every piece of code that we've seen so far.
-
-299
-00:11:10.450 --> 00:11:11.020
-Actually,
+00:11:07.340 --> 00:11:11.020
+And you know every every piece of code that we've seen so far, actually,
 
 300
 00:11:11.030 --> 00:11:13.940
-an Emacs Lisp could also be a MacLisp program.
+in Emacs Lisp could also be a MacLisp program.
 
 301
 00:11:13.940 --> 00:11:18.560
-So MacLisp was one of the predecessors of the Emacs Lisp, and was just a regular Lisp implementation that
+So MacLisp was one of the predecessors of Emacs Lisp, and was just a regular Lisp implementation that
 
 302
-00:11:18.560 --> 00:11:20.420
-existed at the time.
-
-303
-00:11:20.430 --> 00:11:20.910
-Right?
+00:11:18.560 --> 00:11:20.910
+existed at the time.  Right?
 
 304
-00:11:20.990 --> 00:11:22.100
-So,
-
-305
-00:11:22.110 --> 00:11:26.920
-so there's a strange thing is that the binding that we do with let
+00:11:20.990 --> 00:11:26.920
+So, so there's a strange thing is that the binding that we do with let
 
 306
-00:11:26.930 --> 00:11:28.850
-works more like an assignment.
-
-307
-00:11:28.850 --> 00:11:29.170
-Right?
+00:11:26.930 --> 00:11:29.170
+works more like an assignment.  Right?
 
 308
-00:11:29.180 --> 00:11:29.690
-So,
-
-309
-00:11:29.690 --> 00:11:34.170
-so when F refers to Y it doesn't refer to kind of electrically
+00:11:29.180 --> 00:11:34.170
+So, so when F refers to Y it doesn't refer to kind of lexically
 
 310
 00:11:34.180 --> 00:11:37.890
@@ -1040,20 +858,12 @@ but to the one that was done last at run time.
 So there's dynamic scoping and it seems just
 
 313
-00:11:46.160 --> 00:11:48.280
-very unusual to do that.
-
-314
-00:11:48.280 --> 00:11:48.470
-Right?
+00:11:46.160 --> 00:11:48.470
+very unusual to do that.  Right?
 
 315
-00:11:48.470 --> 00:11:48.850
-Why?
-
-316
-00:11:48.860 --> 00:11:53.060
-Why Stefan is there dynamic scoping in Emacs Lisp?
+00:11:48.470 --> 00:11:53.060
+Why?  Why, Stefan, is there dynamic scoping in Emacs Lisp?
 
 317
 00:11:54.040 --> 00:11:55.860
@@ -1064,12 +874,8 @@ Is that a feature or is it a bug?
 That is a feature.
 
 320
-00:11:58.080 --> 00:11:58.750
-Okay,
-
-321
-00:11:59.440 --> 00:12:02.460
-so can you show me something I can actually do with dynamic scoping?
+00:11:58.080 --> 00:12:02.460
+Okay, so can you show me something I can actually do with dynamic scoping?
 
 323
 00:12:03.680 --> 00:12:05.890
@@ -1085,23 +891,15 @@ Yeah.
 
 326
 00:12:09.740 --> 00:12:12.080
-So it's prettier than XEmacs.
+See it's prettier than XEmacs.
 
 328
-00:12:15.140 --> 00:12:17.460
-It's boringer than XEmacs,
-
-329
-00:12:17.470 --> 00:12:18.460
-I can say that much.
+00:12:15.140 --> 00:12:18.460
+It's boringer than XEmacs, I can say that much.
 
 330
-00:12:19.040 --> 00:12:20.100
-Okay,
-
-331
-00:12:20.110 --> 00:12:24.230
-so here is an example of an Emacs Lisp package.
+00:12:19.040 --> 00:12:24.230
+Okay, so here is an example of an Emacs Lisp package.
 
 332
 00:12:24.240 --> 00:12:25.390
@@ -1109,7 +907,7 @@ Okay,
 
 333
 00:12:25.400 --> 00:12:30.230
-it shows somewhat randomly - I was just passing through the other day - and you can see
+it chose it somewhat randomly - I was just passing through the other day - and you can see
 
 334
 00:12:30.230 --> 00:12:34.560
@@ -1124,12 +922,8 @@ and I have it here folded
 so it doesn't overwhelm you with everything.
 
 337
-00:12:38.970 --> 00:12:40.280
-But so here,
-
-338
-00:12:40.290 --> 00:12:40.970
-for example,
+00:12:38.970 --> 00:12:40.970
+But so here, for example,
 
 339
 00:12:40.970 --> 00:12:43.900
@@ -1137,11 +931,11 @@ the isearch-mb--message function,
 
 340
 00:12:43.910 --> 00:12:44.890
-it doesn't really matter,
+it doesn't really matter
 
 341
 00:12:44.900 --> 00:12:49.770
-what it's for but you can see that the first thing you can see
+what it's for, but you can see that the first thing you can see
 
 342
 00:12:49.770 --> 00:12:52.390
@@ -1156,24 +950,16 @@ Okay.
 And that's not what you were asking me.
 
 345
-00:12:55.970 --> 00:12:56.890
-But since we see it,
-
-346
-00:12:56.890 --> 00:12:59.050
-I just mentioned it.
+00:12:55.970 --> 00:12:59.050
+But since we see it, I just mentioned it.
 
 347
 00:12:59.440 --> 00:13:01.680
 So that's a documentation string.
 
 348
-00:13:01.690 --> 00:13:02.910
-That's a kind of,
-
-349
-00:13:02.920 --> 00:13:03.220
-you know,
+00:13:01.690 --> 00:13:03.220
+That's a kind of, you know,
 
 350
 00:13:03.220 --> 00:13:06.460
@@ -1185,7 +971,7 @@ It was actually introduced by Richard Stallman,
 
 352
 00:13:08.890 --> 00:13:09.960
-but not in in Emacs Lisp.
+but not in Emacs Lisp.
 
 353
 00:13:10.640 --> 00:13:12.760
@@ -1193,19 +979,15 @@ It was originally introduced in TECO.
 
 354
 00:13:13.440 --> 00:13:18.410
-So he added into TECO and then and then carried it to Emacs west and from there
+So he added it to TECO and then and then carried it to Emacs Lisp and from there
 
 355
 00:13:18.410 --> 00:13:20.180
 it spread to other languages.
 
 356
-00:13:20.190 --> 00:13:20.630
-Okay,
-
-357
-00:13:20.640 --> 00:13:23.490
-so I guess that's another kind of facet of user empowerment.
+00:13:20.190 --> 00:13:23.490
+Okay, so I guess that's another kind of facet of user empowerment.
 
 358
 00:13:23.490 --> 00:13:23.720
@@ -1216,24 +998,12 @@ Right?
 That you can then easily look up that documentation and it kind of comes with the code.
 
 360
-00:13:28.540 --> 00:13:29.220
-Exactly.
-
-361
-00:13:29.230 --> 00:13:34.050
-So that is something that he
-
-362
-00:13:34.060 --> 00:13:34.970
-found, as you know,
+00:13:28.540 --> 00:13:34.970
+Exactly.  So that is something that he found, as you know,
 
 363
-00:13:34.980 --> 00:13:35.800
-very,
-
-364
-00:13:35.810 --> 00:13:38.810
-very useful for the users.
+00:13:34.980 --> 00:13:38.810
+very, very useful for the users.
 
 365
 00:13:38.820 --> 00:13:40.860
@@ -1241,7 +1011,7 @@ And the one thing here you wanted,
 
 366
 00:13:40.870 --> 00:13:45.550
-you asked about it was this message-log-max binding here.
+you asked about, was this message-log-max binding here.
 
 367
 00:13:45.560 --> 00:13:46.920
@@ -1249,19 +1019,15 @@ Not because it has this name,
 
 368
 00:13:46.920 --> 00:13:51.610
-but if you look this variable is not used because it's using dynamic
+but if you look this variable is not used because .. it's using
 
 369
 00:13:51.620 --> 00:13:52.360
-binding,
+dynamic binding,
 
 370
-00:13:52.740 --> 00:13:53.610
-dynamic scoping.
-
-371
-00:13:53.610 --> 00:13:54.060
-Sorry.
+00:13:52.740 --> 00:13:54.060
+dynamic scoping.  Sorry.
 
 372
 00:13:54.740 --> 00:13:59.470
@@ -1272,24 +1038,20 @@ So this variable is really fundamentally passed as a
 configuration argument through the message function here.
 
 374
-00:14:02.940 --> 00:14:04.970
-The message function here is a kind of printer,
-
-375
-00:14:04.980 --> 00:14:05.330
-you know,
+00:14:02.940 --> 00:14:05.330
+The message function here is a kind of printf, you know,
 
 376
 00:14:05.330 --> 00:14:08.410
-that just displays something in the minibuffer in the little window
+that just displays something in the minibuffer, in the little window
 
 377
 00:14:08.410 --> 00:14:13.380
-you have to be very bottom here and
+you have at the very bottom here and
 
 378
 00:14:13.390 --> 00:14:17.020
-as it does that also it kind of records the message log somewhere,
+as it does that also it kind of records the message in a log somewhere,
 
 379
 00:14:17.020 --> 00:14:19.160
@@ -1301,19 +1063,15 @@ And message-log-max is a variable
 
 381
 00:14:22.010 --> 00:14:25.470
-you can use to tell the message,
+you can use to tell message,
 
 382
 00:14:25.480 --> 00:14:30.260
 you know how many messages to keep and more specifically in this case to just not log anything.
 
 383
-00:14:30.840 --> 00:14:31.250
-Okay,
-
-384
-00:14:31.260 --> 00:14:32.590
-so the implementation,
+00:14:30.840 --> 00:14:32.590
+Okay, so the implementation,
 
 385
 00:14:32.600 --> 00:14:36.450
@@ -1325,7 +1083,7 @@ Exactly.
 
 387
 00:14:37.820 --> 00:14:39.820
-This is actually the C code,
+This is actually in the C code,
 
 388
 00:14:39.830 --> 00:14:40.660
@@ -1341,7 +1099,7 @@ So so it's looked up in the C code as a normal
 
 391
 00:14:48.710 --> 00:14:53.610
-variable and here is bound to affect the behavior of message.
+variable and here it's bound to affect the behavior of message.
 
 392
 00:14:53.620 --> 00:14:55.720
@@ -1356,92 +1114,57 @@ not specifically for this variable but all kinds of functions have this
 extra configuration passed in via dynamic scoping.
 
 395
-00:15:03.940 --> 00:15:04.540
-Okay.
-
-396
-00:15:04.550 --> 00:15:07.230
-So the alternative to that I guess would be to have,
-
-397
-00:15:07.240 --> 00:15:07.510
-you know,
+00:15:03.940 --> 00:15:07.510
+Okay. So the alternative to that I guess would be to have, you know,
 
 398
-00:15:07.510 --> 00:15:09.610
-all the functions have lots of parameters.
-
-399
-00:15:09.620 --> 00:15:09.960
-Right.
+00:15:07.510 --> 00:15:09.960
+all the functions have lots of parameters.  Right?
 
 400
-00:15:10.340 --> 00:15:10.790
-Right.
-
-401
-00:15:10.800 --> 00:15:15.760
-Or some extra config parameter that's threaded through the code or passed through the code
+00:15:10.340 --> 00:15:15.760
+Right.  Or some extra config parameter that's threaded through the code or passed through the code
 
 402
 00:15:15.760 --> 00:15:16.380
 everywhere.
 
 403
-00:15:16.390 --> 00:15:20.270
-So that that I guess makes dynamic scoping via feature.
-
-404
-00:15:20.280 --> 00:15:20.710
-Right?
+00:15:16.390 --> 00:15:20.710
+So that that I guess makes dynamic scoping be a feature.  Right?
 
 405
-00:15:20.720 --> 00:15:22.170
-Yes.
-
-407
-00:15:22.520 --> 00:15:23.350
-Very much so.
+00:15:20.720 --> 00:15:23.350
+Yes.  Very much so.
 
 408
 00:15:23.740 --> 00:15:24.250
 Okay.
 
 409
-00:15:24.260 --> 00:15:26.270
-It's used,
-
-410
-00:15:26.280 --> 00:15:26.490
-you know,
+00:15:24.260 --> 00:15:26.490
+It's used, you know,
 
 411
 00:15:26.490 --> 00:15:29.610
-it's using in in many places in the in the API,
+it's used in many places in the in the API,
 
 414
 00:15:29.920 --> 00:15:32.460
-in the core API of of Emacs Lisp.
+in the core API of Emacs Lisp.
 
 415
 00:15:33.040 --> 00:15:37.790
-So Stefan the other day I tried the dynamic scoping example that I had earlier, that f
+So Stefan, the other day I tried the dynamic scoping example that I had
+earlier, that F function,
 
 416
-00:15:37.790 --> 00:15:38.920
-function, in Emacs,
-
-420
-00:15:39.530 --> 00:15:42.630
-the Emacs that you're working on and it it didn't work.
+00:15:37.790 --> 00:15:42.630
+in GNU Emacs, the Emacs that you're working on, and it it didn't work.
 
 421
-00:15:42.640 --> 00:15:43.890
-What's the matter?
-
-422
-00:15:43.900 --> 00:15:44.950
-What's up with that?
+00:15:42.640 --> 00:15:44.950
+What's the matter?  What's up with that?
 
 423
 00:15:45.640 --> 00:15:50.110
@@ -1449,7 +1172,7 @@ Could you type that into your Emacs just so you can ...
 
 424
 00:15:50.530 --> 00:15:51.580
-defun f ...
+defun F ...
 
 425
 00:15:51.590 --> 00:15:52.540
@@ -1457,7 +1180,7 @@ Yeah.
 
 426
 00:15:53.240 --> 00:15:54.670
-Just x
+Just X
 
 427
 00:15:54.670 --> 00:15:55.780
@@ -1465,7 +1188,7 @@ Right.
 
 428
 00:15:55.890 --> 00:16:00.740
-y and then let y to seven and call f
+y and then let Y to seven and call F
 
 429
 00:16:00.740 --> 00:16:01.460
@@ -1504,12 +1227,8 @@ instead of - or static scoping - instead of dynamic scoping.
 Okay.
 
 438
-00:16:22.090 --> 00:16:24.360
-So of course now this doesn't work anymore.
-
-439
-00:16:24.370 --> 00:16:24.760
-That's right.
+00:16:22.090 --> 00:16:24.760
+So of course now this doesn't work anymore.  That's right.
 
 440
 00:16:25.740 --> 00:16:29.500
@@ -1521,11 +1240,11 @@ a zillion lines of code written in Emacs Lisp.
 
 442
 00:16:32.190 --> 00:16:34.760
-Did that all break when you make that change?
+Did that all break when you made that change?
 
 443
 00:16:35.640 --> 00:16:39.120
-It would have if we if we changed it just like that.
+It would have if we if we'd changed it just like that.
 
 444
 00:16:39.120 --> 00:16:39.700
@@ -1533,7 +1252,7 @@ Yes of course.
 
 445
 00:16:39.700 --> 00:16:42.380
-But okay we just added a new dialect instead.
+But we just added a new dialect instead.
 
 446
 00:16:42.390 --> 00:16:45.290
@@ -1541,7 +1260,7 @@ Okay so there's now two dialects of Emacs Lisp.
 
 447
 00:16:45.300 --> 00:16:49.180
-So there's statically scoped and then there's dynamically scoped.
+So there's statically scoped and then there's dynamically scoped Emacs Lisp.
 
 449
 00:16:50.530 --> 00:16:53.210
@@ -1549,11 +1268,11 @@ So I guess you found a way to kind of make,
 
 450
 00:16:53.220 --> 00:16:58.020
-I mean we said dynamic scoping is a feature and you needed to kind of configure things
+I mean, we said dynamic scoping is a feature and you need it to kind of configure things
 
 451
 00:16:58.140 --> 00:17:00.520
-um and and add additional parameters,
+um, and add additional parameters,
 
 452
 00:17:00.520 --> 00:17:03.040
@@ -1561,15 +1280,11 @@ pass additional parameters into Emacs Lisp functions.
 
 453
 00:17:03.050 --> 00:17:06.060
-So um so I guess you made that work.
+So, um, so I guess you made that work.
 
 454
-00:17:06.069 --> 00:17:08.460
-Why didn't Stallman do that originally?
-
-455
-00:17:08.460 --> 00:17:08.730
-Right?
+00:17:06.069 --> 00:17:08.730
+Why didn't Stallman do that originally?  Right?
 
 456
 00:17:08.730 --> 00:17:10.420
@@ -1580,12 +1295,8 @@ I mean he started working on,
 you know this version of Emacs in the 80s and at that time,
 
 458
-00:17:13.810 --> 00:17:13.990
-you know,
-
-459
-00:17:13.990 --> 00:17:14.950
-Scheme was available,
+00:17:13.810 --> 00:17:14.950
+you know, Scheme was available,
 
 460
 00:17:14.950 --> 00:17:18.089
@@ -1600,88 +1311,52 @@ pretty much used static scoping,
 how come?
 
 463
-00:17:22.640 --> 00:17:22.790
-Well,
-
-464
-00:17:22.790 --> 00:17:27.339
-I think I think it was mostly because first he had a lot of experience with dynamic scoping.
+00:17:22.640 --> 00:17:27.339
+Well, I think I think it was mostly because; first he had a lot of experience with dynamic scoping.
 
 465
-00:17:27.349 --> 00:17:28.630
-The group
-
-466
-00:17:28.630 --> 00:17:31.970
-There was working was using MacLisp and Lisp Machine Lisp.
+00:17:27.349 --> 00:17:31.970
+The group where he was working was using MacLisp and Lisp Machine Lisp.
 
 467
 00:17:31.980 --> 00:17:34.550
 All of these were using dynamic scoping.
 
 468
-00:17:35.140 --> 00:17:36.130
-He also,
-
-469
-00:17:36.140 --> 00:17:36.670
-you know,
-
-470
-00:17:37.140 --> 00:17:39.130
-he also liked Multics Emacs,
-
-471
-00:17:39.140 --> 00:17:40.000
-as you know,
+00:17:35.140 --> 00:17:39.130
+He also, you know, he also liked Multics Emacs,
 
 472
 00:17:40.000 --> 00:17:44.360
 there were lots of lots of variants of Emacs back then when the new Emacs was started
 
 473
-00:17:44.940 --> 00:17:49.830
-and I think Multics Emacs was definitely one of the
-
-474
-00:17:49.840 --> 00:17:50.850
-most successful ones.
+00:17:44.940 --> 00:17:50.850
+and I think Multics Emacs was definitely one of the most successful ones.
 
 476
 00:17:52.440 --> 00:17:57.200
 And Multics Emacs used MacLisp and uses dynamic scoping and in the style of
 
 477
-00:17:57.200 --> 00:17:57.450
-code,
-
-478
-00:17:57.450 --> 00:17:59.160
-you write in Multics Emacs,
+00:17:57.200 --> 00:17:59.160
+code, you write in Multics Emacs,
 
 479
-00:17:59.540 --> 00:18:01.990
-dynamic scoping was also used very,
-
-480
-00:18:02.000 --> 00:18:02.920
-very commonly.
+00:17:59.540 --> 00:18:02.920
+dynamic scoping was also used very, very commonly.
 
 481
 00:18:02.930 --> 00:18:05.310
 So he had a fair bit of experience.
 
 482
-00:18:05.310 --> 00:18:06.140
-Also back then,
-
-483
-00:18:06.150 --> 00:18:06.480
-you know,
+00:18:05.310 --> 00:18:06.480
+Also back then, you know,
 
 484
 00:18:06.480 --> 00:18:11.270
-we should not forget that back then in this particular context,
+we should not forget that back then, in this particular context,
 
 485
 00:18:11.740 --> 00:18:14.050
@@ -1693,131 +1368,73 @@ whereas lexical scoping was kind of the new guy on the block and it wasn't
 
 487
 00:18:20.040 --> 00:18:22.110
-quite clear exactly what they would,
+quite clear exactly what they would...
 
 488
-00:18:22.120 --> 00:18:22.950
-you know,
-
-489
-00:18:23.340 --> 00:18:26.370
-it seems kind of expensive to implement,
+00:18:22.120 --> 00:18:26.370
+you know, it seems kind of expensive to implement,
 
 490
 00:18:26.380 --> 00:18:29.230
 there were ideas of how to make it work efficiently,
 
 491
-00:18:29.230 --> 00:18:29.990
-but you know,
-
-492
-00:18:29.990 --> 00:18:31.520
-it was not as obvious.
+00:18:29.230 --> 00:18:31.520
+but you know, it was not as obvious.
 
 493
-00:18:31.530 --> 00:18:32.160
-Okay,
-
-494
-00:18:32.840 --> 00:18:34.980
-so I guess the point is, with lexical scoping,
+00:18:31.530 --> 00:18:34.980
+Okay, so I guess the point is, with lexical scoping,
 
 495
-00:18:34.980 --> 00:18:37.930
-you need to create closures when there's a lambda expression in your program.
-
-496
-00:18:37.940 --> 00:18:38.700
-Right?
+00:18:34.980 --> 00:18:38.700
+you need to create closures when there's a lambda expression in your
+program.  Right?
 
 497
-00:18:38.710 --> 00:18:43.660
-And you need to package up all the variables used in
-
-498
-00:18:43.660 --> 00:18:44.660
-the body of the lambda,
-
-499
-00:18:45.040 --> 00:18:45.400
-right?
+00:18:38.710 --> 00:18:45.400
+And so you need to package up all the variables used in
+the body of the lambda
 
 500
 00:18:45.400 --> 00:18:50.110
-And then you have to look for them in the different levels of the environment and
+Right, and then you have to look for them in the different levels of the environment
 
 501
 00:18:50.110 --> 00:18:52.550
-depending on how you represent your environment,
+and depending on how you represent your environment,
 
 502
 00:18:52.560 --> 00:18:57.540
-at least it wasn't clear exactly how that should work.
+at least, it wasn't clear exactly how that should work.
 
 503
-00:18:57.550 --> 00:18:58.670
-Okay,
-
-504
-00:18:58.680 --> 00:18:59.010
-so,
-
-505
-00:18:59.010 --> 00:19:01.750
-but how did people work for like 20 years,
+00:18:57.550 --> 00:19:01.750
+Okay, so, but how did people work for like 20 years,
 
 506
-00:19:01.750 --> 00:19:05.310
-20, 30 years with just dynamic scoping available to them?
-
-507
-00:19:05.320 --> 00:19:05.890
-Right.
+00:19:01.750 --> 00:19:05.890
+20, 30 years with just dynamic scoping available to them, right?
 
 508
-00:19:05.900 --> 00:19:09.590
-If lambda doesn't bind local free variables,
-
-509
-00:19:09.600 --> 00:19:10.200
-then,
-
-510
-00:19:10.210 --> 00:19:10.490
-you know,
+00:19:05.900 --> 00:19:10.490
+If lambda doesn't bind local free variables, then, you know,
 
 511
-00:19:10.490 --> 00:19:11.560
-that must be a major pain.
-
-512
-00:19:11.560 --> 00:19:11.860
-Right?
+00:19:10.490 --> 00:19:11.860
+that must be a major pain.  Right?
 
 513
-00:19:13.740 --> 00:19:16.930
-No,
-
-514
-00:19:16.990 --> 00:19:17.410
-no,
-
-515
-00:19:17.410 --> 00:19:21.360
-you dynamic scoping is perfectly sufficient.
-
-517
-00:19:22.800 --> 00:19:26.670
-We had this,
+00:19:13.740 --> 00:19:21.360
+Hmmm, no, you can live... dynamic scoping is perfectly sufficient.
 
 518
 00:19:27.040 --> 00:19:32.000
-technically there's only two main issues with dynamic scoping, and one of them
+technically there's only two main issues with dynamic scoping,
 
 519
 00:19:32.000 --> 00:19:34.270
-is name conflict.
+one of them is name conflict.
 
 520
 00:19:35.040 --> 00:19:35.410
@@ -1825,7 +1442,7 @@ Okay.
 
 521
 00:19:35.420 --> 00:19:39.060
-You have to be more careful when you name your variables.
+You have to be more careful how you name your variables.
 
 522
 00:19:39.440 --> 00:19:43.960
@@ -1833,7 +1450,7 @@ If we go back to my example of isearch minibuffer,
 
 523
 00:19:43.970 --> 00:19:45.860
-the isearch package,
+the isearch-mb package,
 
 524
 00:19:46.240 --> 00:19:48.750
@@ -1841,11 +1458,11 @@ you'll see that all the variables declared here,
 
 525
 00:19:48.920 --> 00:19:52.730
-they all start with isearch and mb.
+they all start with isearch-mb.
 
 526
 00:19:52.750 --> 00:19:55.540
-And so this is basically - we use what they call,
+And so this is basically - we use what we call,
 
 527
 00:19:55.540 --> 00:19:59.820
@@ -1857,15 +1474,11 @@ belongs to this package and so it tries to avoid
 
 529
 00:20:04.370 --> 00:20:08.460
-or it aims to avoid conflict with other packages,
+or it aims to avoid conflicts with other packages,
 
 530
-00:20:08.460 --> 00:20:10.110
-using the same variable
-
-531
-00:20:10.110 --> 00:20:11.360
-for other purposes.
+00:20:08.460 --> 00:20:11.360
+using the same variable for other purposes.
 
 532
 00:20:11.370 --> 00:20:11.940
@@ -1876,32 +1489,20 @@ Okay.
 So you can still have conflicts within the package,
 
 534
-00:20:15.320 --> 00:20:16.040
-but you know,
-
-535
-00:20:16.050 --> 00:20:18.170
-presumably the author knows what he's doing so,
+00:20:15.320 --> 00:20:18.170
+but you know, presumably the author knows what he's doing
 
 536
 00:20:18.540 --> 00:20:19.860
-it's easy to avoid,
+so, it's easy to avoid,
 
 537
 00:20:20.440 --> 00:20:24.050
 but if you look inside inside functions then you'll see,
 
 538
-00:20:24.050 --> 00:20:24.550
-for example,
-
-539
-00:20:24.550 --> 00:20:25.210
-here,
-
-540
-00:20:25.220 --> 00:20:25.490
-you know,
+00:20:24.050 --> 00:20:25.490
+for example, here, you know,
 
 541
 00:20:25.490 --> 00:20:27.390
@@ -1917,19 +1518,19 @@ There's no need for name space prefix for the local variables.
 
 545
 00:20:34.860 --> 00:20:36.810
-It's not as costly as you think.
+It's not as costly as you'd think.
 
 546
 00:20:36.820 --> 00:20:41.700
-It makes it reasonably clear when you have a dynamically scoped variable like we had
+It makes it reasonably clear when you have a dynamically scoped variable,
 
 547
 00:20:41.700 --> 00:20:46.730
-here in the example of message-log-max as opposed to a local variable
+like we had here in the example of message-log-max, as opposed to a local variable
 
 549
 00:20:46.730 --> 00:20:51.570
-that could use lexical scoping or that doesn't really matter because it's just local.
+that could use lexical scoping or doesn't really matter because it's just local.
 
 550
 00:20:51.580 --> 00:20:52.170
@@ -1945,43 +1546,27 @@ Can you pull up the example that you just had with the count variable?
 
 553
 00:20:55.840 --> 00:20:57.330
-All right.
+Ahh.. right.
 
 554
-00:20:57.340 --> 00:20:59.090
-So I guess here really,
-
-555
-00:20:59.100 --> 00:20:59.920
-I guess,
-
-556
-00:20:59.930 --> 00:21:00.210
-you know,
+00:20:57.340 --> 00:21:00.210
+So I guess here really, I guess, you know,
 
 557
 00:21:00.210 --> 00:21:04.210
 the count variable is only used kind of within the lexical extent of the let.
 
 558
-00:21:04.220 --> 00:21:04.670
-Right.
-
-559
-00:21:05.140 --> 00:21:06.860
-So there,
+00:21:04.220 --> 00:21:06.860
+Right. So there,
 
 560
 00:21:06.870 --> 00:21:10.210
 I mean at least as it pertains to that particular variable,
 
 561
-00:21:10.220 --> 00:21:13.170
-there's no difference between dynamic and static scoping.
-
-562
-00:21:13.180 --> 00:21:13.940
-Right?
+00:21:10.220 --> 00:21:13.940
+there's no difference between dynamic and static scoping.  Right?
 
 563
 00:21:13.950 --> 00:21:14.260
@@ -1996,12 +1581,8 @@ I remember you know in the late 90s when I was
 still a research assistant at the university,
 
 566
-00:21:20.780 --> 00:21:23.910
-we were thinking that in fact a lot of Emacs Lisp code,
-
-567
-00:21:23.910 --> 00:21:24.080
-right,
+00:21:20.780 --> 00:21:24.080
+we were thinking that in fact a lot of Emacs Lisp code, right,
 
 568
 00:21:24.080 --> 00:21:28.710
@@ -2012,24 +1593,16 @@ there's kind of the configuration variables that you have up there that are glob
 but kind of when you have purely local bindings are they're usually used in a way that would
 
 570
-00:21:33.690 --> 00:21:36.600
-work just the same with status scoping and dynamic scoping.
-
-571
-00:21:36.610 --> 00:21:37.450
-Right?
+00:21:33.690 --> 00:21:37.450
+work just the same with status scoping and dynamic scoping.  Right?
 
 572
 00:21:37.460 --> 00:21:37.820
-Right.
+That's right.
 
 573
-00:21:37.830 --> 00:21:39.030
-And so you know,
-
-574
-00:21:39.030 --> 00:21:41.400
-we actually did this - shameless plug -
+00:21:37.830 --> 00:21:41.400
+And so you know, we actually did this - shameless plug -
 
 575
 00:21:41.410 --> 00:21:46.310
@@ -2044,20 +1617,12 @@ where primarily my student at the time, Matthias Neubauer, implemented an analys
 would figure out whether kind of static and dynamic scoping would coincide.
 
 578
-00:21:54.890 --> 00:21:58.160
-He found out that indeed they do coincide for most,
-
-579
-00:21:58.160 --> 00:21:58.370
-you know,
+00:21:54.890 --> 00:21:58.370
+He found out that indeed they do coincide for most, you know,
 
 580
-00:21:58.370 --> 00:21:59.820
-a large percentage,
-
-581
-00:21:59.830 --> 00:22:00.210
-you know,
+00:21:58.370 --> 00:22:00.210
+a large percentage, you know,
 
 582
 00:22:00.210 --> 00:22:03.540
@@ -2069,11 +1634,11 @@ And so we thought,
 
 584
 00:22:05.140 --> 00:22:09.750
-I think you did the smart thing by evolving Emacs Lisp into two different
+I think you did the smart thing by evolving Emacs Lisp into two different dialects
 
 585
 00:22:09.750 --> 00:22:14.630
-dialects and we just thought we were just going to transform all the code into a form that was
+and we just thought we were just going to transform all the code into a form that was
 
 586
 00:22:14.630 --> 00:22:19.540
@@ -2088,24 +1653,16 @@ language underneath and the code wouldn't notice.  Alas as it goes with many
 things that originate with research that unfortunately never materialized.
 
 589
-00:22:29.030 --> 00:22:29.440
-Yeah,
-
-590
-00:22:29.450 --> 00:22:30.720
-I was wondering,
-
-591
-00:22:30.720 --> 00:22:31.020
-you know,
+00:22:29.030 --> 00:22:31.020
+Actually, yeah, I was wondering, you know,
 
 592
 00:22:31.020 --> 00:22:35.740
-back then I thought it was a very promising path and I'm
+back then I thought it was a very promising path
 
 593
 00:22:35.750 --> 00:22:40.100
-curious why you didn't go any further.
+and I'm curious why you didn't go any further.
 
 594
 00:22:40.100 --> 00:22:44.200
@@ -2113,31 +1670,23 @@ Matthias graduated is probably the reason.
 
 595
 00:22:44.210 --> 00:22:48.340
-As it goes right as we know how it goes.
+As it goes, right, as we know how it goes.
 
 596
 00:22:48.350 --> 00:22:53.820
 It does take many years of dedication to push through such a change.
 
 598
-00:22:53.870 --> 00:22:54.510
-Yeah.
-
-599
-00:22:54.520 --> 00:22:55.510
-And to your credit,
+00:22:53.870 --> 00:22:55.510
+Yeah.  And to your credit,
 
 600
 00:22:55.520 --> 00:22:56.690
 you've done that for many years.
 
 601
-00:22:56.690 --> 00:22:57.050
-Yes,
-
-602
-00:22:57.240 --> 00:23:01.450
-we have seen this on the Emacs side
+00:22:56.690 --> 00:23:01.450
+Yes, we have seen this on the Emacs side
 
 603
 00:23:01.460 --> 00:23:03.640
@@ -2160,12 +1709,8 @@ Okay, let me switch.
 Okay.
 
 610
-00:23:16.640 --> 00:23:16.760
-Notice that
-
-611
-00:23:16.770 --> 00:23:19.250
-we actually call it lexical binding and not scoping.
+00:23:16.640 --> 00:23:19.250
+Notice that we actually call it lexical binding and not scoping.
 
 612
 00:23:19.250 --> 00:23:22.740
@@ -2196,20 +1741,12 @@ this file is using the new dialect as opposed to the old dynamically scoped dial
 Okay.
 
 620
-00:23:39.940 --> 00:23:41.970
-And this was introduced,
-
-621
-00:23:41.970 --> 00:23:43.470
-this took many years,
+00:23:39.940 --> 00:23:43.470
+And this was introduced .. this took many years,
 
 622
-00:23:43.480 --> 00:23:44.680
-this is not,
-
-623
-00:23:44.690 --> 00:23:45.240
-you know,
+00:23:43.480 --> 00:23:45.240
+this is not, you know,
 
 624
 00:23:45.250 --> 00:23:49.850
@@ -2220,36 +1757,20 @@ it's a very simple feature if you think about it and it took many years to intro
 And again details in the paper.
 
 626
-00:23:54.040 --> 00:23:54.810
-So,
-
-628
-00:23:55.420 --> 00:23:56.980
-Stefan looking at your code.
+00:23:54.040 --> 00:23:56.980
+So, Stefan looking at your code.
 
 629
 00:23:56.980 --> 00:23:57.280
 Right?
 
 630
-00:23:57.280 --> 00:23:58.280
-I see that
-
-631
-00:23:58.290 --> 00:24:00.730
-well you're you're assembling a string there.
-
-632
-00:24:00.730 --> 00:24:00.960
-Right?
+00:23:57.280 --> 00:24:00.960
+I see that well you're you're assembling a string there.  Right?
 
 633
-00:24:00.960 --> 00:24:02.170
-With the concat function.
-
-634
-00:24:02.180 --> 00:24:02.670
-Right.
+00:24:00.960 --> 00:24:02.670
+With the concat function.  Right?
 
 635
 00:24:03.040 --> 00:24:06.580
@@ -2281,27 +1802,23 @@ And you can use those properties to add all kinds of information to your strings
 
 642
 00:24:26.140 --> 00:24:30.630
-One of the important information is this face property which is used to affect the way
+One of the important information is this face property which is used to affect
 
 643
 00:24:30.630 --> 00:24:32.480
-the text would be printed
+the way the text would be printed
 
 644
 00:24:32.480 --> 00:24:35.260
-or displayed if it is to be displayed.
+or displayed, if it is to be displayed.
 
 645
-00:24:35.840 --> 00:24:36.280
-So here,
-
-646
-00:24:36.280 --> 00:24:36.820
-for example,
+00:24:35.840 --> 00:24:36.820
+So here, for example,
 
 647
 00:24:36.820 --> 00:24:41.740
-replace the minibuffer prompt face onto that text
+we place the minibuffer-prompt face onto that text
 
 648
 00:24:41.750 --> 00:24:43.050
@@ -2309,35 +1826,19 @@ so that when it's displayed,
 
 649
 00:24:43.050 --> 00:24:47.860
-it uses a particular color that corresponds to the the face
+it uses a particular color that corresponds to the face
 
 650
 00:24:47.860 --> 00:24:49.030
 called minibuffer-prompt.
 
 651
-00:24:49.040 --> 00:24:49.760
-Okay,
-
-652
-00:24:49.770 --> 00:24:51.500
-so remember an Emacs 18,
-
-653
-00:24:51.500 --> 00:24:51.750
-you know,
+00:24:49.040 --> 00:24:51.750
+Okay, so I remember in Emacs 18, you know,
 
 654
-00:24:51.760 --> 00:24:52.300
-early,
-
-655
-00:24:52.310 --> 00:24:53.180
-early nineties.
-
-656
-00:24:53.180 --> 00:24:53.520
-Right.
+00:24:51.760 --> 00:24:53.520
+early, early nineties, right,
 
 657
 00:24:53.530 --> 00:24:54.840
@@ -2353,7 +1854,7 @@ multicolored and multi-font text like that.
 
 660
 00:25:02.250 --> 00:25:02.690
-Right.
+That's right.
 
 661
 00:25:02.700 --> 00:25:07.560
@@ -2368,24 +1869,12 @@ actually evolves according to the requirements of the users as opposed to the
 requirements of the programming language researchers like ourselves.
 
 664
-00:25:16.080 --> 00:25:16.300
-Yeah,
-
-665
-00:25:16.300 --> 00:25:16.950
-that's right.
-
-666
-00:25:16.960 --> 00:25:17.420
-That's right.
+00:25:16.080 --> 00:25:17.420
+Yeah, that's right.  That's right.
 
 667
-00:25:17.430 --> 00:25:18.070
-Okay.
-
-668
-00:25:18.080 --> 00:25:20.250
-So that's cool.
+00:25:17.430 --> 00:25:20.250
+Okay.  So that's cool.
 
 669
 00:25:20.250 --> 00:25:24.860
@@ -2404,12 +1893,8 @@ There's another feature kind of baked into the core language called buffer-local
 Could you illustrate what that is?
 
 674
-00:25:33.640 --> 00:25:34.890
-Yeah,
-
-675
-00:25:34.890 --> 00:25:37.170
-I think we have some example here actually.
+00:25:33.640 --> 00:25:37.170
+Yeah, I think we have some example here actually.
 
 676
 00:25:38.040 --> 00:25:38.490
@@ -2429,7 +1914,7 @@ So setq-local is in this case a particular macro.
 
 681
 00:25:53.940 --> 00:25:57.950
-But what it does really is actually it sets the variable but you know,
+But what it does really is actually it sets the variable but, you know,
 
 682
 00:25:57.960 --> 00:25:58.940
@@ -2440,60 +1925,48 @@ in a buffer-local way,
 which means that it only changes the value in this particular buffer.
 
 684
-00:26:03.040 --> 00:26:04.710
-So you know,
-
-685
-00:26:04.720 --> 00:26:07.730
-every piece of text is stored,
+00:26:03.040 --> 00:26:07.730
+So you know, every piece of text is stored
 
 686
-00:26:07.740 --> 00:26:12.500
-in the buffer and and you always have the
-
-687
-00:26:12.500 --> 00:26:13.400
-current buffer,
+00:26:07.740 --> 00:26:13.400
+in a buffer and and you always have the current buffer,
 
 688
-00:26:13.410 --> 00:26:13.630
-you know,
-
-689
-00:26:13.630 --> 00:26:16.660
-whenever you're working in Emacs Lisp,
+00:26:13.410 --> 00:26:16.660
+you know, whenever you're working in Emacs Lisp,
 
 690
 00:26:16.670 --> 00:26:22.050
-there's always the current buffer and the current position within this buffer is part of the normal state.
+there's always the current buffer, and the current position within this buffer is part of the normal state.
 
 692
 00:26:22.540 --> 00:26:27.140
 And so when you look up a variable, a global variable such as this tool-bar-map,
 
 693
-00:26:27.150 --> 00:26:32.070
-it will well look it up in the current buffer.  So every
+00:26:27.150 --> 00:26:31.070
+it will look it up in the current buffer.
 
 694
-00:26:32.070 --> 00:26:34.260
-buffer can have a different value for this variable.
+00:26:31.070 --> 00:26:34.260
+So every buffer can have a different value for this variable.
 
 695
 00:26:34.640 --> 00:26:39.610
-Those variables are actually fully global so they have the same value in all buffers but you can set
+Most variables are actually fully global so they have the same value in all buffers
 
 696
 00:26:39.610 --> 00:26:43.670
-specific values in specific buffers.
+but you can set specific values in specific buffers.
 
 697
 00:26:44.040 --> 00:26:48.810
-This is used here for this tool-bar-map which, as
+This is used here for this tool-bar-map which is,
 
 699
 00:26:49.050 --> 00:26:51.270
-the map here refers to a key map,
+the "map" here refers to a key map,
 
 701
 00:26:52.150 --> 00:26:57.160
@@ -2501,15 +1974,11 @@ it's a data structure used to say what happens in response to a particular event
 
 703
 00:26:57.840 --> 00:27:02.890
-Which command, which code should be executed
+which command, which code should be executed
 
 705
-00:27:02.900 --> 00:27:03.570
-in response to a
-
-706
-00:27:03.570 --> 00:27:04.860
-particular user event.
+00:27:02.900 --> 00:27:04.860
+in response to a particular user event.
 
 707
 00:27:05.340 --> 00:27:08.630
@@ -2517,51 +1986,35 @@ So in this case it's what should happen when you use the toolbar.
 
 708
 00:27:08.640 --> 00:27:13.020
-I think you can't see the toolbar right now but Emacs has a
+Actually I think you can't see the toolbar right now 
 
 709
 00:27:13.020 --> 00:27:16.510
-toolbar which you can now see at the top.
+but Emacs has a toolbar which you can now see at the top.
 
 710
-00:27:16.520 --> 00:27:17.060
-Okay.
-
-711
-00:27:17.070 --> 00:27:19.930
-So here you see various buttons.
+00:27:16.520 --> 00:27:19.930
+Okay.  So here you see various buttons.
 
 712
 00:27:19.940 --> 00:27:24.810
 And so this toolbar is actually created by
 
 713
-00:27:24.820 --> 00:27:26.410
-a particular Lisp
-
-714
-00:27:26.410 --> 00:27:27.170
-data structure.
+00:27:24.820 --> 00:27:27.170
+a particular Lisp data structure.
 
 715
 00:27:27.740 --> 00:27:30.850
-And you can you can have every buffer,
+And you can you can have.. every buffer can have
 
 716
 00:27:30.850 --> 00:27:35.370
-can have a different toolbar to adapt it to the particular content in the buffer.
+a different toolbar to adapt it to the particular content in the buffer.
 
 717
-00:27:35.370 --> 00:27:37.340
-So if it's a buffer that displays,
-
-718
-00:27:37.340 --> 00:27:37.650
-you know,
-
-719
-00:27:37.660 --> 00:27:39.640
-a normal piece of code,
+00:27:35.370 --> 00:27:39.640
+So if it's a buffer that displays, you know, a normal piece of code,
 
 720
 00:27:39.650 --> 00:27:44.040
@@ -2576,36 +2029,28 @@ But then if your buffer contains,
 for example, the list of your your email then you will
 
 723
-00:27:50.870 --> 00:27:55.290
-have other buttons so that you can create your mail message or send mails
-
-724
-00:27:55.290 --> 00:27:55.950
-etcetera.
+00:27:50.870 --> 00:27:56.290
+have other buttons so that you can create a new mail message or send mail, ...
 
 725
-00:27:56.440 --> 00:27:58.550
-So that's that's what this setq-local
+00:27:56.440 --> 00:27:59.550
+So that's that's what this setq-local does
 
 726
-00:27:58.550 --> 00:28:03.670
-does.  It lets you change the toolbar according to which buffer is current.
+00:27:59.550 --> 00:28:03.670
+It lets you change the toolbar according to which buffer is current.
 
 728
-00:28:04.440 --> 00:28:04.990
-Alright,
-
-729
-00:28:05.000 --> 00:28:05.640
-so here,
+00:28:04.440 --> 00:28:05.640
+Alright, so here, really,
 
 730
 00:28:05.640 --> 00:28:10.610
-really the core semantics of the programming language interact with the fact that it's running in an editor.
+the core semantics of the programming language interact with the fact that it's running in an editor.
 
 731
 00:28:10.620 --> 00:28:10.920
-Right.
+Right?
 
 732
 00:28:10.920 --> 00:28:15.710
@@ -2624,64 +2069,41 @@ Right.
 Alright.
 
 737
-00:28:21.360 --> 00:28:21.640
-Yeah,
-
-738
-00:28:21.650 --> 00:28:26.160
-Emacs Lisp to a large extent is a normal Lisp but there are a few places where it
+00:28:21.360 --> 00:28:24.160
+Yeah, Emacs Lisp to a large extent is a normal Lisp
 
 739
-00:28:26.160 --> 00:28:26.970
-was adapted to Emacs.
+00:28:24.160 --> 00:28:26.970
+but there are a few places where it was adapted to Emacs.
 
 740
-00:28:26.980 --> 00:28:28.360
-Yeah,
-
-741
-00:28:28.670 --> 00:28:29.620
-that's one of them.
+00:28:26.980 --> 00:28:29.620
+Yeah, that's one of them.
 
 742
-00:28:29.630 --> 00:28:29.820
-Well,
-
-743
-00:28:29.820 --> 00:28:33.720
-I bet there's interesting interactions between dynamic scoping and buffer local variables.
-
-744
-00:28:33.720 --> 00:28:34.060
-Right?
+00:28:29.630 --> 00:28:34.060
+Well, I bet there's interesting interactions between dynamic scoping and
+buffer local variables.  Right?
 
 745
-00:28:34.440 --> 00:28:35.330
-Yes.
-
-746
-00:28:35.340 --> 00:28:35.730
-Yeah.
+00:28:34.440 --> 00:28:35.730
+Yes.  Yeah.
 
 747
-00:28:35.730 --> 00:28:40.680
-There's been lots of bugs over the years. I think for the last few years it's
+00:28:35.730 --> 00:28:38.680
+There's been lots of bugs over the years.
 
 748
-00:28:40.680 --> 00:28:41.670
-been stable.
+00:28:38.680 --> 00:28:41.670
+I think for the last few years it's been stable.
 
 749
-00:28:42.340 --> 00:28:42.930
-Yes.
-
-750
-00:28:42.940 --> 00:28:43.360
-Yeah.
+00:28:42.340 --> 00:28:43.360
+Yes. Yeah.
 
 751
 00:28:43.370 --> 00:28:45.660
-So and we talk about that in the paper we should mention.
+So and we talk about that in the paper, we should mention.
 
 752
 00:28:45.670 --> 00:28:46.500
@@ -2700,28 +2122,16 @@ So um apart,
 I mean lexical scoping,
 
 756
-00:28:52.060 --> 00:28:54.860
-I mean you said it's not a big feature but it really is pretty big,
-
-757
-00:28:54.870 --> 00:28:55.080
-right?
+00:28:52.060 --> 00:28:55.080
+I mean you said it's not a big feature but it really is pretty big, right?
 
 758
 00:28:55.080 --> 00:28:57.540
 It's one of the core parts of language that you changed,
 
 759
-00:28:57.550 --> 00:29:00.400
-but apart from lexical scoping and you know,
-
-760
-00:29:00.410 --> 00:29:01.230
-I think,
-
-761
-00:29:01.240 --> 00:29:01.490
-you know,
+00:28:57.550 --> 00:29:01.490
+but apart from lexical scoping and you know, I think, you know,
 
 762
 00:29:01.490 --> 00:29:04.030
@@ -2732,16 +2142,12 @@ the string representation that we looked at earlier is kind of a detail.
 Was there a lot of fundamental evolution of the underlying core language in Emacs Lisp over the years?
 
 764
-00:29:10.740 --> 00:29:11.210
-No,
-
-765
-00:29:11.210 --> 00:29:12.260
-very little.
+00:29:10.740 --> 00:29:12.260
+No, very little.
 
 766
 00:29:12.270 --> 00:29:16.040
-Emacs Lisp actually has been very stable.
+Emacs Lisp has been very stable.
 
 767
 00:29:16.040 --> 00:29:18.860
@@ -2761,31 +2167,19 @@ the implementation has changed to some extent,
 
 771
 00:29:25.840 --> 00:29:29.170
-but the core languages has stayed pretty much the same.
+but the core language has stayed pretty much the same.
 
 772
-00:29:29.180 --> 00:29:30.060
-So how do they do that?
-
-773
-00:29:30.060 --> 00:29:30.240
-Right?
+00:29:29.180 --> 00:29:30.240
+So how do they do that?  Right?
 
 774
-00:29:30.240 --> 00:29:30.420
-I mean,
-
-775
-00:29:30.420 --> 00:29:31.130
-the Haskell people,
+00:29:30.240 --> 00:29:31.130
+I mean, the Haskell people,
 
 776
-00:29:31.130 --> 00:29:33.060
-they add a new features to the language every week.
-
-777
-00:29:33.540 --> 00:29:33.960
-Right,
+00:29:31.130 --> 00:29:33.960
+they add a new features to the language every week. Right?
 
 778
 00:29:33.970 --> 00:29:34.580
@@ -2812,12 +2206,8 @@ the fact that Emacs Lisp actually is just a tool for Emacs,
 so there's no point in improving Emacs Lisp itself,
 
 784
-00:29:51.130 --> 00:29:51.320
-you know,
-
-785
-00:29:51.320 --> 00:29:52.210
-that's not the goal.
+00:29:51.130 --> 00:29:52.210
+you know, that's not the goal.
 
 786
 00:29:52.220 --> 00:29:55.590
@@ -2828,16 +2218,8 @@ The goal is to improve the editor and the experience
 for the end user.
 
 788
-00:29:56.490 --> 00:29:57.040
-You know,
-
-789
-00:29:57.050 --> 00:30:01.840
-I as a language researcher like to add things to my
-
-790
-00:30:01.840 --> 00:30:02.350
-language.
+00:29:56.490 --> 00:30:02.350
+You know, as a language researcher, I like to add things to my language.
 
 792
 00:30:04.540 --> 00:30:05.170
@@ -2848,20 +2230,12 @@ But you know,
 Richard and Eli, one of the current maintainers, keep reminding us that,
 
 794
-00:30:09.670 --> 00:30:10.080
-you know,
-
-797
-00:30:11.200 --> 00:30:12.210
-this is all nice and good,
+00:30:09.670 --> 00:30:12.210
+you know, well, this is all nice and good,
 
 798
-00:30:12.210 --> 00:30:12.860
-but,
-
-799
-00:30:12.870 --> 00:30:13.290
-you know,
+00:30:12.210 --> 00:30:13.290
+but, you know,
 
 800
 00:30:13.300 --> 00:30:15.820
@@ -2881,67 +2255,35 @@ Okay,
 
 804
 00:30:24.180 --> 00:30:25.980
-since we can extend the language,
+In the sense that we can extend the language,
 
 805
 00:30:25.980 --> 00:30:29.060
-without changing the core language if we use macros.
+without changing the core language, if we use macros.
 
 806
-00:30:29.070 --> 00:30:29.850
-Okay,
-
-807
-00:30:29.860 --> 00:30:31.560
-let me show something there.
+00:30:29.070 --> 00:30:31.560
+Okay, let me show something there.
 
 809
-00:30:32.540 --> 00:30:35.610
-I'm just gonna do that in my favorite Emacs for a moment.
-
-810
-00:30:35.610 --> 00:30:36.020
-Right.
+00:30:32.540 --> 00:30:36.020
+I'm just gonna do that in my favorite Emacs for a moment.  Right?
 
 811
-00:30:36.030 --> 00:30:39.560
-I think the enabling feature that pretty much every Lisp has.
-
-812
-00:30:39.560 --> 00:30:39.780
-Right.
+00:30:36.030 --> 00:30:39.780
+I think the enabling feature that pretty much every Lisp has
 
 813
-00:30:39.780 --> 00:30:41.760
-Is that you know,
-
-814
-00:30:41.760 --> 00:30:42.680
-program code,
-
-815
-00:30:42.680 --> 00:30:43.640
-program source code,
+00:30:39.780 --> 00:30:43.640
+is that, you know, program code, program source code,
 
 816
-00:30:43.640 --> 00:30:46.010
-there's a data structure that looks just the same.
-
-817
-00:30:46.020 --> 00:30:46.340
-Right?
+00:30:43.640 --> 00:30:46.340
+there's a data structure that looks just the same. Right?
 
 818
-00:30:46.350 --> 00:30:47.150
-And so if we,
-
-819
-00:30:47.150 --> 00:30:47.720
-for example,
-
-820
-00:30:47.720 --> 00:30:49.660
-f of 5,
+00:30:46.350 --> 00:30:49.660
+And so if we, for example, have F of 5,
 
 821
 00:30:50.040 --> 00:30:53.180
@@ -2952,24 +2294,12 @@ we can add a quote, an apostrophe, to the beginning,
 and we have something that evaluates to a piece of data that prints out
 
 823
-00:30:57.580 --> 00:31:01.720
-exactly like the function-call source code that you see above.
-
-824
-00:31:01.730 --> 00:31:02.010
-Right.
+00:30:57.580 --> 00:31:02.010
+exactly like the function-call source code that you see above.  Right?
 
 825
-00:31:02.010 --> 00:31:02.490
-And so,
-
-826
-00:31:02.500 --> 00:31:07.010
-so program source code can be manipulated via Emacs Lisp code.
-
-827
-00:31:07.020 --> 00:31:07.560
-Right?
+00:31:02.010 --> 00:31:07.560
+And so, so program source code can be manipulated via Emacs Lisp code. Right?
 
 828
 00:31:07.840 --> 00:31:11.560
@@ -2977,43 +2307,32 @@ And so you could have fancier code and I have an example here.
 
 829
 00:31:11.740 --> 00:31:16.660
-So here's a slightly fancier
+So here's a slightly fancier piece of code that doesn't just use a quote
 
 830
-00:31:16.660 --> 00:31:21.320
-piece of code that doesn't just use a quote but uses a backquote, also one the fundamental features that all Lisps
-
-831
-00:31:21.330 --> 00:31:22.490
+00:31:16.660 --> 00:31:22.490
+but uses a backquote, also one the fundamental features that all Lisps
 pretty much have.
 
 832
 00:31:22.500 --> 00:31:27.480
-And with backquote you can kind of splice little things in there by
+And with backquote you can kind of splice little things in there
 
 833
 00:31:27.480 --> 00:31:30.230
-evaluating expression inside the quoted form,
+by evaluating expression inside the quoted form,
 
 834
-00:31:30.230 --> 00:31:30.760
-so for example,
-
-835
-00:31:30.760 --> 00:31:32.110
-like array-size here,
+00:31:30.230 --> 00:31:32.110
+so for example, like array-size here,
 
 836
 00:31:32.120 --> 00:31:36.700
 array-name and init-val.  And then you can see here that,
 
 837
-00:31:36.710 --> 00:31:38.140
-there's a data type in Emacs Lisp,
-
-838
-00:31:38.140 --> 00:31:38.920
-the symbol,
+00:31:36.710 --> 00:31:38.920
+there's a data type in Emacs Lisp, the symbol,
 
 839
 00:31:38.930 --> 00:31:40.080
@@ -3036,80 +2355,40 @@ we bind a bunch of variables and then these variables through the comma here,
 get inserted into the output.
 
 844
-00:31:49.100 --> 00:31:50.600
-And so if I evaluate this,
-
-845
-00:31:50.610 --> 00:31:52.080
-I see a form here.
+00:31:49.100 --> 00:31:52.080
+And so if I evaluate this, I see a form here.
 
 846
-00:31:52.090 --> 00:31:52.300
-I mean,
-
-847
-00:31:52.300 --> 00:31:52.940
-never mind that
-
-848
-00:31:52.940 --> 00:31:55.910
-it's a special form called do,
+00:31:52.090 --> 00:31:55.910
+I mean, never mind that it's a special form called do,
 
 849
-00:31:55.910 --> 00:31:56.860
-that Stefan you never use,
-
-850
-00:31:56.860 --> 00:31:58.280
-but it's also the same in Scheme,
+00:31:55.910 --> 00:31:58.280
+that Stefan you never use, but it's also the same in Scheme,
 
 851
 00:31:58.280 --> 00:32:00.050
-so I've used it on occasion, (I don't like it!)
+so I've used it on occasion, [I don't like it!]
 
 853
 00:32:00.770 --> 00:32:03.270
 and you don't like it.
 
 854
-00:32:03.280 --> 00:32:03.850
-Yeah,
-
-855
-00:32:03.860 --> 00:32:04.730
-well that's your loss.
+00:32:03.280 --> 00:32:04.730
+Yeah, well that's your loss.
 
 856
-00:32:04.730 --> 00:32:07.200
-But you can see that it's spliced the array-size,
-
-857
-00:32:07.200 --> 00:32:08.040
-for example,
-
-858
-00:32:08.050 --> 00:32:08.590
-in here.
-
-859
-00:32:08.590 --> 00:32:08.970
-Right?
+00:32:04.730 --> 00:32:08.970
+But you can see that it's spliced the array-size, for example, in here.
 
 860
 00:32:08.980 --> 00:32:09.960
 11 here.
 
 861
-00:32:10.340 --> 00:32:11.370
-And also,
-
-862
-00:32:11.380 --> 00:32:11.720
-you know,
-
-863
-00:32:11.720 --> 00:32:14.630
-init-val is this variable here.
+00:32:10.340 --> 00:32:14.630
+And also, you know, init-val is this variable here.
 
 864
 00:32:14.640 --> 00:32:18.370
@@ -3117,7 +2396,7 @@ And so so you can assemble program code programmatically.
 
 865
 00:32:18.380 --> 00:32:22.090
-And not only that you can turn this into what's called a macro,
+And not only that; you can turn this into what's called a macro,
 
 866
 00:32:22.100 --> 00:32:23.500
@@ -3128,12 +2407,8 @@ as you mentioned.
 So a macro looks looks very similar to a function,
 
 868
-00:32:26.620 --> 00:32:28.690
-but the difference is that,
-
-869
-00:32:28.700 --> 00:32:28.990
-you know,
+00:32:26.620 --> 00:32:28.990
+but the difference is that, you know,
 
 870
 00:32:28.990 --> 00:32:31.020
@@ -3141,35 +2416,27 @@ kind of the function that gets defined here,
 
 871
 00:32:31.020 --> 00:32:35.750
-gets called by the computer whenever it sees a parenthesized
+gets called by the computer whenever it sees a parenthesized form
 
 872
-00:32:35.750 --> 00:32:37.430
-form that starts with fill-array.
-
-873
-00:32:37.440 --> 00:32:37.840
-Right?
+00:32:35.750 --> 00:32:37.840
+that starts with fill-array.  Right?
 
 874
 00:32:37.850 --> 00:32:39.950
-So if I do this
+So if I do this I can then go ... 
 
 875
 00:32:39.960 --> 00:32:44.710
-I can then go ... an array is kind of the sequence abstraction in Emacs
+an array is kind of the sequence abstraction in Emacs
 
 876
 00:32:44.720 --> 00:32:46.850
 so I can define a variable here.
 
 877
-00:32:46.850 --> 00:32:47.410
-That's a string,
-
-878
-00:32:47.410 --> 00:32:52.230
-which is also a kind of sequence.
+00:32:46.850 --> 00:32:52.230
+That's a string, which is also a kind of sequence.
 
 879
 00:32:52.230 --> 00:32:55.460
@@ -3180,52 +2447,24 @@ And I can use this fill-array form and it will
 just execute and we can see that it overwrites all the
 
 881
-00:33:00.920 --> 00:33:02.830
-characters in the string by 65,
-
-882
-00:33:02.830 --> 00:33:05.830
-essentially by expanding into
+00:33:00.920 --> 00:33:05.830
+characters in the string by 65, essentially by expanding into
 
 884
-00:33:06.140 --> 00:33:09.100
-this new form that we saw above and and compiling that,
-
-885
-00:33:09.110 --> 00:33:09.560
-right?
+00:33:06.140 --> 00:33:09.560
+this new form that we saw above and and compiling that, right?
 
 886
-00:33:09.840 --> 00:33:12.020
-And we can also kind of
-
-887
-00:33:12.020 --> 00:33:13.110
-see what it's doing,
+00:33:09.840 --> 00:33:13.110
+And we can also kind of see what it's doing,
 
 888
 00:33:13.110 --> 00:33:15.620
 we can call a function called macroexpand,
 
 889
-00:33:15.620 --> 00:33:17.300
-which will just say,
-
-890
-00:33:17.300 --> 00:33:17.800
-see,
-
-891
-00:33:17.810 --> 00:33:18.100
-you know,
-
-892
-00:33:18.100 --> 00:33:19.040
-show us that,
-
-893
-00:33:19.050 --> 00:33:19.300
-you know,
+00:33:15.620 --> 00:33:19.300
+which will just say, see, you know, show us that, you know,
 
 894
 00:33:19.300 --> 00:33:23.250
@@ -3244,32 +2483,16 @@ It expands into that let-while combination that we see here.
 And so it's pretty easy with the facilities of the language.
 
 898
-00:33:34.040 --> 00:33:34.290
-Yeah,
-
-899
-00:33:34.300 --> 00:33:35.410
-talking about this actually,
-
-900
-00:33:35.410 --> 00:33:37.460
-that reminds me have a,
-
-901
-00:33:37.470 --> 00:33:37.850
-you know,
+00:33:34.040 --> 00:33:37.850
+Yeah, talking about this actually, that reminds me have, you know,
 
 902
 00:33:38.240 --> 00:33:41.980
 rather than manipulate code during macro expansion,
 
 903
-00:33:41.990 --> 00:33:44.140
-we can manipulate code as data,
-
-904
-00:33:44.150 --> 00:33:44.500
-you know,
+00:33:41.990 --> 00:33:44.500
+we can manipulate code as data, you know,
 
 905
 00:33:44.510 --> 00:33:47.400
@@ -3280,20 +2503,12 @@ during run time and in Emacs Lisp with dynamic scoping
 we could do things like this.
 
 907
-00:33:50.240 --> 00:33:51.650
-I really could say,
-
-909
-00:33:51.960 --> 00:33:53.060
-let's say,
-
-910
-00:33:55.140 --> 00:33:55.560
-you know,
+00:33:50.240 --> 00:33:55.560
+I really could say, let's say, you know,
 
 911
 00:33:55.940 --> 00:33:59.270
-you said that there's a function that adds 42.
+this is our function that adds 42.
 
 913
 00:34:00.280 --> 00:34:01.440
@@ -3304,20 +2519,8 @@ Have all my parentheses.
 So it's like a data structure that looks like a lambda expression, okay?
 
 916
-00:34:05.140 --> 00:34:05.410
-Right.
-
-917
-00:34:05.410 --> 00:34:05.820
-Exactly.
-
-918
-00:34:05.830 --> 00:34:06.830
-That's what you manipulate.
-
-919
-00:34:06.830 --> 00:34:08.230
-Typically at macro expansion time.
+00:34:05.140 --> 00:34:08.230
+Right. Exactly. That's what you manipulate typically at macro expansion time.
 
 920
 00:34:08.230 --> 00:34:08.460
@@ -3328,40 +2531,24 @@ Right?
 But you can actually use it at run time directly.
 
 922
-00:34:11.139 --> 00:34:13.850
-I can funcall this function directly,
-
-923
-00:34:14.440 --> 00:34:15.920
-which is actually not a function.
+00:34:11.139 --> 00:34:15.920
+I can funcall this function directly, which is actually not a function.
 
 924
 00:34:15.920 --> 00:34:20.469
 It's a list, I can funcall the list and it does give me the 46 you would expect.
 
 925
-00:34:20.940 --> 00:34:21.710
-Okay,
-
-926
-00:34:21.719 --> 00:34:23.300
-that's bizarre.
+00:34:20.940 --> 00:34:23.300
+Okay, that's bizarre.
 
 927
-00:34:23.310 --> 00:34:24.020
-So,
-
-928
-00:34:24.030 --> 00:34:26.639
-it has to be kind of whenever it calls a function,
+00:34:23.310 --> 00:34:26.639
+So, it has to be kind of whenever it calls a function,
 
 929
-00:34:26.639 --> 00:34:28.020
-it has to check whether well,
-
-930
-00:34:28.030 --> 00:34:29.449
-it's not actually a function,
+00:34:26.639 --> 00:34:29.449
+it has to check whether well, it's not actually a function,
 
 931
 00:34:29.449 --> 00:34:30.270
@@ -3376,44 +2563,24 @@ And maybe that list looks like the source code of a function.
 This is because originally this is exactly how functions were represented at run time.
 
 936
-00:34:39.600 --> 00:34:41.540
-There was no difference between,
-
-937
-00:34:41.550 --> 00:34:41.929
-you know,
-
-938
-00:34:41.940 --> 00:34:46.590
-the S-exp that represents
+00:34:39.600 --> 00:34:46.590
+There was no difference between, you know, the S-exp that represents
 
 939
 00:34:46.590 --> 00:34:49.590
 the number and the actual value.
 
 940
-00:34:49.600 --> 00:34:50.610
-So the,
-
-941
-00:34:50.620 --> 00:34:52.500
-the evaluation of a lambda
-
-942
-00:34:52.500 --> 00:34:53.670
-that was just the lambda itself,
+00:34:49.600 --> 00:34:53.670
+So the, the evaluation of a lambda that was just the lambda itself,
 
 943
 00:34:53.670 --> 00:34:54.960
 the lambda list.
 
 944
-00:34:55.540 --> 00:34:59.030
-So that's like the ultimate abstraction leak.
-
-946
-00:34:59.040 --> 00:34:59.700
-Right?
+00:34:55.540 --> 00:34:59.700
+So that's like the ultimate abstraction leak. Right?
 
 947
 00:34:59.710 --> 00:35:03.520
@@ -3436,16 +2603,12 @@ So of course,
 when byte code was introduced,
 
 952
-00:35:08.020 --> 00:35:13.010
-it was a notion of a real actual function object distinct from
-
-953
-00:35:13.010 --> 00:35:13.470
-a list.
+00:35:08.020 --> 00:35:13.470
+it was a notion of a real actual function object distinct from a list.
 
 954
 00:35:14.340 --> 00:35:15.470
-But that state,
+But that stayed,
 
 955
 00:35:15.470 --> 00:35:17.260
@@ -3469,39 +2632,27 @@ And we can actually see it here.
 
 960
 00:35:29.540 --> 00:35:32.560
-Let's say where is it, so lambda.
+Let's see where is it, so lambda...
 
 962
 00:35:36.440 --> 00:35:37.460
-So we'll see.
+So if I go see.
 
 963
 00:35:38.040 --> 00:35:39.640
 Look at the definition of lambda.
 
 964
-00:35:39.880 --> 00:35:40.230
-Oh,
-
-965
-00:35:40.240 --> 00:35:40.860
-look at that.
+00:35:39.880 --> 00:35:40.860
+Oh, look at that.
 
 967
-00:35:43.240 --> 00:35:43.640
-Okay.
-
-968
-00:35:43.650 --> 00:35:44.020
-Here we are.
-
-971
-00:35:46.160 --> 00:35:48.360
-There's a lot of docstring.
+00:35:43.240 --> 00:35:48.360
+Okay. Here we are.  There's a lot of docstring.
 
 972
 00:35:49.440 --> 00:35:54.360
-And then we see the definition just adds "function" around the lambda.
+And then we see the definition just adds "function" in front of the lambda.
 
 974
 00:35:57.120 --> 00:35:59.660
@@ -3512,12 +2663,8 @@ The "function" means it's going to get compiled, right?
 Hopefully.
 
 977
-00:36:00.580 --> 00:36:00.950
-Well,
-
-978
-00:36:00.950 --> 00:36:06.430
-the "function" means that it quotes it as a function instead of quoting it as raw data.
+00:36:00.580 --> 00:36:06.430
+Well, the "function" means that it quotes it as a function instead of quoting it as raw data.
 
 981
 00:36:07.910 --> 00:36:11.570
@@ -3528,12 +2675,8 @@ So the byte compiler is going to see that this is a function and can byte-compil
 exactly.
 
 985
-00:36:14.060 --> 00:36:18.630
-But presumably because this was,
-
-986
-00:36:18.640 --> 00:36:19.120
-you know,
+00:36:14.060 --> 00:36:19.120
+But presumably because this was, you know,
 
 987
 00:36:19.130 --> 00:36:24.030
@@ -3545,163 +2688,104 @@ The habit of just using quote to quote lambdas stuck.
 
 993
 00:36:31.580 --> 00:36:35.010
-So even even nowadays you can still see a lot of code and if you,
+So even even nowadays you can still see a lot of code,
 
 994
-00:36:35.020 --> 00:36:37.160
-if you look for it on the web even more,
-
-996
-00:36:38.340 --> 00:36:38.500
-you know,
+00:36:35.020 --> 00:36:38.500
+and if you if you look for it on the web even more, you know,
 
 997
 00:36:38.500 --> 00:36:43.240
 there's lots of lots of code snippets that have the lambda quoted with a little quote.
 
 998
-00:36:43.630 --> 00:36:44.250
-Okay,
-
-999
-00:36:44.830 --> 00:36:48.350
-I bet that's a pain for your static scoping stuff, right?
+00:36:43.630 --> 00:36:48.350
+Okay, I bet that's a pain for your static scoping stuff, right?
 
 1001
-00:36:48.360 --> 00:36:48.920
-Exactly,
-
-1002
-00:36:48.930 --> 00:36:49.380
-exactly!
+00:36:48.360 --> 00:36:49.380
+Exactly, exactly!
 
 1003
-00:36:49.380 --> 00:36:50.540
-For dynamic scoping,
-
-1004
-00:36:50.550 --> 00:36:52.950
-this doesn't really matter because,
+00:36:49.380 --> 00:36:52.950
+For dynamic scoping, this doesn't really matter because,
 
 1005
-00:36:52.960 --> 00:36:53.240
-you know,
-
-1006
-00:36:53.240 --> 00:36:54.340
-the code,
-
-1007
-00:36:54.350 --> 00:36:56.490
-it doesn't need to know anything.
+00:36:52.960 --> 00:36:56.490
+you know, the code, it doesn't need to know anything.
 
 1008
-00:36:56.500 --> 00:36:56.720
-You know,
-
-1009
-00:36:56.720 --> 00:36:57.600
-you don't need to compile it
+00:36:56.500 --> 00:36:57.600
+You know, you don't need to compile it
 
 1010
 00:36:57.610 --> 00:37:00.750
-pecially in order to to preserve dynamic scoping.
+specially in order to to preserve dynamic scoping.
 
 1011
-00:37:01.430 --> 00:37:03.310
-But for static scoping
-
-1012
-00:37:03.310 --> 00:37:04.550
-you actually need your,
+00:37:01.430 --> 00:37:04.550
+But for static scoping you actually need your..
 
 1013
-00:37:04.560 --> 00:37:05.550
-when you evaluate your lambda,
-
-1014
-00:37:05.550 --> 00:37:07.040
-you need to capture the environment, right?
+00:37:04.560 --> 00:37:07.040
+when you evaluate your lambda, you need to capture the environment, right?
 
 1016
-00:37:07.630 --> 00:37:08.040
-Yeah.
-
-1017
-00:37:08.050 --> 00:37:09.600
-Oh yeah!
+00:37:07.630 --> 00:37:09.600
+Yeah.  Oh yeah!
 
 1018
 00:37:09.600 --> 00:37:12.340
 You need to create a closure.  You can't do that when you just have the source code.
 
 1019
-00:37:12.830 --> 00:37:13.100
-When you,
-
-1020
-00:37:13.110 --> 00:37:14.630
-when you just have the quote,
+00:37:12.830 --> 00:37:14.630
+When you just have the quote,
 
 1021
-00:37:14.640 --> 00:37:19.280
-the evaluation of the quote by definition just returns the list and has no
+00:37:14.640 --> 00:37:18.280
+the evaluation of the quote by definition just returns the list
 
 1022
-00:37:19.280 --> 00:37:21.050
-opportunity to capture the environment.
+00:37:18.280 --> 00:37:21.050
+and has no opportunity to capture the environment.
 
 1024
 00:37:22.260 --> 00:37:23.300
-And of course the same thing:
+And of course, the same thing,
 
 1025
 00:37:23.300 --> 00:37:28.180
-The compiler can't look inside and see that there's a reference to some of the variable which were
+the compiler can't look inside and see that there's a reference to some of the variable which were
 
 1026
 00:37:28.180 --> 00:37:29.550
 renamed and those kinds of things.
 
 1027
-00:37:29.930 --> 00:37:30.370
-Okay.
-
-1028
-00:37:30.380 --> 00:37:33.400
-So it seemed compatible with lexical scoping and introduces,
+00:37:29.930 --> 00:37:33.400
+Okay.  So it's incompatible with lexical scoping and introduces,
 
 1029
-00:37:33.410 --> 00:37:34.160
+00:37:33.410 --> 00:37:38.520
 you know,
-
-1030
-00:37:34.630 --> 00:37:39.520
-a fairly bad pain when doing the conversion of going from the old
+a fair bit of pain when doing the conversion of going
 
 1031
-00:37:39.520 --> 00:37:40.910
-dialect to the new dialect.
+00:37:38.520 --> 00:37:40.910
+from the old dialect to the new dialect.
 
 1032
-00:37:40.920 --> 00:37:41.350
-Okay.
-
-1033
-00:37:41.730 --> 00:37:44.040
-So here's an evolution that still needs to happen, right,
+00:37:40.920 --> 00:37:44.040
+Okay. So here's an evolution that still needs to happen, right,
 
 1035
 00:37:44.040 --> 00:37:46.230
 the evolution of coding style in Emacs Lisp.
 
 1036
-00:37:46.240 --> 00:37:47.430
-It's still ongoing,
-
-1037
-00:37:47.430 --> 00:37:47.750
-yes.
+00:37:46.240 --> 00:37:47.750
+It's still ongoing, yes.
 
 1040
 00:37:48.980 --> 00:37:53.690
@@ -3712,64 +2796,40 @@ We've fixed those within the actual code base of Emacs by now
 actually it's recently that we finished doing that,
 
 1043
-00:37:57.780 --> 00:37:59.860
-but in the code out there,
-
-1044
-00:37:59.870 --> 00:38:00.650
-it's still,
+00:37:57.780 --> 00:38:00.650
+but in the code out there, it's still,
 
 1045
 00:38:01.820 --> 00:38:04.700
 it will be around us for another 20 years at least.
 
 1046
-00:38:04.710 --> 00:38:05.330
-Okay,
-
-1047
-00:38:05.920 --> 00:38:06.450
-Wow.
+00:38:04.710 --> 00:38:06.450
+Okay,  Wow.
 
 1048
-00:38:08.320 --> 00:38:08.690
-Okay.
-
-1049
-00:38:08.700 --> 00:38:12.410
-So talking about Emacs Lisp within the context of Emacs is fine.
+00:38:08.320 --> 00:38:12.410
+Okay.  So talking about Emacs Lisp within the context of Emacs is fine.
 
 1050
-00:38:12.410 --> 00:38:13.540
-But also XEmacs
-
-1051
-00:38:13.540 --> 00:38:18.320
-for many years was the more featureful implementation with
+00:38:12.410 --> 00:38:18.320
+But also XEmacs for many years was the more featureful implementation with
 
 1052
 00:38:18.330 --> 00:38:23.070
-graphical bells and whistles and and what happened at the
+graphical bells and whistles and what happened at the
 
 1053
-00:38:23.070 --> 00:38:27.730
-language level in terms of maybe of implementation or of the language
-
-1054
-00:38:27.730 --> 00:38:28.240
-itself,
+00:38:23.070 --> 00:38:28.240
+language level in terms of maybe of implementation or of the language itself,
 
 1055
 00:38:29.020 --> 00:38:30.150
 can you tell us something about it?
 
 1056
-00:38:31.020 --> 00:38:31.430
-Well,
-
-1057
-00:38:31.440 --> 00:38:35.280
-I mean the focus in the development of Lucid Emacs
+00:38:31.020 --> 00:38:35.280
+Well, I mean the focus in the development of Lucid Emacs
 
 1058
 00:38:35.280 --> 00:38:36.780
@@ -3784,12 +2844,9 @@ wasn't so much on the surface language,
 but there were a few novel things that happened on the implementation side.
 
 1061
-00:38:41.720 --> 00:38:46.520
-I think one of the first things would that that happened was that James Zawinski wrote a new byte-code
-
-1062
-00:38:46.520 --> 00:38:47.150
-compiler,
+00:38:41.720 --> 00:38:47.150
+I think one of the first things that happened was that James Zawinski wrote
+a new byte-code compiler,
 
 1063
 00:38:47.620 --> 00:38:52.240
@@ -3800,24 +2857,13 @@ that ended up in Lucid Emacs and I think later migrated back
 into GNU Emacs.
 
 1066
-00:38:54.730 --> 00:38:59.650
-I think one other notable difference has to do with when Emacs
-
-1067
-00:38:59.660 --> 00:39:00.610
-starts up.
-
-1068
-00:39:00.620 --> 00:39:01.020
-Right.
+00:38:54.730 --> 00:39:01.020
+I think one other notable difference has to do with when Emacs starts up.
+Right?
 
 1069
-00:39:01.030 --> 00:39:01.950
-So Emacs,
-
-1070
-00:39:01.960 --> 00:39:02.960
-when it starts up,
+00:39:01.030 --> 00:39:02.960
+So Emacs, when it starts up,
 
 1071
 00:39:02.970 --> 00:39:06.840
@@ -3825,27 +2871,19 @@ a whole bunch of Lisp code has to be present in order for it to work properly.
 
 1072
 00:39:07.020 --> 00:39:11.880
-And we don't want to compile or evaluate or even load all that Lisp code each
+And we don't want to compile or evaluate or even load all that Lisp code each time
 
 1073
 00:39:11.880 --> 00:39:16.640
-time the editor starts up where at least we didn't want to do that in the nineties
+the editor starts up, or at least we didn't want to do that in the nineties
 
 1074
-00:39:16.650 --> 00:39:18.240
-when computers were still slower.
-
-1075
-00:39:18.250 --> 00:39:18.730
-Right?
+00:39:16.650 --> 00:39:18.730
+when computers were still slower. Right?
 
 1076
-00:39:18.740 --> 00:39:19.830
-You don't want to do that.
-
-1077
-00:39:19.840 --> 00:39:20.720
-Yeah.
+00:39:18.740 --> 00:39:20.720
+You still don't want to do that.  Yeah.
 
 1078
 00:39:20.730 --> 00:39:23.430
@@ -3860,20 +2898,12 @@ so during the build process, right,
 you would fire up Emacs or XEmacs and load all that Lisp code and then somehow
 
 1081
-00:39:29.310 --> 00:39:30.380
-dump,
-
-1082
-00:39:30.390 --> 00:39:31.750
-you know dump Emacs.
-
-1083
-00:39:31.920 --> 00:39:35.560
-So that you could then start up much faster.
+00:39:29.310 --> 00:39:35.560
+dump, you know dump Emacs so that you could then start up much faster.
 
 1084
 00:39:35.570 --> 00:39:40.090
-And the way it was originally done was there was a very operating-system specific facility
+And the way it was originally done was, there was a very operating-system specific facility
 
 1085
 00:39:40.090 --> 00:39:44.510
@@ -3885,11 +2915,11 @@ to disk and then be able to start that up again.
 
 1087
 00:39:47.760 --> 00:39:52.740
-And I remember that being very fragile and I remember
+And I remember that being very fragile and I remember, you know
 
 1088
 00:39:52.750 --> 00:39:57.670
-you know spending countless hours debugging AiX code because some field
+spending countless hours debugging AiX code because some field
 
 1089
 00:39:57.670 --> 00:40:01.250
@@ -3901,11 +2931,11 @@ And there was a long-running effort in XEmacs to
 
 1091
 00:40:06.010 --> 00:40:10.810
-improve on the internal data representation to make it possible to just dump the heap of
+improve on the internal data representation to make it possible to just dump
 
 1092
 00:40:10.820 --> 00:40:15.820
-XEmacs and then be able to load that heap quickly into the running process later.
+the heap of XEmacs and then be able to load that heap quickly into the running process later.
 
 1093
 00:40:15.830 --> 00:40:20.800
@@ -3917,19 +2947,19 @@ every object would get a run time description of the runtime
 
 1095
 00:40:25.640 --> 00:40:30.460
-format that was written and that was then used to write out the heap representation to be able
+format that was written and that was then used to write out the heap representation
 
 1096
-00:40:30.460 --> 00:40:31.330
-to load it back in.
+00:40:30.460 --> 00:40:32.330
+to be able to load it back in.
 
 1097
-00:40:31.810 --> 00:40:36.720
+00:40:32.810 --> 00:40:36.720
 I remember we were doing that just by ourselves for XEmacs.
 
 1100
 00:40:36.960 --> 00:40:39.330
-Did something similar happened with with new Emacs?
+Did something similar happened with GNU Emacs?
 
 1101
 00:40:40.610 --> 00:40:42.790
@@ -3937,7 +2967,7 @@ Actually it happened just a few years ago,
 
 1102
 00:40:42.800 --> 00:40:47.560
-so we suffered through the what was called the unexec process
+so we suffered through the what was called the "unexec" process
 
 1103
 00:40:47.560 --> 00:40:52.280
@@ -3952,100 +2982,85 @@ state of the process into a form that can be started again.
 Okay.
 
 1106
-00:40:56.990 --> 00:41:01.880
-And only a couple of years ago that that was changing in Emacs version 27 that came out
+00:40:56.990 --> 00:41:00.880
+And only a couple of years ago that was changed in Emacs version 27
 
 1107
-00:41:01.890 --> 00:41:02.900
-fairly recently.
+00:41:00.890 --> 00:41:02.900
+that came out fairly recently.
 
 1108
-00:41:02.910 --> 00:41:03.370
-Wow.
-
-1109
-00:41:03.380 --> 00:41:04.120
-Okay.
+00:41:02.910 --> 00:41:04.120
+Wow. Okay.
 
 1110
 00:41:04.130 --> 00:41:05.850
 I was curious what about those,
 
 1111
-00:41:05.860 --> 00:41:10.640
-you know those data structures you say that describes the data to help dump it. Were they
+00:41:05.860 --> 00:41:09.640
+you know, those data structures you say that describe the data to help dump it.
 
 1112
-00:41:10.640 --> 00:41:11.940
-used for something else?
+00:41:09.640 --> 00:41:11.940
+Were they used for something else?
 
 1113
-00:41:12.410 --> 00:41:12.690
-Yeah,
-
-1114
-00:41:12.700 --> 00:41:16.090
-well we also used them then to feed the garbage collector right?
+00:41:12.410 --> 00:41:16.090
+Yeah, well we also used them then to feed the garbage collector right?
 
 1115
 00:41:16.090 --> 00:41:20.890
-To tell the garbage collector what the object layout was and that enabled us to implement new garbage collector.
+To tell the garbage collector what the object layout was and that enabled us
+to implement a new garbage collector.
 
 1116
-00:41:20.890 --> 00:41:21.830
-Actually one my students,
+00:41:20.890 --> 00:41:23.830
+Actually one of my students, Marcus Crestani,
 
 1117
-00:41:21.830 --> 00:41:26.720
-Marcus Crestani, developed an incremental garbage collector because one
+00:41:23.830 --> 00:41:26.720
+developed an incremental garbage collector because one thing
 
 1118
 00:41:26.720 --> 00:41:31.530
-thing that people really really hated in Emacs and XEmacs was when there was a message appearance that
+that people really really hated in Emacs and XEmacs was when there was a message appearing
 
 1119
 00:41:31.530 --> 00:41:33.520
-said "garbage collecting", right?
+that said "garbage collecting", right?
 
 1120
-00:41:33.520 --> 00:41:38.430
-And then you knew you were in for a little weight, and even if it was just a one-second wait
+00:41:33.520 --> 00:41:36.430
+And then you knew you were in for a little wait,
 
 1121
-00:41:38.440 --> 00:41:40.010
-it was annoying.
+00:41:36.440 --> 00:41:39.510
+and even if it was just a one-second wait it was annoying.
 
 1122
-00:41:40.010 --> 00:41:40.940
+00:41:39.510 --> 00:41:40.940
 So we fixed that in XEmacs.
 
 1125
-00:41:41.220 --> 00:41:44.610
-By just having an incremental collector that got rid of the pauses,
-
-1126
-00:41:44.620 --> 00:41:45.080
-right?
+00:41:41.220 --> 00:41:45.080
+By just having an incremental collector that got rid of the pauses, right?
 
 1127
 00:41:45.090 --> 00:41:48.230
 I don't know about the "just" because that seems like a lot of work.
 
 1128
-00:41:48.240 --> 00:41:49.940
-We fixed it in a simple way.
-
-1129
-00:41:49.950 --> 00:41:51.430
-We just removed the message.
+00:41:48.240 --> 00:41:51.430
+We fixed it in a simpler way.  We just removed the message.
 
 1130
 00:41:53.110 --> 00:41:58.050
-Wow.  Well.  Okay.  So when I
+Wow.  Well.  Okay.  So when I use GNU Emacs
 
 1131
 00:41:58.050 --> 00:42:02.090
-use GNU Emacs I sometimes I wait but I don't know who to blame.
+I sometimes I wait but I don't know who to blame.
 
 1132
 00:42:02.100 --> 00:42:03.180
@@ -4053,11 +3068,11 @@ So now I know.
 
 1134
 00:42:04.560 --> 00:42:09.320
-Maybe there's one notable difference really on the language
+Maybe there's one notable difference really on the language side
 
 1135
 00:42:09.320 --> 00:42:13.290
-side that is significant between GNU Emacs and XEmacs, right?
+that is significant between GNU Emacs and XEmacs, right?
 
 1137
 00:42:13.290 --> 00:42:15.620
@@ -4068,12 +3083,8 @@ When Lucid Emacs was originally developed,
 a few of the things that were relevant for windowing got their own data structures.
 
 1139
-00:42:20.150 --> 00:42:22.540
-So let me try to show that here.
-
-1140
-00:42:22.550 --> 00:42:23.500
-So here's my XEmacs.
+00:42:20.150 --> 00:42:23.500
+So let me try to show that here.  So here's my XEmacs.
 
 1144
 00:42:24.600 --> 00:42:27.400
@@ -4084,20 +3095,12 @@ So one example is for example the mode map, right?
 Emacs at the time just represented characters as numbers and 
 
 1147
-00:42:31.590 --> 00:42:36.570
-so the idea was that you would have a
-
-1148
-00:42:36.580 --> 00:42:37.950
-mode map which was a keymap.
+00:42:31.590 --> 00:42:37.950
+so the idea was that you would have a mode map which was a keymap.
 
 1149
-00:42:37.960 --> 00:42:40.380
-It would map key bindings to functions that were called.
-
-1150
-00:42:40.380 --> 00:42:40.840
-Right?
+00:42:37.960 --> 00:42:40.840
+It would map key bindings to functions that were called.  Right?
 
 1151
 00:42:40.850 --> 00:42:43.990
@@ -4105,87 +3108,59 @@ And if you evaluate something like lisp-mode-map,
 
 1152
 00:42:43.990 --> 00:42:48.980
-you can see that there's like a hash mark and then there's angle brackets and they show you
+you can see that there's like a hash mark and then there's angle brackets and
 
 1153
 00:42:48.980 --> 00:42:53.810
-that there is an internal data structure that
+they show you that there is an internal data structure that represents the keymap
 
 1154
 00:42:53.810 --> 00:42:58.810
-represents the keymap and that was a departure from the way it was in GNU Emacs, right?
+and that was a departure from the way it was in GNU Emacs, right?
 
 1156
-00:42:58.810 --> 00:42:59.990
-And I think it still is that way
-
-1157
-00:42:59.990 --> 00:43:01.180
-in GNU Emacs to this day?
+00:42:58.810 --> 00:43:01.180
+And I think it still is that way in GNU Emacs to this day?
 
 1159
-00:43:02.000 --> 00:43:02.540
-Oh yes,
-
-1160
-00:43:02.540 --> 00:43:05.020
-very much so.  You can see the mode map.
+00:43:02.000 --> 00:43:05.020
+Oh yes, very much so.  You can't see the mode map?
 
 1162
-00:43:05.970 --> 00:43:06.340
-For us,
-
-1163
-00:43:06.350 --> 00:43:06.890
-you know,
-
-1164
-00:43:06.900 --> 00:43:08.230
-we actually see the map.
+00:43:05.970 --> 00:43:08.230
+For us, you know, we actually see the map.
 
 1165
 00:43:08.800 --> 00:43:09.430
 Okay.
 
 1166
-00:43:09.440 --> 00:43:09.700
-Oh,
-
-1167
-00:43:09.700 --> 00:43:11.230
-it's a list.
+00:43:09.440 --> 00:43:11.230
+Oh, it's a list.
 
 1168
 00:43:11.240 --> 00:43:15.310
-So of course it's a list!  Another abstraction leak right there.
+So, of course, what else?  Another abstraction leak right there.
 
 1169
 00:43:15.320 --> 00:43:15.850
 Right.
 
 1170
-00:43:15.860 --> 00:43:19.150
-And you know,
-
-1171
-00:43:19.150 --> 00:43:24.040
-I think it goes to the core of the design of Emacs and Emacs Lisp.
+00:43:15.860 --> 00:43:24.040
+And you know, I think it goes to the core of the design of Emacs and Emacs Lisp.
 
 1173
 00:43:24.700 --> 00:43:25.100
 Okay.
 
 1174
-00:43:25.110 --> 00:43:25.350
-You know,
-
-1175
-00:43:25.350 --> 00:43:27.190
-we were talking about you know,
+00:43:25.110 --> 00:43:27.190
+You know, we were talking about you know,
 
 1176
 00:43:27.200 --> 00:43:31.690
-the idea of free software and how it influenced the design of Emacs.
+the idea of Free Software and how it influenced the design of Emacs.
 
 1177
 00:43:31.700 --> 00:43:33.230
@@ -4193,7 +3168,7 @@ I think there's you know,
 
 1178
 00:43:33.240 --> 00:43:37.980
-there was a very clear and and there still is a clear desire to try to
+there was a very clear and there still is a clear desire to try to
 
 1179
 00:43:37.990 --> 00:43:39.750
@@ -4204,12 +3179,8 @@ avoid abstraction boundaries.
 Okay.
 
 1181
-00:43:40.450 --> 00:43:41.410
-If you want to have,
-
-1182
-00:43:41.420 --> 00:43:41.790
-you know,
+00:43:40.450 --> 00:43:41.790
+If you want to have, you know,
 
 1183
 00:43:41.800 --> 00:43:44.520
@@ -4221,14 +3192,11 @@ So you want to have data structures which you can look inside
 
 1185
 00:43:49.700 --> 00:43:54.700
-and dig in and you see all the messy details and change them as
+and dig in and you see all the messy details and change them as much as you want if you want to.
 
 1186
-00:43:54.700 --> 00:43:59.120
-much as you want if you want to. You want to have some kind of abstraction on top of it,
-
-1187
-00:43:59.120 --> 00:44:00.300
+00:43:54.700 --> 00:44:00.300
+You still want to have some kind of abstraction on top of it,
 so you don't have to do that.
 
 1188
@@ -4244,36 +3212,20 @@ Right.
 But at the time there was a lot of code which was aware of the fact that keymaps
 
 1191
-00:44:10.110 --> 00:44:13.490
-were lists and just manipulated them using the list functions.
-
-1192
-00:44:13.490 --> 00:44:13.660
-Right?
+00:44:10.110 --> 00:44:13.660
+were lists and just manipulated them using the list functions. Right?
 
 1193
 00:44:13.660 --> 00:44:15.850
 And we got rid of that for Lucid Emacs, right?
 
 1195
-00:44:15.860 --> 00:44:16.900
-But it also means,
-
-1196
-00:44:16.910 --> 00:44:17.150
-I mean,
-
-1197
-00:44:17.150 --> 00:44:19.930
-you're talking as though that's, you know,
+00:44:15.860 --> 00:44:19.930
+But it also means, I mean, you're talking as though that's, you know,
 
 1198
-00:44:19.930 --> 00:44:20.930
-it's a 
-
-1199
-00:44:20.930 --> 00:44:24.000
-win-only situation where users are empowered.
+00:44:19.930 --> 00:44:24.000
+it's a win-only situation where users are empowered.
 
 1200
 00:44:24.290 --> 00:44:25.880
@@ -4292,40 +3244,20 @@ right,
 should that prove advantageous.
 
 1204
-00:44:33.690 --> 00:44:34.230
-Yeah,
-
-1205
-00:44:34.230 --> 00:44:34.630
-that's true.
+00:44:33.690 --> 00:44:35.630
+Yeah, that's true.  Actually,
 
 1206
-00:44:34.630 --> 00:44:35.490
-Actually,
-
-1207
-00:44:35.500 --> 00:44:40.300
-we changed, we extended the format of the keymaps for Emacs 24,
-
-1208
-00:44:40.300 --> 00:44:41.310
-I think,
+00:44:35.630 --> 00:44:41.310
+we changed, we extended the format of the keymaps for Emacs 24, I think,
 
 1209
 00:44:41.690 --> 00:44:45.690
 so that they could have several parents like in XEmacs.
 
 1210
-00:44:45.690 --> 00:44:45.850
-You know,
-
-1211
-00:44:45.850 --> 00:44:46.140
-there's,
-
-1212
-00:44:46.150 --> 00:44:46.380
-you know,
+00:44:45.690 --> 00:44:46.380
+You know, there's, you know,
 
 1213
 00:44:46.390 --> 00:44:50.540
@@ -4337,7 +3269,8 @@ So until Emacs 24 for there was only one parent.
 
 1215
 00:44:53.890 --> 00:44:58.810
-Then we tried to add more and that was very difficult to retrofit without breaking existing
+Then we tried to add more and that was pretty difficult to retrofit without
+breaking existing code
 
 1216
 00:44:58.810 --> 00:45:00.310
@@ -4360,32 +3293,20 @@ So there's an interesting tradeoff there.
 You mentioned the fact that you use conventions in order to
 
 1223
-00:45:18.040 --> 00:45:19.750
-deal with abstraction boundaries,
-
-1224
-00:45:19.750 --> 00:45:20.040
-right?
+00:45:18.040 --> 00:45:20.040
+deal with abstraction boundaries, right?
 
 1225
 00:45:20.050 --> 00:45:21.340
 And the obvious place
 
 1226
-00:45:21.350 --> 00:45:26.080
-that we should talk about has to do with the module system,
-
-1227
-00:45:26.080 --> 00:45:26.320
-right?
+00:45:21.350 --> 00:45:26.320
+that we should talk about has to do with the module system, right?
 
 1228
-00:45:26.320 --> 00:45:29.900
-Lots of people are developing packages for Emacs.
-
-1229
-00:45:29.900 --> 00:45:30.120
-You know,
+00:45:26.320 --> 00:45:30.120
+Lots of people are developing packages for Emacs. You know,
 
 1230
 00:45:30.120 --> 00:45:34.700
@@ -4401,31 +3322,19 @@ How do we deal with this these days?
 
 1236
 00:45:43.000 --> 00:45:43.990
-There is a good question.
+That is a good question.
 
 1238
-00:45:44.500 --> 00:45:46.630
-So we go back to this
-
-1239
-00:45:46.640 --> 00:45:49.610
-isearch example.
+00:45:44.500 --> 00:45:49.610
+So we go back to this "isearch-mb" example.
 
 1240
-00:45:49.620 --> 00:45:54.470
-You can see right right away what is the solution
-
-1241
-00:45:54.480 --> 00:45:55.420
-we settled on.
+00:45:49.620 --> 00:45:55.420
+You can see right right away what is the solution we settled on.
 
 1242
-00:45:55.890 --> 00:45:58.900
-We just have a kind of poor man's namespace
-
-1243
-00:45:58.900 --> 00:46:02.240
-construct where every function,
+00:45:55.890 --> 00:46:02.240
+We just have a kind of poor man's namespace construct where every function,
 
 1244
 00:46:02.250 --> 00:46:05.400
@@ -4433,15 +3342,11 @@ every global function and global variable definition
 
 1247
 00:46:07.080 --> 00:46:09.750
-has to have a name prefix,
+has to start with a prefix, which we call a name prefix,
 
 1249
-00:46:10.040 --> 00:46:14.750
-a namespace prefix.  There's nothing magical about it.
-
-1251
-00:46:14.750 --> 00:46:14.950
-You know,
+00:46:10.040 --> 00:46:14.950
+a namespace prefix.  There's nothing magical about it, you know,
 
 1252
 00:46:14.950 --> 00:46:19.860
@@ -4453,19 +3358,15 @@ and people have to follow that principle and not everybody follows it in this.
 
 1254
 00:46:25.920 --> 00:46:27.160
-Sometimes some surprises,
+There's sometimes some surprises,
 
 1255
 00:46:27.160 --> 00:46:29.210
 but over the years it has served us very well.
 
 1256
-00:46:29.580 --> 00:46:30.460
-Okay,
-
-1257
-00:46:30.470 --> 00:46:31.710
-that's pretty amazing, right?
+00:46:29.580 --> 00:46:31.710
+Okay, that's pretty amazing, right?
 
 1259
 00:46:31.710 --> 00:46:34.420
@@ -4477,31 +3378,23 @@ and all the ML researchers and so on,
 
 1262
 00:46:36.500 --> 00:46:41.070
-its impossible to manage a couple of million lines of code using just social conventions and without the
+its impossible to manage a couple of million lines of code using just social conventions and
 
 1263
 00:46:41.070 --> 00:46:45.210
-abstraction boundaries of like a module system with strong interfaces.
+without the abstraction boundaries of like a module system with strong interfaces.
 
 1264
-00:46:47.180 --> 00:46:47.440
-Yeah,
-
-1265
-00:46:47.440 --> 00:46:47.760
-I'm not sure.
+00:46:47.180 --> 00:46:47.760
+Yeah, I'm not sure.
 
 1266
 00:46:47.760 --> 00:46:52.030
 exactly why they think it's necessary.
 
 1267
-00:46:52.040 --> 00:46:52.640
-Clearly,
-
-1268
-00:46:52.640 --> 00:46:53.560
-it's convenient,
+00:46:52.040 --> 00:46:53.560
+Clearly, it's convenient,
 
 1269
 00:46:53.570 --> 00:46:56.040
@@ -4521,43 +3414,27 @@ that doesn't make it too painful to have long function names where the
 
 1273
 00:47:07.450 --> 00:47:10.710
-indentation and those kinds of things place reasonably well,
+indentation and those kinds of things plays reasonably well,
 
 1274
 00:47:11.080 --> 00:47:15.050
 because you can easily have the arguments below the function instead of on the side,
 
 1275
-00:47:15.050 --> 00:47:16.410
-I guess something like this,
-
-1276
-00:47:17.080 --> 00:47:19.410
-but to a large extent is just,
+00:47:15.050 --> 00:47:19.410
+I guess something like this, but to a large extent is just,
 
 1277
-00:47:19.420 --> 00:47:19.680
-you know,
-
-1278
-00:47:19.680 --> 00:47:21.000
-you see extra,
-
-1279
-00:47:21.380 --> 00:47:21.670
-you know,
+00:47:19.420 --> 00:47:21.670
+you know, you see extra, you know, you have
 
 1280
 00:47:21.680 --> 00:47:26.580
-you have your function and global variables with longer name that what you would
+your function and global variables with longer name than what you would
 
 1281
-00:47:26.590 --> 00:47:27.500
-ideally have,
-
-1282
-00:47:27.980 --> 00:47:32.300
-but you will live with this very successfully.
+00:47:26.590 --> 00:47:32.300
+ideally have, but we live with this very successfully.
 
 1283
 00:47:32.470 --> 00:47:36.680
@@ -4572,12 +3449,8 @@ some new mechanism for having an actual namespace,
 but it still hasn't happened yet.
 
 1286
-00:47:43.580 --> 00:47:44.090
-Okay.
-
-1287
-00:47:45.180 --> 00:47:47.690
-So yeah,
+00:47:43.580 --> 00:47:47.690
+Okay. So yeah,
 
 1288
 00:47:48.380 --> 00:47:51.250
@@ -4588,28 +3461,16 @@ I think the next 20 years are gonna be interesting, right?
 There's pressure to make changes.
 
 1291
-00:47:52.490 --> 00:47:53.040
-On the other hand,
-
-1292
-00:47:53.040 --> 00:47:54.710
-the language has stayed very stable.
+00:47:52.490 --> 00:47:54.710
+On the other hand, the language has stayed very stable.
 
 1294
-00:47:55.860 --> 00:47:58.970
-Actually there's a good argument for keeping the
-
-1295
-00:47:58.980 --> 00:47:59.890
-long names.
+00:47:55.860 --> 00:47:59.890
+Actually there's a good argument for keeping the long names.
 
 1296
-00:47:59.900 --> 00:48:03.280
-One of the strongest argument is that,
-
-1297
-00:48:03.290 --> 00:48:03.550
-you know,
+00:47:59.900 --> 00:48:03.550
+One of the strongest argument is that, you know,
 
 1298
 00:48:03.560 --> 00:48:05.860
@@ -4617,19 +3478,15 @@ on the side of the tooling.
 
 1299
 00:48:05.870 --> 00:48:10.850
-It makes the tooling much easier because you don't need to pay attention to the context in order
+It makes the tooling much easier because you don't need to pay attention to the context
 
 1300
 00:48:10.850 --> 00:48:13.590
-to know what is the meaning of each identifier.
+in order to know what is the meaning of each identifier.
 
 1301
-00:48:13.670 --> 00:48:14.280
-So when you
-
-1302
-00:48:14.290 --> 00:48:15.500
-look for a function,
+00:48:13.670 --> 00:48:15.500
+So when you look for a function,
 
 1304
 00:48:15.720 --> 00:48:18.390
@@ -4640,12 +3497,8 @@ if you look at the function "isearch-mb--after-change"
 that's the function.
 
 1306
-00:48:20.030 --> 00:48:20.260
-You know,
-
-1307
-00:48:20.260 --> 00:48:21.290
-you don't have to say
+00:48:20.030 --> 00:48:21.290
+You know, you don't have to say
 
 1308
 00:48:21.290 --> 00:48:26.270
@@ -4668,52 +3521,28 @@ Yeah,
 like I can go on DuckDuckGo and search for "isearch-mb--after-change".
 
 1313
-00:48:39.970 --> 00:48:42.630
-They can give me actual actual results,
-
-1314
-00:48:42.630 --> 00:48:43.390
-actual matches.
+00:48:39.970 --> 00:48:43.390
+They can give me actual results, actual matches.
 
 1315
-00:48:43.870 --> 00:48:44.740
-Yeah,
-
-1316
-00:48:44.740 --> 00:48:45.130
-I agree.
-
-1317
-00:48:45.130 --> 00:48:46.570
-That's an advantage.
+00:48:43.870 --> 00:48:46.570
+Yeah, I agree.  That's an advantage.
 
 1318
-00:48:46.580 --> 00:48:47.360
-So,
-
-1319
-00:48:47.360 --> 00:48:47.810
-Stefan,
-
-1320
-00:48:47.810 --> 00:48:49.980
-I think we're pretty much out of time,
+00:48:46.580 --> 00:48:49.980
+So, Stefan, I think we're pretty much out of time,
 
 1321
-00:48:49.990 --> 00:48:52.710
-so we should wrap this up.
-
-1322
-00:48:52.720 --> 00:48:53.240
-Right.
+00:48:49.990 --> 00:48:53.240
+so we should wrap this up.  Right?
 
 1323
-00:48:53.250 --> 00:48:57.750
-So Emacs Lisp has seen a great deal of evolution, is staying
+00:48:53.250 --> 00:48:56.750
+So Emacs Lisp has seen a great deal of evolution,
 
 1324
-00:48:57.750 --> 00:48:58.920
-remarkably stable.
+00:48:56.750 --> 00:48:58.920
+is staying remarkably stable.
 
 1325
 00:48:58.930 --> 00:49:03.520
@@ -4724,12 +3553,8 @@ I'm looking forward to another 20 years of Emacs on my
 desktop and programming Emacs Lisp in 20 years.
 
 1327
-00:49:08.070 --> 00:49:08.430
-Yes,
-
-1328
-00:49:08.430 --> 00:49:08.870
-same thing.
+00:49:08.070 --> 00:49:08.870
+Yes, same thing.
 
 1329
 00:49:08.870 --> 00:49:13.320
@@ -4752,32 +3577,20 @@ So I'm looking forward to what it's going to look like in
 in 20 or so years.  HOPL 7 maybe?
 
 1336
-00:49:27.870 --> 00:49:29.520
-Yeah,
-
-1337
-00:49:29.530 --> 00:49:30.100
-that'd be nice.
+00:49:27.870 --> 00:49:30.100
+Yeah, that'd be nice.
 
 1338
-00:49:30.100 --> 00:49:30.680
-I'm not sure
-
-1339
-00:49:30.680 --> 00:49:34.010
-I'm up for spending that much time on writing a paper though.
+00:49:30.100 --> 00:49:34.010
+I'm not sure I'm up for spending that much time on writing a paper though.
 
 1340
 00:49:34.020 --> 00:49:36.130
-I think it's time to cut your hair again.
+I think I'll have longer hair again.
 
 1341
-00:49:36.140 --> 00:49:37.350
-Yeah,
-
-1342
-00:49:37.360 --> 00:49:41.710
-but I guess it's time to give the audience an opportunity to ask some questions and engage in some interactions,
+00:49:36.140 --> 00:49:41.710
+Yeah, but I guess it's time to give the audience an opportunity to ask some questions and engage in some interactions,
 
 1343
 00:49:41.710 --> 00:49:44.280
@@ -4792,32 +3605,22 @@ Thank you both for an excellent and enjoyable talk.
 This is a an area that's a little different from some of the
 
 1350
-00:49:56.734 --> 00:50:01.594
-shall I say more conventional language presentations and I thought both the content and the style
-
-1351
-00:50:01.594 --> 00:50:02.194
-was great.
+00:49:56.734 --> 00:50:02.194
+shall I say more conventional language presentations and I thought both the
+content and the style was great.
 
 1352
-00:50:02.574 --> 00:50:07.424
-I have a couple questions in Slack, reminding other people if you have other questions for
-
-1353
-00:50:07.424 --> 00:50:08.834
-the authors,
+00:50:02.574 --> 00:50:08.834
+I have a couple questions in Slack, reminding other people if you have other
+questions for the authors,
 
 1354
 00:50:08.834 --> 00:50:11.784
 please add that to Slack.  The first one,
 
 1355
-00:50:11.794 --> 00:50:12.534
-by the way,
-
-1356
-00:50:12.534 --> 00:50:16.534
-there are a lot of comments in Slack that all said "not a question".
+00:50:11.794 --> 00:50:16.534
+by the way, there are a lot of comments in Slack that all said "not a question".
 
 1357
 00:50:16.534 --> 00:50:17.594
@@ -4832,12 +3635,8 @@ please read through those.   A lot of arguments about origins of different kind 
 and corrections on your TECO expertise.
 
 1360
-00:50:25.664 --> 00:50:30.084
-But back to the questions.  From Will Christian
-
-1361
-00:50:30.084 --> 00:50:31.854
-in Stanford.
+00:50:25.664 --> 00:50:31.854
+But back to the questions.  From Will Christian in Stanford.
 
 1362
 00:50:31.864 --> 00:50:36.774
@@ -4848,12 +3647,8 @@ in Stanford.
 dynamically scoped features is to promote extensibility.
 
 1364
-00:50:41.574 --> 00:50:42.284
-For example,
-
-1365
-00:50:42.284 --> 00:50:44.554
-context objects in React UX.
+00:50:41.574 --> 00:50:44.554
+For example, context objects in React UX.
 
 1366
 00:50:44.774 --> 00:50:49.774
@@ -4876,12 +3671,12 @@ Yeah.
 So so we actually talked about this right just a couple of weeks ago.
 
 1373
-00:51:04.434 --> 00:51:09.104
-So these days I work a lot in software architecture and software
+00:51:04.434 --> 00:51:08.104
+So these days I work a lot in software architecture and
 
 1374
-00:51:09.114 --> 00:51:10.454
-architecture education, right?
+00:51:08.114 --> 00:51:10.454
+software architecture education, right?
 
 1376
 00:51:10.454 --> 00:51:15.304
@@ -4889,27 +3684,24 @@ And there's this issue of modularity and I remember talking to the author of Pic
 
 1377
 00:51:15.304 --> 00:51:19.804
-which is dynamically scoped lisp many years ago about modularity.
+which is a dynamically scoped Lisp, many years ago about modularity.
 
 1378
 00:51:19.804 --> 00:51:25.164
 And we were fighting and I was working on Scheme 48, which is statically scoped, at the time.
 
 1380
-00:51:25.174 --> 00:51:25.884
-And he said,
-
-1381
-00:51:25.884 --> 00:51:26.224
-well,
+00:51:25.174 --> 00:51:26.224
+And he said, well,
 
 1382
 00:51:26.224 --> 00:51:31.134
-modularity is the ability to take an existing system and reach into its guts so you can make
+"modularity is the ability to take an existing system and reach into its
+guts so you can make
 
 1383
 00:51:31.134 --> 00:51:34.294
-it do what you want done, right?
+it do what you want done, right?"
 
 1385
 00:51:34.304 --> 00:51:37.564
@@ -4940,12 +3732,8 @@ replace it by something else and so on,
 are what makes it possible for users to modify and to make Emacs,
 
 1393
-00:52:00.034 --> 00:52:00.584
-you know,
-
-1394
-00:52:00.584 --> 00:52:01.784
-do what you want done.
+00:52:00.034 --> 00:52:01.784
+you know, do what you want done.
 
 1395
 00:52:01.794 --> 00:52:06.784
@@ -4956,12 +3744,8 @@ So I think that's one side of it that it's
 important to have these kinds of capabilities.
 
 1397
-00:52:08.944 --> 00:52:10.294
-On the other hand,
-
-1398
-00:52:10.304 --> 00:52:15.104
-it's really easy to kind of lose an overview and
+00:52:08.944 --> 00:52:15.104
+On the other hand, it's really easy to kind of lose an overview and
 
 1399
 00:52:15.104 --> 00:52:17.784
@@ -4984,24 +3768,16 @@ And the paper talks a little bit about this when it comes to a mechanism known a
 Which is also a kind of a dynamic extension mechanism in the language.
 
 1404
-00:52:33.474 --> 00:52:35.414
-And so I think,
-
-1405
-00:52:35.424 --> 00:52:35.644
-you know,
+00:52:33.474 --> 00:52:35.644
+And so I think, you know,
 
 1406
 00:52:35.644 --> 00:52:38.814
 kind of the trend at the conferences that I've gone to in recent years,
 
 1407
-00:52:38.814 --> 00:52:39.054
-ICFP
-
-1408
-00:52:39.054 --> 00:52:43.714
-and so on has been to create unbreakable abstractions and
+00:52:38.814 --> 00:52:43.714
+ICFP and so on, has been to create unbreakable abstractions and
 
 1409
 00:52:43.724 --> 00:52:48.084
@@ -5028,12 +3804,8 @@ I think that's an avenue for research.
 And in particular the context mechanism in React,
 
 1415
-00:53:04.674 --> 00:53:09.604
-I happen to be familiar with that, also underwent a substantial
-
-1416
-00:53:09.604 --> 00:53:10.514
-redesign.
+00:53:04.674 --> 00:53:10.514
+I happen to be familiar with that, also underwent a substantial redesign.
 
 1417
 00:53:10.514 --> 00:53:13.684
@@ -5052,12 +3824,8 @@ changeability and adaptability of the system and at the same time you know,
 keeping the system comprehensible, if that makes any sense.
 
 1421
-00:53:23.974 --> 00:53:24.504
-Yeah,
-
-1422
-00:53:24.514 --> 00:53:26.904
-if I can add something to that.
+00:53:23.974 --> 00:53:26.904
+Yeah, if I can add something to that.
 
 1423
 00:53:26.914 --> 00:53:31.404
@@ -5081,7 +3849,7 @@ in kind of unchecked ways despite all my own notions
 
 1428
 00:53:43.174 --> 00:53:47.964
-of how it should work, as you know a static-typing kind of
+of how it should work, as you know I'm a static-typing kind of
 
 1429
 00:53:47.974 --> 00:53:48.794
@@ -5129,7 +3897,7 @@ Absolutely, right?
 
 1442
 00:54:30.204 --> 00:54:35.084
-I'm not sure it's somewhat it's it's as much a language question as a question of
+I'm not sure it's as much a language question as a question of
 
 1443
 00:54:35.094 --> 00:54:38.264
@@ -5145,35 +3913,23 @@ I remember reading an article about the editor buffer representation
 
 1446
 00:54:42.674 --> 00:54:46.584
-the use in Visual Studio Code, and they needed to go to horrendous lengths,
+they use in Visual Studio Code, and they needed to go to horrendous lengths,
 
 1447
-00:54:46.974 --> 00:54:48.204
-you know,
-
-1448
-00:54:48.204 --> 00:54:50.084
-to make it work efficiently.
+00:54:46.974 --> 00:54:50.084
+you know, to make it work efficiently.
 
 1449
 00:54:50.094 --> 00:54:54.264
 That is all done in C, but it's available at the Emacs Lisp language level.
 
 1450
-00:54:54.274 --> 00:54:58.964
-Arguably, you know,
-
-1451
-00:54:58.964 --> 00:55:00.904
-arguably there's some facilities in other languages.
+00:54:54.274 --> 00:55:00.904
+Arguably, you know, arguably there's some facilities in other languages.
 
 1452
-00:55:00.904 --> 00:55:02.184
-I recall SNOBOL,
-
-1453
-00:55:02.194 --> 00:55:02.864
-for example,
+00:55:00.904 --> 00:55:02.864
+I recall SNOBOL, for example,
 
 1454
 00:55:02.864 --> 00:55:06.724
@@ -5188,16 +3944,8 @@ there is no reason why you can't have any text processing capability that you wa
 So, absolutely, it's the best language.
 
 1459
-00:55:16.074 --> 00:55:16.974
-Okay,
-
-1460
-00:55:16.984 --> 00:55:17.934
-let's see,
-
-1461
-00:55:17.934 --> 00:55:20.754
-the next one is from Marc Law.
+00:55:16.074 --> 00:55:20.754
+Okay, let's see, the next one is from Marc Law.
 
 1462
 00:55:20.764 --> 00:55:25.764
@@ -5220,36 +3968,24 @@ Do you have any remarks on the implications
 this has for the possibility of even being able to make Emacs multithreaded.
 
 1467
-00:55:40.074 --> 00:55:40.994
-For example,
-
-1468
-00:55:40.994 --> 00:55:45.194
-using TLS to simulate dynamic scope while being thread-friendly.
+00:55:40.074 --> 00:55:45.194
+For example, using TLS to simulate dynamic scope while being thread-friendly.
 
 1469
 00:55:47.574 --> 00:55:49.394
 That's one for you with Stefan, I think.
 
 1472
-00:55:55.874 --> 00:55:56.264
-Yeah,
-
-1473
-00:55:56.264 --> 00:55:58.464
-I think that is a hard one.
+00:55:55.874 --> 00:55:58.464
+Yeah, I think that is a hard one.
 
 1474
 00:55:58.474 --> 00:56:04.194
 Multithreading is is clearly a hard problem for Emacs Lisp,
 
 1476
-00:56:05.274 --> 00:56:09.584
-mostly because of all these state, and this
-
-1477
-00:56:09.594 --> 00:56:12.984
-heavy reliance on dynamic scoping.
+00:56:05.274 --> 00:56:12.984
+mostly because of all this state, and this heavy reliance on dynamic scoping.
 
 1479
 00:56:18.144 --> 00:56:20.254
@@ -5264,24 +4000,16 @@ but it can be an opportunity,
 but I think at least in the context of Emacs it's more of a problem than a solution.
 
 1484
-00:56:31.174 --> 00:56:31.824
-Well,
-
-1485
-00:56:31.834 --> 00:56:33.314
-maybe I can contribute something.
+00:56:31.174 --> 00:56:33.314
+Well, maybe I can contribute something.
 
 1488
 00:56:34.094 --> 00:56:35.984
-I mean there's section on multithreading in the paper,
+I mean there's a section on multithreading in the paper,
 
 1489
-00:56:35.984 --> 00:56:36.694
-first of all,
-
-1490
-00:56:36.704 --> 00:56:38.884
-and about how that relates to dynamic scoping.
+00:56:35.984 --> 00:56:38.884
+first of all, and about how that relates to dynamic scoping.
 
 1491
 00:56:39.374 --> 00:56:44.274
@@ -5292,44 +4020,28 @@ Getting the interaction between threading and dynamic scoping tends to be diffic
 also difficult to reconcile with modularity.
 
 1496
-00:56:51.404 --> 00:56:54.764
-I think in the case of in the case of Emacs,
-
-1497
-00:56:54.774 --> 00:56:54.994
-you know,
+00:56:51.404 --> 00:56:54.994
+I think in the case of of Emacs, you know,
 
 1499
 00:56:56.124 --> 00:57:00.694
 making dynamic scoping work was multithreading ...
 
 1501
-00:57:01.774 --> 00:57:03.214
-I think Stefan
-
-1502
-00:57:03.224 --> 00:57:04.344
-blanked out on that one.
+00:57:01.774 --> 00:57:04.344
+I think Stefan blanked out on that one.
 
 1503
 00:57:04.354 --> 00:57:06.244
 Internet blip.
 
 1504
-00:57:06.244 --> 00:57:06.634
-That's fine.
-
-1505
-00:57:06.634 --> 00:57:07.744
-We'll go on to the next one.
+00:57:06.244 --> 00:57:07.744
+That's fine.  We'll go on to the next one.
 
 1506
-00:57:07.764 --> 00:57:08.964
-Okay,
-
-1507
-00:57:08.974 --> 00:57:10.904
-the next one is a multi-part.
+00:57:07.764 --> 00:57:10.904
+Okay, the next one is a multi-part.
 
 1508
 00:57:10.904 --> 00:57:15.874
@@ -5337,11 +4049,11 @@ I'm just going to ask the first part of it. From Yoshiki Takashima, CMU:
 
 1509
 00:57:15.884 --> 00:57:20.744
-"Do you think the number of Ellis programmers is hindering its development?"
+"Do you think the number of ELisp programmers is hindering its development?"
 
 1510
 00:57:20.754 --> 00:57:23.424
-So is it worth considering thinking of Elisp
+So is it worth considering thinking of ELisp
 
 1511
 00:57:23.424 --> 00:57:25.884
@@ -5353,55 +4065,27 @@ Isn't it?
 
 1515
 00:57:31.964 --> 00:57:34.084
-Isn't an Emacs Lisp back in for Idris?
+Isn't an Emacs Lisp backend for Idris?
 
 1516
-00:57:38.174 --> 00:57:38.484
-Well,
-
-1517
-00:57:38.484 --> 00:57:42.754
-I always considered Elisp to be implemented in a fairly inefficient way.
+00:57:38.174 --> 00:57:42.754
+Well, I always considered ELisp to be implemented in a fairly inefficient way.
 
 1518
 00:57:42.764 --> 00:57:45.134
 And so to be fundamentally fairly slow.
 
 1519
-00:57:45.144 --> 00:57:48.374
-I've since had the opportunity to learn that
-
-1520
-00:57:48.384 --> 00:57:49.574
-it's actually not that slow,
+00:57:45.144 --> 00:57:49.574
+I've since had the opportunity to learn that it's actually not that slow,
 
 1523
-00:57:50.354 --> 00:57:53.844
-it's a fairly average performance,
-
-1524
-00:57:53.844 --> 00:57:54.674
-let's say.
+00:57:50.354 --> 00:57:54.674
+it's a fairly average performance, let's say.
 
 1525
-00:57:54.684 --> 00:57:56.054
-But I wouldn't,
-
-1526
-00:57:56.064 --> 00:57:56.394
-you know,
-
-1527
-00:57:56.394 --> 00:57:57.564
-I wouldn't promote it
-
-1528
-00:57:57.574 --> 00:57:58.344
-as a target
-
-1529
-00:57:58.354 --> 00:57:59.314
-for a compiler.
+00:57:54.684 --> 00:57:59.314
+But I wouldn't, you know, I wouldn't promote it as a target for a compiler.
 
 1531
 00:57:59.934 --> 00:58:01.894
@@ -5425,31 +4109,15 @@ Stefan?
 
 1538
 00:58:09.684 --> 00:58:14.444
-You can imagine talking to the byte code for for slightly different frontend,
+You can imagine talking to the byte code for a slightly different frontend,
 
 1539
-00:58:14.454 --> 00:58:16.134
-but then you might as well just use,
-
-1540
-00:58:16.144 --> 00:58:16.794
-you know,
-
-1541
-00:58:17.474 --> 00:58:21.374
-another approach as well.
+00:58:14.454 --> 00:58:21.374
+but then you might as well just use, you know, another approach as well.
 
 1542
-00:58:21.374 --> 00:58:21.834
-So,
-
-1543
-00:58:21.844 --> 00:58:22.324
-you know,
-
-1544
-00:58:22.334 --> 00:58:24.814
-why would you want to use another source language basically?
+00:58:21.374 --> 00:58:24.814
+So, you  why would you want to use another source language basically?
 
 1545
 00:58:24.814 --> 00:58:26.854
@@ -5464,44 +4132,32 @@ it's probably easier to just write Emacs Lisp code directly so that the set of
 features matches.
 
 1548
-00:58:34.174 --> 00:58:34.374
-Yeah.
-
-1549
-00:58:35.774 --> 00:58:36.764
-Okay, from Guy Steele:
+00:58:34.174 --> 00:58:36.764
+Yeah.  Okay, from Guy Steele:
 
 1551
-00:58:36.764 --> 00:58:38.994
-"What changes,
-
-1552
-00:58:38.994 --> 00:58:39.634
-if any,
+00:58:36.764 --> 00:58:39.634
+"What changes, if any,
 
 1553
-00:58:39.644 --> 00:58:44.564
-have been made to Emacs this primarily for the sake of improved performance rather
+00:58:39.644 --> 00:58:43.564
+have been made to Emacs Lisp primarily for the sake of improved performance
 
 1554
-00:58:44.564 --> 00:58:46.094
-than for a new functionality?"
+00:58:43.564 --> 00:58:46.094
+rather than for a new functionality?"
 
 1555
-00:58:48.974 --> 00:58:53.454
-Very little.  Performance has rarely been
-
-1556
-00:58:53.454 --> 00:58:57.254
-an issue when it comes to the language.  That is,
+00:58:48.974 --> 00:58:57.254
+Very little.  Performance has rarely been an issue when it comes to the language.
 
 1557
-00:58:57.254 --> 00:58:58.904
-the language has a
+00:58:57.254 --> 00:59:00.504
+That is, the language has a fairly simple implementation.
 
 1559
-00:58:59.524 --> 00:59:04.084
-fairly simple implementation.  It's reasonably slow in this respect,
+00:59:00.524 --> 00:59:04.084
+It's reasonably slow in this respect,
 
 1560
 00:59:04.674 --> 00:59:09.184
@@ -5513,27 +4169,19 @@ They're part of the library basically.
 
 1562
 00:59:12.774 --> 00:59:16.254
-And so the language itself self has not really been changed
+And so the language itself has not really been changed
 
 1563
 00:59:16.254 --> 00:59:17.184
 to accommodate speed.
 
 1564
-00:59:18.874 --> 00:59:19.144
-Yeah,
-
-1565
-00:59:19.154 --> 00:59:21.014
-if we're talking about the source language, right?
+00:59:18.874 --> 00:59:21.014
+Yeah, if we're talking about the source language, right?
 
 1567
-00:59:21.024 --> 00:59:21.714
-Of course,
-
-1568
-00:59:21.714 --> 00:59:23.884
-the implementation has seen quite a few improvements.
+00:59:21.024 --> 00:59:23.884
+Of course, the implementation has seen quite a few improvements.
 
 1569
 00:59:24.474 --> 00:59:24.864
@@ -5556,12 +4204,8 @@ Andrew Black from Portland State says: "The first version of Emacs Lisp that I u
 was in Gosling's Emacs for Unix.
 
 1574
-00:59:38.174 --> 00:59:40.754
-The early versions did not have function parameters
-
-1575
-00:59:40.754 --> 00:59:41.694
-as I recall.
+00:59:38.174 --> 00:59:41.694
+The early versions did not have function parameters, as I recall.
 
 1576
 00:59:42.004 --> 00:59:46.314
@@ -5644,12 +4288,12 @@ That sounds familiar going back a lot of years.
 From Paul: When and how do external packages get bundled into Emacs's core?
 
 1602
-01:00:54.374 --> 01:00:59.294
-Oh ... it just happens and it
+01:00:54.374 --> 01:00:58.294
+Oh ... it just happens
 
 1603
-01:00:59.294 --> 01:01:03.954
-happens in ways that nobody notices because there is no
+01:00:58.294 --> 01:01:03.954
+and it happens in ways that nobody notices because there is no
 
 1604
 01:01:03.964 --> 01:01:06.374
@@ -5680,16 +4324,12 @@ And I think if you asked different people,
 different people would consider different parts as being part of core or not.
 
 1612
-01:01:25.394 --> 01:01:27.554
-So it's a fuzzy,
-
-1613
-01:01:27.564 --> 01:01:28.894
-fuzzy notion.
+01:01:25.394 --> 01:01:28.894
+So it's a fuzzy, fuzzy notion.
 
 1614
 01:01:30.274 --> 01:01:34.794
-It's more a question of a habit and what is commonly used within within the code.
+It's more a question of a habit and what is commonly used within the code.
 
 1617
 01:01:39.074 --> 01:01:39.494
@@ -5701,7 +4341,7 @@ So I think this will be the last question, from Kiran Gopinathan of NUS.
 
 1619
 01:01:43.974 --> 01:01:48.904
-"I love the extensibility of the Elisp when it provides an editing experience unlike any
+"I love the extensibility of the ELisp when it provides an editing experience unlike any
 
 1620
 01:01:48.904 --> 01:01:49.994
@@ -5713,7 +4353,7 @@ But out of curiosity,
 
 1622
 01:01:51.984 --> 01:01:56.934
-are there lessons that Elisp may be able to learn from the scripting languages
+are there lessons that ELisp may be able to learn from the scripting languages
 
 1623
 01:01:56.944 --> 01:01:58.794
@@ -5732,16 +4372,8 @@ Mike?
 I think the answer is no.
 
 1631
-01:02:11.594 --> 01:02:12.584
-I mean,
-
-1633
-01:02:13.064 --> 01:02:13.724
-as I said,
-
-1634
-01:02:13.724 --> 01:02:14.004
-right,
+01:02:11.594 --> 01:02:14.004
+I mean, as I said, right,
 
 1635
 01:02:14.004 --> 01:02:15.714
@@ -5752,36 +4384,24 @@ I mean the great advantage is, in Emacs Lisp,
 you can really do things at runtime.
 
 1637
-01:02:17.014 --> 01:02:17.964
-Whereas
-
-1638
-01:02:17.974 --> 01:02:20.234
-these modern editors, Neovim
+01:02:17.014 --> 01:02:20.234
+Whereas these modern editors, Neovim
 
 1639
 01:02:20.234 --> 01:02:21.074
 I don't know much about,
 
 1641
-01:02:21.694 --> 01:02:25.834
-but I think you customize it in Lua
-
-1642
-01:02:25.844 --> 01:02:26.544
-these days.
+01:02:21.694 --> 01:02:26.544
+but I think you customize it in Lua these days.
 
 1643
 01:02:26.554 --> 01:02:29.294
 The main question isn't so much about the language,
 
 1644
-01:02:29.294 --> 01:02:33.654
-but if the language enables being able to do things at runtime.
-
-1645
-01:02:33.654 --> 01:02:33.964
-Right?
+01:02:29.294 --> 01:02:33.964
+but if the language enables being able to do things at runtime. Right?
 
 1646
 01:02:33.964 --> 01:02:35.874
@@ -5792,12 +4412,8 @@ And a lot of ... like Visual Studio Code,
 you modify any of its plugins,
 
 1648
-01:02:37.274 --> 01:02:39.634
-you have to restart the editor, as an example.
-
-1649
-01:02:39.644 --> 01:02:40.144
-Right.
+01:02:37.274 --> 01:02:40.144
+you have to restart the editor, as an example. Right?
 
 1650
 01:02:40.154 --> 01:02:44.864
@@ -5813,31 +4429,27 @@ language design there.
 
 1653
 01:02:51.284 --> 01:02:56.794
-I don't think I would change Emacs Lisp to accommodate  their way of doing things.
+I don't think I would change Emacs Lisp to accommodate their way of doing things.
 
 1656
 01:02:58.684 --> 01:03:04.164
-I think in terms of in terms of the language I don't think there is much to be gained from there,
+I think in terms of the language I don't think there is much to be gained from there,
 
 1658
 01:03:04.174 --> 01:03:09.684
-there are some very interesting aspects that we do want to integrate from from those editors,
+there are some very interesting aspects that we do want to integrate from those editors,
 
 1660
 01:03:09.694 --> 01:03:11.384
 but they're not really part of the language there.
 
 1661
-01:03:11.384 --> 01:03:14.444
-More part of the design, of how you structure,
-
-1662
-01:03:14.454 --> 01:03:14.904
-you know,
+01:03:11.384 --> 01:03:14.904
+More part of the design, of how you structure, you know,
 
 1663
 01:03:14.904 --> 01:03:19.804
-the the description of the language that you want to parse so that you do highlighting for example and
+the the description of the language that you want to parse so as you do highlighting for example and
 
 1664
 01:03:19.804 --> 01:03:22.294
@@ -5856,12 +4468,8 @@ I'm going to cut off the questions there,
 but I want to thank you both for like I said,
 
 1671
-01:03:34.164 --> 01:03:35.244
-an excellent paper,
-
-1672
-01:03:35.244 --> 01:03:36.544
-wonderful presentation.
+01:03:34.164 --> 01:03:36.544
+an excellent paper, wonderful presentation.
 
 1673
 01:03:36.554 --> 01:03:39.724
@@ -5876,24 +4484,16 @@ we're bringing back a lot of arguments and discussions from the history of
 editors and Lisp that I haven't seen in decades.
 
 1676
-01:03:48.054 --> 01:03:49.494
-So thank you both very,
-
-1677
-01:03:49.494 --> 01:03:50.334
-very much.
+01:03:48.054 --> 01:03:50.334
+So thank you both very, very much.
 
 1678
-01:03:50.344 --> 01:03:52.084
-And thanks Brent for your hard work.
-
-1679
-01:03:52.084 --> 01:03:52.304
-Right?
+01:03:50.344 --> 01:03:52.304
+And thanks Brent for your hard work. Right?
 
 1680
 01:03:52.304 --> 01:03:56.594
-If the paper is any good, it's at least as much as much your fault as it is ours.
+If the paper is any good, it's at least as much your fault as it is ours.
 
 1681
 01:03:56.974 --> 01:03:57.454
